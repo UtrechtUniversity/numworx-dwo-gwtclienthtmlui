@@ -33,11 +33,9 @@
                                     </bind>
                                 </volumes>
                             </run>
-                            
                         </image>
                     </images>
                 </configuration>
-
             </plugin>
         </plugins>
     </build>
