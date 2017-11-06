@@ -9,7 +9,6 @@ From the commandline build the docker image:
 cd src/main/docker
 docker build -t docker-local-ebs-dev-proxy .
 
-<<<<<<< 526230798c62cfcf6e1cf9b0c84f70ced7891247
 run the image from src/main
 
 cd ..
@@ -25,14 +24,22 @@ docker stop {containerid}
 
 Keep any html and javascript files in src/main/html for compatibility with the maven
 pom.xml. Ensure that the files are accessible by docker to read. 
-=======
-run the image from src/main/docker
 
-docker run -v `../html:/usr/local/apache2/htdocs/local -p 127.0.0.1:8888:80 -dit --name local-ebs-dev-proxy docker-local-ebs-dev-proxy
+run the image from src/main
+
+cd ..
+docker run -v `html:/usr/local/apache2/htdocs/local -p 127.0.0.1:8888:80 -dit --name local-ebs-dev-proxy docker-local-ebs-dev-proxy
+
+stop the image by listing the containers with
+
+docker ps
+
+and run
+
+docker stop {containerid}
 
 Keep any html and javascript files in src/main/html for compatibility with the maven
 pom.xml
->>>>>>> mavenized the project.
 
 MAVEN
 
