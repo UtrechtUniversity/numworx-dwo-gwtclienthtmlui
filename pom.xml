@@ -1,0 +1,56 @@
+ <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>nl.uu.fi.dwo.lms</groupId>
+    <artifactId>DwoGwtClientHtmlUi</artifactId>
+    <version>0.1-SNAPSHOT</version>
+       
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.22.1</version>
+                <!--            <groupId>io.fabric8</groupId>
+                <artifactId>fabric8-maven-plugin</artifactId> 
+                <version>3.2.28</version>-->
+                <!--            <executions>
+                    <execution>
+                        <goals>
+                            <goal>resource</goal>
+                            <goal>build</goal>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>-->
+                <configuration>
+                    <images>
+                        <image>
+                            <alias>service</alias> 
+                            <name>dwo/test:${project.version}</name>                            
+                            <build> 
+                                <dockerFileDir></dockerFileDir>
+                                <from>httpd:2.4</from> 
+<!--                                <cmd> 
+                                    <shell>COPY ./httpd.conf /usr/local/apache2/conf/</shell>
+                                </cmd>-->
+                            </build>
+                            <run>
+                                <!--docker run -v `pwd`/src:/usr/local/apache2/htdocs/local -p 127.0.0.1:8888:80 -dit - -name local-ebs-dev-proxy docker-local-ebs-dev-proxy-->
+                                <ports>
+                                    <port>127.0.0.1:8888:80</port>
+                                </ports>
+                                <volumes>
+                                    <bind>
+                                        <volume>${project.basedir}/src/main/html:/usr/local/apache2/htdocs/local</volume>
+                                    </bind>
+                                </volumes>
+                            </run>
+                            
+                        </image>
+                    </images>
+                </configuration>
+
+            </plugin>
+        </plugins>
+    </build>
+</project>
