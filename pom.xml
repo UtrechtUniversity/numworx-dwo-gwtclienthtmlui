@@ -30,12 +30,20 @@
                             <build> 
                                 <dockerFileDir></dockerFileDir>
                                 <from>httpd:2.4</from> 
-                                <cmd> 
+<!--                                <cmd> 
                                     <shell>COPY ./httpd.conf /usr/local/apache2/conf/</shell>
-                                </cmd>
+                                </cmd>-->
                             </build>
                             <run>
                                 <!--docker run -v `pwd`/src:/usr/local/apache2/htdocs/local -p 127.0.0.1:8888:80 -dit - -name local-ebs-dev-proxy docker-local-ebs-dev-proxy-->
+                                <ports>
+                                    <port>127.0.0.1:8888:80</port>
+                                </ports>
+                                <volumes>
+                                    <bind>
+                                        <volume>${project.basedir}/src/main/html:/usr/local/apache2/htdocs/local</volume>
+                                    </bind>
+                                </volumes>
                             </run>
                             
                         </image>
