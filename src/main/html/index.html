@@ -12,12 +12,35 @@
         var hideGwtGui="true";
         </script>
     <script type="text/javascript" language="javascript" src="/gwtclient/gwtclient/gwtclient.nocache.js"></script>
+	
+	<script src="js/jquery-3.2.1.min.js" type="text/javascript" language="javascript"></script>
+	
+	<!-- Seperate script for each view, could be combined and minified in future -->
+	<script src="js/login.ui.js" type="text/javascript" language="javascript"></script>
+	<script src="js/schoolclasses.ui.js" type="text/javascript" language="javascript"></script>
+	
+	<!-- Main script, should handle basic menu flow -->
+	<script src="js/main.js" type="text/javascript" ></script>	
+	
+	
   </head>
 
   <body>
     <!-- OPTIONAL: include this if you want history support -->
   <!-- <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>-->
-<input type="button" value="login" onclick="javascript:DwoLoginPresenter.loginTest();">
+  
+	<section id="sectionLogin">
+		<form id="formLogin" action="javascript: void(0);" method="POST">
+			<input type="text" name="username" placeholder="Gebruikersnaam" />
+			<input type="password" name="password" />
+			<input type="submit" name="submit" value="inloggen" />
+		</form>
+	</section>
+	
+	<section id="sectionSchoolclasses">
+		<h1>Schoolklassen</h1>
+	</section>
+
   </body>
 </html>
 
