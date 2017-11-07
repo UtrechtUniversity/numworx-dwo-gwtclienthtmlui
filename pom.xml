@@ -16,7 +16,7 @@
                             <alias>service</alias> 
                             <name>dwo/test:${project.version}</name>                            
                             <build> 
-                                <dockerFileDir></dockerFileDir>
+                                <dockerFileDir>.</dockerFileDir>
                                 <from>httpd:2.4</from> 
 <!--                                <cmd> 
                                     <shell>COPY ./httpd.conf /usr/local/apache2/conf/</shell>
