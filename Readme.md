@@ -12,23 +12,23 @@ docker build -t docker-local-ebs-dev-proxy .
 run the image from src/main
 
 cd ..
-docker run -v html:/usr/local/apache2/htdocs/local -p 127.0.0.1:8888:80 -dit --name local-ebs-dev-proxy docker-local-ebs-dev-proxy
+docker run -dit --name local-ebs-dev-proxy -p 8080:80 -v "$PWD"/html:/usr/local/apache2/htdocs/local docker-local-ebs-dev-proxy
 
 stop the image by listing the containers with
 
 docker ps
 
-and run
+and do
 
 docker stop {containerid}
 
-stop the image by listing the containers with
+to find the stopped container do
 
-docker ps
+docker ps -a
 
-and run
+and start it with
 
-docker stop {containerid}
+docker start {containerid}
 
 Keep any html and javascript files in src/main/html for compatibility with the maven
 pom.xml. Ensure that the files are accessible by docker to read. 
