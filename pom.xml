@@ -14,7 +14,7 @@
                     <images>
                         <image>
                             <alias>service</alias> 
-                            <name>dwo/test:${project.version}</name>                            
+                            <name>dwo/dwogwtclienthtmlui:${project.version}</name>                            
                             <build> 
                                 <dockerFileDir>.</dockerFileDir>
                                 <from>httpd:2.4</from> 
