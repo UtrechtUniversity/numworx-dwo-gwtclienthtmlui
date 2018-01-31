@@ -23,7 +23,7 @@ and run
 docker stop {containerid}
 
 Keep any html and javascript files in src/main/html for compatibility with the maven
-pom.xml
+pom.xml. Ensure that the files are accessible by docker to read. 
 
 MAVEN
 
