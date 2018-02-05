@@ -1,6 +1,20 @@
 This project can be used from the commandline in bash or via maven. HTML pages
 and javascript files to create an app are in src/main/html. An example index.html
-already exists there. 
+already exists there. Live accessing the DwoGwtClient Api goes through the javascript console.
+
+var dpf = dwoAPI.DwoPresenterFactory.getDwoPresenterFactory();
+pf = dpf.getFac();
+
+pf will contain contain a presenterfactory in which every returned presenter  
+will contain the documented call-backs in the jsdisplays package. Samples of the
+ui implementations are stored in html/js-plainui. Documentation is in the package
+nl.uu.fi.dwo.lms.gwtclient.gwt.jsdisplays of the DwoGwtClient application.
+
+In the javascript console one can access the api using:
+
+
+In the javascript console one can access the api using:
+
 
 BASH
 
