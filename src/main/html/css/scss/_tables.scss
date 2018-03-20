@@ -1,0 +1,51 @@
+table {
+	//table-layout: fixed;
+	width: 100%;	
+	border-collapse: collapse;
+	//float: left;
+	height: 100px; max-height: 100px;
+	position: relative;
+	margin-bottom: $elementMarginBottom;
+	
+	thead, tbody tr {
+	    display:table;
+	    width:100%;
+	    table-layout:fixed;
+	}
+	
+	thead {
+		//width: 100%;
+		//position: absolute;
+		left: 0; right: 0;
+		tr {
+			width: 100%;
+			th { 
+				text-transform: uppercase;
+				color: $primaryLight;
+				padding: 10px;
+				&:first-child { padding-left: 0; }
+			}
+		}		
+	}
+	
+	tbody {
+		//box-shadow: 0 0 0 3px $primary inset; // border doesn't work combined with radius
+		border: $borderThickness $primary solid;
+	    @include border-box;
+		@include border-radius($defaultRadius);
+		background: $white;
+		width: 100%;
+		//position: absolute;
+		max-height: 200px;
+		overflow-y: scroll;
+		top: 2em;
+		display: block;
+		
+		tr {					
+			td {
+				border-bottom: 1px $line1 solid;
+				padding: 10px;
+			}			
+		}
+	}	
+}
