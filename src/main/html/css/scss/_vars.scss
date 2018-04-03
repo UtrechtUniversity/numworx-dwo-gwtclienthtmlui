@@ -12,6 +12,7 @@ $navWidth : 200; //px
  */ 
 $gutter : 30; //px
 $borderThickness : 2px;
+$borderThicknessResult : 5px;
 
 /*
  * MARGINS & PADDINGS
@@ -41,6 +42,10 @@ $shade2: #edeff1;
 $shade3: #d1e3f3;
 
 $line1: #dadbdd;
+
+$danger: #ff0000;
+
+$transWhite: rgba(255,255,255,0.8);
 
 
 //OLD, to be replaced:

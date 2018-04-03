@@ -11,9 +11,11 @@ input[type="submit"], button {
 	letter-spacing: .3px;
 	font-size: 12px;
 }
-
 input[type="text"] {
 	font-family: 'Ubuntu', sans-serif;
+}
+.options .option label {
+	font-size: 12px;
 }
 
 
@@ -21,7 +23,8 @@ h1 {
 	font-size: 18 / 16 * 1em;
 	color: $primary;	
 	font-weight: bold;
-	margin-bottom: $elementMarginBottom;
+	margin-bottom: 2 * $elementMarginBottom; //TODO
+	padding-top: $elementMarginBottom; //TODO
 }
 h2 {
 	margin-bottom: $elementMarginBottom;
@@ -55,6 +58,14 @@ h2 {
 			header & { max-width: ((6/12 * $sitewidth) - ($gutter/2)) / $sitewidth * 100%; }
 		}
 	}
+	
+	&.helpheader {
+		background-color: $shade3;
+		color: $textOnPrimary;
+		
+		padding: 2px 0;
+		text-indent: 10px;
+	}
 }
 
 h3 {
@@ -69,6 +80,14 @@ h4 {
 	margin-bottom: $elementMarginBottom;
 }
 
+#help .content {
+	h1, h2, h3, h4 {
+		font-size: 24 / 16 * 1em;
+		font-weight: bold;
+		margin-bottom: 1em;
+	}
+}
+
 p {
 	color: $primary;
 	margin-bottom: $elementMarginBottom;
@@ -77,4 +96,9 @@ p {
 label {
 	color: $primary;
 	font-weight: bold;
+}
+
+a.resultIndicator {
+	color: $black;
+	text-decoration: none;
 }

@@ -28,3 +28,9 @@
 .col-10 { width: ((10 / 12 * $sitewidth) - $gutter) / $sitewidth * 100%; }
 .col-11 { width: ((11 / 12 * $sitewidth) - $gutter) / $sitewidth * 100%; }
 .col-12 { width: ((12 / 12 * $sitewidth) - $gutter) / $sitewidth * 100%; }
+
+.clear {
+	clear: both;
+	font-size: 0; line-height: 0;
+	margin-bottom: $rowMarginBottom;
+}

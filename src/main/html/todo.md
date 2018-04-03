@@ -1,14 +1,12 @@
-Ongeveer op tijdsvolgorde:
-
-* option boxes
-* select boxes
+# TODO
+* soms is het label breder dan het veld -> Oplossing zoeken
 
 * exacte kleuren
 * exacte margins/paddings
 
-* hovers tabelrijen
 * hovers buttons
-* select tabelrijen
+
+* help
 
 * account menu
 * viewport
@@ -20,3 +18,12 @@ Ongeveer op tijdsvolgorde:
 
 * cross browser check
 
+* icoontjes
+
+# DONE
+
+* option boxes
+* select boxes
+
+* hovers tabelrijen
+* select tabelrijen

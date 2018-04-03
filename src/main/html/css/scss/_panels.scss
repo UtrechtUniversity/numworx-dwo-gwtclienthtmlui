@@ -2,14 +2,16 @@
  * GENERAL
  */
 
-html { height: 100%; width: 100%; overflow-x:hidden; }
-body { height: 100%; }
+html { height: 100%; width: 100%; overflow-x:hidden;}
+body { height: 100%;  min-width: $sitewidth * 1px; }
 
 .panel {
 	background-color: $white;
 	width: 100%;
 	
 	display: none;
+	
+	
 	
 	//&::before {
 //		/* Adds min-height on before element
@@ -63,14 +65,55 @@ body { height: 100%; }
 			width: ((12 / 12 * $sitewidth) - $gutter) / $sitewidth * 100%;
 			padding: 0 ($gutter / 2) / $sitewidth * 100%;
 		}
+		
+		section#help {
+			z-index: 9999;
+			padding-top: 0;
+			width: ((2 / 12 * $sitewidth) - $gutter) * 1px;
+			background-color: $shade2;
+			
+			position: absolute;
+			right: $navWidth * 1px;
+			margin-right: ($gutter / 2) / $sitewidth * 100%;
+			margin-top: -20px;
+			background-color: $shade3;
+			
+			h2.helpheader {
+				cursor: pointer;
+				border-bottom: 1px $primary solid;
+			}
+			
+			.content {
+				display: none;
+				width: 80%;				
+				padding: 2em 10%;
+			}
+			&.active {
+				h2.helpheader {
+					background-color: $primary;
+					color: $white;
+				}
+				.content {
+					display: block;
+				}				
+			}
+		}	
 	}
 	
 	section {
 		position: relative;
 		max-width: ($sitewidth - $navWidth) * 1px;
-		z-index: 10;
+		//z-index: 10;
 		padding-top: $panelSectionPaddingTop;
+		
+		&:after {
+		    content: "";
+		    clear: both;
+		    display: table;
+		}
 	}
+	
+	
 }
 
 

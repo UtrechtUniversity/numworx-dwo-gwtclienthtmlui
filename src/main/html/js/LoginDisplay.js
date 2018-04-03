@@ -14,6 +14,7 @@ function LoginDisplay() {
 }
 
 LoginDisplay.prototype.show = function() {
+	console.log("show login panel");
 	this.panel.show();
 }
 LoginDisplay.prototype.disable = function() {
