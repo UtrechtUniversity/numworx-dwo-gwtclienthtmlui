@@ -44,10 +44,22 @@ table {
 				//&:first-child { padding-left: 0; }
 				
 				.sortButton {
+					cursor: pointer;
 					display: inline-block;
-					width: 10px; height: 10px;
-					margin: 0 5px;
-					background-color: $primary;
+					width: 13px; height: 13px;
+					//width: 64px; height: 64px;
+					margin: 0 -2px;
+					
+					//background-color: $primary;
+					
+					.icon {
+						display: block;			
+						height: 13px; //TODO var			
+						width: 64/73.9 * 13px; //TODO var
+									
+						use { fill: $shade3; }
+					}
+					&.active .icon use { fill: $primary; }
 				}
 			}
 		}		

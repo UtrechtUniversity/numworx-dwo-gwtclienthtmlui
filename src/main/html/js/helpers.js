@@ -64,9 +64,9 @@ tableSorter = function(tbody, index, attr, type, asc) {
 			console.log(val1+" - "+val2); 
 					
 			if (type == "string") {
-				if ( (asc && val2.localeCompare(val1) < 0) || (!asc && val2.localeCompare(val1) > 0) ) { shouldSwitch = true; break; }
+				if ( (!asc && val2.localeCompare(val1) < 0) || (asc && val2.localeCompare(val1) > 0) ) { shouldSwitch = true; break; }
 			} else {
-				if ( (asc && val2 < val1) || (!asc && val2 > val1) ) { shouldSwitch = true; break; }
+				if ( (!asc && val2 < val1) || (asc && val2 > val1) ) { shouldSwitch = true; break; }
 			}
 						
 		}		
@@ -132,7 +132,10 @@ $(document).ready(function(){
 		attr = "score";
 		if ($this.data("attr")) attr = $this.data("attr");
 			
-		tableSorter(tbody, index, attr, type, asc);					
+		tableSorter(tbody, index, attr, type, asc);	
+		
+		$('.sortButton').removeClass("active");
+		$this.addClass("active");				
 	});
 		
 	$(window).resize( function() {
