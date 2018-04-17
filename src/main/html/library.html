@@ -62,12 +62,12 @@
 					z M19.6,53.8H9.8V44h9.8V53.8z M19.6,37H9.8v-9.8h9.8V37z M19.6,19.5H9.8V9.6h9.8V19.5z M36.7,53.8h-9.8V44h9.8V53.8z M36.7,37h-9.8
 					v-9.8h9.8V37z M36.7,19.5h-9.8V9.6h9.8V19.5z M53.9,53.8h-9.8V44h9.8V53.8z M53.9,37h-9.8v-9.8h9.8V37z M53.9,19.5h-9.8V9.6h9.8
 					V19.5z"/>
-			</g>
-			
+			</g>			
 			
 			<g id="arrowUp">				
 				<path class="st0" d="M64, 73.9 L0, 37 L64, 0V73.9z" transform="rotate(90 38 42)"/>
 			</g>
+			
 			<g id="arrowRight">				
 				<path class="st0" d="M0, 73.9V0l64, 37L0,73.9z"/>
 			</g>
@@ -82,7 +82,26 @@
 	    </defs>
 	  </svg>
 	  
-	  
+	
+	<section id="loginDisplayPanel" class="panel">
+		<div class="container">
+			<div id="loginBox">
+				<div class="block primary">			
+					<form id="formLogin" action="javascript: void(0);" method="POST">
+						<label for="username">&nbsp;<input type="text" name="username" placeholder="Gebruikersnaam" /></label>
+						<label for="password">&nbsp;<input type="password" name="password" placeholder="Wachtwoord" /></label>
+						<input type="submit" class="right" name="submit" value="Aanmelden" />
+					</form>
+				</div>
+			
+				<ul>
+					<li><a href="#">Wachtwoord vergeten?</a></li>
+					<li><a href="#">Nog geen account?</a></li>
+					<li><a href="#">Meer informatie over Numworx</a></li>
+				</ul>
+			</div>
+		</div>
+	</section>
 	
 	<main id="mainPanel" class="panel">
 		<header>
@@ -93,8 +112,8 @@
 			    </svg>
 			</a>
 			<div id="accountMenuBox">
-				<span id="presentationName">Voorbeeld van Naam</span>
-				<span id="schoolName">Voorbeeldschool</span>
+				<span id="accountMenuSchoolName">Voorbeeldschool</span>
+				<span id="accountMenuUserRole">Docent</span><span id="accountMenuPresentationName">Naam</span>
 				<a href="javascript:void(0);">Account beheren</a>
 				<a href="javascript:void(0);">Uitloggen</a>
 			</div>
@@ -137,7 +156,50 @@
 			</ul>
 		</nav>
 				
-		<section id="welcomeDisplayPanel" class="subpanel">
+		<section id="libraryDisplayPanel" class="subpanel">
+			<section class="wide">
+				<div class="row">
+					<div class="col-10">
+						<h1>Modules voor HAVO / VWO 2,3</h1>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque bibendum eros ut posuere faucibus. In non congue quam, sed viverra risus. Aenean sed porta diam, quis hendrerit sem. Suspendisse tempus pellentesque blandit. Duis non tortor vulputate, aliquet erat ut, laoreet justo. Integer urna nisl, rhoncus eget sem nec, efficitur tristique tortor. Vestibulum dapibus nunc commodo lorem accumsan convallis. Maecenas lacinia est at lectus tempor, eu gravida leo convallis.</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque bibendum eros ut posuere faucibus. In non congue quam, sed viverra risus. Aenean sed porta diam, quis hendrerit sem. Suspendisse tempus pellentesque blandit. Duis non tortor vulputate, aliquet erat ut, laoreet justo. Integer urna nisl, rhoncus eget sem nec, efficitur tristique tortor. Vestibulum dapibus nunc commodo lorem accumsan convallis. Maecenas lacinia est at lectus tempor, eu gravida leo convallis.</p>
+					</div>					
+				</div>
+			</section>
+			<section class="wide">
+				<div class="row">
+					<div class="col-4">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque bibendum eros ut posuere faucibus. In non congue quam, sed viverra risus. Aenean sed porta diam, quis hendrerit sem. Suspendisse tempus pellentesque blandit. Duis non tortor vulputate, aliquet erat ut, laoreet justo. Integer urna nisl, rhoncus eget sem nec, efficitur tristique tortor. </p>
+					</div>					
+					<div class="col-4">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque bibendum eros ut posuere faucibus. In  Aenean sed porta diam, quis hendrerit sem. Suspendisse tempus pellentesque blandit. Duis non tortor vulputate, aliquet erat ut, laoreet justo. Integer urna nisl, rhoncus eget sem nec, efficitur tristique tortor. </p>
+					</div>
+					<div class="col-4">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque bibendum eros ut posuere faucibus. In non congue quam, sed viverra risus. Aenean sed porta diam, quis hendrerit sem. Suspendisse tempus pellentesque blandit. Duis non tortor vulputate, aliquet erat ut, laoreet justo. Integer urna nisl, rhoncus eget sem nec, efficitur tristique tortor. </p>
+					</div>
+					<div class="col-4">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Aenean sed porta diam, quis hendrerit sem. Suspendisse tempus pellentesque blandit. Duis non tortor vulputate, aliquet erat ut, laoreet justo. Integer urna nisl, rhoncus eget sem nec, efficitur tristique tortor. </p>
+					</div>
+					<div class="col-4">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque bibendum eros ut posuere faucibus. In non congue quam, sed viverra risus. Aenean sed porta diam, quis hendrerit sem. Suspendisse tempus pellentesque blandit. Duis non tortor vulputate, aliquet erat ut, laoreet justo. Integer urna nisl, rhoncus eget sem nec, efficitur tristique tortor. </p>
+					</div>
+					<div class="col-4">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque bibendum eros ut posuere faucibus faucibus. In non congue quam, sed viverra risus. Aenean sed porta diam, quis hendrerit sem. Suspendisse tempus pellentesque blandit. Duis non tortor vulputate, aliquet erat ut, laoreet justo. Integer urna nisl, rhoncus eget sem nec, efficitur tristique tortor. </p>
+					</div>
+					<div class="col-4">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque bibendum eros ut posuere faucibus. Aenean sed porta diam, quis hendrerit sem. Suspendisse tempus pellentesque blandit. Duis non tortor vulputate, aliquet erat ut, laoreet justo. Integer urna nisl, rhoncus eget sem nec, efficitur tristique tortor. </p>
+					</div>
+					<div class="col-4">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque bibendum eros ut posuere faucibus. In non congue quam, sed viverra risus. Aenean sed porta diam, quis hendrerit sem. Suspendisse tempus pellentesque blandit. Duis non tortor vulputate, aliquet erat ut, laoreet justo. Integer urna nisl, rhoncus eget sem nec, efficitur tristique tortor. </p>
+					</div>
+					<div class="col-4">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque bibendum eros ut posuere faucibus. In non congue quam, sed viverra risus. Aenean sed porta diam, quis hendrerit sem. Suspendisse tempus pellentesque blandit. Duis non tortor vulputate, aliquet erat ut, laoreet justo. Integer urna nisl, rhoncus eget sem nec, efficitur tristique tortor. </p>
+					</div>
+				</div>
+			</section>
+		</section>
+		
+		<section id="demoDisplayPanel" class="subpanel">
 			<header>
 				<div class="container">
 					<div class="content">
@@ -481,7 +543,7 @@
 									<th>Voornaam</th>
 									<th>Tussenvoegsel</th>
 									<th>Achternaam</th>
-									<th>Emailadres</th>
+									<th class="col-4">Emailadres</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -493,149 +555,10 @@
 									<td>Michel</td>
 									<td></td>
 									<td>Bakker</td>
-									<td>michel@hotmail.com</td>
+									<td class="col-4">michel@hotmail.com</td>
 								</tr>
 								
-								<tr>
-									<td>
-										<input type="checkbox" class="hidden" value="bakker34">
-										Bakker34
-									</td>
-									<td>Michel</td>
-									<td></td>
-									<td>Bakker</td>
-									<td>michel@hotmail.com</td>
-								</tr>
-								<tr>
-									<td>
-										<input type="checkbox" class="hidden" value="bakker34">
-										Bakker34
-									</td>
-									<td>Michel</td>
-									<td></td>
-									<td>Bakker</td>
-									<td>michel@hotmail.com</td>
-								</tr>
-								<tr>
-									<td>
-										<input type="checkbox" class="hidden" value="bakker34">
-										Bakker34
-									</td>
-									<td>Michel</td>
-									<td></td>
-									<td>Bakker</td>
-									<td>michel@hotmail.com</td>
-								</tr>
-								<tr>
-									<td>
-										<input type="checkbox" class="hidden" value="bakker34">
-										Bakker34
-									</td>
-									<td>Michel</td>
-									<td></td>
-									<td>Bakker</td>
-									<td>michel@hotmail.com</td>
-								</tr>
-								<tr>
-									<td>
-										<input type="checkbox" class="hidden" value="bakker34">
-										Bakker34
-									</td>
-									<td>Michel</td>
-									<td></td>
-									<td>Bakker</td>
-									<td>michel@hotmail.com</td>
-								</tr>
-								<tr>
-									<td>
-										<input type="checkbox" class="hidden" value="bakker34">
-										Bakker34
-									</td>
-									<td>Michel</td>
-									<td></td>
-									<td>Bakker</td>
-									<td>michel@hotmail.com</td>
-								</tr>
-								<tr>
-									<td>
-										<input type="checkbox" class="hidden" value="bakker34">
-										Bakker34
-									</td>
-									<td>Michel</td>
-									<td></td>
-									<td>Bakker</td>
-									<td>michel@hotmail.com</td>
-								</tr>
-								<tr>
-									<td>
-										<input type="checkbox" class="hidden" value="bakker34">
-										Bakker34
-									</td>
-									<td>Michel</td>
-									<td></td>
-									<td>Bakker</td>
-									<td>michel@hotmail.com</td>
-								</tr>
-								<tr>
-									<td>
-										<input type="checkbox" class="hidden" value="bakker34">
-										Bakker34
-									</td>
-									<td>Michel</td>
-									<td></td>
-									<td>Bakker</td>
-									<td>michel@hotmail.com</td>
-								</tr>
-								<tr>
-									<td>
-										<input type="checkbox" class="hidden" value="bakker34">
-										Bakker34
-									</td>
-									<td>Michel</td>
-									<td></td>
-									<td>Bakker</td>
-									<td>michel@hotmail.com</td>
-								</tr>
-								<tr>
-									<td>
-										<input type="checkbox" class="hidden" value="bakker34">
-										Bakker34
-									</td>
-									<td>Michel</td>
-									<td></td>
-									<td>Bakker</td>
-									<td>michel@hotmail.com</td>
-								</tr>
-								<tr>
-									<td>
-										<input type="checkbox" class="hidden" value="bakker34">
-										Bakker34
-									</td>
-									<td>Michel</td>
-									<td></td>
-									<td>Bakker</td>
-									<td>michel@hotmail.com</td>
-								</tr>
-								<tr>
-									<td>
-										<input type="checkbox" class="hidden" value="bakker34">
-										Bakker34
-									</td>
-									<td>Michel</td>
-									<td></td>
-									<td>Bakker</td>
-									<td>michel@hotmail.com</td>
-								</tr>
-								<tr>
-									<td>
-										<input type="checkbox" class="hidden" value="bakker34">
-										Bakker34
-									</td>
-									<td>Michel</td>
-									<td></td>
-									<td>Bakker</td>
-									<td>michel@hotmail.com</td>
-								</tr>
+								
 								
 							</tbody>
 						</table>
@@ -931,12 +854,6 @@
 		</section>
 		
 	</main>
-
-<script>
-	$(document).ready(function(){ 
-		$(".panel").show();
-	});
-</script>
 
   </body>
 </html>
