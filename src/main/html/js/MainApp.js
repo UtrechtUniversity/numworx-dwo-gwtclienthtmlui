@@ -23,7 +23,6 @@ MainApp.prototype.getPresenterFactory = function() {
 $(document).ready(function(){ 
 	window.app = new MainApp();
 	
-	setTimeout(function() { app.getPresenterFactory().loginPresenter.loginClicked("teuniz", "nizteu2", false); }, 1000); // temporary auto login
-	//setTimeout(function() { app.getPresenterFactory().loginPresenter.loginClicked("teuniz2", "niz2-adm", false); }, 1000); // temporary auto login
+	//setTimeout(function() { app.getPresenterFactory().loginPresenter.loginClicked("teuniz", "***", false); }, 1000); // temporary auto login
 });
 	
