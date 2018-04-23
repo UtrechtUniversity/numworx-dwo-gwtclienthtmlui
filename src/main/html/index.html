@@ -269,7 +269,7 @@
 										<td class="col-1"><span id="updateSchoolLoginsViewRole">ROL</span></td>
 										<td>
 											<div class="checkbox">
-												<input type="radio" name="active" id="updateSchoolLoginsViewActive" value="schoolid"><label class="icon" for="updateSchoolLoginsViewActive"></label>
+												<input type="checkbox" name="active[]" id="updateSchoolLoginsViewActive" value="schoolid"><label class="icon" for="updateSchoolLoginsViewActive"></label>
 											</div>											
 										</td>
 										<td>
@@ -316,11 +316,11 @@
 							</div>
 							<label for="schoolLogin" class="col-2 input">
 								Wachtwoord
-								<input id="schoolLogin" type="password" value="" />
+								<input id="schoolLogin" name="schoolLogin" type="text" value="" />
 							</label>
-							<label for="accessCode" class="col-2 input">
+							<label for="schoolCode" class="col-2 input">
 								Sleutelcode school
-								<input id="accessCode" type="text" value="" />
+								<input id="schoolCode" name="schoolCode" type="password" value="" />
 							</label>
 							
 							<div class="col-4">
@@ -331,9 +331,38 @@
 				</div>
 			</section>			
 			
-		</section> <!-- end account display panel -->
+		</section> 
+		<!-- end account display panel -->
 		
 		
+		<!-- 
+		-
+		- DIALOGS
+		-
+		-->
+		<section id="MsgDialogWithConfirmDisplay" class="dialog">
+			<header>
+				<h4>Mededeling</h4>
+			</header>
+			<section>
+				<!-- <h3>De wijzigingen zijn opgeslagen</h3> -->
+				<p id="MsgDialogWithConfirmDisplayMessage">Kies DOORGAAN om verder te gaan.</p>
+				<input id="MsgDialogWithConfirmDisplayConfirmButton" type="submit" class="right bottom" value="Doorgaan" />
+			</section>
+		</section>
+		
+		<section id="AlertDialogWithConfirmDisplay" class="dialog alert">
+			<header>
+				<h4>Attentie!</h4>
+			</header>
+			<section>
+				<!-- <h3>De wijzigingen zijn opgeslagen</h3> -->
+				<p id="AlertDialogWithConfirmDisplayMessage">Kies DOORGAAN om verder te gaan.</p>
+				<input id="AlertDialogWithConfirmDisplayConfirmButton" type="submit" class="right bottom" value="Doorgaan" />
+			</section>
+		</section>
+		<!-- end dialogs -->
+		 
 		
 	</main>
 

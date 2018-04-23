@@ -1,5 +1,6 @@
 function MainDisplay() {
 	// Bind DOM elements with jQuery
+	this.$body = $("body");
 	this.$panel = jQuery("#mainPanel");
 	this.$panels = this.$panel.find(".panel");	
 	this.$nav = this.$panel.find("nav");
@@ -15,11 +16,18 @@ function MainDisplay() {
 	this.welcomeDisplay = new WelcomeDisplay();
 	window.jsWelcomeDisplay = this.welcomeDisplay;
 	this.accountDisplay = new AccountDisplay();
-	window.jsAccountDisplay = this.accountDisplay;
+	window.jsAccountDisplay = this.accountDisplay;	
 	this.msgDialogDisplay = new MsgDialogDisplay();
 	window.jsMsgDialogDisplay = this.msgDialogDisplay;
-	this.messageDialogWithConfirmDisplay = new MessageDialogWithConfirmDisplay();
-	window.jsMessageDialogWithConfirmDisplay = this.messageDialogWithConfirmDisplay;	
+	this.msgDialogWithConfirmDisplay = new MsgDialogWithConfirmDisplay();
+	window.jsMessageDialogWithConfirmDisplay = this.msgDialogWithConfirmDisplay;		
+	this.alertDialogWithConfirmCancelDisplay = new AlertDialogWithConfirmCancelDisplay();
+	window.jsAlertDialogWithConfirmCancelDisplay = this.alertDialogWithConfirmCancelDisplay;	
+	this.alertDialogWithConfirmDisplay = new AlertDialogWithConfirmDisplay();
+	window.jsAlertDialogWithConfirmDisplay = this.alertDialogWithConfirmDisplay;	
+	this.progressDialogWithAbortDisplay = new ProgressDialogWithAbortDisplay();
+	window.jsProgressDialogWithAbortDisplay = this.progressDialogWithAbortDisplay;
+	
 			
 	// Init
 	this.showLoginView(); // TODO: Gert moet de login view aanroepen nadat alles geinitialiseerd is.
@@ -69,4 +77,17 @@ MainDisplay.prototype.showWelcomeView = function() {
 MainDisplay.prototype.showAccountView = function(vars) {
 	this.initMainView(); 
 	this.accountDisplay.show();
+}
+
+
+MainDisplay.prototype.toggleDialogView = function(value) {
+	if (this.msgDialogDisplay.active ||	
+		this.msgDialogWithConfirmDisplay.active ||	
+		this.alertDialogWithConfirmCancelDisplay.active ||	
+		this.alertDialogWithConfirmDisplay.active ||	
+		this.progressDialogWithAbortDisplay.active ) {
+			this.$body.addClass("overlay");
+	}	else {
+		this.$body.removeClass("overlay");
+	}
 }

@@ -1,30 +1,115 @@
 function MsgDialogDisplay() {
 		
 }
-
 MsgDialogDisplay.prototype.clear = function() {
 }
 MsgDialogDisplay.prototype.init = function() {
 }
-MsgDialogDisplay.prototype.showDialog = function() {	
-	console.log("DIALOG");
+MsgDialogDisplay.prototype.showDialog = function(text) {	
+	console.log("MsgDialogDisplay: "+text);
 }
 MsgDialogDisplay.prototype.hideDialog = function(event) {
 }
 
 
-function MessageDialogWithConfirmDisplay() {
-		
+function MsgDialogWithConfirmDisplay() {
+	this.active = false;
+	
+	// jQuery objects
+	this.$dialog = $("#MsgDialogWithConfirmDisplay");
+	this.$message = $("#MsgDialogWithConfirmDisplayMessage");
+	this.$confirmButton = $("#MsgDialogWithConfirmDisplayConfirmButton");
+	
+	// Bind handlers
+	this.$confirmButton.on('click', $.proxy(this.clickConfirm,this));
+	
+	// Init
+	this.$dialog.hide();
+	
+}
+MsgDialogWithConfirmDisplay.prototype.clear = function() {}
+MsgDialogWithConfirmDisplay.prototype.init = function() {}
+MsgDialogWithConfirmDisplay.prototype.showDialog = function(text) {	
+	this.$dialog.show();
+	this.$message.html(text);
+	this.active = true;
+	window.app.mainDisplay.toggleDialogView();
+}
+MsgDialogWithConfirmDisplay.prototype.hideDialog = function() {
+	this.$dialog.hide();	
+	this.$message.html("");
+	this.active = false;
+	window.app.mainDisplay.toggleDialogView();
+}
+MsgDialogWithConfirmDisplay.prototype.clickConfirm = function(event) {
+	this.hideDialog();
 }
 
-MessageDialogWithConfirmDisplay.prototype.clear = function() {
+function AlertDialogWithConfirmCancelDisplay() {
+		
 }
-MessageDialogWithConfirmDisplay.prototype.init = function() {
+AlertDialogWithConfirmCancelDisplay.prototype.clear = function() {
 }
-MessageDialogWithConfirmDisplay.prototype.showDialog = function() {	
-	console.log("DIALOG MET CONFIRM");
+AlertDialogWithConfirmCancelDisplay.prototype.init = function() {
 }
-MessageDialogWithConfirmDisplay.prototype.hideDialog = function(event) {
+AlertDialogWithConfirmCancelDisplay.prototype.showDialog = function(text) {	
+	console.log("AlertDialogWithConfirmCancelDisplay: "+text);
 }
+AlertDialogWithConfirmCancelDisplay.prototype.hideDialog = function(event) {
+}
+
+
+function AlertDialogWithConfirmDisplay() {
+	this.active = false;
+	
+	// jQuery objects
+	this.$dialog = $("#AlertDialogWithConfirmDisplay");
+	this.$message = $("#AlertDialogWithConfirmDisplayMessage");
+	this.$confirmButton = $("#AlertDialogWithConfirmDisplayConfirmButton");
+	
+	// Bind handlers
+	this.$confirmButton.on('click', $.proxy(this.clickConfirm,this));
+	
+	// Init
+	this.$dialog.hide();
+}
+AlertDialogWithConfirmDisplay.prototype.clear = function() {}
+AlertDialogWithConfirmDisplay.prototype.init = function() {}
+AlertDialogWithConfirmDisplay.prototype.showDialog = function(text) {	
+	this.$dialog.show();
+	this.$message.html(text);
+	this.active = true;
+	window.app.mainDisplay.toggleDialogView();
+}
+AlertDialogWithConfirmDisplay.prototype.hideDialog = function(event) {
+	this.$dialog.hide();	
+	this.$message.html("");
+	this.active = false;
+	window.app.mainDisplay.toggleDialogView();
+}
+AlertDialogWithConfirmDisplay.prototype.clickConfirm = function(event) {
+	this.hideDialog();
+}
+
+
+
+function ProgressDialogWithAbortDisplay() {
+		
+}
+ProgressDialogWithAbortDisplay.prototype.clear = function() {
+}
+ProgressDialogWithAbortDisplay.prototype.init = function() {
+}
+ProgressDialogWithAbortDisplay.prototype.showDialog = function() {	
+	console.log("ProgressDialogWithAbortDisplay");
+}
+ProgressDialogWithAbortDisplay.prototype.hideDialog = function(event) {
+}
+
+
+
+
+
+
 
 
