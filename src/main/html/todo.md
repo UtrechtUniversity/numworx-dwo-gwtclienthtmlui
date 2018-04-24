@@ -21,6 +21,8 @@
 
 * icoontjes
 
+tabindex? keyboard selection?
+
 # DONE
 
 * option boxes

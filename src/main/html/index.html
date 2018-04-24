@@ -30,6 +30,7 @@
 	<script src="js/LoginDisplay.js" type="text/javascript" charset="utf-8"></script>	
 	<script src="js/AccountDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/SchoolclassesDisplay.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/EditSchoolclassesDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/WelcomeDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/dialogs.js" type="text/javascript" charset="utf-8"></script>
 	
@@ -146,8 +147,7 @@
 		<nav>
 			<ul id="mainNav">
 				<li>
-					<a href="#">
-					<svg viewBox="0 0 64 64" class="icon">
+					<a href="#"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#resultaten"></use>
 				    </svg><span class="name">Resultaten</span>
 				    </a>
@@ -161,9 +161,9 @@
 				<li><a href="#"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#modules"></use>
 				    </svg><span class="name">Modules</span></a></li>
-				<li><a href="#"><svg viewBox="0 0 64 64" class="icon">
+				<!-- <li><a href="#"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#organisatie"></use>
-				    </svg><span class="name">Organisatie</span></a></li>
+				    </svg><span class="name">Organisatie</span></a></li> -->
 			</ul>
 		</nav>
 		
@@ -375,6 +375,7 @@
 				</div>
 			</header>
 			
+			<!-- Edit class -->
 			<section>				
 				<div class="row">
 					<form name="chooseSchoolclass">							
@@ -400,8 +401,85 @@
 				</div>								
 			</section>
 			
+			<!-- Add class -->
+			<section>
+				<div class="row">
+					<div class="col-12">
+						<h2 class="sectionhead"><span>Klas toevoegen<span></h2>						
+					</div>
+				</div>
+				<div class="row">
+					<form name="addSchoolclass">
+						<fieldset>
+							<label for="classname" class="col-2 input">
+								Naam klas
+								<input id="classname" name="classname" type="text" value="" />
+							</label>
+							<div class="col-2 options">
+								<label>Boomstructuur?</label>
+								<div class="option">
+									<input type="radio" name="useClasstree" id="useClasstreeYes" value="1">
+									<label for="useClasstreeYes">Ja</label>
+								</div> 
+								<div class="option">
+									<input type="radio" name="useClasstree" id="useClasstreeNo" value="0" checked="checked">
+									<label for="useClasstreeNo">Nee</label>
+								</div>
+							</div>
+							<div class="col-2 options">
+								<label>Klassleutel?</label>
+								<div class="option">
+							    	<input type="radio" name="useClasskey" id="useClasskeyYes" value="1">
+									<label for="useClasskeyYes">Ja</label>
+								</div>
+								<div class="option">
+									<input type="radio" name="useClasskey" id="useClasskeyNo" value="0" checked="checked">
+									<label for="useClasskeyNo">Nee</label>
+								</div> 
+							</div>
+							<label for="classkey" class="col-2 input">
+								&nbsp;
+								<input id="classkey" name="classkey" type="text" value="" />
+							</label>
+							<div class="col-4">
+								<input type="submit" class="primary right bottom" value="Voeg klas toe" />
+							</div>							
+						</fieldset>						
+					</form>
+				</div>
+			</section>	
 			
-					
+		</section> 
+		<!-- end schoolclasses display panel -->
+		
+		
+		
+		<!-- 
+		-
+		- editSchoolclassesDisplayPanel
+		-
+		-->
+		<section id="editSchoolclassesDisplayPanel" class="subpanel">
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon">
+							<use xlink:href="#klassen"></use>
+						</svg>
+						<h1>Klassen bewerken</h1>
+						<h2 class="sectionhead"><span>Klas bewerken</span></h2>					
+					</div>
+					<section id="help" class="col-2">
+						<h2 class="helpheader">Numworx Help</h2>
+						<div class="content">
+							<h2>Help kop</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium gravida dignissim. Aliquam id metus quam. Aenean consequat arcu sit amet commodo porttitor.</p><p>Proin viverra, enim non feugiat ornare, purus urna dignissim ante, consectetur faucibus libero diam id ligula.</p>
+						</div>
+					</section>
+				</div>
+			</header>
+			
+			TODO
 			
 		</section> 
 		<!-- end schoolclasses display panel -->
