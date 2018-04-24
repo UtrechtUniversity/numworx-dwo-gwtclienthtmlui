@@ -1,4 +1,6 @@
 function MainDisplay() {
+	this.activeDialogs = [];
+
 	// Bind DOM elements with jQuery
 	this.$body = $("body");
 	this.$panel = jQuery("#mainPanel");
@@ -80,14 +82,12 @@ MainDisplay.prototype.showAccountView = function(vars) {
 }
 
 
-MainDisplay.prototype.toggleDialogView = function(value) {
-	if (this.msgDialogDisplay.active ||	
-		this.msgDialogWithConfirmDisplay.active ||	
-		this.alertDialogWithConfirmCancelDisplay.active ||	
-		this.alertDialogWithConfirmDisplay.active ||	
-		this.progressDialogWithAbortDisplay.active ) {
-			this.$body.addClass("overlay");
-	}	else {
-		this.$body.removeClass("overlay");
-	}
+MainDisplay.prototype.openDialogView = function(dialog) {
+	this.activeDialogs.push(dialog);
+	this.$body.addClass("overlay");
+}
+MainDisplay.prototype.closeDialogView = function(dialog) {
+	dialog = this.activeDialogs.pop();
+	if (this.activeDialogs.length == 0) this.$body.removeClass("overlay"); // remove overlay
+	else this.activeDialogs[this.activeDialogs.length - 1].setFocus(); // or set focus to next dialog
 }

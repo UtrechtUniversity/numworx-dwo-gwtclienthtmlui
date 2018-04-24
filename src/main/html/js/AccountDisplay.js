@@ -28,7 +28,7 @@ function AccountDisplay() {
 	this.$updateUserForm.on('submit', $.proxy(this.submitUserForm,this));
 	this.$updateSchoolLoginsViewForm.on('submit', $.proxy(this.submitSchoolLogins,this));
 	this.$addSchoolLoginForm.on('submit', $.proxy(this.submitSchoolLoginsViewForm,this));
-	$(this.updateUserForm.elements["currentPassword"]).on('change', $.proxy(this.changeCurrentPasswordInput,this));
+	$(this.updateUserForm.elements["currentPassword"]).on('keypress', $.proxy(this.changeCurrentPasswordInput,this));
 	
 	// Init
 	this.$panel.hide();
@@ -44,15 +44,23 @@ AccountDisplay.prototype.clear = function () {
 AccountDisplay.prototype.init = function (json) {
 }
 
-AccountDisplay.prototype.refresh = function() {
-	// Refresh update user
+AccountDisplay.prototype.updateUserView = function(json) {
+	this.email = json.jsObject.email;
+	this.familyName = json.jsObject.familyName;
+	this.givenName = json.jsObject.givenName;
+	this.insertion = json.jsObject.insertion;
+
 	this.updateUserForm.elements["email"].value = this.email;
 	this.updateUserForm.elements["familyName"].value = this.familyName;
 	this.updateUserForm.elements["givenName"].value = this.givenName;
 	this.updateUserForm.elements["insertion"].value = this.insertion;
 	this.updateUserFormToggle(false);
-	
-	// Refresh update school logins
+}
+
+AccountDisplay.prototype.updateSchoolLoginsView = function(json) {
+	this.activeSchoolRoleAndClass = json.jsObject.activeSchoolRoleAndClass;
+	this.schoolsRolesAndClassesList = json.jsObject.schoolsRolesAndClassesList;
+
 	if (this.schoolsRolesAndClassesList) {
 		
 		if (this.activeSchoolRoleAndClass) { activeSchoolId = this.activeSchoolRoleAndClass.school.id.idString; activeRoleId = this.activeSchoolRoleAndClass.role.id.idString; }
@@ -88,22 +96,6 @@ AccountDisplay.prototype.refresh = function() {
 		
 		this.updateSchoolLoginsViewFormSubmitToggle();
 	}
-}
-
-AccountDisplay.prototype.updateUserView = function(json) {
-	this.email = json.jsObject.email;
-	this.familyName = json.jsObject.familyName;
-	this.givenName = json.jsObject.givenName;
-	this.insertion = json.jsObject.insertion;
-	this.refresh();
-}
-
-AccountDisplay.prototype.updateSchoolLoginsView = function(json) {
-	console.log("update school logins view");
-	console.log(json);	
-	this.activeSchoolRoleAndClass = json.jsObject.activeSchoolRoleAndClass;
-	this.schoolsRolesAndClassesList = json.jsObject.schoolsRolesAndClassesList;
-	this.refresh();	
 }
 
 AccountDisplay.prototype.saveUser = function(event) {	
@@ -171,9 +163,7 @@ AccountDisplay.prototype.submitSchoolLogins = function(event) {
 AccountDisplay.prototype.changeActiveCheckbox = function(event) {
 	if (event.target.checked) {
 		// Set others unchecked
-		for (i = 0; i < this.updateSchoolLoginsViewForm.elements.length; i++) {
-			if (this.updateSchoolLoginsViewForm.elements[i].name == "active[]" && !this.updateSchoolLoginsViewForm.elements[i].disabled) this.updateSchoolLoginsViewForm.elements[i].checked = "";
-		}
+		this.uncheckSchoolLoginsViewFormCheckboxes();
 		
 		// Set remove unchecked
 		var $row = $(event.target.parentElement.parentElement.parentElement);
@@ -189,9 +179,10 @@ AccountDisplay.prototype.changeActiveCheckbox = function(event) {
 
 AccountDisplay.prototype.changeRemoveCheckbox = function(event) {
 	if (event.target.checked) {
-		// Set active unchecked
-		var $row = $(event.target.parentElement.parentElement.parentElement);
-		$row.find("input[name='active[]']:not(:disabled)").prop('checked','');
+		// Set others unchecked
+		this.uncheckSchoolLoginsViewFormCheckboxes();
+		//var $row = $(event.target.parentElement.parentElement.parentElement);
+		//$row.find("input[name='active[]']:not(:disabled)").prop('checked','');
 		
 		// Set current checked
 		event.target.checked = "checked";
@@ -213,6 +204,13 @@ AccountDisplay.prototype.updateSchoolLoginsViewFormStateChanged = function () {
 	}
 	return false;
 }
+AccountDisplay.prototype.uncheckSchoolLoginsViewFormCheckboxes = function() {
+	for (i = 0; i < this.updateSchoolLoginsViewForm.elements.length; i++) {
+		if ( (this.updateSchoolLoginsViewForm.elements[i].name == "active[]" || this.updateSchoolLoginsViewForm.elements[i].name == "remove[]")
+			&& !this.updateSchoolLoginsViewForm.elements[i].disabled) this.updateSchoolLoginsViewForm.elements[i].checked = "";
+	}
+}
+
 
 
 /*

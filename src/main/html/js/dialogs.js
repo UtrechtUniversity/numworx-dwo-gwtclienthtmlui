@@ -32,17 +32,21 @@ MsgDialogWithConfirmDisplay.prototype.init = function() {}
 MsgDialogWithConfirmDisplay.prototype.showDialog = function(text) {	
 	this.$dialog.show();
 	this.$message.html(text);
-	this.active = true;
-	window.app.mainDisplay.toggleDialogView();
+	this.$confirmButton.focus();
+	this.active = true;	
+	window.app.mainDisplay.openDialogView(this);
 }
 MsgDialogWithConfirmDisplay.prototype.hideDialog = function() {
 	this.$dialog.hide();	
 	this.$message.html("");
 	this.active = false;
-	window.app.mainDisplay.toggleDialogView();
+	window.app.mainDisplay.closeDialogView(this);
 }
 MsgDialogWithConfirmDisplay.prototype.clickConfirm = function(event) {
 	this.hideDialog();
+}
+MsgDialogWithConfirmDisplay.prototype.setFocus = function() {
+	this.$confirmButton.focus();
 }
 
 function AlertDialogWithConfirmCancelDisplay() {
@@ -78,18 +82,23 @@ AlertDialogWithConfirmDisplay.prototype.init = function() {}
 AlertDialogWithConfirmDisplay.prototype.showDialog = function(text) {	
 	this.$dialog.show();
 	this.$message.html(text);
+	this.$confirmButton.focus();
 	this.active = true;
-	window.app.mainDisplay.toggleDialogView();
+	window.app.mainDisplay.openDialogView(this);
 }
 AlertDialogWithConfirmDisplay.prototype.hideDialog = function(event) {
 	this.$dialog.hide();	
 	this.$message.html("");
 	this.active = false;
-	window.app.mainDisplay.toggleDialogView();
+	window.app.mainDisplay.closeDialogView(this);
 }
 AlertDialogWithConfirmDisplay.prototype.clickConfirm = function(event) {
 	this.hideDialog();
 }
+AlertDialogWithConfirmDisplay.prototype.setFocus = function() {
+	this.$confirmButton.focus();
+}
+
 
 
 
