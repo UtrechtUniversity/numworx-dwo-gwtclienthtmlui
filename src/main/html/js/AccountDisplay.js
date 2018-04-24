@@ -34,6 +34,12 @@ function AccountDisplay() {
 	this.$panel.hide();
 }
 
+
+/*
+ * VIEW FUNCTIONS
+ * Map to java implementation
+ */
+
 AccountDisplay.prototype.show = function() {
 	this.$panel.show();
 }
@@ -99,6 +105,12 @@ AccountDisplay.prototype.updateSchoolLoginsView = function(json) {
 		this.updateSchoolLoginsViewFormSubmitToggle();
 	}
 }
+
+
+/*
+ * RETURN FUNCTIONS
+ * Use java callbacks
+ */
 
 AccountDisplay.prototype.saveUser = function(event) {	
 	app.getPresenterFactory().accountPresenter.saveUser(    this.updateUserForm.elements["givenName"].value,
@@ -212,7 +224,6 @@ AccountDisplay.prototype.uncheckSchoolLoginsViewFormCheckboxes = function() {
 			&& !this.updateSchoolLoginsViewForm.elements[i].disabled) this.updateSchoolLoginsViewForm.elements[i].checked = "";
 	}
 }
-
 
 
 /*

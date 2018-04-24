@@ -5,11 +5,14 @@ function MainDisplay() {
 	this.$body = $("body");
 	this.$panel = jQuery("#mainPanel");
 	this.$panels = this.$panel.find(".panel");	
+	this.$subpanels = this.$panel.find(".subpanel");	
 	this.$nav = this.$panel.find("nav");
 
 	this.$accountMenuSchoolName = jQuery("#accountMenuSchoolName");
 	this.$accountMenuUserRole = jQuery("#accountMenuUserRole");
 	this.$accountMenuPresentationName = jQuery("#accountMenuPresentationName");
+	this.$accountMenuBox = jQuery("#accountMenuBox");
+	this.$accountMenuToggle = $("#accountMenuToggle");
 	
 	
 	// Setup Display objects
@@ -33,6 +36,10 @@ function MainDisplay() {
 	this.progressDialogWithAbortDisplay = new ProgressDialogWithAbortDisplay();
 	window.jsProgressDialogWithAbortDisplay = this.progressDialogWithAbortDisplay;
 	
+	// Bind events
+	this.$nav.find('a').on('click', $.proxy(this.clickMenuItem, this));
+	this.$accountMenuBox.find('a').on('click', $.proxy(this.clickAccountMenuItem, this));
+	this.$accountMenuToggle.on('click', $.proxy(this.clickAccountMenuToggle, this));
 			
 	// Init
 	this.showLoginView(); // TODO: Gert moet de login view aanroepen nadat alles geinitialiseerd is.
@@ -46,13 +53,11 @@ MainDisplay.prototype.showLoginView = function() {
 MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 	this.$panels.hide();
 	this.$panel.show();	
+	this.$subpanels.hide();
 	this.loginDisplay.hide();
-	
-	this.$nav.find('a').on('click', $.proxy(this.clickMenuItem, this));
 }
 
 MainDisplay.prototype.setActiveView = function(view) {
-	//this.$panels.hide();
 	app.getPresenterFactory().mainPresenter.selectView(view);
 }
 
@@ -60,6 +65,7 @@ MainDisplay.prototype.setActiveView = function(view) {
 
 /*
  * SET MAIN DISPLAY VARIABLES
+ * Maps to java implementation
  */
 
 MainDisplay.prototype.setSchoolName = function (schoolName) {
@@ -75,10 +81,10 @@ MainDisplay.prototype.setPresentationName = function (presentationName) {
 
 /*
  * VIEW FUNCTIONS
+ * Maps to java implementation
  */
 
 MainDisplay.prototype.showWelcomeView = function() {
-	console.log("show WelcomeView");
 	this.initMainView();
 	this.welcomeDisplay.show();
 }
@@ -93,6 +99,9 @@ MainDisplay.prototype.showSchoolclassesView = function(vars) {
 	this.schoolclassesDisplay.show();
 }
 
+/*
+ * DIALOG VIEW HELPERS
+ */
 
 MainDisplay.prototype.openDialogView = function(dialog) {
 	this.activeDialogs.push(dialog);
@@ -113,3 +122,15 @@ MainDisplay.prototype.clickMenuItem = function(event) {
 	var view = event.currentTarget.hash.substr(1);
 	if (view) this.setActiveView(view)
 }
+MainDisplay.prototype.clickAccountMenuItem = function(event) {
+	event.preventDefault();
+	var view = event.currentTarget.hash.substr(1);
+	if (view) {
+		this.$accountMenuBox.toggle();
+		this.setActiveView(view);
+	}
+}
+MainDisplay.prototype.clickAccountMenuToggle = function(event) {
+	this.$accountMenuBox.toggle();
+}
+

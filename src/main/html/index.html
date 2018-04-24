@@ -12,7 +12,7 @@
         <!-- set to false in order to show the default user-interface -->
         var hideGwtGui="true";
         </script>
-    <script type="text/javascript" language="javascript" src="https://teuniz.dwo.nl/gwtclient/gwtclient/gwtclient.nocache.js"></script>
+    <script type="text/javascript" language="javascript" src="/gwtclient/gwtclient/gwtclient.nocache.js"></script>
 	
 	<!-- TODO: decide whether to add Google fonts locally (consider licence) -->
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700" rel="stylesheet">
@@ -138,7 +138,7 @@
 			<div id="accountMenuBox">
 				<span id="accountMenuSchoolName">Voorbeeld van Naam</span>
 				<span id="accountMenuUserRole">Docent</span><span id="accountMenuPresentationName">Voorbeeldschool</span>
-				<a href="javascript:void(0);">Account beheren</a>
+				<a href="#ACCOUNT">Account beheren</a>
 				<a href="javascript:void(0);">Uitloggen</a>
 			</div>
 		</header>
@@ -168,11 +168,20 @@
 		</nav>
 		
 		
+		<!-- 
+		-
+		- welcomePanel
+		-
+		-->
 		<section id="welcomeDisplayPanel" class="subpanel">			
 			<section>	
-				under construction
+				<div class="row">
+					<div class="col-12">
+						<p>Welkom tekst.</p>
+					</div>
 			</section>
 		</section>
+		<!-- end welcome panel -->
 		
 		
 		
@@ -365,6 +374,38 @@
 					</section>
 				</div>
 			</header>
+			
+			<section>				
+				<div class="row">
+					<form name="chooseSchoolclass">							
+						<div class="col-8">
+							<h3>Kies een klas om te bewerken</h2>
+						
+							<table class="hoverable selectable">
+								<tbody>
+									<tr>
+										<td>
+											<input type="radio" name="test" class="hidden" value="bakker341">
+											Bakker34
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input type="radio" name="test" class="hidden" value="bakker34">
+											Bakker34
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						
+						</div>
+						<div class="col-4">
+							<input type="submit" class="primary bottom right" value="Bewerken" />
+						</div>
+					</form>
+				</div>								
+			</section>
+			
 			
 					
 			

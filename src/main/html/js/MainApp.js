@@ -21,8 +21,6 @@ MainApp.prototype.getPresenterFactory = function() {
 }
 
 $(document).ready(function(){ 
-	window.app = new MainApp();
-	
-	
+	window.app = new MainApp();	
 });
 	
