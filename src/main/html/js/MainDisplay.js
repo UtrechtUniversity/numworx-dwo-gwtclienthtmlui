@@ -19,6 +19,9 @@ function MainDisplay() {
 	window.jsWelcomeDisplay = this.welcomeDisplay;
 	this.accountDisplay = new AccountDisplay();
 	window.jsAccountDisplay = this.accountDisplay;	
+	this.schoolclassesDisplay = new SchoolclassesDisplay();
+	window.jsSchoolClassesDisplay = this.schoolclassesDisplay;	
+	
 	this.msgDialogDisplay = new MsgDialogDisplay();
 	window.jsMsgDialogDisplay = this.msgDialogDisplay;
 	this.msgDialogWithConfirmDisplay = new MsgDialogWithConfirmDisplay();
@@ -44,11 +47,15 @@ MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 	this.$panels.hide();
 	this.$panel.show();	
 	this.loginDisplay.hide();
+	
+	this.$nav.find('a').on('click', $.proxy(this.clickMenuItem, this));
 }
 
-MainDisplay.prototype.setActiveMenuItem = function() {
-	// TODO: implementeren
+MainDisplay.prototype.setActiveView = function(view) {
+	//this.$panels.hide();
+	app.getPresenterFactory().mainPresenter.selectView(view);
 }
+
 
 
 /*
@@ -81,6 +88,11 @@ MainDisplay.prototype.showAccountView = function(vars) {
 	this.accountDisplay.show();
 }
 
+MainDisplay.prototype.showSchoolclassesView = function(vars) {
+	this.initMainView(); 
+	this.schoolclassesDisplay.show();
+}
+
 
 MainDisplay.prototype.openDialogView = function(dialog) {
 	this.activeDialogs.push(dialog);
@@ -90,4 +102,14 @@ MainDisplay.prototype.closeDialogView = function(dialog) {
 	dialog = this.activeDialogs.pop();
 	if (this.activeDialogs.length == 0) this.$body.removeClass("overlay"); // remove overlay
 	else this.activeDialogs[this.activeDialogs.length - 1].setFocus(); // or set focus to next dialog
+}
+
+/*
+ * EVENT HANDLERS
+ */
+
+MainDisplay.prototype.clickMenuItem = function(event) {
+	event.preventDefault();
+	var view = event.currentTarget.hash.substr(1);
+	if (view) this.setActiveView(view)
 }

@@ -63,6 +63,8 @@ AccountDisplay.prototype.updateSchoolLoginsView = function(json) {
 
 	if (this.schoolsRolesAndClassesList) {
 		
+		this.$schoolLoginsTableBody.html(""); // empty the table
+		
 		if (this.activeSchoolRoleAndClass) { activeSchoolId = this.activeSchoolRoleAndClass.school.id.idString; activeRoleId = this.activeSchoolRoleAndClass.role.id.idString; }
 		else { activeSchoolId = ""; activeRoleId = ""; }
 		
