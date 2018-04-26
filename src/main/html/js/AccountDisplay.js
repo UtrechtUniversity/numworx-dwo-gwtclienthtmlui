@@ -34,21 +34,22 @@ function AccountDisplay() {
 	this.$panel.hide();
 }
 
+AccountDisplay.prototype.show = function() {
+	this.$panel.show();
+}
+
 
 /*
  * VIEW FUNCTIONS
  * Map to java implementation
  */
 
-AccountDisplay.prototype.show = function() {
-	this.$panel.show();
-}
-
 AccountDisplay.prototype.clear = function () {
 	console.log("clear");
 }
 
 AccountDisplay.prototype.init = function (json) {
+	
 }
 
 AccountDisplay.prototype.updateUserView = function(json) {
@@ -109,6 +110,14 @@ AccountDisplay.prototype.updateSchoolLoginsView = function(json) {
 	}
 }
 
+AccountDisplay.prototype.clearAddSchoolLogin = function() {
+	this.addSchoolLoginForm.elements["role"][0].checked = false;
+	this.addSchoolLoginForm.elements["role"][1].checked = false;
+	this.addSchoolLoginForm.elements["role"][2].checked = false;
+	this.addSchoolLoginForm.elements["schoolCode"].value = "";
+	this.addSchoolLoginForm.elements["schoolLogin"].value = "";
+}
+
 
 /*
  * RETURN FUNCTIONS
@@ -147,7 +156,7 @@ AccountDisplay.prototype.addSchoolLogin = function(event) {
 	console.log("add school login");
 	app.getPresenterFactory().accountPresenter.addASchoolLogin( this.addSchoolLoginForm.elements["role"].value,
 																this.addSchoolLoginForm.elements["schoolLogin"].value,
-																this.addSchoolLoginForm.elements["schoolCode"].value );
+																this.addSchoolLoginForm.elements["schoolCode"].value );	
 }
 
 
