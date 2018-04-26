@@ -45,6 +45,7 @@ AccountDisplay.prototype.show = function() {
 }
 
 AccountDisplay.prototype.clear = function () {
+	console.log("clear");
 }
 
 AccountDisplay.prototype.init = function (json) {
@@ -76,12 +77,14 @@ AccountDisplay.prototype.updateSchoolLoginsView = function(json) {
 		
 		for (i = 0; i < this.schoolsRolesAndClassesList.length; i++) {
 			el = this.schoolsRolesAndClassesList[i];
+			console.log("EL");
+			console.log(el);
 			$row = this.$schoolLoginsRow.clone();
 			$row.find("#updateSchoolLoginsViewSchool").html( el.school.schoolName ).removeAttr("id");
 			$row.find("#updateSchoolLoginsViewRole").html( el.role.roleName ).removeAttr("id");	
 			
 			$row.find("input[type='checkbox'],input[type='radio']").each( function() {
-				this.value = el.role.id.idString;
+				this.value = el.hasRole.id.idString;
 				
 				// Change ID and label for-attributes
 				this.id = this.id + i;				
@@ -127,7 +130,7 @@ AccountDisplay.prototype.saveSchoolLogins = function(event) {
 	for (i = 0; i < this.updateSchoolLoginsViewForm.elements.length; i++) {
 		if (this.updateSchoolLoginsViewForm.elements[i].name == "active[]" && this.updateSchoolLoginsViewForm.elements[i].checked && !this.updateSchoolLoginsViewForm.elements[i].disabled) value = this.updateSchoolLoginsViewForm.elements[i].value;
 	}
-	console.log("set active: "+value);
+	//console.log("set active: "+value);
 	if (value != "") app.getPresenterFactory().accountPresenter.switchSchoolLogin( value );
 	
 	for (i = 0; i < this.updateSchoolLoginsViewForm.elements.length; i++) {
@@ -141,6 +144,7 @@ AccountDisplay.prototype.saveSchoolLogins = function(event) {
 }
 
 AccountDisplay.prototype.addSchoolLogin = function(event) {
+	console.log("add school login");
 	app.getPresenterFactory().accountPresenter.addASchoolLogin( this.addSchoolLoginForm.elements["role"].value,
 																this.addSchoolLoginForm.elements["schoolLogin"].value,
 																this.addSchoolLoginForm.elements["schoolCode"].value );
