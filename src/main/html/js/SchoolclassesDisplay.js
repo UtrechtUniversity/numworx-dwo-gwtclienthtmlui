@@ -90,8 +90,8 @@ SchoolclassesDisplay.prototype.chooseClass = function(id) {
 
 SchoolclassesDisplay.prototype.addClass = function(id) {
 	app.getPresenterFactory().schoolclassesPresenter.AddSchoolClass(this.addSchoolclassForm.elements["classname"].value,
-																	this.addSchoolclassForm.elements["useClasstree"].value ? true : false,
-																	this.addSchoolclassForm.elements["useClasskey"].value ? true : false,
+																	this.addSchoolclassForm.elements["useClasstree"].value == 1 ? true : false,
+																	this.addSchoolclassForm.elements["useClasskey"].value == 1 ? true : false,
 																	this.addSchoolclassForm.elements["classkey"].value);
 																	// TODO: function name start with capital?
 }

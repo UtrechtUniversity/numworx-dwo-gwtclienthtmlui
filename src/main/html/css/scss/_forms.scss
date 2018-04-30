@@ -1,4 +1,4 @@
-input[type="submit"], button {
+input[type="submit"], input[type="button"], button {
 	background-color: $primary;
 	border: $borderThickness $primary solid;
 	@include border-radius($defaultRadius);
