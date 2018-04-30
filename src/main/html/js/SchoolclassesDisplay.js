@@ -35,10 +35,15 @@ SchoolclassesDisplay.prototype.show = function() {
  */
 
 SchoolclassesDisplay.prototype.clear = function () {
-	console.log("CLEAR!"); // Wil jij clear aanroepen of ik?
 }
 
 SchoolclassesDisplay.prototype.init = function () {
+	this.addSchoolclassForm.elements["classname"].value = "";
+	this.addSchoolclassForm.elements["classkey"].value = "";
+	this.addSchoolclassForm.elements["useClasstree"][0].checked = false;
+	this.addSchoolclassForm.elements["useClasstree"][1].checked = true;
+	this.addSchoolclassForm.elements["useClasskey"][0].checked = false;
+	this.addSchoolclassForm.elements["useClasskey"][1].checked = true;
 }
 
 SchoolclassesDisplay.prototype.updateView = function(json) {

@@ -51,7 +51,6 @@ AccountDisplay.prototype.clear = function () {
 }
 
 AccountDisplay.prototype.init = function (json) {
-	
 }
 
 AccountDisplay.prototype.updateUserView = function(json) {
