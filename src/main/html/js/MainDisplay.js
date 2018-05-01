@@ -28,7 +28,7 @@ function MainDisplay() {
 	this.editSchoolclassesDisplay = new EditSchoolclassesDisplay();
 	window.JsEditSchoolclassDisplay	= this.editSchoolclassesDisplay; // TODO: remove first capital
 	this.studentsInSchoolclassDisplay = new StudentsInSchoolclassDisplay();
-	window.JsStudentsInSchoolClassDisplay	= this.studentsInSchoolclassDisplay;
+	window.JsStudentsInSchoolclassDisplay	= this.studentsInSchoolclassDisplay;
 	
 	this.msgDialogDisplay = new MsgDialogDisplay();
 	window.jsMsgDialogDisplay = this.msgDialogDisplay;
