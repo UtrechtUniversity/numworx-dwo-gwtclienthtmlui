@@ -7,7 +7,7 @@ Helpers.selectTableRow = function(event) {
 	var $el = $(event.target);
 	$el = $el.first();
 	
-	if ($el.get(0).tagName == "SPAN") {
+	while ($el.get(0).tagName != "TR") {
 		$el = $el.parent();
 	}
 	
