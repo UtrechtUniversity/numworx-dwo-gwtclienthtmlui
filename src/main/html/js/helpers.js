@@ -159,6 +159,10 @@ $(document).ready(function(){
 		$('.sortButton').removeClass("active");
 		$this.addClass("active");				
 	});
+	
+	
+	$(".tree li.hasSub a").click(function() { $(this).parent().toggleClass("open"); });
+	
 		
 	$(window).resize( function() {
 		if ($(window).outerWidth() > (1366)) {

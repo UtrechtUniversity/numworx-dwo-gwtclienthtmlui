@@ -79,6 +79,12 @@
 			<g id="arrowLeft">				
 				<path class="st0" d="M64, 73.9L0, 37L64, 0V73.9z"/>
 			</g>
+			
+			<g id="folder">				
+				<path class="st0" d="M0, 73.9V0l64, 37L0,73.9z"/>
+			</g>
+			
+			
 	    </defs>
 	  </svg>
 	  
@@ -220,6 +226,222 @@
 			</header>
 
 			<section>
+				
+				
+				
+				
+				<div class="row">
+					<div class="col-6">
+						<h3>Selecteer de gewenste modules om toe te kennen</h3>
+						
+						<div class="treeWrapper">
+							<ul class="tree">
+								<li class="hasSub">
+									<a class="icon folder">Standaard modules</a>
+									<ul>
+										<li class="hasSub">
+											<a class="icon folder">Oefenmateriaal</a>
+											<div class="checkbox">
+												<input type="checkbox" name="module" id="module1" value="module1" checked="checked">
+												<label class="icon" for="module1"></label>
+											</div>
+											<ul>
+												<li class="hasSub">
+													<a class="icon folder">Rekenen</a>
+													<ul>
+														<li class="hasSub">
+															<a class="icon folder">Negatieve getallen</a>
+															<ul>
+																<li class="hasSub">
+																	<a class="icon set">Oefeningen negatieve getallen</a>
+																	<ul>
+																		<li><a class="icon item">Optellen en aftrekken</a></li>
+																		<li><a class="icon item">Drie getallen optellen en aftrekken</a></li>
+																		<li><a class="icon item">Optellen en afstrekkne, met strafpunten</a></li>
+																	</ul>
+																</li>
+																<li class="hasSub">
+																	<a class="icon set">Sprongen op de getallenlijn</a>
+																	<ul>
+																		<li><a class="icon item">Grote sprongen</a></li>
+																		<li><a class="icon item">Kleine sprongen</a></li>
+																	</ul>
+																</li>
+															</ul>
+														</li>
+														<li class="hasSub">
+															<a class="icon folder">Rekentoetsen</a>
+															<ul>
+																<li><a class="icon item">Oefentoets 2016</a></li>
+																<li><a class="icon item">Oefentoets 2017</a></li>
+															</ul>
+														</li>
+													</ul>
+												</li>
+												<li class="hasSub">
+													<a class="icon folder">Formules functies en grafieken</a>
+													<ul>
+														<li><a class="icon item">Oefentoets 2016</a></li>
+														<li><a class="icon item">Oefentoets 2017</a></li>
+													</ul>
+												</li>
+												<li class="hasSub"><a class="icon folder">Vergelijkingen en ongelijkheden</a></li>
+												<li class="hasSub"><a class="icon folder">Meetkunde</a></li>
+											</ul>
+										</li>
+										<li class="hasSub">
+											<a class="icon folder">Lessenseries</a>
+											<div class="checkbox previouslyChecked">
+												<input type="checkbox" name="module" id="module2" value="module2">
+												<label class="icon" for="module2"></label>
+											</div>
+											<ul>
+												<li class="hasSub">
+													<a class="icon folder">VMBO</a>
+													<ul>
+														<li class="hasSub">
+															<a class="icon folder">Onderbouw HV</a>
+															<ul>
+																<li class="hasSub">
+																	<a class="icon set">Serie 1</a>
+																	<ul>
+																		<li><a class="icon item">Les 1</a></li>
+																		<li><a class="icon item">Les 2</a></li>
+																		<li><a class="icon item">Les 3</a></li>
+																	</ul>
+																</li>
+																<li class="hasSub">
+																	<a class="icon set">Serie 2</a>
+																	<ul>
+																		<li><a class="icon item">Les 1</a></li>
+																		<li><a class="icon item">Les 2</a></li>
+																		<li><a class="icon item">Les 3</a></li>
+																	</ul>
+																</li>
+															</ul>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+									</ul>				
+								</li>
+							</ul>
+						</div>
+						
+						
+					</div>
+					<div class="col-6">
+						<h3>Toe te kennen voor klas A6, zichtbaar voor leerling</h3>
+						
+						<table class="hoverable selectable">
+							<tbody>
+								<tr tabindex="1">
+									<td>
+										<input type="checkbox" name="test" class="hidden" value="">
+										<span>Oefeningen met negatieve getallen</span>
+									</td>
+								</tr>
+								
+								<tr tabindex="2">
+									<td>
+										<input type="checkbox" name="test" class="hidden" value="">
+										<span>Sprongen op de getallenlijn</span>
+									</td>
+								</tr>
+								
+								<tr tabindex="3">
+									<td>
+										<input type="checkbox" name="test" class="hidden" value="">
+										<span>Vergelijkingen</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						
+						
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-6">
+						<div class="row">
+							<div class="col-2">
+								<h3>Nu toegekend</h3>
+								<div class="checkbox example">
+									<input type="checkbox" value="" checked="checked">
+									<label class="icon"></label>
+								</div>
+							</div>
+							<div class="col-2">
+								<h3>Ooit toegekend</h3>
+								<div class="checkbox example previouslyChecked">
+									<input type="checkbox" value="">
+									<label class="icon"></label>
+								</div>
+							</div>
+							<div class="col-2">
+								<h3>Niet toegekend</h3>
+								<div class="checkbox example">
+									<input type="checkbox" value="">
+									<label class="icon"></label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<label for="field_1" class="col-3 input">
+								&nbsp;
+								<input id="field_1" type="text" value="" placeholder="of zoek een module" />
+							</label>
+							<div class="col-1">
+								<input type="submit" class="down secondary" value="Search" />
+							</div>
+							<div class="col-2">
+								<input type="submit" class="down secondary" value="Herlaad boom" />
+							</div>
+						</div>	
+					</div>
+					<div class="col-6">
+						<h3>Instellingen geselecteerde module</h3>
+						
+						<div class="row">
+							<label for="field_1" class="col-2 input">
+								Label
+								<input id="field_1" type="text" value="" />
+							</label>
+							<label for="field_1" class="col-2 input">
+								Label
+								<input id="field_1" type="text" value="" />
+							</label>
+							<div class="col-2 options">
+								<label>Twee opties</label>
+								<div class="option">
+									<input type="radio" name="optiona" id="option_a" value="2">
+									<label for="option_a">1</label>
+								</div> 
+								<div class="option">
+									<input type="radio" name="optiona" id="option_b" value="2" checked="checked">
+									<label for="option_b">2</label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<label for="field_1" class="col-2 input">
+								Label
+								<input id="field_1" type="text" value="" />
+							</label>
+						</div>
+						
+						<input type="submit" class="bottom right secondary" value="Button" />
+					</div>
+				</div>
+				
+				
+				
+				<div class="row">
+					<div class="col-12">
+						<h2 class="sectionhead"><span>Results table</span></h2>
+					</div>
+				</div>
 				
 				<div class="row">
 					<div class="col-12">
@@ -842,7 +1064,10 @@
 					</form>
 					
 					</div>
-				</div>
+				<!-- </div> -->
+				
+				
+				
 				
 			</section>
 		</section>

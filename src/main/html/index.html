@@ -37,6 +37,9 @@
 	<script src="js/StudentsInSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/AddStudentToSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/AddTeacherToSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/ModulesOfSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/ResultsDisplay.js" type="text/javascript" charset="utf-8"></script>
+	
 	<script src="js/WelcomeDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/dialogs.js" type="text/javascript" charset="utf-8"></script>
 	
@@ -153,7 +156,7 @@
 		<nav>
 			<ul id="mainNav">
 				<li>
-					<a href="#"><svg viewBox="0 0 64 64" class="icon">
+					<a href="#RESULTS"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#resultaten"></use>
 				    </svg><span class="name">Resultaten</span>
 				    </a>
@@ -863,6 +866,283 @@
 		<!-- end addTeacherToSchoolclassDisplay -->
 		
 		
+		<!-- 
+		-
+		- modulesOfSchoolclassDisplay
+		-
+		-->
+		<section id="modulesOfSchoolclassDisplay" class="subpanel">
+			
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon">
+							<use xlink:href="#klassen"></use>
+						</svg>
+						<h1>Klassen bewerken</h1>
+						<h2 class="sectionhead"><span>Module aan klas [KLAS] koppelen</span></h2>					
+					</div>
+					<section id="help" class="col-2">
+						<h2 class="helpheader">Numworx Help</h2>
+						<div class="content">
+							<h2>Help kop</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium gravida dignissim. Aliquam id metus quam. Aenean consequat arcu sit amet commodo porttitor.</p><p>Proin viverra, enim non feugiat ornare, purus urna dignissim ante, consectetur faucibus libero diam id ligula.</p>
+						</div>
+					</section>
+				</div>
+			</header>
+			
+			<section>
+				<div class="row">
+					<div class="col-6">
+						<h3>Selecteer de gewenste modules om toe te kennen</h3>
+					
+						<!-- 
+							Example format:
+						
+							<li class="hasSub">
+							<a class="icon folder">Standaard modules</a>
+							<ul>
+								<li class="hasSub">
+									<a class="icon folder">Oefenmateriaal</a>
+									<div class="checkbox">
+										<input type="checkbox" name="module" id="module1" value="module1" checked="checked">
+										<label class="icon" for="module1"></label>
+									</div>
+									<ul>
+										<li class="hasSub">
+											<a class="icon folder">Rekenen</a>
+											<ul>
+												<li class="hasSub">
+													<a class="icon set">Negatieve getallen</a>
+
+													<ul>
+														<li><a class="icon item">Optellen en aftrekken</a></li>
+														<li><a class="icon item">Drie getallen optellen en aftrekken</a></li>
+														<li><a class="icon item">Optellen en afstrekkne, met strafpunten</a></li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li> 
+							-->					
+					
+						<div class="treeWrapper">
+							<ul class="tree">
+							</ul>		
+						</div>					
+					
+					</div>
+					<div class="col-6">
+						<h3>Toe te kennen voor klas A6, zichtbaar voor leerling</h3>
+					
+						<table class="hoverable selectable">
+							<tbody>
+								<tr tabindex="1">
+									<td>
+										<input type="checkbox" name="test" class="hidden" value="">
+										<span>Naam module</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					
+					
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-6">
+						<div class="row">
+							<div class="col-2">
+								<h3>Nu toegekend</h3>
+								<div class="checkbox example">
+									<input type="checkbox" value="" checked="checked">
+									<label class="icon"></label>
+								</div>
+							</div>
+							<div class="col-2">
+								<h3>Ooit toegekend</h3>
+								<div class="checkbox example previouslyChecked">
+									<input type="checkbox" value="">
+									<label class="icon"></label>
+								</div>
+							</div>
+							<div class="col-2">
+								<h3>Niet toegekend</h3>
+								<div class="checkbox example">
+									<input type="checkbox" value="">
+									<label class="icon"></label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<label for="field_1" class="col-3 input">
+								&nbsp;
+								<input id="field_1" type="text" value="" placeholder="of zoek een module" />
+							</label>
+							<div class="col-1">
+								<input type="submit" class="down secondary" value="Search" />
+							</div>
+							<div class="col-2">
+								<input type="submit" class="down secondary" value="Herlaad boom" />
+							</div>
+						</div>	
+					</div>
+					<div class="col-6">
+						<h3>Instellingen geselecteerde module</h3>
+					
+						<div class="row">
+							<label for="field_1" class="col-2 input">
+								Label
+								<input id="field_1" type="text" value="" />
+							</label>
+							<label for="field_1" class="col-2 input">
+								Label
+								<input id="field_1" type="text" value="" />
+							</label>
+							<div class="col-2 options">
+								<label>Twee opties</label>
+								<div class="option">
+									<input type="radio" name="optiona" id="option_a" value="2">
+									<label for="option_a">1</label>
+								</div> 
+								<div class="option">
+									<input type="radio" name="optiona" id="option_b" value="2" checked="checked">
+									<label for="option_b">2</label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<label for="field_1" class="col-2 input">
+								Label
+								<input id="field_1" type="text" value="" />
+							</label>
+						</div>
+					
+						<input type="submit" class="bottom right secondary" value="Button" />
+					</div>
+				</div>
+			</section>
+		</section>		
+		<!-- end ModulesOfSchoolclassDisplay -->
+		
+		
+		
+		<!-- 
+		-
+		- resultsDisplay
+		-
+		-->
+		<section id="resultsDisplay" class="subpanel">
+			
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon">
+							<use xlink:href="#klassen"></use>
+						</svg>
+						<h1>Resultaten bekijken</h1>
+						<h2 class="sectionhead"><span>Resultaten van een leerling</span></h2>					
+					</div>
+					<section id="help" class="col-2">
+						<h2 class="helpheader">Numworx Help</h2>
+						<div class="content">
+							<h2>Help kop</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium gravida dignissim. Aliquam id metus quam. Aenean consequat arcu sit amet commodo porttitor.</p><p>Proin viverra, enim non feugiat ornare, purus urna dignissim ante, consectetur faucibus libero diam id ligula.</p>
+						</div>
+					</section>
+				</div>
+			</header>
+			
+			<section>
+				<div class="row">
+					<div class="col-6">
+						<form>
+							<fieldset>
+								<label for="button_1">
+									Zoek een leerling om resultaten van te zien
+									<input type="submit" id="button_1" class="secondary right" value="Zoek leerling" />
+								</label>
+							</fieldset>
+						</form>
+					</div>					
+				</div>
+				
+				<div class="row">
+					<div class="col-12">
+						<h2 class="sectionhead"><span>Resultaten van een klas</span></h2>
+					</div>
+				</div>
+				
+				<div class="row">
+					<form name="chooseResultsView">
+						<div class="col-6">
+							<h3>Selecteer klas en soort(en) modules</h3>
+							<table>
+								<thead>
+									<tr>
+										<th>&nbsp;</th>
+										<th>Open</th>
+										<th>Gesloten</th>
+									</tr>
+								</thead>
+								<tbody>	
+							
+									<!-- The row is detached and used as a template by the JS -->								
+									<tr>
+										<td><span id="chooseResultsViewSchoolclassName">Klasnaam</span></td>
+
+										<td>
+											<div class="checkbox">
+												<input type="checkbox" name="active[]" id="chooseResultsViewSchoolclassOpen" value="schoolclassID"><label class="icon" for="chooseResultsViewSchoolclassOpen"></label>
+											</div>											
+										</td>
+										<td>
+											<div class="checkbox">
+												<input type="checkbox" name="remove[]" id="chooseResultsViewSchoolclassClosed" value="schooclassID"><label class="icon" for="chooseResultsViewSchoolclassClosed"></label>
+											</div>											
+										</td>
+									</tr>
+																
+								</tbody>
+							</table>
+						</div>
+					
+						<div class="col-6">
+							<h3>Selecteer module(s) om resultaten van de klas te zien</h3>
+							<table>
+								<thead>
+									<tr>
+										<th>&nbsp;</th>
+										<th>Selecteer</th>
+									</tr>
+								</thead>
+								<tbody>	
+							
+									<!-- The row is detached and used as a template by the JS -->								
+									<tr>
+										<td><span id="chooseResultsViewModulesName">Module name</span></td>
+
+										<td>
+											<div class="checkbox">
+												<input type="checkbox" name="active[]" id="chooseResultsViewModulesSelect" value="moduleID"><label class="icon" for="chooseResultsViewModulesSelect"></label>
+											</div>											
+										</td>
+									</tr>
+																
+								</tbody>
+							</table>	
+						</div>
+						
+						<input type="submit" class="primary right" value="Toon resultaten" />
+					</form>
+				</div>
+			</section>
+		</section>		
+		<!-- end ResultsDisplay -->
 		
 		
 		<!-- 
@@ -889,6 +1169,18 @@
 				<!-- <h3>De wijzigingen zijn opgeslagen</h3> -->
 				<p id="AlertDialogWithConfirmDisplayMessage">Kies DOORGAAN om verder te gaan.</p>
 				<input id="AlertDialogWithConfirmDisplayConfirmButton" type="button" class="right bottom" value="Doorgaan" />
+			</section>
+		</section>
+		
+		<section id="AlertDialogWithConfirmCancelDisplay" class="dialog alert">
+			<header>
+				<h4>Attentie!</h4>
+			</header>
+			<section>
+				<!-- <h3>De wijzigingen zijn opgeslagen</h3> -->
+				<p id="AlertDialogWithConfirmCancelDisplayMessage">Kies DOORGAAN om verder te gaan.</p>
+				<input id="AlertDialogWithConfirmCancelDisplayConfirmButton" type="button" class="secondary left bottom" value="Doorgaan" />
+				<input id="AlertDialogWithConfirmCancelDisplayCancelButton" type="button" class="right bottom" value="Annuleren" />
 			</section>
 		</section>
 		<!-- end dialogs -->

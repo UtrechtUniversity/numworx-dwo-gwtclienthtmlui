@@ -177,9 +177,12 @@ EditSchoolclassesDisplay.prototype.showShowModels = function(json) { // TODO: ch
 		return;
 	}
 	
+	// Temporary forward to next view
+	//app.mainDisplay.showEditCoursesOfSchoolClassView();
+	//window.JsModulesOfSchoolclassDisplay.updateTable(json);
+	
 	var i = 1;
 	for (var id in modules) { // TODO: probably change to array
-		console.log(modules[id]);
 		moduleName = modules[id].name;
 		$row = this.$changeModulesRow.clone();
 		$row.find("#chooseModuleName").html( moduleName ).removeAttr("id");
@@ -228,7 +231,7 @@ EditSchoolclassesDisplay.prototype.showModulesRequest = function() {
 	app.getPresenterFactory().editSchoolclassPresenter.showModules();
 }
 EditSchoolclassesDisplay.prototype.connectModules = function() {
-	app.getPresenterFactory().editSchoolclassPresenter.connectModules();
+	app.getPresenterFactory().editSchoolclassPresenter.editModules();
 }
 
 
