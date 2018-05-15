@@ -7,9 +7,6 @@
 
 * exacte kleuren 
 * exacte margins/paddings
-
-* hovers buttons
-
 * viewport
 
 * progress box
@@ -33,3 +30,4 @@ tabindex? keyboard selection?
 * help section
 * account menu
 * basic sorting
+* hovers buttons

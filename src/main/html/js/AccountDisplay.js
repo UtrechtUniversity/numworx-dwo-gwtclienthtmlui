@@ -51,6 +51,7 @@ AccountDisplay.prototype.clear = function () {
 }
 
 AccountDisplay.prototype.init = function (json) {
+	Helpers.stretchHeight( [ this.$schoolLoginsTableBody ] )
 }
 
 AccountDisplay.prototype.updateUserView = function(json) {

@@ -91,6 +91,8 @@ EditSchoolclassesDisplay.prototype.init = function () {
 	this.$changeStudentsTableBody.html("");
 	this.$changeTeachersTableBody.html("");
 	this.$changeModulesTableBody.html("");
+	
+	Helpers.stretchHeight( [ this.$changeStudentsTableBody, this.$changeTeachersTableBody, this.$changeModulesTableBody ]);
 }
 
 EditSchoolclassesDisplay.prototype.showSchoolClass = function(json) {	
@@ -140,6 +142,7 @@ EditSchoolclassesDisplay.prototype.showStudents = function(json) {
 		this.$changeStudentsTableBody.append($row);
 		i++;
 	}
+	
 }
 
 EditSchoolclassesDisplay.prototype.showTeachers = function(json) {	
@@ -163,6 +166,7 @@ EditSchoolclassesDisplay.prototype.showTeachers = function(json) {
 		this.$changeTeachersTableBody.append($row);
 		i++;
 	}
+	
 }
 
 EditSchoolclassesDisplay.prototype.showShowModels = function(json) { // TODO: change function name @Gert
