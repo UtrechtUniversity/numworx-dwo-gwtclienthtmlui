@@ -14,6 +14,7 @@
 	
 	<!-- Helpers for interface stuff -->
 	<script src="js/helpers.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/libraryHelpers.js" type="text/javascript" charset="utf-8"></script>
 	
   </head>
 
@@ -215,7 +216,7 @@
 						<h1>Titel van de module</h1>
 						<h2 class="sectionhead"><span>Label met button</span></h2>					
 					</div>
-					<section id="help" class="col-2">
+					<section id="help" class="col-2 help">
 						<h2 class="helpheader">Numworx Help</h2>
 						<div class="content">
 							<h2>Help kop</h2>
@@ -1072,7 +1073,8 @@
 			</section>
 		</section>
 		
-		<section class="dialog">
+		<!-- ID for demo purpose only -->
+		<section id="dialog" class="dialog">
 			<header>
 				<h4>Mededeling</h4>
 			</header>
@@ -1081,6 +1083,22 @@
 				<p>Kies DOORGAAN om verder te gaan.</p>
 				<input type="submit" class="left bottom" value="Doorgaan" />
 				<input type="submit" class="right bottom" value="Doorgaan" />
+			</section>
+		</section>
+		
+		<section id="progressDialog" class="dialog">
+			<header>
+				<h4>Voortgang</h4>
+			</header>
+			<section>
+				<h3>We zijn voor u bezig</h3>
+				<p>Even geduld alstublieft</p>
+				
+				<div id="progressBar">
+					<div class="bar"></div>
+				</div>				
+				
+				<input type="submit" class="right bottom danger" value="Stoppen" />
 			</section>
 		</section>
 		
