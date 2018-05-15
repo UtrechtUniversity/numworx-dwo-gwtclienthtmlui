@@ -202,40 +202,40 @@ EditSchoolclassesDisplay.prototype.showShowModels = function(json) { // TODO: ch
 
 // Edit form 
 EditSchoolclassesDisplay.prototype.saveSchoolclass = function() {
-	app.getPresenterFactory().editSchoolclassPresenter.updateAndRefresh(this.editSchoolclassForm.elements["classname"].value,
+	app.getPresenterFactory().editSchoolclassPresenter().updateAndRefresh(this.editSchoolclassForm.elements["classname"].value,
 																	this.editSchoolclassForm.elements["useClasstree"].value == 1 ? true : false,
 	this.editSchoolclassForm.elements["useClasskey"].value == 1 ? true : false, // TODO: doesnt work
 																	this.editSchoolclassForm.elements["classkey"].value);
 }
 EditSchoolclassesDisplay.prototype.deleteSchoolclass = function() {
-	app.getPresenterFactory().editSchoolclassPresenter.removeSchoolClass();
+	app.getPresenterFactory().editSchoolclassPresenter().removeSchoolClass();
 }
 
 // Students
 EditSchoolclassesDisplay.prototype.showStudentsRequest = function() {
-	app.getPresenterFactory().editSchoolclassPresenter.showStudents();
+	app.getPresenterFactory().editSchoolclassPresenter().showStudents();
 }
 EditSchoolclassesDisplay.prototype.connectStudents = function() {
-	app.getPresenterFactory().editSchoolclassPresenter.connectStudents();
+	app.getPresenterFactory().editSchoolclassPresenter().connectStudents();
 }
 EditSchoolclassesDisplay.prototype.copyOrMoveStudents = function() {
-	app.getPresenterFactory().editSchoolclassPresenter.copyOrMoveStudents();	
+	app.getPresenterFactory().editSchoolclassPresenter().copyOrMoveStudents();	
 }
 
 // Teachers
 EditSchoolclassesDisplay.prototype.showTeachersRequest = function() {
-	app.getPresenterFactory().editSchoolclassPresenter.showTeachers();
+	app.getPresenterFactory().editSchoolclassPresenter().showTeachers();
 }
 EditSchoolclassesDisplay.prototype.connectTeachers = function() {
-	app.getPresenterFactory().editSchoolclassPresenter.connectTeachers();
+	app.getPresenterFactory().editSchoolclassPresenter().connectTeachers();
 }
 
 // Modules
 EditSchoolclassesDisplay.prototype.showModulesRequest = function() {
-	app.getPresenterFactory().editSchoolclassPresenter.showModules();
+	app.getPresenterFactory().editSchoolclassPresenter().showModules();
 }
 EditSchoolclassesDisplay.prototype.connectModules = function() {
-	app.getPresenterFactory().editSchoolclassPresenter.editModules();
+	app.getPresenterFactory().editSchoolclassPresenter().editModules();
 }
 
 

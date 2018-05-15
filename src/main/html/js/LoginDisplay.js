@@ -34,7 +34,7 @@ LoginDisplay.prototype.login = function(event) {
 	this.disable();
 	
 	console.log("log in");
-	app.getPresenterFactory().loginPresenter.loginClicked(username, password, false);
+	app.getPresenterFactory().loginPresenter().loginClicked(username, password, false);
 };
 
 

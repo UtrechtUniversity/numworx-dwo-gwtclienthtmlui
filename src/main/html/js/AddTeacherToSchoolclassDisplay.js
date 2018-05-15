@@ -129,7 +129,7 @@ AddTeacherToSchoolclassDisplay.prototype.setLoadingTableMessage = function() {
  * Use java callbacks
  */
 AddTeacherToSchoolclassDisplay.prototype.addTeacher = function(id) {
-	app.getPresenterFactory().addTeacherToSchoolclassPresenter.AddTeacherToSchoolClass(id);
+	app.getPresenterFactory().addTeacherToSchoolclassPresenter().AddTeacherToSchoolClass(id);
 }
 
 

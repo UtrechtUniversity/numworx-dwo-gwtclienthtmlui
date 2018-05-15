@@ -87,11 +87,11 @@ SchoolclassesDisplay.prototype.setLoadingTableMessage = function(json) {
  */
 
 SchoolclassesDisplay.prototype.chooseClass = function(id) {
-	app.getPresenterFactory().schoolclassesPresenter.editSchoolClass(id);
+	app.getPresenterFactory().schoolclassesPresenter().editSchoolClass(id);
 }
 
 SchoolclassesDisplay.prototype.addClass = function(id) {
-	app.getPresenterFactory().schoolclassesPresenter.AddSchoolClass(this.addSchoolclassForm.elements["classname"].value,
+	app.getPresenterFactory().schoolclassesPresenter().AddSchoolClass(this.addSchoolclassForm.elements["classname"].value,
 																	this.addSchoolclassForm.elements["useClasstree"].value == 1 ? true : false,
 																	this.addSchoolclassForm.elements["useClasskey"].value == 1 ? true : false,
 																	this.addSchoolclassForm.elements["classkey"].value);
