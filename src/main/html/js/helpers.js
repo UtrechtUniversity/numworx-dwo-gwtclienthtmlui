@@ -54,8 +54,10 @@ Helpers.stretchHeight = function(elements) {
 	
 	subpanel = elements[0].closest('.subpanel');
 	subpanelHeight = subpanel.outerHeight();
-	bodyHeight = $(document.body).height();
+	bodyHeight = $(document.body).outerHeight();
 	freeSpace = bodyHeight - subpanelHeight;
+	
+	console.log(bodyHeight);
 	
 	for(i=0; i<elements.length; i++) {
 		newHeight = elements[i].height() + freeSpace;

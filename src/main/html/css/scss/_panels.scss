@@ -72,6 +72,17 @@ body {
 		padding-top: ($headerHeight) * 1px;
 	}
 	
+	&.iframepanel {
+		padding-top: $headerHeight * 1px;
+		iframe {
+			
+			//position: absolute;
+			//top: $headerHeight * 1px;
+			width: 100%;
+			
+		}
+	}
+	
 	
 	header {
 		background-color: $white; 

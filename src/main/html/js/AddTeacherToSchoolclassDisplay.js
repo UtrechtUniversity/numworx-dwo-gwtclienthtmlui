@@ -10,6 +10,7 @@ function AddTeacherToSchoolclassDisplay() {
 	
 	// jQuery objects
 	this.$panel = jQuery("#addTeacherToSchoolclassDisplay");
+	
 	this.$addTeacherSearchForm = $(this.addTeacherSearchForm);
 	this.$addTeacherAddForm = $(this.addTeacherAddForm);
 	

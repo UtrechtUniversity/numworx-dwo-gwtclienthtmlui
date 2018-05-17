@@ -140,18 +140,18 @@ $(document).ready(function(){
 	$(window).resize(Helpers.resizeHelpSection );
 	$(window).trigger('resize');
 	
-	
 	// Test stuff below
 	$(".panel").hide();
 	$("#mainPanel").show();
 	$("#demoDisplayPanel").show();
 	$("#libraryDisplayPanel").hide();
+	$("#modulesDisplayPanel").hide();
 	$("#libraryPageNav").hide(); $(".libraryPageIcon").hide(); $("nav h2").hide();
 	if (window.location.hash == "#bibliotheek") { $("body").addClass("libraryPage"); $("#demoDisplayPanel").hide(); $("#libraryDisplayPanel").show(); $("#libraryPageNav").show(); $(".libraryPageIcon").show(); $("nav h2").show(); return; } 
 	if (window.location.hash == "#lightbox") { $("body").addClass("overlay"); $(".lightbox").show(); return; }
 	if (window.location.hash == "#dialog") { $("body").addClass("overlay"); $("#dialog").show(); return; }
 	if (window.location.hash == "#progressDialog") { $("body").addClass("overlay"); $("#progressDialog").show(); return; }
 	if (window.location.hash == "#login") { $("#mainPanel").hide(); $("#loginDisplayPanel").show(); return; }
-	
+	if (window.location.hash == "#iframe") { $("#demoDisplayPanel").hide(); $("#libraryDisplayPanel").hide(); $("#modulesDisplayPanel").show(); Helpers.stretchHeight( [ $("#modulesDisplayPanel iframe") ] );  return; } 	
 	
 });

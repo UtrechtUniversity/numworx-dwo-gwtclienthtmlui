@@ -27,8 +27,8 @@ function MainDisplay() {
 	window.jsSchoolClassesDisplay = this.schoolclassesDisplay;
 	this.editSchoolclassesDisplay = new EditSchoolclassesDisplay();
 	window.JsEditSchoolclassDisplay	= this.editSchoolclassesDisplay; // TODO: remove first capital
-	this.studentsInSchoolclassDisplay = new StudentsInSchoolclassDisplay(); // TODO: remove?
-	window.JsStudentsInSchoolclassDisplay	= this.studentsInSchoolclassDisplay; // TODO: remove?
+	// OLD this.studentsInSchoolclassDisplay = new StudentsInSchoolclassDisplay(); // TODO: remove?
+	// OLD window.JsStudentsInSchoolclassDisplay	= this.studentsInSchoolclassDisplay; // TODO: remove?
 	this.addStudentToSchoolclassDisplay = new AddStudentToSchoolclassDisplay();
 	window.JsAddStudentToSchoolclassDisplay	= this.addStudentToSchoolclassDisplay;
 	this.addTeacherToSchoolclassDisplay = new AddTeacherToSchoolclassDisplay();
@@ -38,6 +38,10 @@ function MainDisplay() {
 
 	this.resultsDisplay = new ResultsDisplay();
 	window.jsResultsDisplay = this.resultsDisplay;
+	
+	this.modulesDisplay = new ModulesDisplay();
+	window.jsModulesDisplay = this.modulesDisplay;
+	
 		
 	// Dialog Displays
 	this.msgDialogDisplay = new MsgDialogDisplay();
@@ -120,17 +124,17 @@ MainDisplay.prototype.showSchoolclassesView = function(vars) {
 	this.schoolclassesDisplay.show();
 }
 
-MainDisplay.prototype.showEditSchoolclasView = function(vars) { // TODO: Change function name @Gert
+MainDisplay.prototype.showEditSchoolclasView = function(vars) { // TODO: Change function name @Gert, missing s
 	this.initMainView(); 
 	this.editSchoolclassesDisplay.show();
 }
 
-MainDisplay.prototype.showAddStudentToSchoolClassView = function(vars) { // TODO: Change function name @Gert
+MainDisplay.prototype.showAddStudentToSchoolClassView = function(vars) { // TODO: Change function name @Gert, capital C
 	this.initMainView(); 
 	this.addStudentToSchoolclassDisplay.show();
 }
 
-MainDisplay.prototype.showAddTeacherToSchoolClassView = function(vars) { // TODO: Change function name @Gert
+MainDisplay.prototype.showAddTeacherToSchoolClassView = function(vars) { // TODO: Change function name @Gert, capital C
 	this.initMainView(); 
 	this.addTeacherToSchoolclassDisplay.show();
 }
@@ -143,6 +147,11 @@ MainDisplay.prototype.showEditCoursesOfSchoolClassView = function() {
 MainDisplay.prototype.showResultsView = function() {
 	this.initMainView(); 
 	this.resultsDisplay.show();
+}
+
+MainDisplay.prototype.showModulesView = function() {
+	this.initMainView(); 
+	this.modulesDisplay.show();
 }
 
 /*
