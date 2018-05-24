@@ -117,11 +117,11 @@ AddStudentToSchoolclassDisplay.prototype.showStudents = function(json) {
 }
 
 AddStudentToSchoolclassDisplay.prototype.setEmptyTableMessage = function() {
-	console.log("setEmptyTableMessage");
+	this.$addStudentTableBody.html('<tr class="empty"><td>Geen leerlingen gevonden</td></tr>');
 }
 
 AddStudentToSchoolclassDisplay.prototype.setLoadingTableMessage = function() {
-	console.log("setLoadingTableMessage");
+	this.$addStudentTableBody.html('<tr class="loading"><td>Laden...</td></tr>');
 }
 
 

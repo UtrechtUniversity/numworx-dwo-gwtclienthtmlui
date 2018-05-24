@@ -66,6 +66,7 @@ body {
 .subpanel {
 	margin: 0 0 0 auto;
 	margin-right: $navWidth * -1px;
+	min-height: 100%;
 	overflow-y: scroll;	
 	padding-top: ($headerHeight + $subpanelHeaderHeight) * 1px;
 	width: 99.9%; // TODO bug Safari
@@ -74,6 +75,9 @@ body {
 	@media #{$mediaQueryDesktop} {
 		margin-right: $navWidthExpanded * -1px;
 		//position: relative;
+	}
+	.expandedNav & {
+		margin-right: $navWidthExpanded * -1px;
 	}
 	.libraryPage & {
 		margin-right: $navWidthLibraryPage * -1px;
@@ -461,6 +465,8 @@ body {
 			z-index: 200;
 		}
 		
+		
+		
 		.libraryPage & {
 			@include box-shadow(3px,0px,10px,0px,$shadow);
 			top: ($headerHeight) * 1px;
@@ -546,6 +552,7 @@ body {
 						@media #{$mediaQueryDesktop} {
 							display: block;
 						}
+						
 						.libraryPage & {
 							display: none;
 						}
@@ -591,10 +598,25 @@ body {
 				}
 			}
 		}
+	}	
+	
+	&.expandedNav {
+		nav {
+			@include box-shadow(3px,0px,10px,0px,$shadow);
+			top: ($headerHeight) * 1px;
+			width: $navWidthExpanded * 1px;			
+			z-index: 200;
+			
+			ul {
+				margin-top: ($gutter + $subpanelHeaderHeight) * 1px;
+			
+				li a .name {
+					display: block;
+				}
+			}
+		}
 		
-		
-		
-	}		
+	}	
 }
 
 //svg path { fill: inherit; }
@@ -694,5 +716,6 @@ section.lightbox {
  */
 
 #welcomeDisplayPanel {
-	
+	background: transparent url(../images/bg-numworx-logo.png) no-repeat bottom right;
+	background-size: contain;
 }

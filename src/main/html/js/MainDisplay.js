@@ -6,6 +6,7 @@ function MainDisplay() {
 	this.$panel = jQuery("#mainPanel");
 	this.$panels = this.$panel.find(".panel");	
 	this.$subpanels = this.$panel.find(".subpanel");	
+	this.$logo = this.$panel.find("#logo");
 	this.$nav = this.$panel.find("nav");
 
 	this.$accountMenuSchoolName = jQuery("#accountMenuSchoolName");
@@ -58,6 +59,7 @@ function MainDisplay() {
 	// Bind events
 	$(window).resize(Helpers.resizeHelpSection);
 	$(".help h2").click(Helpers.toggleHelpSection);
+	this.$logo.on('click', $.proxy(this.clickLogo, this));
 	this.$nav.find('a').on('click', $.proxy(this.clickMenuItem, this));
 	this.$accountMenuBox.find('a').on('click', $.proxy(this.clickAccountMenuItem, this));
 	this.$accountMenuToggle.on('click', $.proxy(this.clickAccountMenuToggle, this));
@@ -79,6 +81,7 @@ MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 	this.$panel.show();	
 	this.$subpanels.hide();
 	this.loginDisplay.hide();
+	this.setDefaultNavSize();
 }
 
 MainDisplay.prototype.setActiveView = function(view) {
@@ -111,6 +114,7 @@ MainDisplay.prototype.setPresentationName = function (presentationName) {
 
 MainDisplay.prototype.showWelcomeView = function() {
 	this.initMainView();
+	this.setExpandedNavSize();
 	this.welcomeDisplay.show();
 }
 
@@ -155,6 +159,8 @@ MainDisplay.prototype.showModulesView = function() {
 	this.modulesDisplay.show();
 }
 
+
+
 /*
  * DIALOG VIEW HELPERS
  */
@@ -168,6 +174,18 @@ MainDisplay.prototype.closeDialogView = function(dialog) {
 	if (this.activeDialogs.length == 0) this.$body.removeClass("overlay"); // remove overlay
 	else this.activeDialogs[this.activeDialogs.length - 1].setFocus(); // or set focus to next dialog
 }
+
+/*
+ * MENU HELPER
+ */
+
+MainDisplay.prototype.setExpandedNavSize = function() {
+	this.$panel.addClass("expandedNav");
+}
+MainDisplay.prototype.setDefaultNavSize = function() {
+	this.$panel.removeClass("expandedNav");
+}
+
 
 /*
  * EVENT HANDLERS
@@ -188,5 +206,10 @@ MainDisplay.prototype.clickAccountMenuItem = function(event) {
 }
 MainDisplay.prototype.clickAccountMenuToggle = function(event) {
 	this.$accountMenuBox.toggle();
+}
+MainDisplay.prototype.clickLogo = function(event) {
+	event.preventDefault();
+	var view = event.currentTarget.hash.substr(1);
+	if (view) this.setActiveView(view)
 }
 

@@ -127,9 +127,7 @@ EditSchoolclassesDisplay.prototype.showStudents = function(json) {
 	
 	// No Results
 	if ($.isEmptyObject(students)) {
-		$row = this.$changeStudentsRow.clone();
-		$row.find("#chooseStudentName").html( "Geen leerlingen in deze klas" ).removeAttr("id");
-		this.$changeStudentsTableBody.append($row);
+		this.$changeStudentsTableBody.html('<tr class="empty"><td>Geen leerlingen in deze klas</td></tr>');
 		return;
 	}
 	
@@ -152,9 +150,7 @@ EditSchoolclassesDisplay.prototype.showTeachers = function(json) {
 	
 	// No Results
 	if ($.isEmptyObject(teachers)) {
-		$row = this.$changeTeachersRow.clone();
-		$row.find("#chooseTeachersName").html( "Geen docenten gekopped" ).removeAttr("id");
-		this.$changeTeachersTableBody.append($row);
+		this.$changeTeachersTableBody.html('<tr class="empty"><td>Geen docenten gekoppeld</td></tr>');
 		return;
 	}
 	
