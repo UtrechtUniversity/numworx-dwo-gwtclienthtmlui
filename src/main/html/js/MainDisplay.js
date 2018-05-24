@@ -26,15 +26,15 @@ function MainDisplay() {
 	this.schoolclassesDisplay = new SchoolclassesDisplay();
 	window.jsSchoolClassesDisplay = this.schoolclassesDisplay;
 	this.editSchoolclassesDisplay = new EditSchoolclassesDisplay();
-	window.JsEditSchoolclassDisplay	= this.editSchoolclassesDisplay; // TODO: remove first capital
+	window.jsEditSchoolclassDisplay	= this.editSchoolclassesDisplay; 
 	// OLD this.studentsInSchoolclassDisplay = new StudentsInSchoolclassDisplay(); // TODO: remove?
 	// OLD window.JsStudentsInSchoolclassDisplay	= this.studentsInSchoolclassDisplay; // TODO: remove?
 	this.addStudentToSchoolclassDisplay = new AddStudentToSchoolclassDisplay();
-	window.JsAddStudentToSchoolclassDisplay	= this.addStudentToSchoolclassDisplay;
+	window.jsAddStudentToSchoolclassDisplay	= this.addStudentToSchoolclassDisplay; 
 	this.addTeacherToSchoolclassDisplay = new AddTeacherToSchoolclassDisplay();
-	window.JsAddTeacherToSchoolclassDisplay	= this.addTeacherToSchoolclassDisplay;	
+	window.jsAddTeacherToSchoolclassDisplay	= this.addTeacherToSchoolclassDisplay;	
 	this.modulesOfSchoolclassDisplay = new ModulesOfSchoolclassDisplay();
-	window.JsModulesOfSchoolclassDisplay = this.modulesOfSchoolclassDisplay;
+	window.jsModulesOfSchoolclassDisplay = this.modulesOfSchoolclassDisplay;
 
 	this.resultsDisplay = new ResultsDisplay();
 	window.jsResultsDisplay = this.resultsDisplay;
@@ -124,7 +124,7 @@ MainDisplay.prototype.showSchoolclassesView = function(vars) {
 	this.schoolclassesDisplay.show();
 }
 
-MainDisplay.prototype.showEditSchoolclasView = function(vars) { // TODO: Change function name @Gert, missing s
+MainDisplay.prototype.showEditSchoolclassView = function(vars) { // TODO: Change function name @Gert, missing s
 	this.initMainView(); 
 	this.editSchoolclassesDisplay.show();
 }
