@@ -145,22 +145,51 @@ AlertDialogWithConfirmDisplay.prototype.setFocus = function() {
 
 
 function ProgressDialogWithAbortDisplay() {
-		
+	this.active = false;
+	
+	// jQuery objects
+	this.$dialog = $("#progressDialogWithAbortDisplay");
+	this.$message = $("#ProgressDialogWithAbortDisplayMessage");
+	this.$abortButton = $("#ProgressDialogWithAbortDisplayAbortButton");
+	this.$progressBarBar = $("#ProgressBarBar");
+	
+	// Bind handlers
+	this.$abortButton.on('click', $.proxy(this.clickAbort,this));
+	
+	// Init
+	this.$dialog.hide();
 }
 ProgressDialogWithAbortDisplay.prototype.clear = function() {
+	this.$progressBarBar.width(0+"px");
+	this.$message.html("");
 }
 ProgressDialogWithAbortDisplay.prototype.init = function() {
+	this.$progressBarBar.width(0+"px");
+	this.$message.html("");
 }
-ProgressDialogWithAbortDisplay.prototype.showDialog = function() {	
-	console.log("ProgressDialogWithAbortDisplay");
+ProgressDialogWithAbortDisplay.prototype.showDialog = function(text) {	
+	this.$dialog.show();
+	this.$message.html(text);
+	this.$abortButton.focus();
+	this.active = true;
+	window.app.mainDisplay.openDialogView(this);
 }
-ProgressDialogWithAbortDisplay.prototype.hideDialog = function(event) {
+ProgressDialogWithAbortDisplay.prototype.hideDialog = function() {
+	this.$dialog.hide();	
+	this.$message.html("");
+	this.active = false;
+	window.app.mainDisplay.closeDialogView(this);
 }
 
-
-
-
-
-
-
+ProgressDialogWithAbortDisplay.prototype.updateDialog = function(progress, actMsg) {
+ 	this.$message.html(actMsg);
+	this.$progressBarBar.width(progress+'%');
+}
+ProgressDialogWithAbortDisplay.prototype.clickAbort = function(event) {
+	this.hideDialog();
+	// TODO: really abort
+}
+ProgressDialogWithAbortDisplay.prototype.setFocus = function() {
+	this.$abortButton.focus();
+}
 

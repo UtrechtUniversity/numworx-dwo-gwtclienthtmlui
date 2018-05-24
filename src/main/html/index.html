@@ -15,8 +15,8 @@
 		
 		
 	<!-- TODO: change reference -->
-    <script type="text/javascript" language="javascript" src="/gwtclient/gwtclient/gwtclient.nocache.js"></script>
-	<!-- <script type="text/javascript" language="javascript" src="https://teuniz.dwo.nl/gwtclient/gwtclient/gwtclient.nocache.js"></script> -->
+    <!-- <script type="text/javascript" language="javascript" src="/gwtclient/gwtclient/gwtclient.nocache.js"></script> -->
+	<script type="text/javascript" language="javascript" src="https://teuniz.dwo.nl/gwtclient/gwtclient/gwtclient.nocache.js"></script>
 	
 	<!-- TODO: decide whether to add Google fonts locally (consider licence) -->
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700" rel="stylesheet">
@@ -1185,6 +1185,22 @@
 				<p id="AlertDialogWithConfirmCancelDisplayMessage">Kies DOORGAAN om verder te gaan.</p>
 				<input id="AlertDialogWithConfirmCancelDisplayConfirmButton" type="button" class="secondary left bottom" value="Doorgaan" />
 				<input id="AlertDialogWithConfirmCancelDisplayCancelButton" type="button" class="right bottom" value="Annuleren" />
+			</section>
+		</section>
+		
+		<section id="progressDialogWithAbortDisplay" class="dialog">
+			<header>
+				<h4>Voortgang</h4>
+			</header>
+			<section>
+				<h3>We zijn voor u bezig</h3>
+				<p id="ProgressDialogWithAbortDisplayMessage">Even geduld alstublieft</p>
+				
+				<div id="progressBar">
+					<div id="ProgressBarBar" class="bar"></div>
+				</div>				
+				
+				<input id="ProgressDialogWithAbortDisplayAbortButton" type="submit" class="right bottom danger" value="Stoppen" />
 			</section>
 		</section>
 		<!-- end dialogs -->
