@@ -718,13 +718,10 @@
 								Achternaam
 								<input id="addStudentSearchFamilyName" name="familyName" type="text" value="" />
 							</label>
-							<label for="addStudentSearchEmail" class="col-2 input">
-								Emailadres
-								<input id="addStudentSearchEmail" name="email" type="text" value="" />
-							</label>
 							
-							<div class="col-2">
-								<input type="submit" class="primary down" value="Toon resultaten" />
+							
+							<div class="col-4">
+								<input type="submit" class="primary down right" value="Toon resultaten" />
 							</div>
 						</fieldset>
 					</form>
@@ -738,23 +735,22 @@
 						<table class="hoverable selectable">
 							<thead>
 								<tr>
-									<th>Gebruikersnaam</th>
-									<th>Voornaam</th>
-									<th>Tussenvoegsel</th>
-									<th>Achternaam</th>
-									<th class="col-4">Emailadres</th>
+									<th class="col-2">Gebruikersnaam</th>
+									<th class="col-2">Voornaam</th>
+									<th class="col-2">Tussenvoegsel</th>
+									<th class="col-6">Achternaam</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr tabindex="1">
-									<td>
+									<td class="col-2">
 										<input type="checkbox" id="addStudentAddId" name="addStudentAddId" class="hidden" value="bakker34">
 										<span id="addStudentAddUsername">Bakker34</span>
-									</td>
-									<td><span id="addStudentAddGivenName">Michel</span></td>
-									<td><span id="addStudentAddInsertion">van</span></td>
-									<td><span id="addStudentAddFamilyName">Bakker</span></td>
-									<td class="col-4"><span id="addStudentAddEmail">michel@hotmail.com</span></td>
+									</td class="col-2">
+									<td class="col-2"><span id="addStudentAddGivenName">Michel</span></td>
+									<td class="col-2"><span id="addStudentAddInsertion">van</span></td>
+									<td class="col-6"><span id="addStudentAddFamilyName">Bakker</span></td>
+									
 								</tr>
 							</tbody>
 						</table>
@@ -816,13 +812,9 @@
 								Achternaam
 								<input id="addTeacherSearchFamilyName" name="familyName" type="text" value="" />
 							</label>
-							<label for="addTeacherSearchEmail" class="col-2 input">
-								Emailadres
-								<input id="addTeacherSearchEmail" name="email" type="text" value="" />
-							</label>
 							
-							<div class="col-2">
-								<input type="submit" class="primary down" value="Toon resultaten" />
+							<div class="col-4">
+								<input type="submit" class="primary down right" value="Toon resultaten" />
 							</div>
 						</fieldset>
 					</form>
@@ -830,29 +822,27 @@
 				
 				<div class="row">
 					<div class="col-12">
-						<h3>Gevonden leerlingen</h2>
+						<h3>Gevonden docenten</h2>
 						<form name="addTeacherAdd">
 							
 						<table class="hoverable selectable">
 							<thead>
 								<tr>
-									<th>Gebruikersnaam</th>
-									<th>Voornaam</th>
-									<th>Tussenvoegsel</th>
-									<th>Achternaam</th>
-									<th class="col-4">Emailadres</th>
+									<th class="col-2">Gebruikersnaam</th>
+									<th class="col-2">Voornaam</th>
+									<th class="col-2">Tussenvoegsel</th>
+									<th class="col-6">Achternaam</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr tabindex="1">
-									<td>
+									<td class="col-2">
 										<input type="radio" id="addTeacherAddId" name="id" class="hidden" value="bakker34">
 										<span id="addTeacherAddUserName">Bakker34</span>
 									</td>
-									<td><span id="addTeacherAddGivenName">Michel</span></td>
-									<td><span id="addTeacherAddInsertion">van</span></td>
-									<td><span id="addTeacherAddFamilyName">Bakker</span></td>
-									<td class="col-4"><span id="addTeacherAddEmail">michel@hotmail.com</span></td>
+									<td class="col-2"><span id="addTeacherAddGivenName">Michel</span></td>
+									<td class="col-2"><span id="addTeacherAddInsertion">van</span></td>
+									<td class="col-6"><span id="addTeacherAddFamilyName">Bakker</span></td>
 								</tr>
 							</tbody>
 						</table>

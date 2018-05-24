@@ -96,7 +96,7 @@ EditSchoolclassesDisplay.prototype.init = function () {
 }
 
 EditSchoolclassesDisplay.prototype.showSchoolClass = function(json) {	
-	//console.log(json);
+	console.log(json);
 	var schoolclass = json.jsObject;
 	
 	this.editSchoolclassForm.elements["classname"].value = schoolclass.schoolClassName;
@@ -204,7 +204,7 @@ EditSchoolclassesDisplay.prototype.showShowModels = function(json) { // TODO: ch
 EditSchoolclassesDisplay.prototype.saveSchoolclass = function() {
 	app.getPresenterFactory().getEditSchoolclassPresenter().updateAndRefresh(this.editSchoolclassForm.elements["classname"].value,
 																	this.editSchoolclassForm.elements["useClasstree"].value == 1 ? true : false,
-	this.editSchoolclassForm.elements["useClasskey"].value == 1 ? true : false, // TODO: doesnt work
+																	this.editSchoolclassForm.elements["useClasskey"].value == 1 ? true : false, // TODO: doesnt work
 																	this.editSchoolclassForm.elements["classkey"].value);
 }
 EditSchoolclassesDisplay.prototype.deleteSchoolclass = function() {
