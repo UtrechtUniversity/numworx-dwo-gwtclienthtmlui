@@ -9,7 +9,7 @@ function ModulesDisplay() {
 
 ModulesDisplay.prototype.show = function() {
 	this.$panel.show();
-	Helpers.stretchHeight( [ this.$iframe ] );
+	Helpers.stretchIframeHeight( this.$iframe );
 	$(window).on('resize', $.proxy(Helpers.resizeHelpSection, this));
 }
 

@@ -152,6 +152,6 @@ $(document).ready(function(){
 	if (window.location.hash == "#dialog") { $("body").addClass("overlay"); $("#dialog").show(); return; }
 	if (window.location.hash == "#progressDialog") { $("body").addClass("overlay"); $("#progressDialog").show(); return; }
 	if (window.location.hash == "#login") { $("#mainPanel").hide(); $("#loginDisplayPanel").show(); return; }
-	if (window.location.hash == "#iframe") { $("#demoDisplayPanel").hide(); $("#libraryDisplayPanel").hide(); $("#modulesDisplayPanel").show(); Helpers.stretchHeight( [ $("#modulesDisplayPanel iframe") ] );  return; } 	
+	if (window.location.hash == "#iframe") { $("#demoDisplayPanel").hide(); $("#libraryDisplayPanel").hide(); $("#modulesDisplayPanel").show(); Helpers.stretchIframeHeight(  $("#modulesDisplayPanel iframe") );  return; } 	
 	
 });
