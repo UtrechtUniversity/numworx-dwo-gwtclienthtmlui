@@ -1,3 +1,29 @@
+/*
+
+GRID 
+columns and rows
+
+- General
+- Rows
+- Columns
+
+*/
+
+/*
+ * GENERAL
+ */
+
+.clear {
+	clear: both;
+	font-size: 0; line-height: 0;
+	margin-bottom: $rowMarginBottom;
+}
+
+
+/*
+ * ROWS
+ */
+
 .row {
 	position: relative;
 	//width: 100%;
@@ -24,6 +50,11 @@
 .libraryPage .wide .row {
 	margin-right: ($navWidthLibraryPage + $siteMargin) * 1px;
 }
+
+
+/*
+ * COLUMNS
+ */
 
 [class*="col-"] {
 	float: left;
@@ -64,8 +95,3 @@
 	.col-12  { width: (12 * $colWidthLibraryPage / 2 + $gutter *  5) * 1px; }
 }
 
-.clear {
-	clear: both;
-	font-size: 0; line-height: 0;
-	margin-bottom: $rowMarginBottom;
-}

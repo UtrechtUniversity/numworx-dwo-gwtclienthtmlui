@@ -1,3 +1,19 @@
+/*
+
+PANELS 
+including header, navigation, account menu
+
+- General
+- Panels (including library page, iframepanel)
+- Loginpanel
+- Mainpanel
+- Dialogs
+- Lightbox
+
+*/
+
+
+
 /* 
  * GENERAL
  */
@@ -42,6 +58,10 @@ body {
 	width: 100%;	
 }
 
+
+/* 
+ * SUBPANELS (logged in)
+ */
 
 .subpanel {
 	margin: 0 0 0 auto;
@@ -580,6 +600,9 @@ body {
 //svg path { fill: inherit; }
 
 
+/*
+ * DIALOGS
+ */
 
 section.dialog {
 	background: $shade2;
@@ -622,6 +645,10 @@ section.dialog {
 		}
 	}
 }
+
+/*
+ * LIGHTBOX
+ */
 
 section.lightbox {
 	position: fixed;
