@@ -64,35 +64,6 @@
 	.col-12  { width: (12 * $colWidthLibraryPage / 2 + $gutter *  5) * 1px; }
 }
 
-//@media #{$mediaQueryDesktop} {
-//	.col-1  { width: 1 * $colWidthDesktop * 1%; }
-//	.col-2  { width: 2 * $colWidthDesktop * 1%; }
-//	.col-3  { width: 3 * $colWidthDesktop * 1%; }
-//	.col-4  { width: 4 * $colWidthDesktop * 1%; }
-//	.col-5  { width: 5 * $colWidthDesktop * 1%; }
-//	.col-6  { width: 6 * $colWidthDesktop * 1%; }
-//	.col-7  { width: 7 * $colWidthDesktop * 1%; }
-//	.col-8  { width: 8 * $colWidthDesktop * 1%; }
-//	.col-9  { width: 9 * $colWidthDesktop * 1%; }
-//	.col-10  { width: 10 * $colWidthDesktop * 1%; }
-//	.col-11  { width: 11 * $colWidthDesktop * 1%; }
-//	.col-12  { width: 12 * $colWidthDesktop * 1%; }
-//}
-
-
-//.col-1  { width: ((1 / 12 * $siteWidthTablet) - $gutter) / $siteWidthTablet * 100%; }
-//.col-2  { width: ((2 / 12 * $siteWidthTablet) - $gutter) / $siteWidthTablet * 100%; }
-//.col-3  { width: ((3 / 12 * $siteWidthTablet) - $gutter) / $siteWidthTablet * 100%; }
-//.col-4  { width: ((4 / 12 * $siteWidthTablet) - $gutter) / $siteWidthTablet * 100%; }
-//.col-5  { width: ((5 / 12 * $siteWidthTablet) - $gutter) / $siteWidthTablet * 100%; }
-//.col-6  { width: ((6 / 12 * $siteWidthTablet) - $gutter) / $siteWidthTablet * 100%; }
-//.col-7  { width: ((7 / 12 * $siteWidthTablet) - $gutter) / $siteWidthTablet * 100%; }
-//.col-8  { width: ((8 / 12 * $siteWidthTablet) - $gutter) / $siteWidthTablet * 100%; }
-//.col-9  { width: ((9 / 12 * $siteWidthTablet) - $gutter) / $siteWidthTablet * 100%; }
-//.col-10 { width: ((10 / 12 * $siteWidthTablet) - $gutter) / $siteWidthTablet * 100%; }
-//.col-11 { width: ((11 / 12 * $siteWidthTablet) - $gutter) / $siteWidthTablet * 100%; }
-//.col-12 { width: ((12 / 12 * $siteWidthTablet) - $gutter) / $siteWidthTablet * 100%; }
-
 .clear {
 	clear: both;
 	font-size: 0; line-height: 0;

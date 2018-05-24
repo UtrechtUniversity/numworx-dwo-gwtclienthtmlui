@@ -58,9 +58,21 @@ Helpers.stretchHeight = function(elements) {
 	freeSpace = bodyHeight - subpanelHeight;
 	
 	console.log(bodyHeight);
+	console.log(subpanelHeight);
+	console.log(freeSpace);
 	
 	for(i=0; i<elements.length; i++) {
 		newHeight = elements[i].height() + freeSpace;
 		elements[i].height(newHeight+"px");
 	}
+}
+
+Helpers.stretchIframeHeight = function(iframe) {
+	console.log("STRETCH IFRAME!");
+	//if (elements.length < 1) return;
+	
+	subpanel = iframe.closest('.subpanel');
+	subpanelHeight = subpanel.outerHeight();
+	
+	iframe.outerHeight(subpanelHeight+"px");
 }
