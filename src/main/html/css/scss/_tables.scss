@@ -22,6 +22,7 @@ table {
 	//height: 100px; max-height: 100px;
 	position: relative;
 	margin-bottom: $elementMarginBottom;
+	//width: 100%;
 	
 	thead tr, tbody tr {
 	    display:table;
@@ -46,7 +47,7 @@ table {
 				width: ($colWidth - $gutter) * 1px;
 				float: none!important; // for if it has a col-class
 				
-				&:first-child { padding-left: 0!important; }
+				&:first-child { padding-left: 0!important; padding-right: $gutter * 1px!important; }
 				
 				.sortButton {
 					cursor: pointer;
@@ -93,7 +94,10 @@ table {
 				padding: $gutter / 2 * 1px!important;
 				width: ($colWidth - ($gutter)) * 1px;
 				float: none!important; // for if it has a col-class
-			}					
+			}	
+			&.empty td, &.loading td {
+				border-bottom-style: none;
+			}
 		}
 	}
 	

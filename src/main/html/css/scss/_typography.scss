@@ -26,12 +26,22 @@ p {
 	line-height: 24 / 18 * 1em;
 	margin-bottom: $elementMarginBottom;
 	
-	
 	#help & {
 		
 	}
 	.dialog & {
 		font-size: 1em;
+	}
+}
+
+ul {
+	.subpanel &  {
+		color: $primary;
+		font-size: 18/16 * 1em;
+		line-height: 24 / 18 * 1em;
+		margin-bottom: $elementMarginBottom;
+		padding-left: 2em;
+		list-style-type: disc;	
 	}
 }
 

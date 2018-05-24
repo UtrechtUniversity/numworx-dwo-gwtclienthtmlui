@@ -159,6 +159,8 @@ MainDisplay.prototype.showModulesView = function() {
 	this.modulesDisplay.show();
 }
 
+
+
 /*
  * DIALOG VIEW HELPERS
  */

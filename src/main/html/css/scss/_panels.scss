@@ -606,14 +606,16 @@ body {
 			top: ($headerHeight) * 1px;
 			width: $navWidthExpanded * 1px;			
 			z-index: 200;
-		}
-		ul {
-			margin-top: ($gutter + $subpanelHeaderHeight) * 1px;
 			
-			li a .name {
-				display: block;
+			ul {
+				margin-top: ($gutter + $subpanelHeaderHeight) * 1px;
+			
+				li a .name {
+					display: block;
+				}
 			}
 		}
+		
 	}	
 }
 

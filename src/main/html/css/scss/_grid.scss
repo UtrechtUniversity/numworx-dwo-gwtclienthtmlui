@@ -80,6 +80,25 @@ columns and rows
 .col-11  { width: (11 * $colWidth / 2 + $gutter *  4.5) * 1px; }
 .col-12  { width: (12 * $colWidth / 2 + $gutter *  5) * 1px; }
 
+
+td, th { // aparte style, want ze hebben een $gutter padding
+	&.col-1  { width: (1 * $colWidth / 2 - $gutter * 0.5 - $gutter) * 1px; }
+	&.col-2  { width: (2 * $colWidth / 2 - $gutter) * 1px; }
+	&.col-3  { width: (3 * $colWidth / 2 + $gutter * 0.5 - $gutter) * 1px; }
+	&.col-4  { width: (4 * $colWidth / 2 + $gutter *  1 - $gutter) * 1px; }
+	&.col-5  { width: (5 * $colWidth / 2 + $gutter *  1.5 - $gutter) * 1px; }
+	&.col-6  { width: (6 * $colWidth / 2 + $gutter *  2 - $gutter) * 1px; }
+	&.col-7  { width: (7 * $colWidth / 2 + $gutter *  2.5 - $gutter) * 1px; }
+	&.col-8  { width: (8 * $colWidth / 2 + $gutter *  3 - $gutter) * 1px; }
+	&.col-9  { width: (9 * $colWidth / 2 + $gutter *  3.5 - $gutter) * 1px; }
+	&.col-10  { width: (10 * $colWidth / 2 + $gutter *  4 - $gutter) * 1px; }
+	&.col-11  { width: (11 * $colWidth / 2 + $gutter *  4.5 - $gutter) * 1px; }
+	&.col-12  { width: (12 * $colWidth / 2 + $gutter *  5 - $gutter) * 1px; }
+}
+
+
+
+
 .libraryPage {
 	.col-1  { width: (1 * $colWidthLibraryPage / 2 - $gutter * 0.5) * 1px; }
 	.col-2  { width: 2 * $colWidthLibraryPage / 2 * 1px; }
