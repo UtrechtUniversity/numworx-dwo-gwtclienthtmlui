@@ -100,9 +100,9 @@ EditSchoolclassesDisplay.prototype.showSchoolClass = function(json) {
 	var schoolclass = json.jsObject;
 	
 	this.editSchoolclassForm.elements["classname"].value = schoolclass.schoolClassName;
-
-	if (schoolclass.hasRegKey == true) {
-		this.editSchoolclassForm.elements["useClasskey"][0].checked = true;
+	console.log(schoolclass.registrationKey == "");
+	if (schoolclass.registrationKey != "") {
+		this.editSchoolclassForm.elements["useClasskey"][0].checked = true; //yes
 		this.editSchoolclassForm.elements["useClasskey"][1].checked = false;
 	} else {
 		this.editSchoolclassForm.elements["useClasskey"][0].checked = false;
@@ -202,6 +202,8 @@ EditSchoolclassesDisplay.prototype.showShowModels = function(json) { // TODO: ch
 
 // Edit form 
 EditSchoolclassesDisplay.prototype.saveSchoolclass = function() {
+	if (this.editSchoolclassForm.elements["useClasskey"].value == 0) this.editSchoolclassForm.elements["classkey"].value = "";
+	
 	app.getPresenterFactory().getEditSchoolclassPresenter().updateAndRefresh(this.editSchoolclassForm.elements["classname"].value,
 																	this.editSchoolclassForm.elements["useClasstree"].value == 1 ? true : false,
 																	this.editSchoolclassForm.elements["useClasskey"].value == 1 ? true : false, // TODO: doesnt work
