@@ -42,8 +42,8 @@ ResultsDisplay.prototype.plot = function () {
 	console.log("init");
 }
 
-ResultsDisplay.prototype.setTree = function () {
-	console.log("setTree");
+ResultsDisplay.prototype.setTree = function (json) {
+	console.log("setTree"+json);
 }
 
 ResultsDisplay.prototype.setEmptyTableMessageModules = function () {
