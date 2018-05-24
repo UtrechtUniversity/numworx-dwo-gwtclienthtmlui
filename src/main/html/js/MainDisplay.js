@@ -124,7 +124,7 @@ MainDisplay.prototype.showSchoolclassesView = function(vars) {
 	this.schoolclassesDisplay.show();
 }
 
-MainDisplay.prototype.showEditSchoolclassView = function(vars) { // TODO: Change function name @Gert, missing s
+MainDisplay.prototype.showEditSchoolclassView = function(vars) { 
 	this.initMainView(); 
 	this.editSchoolclassesDisplay.show();
 }
@@ -140,6 +140,7 @@ MainDisplay.prototype.showAddTeacherToSchoolClassView = function(vars) { // TODO
 }
 
 MainDisplay.prototype.showEditCoursesOfSchoolClassView = function() {
+	console.log("show edit courses of...")
 	this.initMainView(); 
 	this.modulesOfSchoolclassDisplay.show();
 }

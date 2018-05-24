@@ -38,9 +38,26 @@ ModulesOfSchoolclassDisplay.prototype.init = function () {
 	console.log("init");
 }
 
+ModulesOfSchoolclassDisplay.prototype.setEmptyTableMessageModules = function () {
+	console.log("setEmptyTableMessageModules");
+}
+ModulesOfSchoolclassDisplay.prototype.setLoadingTableMessageModules = function () {
+	console.log("setLoadingTableMessageModules");
+}
+ModulesOfSchoolclassDisplay.prototype.setEmptyTableMessageSelected = function () {
+	console.log("setEmptyTableMessageSelected");
+}
+ModulesOfSchoolclassDisplay.prototype.setLoadingTableMessageSelected = function () {
+	console.log("setLoadingTableMessageSelected");
+}
+
 
 ModulesOfSchoolclassDisplay.prototype.updateTable = function(json) {
 	console.log("UPDATE!");
+	console.log(json);	
+}
+ModulesOfSchoolclassDisplay.prototype.setTree = function(json) {
+	console.log("SET TREE");
 	console.log(json);	
 }
 
@@ -49,6 +66,13 @@ ModulesOfSchoolclassDisplay.prototype.updateTable = function(json) {
 /*
  * RETURN FUNCTIONS
  * Use java callbacks
+
+@JsMethod
+   void detachItemFromSchoolClass(ClassCourseItem classCourseItem) 
+@JsMethod
+   void attachItemToSchoolClass(ClassCourseItem classCourseItem)
+@JsMethod
+   void setModuleSettings(String key, String typeString, String fromData, String toData, String accessKey)
  */
 
 

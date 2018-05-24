@@ -38,6 +38,14 @@ ResultsDisplay.prototype.init = function () {
 	console.log("init");
 }
 
+ResultsDisplay.prototype.plot = function () {
+	console.log("init");
+}
+
+ResultsDisplay.prototype.setTree = function () {
+	console.log("setTree");
+}
+
 
 /*
  * RETURN FUNCTIONS
