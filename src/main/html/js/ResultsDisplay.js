@@ -46,6 +46,19 @@ ResultsDisplay.prototype.setTree = function () {
 	console.log("setTree");
 }
 
+ResultsDisplay.prototype.setEmptyTableMessageModules = function () {
+	console.log("setEmptyTableMessageModules");
+}
+ResultsDisplay.prototype.setLoadingTableMessageModules = function () {
+	console.log("setLoadingTableMessageModules");
+}
+ResultsDisplay.prototype.setEmptyTableMessageSelected = function () {
+	console.log("setEmptyTableMessageSelected");
+}
+ResultsDisplay.prototype.setLoadingTableMessageSelected = function () {
+	console.log("setLoadingTableMessageSelected");
+}
+
 
 /*
  * RETURN FUNCTIONS
