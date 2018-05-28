@@ -3,12 +3,17 @@ function ModulesOfSchoolclassDisplay() {
 	
 	
 	// Forms 
+	this.selectForm = document.forms["modulesOfSchoolclassDisplaySelect"];
 	
 	// Buttons 
 	
 	// jQuery objects
 	this.$panel = jQuery("#modulesOfSchoolclassDisplay");
 	this.$treeWrapper = jQuery("#modulesOfSchoolclassDisplayTreeWrapper");
+	
+	this.$selectForm = $(this.selectForm);
+	this.$selectRow = this.$selectForm.find("tbody tr").detach();
+	this.$selectTableBody = this.$selectForm.find("tbody");
 		
 	// Bind handlers
 	
@@ -37,9 +42,7 @@ ModulesOfSchoolclassDisplay.prototype.clear = function () {
 }
 
 ModulesOfSchoolclassDisplay.prototype.init = function () {
-	console.log("init");
-	window.jsMainDisplay.showEditCoursesOfSchoolClassView(); // TODO: REMOVE!!
-	
+	console.log("init");	
 }
 
 ModulesOfSchoolclassDisplay.prototype.setEmptyTableMessageModules = function () {
@@ -59,6 +62,30 @@ ModulesOfSchoolclassDisplay.prototype.setLoadingTableMessageSelected = function 
 ModulesOfSchoolclassDisplay.prototype.updateTable = function(json) {
 	console.log("UPDATE!");
 	console.log(json);	
+	
+	var modules = json;
+	
+	this.$selectTableBody.html("");
+	
+	var i = 1;
+	for (var id in modules) { 
+		el = modules[id];
+		
+		$row = this.$selectRow.clone();
+		$row.prop('tabindex', i);
+		$row.find("#modulesOfSchoolclassDisplaySelectId").val( id ).removeAttr("id");
+		$row.find("#modulesOfSchoolclassDisplaySelectName").html( el ).removeAttr("id");
+
+		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
+			this.value = id;
+		});
+
+		$row.on('click keypress', $.proxy(this.clickSelectRow, this));
+		this.$selectTableBody.append($row);
+		i++;
+	}
+	//this.selectFormToggle(false);
+	Helpers.stretchHeight( [this.$treeWrapper, this.$selectTableBody] );
 }
 ModulesOfSchoolclassDisplay.prototype.setTree = function(json) {
 	console.log("SET TREE");
@@ -71,10 +98,11 @@ ModulesOfSchoolclassDisplay.prototype.setTree = function(json) {
 	result = '<ul id ="modulesOfSchoolclassDisplayTree" class="tree">'+result+'</li>';
 	$result = $(result);
 	$result.find("li.hasSub a").click(Helpers.clickTreeNode);
+	$result.find("input").on('change', $.proxy(this.toggleTreeCheckbox, this));
 	
 	this.$treeWrapper.html("");
 	this.$treeWrapper.append($result);
-	Helpers.stretchHeight( [this.$treeWrapper] );
+	Helpers.stretchHeight( [this.$treeWrapper, this.$selectTableBody] );
 }
 
 ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, depth = 0, checkboxId = 0) {
@@ -136,16 +164,39 @@ ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, dept
 /*
  * RETURN FUNCTIONS
  * Use java callbacks
-
-@JsMethod
-   void detachItemFromSchoolClass(ClassCourseItem classCourseItem) 
-@JsMethod
-   void attachItemToSchoolClass(ClassCourseItem classCourseItem)
-@JsMethod
-   void setModuleSettings(String key, String typeString, String fromData, String toData, String accessKey)
  */
+
+ModulesOfSchoolclassDisplay.prototype.attachItem = function(id) {
+	app.getPresenterFactory().modulesOfSchoolclassPresenter.attachItemToSchoolClass(id);
+}
+
+ModulesOfSchoolclassDisplay.prototype.detachItem = function(id) {
+	app.getPresenterFactory().modulesOfSchoolclassPresenter.detachItemFromSchoolClass(id);
+}
+
+/*
+ * EVENT HANDLERS - tree checkboxes
+ */
+
+ModulesOfSchoolclassDisplay.prototype.toggleTreeCheckbox = function(event) {
+	if (event.target.checked) this.attachItem(event.target.value);
+	else this.detachItem(event.target.value);			
+}
 
 
 /*
- * EVENT HANDLERS
+ * EVENT HANDLERS - select table
  */
+
+ModulesOfSchoolclassDisplay.prototype.clickSelectRow = function(event) {
+	Helpers.selectTableRow(event);
+	//if (this.SelectForm.elements["module"].value != "") this.selectFormToggle(true);
+	//else this.chooseSchoolclassFormToggle(false);	
+}
+
+// helpers
+ModulesOfSchoolclassDisplay.prototype.chooseSchoolclassFormToggle = function(value) {
+	//if (value) this.$chooseSchoolclassForm.find(':submit').prop('disabled','');
+	//else this.$chooseSchoolclassForm.find(':submit').prop('disabled','disabled');
+}
+

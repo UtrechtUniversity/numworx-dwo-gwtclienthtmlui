@@ -931,16 +931,18 @@
 					<div class="col-6">
 						<h3>Toe te kennen voor klas A6, zichtbaar voor leerling</h3>
 					
-						<table class="hoverable selectable">
-							<tbody>
-								<tr tabindex="1">
-									<td>
-										<input type="checkbox" name="test" class="hidden" value="">
-										<span>Naam module</span>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+						<form name="modulesOfSchoolclassDisplaySelect">
+							<table class="hoverable selectable">
+								<tbody>
+									<tr tabindex="1">
+										<td>
+											<input type="checkbox" id="modulesOfSchoolclassDisplaySelectId" name="module" class="hidden" value="">
+											<span id="modulesOfSchoolclassDisplaySelectName">Naam module</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
 					
 					
 					</div>
@@ -987,29 +989,29 @@
 						<h3>Instellingen geselecteerde module</h3>
 					
 						<div class="row">
-							<label for="modulesOfSchoolclassDisplayValidityFrom" class="col-2 input">
-								Label
+							<label for="modulesOfSchoolclassDisplayValidityFrom" class="col-2 input textoverflow">
+								Geldigsheidsduur (van - tot)
 								<input id="modulesOfSchoolclassDisplayValidityFrom" type="text" value="" />
 							</label>
 							<label for="modulesOfSchoolclassDisplayValidityTo" class="col-2 input">
-								Label
+								&nbsp;
 								<input id="modulesOfSchoolclassDisplayValidityTo" type="text" value="" />
 							</label>
 							<div class="col-2 options">
 								<label>Type</label>
 								<div class="option">
 									<input type="radio" name="optiona" id="modulesOfSchoolclassDisplayTypeLocked" value="2">
-									<label for="modulesOfSchoolclassDisplayTypeLocked">1</label>
+									<label for="modulesOfSchoolclassDisplayTypeLocked">open</label>
 								</div> 
 								<div class="option">
 									<input type="radio" name="optiona" id="modulesOfSchoolclassDisplayTypeUnlocked" value="2" checked="checked">
-									<label for="modulesOfSchoolclassDisplayTypeUnlocked">2</label>
+									<label for="modulesOfSchoolclassDisplayTypeUnlocked">dicht</label>
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<label for="field_1" class="col-2 input">
-								Label
+								Wachtwoord
 								<input id="password" type="text" value="" />
 							</label>
 						</div>
