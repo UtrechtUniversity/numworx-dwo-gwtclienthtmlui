@@ -21,6 +21,7 @@ Tree, its wrapper and icons
 ul.tree {
 	font-size: 14 / 16 * 1em;
 	line-height: 27 / 14 * 1em;
+	list-style-type: none;
 	
 	li {
 		border-left: 1px $shade11 solid;
@@ -51,6 +52,9 @@ ul.tree {
 		&.hasSub {
 			ul {
 				display: none;
+				//font-size: 1em;
+				//line-height: 1em;
+				list-style-type: none;
 			}
 			
 			&.open {
@@ -98,9 +102,9 @@ ul.tree {
 			top: 0;
 		}
 	}
-	> li:first-child {
-		border-left-style: none;			
-	}
+	//> li:first-child {
+//		border-left-style: none;
+//	}
 	
 	
 	

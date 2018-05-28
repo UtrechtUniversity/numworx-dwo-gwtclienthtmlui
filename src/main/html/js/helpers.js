@@ -76,3 +76,8 @@ Helpers.stretchIframeHeight = function(iframe) {
 	
 	iframe.outerHeight(subpanelHeight+"px");
 }
+
+Helpers.clickTreeNode = function() {
+	console.log("Help");
+	$(this).parent().toggleClass("open");
+}
