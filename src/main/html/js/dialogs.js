@@ -1,19 +1,63 @@
+/*
+ * DIALOG
+ * 
+ * Classes for five types of dialogs:
+ * - MsgDialogDisplay
+ * - MsgDialogWithConfirmDisplay
+ * - AlertDialogWithConfirmCancelDisplay
+ * - AlertDialogWithConfirmDisplay
+ * - ProgressDialogWithAbortDisplay
+ *
+ */
+
+
+/*
+ * MsgDialogDisplay
+ */
+
 function MsgDialogDisplay() {
-		
+	this.active = false;
+	
+	// jQuery objects
+	this.$dialog = $("#MsgDialogDisplay");
+	this.$message = $("#MsgDialogDisplayMessage");
+	this.$confirmButton = $("#MsgDialogDisplayConfirmButton");
+	
+	// Bind handlers
+	this.$confirmButton.on('click', $.proxy(this.clickConfirm,this));
+	
+	// Init
+	this.$dialog.hide();
 }
 MsgDialogDisplay.prototype.clear = function() {
 }
 MsgDialogDisplay.prototype.init = function() {
 }
 MsgDialogDisplay.prototype.showDialog = function(text) {	
-	console.log("MsgDialogDisplay: "+text);
+	this.$dialog.show();
+	this.$message.html(text);
+	this.$confirmButton.focus();
+	this.active = true;	
+	window.app.mainDisplay.openDialogView(this);
 }
 MsgDialogDisplay.prototype.hideDialog = function(event) {
+	this.$dialog.hide();	
+	this.$message.html("");
+	this.active = false;
+	window.app.mainDisplay.closeDialogView(this);
+}
+MsgDialogDisplay.prototype.clickConfirm = function(event) {
+	app.getPresenterFactory().msgDialogDisplayPresenter.confirm();
+	//this.hideDialog();
+}
+MsgDialogDisplay.prototype.setFocus = function() {
+	this.$confirmButton.focus();
 }
 
 
-
-
+/*
+ * MsgDialogWithConfirmDisplay
+ */
 
 function MsgDialogWithConfirmDisplay() {
 	this.active = false;
@@ -46,16 +90,17 @@ MsgDialogWithConfirmDisplay.prototype.hideDialog = function() {
 	window.app.mainDisplay.closeDialogView(this);
 }
 MsgDialogWithConfirmDisplay.prototype.clickConfirm = function(event) {
-	this.hideDialog();
+	app.getPresenterFactory().msgDialogWithConfirmPresenter.confirm();
+	//this.hideDialog();
 }
 MsgDialogWithConfirmDisplay.prototype.setFocus = function() {
 	this.$confirmButton.focus();
 }
 
 
-
-
-
+/*
+ * AlertDialogWithConfirmCancelDisplay
+ */
 
 function AlertDialogWithConfirmCancelDisplay() {
 	this.active = false;
@@ -90,20 +135,20 @@ AlertDialogWithConfirmCancelDisplay.prototype.hideDialog = function(event) {
 }
 AlertDialogWithConfirmCancelDisplay.prototype.clickConfirm = function(event) {
 	app.getPresenterFactory().alertDialogWithConfirmCancelPresenter.confirm();
-	this.hideDialog();	
+	//this.hideDialog();	
 }
 AlertDialogWithConfirmCancelDisplay.prototype.clickCancel = function(event) {
 	app.getPresenterFactory().alertDialogWithConfirmCancelPresenter.confirm();
-	this.hideDialog();	
+	//this.hideDialog();	
 }
 AlertDialogWithConfirmCancelDisplay.prototype.setFocus = function() {
 	this.$confirmButton.focus();
 }
 
 
-
-
-
+/*
+ * AlertDialogWithConfirmDisplay
+ */
 
 function AlertDialogWithConfirmDisplay() {
 	this.active = false;
@@ -135,14 +180,17 @@ AlertDialogWithConfirmDisplay.prototype.hideDialog = function(event) {
 	window.app.mainDisplay.closeDialogView(this);
 }
 AlertDialogWithConfirmDisplay.prototype.clickConfirm = function(event) {
-	this.hideDialog();
+	app.getPresenterFactory().alertDialogWithOKPresenter.hide();
+	//this.hideDialog();
 }
 AlertDialogWithConfirmDisplay.prototype.setFocus = function() {
 	this.$confirmButton.focus();
 }
 
 
-
+/*
+ * ProgressDialogWithAbortDisplay
+ */
 
 function ProgressDialogWithAbortDisplay() {
 	this.active = false;
@@ -186,8 +234,9 @@ ProgressDialogWithAbortDisplay.prototype.updateDialog = function(progress, actMs
 	this.$progressBarBar.width(progress+'%');
 }
 ProgressDialogWithAbortDisplay.prototype.clickAbort = function(event) {
-	this.hideDialog();
-	// TODO: really abort
+	app.getPresenterFactory().ProgressDialogWithAbortPresenter.abort();
+	//this.hideDialog();
+
 }
 ProgressDialogWithAbortDisplay.prototype.setFocus = function() {
 	this.$abortButton.focus();

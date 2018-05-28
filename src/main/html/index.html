@@ -971,9 +971,9 @@
 							</div>
 						</div>
 						<div class="row">
-							<label for="field_1" class="col-3 input">
+							<label for="modulesOfSchoolclassDisplayPassword" class="col-3 input">
 								&nbsp;
-								<input id="field_1" type="text" value="" placeholder="of zoek een module" />
+								<input id="modulesOfSchoolclassDisplayPassword" type="text" value="" placeholder="of zoek een module" />
 							</label>
 							<div class="col-1">
 								<input type="submit" class="down secondary" value="Search" />
@@ -987,30 +987,30 @@
 						<h3>Instellingen geselecteerde module</h3>
 					
 						<div class="row">
-							<label for="field_1" class="col-2 input">
+							<label for="modulesOfSchoolclassDisplayValidityFrom" class="col-2 input">
 								Label
-								<input id="field_1" type="text" value="" />
+								<input id="modulesOfSchoolclassDisplayValidityFrom" type="text" value="" />
 							</label>
-							<label for="field_1" class="col-2 input">
+							<label for="modulesOfSchoolclassDisplayValidityTo" class="col-2 input">
 								Label
-								<input id="field_1" type="text" value="" />
+								<input id="modulesOfSchoolclassDisplayValidityTo" type="text" value="" />
 							</label>
 							<div class="col-2 options">
-								<label>Twee opties</label>
+								<label>Type</label>
 								<div class="option">
-									<input type="radio" name="optiona" id="option_a" value="2">
-									<label for="option_a">1</label>
+									<input type="radio" name="optiona" id="modulesOfSchoolclassDisplayTypeLocked" value="2">
+									<label for="modulesOfSchoolclassDisplayTypeLocked">1</label>
 								</div> 
 								<div class="option">
-									<input type="radio" name="optiona" id="option_b" value="2" checked="checked">
-									<label for="option_b">2</label>
+									<input type="radio" name="optiona" id="modulesOfSchoolclassDisplayTypeUnlocked" value="2" checked="checked">
+									<label for="modulesOfSchoolclassDisplayTypeUnlocked">2</label>
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<label for="field_1" class="col-2 input">
 								Label
-								<input id="field_1" type="text" value="" />
+								<input id="password" type="text" value="" />
 							</label>
 						</div>
 					
@@ -1154,6 +1154,18 @@
 		- DIALOGS
 		-
 		-->
+			
+		<section id="MsgDialogDisplay" class="dialog">
+			<header>
+				<h4>Mededeling</h4>
+			</header>
+			<section>
+				<!-- <h3>De wijzigingen zijn opgeslagen</h3> -->
+				<p id="MsgDialogDisplayMessage">Kies DOORGAAN om verder te gaan.</p>
+				<input id="MsgDialogDisplayConfirmButton" type="button" class="right bottom" value="Doorgaan" />
+			</section>
+		</section>
+			
 		<section id="MsgDialogWithConfirmDisplay" class="dialog">
 			<header>
 				<h4>Mededeling</h4>
