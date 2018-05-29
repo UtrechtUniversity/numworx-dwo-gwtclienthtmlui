@@ -46,31 +46,44 @@ ModulesOfSchoolclassDisplay.prototype.show = function() {
 
 ModulesOfSchoolclassDisplay.prototype.searchModule = function() {
 	console.log("zoeken maar!");
-	var searchForm = this.searchForm;
+	//var searchForm = this.searchForm;
 	
 	// Collapse tree
-	this.$tree.find("li").removeClass("open");
+	this.collapseTree();
+	
 	
 	// Iterate over all li-s
-	this.$tree.find("li a").each(function() {
-		$this = $(this);
-		el = $this.get(0);
-		searchWord = searchForm.elements["name"].value;
-		
-		console.log(el.innerHTML);
-		console.log(searchWord);
-		
-		if ( el.innerHTML.toLowerCase() == searchWord.toLowerCase() ) {
-			$this.addClass("open");
-			$this.parents().addClass("open");
-		}
-		
-	});
+	this.$tree.find("li a").each( $.proxy(this.iterateNodesForSearch, this));
+}
+ModulesOfSchoolclassDisplay.prototype.iterateNodesForSearch = function(index, el) {
+	
+	searchWord = this.searchForm.elements["name"].value;
+	
+	if ( el.innerHTML.toLowerCase() == searchWord.toLowerCase() ) {
+		$el = $(el);
+		$el.addClass("open");
+		if (this.nodes[$el.data("id")]) this.nodes[$el.data("id")].open = true;
+
+		$el.parents().each( $.proxy( function(index, el) {
+			$el = $(el);
+			$el.addClass("open");
+			if (this.nodes[$el.data("id")]) this.nodes[$el.data("id")].open = true;
+		}, this));
+	}
 }
 
+ModulesOfSchoolclassDisplay.prototype.collapseTree = function() {
+	this.$tree.find("li").removeClass("open");
+	for (var id in this.nodes) {
+		this.nodes[id].open = false;
+	}
+}
+
+
+
+
 ModulesOfSchoolclassDisplay.prototype.reloadTree = function() {
-	// Collapse tree
-	this.$tree.find("li").removeClass("open");	
+	this.collapseTree();
 }
 
 ModulesOfSchoolclassDisplay.prototype.updateTable = function() {
