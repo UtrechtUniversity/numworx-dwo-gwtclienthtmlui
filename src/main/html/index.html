@@ -1077,10 +1077,10 @@
 				</div>
 				
 				<div class="row">
-					<form name="chooseResultsView">
+					<form name="chooseClassAndModules">
 						<div class="col-6">
 							<h3>Selecteer klas en soort(en) modules</h3>
-							<table>
+							<table id="resultsDisplayChooseClass">
 								<thead>
 									<tr>
 										<th>&nbsp;</th>
@@ -1092,16 +1092,16 @@
 							
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
-										<td><span id="chooseResultsViewSchoolclassName">Klasnaam</span></td>
+										<td><span id="chooseClassAndModulesClassname">Klasnaam</span></td>
 
 										<td>
 											<div class="checkbox">
-												<input type="checkbox" name="active[]" id="chooseResultsViewSchoolclassOpen" value="schoolclassID"><label class="icon" for="chooseResultsViewSchoolclassOpen"></label>
+												<input type="checkbox" name="open[]" id="chooseClassAndModulesOpen" value="schoolclassID"><label class="icon" for="chooseClassAndModulesOpen"></label>
 											</div>											
 										</td>
 										<td>
 											<div class="checkbox">
-												<input type="checkbox" name="remove[]" id="chooseResultsViewSchoolclassClosed" value="schooclassID"><label class="icon" for="chooseResultsViewSchoolclassClosed"></label>
+												<input type="checkbox" name="closed[]" id="chooseClassAndModulesClassClosed" value="schooclassID"><label class="icon" for="chooseClassAndModulesClassClosed"></label>
 											</div>											
 										</td>
 									</tr>
@@ -1112,7 +1112,7 @@
 					
 						<div class="col-6">
 							<h3>Selecteer module(s) om resultaten van de klas te zien</h3>
-							<table>
+							<table id="resultsDisplayChooseModules">
 								<thead>
 									<tr>
 										<th>&nbsp;</th>
@@ -1123,11 +1123,11 @@
 							
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
-										<td><span id="chooseResultsViewModulesName">Module name</span></td>
+										<td><span id="chooseClassAndModulesModuleName">Module name</span></td>
 
 										<td>
 											<div class="checkbox">
-												<input type="checkbox" name="active[]" id="chooseResultsViewModulesSelect" value="moduleID"><label class="icon" for="chooseResultsViewModulesSelect"></label>
+												<input type="checkbox" name="select[]" id="chooseClassAndModulesModuleSelect" value="moduleID"><label class="icon" for="chooseClassAndModulesModuleSelect"></label>
 											</div>											
 										</td>
 									</tr>
