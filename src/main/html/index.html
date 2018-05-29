@@ -973,50 +973,55 @@
 							</div>
 						</div>
 						<div class="row">
-							<label for="modulesOfSchoolclassDisplayPassword" class="col-3 input">
-								&nbsp;
-								<input id="modulesOfSchoolclassDisplayPassword" type="text" value="" placeholder="of zoek een module" />
-							</label>
-							<div class="col-1">
-								<input type="submit" class="down secondary" value="Search" />
-							</div>
-							<div class="col-2">
-								<input type="submit" class="down secondary" value="Herlaad boom" />
-							</div>
+							<form name="modulesOfSchoolclassDisplaySearch">
+								<label for="modulesOfSchoolclassDisplaySearchWord" class="col-3 input">
+									&nbsp;
+									<input id="modulesOfSchoolclassDisplaySearchWord" name="name" type="text" value="" placeholder="of zoek een module" />
+								</label>
+								<div class="col-1">
+									<input type="submit" name="search" class="down secondary" value="Search" />
+								</div>
+								<div class="col-2">
+									<input type="button" name="reload" class="down secondary" value="Reset" />
+								</div>
+							</form>
 						</div>	
 					</div>
 					<div class="col-6">
 						<h3>Instellingen geselecteerde module</h3>
 					
 						<div class="row">
-							<label for="modulesOfSchoolclassDisplayValidityFrom" class="col-2 input textoverflow">
-								Geldigsheidsduur (van - tot)
-								<input id="modulesOfSchoolclassDisplayValidityFrom" type="text" value="" />
-							</label>
-							<label for="modulesOfSchoolclassDisplayValidityTo" class="col-2 input">
-								&nbsp;
-								<input id="modulesOfSchoolclassDisplayValidityTo" type="text" value="" />
-							</label>
-							<div class="col-2 options">
-								<label>Type</label>
-								<div class="option">
-									<input type="radio" name="optiona" id="modulesOfSchoolclassDisplayTypeLocked" value="2">
-									<label for="modulesOfSchoolclassDisplayTypeLocked">open</label>
-								</div> 
-								<div class="option">
-									<input type="radio" name="optiona" id="modulesOfSchoolclassDisplayTypeUnlocked" value="2" checked="checked">
-									<label for="modulesOfSchoolclassDisplayTypeUnlocked">dicht</label>
+							<form name="modulesOfSchoolclassDisplaySettings">
+								<input name="key" type="hidden" value="" />
+								<label for="modulesOfSchoolclassDisplayValidityFrom" class="col-2 input textoverflow">
+									Geldigsheidsduur (van - tot)
+									<input id="modulesOfSchoolclassDisplayValidityFrom" name="from" type="text" value="" />
+								</label>
+								<label for="modulesOfSchoolclassDisplayValidityTo" class="col-2 input">
+									&nbsp;
+									<input id="modulesOfSchoolclassDisplayValidityTo" name="to" type="text" value="" />
+								</label>
+								<div class="col-2 options">
+									<label>Type</label>
+									<div class="option">
+										<input type="radio" name="locked" id="modulesOfSchoolclassDisplayTypeLocked" value="1">
+										<label for="modulesOfSchoolclassDisplayTypeLocked">dicht</label>
+									</div> 
+									<div class="option">
+										<input type="radio" name="locked" id="modulesOfSchoolclassDisplayTypeUnlocked" value="1" checked="checked">
+										<label for="modulesOfSchoolclassDisplayTypeUnlocked">open</label>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row">
-							<label for="field_1" class="col-2 input">
-								Wachtwoord
-								<input id="password" type="text" value="" />
-							</label>
-						</div>
+							<div class="row">
+								<label for="field_1" class="col-2 input">
+									Wachtwoord
+									<input id="password" name="accessKey" type="text" value="" />
+								</label>
+							</div>
 					
-						<input type="submit" class="bottom right secondary" value="Button" />
+							<input type="submit" class="bottom right secondary" value="Sla op" />
+						</form>
 					</div>
 				</div>
 			</section>

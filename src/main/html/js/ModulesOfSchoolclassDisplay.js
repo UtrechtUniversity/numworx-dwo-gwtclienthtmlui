@@ -4,18 +4,31 @@ function ModulesOfSchoolclassDisplay() {
 	
 	// Forms 
 	this.selectForm = document.forms["modulesOfSchoolclassDisplaySelect"];
+	this.settingsForm = document.forms["modulesOfSchoolclassDisplaySettings"];
+	this.searchForm = document.forms["modulesOfSchoolclassDisplaySearch"];
+	
 	
 	// Buttons 
 	
 	// jQuery objects
 	this.$panel = jQuery("#modulesOfSchoolclassDisplay");
 	this.$treeWrapper = jQuery("#modulesOfSchoolclassDisplayTreeWrapper");
+	this.$tree = null;
 	
 	this.$selectForm = $(this.selectForm);
 	this.$selectRow = this.$selectForm.find("tbody tr").detach();
 	this.$selectTableBody = this.$selectForm.find("tbody");
-		
+	
+	this.$settingsForm = $(this.settingsForm);	
+	this.$searchForm = $(this.searchForm);
+	
+	this.$reloadButton = $(this.searchForm.elements["reload"]);
+	
+
 	// Bind handlers
+	this.$settingsForm.on('submit', $.proxy(this.submitSettings,this));	
+	this.$searchForm.on('submit', $.proxy(this.submitSearch,this));	
+	this.$reloadButton.on('click', $.proxy(this.clickReload,this))
 	
 	// Init
 	this.$panel.hide();
@@ -30,7 +43,34 @@ ModulesOfSchoolclassDisplay.prototype.show = function() {
  * GUI FUNCTIONS
  */
 
+ModulesOfSchoolclassDisplay.prototype.searchModule = function() {
+	console.log("zoeken maar!");
+	var searchForm = this.searchForm;
+	
+	// Collapse tree
+	this.$tree.find("li").removeClass("open");
+	
+	// Iterate over all li-s
+	this.$tree.find("li a").each(function() {
+		$this = $(this);
+		el = $this.get(0);
+		searchWord = searchForm.elements["name"].value;
+		
+		console.log(el.innerHTML);
+		console.log(searchWord);
+		
+		if ( el.innerHTML.toLowerCase() == searchWord.toLowerCase() ) {
+			$this.addClass("open");
+			$this.parents().addClass("open");
+		}
+		
+	});
+}
 
+ModulesOfSchoolclassDisplay.prototype.reloadTree = function() {
+	// Collapse tree
+	this.$tree.find("li").removeClass("open");	
+}
 
 /*
  * VIEW FUNCTIONS
@@ -84,7 +124,7 @@ ModulesOfSchoolclassDisplay.prototype.updateTable = function(json) {
 		this.$selectTableBody.append($row);
 		i++;
 	}
-	//this.selectFormToggle(false);
+	
 	Helpers.stretchHeight( [this.$treeWrapper, this.$selectTableBody] );
 }
 ModulesOfSchoolclassDisplay.prototype.setTree = function(json) {
@@ -93,13 +133,14 @@ ModulesOfSchoolclassDisplay.prototype.setTree = function(json) {
 	
 	var tree = json.jsObject, result, $result;
 	
-	var result = this.recursiveTreeBuilder(tree);
+	var result = this.recursiveTreeBuilder(tree.children);
 	
 	result = '<ul id ="modulesOfSchoolclassDisplayTree" class="tree">'+result+'</li>';
 	$result = $(result);
 	$result.find("li.hasSub a").click(Helpers.clickTreeNode);
 	$result.find("input").on('change', $.proxy(this.toggleTreeCheckbox, this));
 	
+	this.$tree = $result;
 	this.$treeWrapper.html("");
 	this.$treeWrapper.append($result);
 	Helpers.stretchHeight( [this.$treeWrapper, this.$selectTableBody] );
@@ -128,8 +169,7 @@ ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, dept
 			subtree = this.recursiveTreeBuilder(tree[id].children, depth + 1, checkboxId);
 			liClass = "hasSub";
 			aClass = "folder";			
-		}
-		else {
+		} else {
 			aClass="set";
 		}
 		
@@ -174,6 +214,21 @@ ModulesOfSchoolclassDisplay.prototype.detachItem = function(id) {
 	app.getPresenterFactory().modulesOfSchoolclassPresenter.detachItemFromSchoolClass(id);
 }
 
+ModulesOfSchoolclassDisplay.prototype.detachItem = function(id) {
+	app.getPresenterFactory().modulesOfSchoolclassPresenter.detachItemFromSchoolClass(id);
+}
+
+ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
+	//String key, String typeString, String fromData, String toData, String accessKey
+	
+	typeString = this.settingsForm.elements["locked"].value == 1 ? "unlocked" : "locked";
+	app.getPresenterFactory().modulesOfSchoolclassPresenter.setModuleSettings(  this.settingsForm.elements["key"].value,
+																				typeString,
+																				this.settingsForm.elements["from"].value,
+																				this.settingsForm.elements["to"].value,
+																				this.settingsForm.elements["accesKey"].value);
+}
+
 /*
  * EVENT HANDLERS - tree checkboxes
  */
@@ -194,9 +249,28 @@ ModulesOfSchoolclassDisplay.prototype.clickSelectRow = function(event) {
 	//else this.chooseSchoolclassFormToggle(false);	
 }
 
-// helpers
-ModulesOfSchoolclassDisplay.prototype.chooseSchoolclassFormToggle = function(value) {
-	//if (value) this.$chooseSchoolclassForm.find(':submit').prop('disabled','');
-	//else this.$chooseSchoolclassForm.find(':submit').prop('disabled','disabled');
+/*
+ * EVENT HANDLERS - settings
+ */
+
+ModulesOfSchoolclassDisplay.prototype.submitSettings = function(event) {
+	event.preventDefault();	
+	this.setModuleSettings();
 }
+
+/*
+ * EVENT HANDLERS - search & reload
+ */
+
+ModulesOfSchoolclassDisplay.prototype.submitSearch = function(event) {
+	event.preventDefault();	
+	this.searchModule();
+}
+
+ModulesOfSchoolclassDisplay.prototype.clickReload = function(event) {
+	event.preventDefault();	
+	this.reloadTree();
+}
+
+
 
