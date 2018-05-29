@@ -36,7 +36,6 @@ function ModulesOfSchoolclassDisplay() {
 }
 
 ModulesOfSchoolclassDisplay.prototype.show = function() {
-	console.log("#show")
 	this.$panel.show();
 }
 
@@ -45,18 +44,14 @@ ModulesOfSchoolclassDisplay.prototype.show = function() {
  */
 
 ModulesOfSchoolclassDisplay.prototype.searchModule = function() {
-	console.log("zoeken maar!");
-	//var searchForm = this.searchForm;
-	
 	// Collapse tree
 	this.collapseTree();
-	
 	
 	// Iterate over all li-s
 	this.$tree.find("li a").each( $.proxy(this.iterateNodesForSearch, this));
 }
+
 ModulesOfSchoolclassDisplay.prototype.iterateNodesForSearch = function(index, el) {
-	
 	searchWord = this.searchForm.elements["name"].value;
 	
 	if ( el.innerHTML.toLowerCase() == searchWord.toLowerCase() ) {
@@ -78,22 +73,13 @@ ModulesOfSchoolclassDisplay.prototype.collapseTree = function() {
 		this.nodes[id].open = false;
 	}
 }
-
-
-
-
 ModulesOfSchoolclassDisplay.prototype.reloadTree = function() {
 	this.collapseTree();
 }
 
 ModulesOfSchoolclassDisplay.prototype.updateTable = function() {
-	console.log("UPDATE!");
-	
-	//var modules = this.activeModuleList;
 	var modules = this.nodes;
-	
-	console.log(modules);
-	
+		
 	this.$selectTableBody.html("");
 	
 	var i = 1;
@@ -120,13 +106,15 @@ ModulesOfSchoolclassDisplay.prototype.updateTable = function() {
 			i++;
 		}
 	}
+	
+	this.settingsFormToggle(false);
+	
 	return;
 }
 ModulesOfSchoolclassDisplay.prototype.setSettings = function(id) {
-	console.log(id);
-	console.log(this.nodes[id]);
-	
 	if (!this.nodes.hasOwnProperty(id)) return;
+	
+	console.log(this.nodes[id]);
 	
 	this.settingsForm.elements["key"].value = id;
 	this.settingsForm.elements["accessKey"].value = this.nodes[id].classCourse.accessKey ? this.nodes[id].classCourse.accessKey : "";
@@ -158,6 +146,7 @@ ModulesOfSchoolclassDisplay.prototype.setLoadingTableMessageModules = function (
 	console.log("setLoadingTableMessageModules");
 }
 ModulesOfSchoolclassDisplay.prototype.setEmptyTableMessageSelected = function () {
+	console.log("setEmptyTableMessageSelected");
 	//this.$selectTableBody.html('<tr class="empty"><td>Geen modules gevonden</td></tr>');
 }
 ModulesOfSchoolclassDisplay.prototype.setLoadingTableMessageSelected = function () {
@@ -336,9 +325,16 @@ ModulesOfSchoolclassDisplay.prototype.clickSelectRow = function(event) {
 	if (this.selectForm.elements["module"].value) {
 		this.setSettings(this.selectForm.elements["module"].value);
 		this.selectedNodeId = this.selectForm.elements["module"].value;
+		this.settingsFormToggle(true);
+	} else {
+		this.settingsFormToggle(false);
 	}
-	//if (this.SelectForm.elements["module"].value != "") this.selectFormToggle(true);
-	//else this.chooseSchoolclassFormToggle(false);	
+}
+
+// helpers
+ModulesOfSchoolclassDisplay.prototype.settingsFormToggle = function(value) {
+	if (value === true) this.$settingsForm.find(':submit').prop('disabled','');
+	else this.$settingsForm.find(':submit').prop('disabled','disabled');
 }
 
 /*
@@ -349,6 +345,7 @@ ModulesOfSchoolclassDisplay.prototype.submitSettings = function(event) {
 	event.preventDefault();	
 	this.setModuleSettings();
 }
+
 
 /*
  * EVENT HANDLERS - search & reload

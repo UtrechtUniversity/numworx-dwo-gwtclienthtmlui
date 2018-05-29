@@ -39,11 +39,12 @@ ResultsDisplay.prototype.init = function () {
 }
 
 ResultsDisplay.prototype.plot = function () {
-	console.log("init");
+	console.log("PLOT");
 }
 
 ResultsDisplay.prototype.setTree = function (json) {
-	console.log("setTree"+json);
+	console.log("setTree results");
+	console.log(json)
 }
 
 ResultsDisplay.prototype.setEmptyTableMessageModules = function () {
