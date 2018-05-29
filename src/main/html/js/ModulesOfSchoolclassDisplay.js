@@ -1,8 +1,10 @@
 function ModulesOfSchoolclassDisplay() {	
 	// GWT vars
 	
-	this.openNodes = [];
-	this.activeModuleList = [];
+	this.nodes = [];
+	this.selectedNodeId = "";
+	//this.openNodes = [];
+	// this.activeModuleList = [];
 	
 	// Forms 
 	this.selectForm = document.forms["modulesOfSchoolclassDisplaySelect"];
@@ -74,7 +76,10 @@ ModulesOfSchoolclassDisplay.prototype.reloadTree = function() {
 ModulesOfSchoolclassDisplay.prototype.updateTable = function() {
 	console.log("UPDATE!");
 	
-	var modules = this.activeModuleList;
+	//var modules = this.activeModuleList;
+	var modules = this.nodes;
+	
+	console.log(modules);
 	
 	this.$selectTableBody.html("");
 	
@@ -82,22 +87,42 @@ ModulesOfSchoolclassDisplay.prototype.updateTable = function() {
 	for (var id in modules) { 
 		el = modules[id];
 		
-		$row = this.$selectRow.clone();
-		$row.prop('tabindex', i);
-		$row.find("#modulesOfSchoolclassDisplaySelectId").val( id ).removeAttr("id");
-		$row.find("#modulesOfSchoolclassDisplaySelectName").html( el.name ).removeAttr("id");
+		if (el.active == true) {
 		
-		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
-			this.value = id;
-		});
+			$row = this.$selectRow.clone();
+			$row.prop('tabindex', i);
+			$row.find("#modulesOfSchoolclassDisplaySelectId").val( id ).removeAttr("id");
+			$row.find("#modulesOfSchoolclassDisplaySelectName").html( el.course.name ).removeAttr("id");
+		
+			$row.find("input[type='checkbox'],input[type='radio']").each( function() {
+				this.value = id;
+			});
+		
+			$row.on('click keypress', $.proxy(this.clickSelectRow, this));
+		
+			this.$selectTableBody.append($row);
+			
+			if (id === this.selectedNodeId) $row.trigger('click');
 
-		$row.on('click keypress', $.proxy(this.clickSelectRow, this));
-		
-		this.$selectTableBody.append($row);
-		i++;
+			i++;
+		}
 	}
 	return;
 }
+ModulesOfSchoolclassDisplay.prototype.setSettings = function(id) {
+	console.log(id);
+	console.log(this.nodes[id]);
+	
+	if (!this.nodes.hasOwnProperty(id)) return;
+	
+	this.settingsForm.elements["key"].value = id;
+	this.settingsForm.elements["accessKey"].value = this.nodes[id].classCourse.accessKey ? this.nodes[id].classCourse.accessKey : "";
+	this.settingsForm.elements["from"].value = this.nodes[id].classCourse.notBefore ? this.nodes[id].classCourse.notBefore : "";
+	this.settingsForm.elements["to"].value = this.nodes[id].classCourse.notAfter ? this.nodes[id].classCourse.notAfter : "";
+	if (this.nodes[id].classCourse.courseType == "normal") this.settingsForm.elements["locked"] = 1;
+	else this.settingsForm.elements["locked"] = 0;
+}
+
 
 /*
  * VIEW FUNCTIONS
@@ -131,27 +156,24 @@ ModulesOfSchoolclassDisplay.prototype.setTree = function(json) {
 	console.log(json);	
 	
 	var tree = json.jsObject, result, $result;
-	
+		
 	var result = this.recursiveTreeBuilder(tree.children);
 	
 	result = '<ul id ="modulesOfSchoolclassDisplayTree" class="tree">'+result+'</li>';
 	$result = $(result);
-	$result.find("li.hasSub a").on('click', $.proxy(this.clickTreeNode, this)); //click(Helpers.clickTreeNode);
+	$result.find("li.hasSub a").on('click', $.proxy(this.clickTreeNode, this)); 
 	$result.find("input").on('change', $.proxy(this.toggleTreeCheckbox, this));
 	
 	this.$tree = $result;
 	this.$treeWrapper.html("");
 	this.$treeWrapper.append($result);
 	
-	console.log(this.activeModuleList);
 	this.updateTable();
-	
-	
 }
 
 // Helper:
 ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, depth = 0, checkboxId = 0) {
-	var result, subtree, liClass, aClass, checkboxId, checked, checkboxClass;
+	var result, subtree, liClass, aClass, checkboxId, checked, checkboxClass, checkboxDisabled;
 	
 	if (!tree) return; //sometimes it is undefined
 	
@@ -165,31 +187,46 @@ ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, dept
 	i = 0;
 	
 	for (var id in tree) {
+		
+		// initiate variables
 		checkboxId += "" + depth + i
 		liClass = "";
 		aClass = "";
 		checkboxClass = "";
+		checkboxDisabled = "";
+		checked = "";
 		
+		// Update the node list
+		if (this.nodes[id]) {
+			tree[id].data.active = this.nodes[id].active;
+			tree[id].data.open = this.nodes[id].open;
+		}		
+		this.nodes[id]=tree[id].data;		
+		
+				
 		if (tree[id].data.course.withChildren == true) {
 			subtree = this.recursiveTreeBuilder(tree[id].children, depth + 1, checkboxId);
 			liClass = "hasSub";
-			aClass = "folder";			
+			aClass = "folder";
+			checkboxDisabled = " disabled";
 		} else {
 			aClass="set";
 		}
 		
-		if ( this.openNodes != null && this.openNodes.hasOwnProperty(id)  ) {
-			if (this.openNodes[id] === true) liClass += " open";
-		}
+		if (this.nodes[id].open == true) liClass += " open";
 
 		if (tree[id].data.classCourse != null) {
-			if (tree[id].data.classCourse.viewState == "invisible") checkboxClass = "previouslyChecked";
-			 else {
+			if (tree[id].data.classCourse.viewState === "invisible") {
+				checkboxClass += " previouslyChecked";
+				this.nodes[id].active = false;
+			 } else {
 				 checked = 'checked="checked"';
-				 this.activeModuleList[id] = tree[id].data.course;
+				 if (!tree[id].data.course.withChildren) this.nodes[id].active = true;
+				 //this.activeModuleList[id] = tree[id].data.course;
 			 }
 		} else {
 			checked = "";
+			this.nodes[id].active = false;
 		}		
 		
 		result += '<li class="'+liClass+'" data-id="'+id+'">';
@@ -198,7 +235,7 @@ ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, dept
 		result += '</a>';
 		
 		result += '<div class="checkbox '+checkboxClass+'">';
-		result += '<input type="checkbox" name="module" id="'+checkboxId+'" value="'+id+'" '+checked+'>'; //tree[id].data.course.id.idString
+		result += '<input type="checkbox" name="module" id="'+checkboxId+'" value="'+id+'" '+checked+checkboxDisabled+'>'; //tree[id].data.course.id.idString
 		result += '<label class="icon" for="'+checkboxId+'"></label>';
 		result += '</div>';
 		
@@ -239,12 +276,13 @@ ModulesOfSchoolclassDisplay.prototype.detachItem = function(id) {
 ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
 	//String key, String typeString, String fromData, String toData, String accessKey
 	
-	typeString = this.settingsForm.elements["locked"].value == 1 ? "unlocked" : "locked";
+	typeString = this.settingsForm.elements["locked"].value == 1 ? "assesment" : "normal";
+		
 	app.getPresenterFactory().modulesOfSchoolclassPresenter.setModuleSettings(  this.settingsForm.elements["key"].value,
 																				typeString,
 																				this.settingsForm.elements["from"].value,
 																				this.settingsForm.elements["to"].value,
-																				this.settingsForm.elements["accesKey"].value);
+																				this.settingsForm.elements["accessKey"].value);
 }
 
 /*
@@ -252,8 +290,12 @@ ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
  */
 
 ModulesOfSchoolclassDisplay.prototype.toggleTreeCheckbox = function(event) {
-	if (event.target.checked) this.attachItem(event.target.value);
-	else this.detachItem(event.target.value);			
+	if (event.target.checked) {
+		this.attachItem(event.target.value);
+		this.selectedNodeId = event.target.value;
+	} else {
+		this.detachItem(event.target.value);			
+	} 
 }
 
 ModulesOfSchoolclassDisplay.prototype.clickTreeNode = function(event) {
@@ -261,10 +303,12 @@ ModulesOfSchoolclassDisplay.prototype.clickTreeNode = function(event) {
 	console.log($el);
 	if ($el.hasClass("open")) {
 		$el.removeClass("open");
-		this.openNodes[$el.data("id")] = false;
+		//this.openNodes[$el.data("id")] = false;
+		this.nodes[$el.data("id")].open = false;
 	} else {
 		$el.addClass("open");
-		this.openNodes[$el.data("id")] = true;
+		//this.openNodes[$el.data("id")] = true;
+		this.nodes[$el.data("id")].open = true;
 	}
 }
 
@@ -275,6 +319,11 @@ ModulesOfSchoolclassDisplay.prototype.clickTreeNode = function(event) {
 
 ModulesOfSchoolclassDisplay.prototype.clickSelectRow = function(event) {
 	Helpers.selectTableRow(event);
+	
+	if (this.selectForm.elements["module"].value) {
+		this.setSettings(this.selectForm.elements["module"].value);
+		this.selectedNodeId = this.selectForm.elements["module"].value;
+	}
 	//if (this.SelectForm.elements["module"].value != "") this.selectFormToggle(true);
 	//else this.chooseSchoolclassFormToggle(false);	
 }
