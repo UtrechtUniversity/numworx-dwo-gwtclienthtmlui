@@ -104,6 +104,7 @@ label {
 	}	
 }
 form {
+	//display: inline;
 	fieldset {
 		@include clearfix;
 	}

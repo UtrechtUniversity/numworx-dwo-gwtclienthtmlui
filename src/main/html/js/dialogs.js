@@ -34,11 +34,12 @@ MsgDialogDisplay.prototype.clear = function() {
 MsgDialogDisplay.prototype.init = function() {
 }
 MsgDialogDisplay.prototype.showDialog = function(text) {	
+	if(this.active == false) window.app.mainDisplay.openDialogView(this);
 	this.$dialog.show();
 	this.$message.html(text);
 	this.$confirmButton.focus();
 	this.active = true;	
-	window.app.mainDisplay.openDialogView(this);
+	
 }
 MsgDialogDisplay.prototype.hideDialog = function(event) {
 	this.$dialog.hide();	
@@ -77,11 +78,12 @@ function MsgDialogWithConfirmDisplay() {
 MsgDialogWithConfirmDisplay.prototype.clear = function() {}
 MsgDialogWithConfirmDisplay.prototype.init = function() {}
 MsgDialogWithConfirmDisplay.prototype.showDialog = function(text) {	
+	if(this.active == false) window.app.mainDisplay.openDialogView(this);
 	this.$dialog.show();
 	this.$message.html(text);
 	this.$confirmButton.focus();
 	this.active = true;	
-	window.app.mainDisplay.openDialogView(this);
+	
 }
 MsgDialogWithConfirmDisplay.prototype.hideDialog = function() {
 	this.$dialog.hide();	
@@ -121,11 +123,12 @@ function AlertDialogWithConfirmCancelDisplay() {
 AlertDialogWithConfirmCancelDisplay.prototype.clear = function() {}
 AlertDialogWithConfirmCancelDisplay.prototype.init = function() {}
 AlertDialogWithConfirmCancelDisplay.prototype.showDialog = function(text) {	
+	if(this.active == false) window.app.mainDisplay.openDialogView(this);
 	this.$dialog.show();
 	this.$message.html(text);
 	this.$confirmButton.focus();
 	this.active = true;	
-	window.app.mainDisplay.openDialogView(this);
+	
 }
 AlertDialogWithConfirmCancelDisplay.prototype.hideDialog = function(event) {
 	this.$dialog.hide();	
@@ -167,11 +170,12 @@ function AlertDialogWithConfirmDisplay() {
 AlertDialogWithConfirmDisplay.prototype.clear = function() {}
 AlertDialogWithConfirmDisplay.prototype.init = function() {}
 AlertDialogWithConfirmDisplay.prototype.showDialog = function(text) {	
+	if(this.active == false) window.app.mainDisplay.openDialogView(this);
 	this.$dialog.show();
 	this.$message.html(text);
 	this.$confirmButton.focus();
 	this.active = true;
-	window.app.mainDisplay.openDialogView(this);
+	
 }
 AlertDialogWithConfirmDisplay.prototype.hideDialog = function(event) {
 	this.$dialog.hide();	
@@ -216,11 +220,12 @@ ProgressDialogWithAbortDisplay.prototype.init = function() {
 	this.$message.html("");
 }
 ProgressDialogWithAbortDisplay.prototype.showDialog = function(text) {	
+	if(this.active == false) window.app.mainDisplay.openDialogView(this);
 	this.$dialog.show();
 	this.$message.html(text);
 	this.$abortButton.focus();
 	this.active = true;
-	window.app.mainDisplay.openDialogView(this);
+	
 }
 ProgressDialogWithAbortDisplay.prototype.hideDialog = function() {
 	this.$dialog.hide();	
