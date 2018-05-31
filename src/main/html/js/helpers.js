@@ -49,7 +49,7 @@ Helpers.toggleHelpSection = function() {
 }
 
 Helpers.stretchHeight = function(elements) {
-	console.log("STRETCH!");
+	//console.log("STRETCH!");
 	if (elements.length < 1) return;
 	
 	subpanel = elements[0].closest('.subpanel');
@@ -57,9 +57,9 @@ Helpers.stretchHeight = function(elements) {
 	bodyHeight = $(document.body).outerHeight();
 	freeSpace = bodyHeight - subpanelHeight;
 	
-	console.log(bodyHeight);
-	console.log(subpanelHeight);
-	console.log(freeSpace);
+	//console.log(bodyHeight);
+	//console.log(subpanelHeight);
+	//console.log(freeSpace);
 	
 	for(i=0; i<elements.length; i++) {
 		newHeight = elements[i].height() + freeSpace;
@@ -76,3 +76,4 @@ Helpers.stretchIframeHeight = function(iframe) {
 	
 	iframe.outerHeight(subpanelHeight+"px");
 }
+

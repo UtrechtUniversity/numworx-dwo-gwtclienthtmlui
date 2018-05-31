@@ -922,25 +922,27 @@
 						</li> 
 							-->					
 					
-						<div class="treeWrapper">
-							<ul class="tree">
-							</ul>		
+						<div id="modulesOfSchoolclassDisplayTreeWrapper" class="treeWrapper">
+							<!-- <ul id="modulesOfSchoolclassDisplayTree" class="tree">
+							</ul>	 -->	
 						</div>					
 					
 					</div>
 					<div class="col-6">
 						<h3>Toe te kennen voor klas A6, zichtbaar voor leerling</h3>
 					
-						<table class="hoverable selectable">
-							<tbody>
-								<tr tabindex="1">
-									<td>
-										<input type="checkbox" name="test" class="hidden" value="">
-										<span>Naam module</span>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+						<form name="modulesOfSchoolclassDisplaySelect">
+							<table class="hoverable selectable">
+								<tbody>
+									<tr tabindex="1">
+										<td>
+											<input type="radio" id="modulesOfSchoolclassDisplaySelectId" name="module" class="hidden" value="">
+											<span id="modulesOfSchoolclassDisplaySelectName">Naam module</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
 					
 					
 					</div>
@@ -971,50 +973,55 @@
 							</div>
 						</div>
 						<div class="row">
-							<label for="field_1" class="col-3 input">
-								&nbsp;
-								<input id="field_1" type="text" value="" placeholder="of zoek een module" />
-							</label>
-							<div class="col-1">
-								<input type="submit" class="down secondary" value="Search" />
-							</div>
-							<div class="col-2">
-								<input type="submit" class="down secondary" value="Herlaad boom" />
-							</div>
+							<form name="modulesOfSchoolclassDisplaySearch">
+								<label for="modulesOfSchoolclassDisplaySearchWord" class="col-3 input">
+									&nbsp;
+									<input id="modulesOfSchoolclassDisplaySearchWord" name="name" type="text" value="" placeholder="of zoek een module" />
+								</label>
+								<div class="col-1">
+									<input type="submit" name="search" class="down secondary" value="Zoek" />
+								</div>
+								<div class="col-2">
+									<input type="button" name="reload" class="down secondary" value="Reset" />
+								</div>
+							</form>
 						</div>	
 					</div>
 					<div class="col-6">
 						<h3>Instellingen geselecteerde module</h3>
 					
 						<div class="row">
-							<label for="field_1" class="col-2 input">
-								Label
-								<input id="field_1" type="text" value="" />
-							</label>
-							<label for="field_1" class="col-2 input">
-								Label
-								<input id="field_1" type="text" value="" />
-							</label>
-							<div class="col-2 options">
-								<label>Twee opties</label>
-								<div class="option">
-									<input type="radio" name="optiona" id="option_a" value="2">
-									<label for="option_a">1</label>
-								</div> 
-								<div class="option">
-									<input type="radio" name="optiona" id="option_b" value="2" checked="checked">
-									<label for="option_b">2</label>
+							<form name="modulesOfSchoolclassDisplaySettings">
+								<input name="key" type="hidden" value="" />
+								<label for="modulesOfSchoolclassDisplayValidityFrom" class="col-2 input textoverflow">
+									Geldigsheidsduur (van - tot)
+									<input id="modulesOfSchoolclassDisplayValidityFrom" name="from" type="text" value="" />
+								</label>
+								<label for="modulesOfSchoolclassDisplayValidityTo" class="col-2 input">
+									&nbsp;
+									<input id="modulesOfSchoolclassDisplayValidityTo" name="to" type="text" value="" />
+								</label>
+								<div class="col-2 options">
+									<label>Type</label>
+									<div class="option">
+										<input type="radio" name="locked" id="modulesOfSchoolclassDisplayTypeLocked" value="1">
+										<label for="modulesOfSchoolclassDisplayTypeLocked">dicht</label>
+									</div> 
+									<div class="option">
+										<input type="radio" name="locked" id="modulesOfSchoolclassDisplayTypeUnlocked" value="0" checked="checked">
+										<label for="modulesOfSchoolclassDisplayTypeUnlocked">open</label>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row">
-							<label for="field_1" class="col-2 input">
-								Label
-								<input id="field_1" type="text" value="" />
-							</label>
-						</div>
+							<div class="row">
+								<label for="field_1" class="col-2 input">
+									Wachtwoord
+									<input id="password" name="accessKey" type="text" value="" />
+								</label>
+							</div>
 					
-						<input type="submit" class="bottom right secondary" value="Button" />
+							<input type="submit" class="bottom right secondary" value="Sla op" />
+						</form>
 					</div>
 				</div>
 			</section>
@@ -1070,10 +1077,10 @@
 				</div>
 				
 				<div class="row">
-					<form name="chooseResultsView">
+					<form name="chooseClassAndModules">
 						<div class="col-6">
 							<h3>Selecteer klas en soort(en) modules</h3>
-							<table>
+							<table id="resultsDisplayChooseClass">
 								<thead>
 									<tr>
 										<th>&nbsp;</th>
@@ -1085,16 +1092,16 @@
 							
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
-										<td><span id="chooseResultsViewSchoolclassName">Klasnaam</span></td>
+										<td><span id="chooseClassAndModulesClassname">Klasnaam</span></td>
 
 										<td>
 											<div class="checkbox">
-												<input type="checkbox" name="active[]" id="chooseResultsViewSchoolclassOpen" value="schoolclassID"><label class="icon" for="chooseResultsViewSchoolclassOpen"></label>
+												<input type="checkbox" name="open[]" id="chooseClassAndModulesOpen" value="schoolclassID"><label class="icon" for="chooseClassAndModulesOpen"></label>
 											</div>											
 										</td>
 										<td>
 											<div class="checkbox">
-												<input type="checkbox" name="remove[]" id="chooseResultsViewSchoolclassClosed" value="schooclassID"><label class="icon" for="chooseResultsViewSchoolclassClosed"></label>
+												<input type="checkbox" name="closed[]" id="chooseClassAndModulesClassClosed" value="schooclassID"><label class="icon" for="chooseClassAndModulesClassClosed"></label>
 											</div>											
 										</td>
 									</tr>
@@ -1105,7 +1112,7 @@
 					
 						<div class="col-6">
 							<h3>Selecteer module(s) om resultaten van de klas te zien</h3>
-							<table>
+							<table id="resultsDisplayChooseModules">
 								<thead>
 									<tr>
 										<th>&nbsp;</th>
@@ -1116,11 +1123,11 @@
 							
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
-										<td><span id="chooseResultsViewModulesName">Module name</span></td>
+										<td><span id="chooseClassAndModulesModuleName">Module name</span></td>
 
 										<td>
 											<div class="checkbox">
-												<input type="checkbox" name="active[]" id="chooseResultsViewModulesSelect" value="moduleID"><label class="icon" for="chooseResultsViewModulesSelect"></label>
+												<input type="checkbox" name="select[]" id="chooseClassAndModulesModuleSelect" value="moduleID"><label class="icon" for="chooseClassAndModulesModuleSelect"></label>
 											</div>											
 										</td>
 									</tr>
@@ -1154,6 +1161,18 @@
 		- DIALOGS
 		-
 		-->
+			
+		<section id="MsgDialogDisplay" class="dialog">
+			<header>
+				<h4>Mededeling</h4>
+			</header>
+			<section>
+				<!-- <h3>De wijzigingen zijn opgeslagen</h3> -->
+				<p id="MsgDialogDisplayMessage">Kies DOORGAAN om verder te gaan.</p>
+				<input id="MsgDialogDisplayConfirmButton" type="button" class="right bottom" value="Doorgaan" />
+			</section>
+		</section>
+			
 		<section id="MsgDialogWithConfirmDisplay" class="dialog">
 			<header>
 				<h4>Mededeling</h4>
