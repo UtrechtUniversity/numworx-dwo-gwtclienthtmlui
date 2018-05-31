@@ -141,7 +141,7 @@ AlertDialogWithConfirmCancelDisplay.prototype.clickConfirm = function(event) {
 	//this.hideDialog();	
 }
 AlertDialogWithConfirmCancelDisplay.prototype.clickCancel = function(event) {
-	app.getPresenterFactory().alertDialogWithConfirmCancelPresenter.confirm();
+	app.getPresenterFactory().alertDialogWithConfirmCancelPresenter.cancel();
 	//this.hideDialog();	
 }
 AlertDialogWithConfirmCancelDisplay.prototype.setFocus = function() {
