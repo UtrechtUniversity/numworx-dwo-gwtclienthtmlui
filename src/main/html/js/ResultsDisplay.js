@@ -67,8 +67,8 @@ ResultsDisplay.prototype.setChooseClassTable = function() {
 }
 
 ResultsDisplay.prototype.setChooseModulesTable = function() {
-	console.log(this.activeClass);
-	console.log(this.resultTree.children[ this.activeClass ]); 
+	//console.log(this.activeClass);
+	//console.log(this.resultTree.children[ this.activeClass ]); 
 	
 	var i = 0, course;
 	
@@ -106,7 +106,7 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
  */
 
 ResultsDisplay.prototype.clear = function () {
-	console.log("clear");
+	//console.log("clear");
 	this.chooseClassModuleFormToggle();
 }
 
@@ -120,8 +120,8 @@ ResultsDisplay.prototype.clear = function () {
 // }
 
 ResultsDisplay.prototype.setResultTree = function (json) {
-	console.log("setTree results");
-	console.log(json)
+	//console.log("setTree results");
+	//console.log(json)
 	
 	this.resultTree = json.jsObject;
 	
@@ -129,16 +129,16 @@ ResultsDisplay.prototype.setResultTree = function (json) {
 }
 
 ResultsDisplay.prototype.setEmptyTableMessageModules = function () {
-	console.log("setEmptyTableMessageModules");
+	//console.log("setEmptyTableMessageModules");
 }
 ResultsDisplay.prototype.setLoadingTableMessageModules = function () {
-	console.log("setLoadingTableMessageModules");
+	//console.log("setLoadingTableMessageModules");
 }
 ResultsDisplay.prototype.setEmptyTableMessageSelected = function () {
-	console.log("setEmptyTableMessageSelected");
+	//console.log("setEmptyTableMessageSelected");
 }
 ResultsDisplay.prototype.setLoadingTableMessageSelected = function () {
-	console.log("setLoadingTableMessageSelected");
+	//console.log("setLoadingTableMessageSelected");
 }
 
 
@@ -150,10 +150,10 @@ ResultsDisplay.prototype.setLoadingTableMessageSelected = function () {
 ResultsDisplay.prototype.showSelectedResults = function() {
 	//String schoolClassId, boolean showOpenModules, boolean showClosedModules, JSONObject courseIds	
 	
-	console.log(this.activeClass);
-	console.log(this.showOpenModules);
-	console.log(this.showClosedModules);
-	console.log(this.courseIds);
+	//console.log(this.activeClass);
+	//console.log(this.showOpenModules);
+	//console.log(this.showClosedModules);
+	//console.log(this.courseIds);
 	
 	app.getPresenterFactory().getResultsPresenter().showSelectedResults(
 		this.activeClass,
@@ -209,7 +209,7 @@ ResultsDisplay.prototype.submitChooseClassModuleForm = function() {
 
 //helpers 
 ResultsDisplay.prototype.chooseClassModuleFormToggle = function() {
-	console.log("TOGGLE");
+	//console.log("TOGGLE");
 	if ( this.courseIds.length > 0 ) this.$chooseClassModuleForm.find(':submit').prop('disabled','');
 	else this.$chooseClassModuleForm.find(':submit').prop('disabled','disabled');
 }
