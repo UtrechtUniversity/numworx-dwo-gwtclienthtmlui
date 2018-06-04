@@ -10,7 +10,7 @@ function AddStudentToSchoolclassDisplay() {
 	
 	// jQuery objects
 	this.$panel = jQuery("#addStudentToSchoolclassDisplay");
-	
+		
 	this.$addStudentSearchForm = $(this.addStudentSearchForm);
 	this.$addStudentAddForm = $(this.addStudentAddForm);
 	
@@ -78,18 +78,18 @@ AddStudentToSchoolclassDisplay.prototype.setSchoolClass = function(schoolclass) 
 }
 
 AddStudentToSchoolclassDisplay.prototype.showStudents = function(json) {
-	console.log(">>> show students");
+	console.log("- show students -");
 	console.log(json);
-	
+		
 	var students = json, studentName;
 	
 	this.$addStudentTableBody.html("");
 	
 	// No Results
 	if ($.isEmptyObject(students)) {
-		$row = this.$changeStudentsRow.clone();
+		$row = this.$addStudentRow.clone();
 		$row.find("#addStudentAddUserName").html( "Geen leerlingen gekoppeld" ).removeAttr("id");
-		this.$addStudentsTableBody.append($row);
+		this.$addStudentTableBody.append($row);
 		return;
 	}
 	
@@ -106,8 +106,8 @@ AddStudentToSchoolclassDisplay.prototype.showStudents = function(json) {
 			this.value = id;
 		});
 		
-		$row.on('click keypress', $.proxy(this.clickAddTeacherAddRow, this));
-		this.$addStudentsTableBody.append($row);
+		$row.on('click keypress', $.proxy(this.clickAddStudentAddRow, this));
+		this.$addStudentTableBody.append($row);
 		i++;
 	}
 	this.addStudentAddFormToggle(false);
@@ -138,7 +138,7 @@ AddStudentToSchoolclassDisplay.prototype.submitAddStudentAddForm = function(even
 	event.preventDefault();	
 	this.addTeacher(this.addStudentAddForm.elements["id"].value);
 }
-AddStudentToSchoolclassDisplay.prototype.clickAddTeacherAddRow = function(event) {
+AddStudentToSchoolclassDisplay.prototype.clickAddStudentAddRow = function(event) {
 	Helpers.selectTableRow(event);
 	console.log(this.addStudentAddForm.elements["id"].value);
 	if (this.addStudentAddForm.elements["id"].value != "") this.addStudentAddFormToggle(true);

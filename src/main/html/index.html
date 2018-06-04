@@ -38,6 +38,10 @@
 	<!-- OLD <script src="js/StudentsInSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script> -->
 	<script src="js/AddStudentToSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/AddTeacherToSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/CopyOrMoveStudentToSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
+	
+	
+	
 	<script src="js/ModulesOfSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/ResultsDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/SelectedResultsDisplay.js" type="text/javascript" charset="utf-8"></script>
@@ -765,6 +769,136 @@
 			
 		</section> 
 		<!-- end addStudentToSchoolclassDisplay -->
+		
+		
+		
+		
+		<!-- 
+		-
+		- copyOrMoveStudentToSchoolclassDisplay
+		-
+		-->
+		<section id="copyOrMoveStudentToSchoolclassDisplay" class="subpanel">
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon">
+							<use xlink:href="#klassen"></use>
+						</svg>
+						<h1>Klassen bewerken</h1>
+						<h2 class="sectionhead"><span>Leerlingen overplaatsen</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+						<h2 class="helpheader">Numworx Help</h2>
+						<div class="content">
+							<h2>Help kop</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium gravida dignissim. Aliquam id metus quam. Aenean consequat arcu sit amet commodo porttitor.</p><p>Proin viverra, enim non feugiat ornare, purus urna dignissim ante, consectetur faucibus libero diam id ligula.</p>
+						</div>
+					</section>
+				</div>
+			</header>
+			
+			<section>
+				<div class="row">
+					<div class="col-4">
+						<h3>Leerlingen gekozen klas</h3>
+						<input type="text" id="copyOrMoveStudentToSchoolclassClassAClassname" value="" class="col-2" disabled="disabled" />
+					</div>					
+					<div class="col-4">
+						<h3>Kies een tweede klas om leerlingen it of naar te kopieren of te verplaatsen.</h3>
+					</div>
+					<div class="col-4">
+						<h3>Leerlingen tweede gekozen klas</h3>
+						<input type="text" id="copyOrMoveStudentToSchoolclassClassBClassname" value="" class="col-2" disabled="disabled" />
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-4">
+						<form name="copyOrMoveStudentToSchoolclassClassA">
+							<table>
+								<thead>
+									<tr>
+										<th class="col-2">&nbsp;</th>										
+										<th>Selecteer</th>
+									</tr>
+								</thead>
+								<tbody>	
+								
+									<!-- The row is detached and used as a template by the JS -->								
+									<tr>
+										<td class="col-2"><span id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentName">Leerling naam</span></td>
+										<td>
+											<div class="checkbox">
+												<input type="checkbox" name="studentsA[]" id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentSelect" value=""><label class="icon" for="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentSelect"></label>
+											</div>											
+										</td>										
+									</tr>
+																	
+								</tbody>
+							</table>
+						
+							<input type="button" name="move" class="primary right clearbtn" value="Verplaats >" />
+							<input type="submit" name="copy" class="primary right clearbtn" value="Kopieer >" />							
+						</form>	
+					</div>
+					<div class="col-4">
+						<form name="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelect">
+							<table class="hoverable selectable">
+								<thead>
+									<tr>
+										<th>&nbsp;</th>
+									</tr>
+								</thead>
+								<tbody>	
+								
+									<!-- The row is detached and used as a template by the JS -->								
+									<tr>
+										<td class="col-2">
+											<input type="radio" name="schoolclass" id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelectId" class="hidden" value="schoolclassId">
+											<span id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelectClassName">Naam klas</span>
+										</td>										
+									</tr>
+																	
+								</tbody>
+							</table>
+						
+							<input type="submit" name="choose" class="primary center" value="Kies tweede klas" />						
+						</form>	
+					</div>
+					<div class="col-4">
+						<form name="copyOrMoveStudentToSchoolclassClassB">
+							<table>
+								<thead>
+									<tr>
+										<th class="col-2">&nbsp;</th>										
+										<th>Selecteer</th>
+									</tr>
+								</thead>
+								<tbody>	
+								
+									<!-- The row is detached and used as a template by the JS -->								
+									<tr>
+										<td class="col-2"><span id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentName">Leerling naam</span></td>
+										<td>
+											<div class="checkbox">
+												<input type="checkbox" name="studentsA[]" id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentSelect" value=""><label class="icon" for="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentSelect"></label>
+											</div>											
+										</td>										
+									</tr>
+																	
+								</tbody>
+							</table>
+						
+							<input type="button" name="move" class="primary left clearbtn" value="< Verplaats" />
+							<input type="submit" name="copy" class="primary left clearbtn" value="< Kopieer" />							
+						</form>	
+					</div>
+				</div>
+			</section>
+			
+		</section> 
+		<!-- end copyOrMoveStudentToSchoolclassDisplay -->
 		
 		
 		

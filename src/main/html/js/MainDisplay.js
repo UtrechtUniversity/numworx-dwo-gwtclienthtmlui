@@ -32,10 +32,13 @@ function MainDisplay() {
 	// OLD window.JsStudentsInSchoolclassDisplay	= this.studentsInSchoolclassDisplay; // TODO: remove?
 	this.addStudentToSchoolclassDisplay = new AddStudentToSchoolclassDisplay();
 	window.jsAddStudentToSchoolclassDisplay	= this.addStudentToSchoolclassDisplay; 
+	this.copyOrMoveStudentToSchoolclassDisplay = new CopyOrMoveStudentToSchoolclassDisplay();
+	window.jsCopyOrMoveStudentToSchoolclassDisplay = this.copyOrMoveStudentToSchoolclassDisplay;	
 	this.addTeacherToSchoolclassDisplay = new AddTeacherToSchoolclassDisplay();
 	window.jsAddTeacherToSchoolclassDisplay	= this.addTeacherToSchoolclassDisplay;	
 	this.modulesOfSchoolclassDisplay = new ModulesOfSchoolclassDisplay();
 	window.jsModulesOfSchoolclassDisplay = this.modulesOfSchoolclassDisplay;
+	
 
 	this.resultsDisplay = new ResultsDisplay();
 	window.jsResultsDisplay = this.resultsDisplay;
@@ -140,6 +143,11 @@ MainDisplay.prototype.showAddStudentToSchoolClassView = function(vars) { // TODO
 	this.addStudentToSchoolclassDisplay.show();
 }
 
+MainDisplay.prototype.showCopyOrMoveStudentToSchoolClassView = function() {
+	this.initMainView(); 
+	this.copyOrMoveStudentToSchoolclassDisplay.show();
+}
+
 MainDisplay.prototype.showAddTeacherToSchoolClassView = function(vars) { // TODO: Change function name @Gert, capital C
 	this.initMainView(); 
 	this.addTeacherToSchoolclassDisplay.show();
@@ -149,6 +157,7 @@ MainDisplay.prototype.showEditCoursesOfSchoolClassView = function() {
 	this.initMainView(); 
 	this.modulesOfSchoolclassDisplay.show();
 }
+
 
 MainDisplay.prototype.showResultsView = function() {
 	this.initMainView(); 
