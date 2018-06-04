@@ -40,6 +40,7 @@
 	<script src="js/AddTeacherToSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/ModulesOfSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/ResultsDisplay.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/SelectedResultsDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/ModulesDisplay.js" type="text/javascript" charset="utf-8"></script>
 	
 	<script src="js/WelcomeDisplay.js" type="text/javascript" charset="utf-8"></script>
@@ -929,7 +930,7 @@
 					
 					</div>
 					<div class="col-6">
-						<h3>Toe te kennen voor klas A6, zichtbaar voor leerling</h3>
+						<h3>Toe te kennen voor klas [KLAS], zichtbaar voor leerling</h3>
 					
 						<form name="modulesOfSchoolclassDisplaySelect">
 							<table class="hoverable selectable">
@@ -1004,11 +1005,11 @@
 								<div class="col-2 options">
 									<label>Type</label>
 									<div class="option">
-										<input type="radio" name="locked" id="modulesOfSchoolclassDisplayTypeLocked" value="1">
+										<input type="radio" name="locked[]" id="modulesOfSchoolclassDisplayTypeLocked" value="1">
 										<label for="modulesOfSchoolclassDisplayTypeLocked">dicht</label>
 									</div> 
 									<div class="option">
-										<input type="radio" name="locked" id="modulesOfSchoolclassDisplayTypeUnlocked" value="0" checked="checked">
+										<input type="radio" name="locked[]" id="modulesOfSchoolclassDisplayTypeUnlocked" value="0">
 										<label for="modulesOfSchoolclassDisplayTypeUnlocked">open</label>
 									</div>
 								</div>
@@ -1096,12 +1097,12 @@
 
 										<td>
 											<div class="checkbox">
-												<input type="checkbox" name="open[]" id="chooseClassAndModulesOpen" value="schoolclassID"><label class="icon" for="chooseClassAndModulesOpen"></label>
+												<input type="radio" name="open[]" id="chooseClassAndModulesOpen" value="schoolclassID"><label class="icon" for="chooseClassAndModulesOpen"></label>
 											</div>											
 										</td>
 										<td>
 											<div class="checkbox">
-												<input type="checkbox" name="closed[]" id="chooseClassAndModulesClassClosed" value="schooclassID"><label class="icon" for="chooseClassAndModulesClassClosed"></label>
+												<input type="radio" name="closed[]" id="chooseClassAndModulesClassClosed" value="schooclassID"><label class="icon" for="chooseClassAndModulesClassClosed"></label>
 											</div>											
 										</td>
 									</tr>
@@ -1142,6 +1143,96 @@
 			</section>
 		</section>		
 		<!-- end ResultsDisplay -->
+		
+		
+		<!-- 
+		-
+		- selectedResultsDisplay
+		-
+		-->
+		<section id="selectedResultsDisplay" class="subpanel">
+			
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon">
+							<use xlink:href="#klassen"></use>
+						</svg>
+						<h1>Resultaten klas bekijken</h1>
+						<h2 class="sectionhead"><span>Resultaten [KLAS]</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+						<h2 class="helpheader">Numworx Help</h2>
+						<div class="content">
+							<h2>Help kop</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium gravida dignissim. Aliquam id metus quam. Aenean consequat arcu sit amet commodo porttitor.</p><p>Proin viverra, enim non feugiat ornare, purus urna dignissim ante, consectetur faucibus libero diam id ligula.</p>
+						</div>
+					</section>
+				</div>
+			</header>
+			
+			<section>
+				
+				<div class="row">
+					<div class="col-12">
+						<div class="tablewrap">
+							<table id="selectedResultsTable" class="hoverable results">
+								<thead>
+									<tr>
+										<th colspan="2">Modules</th>
+									</tr>
+									<tr class="headers">
+										<th>&nbsp;</th>
+										<th><span>Module naam in drie regels</span></th>
+									</tr>
+									<tr class="sorting">
+										<th>
+											<span class="sortButton asc" data-order="asc" data-type="string" data-attr="name">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string" data-attr="name">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>											
+										</th>
+										<th id="selectedResultsTableRepeatableColumnHeader">
+											<span class="sortButton asc" data-order="asc" data-type="int" data-attr="score">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="int" data-attr="score">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									
+									<!-- The row is detached and used as a template by the JS -->								
+									<tr>
+										<td><span id="selectedResultsTableName" data-name="Klaasen, Klaas">Klaassen, Klaas</span></td>
+										
+										<!-- The column is detached and used as a template by the JS -->								
+										<td id="selectedResultsTableRepeatableColumn"><a id="selectedResultsTableResult" href="javascript:void(0);" class="resultIndicator" data-score="9" data-rowid="" data-colid="">9%</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+			</section>
+		</section>		
+		<!-- end selectedResultsDisplay -->
+		
+		
+		
 		
 		<!-- 
 		-

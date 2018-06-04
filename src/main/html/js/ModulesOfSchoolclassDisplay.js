@@ -120,8 +120,13 @@ ModulesOfSchoolclassDisplay.prototype.setSettings = function(id) {
 	this.settingsForm.elements["accessKey"].value = this.nodes[id].classCourse.accessKey ? this.nodes[id].classCourse.accessKey : "";
 	this.settingsForm.elements["from"].value = this.nodes[id].classCourse.notBefore ? this.nodes[id].classCourse.notBefore : "";
 	this.settingsForm.elements["to"].value = this.nodes[id].classCourse.notAfter ? this.nodes[id].classCourse.notAfter : "";
-	if (this.nodes[id].classCourse.courseType == "normal") this.settingsForm.elements["locked"] = 1;
-	else this.settingsForm.elements["locked"] = 0;
+	if (this.nodes[id].classCourse.courseType == "normal") {
+		this.settingsForm.elements["locked[]"][0].checked = "";
+		this.settingsForm.elements["locked[]"][1].checked = "checked";
+	} else  {
+		this.settingsForm.elements["locked[]"][0].checked = "checked";
+		this.settingsForm.elements["locked[]"][1].checked = "";
+	}
 }
 
 
@@ -277,8 +282,8 @@ ModulesOfSchoolclassDisplay.prototype.detachItem = function(id) {
 
 ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
 	//String key, String typeString, String fromData, String toData, String accessKey
-	
-	typeString = this.settingsForm.elements["locked"].value == 1 ? "assesment" : "normal";
+
+	typeString = this.settingsForm.elements["locked[]"][0].checked ? "assesment" : "normal";
 		
 	app.getPresenterFactory().modulesOfSchoolclassPresenter.setModuleSettings(  this.settingsForm.elements["key"].value,
 																				typeString,

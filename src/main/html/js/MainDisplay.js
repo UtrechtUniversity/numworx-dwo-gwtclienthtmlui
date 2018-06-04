@@ -39,6 +39,8 @@ function MainDisplay() {
 
 	this.resultsDisplay = new ResultsDisplay();
 	window.jsResultsDisplay = this.resultsDisplay;
+	this.selectedResultsDisplay = new SelectedResultsDisplay();
+	window.jsSelectedResultsDisplay = this.selectedResultsDisplay;
 	
 	this.modulesDisplay = new ModulesDisplay();
 	window.jsModulesDisplay = this.modulesDisplay;
@@ -144,7 +146,6 @@ MainDisplay.prototype.showAddTeacherToSchoolClassView = function(vars) { // TODO
 }
 
 MainDisplay.prototype.showEditCoursesOfSchoolClassView = function() {
-	console.log("show edit courses of...")
 	this.initMainView(); 
 	this.modulesOfSchoolclassDisplay.show();
 }
@@ -152,6 +153,11 @@ MainDisplay.prototype.showEditCoursesOfSchoolClassView = function() {
 MainDisplay.prototype.showResultsView = function() {
 	this.initMainView(); 
 	this.resultsDisplay.show();
+}
+
+MainDisplay.prototype.showSelectedResultsView = function() {
+	this.initMainView(); 
+	this.selectedResultsDisplay.show();
 }
 
 MainDisplay.prototype.showModulesView = function() {

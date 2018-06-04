@@ -34,23 +34,21 @@ AddStudentToSchoolclassDisplay.prototype.show = function() {
  */
 
 AddStudentToSchoolclassDisplay.prototype.searchStudent = function() {
-	var addStudentSearchForm = this.addStudentSearchForm;
+	var addStudentSearchForm = this.addStudentSearchForm; // for the inline function
 	
-	if ( addStudentSearchForm.elements["userName"].value == "" &&
-		 addStudentSearchForm.elements["givenName"].value == "" &&
-		 addStudentSearchForm.elements["insertion"].value == "" &&
-		 addStudentSearchForm.elements["familyName"].value == "" &&
-		 addStudentSearchForm.elements["email"].value == "" ) {
+	if ( this.addStudentSearchForm.elements["username"].value == "" &&
+		 this.addStudentSearchForm.elements["givenName"].value == "" &&
+		 this.addStudentSearchForm.elements["insertion"].value == "" &&
+		 this.addStudentSearchForm.elements["familyName"].value == "" ) {
 			$result = this.$addStudentTableBody.find("tr");
 	} else {	
 		var $result = this.$addStudentTableBody.find("td span").filter(function() {
 			el = $(this).get(0);
 						
-			if (el.parentElement.cellIndex == 0) val = addStudentSearchForm.elements["userName"].value;
+			if (el.parentElement.cellIndex == 0) val = addStudentSearchForm.elements["username"].value;
 			if (el.parentElement.cellIndex == 1) val = addStudentSearchForm.elements["givenName"].value;
 			if (el.parentElement.cellIndex == 2) val = addStudentSearchForm.elements["insertion"].value;
 			if (el.parentElement.cellIndex == 3) val = addStudentSearchForm.elements["familyName"].value;
-			if (el.parentElement.cellIndex == 4) val = addStudentSearchForm.elements["email"].value;
 			
 			return el.innerHTML.toLowerCase() == val.toLowerCase();
 		}).closest("tr");
@@ -103,8 +101,7 @@ AddStudentToSchoolclassDisplay.prototype.showStudents = function(json) {
 		$row.find("#addStudentAddGivenName").html( students[id].givenName ).removeAttr("id");
 		$row.find("#addStudentAddInsertion").html( students[id].insertion ).removeAttr("id");
 		$row.find("#addStudentAddFamilyName").html( students[id].familyName ).removeAttr("id");
-		$row.find("#addStudentAddEmail").html( "niet in json" ).removeAttr("id");	// TODO: email in JSON
-		 
+				 
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;
 		});
