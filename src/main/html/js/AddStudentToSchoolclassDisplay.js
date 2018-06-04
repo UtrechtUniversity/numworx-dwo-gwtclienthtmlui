@@ -88,8 +88,7 @@ AddStudentToSchoolclassDisplay.prototype.showStudents = function(json) {
 	// No Results
 	if ($.isEmptyObject(students)) {
 		$row = this.$addStudentRow.clone();
-		$row.find("#addStudentAddUserName").html( "Geen leerlingen gekoppeld" ).removeAttr("id");
-		this.$addStudentTableBody.append($row);
+		this.$addStudentTableBody.html('<tr colspan="4" class="empty"><td>Geen leerlingen gevonden.</td></tr>');
 		return;
 	}
 	
@@ -97,7 +96,7 @@ AddStudentToSchoolclassDisplay.prototype.showStudents = function(json) {
 	for (var id in students) { // TODO: probably change to array
 		$row = this.$addStudentRow.clone();		
 		$row.find("#addStudentAddId").val( id ).removeAttr("id");
-		$row.find("#addStudentAddUserName").html( students[id].userName ).removeAttr("id");
+		$row.find("#addStudentAddUsername").html( students[id].userName ).removeAttr("id");
 		$row.find("#addStudentAddGivenName").html( students[id].givenName ).removeAttr("id");
 		$row.find("#addStudentAddInsertion").html( students[id].insertion ).removeAttr("id");
 		$row.find("#addStudentAddFamilyName").html( students[id].familyName ).removeAttr("id");
