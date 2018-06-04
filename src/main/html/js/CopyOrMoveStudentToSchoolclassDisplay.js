@@ -1,12 +1,13 @@
 function CopyOrMoveStudentToSchoolclassDisplay() {	
 	// GWT vars
-	
+	this.classBSet = false;
 	
 	// Forms 
 	this.classAForm = document.forms["copyOrMoveStudentToSchoolclassClassA"];
 	this.classBForm = document.forms["copyOrMoveStudentToSchoolclassClassB"];
 	this.classesForm = document.forms["updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelect"];
 		
+	
 	
 	// Buttons 
 	
@@ -46,6 +47,13 @@ function CopyOrMoveStudentToSchoolclassDisplay() {
 			
 	// Bind handlers
 	this.$classesForm.on('submit', $.proxy(this.submitClassesForm,this));	
+	this.$classAForm.on('submit', $.proxy(this.submitOrClickABFormOrButton,this));	
+	this.$classBForm.on('submit', $.proxy(this.submitOrClickABFormOrButton,this));	
+	this.$classAMoveButton.on('click', $.proxy(this.submitOrClickABFormOrButton,this));	
+	this.$classACopyButton.on('click', $.proxy(this.submitOrClickABFormOrButton,this));	
+	this.$classBMoveButton.on('click', $.proxy(this.submitOrClickABFormOrButton,this));	
+	this.$classBCopyButton.on('click', $.proxy(this.submitOrClickABFormOrButton,this));	
+	
 	
 	// Init
 	this.$panel.hide();
@@ -53,6 +61,8 @@ function CopyOrMoveStudentToSchoolclassDisplay() {
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.show = function() {
 	this.$panel.show();
+	this.classAFormToggle(false);
+	this.classBFormToggle(false);
 	Helpers.stretchHeight( [ this.$classATableBody, this.$classBTableBody, this.$classesTableBody ]);
 }
 
@@ -60,7 +70,7 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.show = function() {
  * GUI FUNCTIONS
  */
 
-CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudents = function(json, $tableBody, $templateRow, nameId) {
+CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudents = function(json, $tableBody, $templateRow, nameId, changeCallback) {
 	console.log("show!");
 	var students = json, studentName;
 	
@@ -89,6 +99,8 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudents = function(json, $t
 			this.nextElementSibling.setAttribute("for", oldFor + i);
 		});
 		
+		$row.find("input[name='students[]']").on('change', $.proxy(changeCallback,this));
+		
 		$tableBody.append($row);
 		i++;
 	}
@@ -106,6 +118,8 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.clear = function () {
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.init = function () {
 	console.log("init");
+	this.classAFormToggle(false);
+	this.classBFormToggle(false);
 	Helpers.stretchHeight([ this.$addStudentTableBody ]);
 }
 
@@ -143,10 +157,14 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.setLoadingTableMessageB = functi
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudentsClassA = function(json) {
-	this.showStudents(json, this.$classATableBody, this.$classARow, "#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentName");
+	this.showStudents(json, this.$classATableBody, this.$classARow, "#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentName", this.changeSelectACheckbox);
+	this.classAFormToggle(false);
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudentsClassB = function(json) {
-	this.showStudents(json, this.$classBTableBody, this.$classBRow, "#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentName");
+	this.showStudents(json, this.$classBTableBody, this.$classBRow, "#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentName", this.changeSelectACheckbox);
+	this.classBSet = true;
+	this.classBFormToggle(false);
+	this.classAFormToggle(true); // checks only is selected
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setClassList = function(schoolclasses) {
@@ -187,9 +205,26 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.setClass = function(classId) {
 	app.getPresenterFactory().getCopyOrMoveStudentToSchoolclassPresenter().SelectClassB(classId);
 }
 
+CopyOrMoveStudentToSchoolclassDisplay.prototype.copyAtoB = function(list) {
+	console.log(list);
+	app.getPresenterFactory().getCopyOrMoveStudentToSchoolclassPresenter().CopyStudentsToClassB(list);
+}
+CopyOrMoveStudentToSchoolclassDisplay.prototype.moveAtoB = function(list) {
+	console.log(list);
+	app.getPresenterFactory().getCopyOrMoveStudentToSchoolclassPresenter().CopyStudentsToClassB(list);
+}
+CopyOrMoveStudentToSchoolclassDisplay.prototype.copyBtoA = function(list) {
+	console.log(list);
+	app.getPresenterFactory().getCopyOrMoveStudentToSchoolclassPresenter().CopyStudentsToClassA(list);
+}
+CopyOrMoveStudentToSchoolclassDisplay.prototype.moveBtoA = function(list) {
+	console.log(list);
+	app.getPresenterFactory().getCopyOrMoveStudentToSchoolclassPresenter().MoveStudentsToClassA(list);
+}
+
 
 /*
- * EVENT HANDLERS 
+ * EVENT HANDLERS - classes
  */
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.clickClassesRow = function(event) {
@@ -204,11 +239,58 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.classesFormToggle = function(val
 	else this.$classesForm.find(':submit').prop('disabled','disabled');
 }
 
+/*
+ * EVENT HANDLERS - class A or B
+ */
+
+CopyOrMoveStudentToSchoolclassDisplay.prototype.changeSelectACheckbox = function(event) {
+	event.preventDefault();		
+	if (event.target.form.elements["students[]"].length > 0) this.classAFormToggle(true);
+	else this.classAFormToggle(false);
+}
+CopyOrMoveStudentToSchoolclassDisplay.prototype.changeSelectBCheckbox = function(event) {
+	event.preventDefault();		
+	if (event.target.form.elements["students[]"].length > 0) this.classBFormToggle(true);
+	else this.classBFormToggle(false);
+}
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.submitClassesForm = function(event) {
-	console.log("submit classesform!")
 	event.preventDefault();		
-	console.log(this.classesForm.elements["schoolclass"].value);
 	this.setClass(this.classesForm.elements["schoolclass"].value);
 }
+
+CopyOrMoveStudentToSchoolclassDisplay.prototype.submitOrClickABFormOrButton = function(event) {
+	event.preventDefault();		
+	if (event.target.form.name == "copyOrMoveStudentToSchoolclassClassA" && event.target.name == "copy") this.copyAtoB( this.getClassList(event.target.form) );
+	if (event.target.form.name == "copyOrMoveStudentToSchoolclassClassA" && event.target.name == "move") this.moveAtoB( this.getClassList(event.target.form) );
+	if (event.target.form.name == "copyOrMoveStudentToSchoolclassClassB" && event.target.name == "copy") this.copyBtoA( this.getClassList(event.target.form) );
+	if (event.target.form.name == "copyOrMoveStudentToSchoolclassClassB" && event.target.name == "move") this.moveBtoA( this.getClassList(event.target.form) );
+}
+
+CopyOrMoveStudentToSchoolclassDisplay.prototype.getClassList = function(form) {
+	var list = [];
+	for (i = 0; i < form.elements["students[]"].length; i++) {
+		if (form.elements["students[]"][i].checked) list.push(form.elements["students[]"][i].value);
+	}	
+	return list;
+}
+
+// helpers
+CopyOrMoveStudentToSchoolclassDisplay.prototype.classAFormToggle = function(value) {
+	var aChecked = false;
+	for (i = 0; i <  this.classAForm.elements["students[]"].length; i++) {
+		if (this.classAForm.elements["students[]"][i].checked) { 
+			aChecked = true 
+			break; 
+		}
+	}
+	console.log(aChecked);
+	if (this.classBSet && aChecked && value) this.$classAForm.find(':submit, :button').prop('disabled','');
+	else this.$classAForm.find(':submit, :button').prop('disabled','disabled');
+}
+CopyOrMoveStudentToSchoolclassDisplay.prototype.classBFormToggle = function(value) {
+	if (value) this.$classBForm.find(':submit, :button').prop('disabled','');
+	else this.$classBForm.find(':submit, :button').prop('disabled','disabled');
+}
+
 
