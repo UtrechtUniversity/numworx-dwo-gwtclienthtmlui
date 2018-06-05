@@ -1292,8 +1292,8 @@
 						<svg viewBox="0 0 64 64" class="icon">
 							<use xlink:href="#klassen"></use>
 						</svg>
-						<h1>Resultaten klas bekijken</h1>
-						<h2 class="sectionhead"><span>Resultaten [KLAS]</span></h2>					
+						<h1>Resultaten [postfix]</h1>
+						<h2 class="sectionhead"><span>Resultaten [postfix]</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader">Numworx Help</h2>
@@ -1309,15 +1309,15 @@
 				
 				<div class="row">
 					<div class="col-12">
-						<div class="tablewrap">
+						<div class="tablewrap" id="selectedResultsTableWrap">
 							<table id="selectedResultsTable" class="hoverable results">
 								<thead>
 									<tr>
-										<th colspan="2">Modules</th>
+										<th colspan="2">[colum type name]</th>
 									</tr>
 									<tr class="headers">
 										<th>&nbsp;</th>
-										<th><span>Module naam in drie regels</span></th>
+										<th id="selectedResultsTableRepeatableColumnHeaderName"><span>Module naam in drie regels</span></th>
 									</tr>
 									<tr class="sorting">
 										<th>
@@ -1332,7 +1332,7 @@
 												</svg>
 											</span>											
 										</th>
-										<th id="selectedResultsTableRepeatableColumnHeader">
+										<th id="selectedResultsTableRepeatableColumnHeaderSorting">
 											<span class="sortButton asc" data-order="asc" data-type="int" data-attr="score">
 												<svg viewBox="0 0 74 74" class="icon">
 													  <use xlink:href="#arrowUp"></use>
@@ -1350,11 +1350,12 @@
 									
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
-										<td><span id="selectedResultsTableName" data-name="Klaasen, Klaas">Klaassen, Klaas</span></td>
+										<td id="selectedResultsTableRowHeader"><span data-name="Klaasen, Klaas">Klaassen, Klaas</span></td>
 										
 										<!-- The column is detached and used as a template by the JS -->								
-										<td id="selectedResultsTableRepeatableColumn"><a id="selectedResultsTableResult" href="javascript:void(0);" class="resultIndicator" data-score="9" data-rowid="" data-colid="">9%</a></td>
+										<td id="selectedResultsTableRepeatableCell"><a id="selectedResultsTableResult" href="javascript:void(0);" class="resultIndicator" data-score="9" data-rowid="" data-colid="">9%</a></td>
 									</tr>
+									
 								</tbody>
 							</table>
 						</div>
