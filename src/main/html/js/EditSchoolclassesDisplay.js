@@ -121,7 +121,7 @@ EditSchoolclassesDisplay.prototype.showSchoolClass = function(json) {
 }
 
 EditSchoolclassesDisplay.prototype.showStudents = function(json) {	
-	var students = json.jsObject, studentName;
+	var students = json, studentName;
 	
 	this.$changeStudentsTableBody.html("");
 	
@@ -144,8 +144,8 @@ EditSchoolclassesDisplay.prototype.showStudents = function(json) {
 }
 
 EditSchoolclassesDisplay.prototype.showTeachers = function(json) {	
-	var teachers = json.jsObject, teacherName;
-	
+	var teachers = json;//, teacherName;
+	var teacherName;
 	this.$changeTeachersTableBody.html("");
 	
 	// No Results
@@ -166,7 +166,7 @@ EditSchoolclassesDisplay.prototype.showTeachers = function(json) {
 }
 
 EditSchoolclassesDisplay.prototype.showShowModels = function(json) { // TODO: change function name @Gert
-	var modules = json.jsObject, moduleName;
+	var modules = json, moduleName;
 	this.$changeModulesTableBody.html("");
 	
 	// No Results
