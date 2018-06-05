@@ -97,7 +97,7 @@ EditSchoolclassesDisplay.prototype.init = function () {
 
 EditSchoolclassesDisplay.prototype.showSchoolClass = function(json) {	
 	console.log(json);
-	var schoolclass = json.jsObject;
+	var schoolclass = json;
 	
 	this.editSchoolclassForm.elements["classname"].value = schoolclass.schoolClassName;
 	console.log(schoolclass.registrationKey == "");

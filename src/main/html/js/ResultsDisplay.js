@@ -123,7 +123,7 @@ ResultsDisplay.prototype.setResultTree = function (json) {
 	//console.log("setTree results");
 	//console.log(json)
 	
-	this.resultTree = json.jsObject;
+	this.resultTree = json;
 	
 	this.setChooseClassTable();
 }

@@ -162,7 +162,7 @@ ModulesOfSchoolclassDisplay.prototype.setTree = function(json) {
 	console.log("SET TREE");
 	console.log(json);	
 	
-	var tree = json.jsObject, result, $result;
+	var tree = json, result, $result;
 		
 	var result = this.recursiveTreeBuilder(tree.children);
 	

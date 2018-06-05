@@ -55,10 +55,10 @@ AccountDisplay.prototype.init = function (json) {
 }
 
 AccountDisplay.prototype.updateUserView = function(json) {
-	this.email = json.jsObject.email;
-	this.familyName = json.jsObject.familyName;
-	this.givenName = json.jsObject.givenName;
-	this.insertion = json.jsObject.insertion;
+	this.email = json.email;
+	this.familyName = json.familyName;
+	this.givenName = json.givenName;
+	this.insertion = json.insertion;
 
 	this.updateUserForm.elements["email"].value = this.email;
 	this.updateUserForm.elements["familyName"].value = this.familyName;
@@ -68,8 +68,8 @@ AccountDisplay.prototype.updateUserView = function(json) {
 }
 
 AccountDisplay.prototype.updateSchoolLoginsView = function(json) {
-	this.activeSchoolRoleAndClass = json.jsObject.activeSchoolRoleAndClass;
-	this.schoolsRolesAndClassesList = json.jsObject.schoolsRolesAndClassesList;
+	this.activeSchoolRoleAndClass = json.activeSchoolRoleAndClass;
+	this.schoolsRolesAndClassesList = json.schoolsRolesAndClassesList;
 
 	if (this.schoolsRolesAndClassesList) {
 		
