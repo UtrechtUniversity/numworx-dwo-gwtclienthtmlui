@@ -45,6 +45,7 @@ function MainDisplay() {
 	this.selectedResultsDisplay = new SelectedResultsDisplay();
 	window.jsSelectedResultsDisplay = this.selectedResultsDisplay;
 	
+	
 	this.modulesDisplay = new ModulesDisplay();
 	window.jsModulesDisplay = this.modulesDisplay;
 	

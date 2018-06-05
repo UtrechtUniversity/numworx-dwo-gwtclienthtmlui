@@ -1,10 +1,6 @@
-function SelectedResultsDisplay() {	
-	// GWT vars
-	this.resultTree = null;
-	
-	
-	// Forms 
-	
+function SelectedResultsDisplay() {		
+	this.resultState = null;
+	this.studentsTree = null;
 	
 	// Buttons 
 	
@@ -26,15 +22,14 @@ function SelectedResultsDisplay() {
 }
 
 SelectedResultsDisplay.prototype.show = function() {
-	this.$panel.show();
-	
+	this.$panel.show();	
 }
 
 /*
  * GUI FUNCTIONS
  */
 
-
+SelectedResultsDisplay.prototype.show
 
 
 /*
@@ -43,15 +38,19 @@ SelectedResultsDisplay.prototype.show = function() {
  */
 
 SelectedResultsDisplay.prototype.clear = function () {
-	console.log("clear");
-	
+	console.log("clear");	
 }
 
-SelectedResultsDisplay.prototype.setResultTree = function (resultsTree, studentsTree) {
-	console.log(resultsTree);
-	console.log(studentsTree);
+SelectedResultsDisplay.prototype.init = function(resultState) {
+	console.log("init");
+	console.log(resultState);
+	this.resultState = resultState;
 }
 
+SelectedResultsDisplay.prototype.updateResultTree = function (resultsTree, studentsTree) {
+	this.resultState.resultsTree = resultsTree;
+	this.resultState.studentsTree = studentsTree;
+}
 
 /*
  * RETURN FUNCTIONS
