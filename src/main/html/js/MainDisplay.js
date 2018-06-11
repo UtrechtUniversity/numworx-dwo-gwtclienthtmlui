@@ -39,6 +39,10 @@ function MainDisplay() {
 	this.modulesOfSchoolclassDisplay = new ModulesOfSchoolclassDisplay();
 	window.jsModulesOfSchoolclassDisplay = this.modulesOfSchoolclassDisplay;
 	
+	
+	this.personsDisplay = new PersonsDisplay();
+	window.jsPersonsDisplay = this.personsDisplay;
+	
 
 	this.resultsDisplay = new ResultsDisplay();
 	window.jsResultsDisplay = this.resultsDisplay;
@@ -159,6 +163,10 @@ MainDisplay.prototype.showEditCoursesOfSchoolClassView = function() {
 	this.modulesOfSchoolclassDisplay.show();
 }
 
+MainDisplay.prototype.showPersonsView = function() {
+	this.initMainView(); 
+	this.personsDisplay.show();
+}
 
 MainDisplay.prototype.showResultsView = function() {
 	this.initMainView(); 

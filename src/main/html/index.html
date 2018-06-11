@@ -40,9 +40,9 @@
 	<script src="js/AddTeacherToSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/CopyOrMoveStudentToSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
 	
-	
-	
 	<script src="js/ModulesOfSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
+
+	<script src="js/PersonsDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/ResultsDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/SelectedResultsDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/ModulesDisplay.js" type="text/javascript" charset="utf-8"></script>
@@ -168,7 +168,7 @@
 				    </svg><span class="name">Resultaten</span>
 				    </a>
 				</li>
-				<li><a href="#PEOPLE"><svg viewBox="0 0 64 64" class="icon">
+				<li><a href="#PERSONS"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#personen"></use>
 				    </svg><span class="name">Personen</span></a></li>
 				<li><a href="#SCHOOLCLASSES"><svg viewBox="0 0 64 64" class="icon">
@@ -1365,6 +1365,143 @@
 			</section>
 		</section>		
 		<!-- end selectedResultsDisplay -->
+		
+		
+		
+		
+		
+		<!-- 
+		-
+		- personsDisplay
+		-
+		-->
+		<section id="personsDisplay" class="subpanel">
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon">
+							<use xlink:href="#klassen"></use>
+						</svg>
+						<h1>Personen bewerken en toevoegen</h1>
+						<h2 class="sectionhead"><span>Zoek een persoon om te bewerken</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+						<h2 class="helpheader">Numworx Help</h2>
+						<div class="content">
+							<h2>Help kop</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium gravida dignissim. Aliquam id metus quam. Aenean consequat arcu sit amet commodo porttitor.</p><p>Proin viverra, enim non feugiat ornare, purus urna dignissim ante, consectetur faucibus libero diam id ligula.</p>
+						</div>
+					</section>
+				</div>
+			</header>
+			
+			<section>
+				<div class="row">
+					<form name="personsSearch">
+						<fieldset>
+							<label for="personsSearchUserName" class="col-2 input">
+								Gebruikersnaam
+								<input id="personsSearchUserName" name="userName" type="text" value="" />
+							</label>
+							<label for="personsSearchGivenName" class="col-2 input">
+								Voornaam
+								<input id="personsSearchGivenName" name="givenName" type="text" value="" />
+							</label>
+							<label for="personsSearchInsertion" class="col-2 input">
+								Tussenvoegsel
+								<input id="personsSearchInsertion" name="insertion" type="text" value="" />
+							</label>
+							<label for="personsSearchFamilyName" class="col-2 input">
+								Achternaam
+								<input id="personsSearchFamilyName" name="familyName" type="text" value="" />
+							</label>
+							
+							<div class="col-2 options">
+								<label>Type</label>
+								<div class="option">
+									<input type="radio" name="role" id="personsSearchL" value="L">
+									<label for="personsSearchL">L</label>
+								</div> 
+								<div class="option">
+									<input type="radio" name="role" id="personsSearchD" value="D">
+									<label for="personsSearchD">D</label>
+								</div>
+							</div>
+							
+							<div class="col-2">
+								<input type="submit" class="primary down right" value="Zoek" />
+							</div>
+						</fieldset>
+					</form>
+				</div>
+				
+				<div class="row">
+					<div class="col-12">
+						<h3>Gevonden personen</h2>
+						<form name="personEdit">
+							
+						<table class="hoverable selectable">
+							<thead>
+								<tr>
+									<th class="col-2">Gebruikersnaam</th>
+									<th class="col-2">Voornaam</th>
+									<th class="col-2">Tussenvoegsel</th>
+									<th class="col-6">Achternaam</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr tabindex="1">
+									<td class="col-2">
+										<input type="radio" id="addTeacherAddId" name="id" class="hidden" value="bakker34">
+										<span id="addTeacherAddUserName">Bakker34</span>
+									</td>
+									<td class="col-2"><span id="addTeacherAddGivenName">Michel</span></td>
+									<td class="col-2"><span id="addTeacherAddInsertion">van</span></td>
+									<td class="col-6"><span id="addTeacherAddFamilyName">Bakker</span></td>
+								</tr>
+							</tbody>
+						</table>
+						
+						
+							<input type="submit" class="primary right" value="Bewerk persoon" />
+						</form>
+					</div>
+				</div>
+				
+				
+				<div class="row">					
+					<div class="col-6">
+						<h2 class="sectionhead"><span>Voeg een nieuw persoon toe</span></h2>
+						<form name="personsAdd">
+							<fieldset>
+								<label for="button_1">
+									Een enkele nieuwe leerling of docentopvoeren
+									<input type="submit" class="secondary right" value="Toevoegen" />
+								</label>
+							</fieldset>
+						</form>
+					</div>
+					<div class="col-6">
+						<h2 class="sectionhead"><span>Meerdere personen tegelijk toevoegen</span></h2>
+						<form name="personsImport">
+							<fieldset>
+								<label for="button_1">
+									Importeer leerlingen of docenten vanuit een CSV bestand
+									<input type="submit" class="secondary right" value="Zoek bestand" />
+								</label>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+				
+				
+				
+			</section>
+			
+		</section> 
+		<!-- end personsDisplay -->
+		
+		
 		
 		
 		
