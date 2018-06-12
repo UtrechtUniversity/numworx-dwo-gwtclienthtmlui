@@ -27,6 +27,7 @@ function AddPersonDisplay() {
 
 AddPersonDisplay.prototype.show = function() {
 	this.$panel.show();
+	Helpers.stretchHeight([ this.$addPersonSchoolclassesTableBody ]);
 }
 
 
