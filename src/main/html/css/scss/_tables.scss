@@ -290,6 +290,7 @@ table.results {
 			a.resultIndicator {
 				background-color: $shade2;
 				border-bottom: $borderThicknessResult $primary solid;
+				cursor: pointer;
 				display: block;			
 				width: 100%;
 				

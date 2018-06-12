@@ -72,6 +72,11 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 				$value = $("<a class=\"resultIndicator\">" + matrix[i][j].label +"</a>");
 				$value.attr("data-score", matrix[i][j].label );
 				Helpers.setResultIndicatorColor($value);
+				
+				if (matrix[i][j].callback) {
+					$value.on('click', $.proxy(matrix[i][j].callback, this));
+				}
+				
 				$rowCell.append($value);
 			} else {
 				$rowCell.html("&nbsp;");
@@ -93,7 +98,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 
 SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function() {
 	var matrix = [], i = 1, j = 1;
-	students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children; //should be children
+	students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children; 
 	modules = this.resultState.resultTree.children[ this.resultState.activeSchoolClass ].children;
 	activeModules = this.resultState.activeCourses;
 	
@@ -116,6 +121,7 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 		for (var amId in activeModules) {
 			matrix[i][j] = {};
 			matrix[i][j].label = this.computeModuleScoreForStudent(modules[ activeModules[amId] ], studentId);
+			matrix[i][j].callback = function() { this.activitiesStudent(modules[ activeModules[amId] ], studentId) };
 			j++;
 		}	
 		i++;	
@@ -124,6 +130,48 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 	return matrix;
 	//resultState.studentsTree.schoolclasses[ resultState.activeSchoolClass ].children // students
 }
+
+SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function(module, studentId) {
+	var matrix = [], i = 1, j = 1;
+	var students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children
+	
+	matrix[0] = [];
+	matrix[0][0] = "colsname";
+	
+	// Set row header
+	for (var stuId in students) {
+		if (stuId == studentId) {
+			matrix[1] = [];
+			matrix[1][0] = {};
+			matrix[1][0].label = students[studentId].givenName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].familyName;
+		}
+	}
+	
+	for (var actId in module.children) {
+		matrix[0][j] = {};
+
+		// set col headers
+		matrix[0][j].label = module.children[actId].label;
+
+		// set single row
+		for (var stuScoId in module.children[actId].children) { 
+			if (module.children[actId].children[stuScoId]["user-id"] == studentId) {
+				matrix[1][j] = {};
+				matrix[1][j].label = module.children[actId].children[stuScoId].sumScore;
+			}
+		}
+		
+		if (matrix[1][j] == undefined) {
+			matrix[1][j] = {};
+			matrix[1][j].label = "";
+		}
+		
+		j++;
+	}
+	
+	return matrix
+}
+
 
 SelectedResultsDisplay.prototype.computeModuleScoreForStudent = function(module, studentId) {
 	var total = 0, totalCount = 0, scoreSet = false;
@@ -144,6 +192,22 @@ SelectedResultsDisplay.prototype.computeModuleScoreForStudent = function(module,
 }
 
 
+/*
+ * VIEWS
+ */
+
+SelectedResultsDisplay.prototype.modulesStudents = function() {
+	var matrix = this.buildMatrixModulesStudentsForClass();
+	this.plotMatrix(matrix);
+}
+
+SelectedResultsDisplay.prototype.activitiesStudent = function(module, studentId) {
+	console.log("show activities in module for student")
+	console.log(module);
+	console.log(studentId);
+	var matrix = this.buildMatrixActivitiesStudentInModule(module, studentId);
+	this.plotMatrix(matrix);
+}
 
 /*
  * VIEW FUNCTIONS
@@ -155,11 +219,11 @@ SelectedResultsDisplay.prototype.clear = function () {
 }
 
 SelectedResultsDisplay.prototype.init = function(resultState) {
-	console.log("init");
 	console.log(resultState);
 	this.resultState = resultState;
-	var matrix = this.buildMatrixModulesStudentsForClass();
-	this.plotMatrix(matrix);
+	
+	this.modulesStudents();
+	
 }
 
 SelectedResultsDisplay.prototype.updateResultTree = function (resultsTree, studentsTree) {
