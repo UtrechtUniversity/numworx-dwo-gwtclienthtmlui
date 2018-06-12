@@ -63,7 +63,11 @@ EditPersonDisplay.prototype.removeButtons = function () {
 
 EditPersonDisplay.prototype.clear = function () {
 	console.log("clear");
-	
+	this.editPersonDetailsForm.elements["userName"].value = "";
+	this.editPersonDetailsForm.elements["familyName"].value = "";
+	this.editPersonDetailsForm.elements["givenName"].value = "";
+	this.editPersonDetailsForm.elements["insertion"].value = "";
+	this.editPersonDetailsForm.elements["role"].value = "";	
 }
 
 EditPersonDisplay.prototype.setUser = function (role,json) {
