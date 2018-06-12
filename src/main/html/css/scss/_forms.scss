@@ -96,6 +96,13 @@ input[type="text"], input[type="password"] {
 		margin-top: $elementMarginBottom; // in fact, this is the labels bottom margin
 		width: 100%; 
 	}
+	
+	&:disabled {
+		background-color: $shade1;
+		border-color: $shade12;
+		color: $shade12;
+		cursor: not-allowed;
+	}
 }
 
 label {

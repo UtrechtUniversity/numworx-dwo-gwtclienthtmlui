@@ -79,7 +79,8 @@ PersonsDisplay.prototype.clear = function () {
 	this.personsSearchFormToggle(false);	
 	this.$personsTableBody.html("");
 	this.personsEditFormToggle(false);
-	this.personsSearchForm.elements["role"].value = "";
+	this.personsSearchForm.elements["role"][0].checked = "";
+	this.personsSearchForm.elements["role"][1].checked = "";
 	this.personsSearchForm.elements["userName"].value == "";
 	this.personsSearchForm.elements["givenName"].value == "";
 	this.personsSearchForm.elements["insertion"].value == "";
@@ -88,7 +89,7 @@ PersonsDisplay.prototype.clear = function () {
 
 PersonsDisplay.prototype.init = function (json) {
 	console.log("init");
-	//Helpers.stretchHeight( [ this.$schoolLoginsTableBody ] )
+	Helpers.stretchHeight([ this.$personsTableBody ]);
 }
 
 PersonsDisplay.prototype.showPersons = function(json) {
@@ -154,6 +155,7 @@ PersonsDisplay.prototype.searchPersons = function() {
 }
 
 PersonsDisplay.prototype.editPerson = function(id) {
+	console.log(id);
 	if (this.stateRole == "L") app.getPresenterFactory().getPersonsPresenter().editStudent(id);
 	if (this.stateRole == "D") app.getPresenterFactory().getPersonsPresenter().editTeacher(id);
 }

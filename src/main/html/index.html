@@ -43,6 +43,9 @@
 	<script src="js/ModulesOfSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
 
 	<script src="js/PersonsDisplay.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/EditPersonDisplay.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/AddPersonDisplay.js" type="text/javascript" charset="utf-8"></script>
+	
 	<script src="js/ResultsDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/SelectedResultsDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/ModulesDisplay.js" type="text/javascript" charset="utf-8"></script>
@@ -1475,13 +1478,13 @@
 						<form name="personsAdd">
 							<fieldset>
 								<label for="button_1">
-									Een enkele nieuwe leerling of docentopvoeren
+									Een enkele nieuwe leerling of docent opvoeren
 									<input type="submit" class="secondary right" value="Toevoegen" />
 								</label>
 							</fieldset>
 						</form>
 					</div>
-					<div class="col-6">
+					<!-- <div class="col-6">
 						<h2 class="sectionhead"><span>Meerdere personen tegelijk toevoegen</span></h2>
 						<form name="personsImport">
 							<fieldset>
@@ -1491,7 +1494,7 @@
 								</label>
 							</fieldset>
 						</form>
-					</div>
+					</div> -->
 				</div>
 				
 				
@@ -1502,6 +1505,239 @@
 		<!-- end personsDisplay -->
 		
 		
+		<!-- 
+		-
+		- editPersonDisplay
+		-
+		-->
+		<section id="editPersonDisplay" class="subpanel">
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon">
+							<use xlink:href="#personen"></use>
+						</svg>
+						<h1>Personen bewerken</h1>
+						<h2 class="sectionhead"><span>Bewerk gegevens [NAAM]</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+						<h2 class="helpheader">Numworx Help</h2>
+						<div class="content">
+							<h2>Help kop</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium gravida dignissim. Aliquam id metus quam. Aenean consequat arcu sit amet commodo porttitor.</p><p>Proin viverra, enim non feugiat ornare, purus urna dignissim ante, consectetur faucibus libero diam id ligula.</p>
+						</div>
+					</section>
+				</div>
+			</header>
+			
+			<!-- Change personal details -->
+			<section>				
+				<div class="row">
+					<form name="editPersonDetails">
+						<fieldset>
+							
+							<label for="editPersonUserName" class="col-2 input">
+								Username
+								<input id="editPersonUserName" name="userName" type="text" value="" />
+							</label>
+							
+							<label for="editPersonGivenName" class="col-2 input">
+								Voornaam
+								<input id="editPersonGivenName" name="givenName" type="text" value="" />
+							</label>
+							<label for="editPersonInsertion" class="col-2 input">
+								Tussenvoegsel
+								<input id="editPersonInsertion" name="insertion" type="text" value="" />
+							</label>
+							<label for="editPersonFamilyName" class="col-2 input">
+								Achternaam
+								<input id="editPersonFamilyName" name="familyName" type="text" value="" />
+							</label>
+							<label for="editPersonPassword" class="col-2 input">
+								Huidig wachtwoord
+								<input id="editPersonPassword" name="currentPassword" type="password" value="" />
+							</label>
+							<label for="editPersonEmail" class="col-2 input">
+								Emailadres
+								<input id="editPersonEmail" name="email" type="text" value="" />
+							</label>
+							
+							<div class="clear"></div>
+							
+							<label for="editPersonRole" class="col-2 input">
+								Rol
+								<input id="editPersonRole" name="email" type="text" value="" />
+							</label>
+							
+							<div class="col-10">
+								<input type="button" name="remove" class="danger down right" value="Verwijder persoon" />
+								<input type="submit" class="primary down right" value="Sla op" />
+							</div>							
+							
+						</fieldset>						
+					</form>					
+				</div>
+			</section>
+			
+			<!-- schoolclasses -->
+			<section>
+				<div class="row">
+					<div class="col-12">
+						<h2 class="sectionhead"><span>Bewerk koppeling van deze persoon aan klas(sen)</span></h2>
+					</div>
+				</div>				
+				<div class="row">
+					<form name="editPersonSchoolclasses">
+						<div class="col-6">
+							<table>
+								<thead>
+									<tr>
+										<th>&nbsp;</th>
+										<th>Selecteer</th>
+									</tr>
+								</thead>
+								<tbody>	
+									
+									<!-- The row is detached and used as a template by the JS -->								
+									<tr>
+										<td class="col-3"><span id="editPersonSchoolclassName">Schoolnaam</span></td>
+										<td>
+											<div class="checkbox">
+												<input type="checkbox" name="active[]" id="editPersonSchoolclassActive" value="schoolid"><label class="icon" for="editPersonSchoolclassActive"></label>
+											</div>
+										</td>
+									</tr>
+																		
+								</tbody>
+							</table>
+						</div>
+						<!--<div class="col-6">
+							<input type="submit" class="primary right bottom" value="Voeg persoon toe" />
+						</div>-->
+					</form>
+				</div>
+			</section>	
+			
+		</section> 
+		<!-- end editPersonDisplay -->
+		
+		
+		
+		<!-- 
+		-
+		- addPersonDisplay
+		-
+		-->
+		<section id="addPersonDisplay" class="subpanel">
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon">
+							<use xlink:href="#personen"></use>
+						</svg>
+						<h1>Personen Toevoegen</h1>
+						<h2 class="sectionhead"><span>Nieuwe persoon toevoegen</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+						<h2 class="helpheader">Numworx Help</h2>
+						<div class="content">
+							<h2>Help kop</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium gravida dignissim. Aliquam id metus quam. Aenean consequat arcu sit amet commodo porttitor.</p><p>Proin viverra, enim non feugiat ornare, purus urna dignissim ante, consectetur faucibus libero diam id ligula.</p>
+						</div>
+					</section>
+				</div>
+			</header>
+			
+			<!-- Change personal details -->
+			<section>				
+				<div class="row">
+					<form name="addPersonDetails">
+						<fieldset>
+							
+							<label for="addPersonUserName" class="col-2 input">
+								Username
+								<input id="addPersonUserName" name="userName" type="text" value="" />
+							</label>
+							
+							<label for="addPersonGivenName" class="col-2 input">
+								Voornaam
+								<input id="addPersonGivenName" name="givenName" type="text" value="" />
+							</label>
+							<label for="addPersonInsertion" class="col-2 input">
+								Tussenvoegsel
+								<input id="addPersonInsertion" name="insertion" type="text" value="" />
+							</label>
+							<label for="addPersonFamilyName" class="col-2 input">
+								Achternaam
+								<input id="addPersonFamilyName" name="familyName" type="text" value="" />
+							</label>
+							<label for="addPersonEmail" class="col-2 input">
+								Emailadres
+								<input id="addPersonEmail" name="email" type="text" value="" />
+							</label>
+							<label for="addPersonPassword" class="col-2 input">
+								Wachtwoord
+								<input id="addPersonPassword" name="currentPassword" type="password" value="" />
+							</label>
+							
+							<div class="col-2 options">
+								<label>Leerling / Docent?</label>
+								<div class="option">
+									<input type="radio" name="role" id="addPersonL" value="L">
+									<label for="addPersonL">L</label>
+								</div> 
+								<div class="option">
+									<input type="radio" name="role" id="addPersonD" value="D">
+									<label for="addPersonD">D</label>
+								</div>
+							</div>							
+							
+						</fieldset>						
+					</form>					
+				</div>
+			</section>
+			
+			<!-- schoolclasses -->
+			<section>
+				<div class="row">
+					<div class="col-12">
+						<h3>Kies klas(sen) voor deze persoon</h3>
+					</div>
+				</div>				
+				<div class="row">
+					<form name="addPersonSchoolclasses">
+						<div class="col-6">
+							<table>
+								<thead>
+									<tr>
+										<th>&nbsp;</th>
+										<th>Selecteer</th>
+									</tr>
+								</thead>
+								<tbody>	
+									
+									<!-- The row is detached and used as a template by the JS -->								
+									<tr>
+										<td class="col-3"><span id="addPersonSchoolclassName">Schoolnaam</span></td>
+										<td>
+											<div class="checkbox">
+												<input type="checkbox" name="active[]" id="addPersonSchoolclassActive" value="schoolid"><label class="icon" for="addPersonSchoolclassActive"></label>
+											</div>
+										</td>
+									</tr>
+																		
+								</tbody>
+							</table>
+						</div>
+						<div class="col-6">
+							<input type="submit" class="primary right bottom" value="Voeg persoon toe" />
+						</div>
+					</form>
+				</div>
+			</section>	
+			
+		</section> 
+		<!-- end addPersonDisplay -->
 		
 		
 		

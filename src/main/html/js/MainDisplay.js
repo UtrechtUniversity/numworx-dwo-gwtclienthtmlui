@@ -24,6 +24,7 @@ function MainDisplay() {
 	this.accountDisplay = new AccountDisplay();
 	window.jsAccountDisplay = this.accountDisplay;	
 	
+	// SCHOOLCLASSES
 	this.schoolclassesDisplay = new SchoolclassesDisplay();
 	window.jsSchoolClassesDisplay = this.schoolclassesDisplay;
 	this.editSchoolclassesDisplay = new EditSchoolclassesDisplay();
@@ -39,17 +40,21 @@ function MainDisplay() {
 	this.modulesOfSchoolclassDisplay = new ModulesOfSchoolclassDisplay();
 	window.jsModulesOfSchoolclassDisplay = this.modulesOfSchoolclassDisplay;
 	
-	
+	// PERSONS
 	this.personsDisplay = new PersonsDisplay();
 	window.jsPersonsDisplay = this.personsDisplay;
+	this.editPersonDisplay = new EditPersonDisplay();
+	window.jsEditPersonDisplay = this.editPersonDisplay;
+	this.addPersonDisplay = new AddPersonDisplay();
+	window.jsAddPersonDisplay = this.addPersonDisplay;
 	
-
+	// RESULTS
 	this.resultsDisplay = new ResultsDisplay();
 	window.jsResultsDisplay = this.resultsDisplay;
 	this.selectedResultsDisplay = new SelectedResultsDisplay();
 	window.jsSelectedResultsDisplay = this.selectedResultsDisplay;
 	
-	
+	// MODULES
 	this.modulesDisplay = new ModulesDisplay();
 	window.jsModulesDisplay = this.modulesDisplay;
 	
@@ -166,6 +171,14 @@ MainDisplay.prototype.showEditCoursesOfSchoolClassView = function() {
 MainDisplay.prototype.showPersonsView = function() {
 	this.initMainView(); 
 	this.personsDisplay.show();
+}
+MainDisplay.prototype.showEditPersonView = function() {
+	this.initMainView(); 
+	this.editPersonDisplay.show();
+}
+MainDisplay.prototype.showAddPersonView = function() {
+	this.initMainView(); 
+	this.addPersonDisplay.show();
 }
 
 MainDisplay.prototype.showResultsView = function() {
