@@ -212,8 +212,6 @@ AccountDisplay.prototype.changeRemoveCheckbox = function(event) {
 	if (event.target.checked) {
 		// Set others unchecked
 		this.uncheckSchoolLoginsViewFormCheckboxes();
-		//var $row = $(event.target.parentElement.parentElement.parentElement);
-		//$row.find("input[name='active[]']:not(:disabled)").prop('checked','');
 		
 		// Set current checked
 		event.target.checked = "checked";
@@ -233,13 +231,6 @@ AccountDisplay.prototype.updateSchoolLoginsViewFormStateChanged = function () {
 		if (this.updateSchoolLoginsViewForm.elements[i].name == "active[]" && this.updateSchoolLoginsViewForm.elements[i].checked && !this.updateSchoolLoginsViewForm.elements[i].disabled) return true;
 		if (this.updateSchoolLoginsViewForm.elements[i].name == "remove[]" && this.updateSchoolLoginsViewForm.elements[i].checked) return true;
 	}
-	
-	// if (this.updateSchoolLoginsViewForm.elements['active[]']) {
-// 		for (var i = 0; i < this.updateSchoolLoginsViewForm.elements['active[]'].length; i++) if (!this.updateSchoolLoginsViewForm.elements['active[]'][i].disabled && this.updateSchoolLoginsViewForm.elements['active[]'][i].checked) return true;
-// 	}
-// 	if (this.updateSchoolLoginsViewForm.elements['remove[]']) {
-// 		for (var i = 0; i < this.updateSchoolLoginsViewForm.elements['remove[]'].length; i++) if (!this.updateSchoolLoginsViewForm.elements['remove[]'][i].disabled && this.updateSchoolLoginsViewForm.elements['remove[]'][i].checked) return true;
-// 	}
 	return false;
 }
 AccountDisplay.prototype.uncheckSchoolLoginsViewFormCheckboxes = function() {
