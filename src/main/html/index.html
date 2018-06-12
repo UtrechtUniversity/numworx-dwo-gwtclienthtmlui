@@ -1653,92 +1653,94 @@
 			</header>
 			
 			<!-- Change personal details -->
-			<section>				
-				<div class="row">
-					<form name="addPersonDetails">
-						<fieldset>
+			<form name="addPerson">
+				<section>				
+					<div class="row">
+					
+							<fieldset>
 							
-							<label for="addPersonUserName" class="col-2 input">
-								Username
-								<input id="addPersonUserName" name="userName" type="text" value="" />
-							</label>
+								<label for="addPersonUserName" class="col-2 input">
+									Username
+									<input id="addPersonUserName" name="userName" type="text" value="" />
+								</label>
 							
-							<label for="addPersonGivenName" class="col-2 input">
-								Voornaam
-								<input id="addPersonGivenName" name="givenName" type="text" value="" />
-							</label>
-							<label for="addPersonInsertion" class="col-2 input">
-								Tussenvoegsel
-								<input id="addPersonInsertion" name="insertion" type="text" value="" />
-							</label>
-							<label for="addPersonFamilyName" class="col-2 input">
-								Achternaam
-								<input id="addPersonFamilyName" name="familyName" type="text" value="" />
-							</label>
-							<label for="addPersonEmail" class="col-2 input">
-								Emailadres
-								<input id="addPersonEmail" name="email" type="text" value="" />
-							</label>
-							<label for="addPersonPassword" class="col-2 input">
-								Wachtwoord
-								<input id="addPersonPassword" name="currentPassword" type="password" value="" />
-							</label>
+								<label for="addPersonGivenName" class="col-2 input">
+									Voornaam
+									<input id="addPersonGivenName" name="givenName" type="text" value="" />
+								</label>
+								<label for="addPersonInsertion" class="col-2 input">
+									Tussenvoegsel
+									<input id="addPersonInsertion" name="insertion" type="text" value="" />
+								</label>
+								<label for="addPersonFamilyName" class="col-2 input">
+									Achternaam
+									<input id="addPersonFamilyName" name="familyName" type="text" value="" />
+								</label>
+								<label for="addPersonEmail" class="col-2 input">
+									Emailadres
+									<input id="addPersonEmail" name="email" type="text" value="" />
+								</label>
+								<label for="addPersonPassword" class="col-2 input">
+									Wachtwoord
+									<input id="addPersonPassword" name="password" type="password" value="" />
+								</label>
 							
-							<div class="col-2 options">
-								<label>Leerling / Docent?</label>
-								<div class="option">
-									<input type="radio" name="role" id="addPersonL" value="L">
-									<label for="addPersonL">L</label>
-								</div> 
-								<div class="option">
-									<input type="radio" name="role" id="addPersonD" value="D">
-									<label for="addPersonD">D</label>
-								</div>
-							</div>							
+								<!-- <div class="col-2 options">
+									<label>Leerling / Docent?</label>
+									<div class="option">
+										<input type="radio" name="role" id="addPersonL" value="L">
+										<label for="addPersonL">L</label>
+									</div>
+									<div class="option">
+										<input type="radio" name="role" id="addPersonD" value="D">
+										<label for="addPersonD">D</label>
+									</div>
+								</div>		 -->					
 							
-						</fieldset>						
-					</form>					
-				</div>
-			</section>
-			
-			<!-- schoolclasses -->
-			<section>
-				<div class="row">
-					<div class="col-12">
-						<h3>Kies klas(sen) voor deze persoon</h3>
+							</fieldset>						
+						<!-- </form>					 -->
 					</div>
-				</div>				
-				<div class="row">
-					<form name="addPersonSchoolclasses">
-						<div class="col-6">
-							<table>
-								<thead>
-									<tr>
-										<th>&nbsp;</th>
-										<th>Selecteer</th>
-									</tr>
-								</thead>
-								<tbody>	
+				</section>
+			
+				<!-- schoolclasses -->
+				<section>
+					<div class="row">
+						<div class="col-12">
+							<h3>Kies klas(sen) voor deze persoon</h3>
+						</div>
+					</div>				
+					<div class="row">
+						<!-- <form name="addPersonSchoolclasses"> -->
+							<div class="col-6">
+								<table>
+									<thead>
+										<tr>
+											<th>&nbsp;</th>
+											<th>Selecteer</th>
+										</tr>
+									</thead>
+									<tbody>	
 									
-									<!-- The row is detached and used as a template by the JS -->								
-									<tr>
-										<td class="col-3"><span id="addPersonSchoolclassName">Schoolnaam</span></td>
-										<td>
-											<div class="checkbox">
-												<input type="radio" name="active[]" id="addPersonSchoolclassActive" value="schoolid"><label class="icon" for="addPersonSchoolclassActive"></label>
-											</div>
-										</td>
-									</tr>
+										<!-- The row is detached and used as a template by the JS -->								
+										<tr>
+											<td class="col-3"><span id="addPersonSchoolclassName">Schoolnaam</span></td>
+											<td>
+												<div class="checkbox">
+													<input type="radio" name="schoolclass" id="addPersonSchoolclassActive" value="schoolid"><label class="icon" for="addPersonSchoolclassActive"></label>
+												</div>
+											</td>
+										</tr>
 																		
-								</tbody>
-							</table>
-						</div>
-						<div class="col-6">
-							<input type="submit" class="primary right bottom" value="Voeg persoon toe" />
-						</div>
-					</form>
-				</div>
-			</section>	
+									</tbody>
+								</table>
+							</div>
+							<div class="col-6">
+								<input type="submit" class="primary right bottom" value="Voeg persoon toe" />
+							</div>
+					
+					</div>
+				</section>
+			</form>	
 			
 		</section> 
 		<!-- end addPersonDisplay -->

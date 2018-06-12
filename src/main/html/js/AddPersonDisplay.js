@@ -4,19 +4,21 @@ function AddPersonDisplay() {
 	
 	
 	// Forms 
-	this.addPersonDetailsForm = document.forms["addPersonDetails"];	
-	this.addPersonSchoolclassesForm = document.forms["addPersonSchoolclasses"];	
+	this.addPersonForm = document.forms["addPerson"];	
+	// this.addPersonSchoolclassesForm = document.forms["addPersonSchoolclasses"];
 	
 	// jQuery objects
 	this.$panel = jQuery("#addPersonDisplay");
 	
-	this.$addPersonDetailsForm = $(this.addPersonDetailsForm);
-	this.$addPersonSchoolclassesForm = $(this.addPersonSchoolclassesForm);
+	this.$addPersonForm = $(this.addPersonForm);
+	// this.$addPersonSchoolclassesForm = $(this.addPersonSchoolclassesForm);
 	
-	this.$addPersonSchoolclassesRow = this.$addPersonSchoolclassesForm.find("tbody tr").detach();
-	this.$addPersonSchoolclassesTableBody = this.$addPersonSchoolclassesForm.find("tbody");
+	this.$addPersonSchoolclassesRow = this.$addPersonForm.find("tbody tr").detach();
+	this.$addPersonSchoolclassesTableBody = this.$addPersonForm.find("tbody");
 		
 	// Bind handlers
+	this.$addPersonForm.on('submit', $.proxy(this.submitAddPersonForm,this));	
+	this.$addPersonForm.find("input").on('change', $.proxy(this.changeInputField,this));	
 	
 	// Init
 	this.$panel.hide();
@@ -43,10 +45,20 @@ AddPersonDisplay.prototype.show = function() {
 
 AddPersonDisplay.prototype.clear = function () {
 	console.log("clear");
+	if (this.addPersonForm.elements['schoolclass']) {
+		for (var i = 0; i < this.addPersonForm.elements['schoolclass'].length; i++) this.addPersonForm.elements['schoolclass'][i].checked = false;
+	}
+	this.addPersonForm.elements['userName'].value = "";
+	this.addPersonForm.elements['givenName'].value = "";
+	this.addPersonForm.elements['insertion'].value = "";
+	this.addPersonForm.elements['familyName'].value = "";
+	this.addPersonForm.elements['email'].value = "";
+	this.addPersonForm.elements['password'].value = "";
+	this.updateSchoolLoginsViewFormSubmitToggle();
 	
 }
 AddPersonDisplay.prototype.init = function () {
-	console.log("clear");
+	console.log("init");
 	
 }
 
@@ -67,6 +79,7 @@ AddPersonDisplay.prototype.showSchoolClasses = function(json) {
 		$row.find("#addPersonSchoolclassName").html( el.schoolClassName ).removeAttr("id");
 	
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
+			
 			this.value = id;
 			
 			// Change ID and label for-attributes
@@ -74,12 +87,13 @@ AddPersonDisplay.prototype.showSchoolClasses = function(json) {
 			oldFor = this.nextElementSibling.getAttribute("for");
 			this.nextElementSibling.setAttribute("for", oldFor + i);
 		});
+		
+		$row.find("input[type='checkbox'],input[type='radio']").on('change', $.proxy(this.changeInputField,this));	
 
-		$row.find("input[name='active[]']").on('change', $.proxy(this.changeActiveCheckbox,this));
 		this.$addPersonSchoolclassesTableBody.append($row);
 		i++;
 	}
-	this.addPersonSchoolclassesFormToggle(false);
+	this.updateSchoolLoginsViewFormSubmitToggle();
 	
 }
 
@@ -101,6 +115,16 @@ AddPersonDisplay.prototype.setLoadingTableMessage = function (json) {
  */
 
 AddPersonDisplay.prototype.addPerson = function() {
+	//String schoolClassId, String username, String givenName, String insertion, String familyName, String eMail, String password
+	app.getPresenterFactory().getAddStudentPresenter().submitSingleSchoolStudent( 
+		this.addPersonForm.elements['schoolclass'].value,
+		this.addPersonForm.elements['userName'].value,
+		this.addPersonForm.elements['givenName'].value,
+		this.addPersonForm.elements['insertion'].value,
+		this.addPersonForm.elements['familyName'].value,
+		this.addPersonForm.elements['email'].value,
+		this.addPersonForm.elements['password'].value
+	);	
 }
 
 
@@ -109,26 +133,31 @@ AddPersonDisplay.prototype.addPerson = function() {
  * EVENT HANDLERS
  */
 
-AddPersonDisplay.prototype.submitAddPerson = function(event) {
+AddPersonDisplay.prototype.submitAddPersonForm = function(event) {
 	event.preventDefault();		
 	this.addPerson();
 }
 
-AddPersonDisplay.prototype.changeActiveCheckbox = function(event) {
-	// do something?
+AddPersonDisplay.prototype.changeInputField = function(event) {
+	console.log("change");
+	this.updateSchoolLoginsViewFormSubmitToggle();
 }
 
 // Helpers
 AddPersonDisplay.prototype.updateSchoolLoginsViewFormSubmitToggle = function() {
-	if (this.addPersonSchoolclassesStateChanged()) this.$addPersonSchoolclassesForm.find(':submit').prop('disabled','');
-	else this.$addPersonSchoolclassesForm.find(':submit').prop('disabled','disabled');
+	if (this.requiredFields()) this.$addPersonForm.find(':submit').prop('disabled','');
+	else this.$addPersonForm.find(':submit').prop('disabled','disabled');
 }
-AddPersonDisplay.prototype.updateSchoolLoginsViewFormStateChanged = function () {
-	for (i = 0; i < this.addPersonSchoolclassesForm.elements.length; i++) {
-		if (this.addPersonSchoolclassesForm.elements[i].name == "active[]" && this.addPersonSchoolclassesForm.elements[i].checked && !this.addPersonSchoolclassesForm.elements[i].disabled) return true;
-	}
-	return false;
+
+AddPersonDisplay.prototype.requiredFields = function() {
+	return 	this.addPersonForm.elements['schoolclass'].value != "" &&
+		   	this.addPersonForm.elements['userName'].value != "" &&
+		   	this.addPersonForm.elements['givenName'].value != "" &&
+			this.addPersonForm.elements['familyName'].value != "" &&
+			this.addPersonForm.elements['email'].value != "" &&
+			this.addPersonForm.elements['password'].value != "";
 }
+
 /*
 AccountDisplay.prototype.uncheckSchoolLoginsViewFormCheckboxes = function() {
 	for (i = 0; i < this.updateSchoolLoginsViewForm.elements.length; i++) {
