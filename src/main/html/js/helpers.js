@@ -77,3 +77,17 @@ Helpers.stretchIframeHeight = function(iframe) {
 	iframe.outerHeight(subpanelHeight+"px");
 }
 
+Helpers.setResultIndicatorColor = function ($el) {
+	var r, g, b, score;
+	score = parseInt($el.data("score"));
+	
+	if (score > 0) {
+       
+       b = 0;
+       g = parseInt( (255 * (score / 50)) );
+       r = parseInt( (255 * (1 - (score - 50) / 50)) );
+
+	   $el.css('border-color','rgb('+r+','+g+','+b+')' );
+   }
+}
+

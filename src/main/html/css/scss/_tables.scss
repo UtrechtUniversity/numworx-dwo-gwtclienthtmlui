@@ -126,6 +126,16 @@ table.results {
 	max-height: 500px; height: auto;
 	overflow-x: scroll;
 	overflow-y: visible;
+	
+	.size-2 & {	width: ($colWidth + $gutter + (0.5 * ($colWidth + $gutter))) * 1px; }
+	.size-3 & {	width: ($colWidth + $gutter + (1 * ($colWidth + $gutter))) * 1px; }
+	.size-4 & {	width: ($colWidth + $gutter + (1.5 * ($colWidth + $gutter))) * 1px; }
+	.size-5 & {	width: ($colWidth + $gutter + (2 * ($colWidth + $gutter))) * 1px; }
+	.size-6 & {	width: ($colWidth + $gutter + (2.5 * ($colWidth + $gutter))) * 1px; }
+	.size-7 & {	width: ($colWidth + $gutter + (3 * ($colWidth + $gutter))) * 1px; }
+	.size-8 & {	width: ($colWidth + $gutter + (3.5 * ($colWidth + $gutter))) * 1px; }
+	.size-9 & {	width: ($colWidth + $gutter + (4 * ($colWidth + $gutter))) * 1px; }
+	//.size-2 & {	width: ($colWidth + $gutter + (1 * ($colWidth + $gutter))) * 1px; }
 		
 	&:after {
 		content: "\00A0";
@@ -210,19 +220,22 @@ table.results {
 						width: (($colWidth - $gutter) / 2 - 10) * 1px;
 						z-index: 9;
 						
-						&:after {
-							bottom: 0;
-							content: "";
-							left: 0;
-							position: absolute;
-							right: 0;
-							top: 0;  
+						.overflow & {
+							&:after {
+								bottom: 0;
+								content: "";
+								left: 0;
+								position: absolute;
+								right: 0;
+								top: 0;  
+	
+								/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#edeff1+0,edeff1+100&0+0,0+80,1+100 */
+								background: -moz-linear-gradient(left, $shade2RGBA0 0%, $shade2RGBA0 70%, $shade2RGBA1 100%); /* FF3.6-15 */
+								background: -webkit-linear-gradient(left, $shade2RGBA0 0%,$shade2RGBA0 70%,$shade2RGBA1 100%); /* Chrome10-25,Safari5.1-6 */
+								background: linear-gradient(to right, $shade2RGBA0 0%,$shade2RGBA0 70%,$shade2RGBA1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+								filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00edeff1', endColorstr='#{$shade2}',GradientType=1 ); /* IE6-9 */
+							}
 							
-							/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#edeff1+0,edeff1+100&0+0,0+80,1+100 */
-							background: -moz-linear-gradient(left, $shade2RGBA0 0%, $shade2RGBA0 70%, $shade2RGBA1 100%); /* FF3.6-15 */
-							background: -webkit-linear-gradient(left, $shade2RGBA0 0%,$shade2RGBA0 70%,$shade2RGBA1 100%); /* Chrome10-25,Safari5.1-6 */
-							background: linear-gradient(to right, $shade2RGBA0 0%,$shade2RGBA0 70%,$shade2RGBA1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-							filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00edeff1', endColorstr='#{$shade2}',GradientType=1 ); /* IE6-9 */
 						}
 						
 						&.active {
@@ -299,24 +312,28 @@ table.results {
 
 .tablewrap {
 	width: 100%;
-	overflow-x: scroll;
-	overflow-y: visible;
 	padding-top: 3em;
 	
-	//position: relative;
-	//border-right: $borderThickness $primary solid;
+	&.overflow {
+		overflow-x: scroll;
+		overflow-y: visible;
+		
 	
-	&:after {
-		content: "";
-		position: absolute;
-		width: 1 / 12 * $siteWidth * 1px;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#edeff1+0,edeff1+100&0+0,1+100 */
-		background: -moz-linear-gradient(left, $shade1RGBA0 0%, $shade1RGBA1 100%); /* FF3.6-15 */
-		background: -webkit-linear-gradient(left, $shade1RGBA0 0%,$shade1RGBA1 100%); /* Chrome10-25,Safari5.1-6 */
-		background: linear-gradient(to right, $shade1RGBA0 0%,$shade1RGBA1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00edeff1', endColorstr='#{$shade1}',GradientType=1 ); /* IE6-9 */
+		//position: relative;
+		//border-right: $borderThickness $primary solid;
+	
+		&:after {
+			content: "";
+			position: absolute;
+			width: 1 / 12 * $siteWidth * 1px;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#edeff1+0,edeff1+100&0+0,1+100 */
+			background: -moz-linear-gradient(left, $shade1RGBA0 0%, $shade1RGBA1 100%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(left, $shade1RGBA0 0%,$shade1RGBA1 100%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to right, $shade1RGBA0 0%,$shade1RGBA1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00edeff1', endColorstr='#{$shade1}',GradientType=1 ); /* IE6-9 */
+		}
 	}
 }

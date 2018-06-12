@@ -68,13 +68,23 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 		for (var j = 1; j < matrix[i].length; j++) {
 			$rowCell = this.$selectedResultsRowCell.clone();
 			$rowCell.html("");
-			$value = $("<a class=\"resultIndicator\">" + matrix[i][j].label +"</a>");
-			$value.attr("data-score", matrix[i][j].label );
-			$rowCell.append($value);
+			if (matrix[i][j].label != "") {
+				$value = $("<a class=\"resultIndicator\">" + matrix[i][j].label +"</a>");
+				$value.attr("data-score", matrix[i][j].label );
+				Helpers.setResultIndicatorColor($value);
+				$rowCell.append($value);
+			} else {
+				$rowCell.html("&nbsp;");
+			}
 			$row.append($rowCell);
 		} 		
 		$tbody.append($row);
 	}
+	
+	if (matrix[0].length > 10) this.$selectResultsTableWrap.addClass("overflow");
+	else this.$selectResultsTableWrap.removeClass("overflow");
+	
+	this.$selectResultsTableWrap.addClass("size-"+matrix[0].length);
 	
 	this.$selectResultsTableWrap.html("");
 	this.$selectResultsTableWrap.append($table);
@@ -116,18 +126,20 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 }
 
 SelectedResultsDisplay.prototype.computeModuleScoreForStudent = function(module, studentId) {
-	var total = 0, totalCount = 0;
+	var total = 0, totalCount = 0, scoreSet = false;
 
 	for (var id in module.children) { // Loop over modules
 		if (module.children[id].children) { 
 			for (var scoId in module.children[id].children) { // Loop over activities
 				if (module.children[id].children[scoId]["user-id"] == studentId) { // Select student
+					scoreSet = true;
 					total += parseInt(module.children[id].children[scoId].sumScore); // Sum of scores
 				}	
 			}
 		}
 		totalCount++;
 	}
+	if (!scoreSet) return "";
 	return Math.round(total / totalCount);
 }
 
