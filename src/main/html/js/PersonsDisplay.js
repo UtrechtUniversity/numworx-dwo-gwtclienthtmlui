@@ -34,6 +34,7 @@ function PersonsDisplay() {
 
 PersonsDisplay.prototype.show = function() {
 	this.$panel.show();
+	Helpers.stretchHeight([ this.$personsTableBody ]);
 }
 
 
@@ -92,7 +93,7 @@ PersonsDisplay.prototype.clear = function () {
 
 PersonsDisplay.prototype.init = function (json) {
 	console.log("init");
-	Helpers.stretchHeight([ this.$personsTableBody ]);
+	
 }
 
 PersonsDisplay.prototype.showPersons = function(json) {
