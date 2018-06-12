@@ -26,6 +26,7 @@ function SchoolclassesDisplay() {
 
 SchoolclassesDisplay.prototype.show = function() {
 	this.$panel.show();
+	Helpers.stretchHeight( [ this.$chooseSchoolclassTableBody ]);
 }
 
 
@@ -45,7 +46,7 @@ SchoolclassesDisplay.prototype.init = function () {
 	this.addSchoolclassForm.elements["useClasskey"][0].checked = false;
 	this.addSchoolclassForm.elements["useClasskey"][1].checked = true;
 	
-	Helpers.stretchHeight( [ this.$chooseSchoolclassTableBody ]);
+	
 }
 
 SchoolclassesDisplay.prototype.updateView = function(json) {
