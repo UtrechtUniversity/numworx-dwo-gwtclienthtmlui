@@ -63,6 +63,8 @@ ResultsDisplay.prototype.setChooseClassTable = function() {
 		this.$chooseClassTableBody.append($row);
 		i++;
 	}	
+	
+	this.$chooseModulesTableBody.html("");
 }
 
 ResultsDisplay.prototype.setChooseModulesTable = function() {
@@ -184,10 +186,16 @@ ResultsDisplay.prototype.uncheckCheckboxOpenClosed = function() {
 }
 
 ResultsDisplay.prototype.changeCheckboxSelect = function(event) {
+	console.log(this.chooseClassModuleForm.elements["select[]"].length);
 	this.resultState.activeCourses = [];
 	
-	for (i=0 ; i < this.chooseClassModuleForm.elements["select[]"].length ; i++) {
-		if (this.chooseClassModuleForm.elements["select[]"][i].checked)  this.resultState.activeCourses.push(this.chooseClassModuleForm.elements["select[]"][i].value);
+	if (!this.chooseClassModuleForm.elements["select[]"].length) {
+		if (this.chooseClassModuleForm.elements["select[]"].checked)  this.resultState.activeCourses.push(this.chooseClassModuleForm.elements["select[]"].value);
+	} else {
+		for (var i=0 ; i < this.chooseClassModuleForm.elements["select[]"].length; i++) {
+			console.log(this.chooseClassModuleForm.elements["select[]"][i]);
+			if (this.chooseClassModuleForm.elements["select[]"][i].checked)  this.resultState.activeCourses.push(this.chooseClassModuleForm.elements["select[]"][i].value);
+		}
 	}
 		
 	this.chooseClassModuleFormToggle();
@@ -200,7 +208,7 @@ ResultsDisplay.prototype.submitChooseClassModuleForm = function() {
 
 //helpers 
 ResultsDisplay.prototype.chooseClassModuleFormToggle = function() {
-	//console.log("TOGGLE");
+	console.log("TOGGLE");
 	if ( this.resultState.activeCourses.length > 0 ) this.$chooseClassModuleForm.find(':submit').prop('disabled','');
 	else this.$chooseClassModuleForm.find(':submit').prop('disabled','disabled');
 }
