@@ -14,12 +14,12 @@ function EditPersonDisplay() {
 	this.$panel = jQuery("#editPersonDisplay");
 	
 	this.$editPersonDetailsForm = $(this.editPersonDetailsForm);
-	this.$editPersonSchoolclassForm = $(this.editPersonSchoolclassForm);
+	this.$editPersonSchoolclassesForm = $(this.editPersonSchoolclassesForm);
 	
 	this.$removeButton = $(this.removeButton);
 	
-	this.$editPersonSchoolclassesRow = this.$addPersonSchoolclassesForm.find("tbody tr").detach();
-	this.$editPersonSchoolclassesTableBody = this.$addPersonSchoolclassesForm.find("tbody");
+	this.$editPersonSchoolclassesRow = this.$editPersonSchoolclassesForm.find("tbody tr").detach();
+	this.$editPersonSchoolclassesTableBody = this.$editPersonSchoolclassesForm.find("tbody");
 	
 	// Bind handlers
 	this.$editPersonDetailsForm.on('submit', $.proxy(this.submitEditPersonDetails,this));	
@@ -32,6 +32,7 @@ function EditPersonDisplay() {
 
 EditPersonDisplay.prototype.show = function() {
 	this.$panel.show();
+	Helpers.stretchHeight([ this.$editPersonSchoolclassesTableBody ]);
 }
 
 
@@ -45,7 +46,10 @@ EditPersonDisplay.prototype.disableAllInputFields = function () {
 		this.editPersonDetailsForm.elements[id].disabled = true;	
 	}
 }
-
+EditPersonDisplay.prototype.removeButtons = function () {	
+	$(this.editPersonDetailsForm.elements["submit"]).remove();
+	$(this.editPersonDetailsForm.elements["remove"]).remove();
+}
 
 
 /*
@@ -73,6 +77,7 @@ EditPersonDisplay.prototype.setUser = function (json) {
 	
 	if (true) { // docent
 		this.disableAllInputFields();
+		this.removeButtons();
 	}
 }
 

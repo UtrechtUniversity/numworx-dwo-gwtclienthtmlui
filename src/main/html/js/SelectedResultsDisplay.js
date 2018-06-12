@@ -114,18 +114,15 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 	return matrix;
 	//resultState.studentsTree.schoolclasses[ resultState.activeSchoolClass ].children // students
 }
+
 SelectedResultsDisplay.prototype.computeModuleScoreForStudent = function(module, studentId) {
 	var total = 0, totalCount = 0;
-	console.log("score berekenen voor: "+studentId)
-	console.log(module);
-	for (var id in module.children) {
-		if (module.children[id].children) {
-			console.log("loop over activiteiten")
-			for (var scoId in module.children[id].children) {
-				console.log(module.children[id].children[scoId]);
-				if (module.children[id].children[scoId]["user-id"] == studentId) {
-					console.log(module.children[id].children[scoId]);
-					total += parseInt(module.children[id].children[scoId].sumScore);
+
+	for (var id in module.children) { // Loop over modules
+		if (module.children[id].children) { 
+			for (var scoId in module.children[id].children) { // Loop over activities
+				if (module.children[id].children[scoId]["user-id"] == studentId) { // Select student
+					total += parseInt(module.children[id].children[scoId].sumScore); // Sum of scores
 				}	
 			}
 		}

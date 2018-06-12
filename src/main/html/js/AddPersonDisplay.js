@@ -5,7 +5,7 @@ function AddPersonDisplay() {
 	
 	// Forms 
 	this.addPersonDetailsForm = document.forms["addPersonDetails"];	
-	this.addPersonSchoolclassesForm = document.forms["addPersonDetails"];	
+	this.addPersonSchoolclassesForm = document.forms["addPersonSchoolclasses"];	
 	
 	// jQuery objects
 	this.$panel = jQuery("#addPersonDisplay");
@@ -52,6 +52,7 @@ AddPersonDisplay.prototype.init = function () {
 
 AddPersonDisplay.prototype.showSchoolClasses = function(json) {
 	console.log("showSchoolClasses");
+	console.log(json);
 	
 	var schoolclasses = json;
 	
@@ -59,14 +60,19 @@ AddPersonDisplay.prototype.showSchoolClasses = function(json) {
 	
 	var i = 1;
 	for (var id in schoolclasses) { 
-		el = schoolclasses[id];
+		el = schoolclasses[id].schoolClass;
 		//console.log(el); console.log(id);
 		$row = this.$addPersonSchoolclassesRow.clone();
 		$row.prop('tabindex', i);
-		$row.find("#addPersonSchoolclassName").html( el ).removeAttr("id");
-
+		$row.find("#addPersonSchoolclassName").html( el.schoolClassName ).removeAttr("id");
+	
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;
+			
+			// Change ID and label for-attributes
+			this.id = this.id + i;				
+			oldFor = this.nextElementSibling.getAttribute("for");
+			this.nextElementSibling.setAttribute("for", oldFor + i);
 		});
 
 		$row.find("input[name='active[]']").on('change', $.proxy(this.changeActiveCheckbox,this));
@@ -109,16 +115,7 @@ AddPersonDisplay.prototype.submitAddPerson = function(event) {
 }
 
 AddPersonDisplay.prototype.changeActiveCheckbox = function(event) {
-	if (event.target.checked) {
-		// Set others unchecked
-		this.uncheckSchoolLoginsViewFormCheckboxes();
-		
-		// Set current checked
-		event.target.checked = "checked";
-	} else {
-		event.target.checked = "";
-	}
-	this.updateSchoolLoginsViewFormSubmitToggle();
+	// do something?
 }
 
 // Helpers
