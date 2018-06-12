@@ -248,6 +248,7 @@ table.results {
 							a {
 								bottom: 3px;
 								color: $shade1;
+								display: none;
 								position: absolute;
 								right: 5px;
 								
@@ -262,7 +263,11 @@ table.results {
 							&:after {
 								display: none;
 							}
-						}						
+						}	
+						
+						a {
+							display: none;
+						}					
 						
 						//word-break: break-all;
 						//word-wrap: break-word;
