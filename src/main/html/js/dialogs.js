@@ -48,7 +48,7 @@ MsgDialogDisplay.prototype.hideDialog = function(event) {
 	window.app.mainDisplay.closeDialogView(this);
 }
 MsgDialogDisplay.prototype.clickConfirm = function(event) {
-	app.getPresenterFactory().msgDialogDisplayPresenter.confirm();
+	app.getPresenterFactory().getMessageDialogWithOKPresenter().confirm();
 	//this.hideDialog();
 }
 MsgDialogDisplay.prototype.setFocus = function() {
@@ -92,7 +92,7 @@ MsgDialogWithConfirmDisplay.prototype.hideDialog = function() {
 	window.app.mainDisplay.closeDialogView(this);
 }
 MsgDialogWithConfirmDisplay.prototype.clickConfirm = function(event) {
-	app.getPresenterFactory().msgDialogWithConfirmPresenter.confirm();
+	app.getPresenterFactory().getMessageDialogWithOKPresenter().confirm();
 	//this.hideDialog();
 }
 MsgDialogWithConfirmDisplay.prototype.setFocus = function() {
@@ -137,11 +137,11 @@ AlertDialogWithConfirmCancelDisplay.prototype.hideDialog = function(event) {
 	window.app.mainDisplay.closeDialogView(this);
 }
 AlertDialogWithConfirmCancelDisplay.prototype.clickConfirm = function(event) {
-	app.getPresenterFactory().alertDialogWithConfirmCancelPresenter.confirm();
+	app.getPresenterFactory().getAlertDialogWithConfirmCancelPresenter().confirm();
 	//this.hideDialog();	
 }
 AlertDialogWithConfirmCancelDisplay.prototype.clickCancel = function(event) {
-	app.getPresenterFactory().alertDialogWithConfirmCancelPresenter.cancel();
+	app.getPresenterFactory().getAlertDialogWithConfirmCancelPresenter().cancel();
 	//this.hideDialog();	
 }
 AlertDialogWithConfirmCancelDisplay.prototype.setFocus = function() {
@@ -184,7 +184,7 @@ AlertDialogWithConfirmDisplay.prototype.hideDialog = function(event) {
 	window.app.mainDisplay.closeDialogView(this);
 }
 AlertDialogWithConfirmDisplay.prototype.clickConfirm = function(event) {
-	app.getPresenterFactory().alertDialogWithOKPresenter.hide();
+	app.getPresenterFactory().getAlertDialogWithOKPresenter().hide();
 	//this.hideDialog();
 }
 AlertDialogWithConfirmDisplay.prototype.setFocus = function() {
@@ -239,7 +239,7 @@ ProgressDialogWithAbortDisplay.prototype.updateDialog = function(progress, actMs
 	this.$progressBarBar.width(progress+'%');
 }
 ProgressDialogWithAbortDisplay.prototype.clickAbort = function(event) {
-	app.getPresenterFactory().ProgressDialogWithAbortPresenter.abort();
+	app.getPresenterFactory().getProgressDialogWithAbortPresenter().abort();
 	//this.hideDialog();
 
 }
