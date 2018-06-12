@@ -105,6 +105,16 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
  */
 
 ResultsDisplay.prototype.clear = function () {
+	console.log("clear");
+	if (this.chooseClassModuleForm.elements['open']) {
+		for (var i = 0; i < this.chooseClassModuleForm.elements['open'].length; i++) this.chooseClassModuleForm.elements['open'][i].checked = false;
+	}
+	if (this.chooseClassModuleForm.elements['closed']) {
+		for (var i = 0; i < this.chooseClassModuleForm.elements['closed'].length; i++) this.chooseClassModuleForm.elements['closed'][i].checked = false;
+	}
+	if (this.chooseClassModuleForm.elements['select[]']) {
+		for (var i = 0; i < this.chooseClassModuleForm.elements['select[]'].length; i++) this.chooseClassModuleForm.elements['select[]'][i].checked = false;
+	}
 	this.chooseClassModuleFormToggle();
 }
 

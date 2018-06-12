@@ -139,21 +139,21 @@ EditPersonDisplay.prototype.setLoadingTableMessage = function (json) {
  * Use java callbacks
  */
 
-AccountDisplay.prototype.submitPersonToSchoolClass = function(id) {
+EditPersonDisplay.prototype.submitPersonToSchoolClass = function(id) {
 	if (this.role == "TEACHER") app.getPresenterFactory().getEditTeacherPresenter().submitTeacherToSchoolClass(id);
 	if (this.role == "STUDENT") app.getPresenterFactory().getEditStudentPresenter().submitStudentToSchoolClass(id);
 }
-AccountDisplay.prototype.removePersonFromSchoolClass = function(id) {
+EditPersonDisplay.prototype.removePersonFromSchoolClass = function(id) {
 	if (this.role == "TEACHER") app.getPresenterFactory().getEditTeacherPresenter().removeTeacherFromSchoolClass(id);
 	if (this.role == "STUDENT") app.getPresenterFactory().getEditStudentPresenter().removeStudentFromSchoolClass(id);
 }
 
-AccountDisplay.prototype.updatePerson = function() {
+EditPersonDisplay.prototype.updatePerson = function() {
 	if (this.role == "TEACHER") return;
 	
 	// save student
 }
-AccountDisplay.prototype.removePerson = function() {
+EditPersonDisplay.prototype.removePerson = function() {
 	if (this.role == "TEACHER") return;
 	
 	// remove student
@@ -164,11 +164,11 @@ AccountDisplay.prototype.removePerson = function() {
  * EVENT HANDLERS - Details
  */
 
-AccountDisplay.prototype.submitEditPersonDetails = function(event) {
+EditPersonDisplay.prototype.submitEditPersonDetails = function(event) {
 	event.preventDefault();		
 	if (this.role == "L") this.updatePerson();
 }
-AccountDisplay.prototype.clickRemoveButton = function(event) {
+EditPersonDisplay.prototype.clickRemoveButton = function(event) {
 	event.preventDefault();		
 	if (this.role == "L") this.removePerson();
 }
@@ -177,7 +177,7 @@ AccountDisplay.prototype.clickRemoveButton = function(event) {
  * EVENT HANDLERS - Schoolclasses
  */
 
-AccountDisplay.prototype.changeActiveCheckbox = function(event) {
+EditPersonDisplay.prototype.changeActiveCheckbox = function(event) {
 	if (event.target.checked) {
 		this.submitPersonToSchoolClass(event.target.value);
 	} else {
