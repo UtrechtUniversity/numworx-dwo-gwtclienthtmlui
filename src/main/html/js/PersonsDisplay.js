@@ -79,8 +79,11 @@ PersonsDisplay.prototype.clear = function () {
 	this.personsSearchFormToggle(false);	
 	this.$personsTableBody.html("");
 	this.personsEditFormToggle(false);
-	this.personsSearchForm.elements["role"][0].checked = "";
-	this.personsSearchForm.elements["role"][1].checked = "";
+	
+	this.personsSearchForm.elements["role"][0].checked = true;
+	this.personsSearchForm.elements["role"][1].checked = false;
+	this.changePersonsSearchRole();
+	
 	this.personsSearchForm.elements["userName"].value == "";
 	this.personsSearchForm.elements["givenName"].value == "";
 	this.personsSearchForm.elements["insertion"].value == "";

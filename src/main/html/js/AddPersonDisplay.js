@@ -55,7 +55,6 @@ AddPersonDisplay.prototype.clear = function () {
 	this.addPersonForm.elements['email'].value = "";
 	this.addPersonForm.elements['password'].value = "";
 	this.updateSchoolLoginsViewFormSubmitToggle();
-	
 }
 AddPersonDisplay.prototype.init = function () {
 	console.log("init");
@@ -150,6 +149,7 @@ AddPersonDisplay.prototype.updateSchoolLoginsViewFormSubmitToggle = function() {
 }
 
 AddPersonDisplay.prototype.requiredFields = function() {
+	if (!this.addPersonForm.elements['schoolclass']) return false;
 	return 	this.addPersonForm.elements['schoolclass'].value != "" &&
 		   	this.addPersonForm.elements['userName'].value != "" &&
 		   	this.addPersonForm.elements['givenName'].value != "" &&

@@ -41,10 +41,14 @@ EditPersonDisplay.prototype.show = function() {
  * Map to java implementation
  */
 
-EditPersonDisplay.prototype.disableAllInputFields = function () {	
+EditPersonDisplay.prototype.disableInputFieldsTeacher = function () {	
 	for (var id in this.editPersonDetailsForm.elements) {
 		this.editPersonDetailsForm.elements[id].disabled = true;	
 	}
+}
+EditPersonDisplay.prototype.disableInputFieldsStudent = function () {	
+	this.editPersonDetailsForm.elements["password"].disabled = true;	
+	this.editPersonDetailsForm.elements["role"].disabled = true;	
 }
 EditPersonDisplay.prototype.removeButtons = function () {	
 	$(this.editPersonDetailsForm.elements["submit"]).remove();
@@ -62,7 +66,7 @@ EditPersonDisplay.prototype.clear = function () {
 	
 }
 
-EditPersonDisplay.prototype.setUser = function (json) {
+EditPersonDisplay.prototype.setUser = function (role,json) {
 	//var email = json.email;
 	var userName = json.userName;
 	var familyName = json.familyName;
@@ -74,10 +78,18 @@ EditPersonDisplay.prototype.setUser = function (json) {
 	this.editPersonDetailsForm.elements["familyName"].value = familyName;
 	this.editPersonDetailsForm.elements["givenName"].value = givenName;
 	this.editPersonDetailsForm.elements["insertion"].value = insertion;
+	this.editPersonDetailsForm.elements["role"].value = role == "TEACHER" ? "docent" : "leerling";
 	
-	if (true) { // docent
-		this.disableAllInputFields();
+	this.role = role;
+	
+	console.log(this.role);
+	
+	if (this.role == "TEACHER") { 
+		this.disableInputFieldsTeacher();
 		this.removeButtons();
+	}
+	if (this.role == "STUDENT") { 
+		this.disableInputFieldsStudent();	
 	}
 }
 
@@ -128,21 +140,21 @@ EditPersonDisplay.prototype.setLoadingTableMessage = function (json) {
  */
 
 AccountDisplay.prototype.submitPersonToSchoolClass = function(id) {
-	if (this.role == "D") app.getPresenterFactory().getEditTeacherPresenter().submitTeacherToSchoolClass(id);
-	if (this.role == "L") app.getPresenterFactory().getEditStudentPresenter().submitStudentToSchoolClass(id);
+	if (this.role == "TEACHER") app.getPresenterFactory().getEditTeacherPresenter().submitTeacherToSchoolClass(id);
+	if (this.role == "STUDENT") app.getPresenterFactory().getEditStudentPresenter().submitStudentToSchoolClass(id);
 }
 AccountDisplay.prototype.removePersonFromSchoolClass = function(id) {
-	if (this.role == "D") app.getPresenterFactory().getEditTeacherPresenter().removeTeacherFromSchoolClass(id);
-	if (this.role == "L") app.getPresenterFactory().getEditStudentPresenter().removeStudentFromSchoolClass(id);
+	if (this.role == "TEACHER") app.getPresenterFactory().getEditTeacherPresenter().removeTeacherFromSchoolClass(id);
+	if (this.role == "STUDENT") app.getPresenterFactory().getEditStudentPresenter().removeStudentFromSchoolClass(id);
 }
 
 AccountDisplay.prototype.updatePerson = function() {
-	if (this.role == "D") return;
+	if (this.role == "TEACHER") return;
 	
 	// save student
 }
 AccountDisplay.prototype.removePerson = function() {
-	if (this.role == "D") return;
+	if (this.role == "TEACHER") return;
 	
 	// remove student
 }
