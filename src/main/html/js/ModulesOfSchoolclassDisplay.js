@@ -268,16 +268,16 @@ ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, dept
 
 ModulesOfSchoolclassDisplay.prototype.attachItem = function(id) {
 	console.log("attach "+id);
-	app.getPresenterFactory().modulesOfSchoolclassPresenter.attachItemToSchoolClass(id);
+	app.getPresenterFactory().getModulesOfSchoolclassPresenter().attachItemToSchoolClass(id);
 }
 
 ModulesOfSchoolclassDisplay.prototype.detachItem = function(id) {
 	console.log("detach "+id);
-	app.getPresenterFactory().modulesOfSchoolclassPresenter.detachItemFromSchoolClass(id);
+	app.getPresenterFactory().getModulesOfSchoolclassPresenter().detachItemFromSchoolClass(id);
 }
 
 // ModulesOfSchoolclassDisplay.prototype.detachItem = function(id) {
-// 	app.getPresenterFactory().modulesOfSchoolclassPresenter.detachItemFromSchoolClass(id);
+// 	app.getPresenterFactory().getModulesOfSchoolclassPresenter.detachItemFromSchoolClass(id);
 // }
 
 ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
@@ -285,7 +285,7 @@ ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
 
 	typeString = this.settingsForm.elements["locked[]"][0].checked ? "assesment" : "normal";
 		
-	app.getPresenterFactory().modulesOfSchoolclassPresenter.setModuleSettings(  this.settingsForm.elements["key"].value,
+	app.getPresenterFactory().getModulesOfSchoolclassPresenter().setModuleSettings(  this.settingsForm.elements["key"].value,
 																				typeString,
 																				this.settingsForm.elements["from"].value,
 																				this.settingsForm.elements["to"].value,
