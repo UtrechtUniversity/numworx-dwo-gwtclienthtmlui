@@ -2,21 +2,28 @@ function SelectedResultsDisplay() {
 	this.resultState = null;
 	this.studentsTree = null;
 	
-	// Buttons 
+	// Form
+	this.sealModuleActivitiesForm = document.forms["sealModuleActivities"];
+	 
 	
 	// jQuery objects
 	this.$panel = jQuery("#selectedResultsDisplay");
 	
+	// Bottom bars
+	this.$bars = this.$panel.find(".bar");
+	this.$barModulesStudents = $("#barModulesStudents").hide();
+	this.$barActivitiesStudent = $("#barActivitiesStudent").hide();
+	this.$barActivitiesStudentBacklink = $("#barActivitiesStudentBacklink");
+	this.$barActivitiesStudents = $("#barActivitiesStudents").hide();
+	this.$barActivitiesStudentsBacklink = $("#barActivitiesStudentsBacklink");
+	
+	
 	this.$selectResultsTableWrap = $("#selectedResultsTableWrap");
 	
-	
-	//this.$selectedResultsTableBody = this.$selectedResultsTable.find("tbody");	
-	//this.$selectedResultsTableHead = this.$selectedResultsTable.find("thead");	
 	this.$selectedResultsTable = $("#selectedResultsTable").detach();	
 	this.$selectedResultsColumnHeaderName = this.$selectedResultsTable.find("#selectedResultsTableRepeatableColumnHeaderName").detach();	
 	this.$selectedResultsColumnHeaderSorting = this.$selectedResultsTable.find("#selectedResultsTableRepeatableColumnHeaderSorting").detach();	
-	
-	
+		
 	this.$selectedResultsRowHeader = this.$selectedResultsTable.find("#selectedResultsTableRowHeader").detach();
 	this.$selectedResultsRowCell = this.$selectedResultsTable.find("#selectedResultsTableRepeatableCell").detach();
 	this.$selectedResultsRow = this.$selectedResultsTable.find("tbody tr").detach();
@@ -177,6 +184,29 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function
 		}
 	}
 	
+	// module.children[Symbol.iterator] = function() {
+// 	    var keys = [];
+// 	    var ref = this;
+// 	    for (var key in this) {
+// 	        keys.push(key);
+// 	    }
+//
+// 	    return {
+// 	        next: function() {
+// 	            if (this._keys && this._obj && this._index < this._keys.length) {
+// 	                var key = this._keys[this._index];
+// 	                this._index++;
+// 	                return { key: key, value: this._obj[key], done: false };
+// 	            } else {
+// 	                return { done: true };
+// 	            }
+// 	        },
+// 	        _index: 0,
+// 	        _keys: keys,
+// 	        _obj: ref
+// 	    };
+// 	}
+	
 	for (var actId in module.children) {
 		matrix[0][j] = {};
 
@@ -283,17 +313,27 @@ SelectedResultsDisplay.prototype.computeActivityScoreForStudent = function(activ
 SelectedResultsDisplay.prototype.modulesStudents = function() {
 	var matrix = this.buildMatrixModulesStudentsForClass();
 	this.plotMatrix(matrix);
+	this.$bars.hide();
+	this.$barModulesStudents.show();
 }
 
 SelectedResultsDisplay.prototype.activitiesStudent = function(module, studentId) {
 	var matrix = this.buildMatrixActivitiesStudentInModule(module, studentId);
 	this.plotMatrix(matrix);
+	this.$bars.hide();
+	this.$barActivitiesStudent.show();
+	this.$barActivitiesStudentBacklink.html("Terug naar <b>Alle geselecteerde modules</b>");
+	this.$barActivitiesStudentBacklink.click($.proxy(this.clickBackToModulesStudents, this));
 }
 
 SelectedResultsDisplay.prototype.activitiesStudents = function(module) {
 	console.log(module);
 	var matrix = this.buildMatrixActivitiesStudentsInModule(module);
 	this.plotMatrix(matrix);
+	this.$bars.hide();
+	this.$barActivitiesStudents.show();
+	this.$barActivitiesStudentsBacklink.html("Terug naar <b>Alle geselecteerde modules</b>");
+	this.$barActivitiesStudentsBacklink.click($.proxy(this.clickBackToModulesStudents, this));
 }
 
 
@@ -340,4 +380,9 @@ SelectedResultsDisplay.prototype.hoverColumnHeader = function(event) {
 		$target.addClass('active');
 		$target.find('a').show();
 	}	
+}
+
+SelectedResultsDisplay.prototype.clickBackToModulesStudents = function(event) {
+	event.preventDefault();		
+	this.modulesStudents();
 }
