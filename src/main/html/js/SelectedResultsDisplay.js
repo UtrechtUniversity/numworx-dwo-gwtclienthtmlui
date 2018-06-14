@@ -121,7 +121,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 	}
 	
 	// Sizing
-	if (matrix[0].length > 10) this.$selectResultsTableWrap.addClass("overflow");
+	if (matrix[0].length > 11) this.$selectResultsTableWrap.addClass("overflow");
 	else this.$selectResultsTableWrap.removeClass("overflow");
 	
 	this.$selectResultsTableWrap.removeClass(function (index, className) {

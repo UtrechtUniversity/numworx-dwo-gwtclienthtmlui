@@ -323,15 +323,28 @@ table.results {
 	}
 	
 	tbody td.fill, thead th.fill {
-		display: none;
-		.size-2 & {	display: table-cell; width: (4.5 * ($colWidth + $gutter)) * 1px; }
-		.size-3 & {	display: table-cell; width: (4 * ($colWidth + $gutter)) * 1px; }
-		.size-4 & {	display: table-cell; width: (3.5 * ($colWidth + $gutter)) * 1px; }
-		.size-5 & {	display: table-cell; width: (3 * ($colWidth + $gutter)) * 1px; }
-		.size-6 & {	display: table-cell; width: (2.5 * ($colWidth + $gutter)) * 1px; }
-		.size-7 & {	display: table-cell; width: (2 * ($colWidth + $gutter)) * 1px; }
-		.size-8 & {	display: table-cell; width: (1.5 * ($colWidth + $gutter)) * 1px; }
-		.size-9 & {	display: table-cell; width: (1 * ($colWidth + $gutter)) * 1px; }
+		display: table-cell;
+		width: 25px;
+		//.size-2 & {	display: table-cell; width: (4.5 * ($colWidth + $gutter)) * 1px; }
+//		.size-3 & {	display: table-cell; width: (4 * ($colWidth + $gutter)) * 1px; }
+//		.size-4 & {	display: table-cell; width: (3.5 * ($colWidth + $gutter)) * 1px; }
+//		.size-5 & {	display: table-cell; width: (3 * ($colWidth + $gutter)) * 1px; }
+//		.size-6 & {	display: table-cell; width: (2.5 * ($colWidth + $gutter)) * 1px; }
+//		.size-7 & {	display: table-cell; width: (2 * ($colWidth + $gutter)) * 1px; }
+//		.size-8 & {	display: table-cell; width: (1.5 * ($colWidth + $gutter)) * 1px; }
+//		.size-9 & {	display: table-cell; width: (1 * ($colWidth + $gutter)) * 1px; }
+		
+		.size-2 & {	display: table-cell; width: 10 * $colWidth / 2 * 1px; }
+		.size-3 & {	display: table-cell; width: 9 * $colWidth / 2 * 1px; }
+		.size-4 & {	display: table-cell; width: 8 * $colWidth / 2 * 1px; }
+		.size-5 & {	display: table-cell; width: 7 * $colWidth / 2 * 1px; }
+		.size-6 & {	display: table-cell; width: 6 * $colWidth / 2 * 1px; }
+		.size-7 & {	display: table-cell; width: 5 * $colWidth / 2 * 1px; }
+		.size-8 & {	display: table-cell; width: 4 * $colWidth / 2 * 1px; }
+		.size-9 & {	display: table-cell; width: 3 * $colWidth / 2 * 1px; }
+		.size-10 & {	display: table-cell; width: 2 * $colWidth / 2 * 1px; }
+		.size-11 & {	display: table-cell; width: 1 * $colWidth / 2 * 1px; }
+		//.size-12 & {	display: table-cell; width: 1 * $colWidth / 2 * 1px; }
 	}	
 }
 
