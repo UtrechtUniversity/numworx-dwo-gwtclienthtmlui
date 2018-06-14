@@ -28,7 +28,6 @@ function SelectedResultsDisplay() {
 	this.$selectedResultsRowCell = this.$selectedResultsTable.find("#selectedResultsTableRepeatableCell").detach();
 	this.$selectedResultsRow = this.$selectedResultsTable.find("tbody tr").detach();
 	
-	
 	// Bind handlers
 	
 	
@@ -80,6 +79,8 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 	}
 	$theadRow3.append('<th class="fill">&nbsp;</th>');	
 	$theadRow2.append('<th class="fill">&nbsp;</th>');	
+	
+	$table.find(".tableTitle").html(matrix[0][0].label);
 	
 	// BUILD BODY
 	for (var i = 1; i < matrix.length; i++) {
@@ -140,7 +141,9 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 	activeModules = this.resultState.activeCourses;
 	
 	matrix[0] = [];
-	matrix[0][0] = "colsname";
+	matrix[0][0] = {};
+	matrix[0][0].label = "Modules"
+	
 	
 	
 	for (var amId in activeModules) {
@@ -182,7 +185,8 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function
 	var students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children;
 	
 	matrix[0] = [];
-	matrix[0][0] = "colsname";
+	matrix[0][0] = {};
+	matrix[0][0].label = "Activities"
 	
 	// Set row header
 	for (var stuId in students) {
@@ -247,7 +251,8 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 	var students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children;
 	
 	matrix[0] = [];
-	matrix[0][0] = "colsname";
+	matrix[0][0] = {};
+	matrix[0][0].label = "Activities";
 	
 	for (var actId in module.children) {
 		matrix[0][j] = {};
