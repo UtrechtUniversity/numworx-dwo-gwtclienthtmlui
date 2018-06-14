@@ -33,6 +33,7 @@ function ResultsDisplay() {
 ResultsDisplay.prototype.show = function() {
 	this.$panel.show();
 	this.chooseClassModuleFormToggle();
+	Helpers.stretchHeight( [ this.$chooseClassTableBody, this.$chooseModulesTableBody  ] )
 }
 
 /*
