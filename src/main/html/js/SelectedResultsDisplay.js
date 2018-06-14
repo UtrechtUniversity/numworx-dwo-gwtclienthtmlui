@@ -63,21 +63,23 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 		$value = $("<span>" + matrix[0][i].label + "</span>");
 		$headerName.html("").append($value);		
 		if (matrix[0][i].callback) {
-			$value.on('click', $.proxy(matrix[0][i].callback, this));
+			$value.on('click', $.proxy(matrix[0][i].callback, this, matrix[0][i].params));
 		}
 		if (matrix[0][i].linkLabel && matrix[0][i].linkCallback) {
 			$link = $('<a href="javascript:void(0);">'+matrix[0][i].linkLabel+'</a>');
 			$value.append($link);
-			$link.on('click', $.proxy(matrix[0][i].linkCallback, this));
+			$link.on('click', $.proxy(matrix[0][i].linkCallback, this, matrix[0][i].linkParams));
 		}
 		$value.hover($.proxy(this.hoverColumnHeader, this));		
 		$theadRow2.append($headerName);
 		
 		// Sort buttons
 		$headerSorting = this.$selectedResultsColumnHeaderSorting.clone();
-		$theadRow3.append($headerSorting);		
+		$theadRow3.append($headerSorting);	
 		$theadRow3.find(".sortButton").click(Helpers.clickSortButton);
 	}
+	$theadRow3.append('<th class="fill">&nbsp;</th>');	
+	$theadRow2.append('<th class="fill">&nbsp;</th>');	
 	
 	// BUILD BODY
 	for (var i = 1; i < matrix.length; i++) {
@@ -103,7 +105,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 				Helpers.setResultIndicatorColor($value);
 				
 				if (matrix[i][j].callback) {
-					$value.on('click', $.proxy(matrix[i][j].callback, this));
+					$value.on('click', $.proxy(matrix[i][j].callback, this, matrix[i][j].params));
 				}
 
 				$rowCell.append($value);
@@ -113,6 +115,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 			console.log($rowCell);
 			$row.append($rowCell);
 		} 		
+		$row.append('<td class="fill">&nbsp;</td>');
 		$tbody.append($row);
 	}
 	
@@ -143,9 +146,12 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 	for (var amId in activeModules) {
 		matrix[0][j] = {};
 		matrix[0][j].label = modules[ activeModules[amId] ].label;
-		matrix[0][j].callback = function(event) { event.stopPropagation(); event.preventDefault();	this.activitiesStudents( modules[ activeModules[amId] ] ); };
+		matrix[0][j].callback = this.activitiesStudents;
+		matrix[0][j].params = { module: modules[ activeModules[amId] ]  };
 		matrix[0][j].linkLabel = "activiteiten";
-		matrix[0][j].linkCallback = function() {  event.stopPropagation(); event.preventDefault();	this.activitiesStudents( modules[ activeModules[amId] ] ); };
+		matrix[0][j].linkCallback = this.activitiesStudents;
+		matrix[0][j].linkParams = { module: modules[ activeModules[amId] ]  };
+		
 		j++;
 	}
 	
@@ -158,7 +164,10 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 		for (var amId in activeModules) {
 			matrix[i][j] = {};
 			matrix[i][j].label = this.computeModuleScoreForStudent(modules[ activeModules[amId] ], studentId);
-			matrix[i][j].callback = function() { this.activitiesStudent(modules[ activeModules[amId] ], studentId) };
+			//matrix[i][j].callback = function() { this.activitiesStudent(modules[ activeModules[amId] ], studentId) };
+			//matrix[i][j].callback = $.proxy(this.activitiesStudent, this, modules[ activeModules[amId] ], studentId );
+			matrix[i][j].callback = this.activitiesStudent;
+			matrix[i][j].params = { module: modules[ activeModules[amId] ], studentId: studentId };
 			j++;
 		}	
 		i++;	
@@ -214,6 +223,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function
 		matrix[0][j].label = module.children[actId].label;
 
 		// set single row
+		//matrix[1] = [];
 		for (var stuScoId in module.children[actId].children) { 
 			if (module.children[actId].children[stuScoId]["user-id"] == studentId) {
 				matrix[1][j] = {};
@@ -245,8 +255,6 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 		j++;
 	}
 	
-	console.log(module);
-	
 	for (var studentId in students) {
 		matrix[i] = [];
 		matrix[i][0] = {};
@@ -254,8 +262,6 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 		
 		j = 1;
 		for (var actId in module.children) {
-			console.log("i:"+i+" j:"+j);
-			console.log(module.children[actId]);
 			matrix[i][j] = {};
 			matrix[i][j].label = this.computeActivityScoreForStudent(module.children[actId], studentId);
 			matrix[i][j].callback = function() { console.log("callback"); };
@@ -317,8 +323,8 @@ SelectedResultsDisplay.prototype.modulesStudents = function() {
 	this.$barModulesStudents.show();
 }
 
-SelectedResultsDisplay.prototype.activitiesStudent = function(module, studentId) {
-	var matrix = this.buildMatrixActivitiesStudentInModule(module, studentId);
+SelectedResultsDisplay.prototype.activitiesStudent = function(params) {
+	var matrix = this.buildMatrixActivitiesStudentInModule(params.module, params.studentId);
 	this.plotMatrix(matrix);
 	this.$bars.hide();
 	this.$barActivitiesStudent.show();
@@ -326,9 +332,8 @@ SelectedResultsDisplay.prototype.activitiesStudent = function(module, studentId)
 	this.$barActivitiesStudentBacklink.click($.proxy(this.clickBackToModulesStudents, this));
 }
 
-SelectedResultsDisplay.prototype.activitiesStudents = function(module) {
-	console.log(module);
-	var matrix = this.buildMatrixActivitiesStudentsInModule(module);
+SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
+	var matrix = this.buildMatrixActivitiesStudentsInModule(params.module);
 	this.plotMatrix(matrix);
 	this.$bars.hide();
 	this.$barActivitiesStudents.show();
