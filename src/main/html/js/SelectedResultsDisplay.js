@@ -232,8 +232,8 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function
 				matrix[1][j] = {};
 				matrix[1][j].label = module.children[actId].children[stuScoId].sumScore;
 				
-				matrix[1][j].callback = this.clickResultIndicator;			
-				matrix[1][j].params = { scoId: stuScoId, studentId: studentId };
+				matrix[1][j].callback = this.clickResultIndicator;		
+				matrix[1][j].params = { scoId: actId, studentId: studentId };
 			}
 		}
 		
@@ -272,10 +272,10 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 			matrix[i][j] = {};
 			matrix[i][j].label = this.computeActivityScoreForStudent(module.children[actId], studentId);
 			matrix[i][j].callback = this.clickResultIndicator;
-			for (var scoId in module.children[actId].children) // loop over activities
-				if (module.children[actId].children[scoId]["user-id"] == studentId) break;
+			//for (var scoId in module.children[actId].children) // loop over activities
+			//	if (module.children[actId].children[scoId]["user-id"] == studentId) break;
 			
-			matrix[i][j].params = { scoId: scoId, studentId: studentId };
+			matrix[i][j].params = { scoId: actId, studentId: studentId };
 			j++;
 		}		
 		
