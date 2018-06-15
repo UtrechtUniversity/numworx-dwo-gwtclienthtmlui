@@ -1,6 +1,6 @@
 function SelectedResultsDisplay() {		
 	this.resultState = null;
-	this.studentsTree = null;
+	//this.studentsTree = null;
 	
 	// Form
 	this.sealModuleActivitiesForm = document.forms["sealModuleActivities"];
@@ -113,7 +113,6 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 			} else {
 				$rowCell.html("&nbsp;");
 			}
-			console.log($rowCell);
 			$row.append($rowCell);
 		} 		
 		$row.append('<td class="fill">&nbsp;</td>');
@@ -232,6 +231,9 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function
 			if (module.children[actId].children[stuScoId]["user-id"] == studentId) {
 				matrix[1][j] = {};
 				matrix[1][j].label = module.children[actId].children[stuScoId].sumScore;
+				
+				matrix[1][j].callback = this.clickResultIndicator;			
+				matrix[1][j].params = { scoId: stuScoId, studentId: studentId };
 			}
 		}
 		
@@ -269,7 +271,11 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 		for (var actId in module.children) {
 			matrix[i][j] = {};
 			matrix[i][j].label = this.computeActivityScoreForStudent(module.children[actId], studentId);
-			matrix[i][j].callback = function() { console.log("callback"); };
+			matrix[i][j].callback = this.clickResultIndicator;
+			for (var scoId in module.children[actId].children) // loop over activities
+				if (module.children[actId].children[scoId]["user-id"] == studentId) break;
+			
+			matrix[i][j].params = { scoId: scoId, studentId: studentId };
 			j++;
 		}		
 		
@@ -359,7 +365,6 @@ SelectedResultsDisplay.prototype.clear = function () {
 SelectedResultsDisplay.prototype.init = function(resultState) {
 	console.log(resultState);
 	this.resultState = resultState;
-	
 	this.modulesStudents();
 	
 }
@@ -374,7 +379,13 @@ SelectedResultsDisplay.prototype.updateResultTree = function (resultsTree, stude
  * Use java callbacks
  */
 
-
+SelectedResultsDisplay.prototype.showStudentResults = function(scoId, studentId) {
+	console.log(this.resultState);
+	console.log(scoId);
+	console.log(studentId);
+	console.log(this.resultState.activeSchoolClass);
+	app.getPresenterFactory().getSelectedResultsPresenter().showStudentResults(this.resultState, scoId, studentId, this.resultState.activeSchoolClass);
+}
 
 /*
  * EVENT HANDLERS
@@ -395,4 +406,11 @@ SelectedResultsDisplay.prototype.hoverColumnHeader = function(event) {
 SelectedResultsDisplay.prototype.clickBackToModulesStudents = function(event) {
 	event.preventDefault();		
 	this.modulesStudents();
+}
+
+SelectedResultsDisplay.prototype.clickResultIndicator = function(params) {
+//	event.preventDefault();		
+	console.log(params)
+	this.showStudentResults(params.scoId, params.studentId);
+	
 }

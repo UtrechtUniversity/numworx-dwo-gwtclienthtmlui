@@ -1,5 +1,6 @@
 function MainDisplay() {
 	this.activeDialogs = [];
+	this.activeLightboxes = [];
 
 	// Bind DOM elements with jQuery
 	this.$body = $("body");
@@ -53,6 +54,10 @@ function MainDisplay() {
 	window.jsResultsDisplay = this.resultsDisplay;
 	this.selectedResultsDisplay = new SelectedResultsDisplay();
 	window.jsSelectedResultsDisplay = this.selectedResultsDisplay;
+	this.studentScoResultDisplay = new StudentScoResultDisplay();
+	window.jsStudentScoResultDisplay = this.studentScoResultDisplay;
+	this.selectStudentResultsDisplay = new SelectStudentResultsDisplay();
+	window.jsSelectStudentResultsDisplay = this.selectStudentResultsDisplay;
 	
 	// MODULES
 	this.modulesDisplay = new ModulesDisplay();
@@ -191,6 +196,16 @@ MainDisplay.prototype.showSelectedResultsView = function() {
 	this.selectedResultsDisplay.show();
 }
 
+MainDisplay.prototype.showStudentScoResultView = function() {
+	this.initMainView(); 
+	this.studentScoResultDisplay.show();
+}
+
+MainDisplay.prototype.showSelectStudentResultsView = function() {
+	this.initMainView(); 
+	this.selectStudentResultsDisplay.show();
+}
+
 MainDisplay.prototype.showModulesView = function() {
 	this.initMainView(); 
 	this.modulesDisplay.show();
@@ -210,6 +225,20 @@ MainDisplay.prototype.closeDialogView = function(dialog) {
 	dialog = this.activeDialogs.pop();
 	if (this.activeDialogs.length == 0) this.$body.removeClass("overlay"); // remove overlay
 	else this.activeDialogs[this.activeDialogs.length - 1].setFocus(); // or set focus to next dialog
+}
+
+/*
+ * LIGHTBOX VIEW HELPERS
+ */
+
+MainDisplay.prototype.openLightboxView = function(dialog) {
+	this.activeLightboxes.push(dialog);
+	this.$body.addClass("overlay");
+}
+MainDisplay.prototype.closeLightboxView = function(dialog) {
+	dialog = this.activeLightboxes.pop();
+	if (this.activeLightboxes.length == 0) this.$body.removeClass("overlay"); // remove overlay
+	else this.activeLightboxes[this.activeLightboxes.length - 1].setFocus(); // or set focus to next dialog
 }
 
 /*

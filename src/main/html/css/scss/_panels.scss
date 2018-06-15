@@ -693,8 +693,19 @@ section.lightbox {
 	@include box-shadow(3px,3px,10px,0px,$shadow);
 	
 	header {
-		position: absolute;
 		height: 30px;
+		position: absolute;
+		width: 100%;
+		
+		.closeButton {
+			background: #ff0000;
+			cursor: pointer;
+			height: 32px;
+			position: absolute;
+			right: 5px;
+			top: 5px;
+			width: 32px;
+		}
 	}
 	section {
 		position: absolute;
