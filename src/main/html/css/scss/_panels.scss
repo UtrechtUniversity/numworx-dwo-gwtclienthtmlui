@@ -712,7 +712,7 @@ section.lightbox {
 	section {
 		position: absolute;
 		top: (30 + 2 * $gutter) * 1px;
-		bottom: 30px;
+		bottom: 75 + 30 + $borderThickness;
 		width: 100%;
 		
 		iframe {

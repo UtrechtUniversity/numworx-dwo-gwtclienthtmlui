@@ -1,6 +1,6 @@
 function ResultsDisplay() {	
 	this.resultState = {};
-	this.resultState.resultTree = null;
+	this.resultState.resultsTree = null;
 	this.resultState.studentsTree = null;
 	this.resultState.showOpenModules = false;
 	this.resultState.showClosedModules = false;
@@ -45,9 +45,9 @@ ResultsDisplay.prototype.setChooseClassTable = function() {
 	
 	this.$chooseClassTableBody.html("");
 	
-	for (var id in this.resultState.resultTree.children) {
+	for (var id in this.resultState.resultsTree.children) {
 		$row = this.$chooseClassRow.clone();
-		$row.find("#chooseClassAndModulesClassname").html( this.resultState.resultTree.children[id].label ).removeAttr("id");
+		$row.find("#chooseClassAndModulesClassname").html( this.resultState.resultsTree.children[id].label ).removeAttr("id");
 		
 		$row.find("input[type='checkbox'],input[type='radio']").each( function(index, el) {
 			el.value = id;
@@ -70,15 +70,15 @@ ResultsDisplay.prototype.setChooseClassTable = function() {
 
 ResultsDisplay.prototype.setChooseModulesTable = function() {
 	//console.log(this.activeClass);
-	//console.log(this.resultState.resultTree.children[ this.activeClass ]); 
+	//console.log(this.resultState.resultsTree.children[ this.activeClass ]); 
 	
 	var i = 0, course;
 	
 	this.$chooseModulesTableBody.html("");
 	
 
-	for (var id in this.resultState.resultTree.children[ this.resultState.activeSchoolClass ].children) { // loop over modules
-		course = this.resultState.resultTree.children[ this.resultState.activeSchoolClass ].children[id];
+	for (var id in this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children) { // loop over modules
+		course = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[id];
 
 		$row = this.$chooseModulesRow.clone();
 	
@@ -122,7 +122,7 @@ ResultsDisplay.prototype.clear = function () {
 }
 
 ResultsDisplay.prototype.setResultTree = function (resultTree, studentsTree) {
-	this.resultState.resultTree = resultTree;
+	this.resultState.resultsTree = resultTree;
 	this.resultState.studentsTree = studentsTree;	
 	this.setChooseClassTable();
 }

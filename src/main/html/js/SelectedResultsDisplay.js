@@ -131,12 +131,14 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 	this.$selectResultsTableWrap.html("");
 	this.$selectResultsTableWrap.append($table);
 	
+	console.log(JSON.stringify(this.resultState));
+	
 }
 
 SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function() {
 	var matrix = [], i = 1, j = 1;
 	students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children; 
-	modules = this.resultState.resultTree.children[ this.resultState.activeSchoolClass ].children;
+	modules = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children;
 	activeModules = this.resultState.activeCourses;
 	
 	matrix[0] = [];
@@ -174,6 +176,8 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 		}	
 		i++;	
 	}
+	
+	console.log(JSON.stringify(this.resultState));
 	
 	return matrix;
 	//resultState.studentsTree.schoolclasses[ resultState.activeSchoolClass ].children // students
@@ -245,6 +249,8 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function
 		j++;
 	}
 	
+	console.log(JSON.stringify(this.resultState));
+	
 	return matrix;
 }
 
@@ -286,6 +292,8 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 		
 		i++;	
 	}
+	
+	console.log(JSON.stringify(this.resultState));
 	
 	return matrix;
 }
@@ -372,6 +380,8 @@ SelectedResultsDisplay.prototype.init = function(resultState) {
 }
 
 SelectedResultsDisplay.prototype.updateResultTree = function (resultsTree, studentsTree) {
+	console.log("updateTree");
+	console.log(studentsTree);
 	this.resultState.resultsTree = resultsTree;
 	this.resultState.studentsTree = studentsTree;
 }
@@ -384,7 +394,7 @@ SelectedResultsDisplay.prototype.updateResultTree = function (resultsTree, stude
 SelectedResultsDisplay.prototype.showStudentResults = function(scoId, studentId) {
 	this.resultState.activeActivity = scoId;
 	this.resultState.activeStudent = studentId;
-	console.log(this.resultState);
+	console.log(JSON.stringify(this.resultState));
 	console.log(scoId);
 	console.log(studentId);
 	console.log(this.resultState.activeSchoolClass); 
@@ -415,6 +425,5 @@ SelectedResultsDisplay.prototype.clickBackToModulesStudents = function(event) {
 SelectedResultsDisplay.prototype.clickResultIndicator = function(params) {
 //	event.preventDefault();		
 	console.log(params)
-	this.showStudentResults(params.scoId, params.studentId);
-	
+	this.showStudentResults(params.scoId, params.studentId);	
 }

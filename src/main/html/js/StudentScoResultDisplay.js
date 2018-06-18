@@ -25,9 +25,8 @@ function StudentScoResultDisplay() {
 
 StudentScoResultDisplay.prototype.show = function() {
 	window.app.mainDisplay.openLightboxView(this);
-	this.$panel.show();
-	
-	Helpers.stretchIframeHeight( this.$iframe );
+	this.$panel.show();	
+	Helpers.stretchIframeHeight( this.$iframe ); // TODO: Action on Resizing
 	
 	//$(window).on('resize', $.proxy(Helpers.resizeHelpSection, this));
 }
@@ -43,13 +42,21 @@ StudentScoResultDisplay.prototype.clear = function () {
 }
 
 StudentScoResultDisplay.prototype.init = function (state) {
+	console.log("init StudentScoResultDisplay");
+	console.log(state);
+	
 	var activeModule, activeStudent;
 	this.resultState = state;
 	
+	//console.log(this.resultState.resultsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeModule].children[this.resultState.activeActivity]);
+	//console.log(this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeStudent]);
+	
 	// Set header titles
-	activeModule = this.resultState.resultTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeModule].children[this.resultState.activeActivity];
-	activeStudent = this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeStudent];		
-	this.$nameHeader.html(activeStudent.givenName + " " + (activeStudent.insertion ? activeStudent.insertion+" ":"")  + activeStudent.familyName);
+	activeModule = this.resultState.resultsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeModule].children[this.resultState.activeActivity];
+	//activeStudent = this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeStudent];		
+	
+	
+	//this.$nameHeader.html(activeStudent.givenName + " " + (activeStudent.insertion ? activeStudent.insertion+" ":"")  + activeStudent.familyName);
 	this.$activityHeader.html(activeModule.label);
 	
 	this.$iframe.attr('src', '' );
@@ -61,6 +68,7 @@ StudentScoResultDisplay.prototype.openUrl = function (url) {
 }
 
 StudentScoResultDisplay.prototype.updateResultTree = function (resultsTree, studentsTree) {
+	console.log("update trees StudentScoResultDisplay");
 	this.resultState.resultsTree = resultsTree;
 	this.resultState.studentsTree = studentsTree;
 }
