@@ -124,13 +124,11 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.init = function () {
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setSchoolClassA = function(schoolclass) {
-	console.log("setSchoolClass");
-	console.log(schoolclass);
-	this.$classAClassName.value(schoolclass)
+	this.$classAClassName.val(schoolclass.schoolClassName);
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setSchoolClassB = function(schoolclass) {
-	console.log("setSchoolClass");
+	this.$classBClassName.val(schoolclass.schoolClassName);
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setEmptyTableMessageClasses = function() {
@@ -278,13 +276,13 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.getClassList = function(form) {
 // helpers
 CopyOrMoveStudentToSchoolclassDisplay.prototype.classAFormToggle = function(value) {
 	var aChecked = false;
+	if (!this.classAForm.elements["students[]"]) return;
 	for (i = 0; i <  this.classAForm.elements["students[]"].length; i++) {
 		if (this.classAForm.elements["students[]"][i].checked) { 
 			aChecked = true 
 			break; 
 		}
 	}
-	console.log(aChecked);
 	if (this.classBSet && aChecked && value) this.$classAForm.find(':submit, :button').prop('disabled','');
 	else this.$classAForm.find(':submit, :button').prop('disabled','disabled');
 }

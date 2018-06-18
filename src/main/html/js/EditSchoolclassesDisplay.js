@@ -77,6 +77,7 @@ function EditSchoolclassesDisplay() {
 
 EditSchoolclassesDisplay.prototype.show = function() {
 	this.$panel.show();
+	Helpers.stretchHeight( [ this.$changeStudentsTableBody, this.$changeTeachersTableBody, this.$changeModulesTableBody ]);
 }
 
 /*
@@ -92,7 +93,7 @@ EditSchoolclassesDisplay.prototype.init = function () {
 	this.$changeTeachersTableBody.html("");
 	this.$changeModulesTableBody.html("");
 	
-	Helpers.stretchHeight( [ this.$changeStudentsTableBody, this.$changeTeachersTableBody, this.$changeModulesTableBody ]);
+	
 }
 
 EditSchoolclassesDisplay.prototype.showSchoolClass = function(json) {	
