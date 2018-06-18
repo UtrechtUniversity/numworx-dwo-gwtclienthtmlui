@@ -114,12 +114,22 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudents = function(json, $t
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.clear = function () {
 	console.log("clear");
+	this.classAFormToggle(false);
+	this.classBFormToggle(false);
+	this.$classATableBody.html("");
+	this.$classBTableBody.html("");
+	this.$classAClassName.val("");
+	this.$classBClassName.val("");
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.init = function () {
 	console.log("init");
 	this.classAFormToggle(false);
 	this.classBFormToggle(false);
+	this.$classATableBody.html("");
+	this.$classBTableBody.html("");
+	this.$classAClassName.val("");
+	this.$classBClassName.val("");
 	Helpers.stretchHeight([ this.$addStudentTableBody ]);
 }
 
@@ -159,10 +169,10 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudentsClassA = function(js
 	this.classAFormToggle(false);
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudentsClassB = function(json) {
-	this.showStudents(json, this.$classBTableBody, this.$classBRow, "#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentName", this.changeSelectACheckbox);
+	this.showStudents(json, this.$classBTableBody, this.$classBRow, "#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentName", this.changeSelectBCheckbox);
 	this.classBSet = true;
 	this.classBFormToggle(false);
-	this.classAFormToggle(true); // checks only is selected
+	this.classAFormToggle(true); // checks only if selected
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setClassList = function(schoolclasses) {
