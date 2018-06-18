@@ -48,4 +48,7 @@
          </plugins>
     </build>
     <packaging>war</packaging>
+    <scm>
+    	<developerConnection>scm:git:ssh://git@git.science.uu.nl:dwoproject/DWO-LMS/DwoGwtClientHtmlUi.git</developerConnection>
+    </scm>
 </project>
