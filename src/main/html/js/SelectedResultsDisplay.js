@@ -348,7 +348,7 @@ SelectedResultsDisplay.prototype.activitiesStudent = function(params) {
 	this.plotMatrix(matrix);
 	this.$bars.hide();
 	this.$barActivitiesStudent.show();
-	this.$barActivitiesStudentBacklink.html("Terug naar <b>Alle geselecteerde modules</b>");
+	//this.$barActivitiesStudentBacklink.html("Terug naar <b>Alle geselecteerde modules</b>");
 	this.$barActivitiesStudentBacklink.click($.proxy(this.clickBackToModulesStudents, this));
 }
 
@@ -358,7 +358,7 @@ SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
 	this.plotMatrix(matrix);
 	this.$bars.hide();
 	this.$barActivitiesStudents.show();
-	this.$barActivitiesStudentsBacklink.html("Terug naar <b>Alle geselecteerde modules</b>");
+	//this.$barActivitiesStudentsBacklink.html("Terug naar <b>Alle geselecteerde modules</b>");
 	this.$barActivitiesStudentsBacklink.click($.proxy(this.clickBackToModulesStudents, this));
 }
 

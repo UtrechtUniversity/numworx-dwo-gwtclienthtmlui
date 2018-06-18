@@ -58,6 +58,7 @@ StudentScoResultDisplay.prototype.init = function (state) {
 	
 	//this.$nameHeader.html(activeStudent.givenName + " " + (activeStudent.insertion ? activeStudent.insertion+" ":"")  + activeStudent.familyName);
 	this.$activityHeader.html(activeModule.label);
+	console.log(activeModule);
 	
 	this.$iframe.attr('src', '' );
 }
@@ -78,6 +79,7 @@ StudentScoResultDisplay.prototype.hide = function () {
 	window.app.mainDisplay.closeLightboxView(this);
 	this.$panel.hide();		
 }
+StudentScoResultDisplay.prototype.close = function () { console.log("check of je een close doet"); }
 
 /*
  * RETURN FUNCTIONS
