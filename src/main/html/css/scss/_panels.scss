@@ -713,6 +713,11 @@ section.lightbox {
 		top: 30px;
 		bottom: 30px;
 		width: 100%;
+		
+		iframe {
+			height: 100%;
+			width: 100%;			
+		}
 	}
 	footer {
 		position: absolute;

@@ -48,6 +48,20 @@ StudentScoResultDisplay.prototype.updateResultTree = function (resultsTree, stud
 	this.resultState.studentsTree = studentsTree;
 }
 
+StudentScoResultDisplay.prototype.hide = function () {
+	this.$iframe.attr('src', '' );
+	window.app.mainDisplay.closeLightboxView(this);
+	this.$panel.hide();		
+}
+
+/*
+ * RETURN FUNCTIONS
+ */
+
+StudentScoResultDisplay.prototype.requestClose = function () {
+	app.getPresenterFactory().getStudentScoResultPresenter().close();
+}
+
 /*
  * EVENT HANDLERS
  */
@@ -58,8 +72,6 @@ StudentScoResultDisplay.prototype.resizeIframe = function(e) {
 
 StudentScoResultDisplay.prototype.clickStudentScoResultCloseButton = function(event) {
 	event.preventDefault();
-	window.app.mainDisplay.closeLightboxView(this);
-	this.$panel.hide();		
-	console.log("close");
+	this.requestClose();	
 }
 
