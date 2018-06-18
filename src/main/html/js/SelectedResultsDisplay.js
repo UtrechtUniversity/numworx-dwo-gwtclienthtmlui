@@ -131,7 +131,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 	this.$selectResultsTableWrap.html("");
 	this.$selectResultsTableWrap.append($table);
 	
-	console.log(JSON.stringify(this.resultState));
+	//console.log(JSON.stringify(this.resultState));
 	
 }
 
@@ -177,7 +177,7 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 		i++;	
 	}
 	
-	console.log(JSON.stringify(this.resultState));
+	//console.log(JSON.stringify(this.resultState));
 	
 	return matrix;
 	//resultState.studentsTree.schoolclasses[ resultState.activeSchoolClass ].children // students
@@ -249,7 +249,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function
 		j++;
 	}
 	
-	console.log(JSON.stringify(this.resultState));
+	//console.log(JSON.stringify(this.resultState));
 	
 	return matrix;
 }
@@ -293,7 +293,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 		i++;	
 	}
 	
-	console.log(JSON.stringify(this.resultState));
+	//console.log(JSON.stringify(this.resultState));
 	
 	return matrix;
 }
@@ -394,7 +394,7 @@ SelectedResultsDisplay.prototype.updateResultTree = function (resultsTree, stude
 SelectedResultsDisplay.prototype.showStudentResults = function(scoId, studentId) {
 	this.resultState.activeActivity = scoId;
 	this.resultState.activeStudent = studentId;
-	console.log(JSON.stringify(this.resultState));
+	//console.log(JSON.stringify(this.resultState));
 	console.log(scoId);
 	console.log(studentId);
 	console.log(this.resultState.activeSchoolClass); 
