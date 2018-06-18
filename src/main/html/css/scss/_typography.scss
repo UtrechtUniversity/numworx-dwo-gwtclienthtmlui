@@ -7,6 +7,7 @@ Colors, font-sizes, weights, margins, paddings etc. for text-items.
 - Headers
 - Forms 
 - Tables
+- Lightbox
 
 */
 
@@ -206,5 +207,49 @@ table.results {
 				text-decoration: none;
 			}	
 		}
+	}
+}
+
+/*
+ * LIGHTBOX Typography
+ */
+
+.lightbox {
+	header {
+		color: $primaryLight;
+		text-transform: uppercase;
+		
+		span.strong {
+			font-weight: bold;
+		}
+		span#studentScoResultName {
+			margin-right: 1em;
+		}
+	}
+	footer {
+		label, p {
+			color: $primary;
+			font-size: 13 / 17 * 1em;
+			font-weight: bold;
+			text-transform: none;
+		}
+	}
+	a {
+		color: $primaryLight;
+		&:hover {
+			color: $primary;
+		}
+		
+		.icon {
+			display: inline-block;			
+			height: 13px; //TODO var			
+			width: 64/73.9 * 13px; //TODO var
+						
+			use { fill: $primaryLight; }
+		}
+		&:hover .icon use { fill: $primary; }
+		&.prev { margin-right: $gutter * 1px; }
+		&.prev .icon { margin-right: 6px; }
+		&.next .icon { margin-left: 6px; }
 	}
 }

@@ -673,41 +673,65 @@ section.dialog {
  */
 
 section.lightbox {
+	background-color: $white;
+	border: $borderThickness $primaryLight solid;
+	@include border-radius($defaultRadius);
+	@include box-shadow(3px,3px,10px,0px,$shadow);
+	display: none;
+	height: 90%;
+	left: 50%;	
+	margin-left: -45%;
+	margin-top: -45vh;
 	position: fixed;
 	top: 50%;
-	left: 50%;
-	
-	background-color: $shade2;
-	
 	width: 90%;
-	//max-width: $siteWidth * 1px;
-	margin-left: -45%;
-	
-	height: 90%;
-	
-	margin-top: -45vh;
 	z-index: 9999;
 	
-	display: none;
-	
-	@include box-shadow(3px,3px,10px,0px,$shadow);
-	
 	header {
+		
+		border: $borderThickness $shade11 solid;
+		@include border-radius($defaultRadius);
+		bottom: $elementMarginBottom;
+		height: 20px;
+		left: $gutter * 1px;
+		padding: $elementMarginBottom $gutter/2 * 1px;
 		position: absolute;
-		height: 30px;
+		right: $gutter * 1px;
+		top: $elementMarginBottom;
+		
+		.closeButton {
+			background: #ff0000;
+			cursor: pointer;
+			height: 32px;
+			position: absolute;
+			right: 5px;
+			top: 5px;
+			width: 32px;
+		}
 	}
 	section {
 		position: absolute;
-		background-color: $shade1;
-		top: 30px;
-		bottom: 30px;
+		top: (30 + 2 * $gutter) * 1px;
+		bottom: 75 + 30 + $borderThickness;
 		width: 100%;
+		
+		iframe {
+			height: 100%;
+			width: 100%;			
+		}
 	}
 	footer {
-		position: absolute;
-		height: 30px;
-		width: 100%;
+		border-top: $borderThickness $shade11 solid;
 		bottom: 0;
+		height: 75px;
+		padding-top: $elementMarginBottom;
+		position: absolute;
+		width: 100%;		
+		
+		.row {
+			position: relative;
+			width: 100%;
+		}
 	}
 }
 

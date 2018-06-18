@@ -126,6 +126,18 @@ table.results {
 	max-height: 500px; height: auto;
 	overflow-x: scroll;
 	overflow-y: visible;
+	
+	//.size-2 & {	width: ($colWidth + $gutter + (0.5 * ($colWidth + $gutter))) * 1px; }
+//	.size-3 & {	width: ($colWidth + $gutter + (1 * ($colWidth + $gutter))) * 1px; }
+//	.size-4 & {	width: ($colWidth + $gutter + (1.5 * ($colWidth + $gutter))) * 1px; }
+//	.size-5 & {	width: ($colWidth + $gutter + (2 * ($colWidth + $gutter))) * 1px; }
+//	.size-6 & {	width: ($colWidth + $gutter + (2.5 * ($colWidth + $gutter))) * 1px; }
+//	.size-7 & {	width: ($colWidth + $gutter + (3 * ($colWidth + $gutter))) * 1px; }
+//	.size-8 & {	width: ($colWidth + $gutter + (3.5 * ($colWidth + $gutter))) * 1px; }
+//	.size-9 & {	width: ($colWidth + $gutter + (4 * ($colWidth + $gutter))) * 1px; }
+	//.size-2 & {	width: ($colWidth + $gutter + (1 * ($colWidth + $gutter))) * 1px; }
+	
+	
 		
 	&:after {
 		content: "\00A0";
@@ -139,7 +151,7 @@ table.results {
 	th, td {
 		//width: (1 / 12 * $siteWidth - 20) * 1px;
 		text-align: center;
-		width: ($colWidth - $gutter) / 2 * 1px;
+		width: (($colWidth / 2) - $gutter) * 1px;
 		
 		&:first-child {
 			position: relative;
@@ -162,6 +174,8 @@ table.results {
 		}
 	}
 	
+	
+	
 	thead {
 		border-left: $borderThickness $primary solid;
 		@include border-radius(4px, 4px, 0px, 0px);		
@@ -170,9 +184,10 @@ table.results {
 		position: relative;
 		
 		tr {
-			th:first-child { 
-				padding-left: 10px!important;
-			}
+			//th:first-child {
+//
+//				//margin-right: $gutter / 2 * -1px!important;
+//			}
 			&:nth-child(1) {
 				background-color: $primaryLight;
 				color: $white;
@@ -182,7 +197,8 @@ table.results {
 				width: 98%;
 							
 				th {
-					padding: 2px 10px;					
+					padding: 2px $gutter/2 *1px;	
+					text-indent: 10px;				
 				}
 			}
 			&:nth-child(2) {
@@ -191,6 +207,8 @@ table.results {
 			
 				th {
 					position: relative;
+					
+					
 					
 					span {
 						background-color: $shade2;
@@ -210,19 +228,22 @@ table.results {
 						width: (($colWidth - $gutter) / 2 - 10) * 1px;
 						z-index: 9;
 						
-						&:after {
-							bottom: 0;
-							content: "";
-							left: 0;
-							position: absolute;
-							right: 0;
-							top: 0;  
+						.overflow & {
+							&:after {
+								bottom: 0;
+								content: "";
+								left: 0;
+								position: absolute;
+								right: 0;
+								top: 0;  
+	
+								/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#edeff1+0,edeff1+100&0+0,0+80,1+100 */
+								background: -moz-linear-gradient(left, $shade2RGBA0 0%, $shade2RGBA0 70%, $shade2RGBA1 100%); /* FF3.6-15 */
+								background: -webkit-linear-gradient(left, $shade2RGBA0 0%,$shade2RGBA0 70%,$shade2RGBA1 100%); /* Chrome10-25,Safari5.1-6 */
+								background: linear-gradient(to right, $shade2RGBA0 0%,$shade2RGBA0 70%,$shade2RGBA1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+								filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00edeff1', endColorstr='#{$shade2}',GradientType=1 ); /* IE6-9 */
+							}
 							
-							/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#edeff1+0,edeff1+100&0+0,0+80,1+100 */
-							background: -moz-linear-gradient(left, $shade2RGBA0 0%, $shade2RGBA0 70%, $shade2RGBA1 100%); /* FF3.6-15 */
-							background: -webkit-linear-gradient(left, $shade2RGBA0 0%,$shade2RGBA0 70%,$shade2RGBA1 100%); /* Chrome10-25,Safari5.1-6 */
-							background: linear-gradient(to right, $shade2RGBA0 0%,$shade2RGBA0 70%,$shade2RGBA1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-							filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00edeff1', endColorstr='#{$shade2}',GradientType=1 ); /* IE6-9 */
 						}
 						
 						&.active {
@@ -235,6 +256,7 @@ table.results {
 							a {
 								bottom: 3px;
 								color: $shade1;
+								display: none;
 								position: absolute;
 								right: 5px;
 								
@@ -249,7 +271,11 @@ table.results {
 							&:after {
 								display: none;
 							}
-						}						
+						}	
+						
+						a {
+							display: none;
+						}					
 						
 						//word-break: break-all;
 						//word-wrap: break-word;
@@ -258,10 +284,15 @@ table.results {
 //						-webkit-line-clamp: 3;
 //						-webkit-box-orient: vertical;
 					}
+					
 				}
 			}
 			&:nth-child(3) {
-				background-color: $shade2;				
+				background-color: $shade2;
+				
+				th:first-child {
+					text-indent: 10px;
+				}			
 			}			
 		}
 	}
@@ -277,6 +308,7 @@ table.results {
 			a.resultIndicator {
 				background-color: $shade2;
 				border-bottom: $borderThicknessResult $primary solid;
+				cursor: pointer;
 				display: block;			
 				width: 100%;
 				
@@ -288,6 +320,31 @@ table.results {
 				}
 			}						
 		}		
+	}
+	
+	tbody td.fill, thead th.fill {
+		display: table-cell;
+		width: 25px;
+		//.size-2 & {	display: table-cell; width: (4.5 * ($colWidth + $gutter)) * 1px; }
+//		.size-3 & {	display: table-cell; width: (4 * ($colWidth + $gutter)) * 1px; }
+//		.size-4 & {	display: table-cell; width: (3.5 * ($colWidth + $gutter)) * 1px; }
+//		.size-5 & {	display: table-cell; width: (3 * ($colWidth + $gutter)) * 1px; }
+//		.size-6 & {	display: table-cell; width: (2.5 * ($colWidth + $gutter)) * 1px; }
+//		.size-7 & {	display: table-cell; width: (2 * ($colWidth + $gutter)) * 1px; }
+//		.size-8 & {	display: table-cell; width: (1.5 * ($colWidth + $gutter)) * 1px; }
+//		.size-9 & {	display: table-cell; width: (1 * ($colWidth + $gutter)) * 1px; }
+		
+		.size-2 & {	display: table-cell; width: 10 * $colWidth / 2 * 1px; }
+		.size-3 & {	display: table-cell; width: 9 * $colWidth / 2 * 1px; }
+		.size-4 & {	display: table-cell; width: 8 * $colWidth / 2 * 1px; }
+		.size-5 & {	display: table-cell; width: 7 * $colWidth / 2 * 1px; }
+		.size-6 & {	display: table-cell; width: 6 * $colWidth / 2 * 1px; }
+		.size-7 & {	display: table-cell; width: 5 * $colWidth / 2 * 1px; }
+		.size-8 & {	display: table-cell; width: 4 * $colWidth / 2 * 1px; }
+		.size-9 & {	display: table-cell; width: 3 * $colWidth / 2 * 1px; }
+		.size-10 & {	display: table-cell; width: 2 * $colWidth / 2 * 1px; }
+		.size-11 & {	display: table-cell; width: 1 * $colWidth / 2 * 1px; }
+		//.size-12 & {	display: table-cell; width: 1 * $colWidth / 2 * 1px; }
 	}	
 }
 
@@ -299,24 +356,28 @@ table.results {
 
 .tablewrap {
 	width: 100%;
-	overflow-x: scroll;
-	overflow-y: visible;
 	padding-top: 3em;
 	
-	//position: relative;
-	//border-right: $borderThickness $primary solid;
+	&.overflow {
+		overflow-x: scroll;
+		overflow-y: visible;
+		
 	
-	&:after {
-		content: "";
-		position: absolute;
-		width: 1 / 12 * $siteWidth * 1px;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#edeff1+0,edeff1+100&0+0,1+100 */
-		background: -moz-linear-gradient(left, $shade1RGBA0 0%, $shade1RGBA1 100%); /* FF3.6-15 */
-		background: -webkit-linear-gradient(left, $shade1RGBA0 0%,$shade1RGBA1 100%); /* Chrome10-25,Safari5.1-6 */
-		background: linear-gradient(to right, $shade1RGBA0 0%,$shade1RGBA1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00edeff1', endColorstr='#{$shade1}',GradientType=1 ); /* IE6-9 */
+		//position: relative;
+		//border-right: $borderThickness $primary solid;
+	
+		&:after {
+			content: "";
+			position: absolute;
+			width: 1 / 12 * $siteWidth * 1px;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#edeff1+0,edeff1+100&0+0,1+100 */
+			background: -moz-linear-gradient(left, $shade1RGBA0 0%, $shade1RGBA1 100%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(left, $shade1RGBA0 0%,$shade1RGBA1 100%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to right, $shade1RGBA0 0%,$shade1RGBA1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00edeff1', endColorstr='#{$shade1}',GradientType=1 ); /* IE6-9 */
+		}
 	}
 }

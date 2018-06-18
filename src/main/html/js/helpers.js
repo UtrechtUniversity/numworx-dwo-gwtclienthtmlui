@@ -77,3 +77,86 @@ Helpers.stretchIframeHeight = function(iframe) {
 	iframe.outerHeight(subpanelHeight+"px");
 }
 
+Helpers.setResultIndicatorColor = function ($el) {
+	var r, g, b, score;
+	score = parseInt($el.data("score"));
+	
+	if (score > 0) {
+       
+       b = 0;
+       g = parseInt( (255 * (score / 50)) );
+       r = parseInt( (255 * (1 - (score - 50) / 50)) );
+
+	   $el.css('border-color','rgb('+r+','+g+','+b+')' );
+   }
+}
+
+
+Helpers.tableSorterBubbleSort = function(tbody, index, attr, type, asc) { //bubblesort
+	// In Vanilla JS for performance	
+	console.log("sort");
+	
+	switching = true;
+	j = 0;
+	while (switching) {
+		j++; if (j > 250000) { break; } // safety stop to avoid endless loops, max 500 items to sort
+		
+		switching = false;
+				
+		tr = tbody.getElementsByTagName("TR");
+		
+		for (i = 0; i < tr.length; i++) {
+			shouldSwitch = false;
+			
+			row1 = tr[i];
+			row2 = tr[i+1];
+			if (!row2) break;
+			
+			val1 = 0;
+			val2 = 0;
+			
+			if (row1.children[index].firstChild && row1.children[index].firstChild.dataset) val1 = row1.children[index].firstChild.dataset[attr]; 
+			if (row2.children[index].firstChild && row2.children[index].firstChild.dataset) val2 = row2.children[index].firstChild.dataset[attr];
+									
+			if (type == "string") {
+				if ( (!asc && val2.localeCompare(val1) < 0) || (asc && val2.localeCompare(val1) > 0) ) { shouldSwitch = true; break; }
+			} else {
+				if ( (!asc && val2 < val1) || (asc && val2 > val1) ) { shouldSwitch = true; break; }
+			}
+						
+		}		
+		if (shouldSwitch == true) {	
+			console.log("switch");		
+			if (asc) tr[i].parentNode.insertBefore(tr[i + 1], tr[i]);
+			else {
+				(tr[i].parentNode).insertBefore(tr[i], tr[i+1].nextSibling);
+			}
+			switching = true;
+		}
+	}
+	return;
+}
+
+Helpers.clickSortButton = function() {
+	console.log("click sort");
+	$this = $(this);
+	$table = $this.parents('table');
+	tbody = $table.find('tbody').get(0);
+	index = $this.parent().index();
+	
+	asc = true;
+	if ($this.data("order") == "desc") asc = false;
+	
+	type = "int";
+	if ($this.data("type") == "string") type = "string";
+	
+	//attr = "score";
+	//if ($this.data("attr")) attr = $this.data("attr");
+	attr = "sortvalue";
+		
+	Helpers.tableSorterBubbleSort(tbody, index, attr, type, asc);	
+	
+	$('.sortButton').removeClass("active");
+	$this.addClass("active");	
+}
+

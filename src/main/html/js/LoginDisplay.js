@@ -25,6 +25,21 @@ LoginDisplay.prototype.disable = function() {
 	this.panel.hide();
 }
 
+LoginDisplay.prototype.showMessage = function(msg) {
+	console.log("showMessage");
+	console.log(msg);
+}
+LoginDisplay.prototype.showWarning = function(msg) {
+	console.log("showWarning");
+	console.log(msg);
+}
+LoginDisplay.prototype.hideMsgBox = function(msg) {
+	console.log("hide!");
+}
+
+
+
+
 LoginDisplay.prototype.login = function(event) {
 	event.preventDefault();
 	

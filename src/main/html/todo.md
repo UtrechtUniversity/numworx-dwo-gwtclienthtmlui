@@ -16,6 +16,8 @@
 * cross browser check
 * performance test op sorting (voldoet bubblesort?)
 
+* iPad homescreenstuff
+
 * icoontjes
 
 tabindex? keyboard selection?
@@ -31,3 +33,10 @@ tabindex? keyboard selection?
 * account menu
 * basic sorting
 * hovers buttons
+
+
+
+
+<meta
+name="apple-mobile-web-app-capable"
+content="yes">

@@ -77,6 +77,7 @@ function EditSchoolclassesDisplay() {
 
 EditSchoolclassesDisplay.prototype.show = function() {
 	this.$panel.show();
+	Helpers.stretchHeight( [ this.$changeStudentsTableBody, this.$changeTeachersTableBody, this.$changeModulesTableBody ]);
 }
 
 /*
@@ -92,12 +93,12 @@ EditSchoolclassesDisplay.prototype.init = function () {
 	this.$changeTeachersTableBody.html("");
 	this.$changeModulesTableBody.html("");
 	
-	Helpers.stretchHeight( [ this.$changeStudentsTableBody, this.$changeTeachersTableBody, this.$changeModulesTableBody ]);
+	
 }
 
 EditSchoolclassesDisplay.prototype.showSchoolClass = function(json) {	
 	console.log(json);
-	var schoolclass = json.jsObject;
+	var schoolclass = json;
 	
 	this.editSchoolclassForm.elements["classname"].value = schoolclass.schoolClassName;
 	console.log(schoolclass.registrationKey == "");
@@ -121,7 +122,7 @@ EditSchoolclassesDisplay.prototype.showSchoolClass = function(json) {
 }
 
 EditSchoolclassesDisplay.prototype.showStudents = function(json) {	
-	var students = json.jsObject, studentName;
+	var students = json, studentName;
 	
 	this.$changeStudentsTableBody.html("");
 	
@@ -144,8 +145,8 @@ EditSchoolclassesDisplay.prototype.showStudents = function(json) {
 }
 
 EditSchoolclassesDisplay.prototype.showTeachers = function(json) {	
-	var teachers = json.jsObject, teacherName;
-	
+	var teachers = json;//, teacherName;
+	var teacherName;
 	this.$changeTeachersTableBody.html("");
 	
 	// No Results
@@ -166,7 +167,7 @@ EditSchoolclassesDisplay.prototype.showTeachers = function(json) {
 }
 
 EditSchoolclassesDisplay.prototype.showShowModels = function(json) { // TODO: change function name @Gert
-	var modules = json.jsObject, moduleName;
+	var modules = json, moduleName;
 	this.$changeModulesTableBody.html("");
 	
 	// No Results
@@ -183,6 +184,7 @@ EditSchoolclassesDisplay.prototype.showShowModels = function(json) { // TODO: ch
 	
 	var i = 1;
 	for (var id in modules) { // TODO: probably change to array
+		//console.log(modules[id]);
 		moduleName = modules[id].name;
 		$row = this.$changeModulesRow.clone();
 		$row.find("#chooseModuleName").html( moduleName ).removeAttr("id");

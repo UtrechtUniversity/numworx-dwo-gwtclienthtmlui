@@ -40,7 +40,9 @@ input[type="submit"], input[type="button"], button {
 	}
 	&.left {
 		float: left;
-		
+	}
+	&.clearbtn {
+		clear: both;
 	}
 	&.single { margin-left: 100%; }
 	&.down { margin-top: 22 / 12 * 1em;}
@@ -54,6 +56,11 @@ input[type="submit"], input[type="button"], button {
 		//margin-right: ($gutter / 2) / ($siteWidth) * 100%;
 		//max-width: ((2/12 * $siteWidth) - ($gutter)) / $siteWidth * 100%;
 		//.col-4 & { max-width: ((4/12 * $siteWidth) - ($gutter)) / $siteWidth * 100%; }
+	}
+	&.center {
+		display: inherit;
+		margin-left: auto;
+		margin-right: auto;
 	}
 	&.bottom.left {
 		left: 0;
@@ -82,12 +89,19 @@ input[type="text"], input[type="password"] {
 	@include border-box;
 	@include border-radius($defaultRadius);	
 	
-	padding: 6px 2%;	
+	padding: 6px $gutter / 2 * 1px;	
 	width: 100%;
 	
 	label & {
 		margin-top: $elementMarginBottom; // in fact, this is the labels bottom margin
 		width: 100%; 
+	}
+	
+	&:disabled {
+		background-color: $shade1;
+		border-color: $shade12;
+		color: $shade12;
+		cursor: not-allowed;
 	}
 }
 
