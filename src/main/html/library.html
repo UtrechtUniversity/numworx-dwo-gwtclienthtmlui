@@ -1166,13 +1166,52 @@
 		
 		<section class="lightbox">
 			<header>
-				<span>Naam leerling</span><span>Opgave</span>
+				<!-- <div class="row"> -->
+					<!-- <div class="col-12"> -->
+						<span>Naam leerling</span>
+						<span class="strong">Opgave</span>
+					<!-- </div> -->
+					<span id="studentScoResultCloseButton" class="closeButton"></span>
+				<!-- </div> -->
 			</header>
 			<section>
-				[MOET NOG WORDEN AFGEMAAKT]
+				<iframe scr=""></iframe>
 			</section>
 			<footer>
-				Footer knoppen
+					<div class="row">
+						<form name="studentScoResultActions">				
+							<div class="col-3 options">
+								<label>Verzegelen voor deze leerling?</label>
+								<div class="option">
+									<input type="radio" name="seal" id="studentScoResultSealYes" value="1">
+									<label for="studentScoResultSealYes">Ja</label>
+								</div> 
+								<div class="option">
+									<input type="radio" name="seal" id="studentScoResultSealNo" value="0">
+									<label for="studentScoResultSealNo">Nee</label>
+								</div>
+							</div>
+					
+							<label for="studentScoResultAttempts" class="col-2 input">
+								Aantal pogingen
+								<input id="studentScoResultAttempts" name="attempts" type="text" value="" disabled="disabled" />
+							</label>
+						</form>
+					
+						<div class="col-4">
+							<p>Andere leerling</p>
+							<p><a href="javascript: void(0);" class="prev">
+								<svg viewBox="0 0 74 74" class="icon">
+									  <use xlink:href="#arrowLeft"></use>
+								</svg>Vorige</a>
+							   <a href="javascript: void(0);" class="next">
+								   Volgende<svg viewBox="0 0 74 74" class="icon">
+									  <use xlink:href="#arrowRight"></use>
+									</svg>
+							   </a>
+						   </p>
+						</div>
+					</div>
 			</footer>
 		</section>
 		

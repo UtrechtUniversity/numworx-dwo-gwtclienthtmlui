@@ -1,13 +1,23 @@
 function StudentScoResultDisplay() {
 	this.resultState = [];
+	
+	this.studentScoResultActionsForm = document.forms["studentScoResultActions"];
 		
 	// jQuery objects
 	this.$panel = jQuery("#studentScoResult");
 	this.$iframe = this.$panel.find("iframe");
+	this.$studentScoResultActionsForm = $("this.studentScoResultActionsForm");
 	
-	this.$closeButton = $("#studentScoResultCloseButton");
-	
+	this.$closeButton = $("#studentScoResultCloseButton");	
 	this.$closeButton.on('click', $.proxy(this.clickStudentScoResultCloseButton, this));
+	
+	this.$sealButton = $(this.studentScoResultActionsForm.elements["seal"]);
+	
+	this.$nameHeader = $("#studentScoResultName");
+	this.$activityHeader = $("#studentScoResultActivity");
+	
+	// Bind handlers
+	this.$sealButton.on('change', $.proxy(this.changeSealButton,this));	
 	
 	// Init
 	this.$panel.hide();
@@ -33,7 +43,14 @@ StudentScoResultDisplay.prototype.clear = function () {
 }
 
 StudentScoResultDisplay.prototype.init = function (state) {
+	var activeModule, activeStudent;
 	this.resultState = state;
+	
+	// Set header titles
+	activeModule = this.resultState.resultTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeModule].children[this.resultState.activeActivity];
+	activeStudent = this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeStudent];		
+	this.$nameHeader.html(activeStudent.givenName + " " + (activeStudent.insertion ? activeStudent.insertion+" ":"")  + activeStudent.familyName);
+	this.$activityHeader.html(activeModule.label);
 	
 	this.$iframe.attr('src', '' );
 }
@@ -61,6 +78,9 @@ StudentScoResultDisplay.prototype.hide = function () {
 StudentScoResultDisplay.prototype.requestClose = function () {
 	app.getPresenterFactory().getStudentScoResultPresenter().close(this.resultState);
 }
+StudentScoResultDisplay.prototype.seal = function () {
+	app.getPresenterFactory().getStudentScoResultPresenter().sealSingleActivity();
+}
 
 /*
  * EVENT HANDLERS
@@ -73,5 +93,10 @@ StudentScoResultDisplay.prototype.resizeIframe = function(e) {
 StudentScoResultDisplay.prototype.clickStudentScoResultCloseButton = function(event) {
 	event.preventDefault();
 	this.requestClose();	
+}
+
+StudentScoResultDisplay.prototype.changeSealButton = function(event) {
+	event.preventDefault();
+	if (event.target.value == 1) this.seal();	
 }
 

@@ -1373,16 +1373,7 @@
 				</div>
 				
 				<div class="row bar" id="barModulesStudents">
-					<div class="col-5">
-						<p>Deze modules voor deze klas verzegelen?</p>
-					</div>
-					<div class="col-1">
-						<form name="sealModuleActivities">
-							<div class="checkbox">
-								<input type="checkbox" name="seal" id="sealModuleActivitiesCheckbox" value="schooclassID"><label class="icon" for="sealModuleActivitiesCheckbox"></label>
-							</div>
-						</form>
-					</div>
+					
 					<div class="col-4">
 						Toon
 					</div>
@@ -1399,15 +1390,32 @@
 				</div>
 				
 				<div class="row bar" id="barActivitiesStudents">
+					
+					
 					<div class="col-5">
-						<a href="javascript:void(0);" id="barActivitiesStudentsBacklink"></a>
+						<p>Deze modules voor deze klas verzegelen?</p>
 					</div>
-					<div class="col-6">
+					<div class="col-1">
+						<form name="sealModuleActivities">
+							<div class="checkbox">
+								<input type="checkbox" name="seal" id="sealModuleActivitiesCheckbox" value="schooclassID"><label class="icon" for="sealModuleActivitiesCheckbox"></label>
+							</div>
+						</form>
+					</div>
+					
+					<div class="col-5">
 						Toon
 					</div>
 					<div class="col-1">
 						log-dld
 					</div>
+					
+					<div class="clear"></div>
+					
+					<div class="col-12">
+						<a href="javascript:void(0);" id="barActivitiesStudentsBacklink"></a>
+					</div>
+					
 				</div>
 				
 			</section>
@@ -1421,14 +1429,51 @@
 		-->
 		<section id="studentScoResult" class="lightbox">
 			<header>
-				<span>Naam leerling</span><span>Opgave</span>
-				<span id="studentScoResultCloseButton" class="closeButton"></span>
+				<!-- <div class="row"> -->
+					<!-- <div class="col-12"> -->
+						<span id="studentScoResultName">Naam leerling</span><span id="studentScoResultActivity" class="strong">Opgave</span>
+					<!-- </div> -->
+					<span id="studentScoResultCloseButton" class="closeButton"></span>
+				<!-- </div> -->
 			</header>
 			<section>
 				<iframe scr=""></iframe>
 			</section>
 			<footer>
-				Footer knoppen
+					<div class="row">
+						<form name="studentScoResultActions">				
+							<div class="col-3 options">
+								<label>Verzegelen voor deze leerling?</label>
+								<div class="option">
+									<input type="radio" name="seal" id="studentScoResultSealYes" value="1">
+									<label for="studentScoResultSealYes">Ja</label>
+								</div> 
+								<div class="option">
+									<input type="radio" name="seal" id="studentScoResultSealNo" value="0">
+									<label for="studentScoResultSealNo">Nee</label>
+								</div>
+							</div>
+					
+							<label for="studentScoResultAttempts" class="col-2 input">
+								Aantal pogingen
+								<input id="studentScoResultAttempts" name="attempts" type="text" value="" disabled="disabled" />
+							</label>
+						</form>
+					
+						<div class="col-4">
+							<p>Andere leerling</p>
+							<p><a href="javascript: void(0);" class="prev">
+								<svg viewBox="0 0 74 74" class="icon">
+									  <use xlink:href="#arrowLeft"></use>
+								</svg>Vorige</a>
+							   <a href="javascript: void(0);" class="next">
+								   Volgende<svg viewBox="0 0 74 74" class="icon">
+									  <use xlink:href="#arrowRight"></use>
+									</svg>
+							   </a>
+						   </p>
+						</div>
+					</div>
 			</footer>
 		</section>
 		<!-- end studentScoResultDisplay (lightbox) -->

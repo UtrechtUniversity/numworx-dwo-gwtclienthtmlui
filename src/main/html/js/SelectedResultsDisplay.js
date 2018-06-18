@@ -169,7 +169,7 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 			//matrix[i][j].callback = function() { this.activitiesStudent(modules[ activeModules[amId] ], studentId) };
 			//matrix[i][j].callback = $.proxy(this.activitiesStudent, this, modules[ activeModules[amId] ], studentId );
 			matrix[i][j].callback = this.activitiesStudent;
-			matrix[i][j].params = { module: modules[ activeModules[amId] ], studentId: studentId };
+			matrix[i][j].params = { moduleId: activeModules[amId], module: modules[ activeModules[amId] ], studentId: studentId };
 			j++;
 		}	
 		i++;	
@@ -336,6 +336,7 @@ SelectedResultsDisplay.prototype.modulesStudents = function() {
 
 SelectedResultsDisplay.prototype.activitiesStudent = function(params) {
 	var matrix = this.buildMatrixActivitiesStudentInModule(params.module, params.studentId);
+	this.resultState.activeModule = params.moduleId;
 	this.plotMatrix(matrix);
 	this.$bars.hide();
 	this.$barActivitiesStudent.show();
@@ -345,6 +346,7 @@ SelectedResultsDisplay.prototype.activitiesStudent = function(params) {
 
 SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
 	var matrix = this.buildMatrixActivitiesStudentsInModule(params.module);
+	this.resultState.activeModule = params.moduleId;
 	this.plotMatrix(matrix);
 	this.$bars.hide();
 	this.$barActivitiesStudents.show();
@@ -380,10 +382,12 @@ SelectedResultsDisplay.prototype.updateResultTree = function (resultsTree, stude
  */
 
 SelectedResultsDisplay.prototype.showStudentResults = function(scoId, studentId) {
+	this.resultState.activeActivity = scoId;
+	this.resultState.activeStudent = studentId;
 	console.log(this.resultState);
 	console.log(scoId);
 	console.log(studentId);
-	console.log(this.resultState.activeSchoolClass);
+	console.log(this.resultState.activeSchoolClass); 
 	app.getPresenterFactory().getSelectedResultsPresenter().showStudentResults(this.resultState, scoId, studentId, this.resultState.activeSchoolClass);
 }
 
