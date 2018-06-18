@@ -59,7 +59,7 @@ StudentScoResultDisplay.prototype.hide = function () {
  */
 
 StudentScoResultDisplay.prototype.requestClose = function () {
-	app.getPresenterFactory().getStudentScoResultPresenter().close();
+	app.getPresenterFactory().getStudentScoResultPresenter().close(this.resultState);
 }
 
 /*
