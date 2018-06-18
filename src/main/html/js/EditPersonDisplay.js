@@ -46,7 +46,10 @@ EditPersonDisplay.prototype.disableInputFieldsTeacher = function () {
 		this.editPersonDetailsForm.elements[id].disabled = true;	
 	}
 }
-EditPersonDisplay.prototype.disableInputFieldsStudent = function () {	
+EditPersonDisplay.prototype.disableInputFieldsRegularStudent = function () {	
+	this.editPersonDetailsForm.elements["userName"].disabled = true;
+	this.editPersonDetailsForm.elements["familyName"].disabled = true;
+	this.editPersonDetailsForm.elements["givenName"].disabled = true;
 	this.editPersonDetailsForm.elements["password"].disabled = true;	
 	this.editPersonDetailsForm.elements["role"].disabled = true;	
 }
@@ -71,6 +74,7 @@ EditPersonDisplay.prototype.clear = function () {
 }
 
 EditPersonDisplay.prototype.setUser = function (role,json) {
+	console.log("set user");
 	//var email = json.email;
 	var userName = json.userName;
 	var familyName = json.familyName;
@@ -93,12 +97,26 @@ EditPersonDisplay.prototype.setUser = function (role,json) {
 		this.removeButtons();
 	}
 	if (this.role == "STUDENT") { 
-		this.disableInputFieldsStudent();	
+		this.disableInputFieldsRegularStudent();	
 	}
 }
 
 EditPersonDisplay.prototype.setSingleSchoolStudent = function (json) {
 	console.log("setSingleSchoolStudent");
+	
+	var userName = json.userName;
+	var familyName = json.familyName;
+	var givenName = json.givenName;
+	var insertion = json.insertion;
+
+	//this.editPersonDetailsForm.elements["email"].value = this.email;
+	this.editPersonDetailsForm.elements["userName"].value = userName;
+	this.editPersonDetailsForm.elements["familyName"].value = familyName;
+	this.editPersonDetailsForm.elements["givenName"].value = givenName;
+	this.editPersonDetailsForm.elements["insertion"].value = insertion;
+	this.editPersonDetailsForm.elements["role"].value = role == "TEACHER" ? "docent" : "leerling";
+	
+	this.disableInputFieldsStudent();	
 }
 
 
