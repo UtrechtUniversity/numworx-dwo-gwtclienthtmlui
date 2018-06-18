@@ -118,6 +118,7 @@ PersonsDisplay.prototype.showPersons = function(json) {
 		$row.find("#personsTableGivenName").html( persons[id].givenName ).removeAttr("id");
 		$row.find("#personsTableInsertion").html( persons[id].insertion ).removeAttr("id");
 		$row.find("#personsTableFamilyName").html( persons[id].familyName ).removeAttr("id");
+		$row.find("#personsTableSingleSchool").html( persons[id].singleSchool ? "ja" : "" ).removeAttr("id");
 				 
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;
