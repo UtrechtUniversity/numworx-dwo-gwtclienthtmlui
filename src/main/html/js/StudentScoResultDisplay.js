@@ -53,10 +53,10 @@ StudentScoResultDisplay.prototype.init = function (state) {
 	
 	// Set header titles
 	activeModule = this.resultState.resultsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeModule].children[this.resultState.activeActivity];
-	//activeStudent = this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeStudent];		
+	activeStudent = this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeStudent];		
 	
 	
-	//this.$nameHeader.html(activeStudent.givenName + " " + (activeStudent.insertion ? activeStudent.insertion+" ":"")  + activeStudent.familyName);
+	this.$nameHeader.html(activeStudent.givenName + " " + (activeStudent.insertion ? activeStudent.insertion+" ":"")  + activeStudent.familyName);
 	this.$activityHeader.html(activeModule.label);
 	if (activeModule.children[this.resultState.activeStudent] == "completed") this.studentScoResultActionsForm.elements["seal"][0].checked = true;
 	else this.studentScoResultActionsForm.elements["seal"] = this.studentScoResultActionsForm.elements["seal"][1].checked = true;
