@@ -219,7 +219,7 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.copyAtoB = function(list) {
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.moveAtoB = function(list) {
 	console.log(list);
-	app.getPresenterFactory().getCopyOrMoveStudentToSchoolclassPresenter().CopyStudentsToClassB(list);
+	app.getPresenterFactory().getCopyOrMoveStudentToSchoolclassPresenter().MoveStudentsToClassB(list);
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.copyBtoA = function(list) {
 	console.log(list);
