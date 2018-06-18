@@ -86,8 +86,8 @@ StudentScoResultDisplay.prototype.hide = function () {
 StudentScoResultDisplay.prototype.requestClose = function () {
 	app.getPresenterFactory().getStudentScoResultPresenter().close(this.resultState);
 }
-StudentScoResultDisplay.prototype.seal = function () {
-	app.getPresenterFactory().getStudentScoResultPresenter().sealSingleActivity();
+StudentScoResultDisplay.prototype.seal = function (state) {
+	app.getPresenterFactory().getStudentScoResultPresenter().sealSingleActivity(state);
 }
 
 /*
@@ -105,6 +105,7 @@ StudentScoResultDisplay.prototype.clickStudentScoResultCloseButton = function(ev
 
 StudentScoResultDisplay.prototype.changeSealButton = function(event) {
 	event.preventDefault();
-	if (event.target.value == 1) this.seal();	
+	if (event.target.value == 1) this.seal(true);	
+	else this.seal(false);
 }
 
