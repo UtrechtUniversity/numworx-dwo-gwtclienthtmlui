@@ -131,12 +131,20 @@
   
 	<section id="loginDisplayPanel" class="panel">
 		<div class="container">
+			<div id="loginDisplayPanelMessageBox">
+				<div class="block primary">	
+					<div class="content">
+						msg
+					</div>
+				</div>		
+			</div>
 			<div id="loginBox">
 				<div class="block primary">			
-					<form id="formLogin" action="javascript: void(0);" method="POST">
+					<form id="formLogin" name="login" action="javascript: void(0);" method="POST">
 						<label for="username">&nbsp;<input type="text" name="username" placeholder="Gebruikersnaam" /></label>
 						<label for="password">&nbsp;<input type="password" name="password" placeholder="Wachtwoord" /></label>
 						<input type="submit" class="right" name="submit" value="Aanmelden" />
+						<span id="loginDisplayPanelWarningBox"></span>
 					</form>
 				</div>
 			

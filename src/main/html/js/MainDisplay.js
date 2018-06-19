@@ -86,15 +86,9 @@ function MainDisplay() {
 	
 	// Trigger window resize for initial help sizing
 	$(window).trigger('resize');
-			
-	// Init
-	this.showLoginView(); // TODO: Gert moet de login view aanroepen nadat alles geinitialiseerd is.
 }
 
-MainDisplay.prototype.showLoginView = function() {
-	this.$panel.hide();
-	this.loginDisplay.show();
-}
+
 
 MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 	this.$panels.hide();
@@ -131,6 +125,11 @@ MainDisplay.prototype.setPresentationName = function (presentationName) {
  * VIEW FUNCTIONS
  * Maps to java implementation
  */
+
+MainDisplay.prototype.showLoginView = function() {
+	this.$panel.hide();
+	this.loginDisplay.show();
+}
 
 MainDisplay.prototype.showWelcomeView = function() {
 	this.initMainView();

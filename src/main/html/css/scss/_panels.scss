@@ -297,10 +297,25 @@ body {
 		width: 580px;		
 	}
 	
+	#loginDisplayPanelMessageBox {
+		display: none;
+		left: 0;
+		position: absolute;
+		top: 175px;
+		width: 240 / 580 * 100%;
+		
+		.block.primary {
+			background-color: $primaryDark;
+			@include border-radius($defaultRadius);
+			color: $white;
+			padding: $gutter * 1px;
+		}
+	}
+	
 	#loginBox {
 		color: $primaryLight;
 		left: 270 / 580 * 100%;
-		margin-top: 123px;
+		margin-top: 175px;
 		position: relative;
 		width: 310 / 580 * 100%;
 		
@@ -331,6 +346,7 @@ body {
 			}
 			input[type="submit"] {
 				margin-top: $gutter * 1px;
+				margin-bottom: $rowMarginBottom;
 			}
 		}
 		
@@ -349,6 +365,17 @@ body {
 		a {
 			color: $white;
 			text-decoration: none;
+		}
+		
+		#loginDisplayPanelWarningBox {
+			background-color: $black;
+			@include border-box();
+			@include border-radius($defaultRadius);
+			color: $white;
+			display:none;
+			float: left;
+			padding: $gutter * 1px;
+			width: 100%;
 		}
 	}
 }
