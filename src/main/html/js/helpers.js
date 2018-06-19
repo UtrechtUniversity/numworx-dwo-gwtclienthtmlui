@@ -99,7 +99,7 @@ Helpers.setResultIndicatorColor = function ($el) {
 		$el.addClass('result3'); return
 	}  else if (score < 80) {
 		$el.addClass('result2'); return
-	}  else if (score < 100) {
+	}  else if (score <= 100) {
 		$el.addClass('result1'); return
 	}
 }
