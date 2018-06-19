@@ -58,8 +58,9 @@ StudentScoResultDisplay.prototype.init = function (state) {
 	
 	this.$nameHeader.html(activeStudent.givenName + " " + (activeStudent.insertion ? activeStudent.insertion+" ":"")  + activeStudent.familyName);
 	this.$activityHeader.html(activeModule.label);
+	
 	if (activeModule.children[this.resultState.activeStudent] == "completed") this.studentScoResultActionsForm.elements["seal"][0].checked = true;
-	else this.studentScoResultActionsForm.elements["seal"] = this.studentScoResultActionsForm.elements["seal"][1].checked = true;
+	else this.studentScoResultActionsForm.elements["seal"][1].checked = true;
 	
 	this.$iframe.attr('src', '' );
 }
