@@ -66,6 +66,7 @@ StudentScoResultDisplay.prototype.init = function (state) {
 
 
 StudentScoResultDisplay.prototype.openUrl = function (url) {
+	console.log(url);
 	this.$iframe.attr('src', url );
 }
 
