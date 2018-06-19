@@ -13,6 +13,7 @@ function SelectedResultsDisplay() {
 	// Bottom bars
 	this.$bars = this.$panel.find(".bar");
 	this.$barModulesStudents = $("#barModulesStudents").hide();
+	
 	this.$barActivitiesStudent = $("#barActivitiesStudent").hide();
 	this.$barActivitiesStudentBacklink = $("#barActivitiesStudentBacklink");
 	this.$barActivitiesStudents = $("#barActivitiesStudents").hide();
@@ -29,8 +30,10 @@ function SelectedResultsDisplay() {
 	this.$selectedResultsRowCell = this.$selectedResultsTable.find("#selectedResultsTableRepeatableCell").detach();
 	this.$selectedResultsRow = this.$selectedResultsTable.find("tbody tr").detach();
 	
-	// Bind handlers
+	this.$filterIndicators = $(".filterIndicators");
 	
+	// Bind handlers
+	this.$filterIndicators.on('click', $.proxy(this.clickFilterIndicator, this));
 	
 	// Init
 	this.$panel.hide();
@@ -332,6 +335,16 @@ SelectedResultsDisplay.prototype.computeActivityScoreForStudent = function(activ
 	return Math.round(total / totalCount);
 }
 
+SelectedResultsDisplay.prototype.filterIndicator = function(nr) {
+	this.$selectResultsTableWrap.find(".resultIndicator").hide();
+	this.$selectResultsTableWrap.find(".result"+nr).show();
+}
+SelectedResultsDisplay.prototype.filterIndicatorReset = function() {
+	console.log("reset");
+	this.$selectResultsTableWrap.find(".resultIndicator").show();
+}
+
+
 /*
  * VIEWS
  */
@@ -431,3 +444,21 @@ SelectedResultsDisplay.prototype.clickResultIndicator = function(params) {
 	console.log(params)
 	this.showStudentResults(params.scoId, params.studentId);	
 }
+
+SelectedResultsDisplay.prototype.clickFilterIndicator = function(params) {
+	event.preventDefault();
+	$el = $(event.target);
+	hadClass = $el.hasClass("active");
+	
+	this.$filterIndicators.find("a").removeClass("active");
+
+	if (hadClass) {		
+		this.filterIndicatorReset();
+	} else {
+		var nr = $el.data('filter');
+		if (nr < -1 || nr > 4) return;	
+		$el.addClass("active")	
+		this.filterIndicator(nr);
+	}	
+}
+
