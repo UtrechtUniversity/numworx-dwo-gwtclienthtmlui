@@ -4,6 +4,7 @@ function SelectedResultsDisplay() {
 	
 	// Form
 	this.sealModuleActivitiesForm = document.forms["sealModuleActivities"];
+	this.startCompareClassForm = document.forms["startCompareClass"];
 	 
 	
 	// jQuery objects
@@ -18,8 +19,7 @@ function SelectedResultsDisplay() {
 	this.$barActivitiesStudentBacklink = $("#barActivitiesStudentBacklink");
 	this.$barActivitiesStudents = $("#barActivitiesStudents").hide();
 	this.$barActivitiesStudentsBacklink = $("#barActivitiesStudentsBacklink");
-	
-	
+		
 	this.$selectResultsTableWrap = $("#selectedResultsTableWrap");
 	
 	this.$selectedResultsTable = $("#selectedResultsTable").detach();	
@@ -32,8 +32,11 @@ function SelectedResultsDisplay() {
 	
 	this.$filterIndicators = $(".filterIndicators");
 	
+	this.$startCompareClassForm = $(this.startCompareClassForm);
+	
 	// Bind handlers
 	this.$filterIndicators.on('click', $.proxy(this.clickFilterIndicator, this));
+	this.$startCompareClassForm.on('submit', $.proxy(this.submitStartCompareClassForm, this));
 	
 	// Init
 	this.$panel.hide();
@@ -41,6 +44,8 @@ function SelectedResultsDisplay() {
 
 SelectedResultsDisplay.prototype.show = function() {
 	this.$panel.show();	
+	
+	if (!app.getPresenterFactory().getSelectedResultsPresenter().hasCompareClasses()) this.$startCompareClassForm.hide();
 }
 
 /*
@@ -419,6 +424,10 @@ SelectedResultsDisplay.prototype.showStudentResults = function(scoId, studentId)
 	app.getPresenterFactory().getSelectedResultsPresenter().showStudentResults(this.resultState, scoId, studentId, this.resultState.activeSchoolClass);
 }
 
+SelectedResultsDisplay.prototype.compareClass = function() {
+	app.getPresenterFactory().getSelectedResultsPresenter().compareSchoolClasses(this.resultState);
+}
+
 /*
  * EVENT HANDLERS
  */
@@ -440,13 +449,13 @@ SelectedResultsDisplay.prototype.clickBackToModulesStudents = function(event) {
 	this.modulesStudents();
 }
 
-SelectedResultsDisplay.prototype.clickResultIndicator = function(params) {
+SelectedResultsDisplay.prototype.clickResultIndicator = function(event) {
 //	event.preventDefault();		
 	console.log(params)
 	this.showStudentResults(params.scoId, params.studentId);	
 }
 
-SelectedResultsDisplay.prototype.clickFilterIndicator = function(params) {
+SelectedResultsDisplay.prototype.clickFilterIndicator = function(event) {
 	event.preventDefault();
 	$el = $(event.target);
 	hadClass = $el.hasClass("active");
@@ -461,5 +470,10 @@ SelectedResultsDisplay.prototype.clickFilterIndicator = function(params) {
 		$el.addClass("active")	
 		this.filterIndicator(nr);
 	}	
+}
+
+SelectedResultsDisplay.prototype.submitStartCompareClassForm = function(event) {
+	event.preventDefault();			
+	this.compareClass();
 }
 

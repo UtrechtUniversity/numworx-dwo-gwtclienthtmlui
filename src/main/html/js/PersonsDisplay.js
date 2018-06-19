@@ -35,6 +35,9 @@ function PersonsDisplay() {
 
 PersonsDisplay.prototype.show = function() {
 	this.$panel.show();
+	
+	if (!app.getPresenterFactory().getPersonsPresenter().hasImportPersons()) this.$personsImportForm.hide();
+	
 	Helpers.stretchHeight([ this.$personsTableBody ]);
 }
 
