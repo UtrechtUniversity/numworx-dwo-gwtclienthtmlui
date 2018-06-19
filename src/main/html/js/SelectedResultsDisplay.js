@@ -387,6 +387,7 @@ SelectedResultsDisplay.prototype.clear = function () {
 }
 
 SelectedResultsDisplay.prototype.init = function(resultState) {
+	console.log("init SelectedResultsDisplay");
 	console.log(resultState);
 	this.resultState = resultState;
 	this.modulesStudents();	
