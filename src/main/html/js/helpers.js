@@ -78,17 +78,30 @@ Helpers.stretchIframeHeight = function(iframe) {
 }
 
 Helpers.setResultIndicatorColor = function ($el) {
-	var r, g, b, score;
-	score = parseInt($el.data("score"));
+	// OLD STYLING smooth scale
+	// var r, g, b, score;
+	// 	score = parseInt($el.data("score"));
+	//
+	// 	if (score > 0) {
+	//
+	//        b = 0;
+	//        g = parseInt( (255 * (score / 50)) );
+	//        r = parseInt( (255 * (1 - (score - 50) / 50)) );
+	//
+	// 	   $el.css('border-color','rgb('+r+','+g+','+b+')' );
+	//    }
 	
-	if (score > 0) {
-       
-       b = 0;
-       g = parseInt( (255 * (score / 50)) );
-       r = parseInt( (255 * (1 - (score - 50) / 50)) );
-
-	   $el.css('border-color','rgb('+r+','+g+','+b+')' );
-   }
+	var score = parseInt($el.data("score"));
+	
+	if (score < 10) {
+		$el.addClass('result4'); return
+	} else if (score < 50) {
+		$el.addClass('result3'); return
+	}  else if (score < 80) {
+		$el.addClass('result2'); return
+	}  else if (score < 100) {
+		$el.addClass('result1'); return
+	}
 }
 
 

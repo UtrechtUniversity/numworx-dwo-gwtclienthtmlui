@@ -318,6 +318,11 @@ table.results {
 					background-color: $primary;
 					color: $white;
 				}
+				
+				&.result1 {	border-color: $scoreIndicator1;	}
+				&.result2 {	border-color: $scoreIndicator2;	}
+				&.result3 {	border-color: $scoreIndicator3;	}
+				&.result4 {	border-color: $scoreIndicator4;	}
 			}						
 		}		
 	}
