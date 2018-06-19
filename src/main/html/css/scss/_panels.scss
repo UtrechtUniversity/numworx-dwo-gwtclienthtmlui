@@ -775,3 +775,29 @@ section.lightbox {
 	background: transparent url(../images/bg-numworx-logo.png) no-repeat bottom right;
 	background-size: contain;
 }
+
+
+.filterIndicators {
+	border-bottom: $borderThickness $primary solid;
+	display: inline-block;
+	padding-bottom: $borderThickness;
+	
+	a {		
+		background-color: $primaryLight;
+		border: $borderThickness $shade11 solid;
+		@include border-radius($defaultRadius);
+		color: $black;
+		display: inline-block;
+		font-size: 12 / 17 * 1em;
+		padding: 3px 9px;
+		
+	}
+	&.result1 a { background-color: $scoreIndicator1; }
+	&.result2 a { background-color: $scoreIndicator2; }
+	&.result3 a { background-color: $scoreIndicator3; }
+	&.result4 a { background-color: $scoreIndicator4; }
+}
+
+
+
+

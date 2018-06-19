@@ -14,6 +14,7 @@ function ResultsDisplay() {
 	
 	// jQuery objects
 	this.$panel = jQuery("#resultsDisplay");
+	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
 	
 	this.$chooseClassModuleForm = $(this.chooseClassModuleForm);	
 	
@@ -119,6 +120,10 @@ ResultsDisplay.prototype.clear = function () {
 		for (var i = 0; i < this.chooseClassModuleForm.elements['select[]'].length; i++) this.chooseClassModuleForm.elements['select[]'][i].checked = false;
 	}
 	this.chooseClassModuleFormToggle();
+}
+
+ResultsDisplay.prototype.setHelp = function(url) {
+	this.$helpContentIFrame.attr('src', url );
 }
 
 ResultsDisplay.prototype.setResultTree = function (resultTree, studentsTree) {

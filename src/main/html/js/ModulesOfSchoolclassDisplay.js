@@ -14,6 +14,8 @@ function ModulesOfSchoolclassDisplay() {
 			
 	// jQuery objects
 	this.$panel = jQuery("#modulesOfSchoolclassDisplay");
+	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
+	
 	this.$treeWrapper = jQuery("#modulesOfSchoolclassDisplayTreeWrapper");
 	this.$tree = null;
 	
@@ -142,6 +144,9 @@ ModulesOfSchoolclassDisplay.prototype.clear = function () {
 ModulesOfSchoolclassDisplay.prototype.init = function () {
 	console.log("init");
 	Helpers.stretchHeight( [this.$treeWrapper, this.$selectTableBody] );
+}
+ModulesOfSchoolclassDisplay.prototype.setHelp = function(url) {
+	this.$helpContentIFrame.attr('src', url );
 }
 
 ModulesOfSchoolclassDisplay.prototype.setEmptyTableMessageModules = function () {

@@ -1,6 +1,7 @@
 function SelectStudentResultsDisplay() {	
 	// jQuery objects
 	this.$panel = jQuery("#modulesDisplayPanel");
+	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
 	this.$iframe = this.$panel.find("iframe");
 	
 	// Init
@@ -27,6 +28,10 @@ SelectStudentResultsDisplay.prototype.clear = function () {
 
 SelectStudentResultsDisplay.prototype.init = function (context) {
 	this.$iframe.attr('src', '' );
+}
+
+SelectStudentResultsDisplay.prototype.setHelp = function(url) {
+	this.$helpContentIFrame.attr('src', url );
 }
 
 

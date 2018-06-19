@@ -17,7 +17,7 @@ function AccountDisplay() {
 	
 	// jQuery objects
 	this.$panel = jQuery("#accountDisplayPanel");
-	this.$helpContentIFrame = this.$panel.find("iframe").first();
+	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
 	this.$schoolLoginsRow = $(this.updateSchoolLoginsViewForm).find("tbody tr").detach();
 	this.$schoolLoginsTableBody = $(this.updateSchoolLoginsViewForm).find("tbody");
 	

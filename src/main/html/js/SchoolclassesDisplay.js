@@ -8,6 +8,7 @@ function SchoolclassesDisplay() {
 	
 	// jQuery objects
 	this.$panel = jQuery("#schoolclassesDisplayPanel");
+	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
 	
 	this.$chooseSchoolclassForm = $(this.chooseSchoolclassForm);
 	this.$chooseSchoolclassRow = this.$chooseSchoolclassForm.find("tbody tr").detach();
@@ -45,8 +46,10 @@ SchoolclassesDisplay.prototype.init = function () {
 	this.addSchoolclassForm.elements["useClasstree"][1].checked = true;
 	this.addSchoolclassForm.elements["useClasskey"][0].checked = false;
 	this.addSchoolclassForm.elements["useClasskey"][1].checked = true;
-	
-	
+}
+
+SchoolclassesDisplay.prototype.setHelp = function(url) {
+	this.$helpContentIFrame.attr('src', url );
 }
 
 SchoolclassesDisplay.prototype.updateView = function(json) {

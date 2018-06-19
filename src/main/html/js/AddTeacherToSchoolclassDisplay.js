@@ -10,6 +10,7 @@ function AddTeacherToSchoolclassDisplay() {
 	
 	// jQuery objects
 	this.$panel = jQuery("#addTeacherToSchoolclassDisplay");
+	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
 	
 	this.$addTeacherSearchForm = $(this.addTeacherSearchForm);
 	this.$addTeacherAddForm = $(this.addTeacherAddForm);
@@ -71,6 +72,9 @@ AddTeacherToSchoolclassDisplay.prototype.clear = function () {
 AddTeacherToSchoolclassDisplay.prototype.init = function () {
 	console.log("init");
 	Helpers.stretchHeight([ this.$addTeacherTableBody ]);
+}
+AddTeacherToSchoolclassDisplay.prototype.setHelp = function(url) {
+	this.$helpContentIFrame.attr('src', url );
 }
 
 AddTeacherToSchoolclassDisplay.prototype.setSchoolClass = function(schoolclass) {

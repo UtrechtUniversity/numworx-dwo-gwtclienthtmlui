@@ -11,6 +11,7 @@ function PersonsDisplay() {
 	
 	// jQuery objects
 	this.$panel = jQuery("#personsDisplay");
+	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
 	
 	this.$personsSearchForm = $(this.personsSearchForm);
 	this.$personsEditForm = $(this.personsEditForm);
@@ -93,7 +94,10 @@ PersonsDisplay.prototype.clear = function () {
 
 PersonsDisplay.prototype.init = function (json) {
 	console.log("init");
-	
+}
+
+PersonsDisplay.prototype.setHelp = function(url) {
+	this.$helpContentIFrame.attr('src', url );
 }
 
 PersonsDisplay.prototype.showPersons = function(json) {

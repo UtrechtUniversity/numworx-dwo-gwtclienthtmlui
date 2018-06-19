@@ -8,6 +8,7 @@ function SelectedResultsDisplay() {
 	
 	// jQuery objects
 	this.$panel = jQuery("#selectedResultsDisplay");
+	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
 	
 	// Bottom bars
 	this.$bars = this.$panel.find(".bar");
@@ -375,8 +376,11 @@ SelectedResultsDisplay.prototype.clear = function () {
 SelectedResultsDisplay.prototype.init = function(resultState) {
 	console.log(resultState);
 	this.resultState = resultState;
-	this.modulesStudents();
-	
+	this.modulesStudents();	
+}
+
+SelectedResultsDisplay.prototype.setHelp = function(url) {
+	this.$helpContentIFrame.attr('src', url );
 }
 
 SelectedResultsDisplay.prototype.updateResultTree = function (resultsTree, studentsTree) {

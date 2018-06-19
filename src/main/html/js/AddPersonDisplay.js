@@ -9,6 +9,7 @@ function AddPersonDisplay() {
 	
 	// jQuery objects
 	this.$panel = jQuery("#addPersonDisplay");
+	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
 	
 	this.$addPersonForm = $(this.addPersonForm);
 	// this.$addPersonSchoolclassesForm = $(this.addPersonSchoolclassesForm);
@@ -59,7 +60,9 @@ AddPersonDisplay.prototype.clear = function () {
 }
 AddPersonDisplay.prototype.init = function () {
 	console.log("init");
-	
+}
+AddPersonDisplay.prototype.setHelp = function(url) {
+	this.$helpContentIFrame.attr('src', url );
 }
 
 AddPersonDisplay.prototype.showSchoolClasses = function(json) {

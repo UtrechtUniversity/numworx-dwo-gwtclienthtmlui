@@ -12,6 +12,7 @@ function EditPersonDisplay() {
 	
 	// jQuery objects
 	this.$panel = jQuery("#editPersonDisplay");
+	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
 	
 	this.$editPersonDetailsForm = $(this.editPersonDetailsForm);
 	this.$editPersonSchoolclassesForm = $(this.editPersonSchoolclassesForm);
@@ -71,6 +72,9 @@ EditPersonDisplay.prototype.clear = function () {
 	this.editPersonDetailsForm.elements["givenName"].value = "";
 	this.editPersonDetailsForm.elements["insertion"].value = "";
 	this.editPersonDetailsForm.elements["role"].value = "";	
+}
+EditPersonDisplay.prototype.setHelp = function(url) {
+	this.$helpContentIFrame.attr('src', url );
 }
 
 EditPersonDisplay.prototype.setUser = function (role,json) {
