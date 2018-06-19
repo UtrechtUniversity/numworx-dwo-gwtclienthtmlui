@@ -109,7 +109,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 			$rowCell = this.$selectedResultsRowCell.clone();
 			$rowCell.html("");
 			if (matrix[i][j].label != "") {
-				$value = $("<a class=\"resultIndicator\">" + matrix[i][j].label +"</a>");
+				$value = $("<a class=\"resultIndicator\" title=\""+matrix[i][j].label+"\">" + matrix[i][j].label +"</a>");
 				$value.attr("data-score", matrix[i][j].label );
 				$value.attr("data-sortvalue", matrix[i][j].label );
 				Helpers.setResultIndicatorColor($value);
@@ -243,7 +243,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function
 		for (var stuScoId in module.children[actId].children) { 
 			if (module.children[actId].children[stuScoId]["user-id"] == studentId) {
 				matrix[1][j] = {};
-				matrix[1][j].label = module.children[actId].children[stuScoId].sumScore;
+				matrix[1][j].label = module.children[actId].children[stuScoId].sumScore+" in "+module.children[actId].children[stuScoId].totalTime;
 				
 				matrix[1][j].callback = this.clickResultIndicator;		
 				matrix[1][j].params = { scoId: actId, studentId: studentId };
@@ -285,20 +285,28 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 		j = 1;
 		for (var actId in module.children) {
 			matrix[i][j] = {};
-			matrix[i][j].label = this.computeActivityScoreForStudent(module.children[actId], studentId);
-			matrix[i][j].callback = this.clickResultIndicator;
-			//for (var scoId in module.children[actId].children) // loop over activities
-			//	if (module.children[actId].children[scoId]["user-id"] == studentId) break;
+			score = null;
+			time = null;
 			
+			for (var scoId in module.children[actId].children) { // Loop over activities
+				if (module.children[actId].children[scoId]["user-id"] == studentId) { // Select student
+					scoreSet = true;
+					score = module.children[actId].children[scoId].sumScore; 
+					time = module.children[actId].children[scoId].totalTime; 
+				}	
+			}
+			
+			if (score != null || time != null) {
+				matrix[i][j].label = score + " in " + time;
+				matrix[i][j].callback = this.clickResultIndicator;
+			} else {
+				matrix[i][j].label = "";
+			}
+						
 			matrix[i][j].params = { scoId: actId, studentId: studentId };
 			j++;
 		}		
-		
-		// if (matrix[i][j] == undefined) {
-// 			matrix[i][j] = {};
-// 			matrix[i][j].label = "";
-// 		}
-		
+				
 		i++;	
 	}
 	
@@ -320,20 +328,6 @@ SelectedResultsDisplay.prototype.computeModuleScoreForStudent = function(module,
 				}	
 			}
 		}
-		totalCount++;
-	}
-	if (!scoreSet) return "";
-	return Math.round(total / totalCount);
-}
-
-SelectedResultsDisplay.prototype.computeActivityScoreForStudent = function(activity, studentId) {
-	var total = 0, totalCount = 0, scoreSet = false;
-	
-	for (var scoId in activity.children) { // Loop over activities
-		if (activity.children[scoId]["user-id"] == studentId) { // Select student
-			scoreSet = true;
-			total += parseInt(activity.children[scoId].sumScore); // Sum of scores
-		}	
 		totalCount++;
 	}
 	if (!scoreSet) return "";

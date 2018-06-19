@@ -193,8 +193,10 @@ a.resultIndicator {
 
 	color: $black;	
 	font-size: 13 / 16 * 1em;
+	overflow-x: hidden;
 	text-align: center;
 	text-decoration: none;
+	white-space: nowrap;
 }
 
 table thead tr th {
