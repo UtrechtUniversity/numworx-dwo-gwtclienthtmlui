@@ -135,7 +135,7 @@ AddStudentToSchoolclassDisplay.prototype.addStudent = function(id) {
 
 AddStudentToSchoolclassDisplay.prototype.submitAddStudentAddForm = function(event) {
 	event.preventDefault();	
-	this.addTeacher(this.addStudentAddForm.elements["id"].value);
+	this.addStudent(this.addStudentAddForm.elements["id"].value);
 }
 AddStudentToSchoolclassDisplay.prototype.clickAddStudentAddRow = function(event) {
 	Helpers.selectTableRow(event);
