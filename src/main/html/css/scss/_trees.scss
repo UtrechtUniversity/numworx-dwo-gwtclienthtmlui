@@ -96,6 +96,20 @@ ul.tree {
 //			background-repeat: no-repeat;
 		}
 		
+		span.indicator {
+			@include border-radius(50%);
+			display: inline-block;
+			height: 10px;
+			
+			width: 10px;
+			&.previouslyChecked {
+				background-color: $shade12;
+			}
+			&.checked {
+				background-color: $primary;
+			}
+		}
+		
 		div.checkbox {
 			position: absolute;
 			right: 0;
@@ -113,6 +127,7 @@ ul.tree {
 a.icon {
 	cursor: pointer;
 	left: -24px; // in order to make node clickable
+	margin-right: -15px;
 	padding-left: 24px;
 	position: relative;
 	
