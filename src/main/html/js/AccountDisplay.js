@@ -17,6 +17,7 @@ function AccountDisplay() {
 	
 	// jQuery objects
 	this.$panel = jQuery("#accountDisplayPanel");
+	this.$helpContentIFrame = this.$panel.find("iframe").first();
 	this.$schoolLoginsRow = $(this.updateSchoolLoginsViewForm).find("tbody tr").detach();
 	this.$schoolLoginsTableBody = $(this.updateSchoolLoginsViewForm).find("tbody");
 	
@@ -52,6 +53,10 @@ AccountDisplay.prototype.clear = function () {
 
 AccountDisplay.prototype.init = function (json) {
 	Helpers.stretchHeight( [ this.$schoolLoginsTableBody ] )
+}
+
+AccountDisplay.prototype.setHelp = function(url) {
+	this.$helpContentIFrame.attr('src', url );
 }
 
 AccountDisplay.prototype.updateUserView = function(json) {

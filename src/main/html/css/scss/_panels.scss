@@ -189,6 +189,7 @@ body {
 				margin-left: ($gutter + 1) * -1px;						
 			}			
 			.content {
+				
 				background-color: $shade2;
 				border-left: 1px $shade2 solid;
 				bottom: 0;
@@ -198,6 +199,10 @@ body {
 				right: $siteMargin * 1px;			
 				top: ($headerHeight + $subpanelHeaderHeight + 1) * 1px;
 				
+				iframe {
+					width: 100%;
+					height: 100%;
+				}
 				
 				
 				@media #{$mediaQueryDesktopWide} {
