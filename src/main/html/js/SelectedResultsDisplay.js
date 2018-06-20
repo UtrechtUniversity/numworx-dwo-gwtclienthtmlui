@@ -445,8 +445,8 @@ SelectedResultsDisplay.prototype.clickBackToModulesStudents = function(event) {
 
 SelectedResultsDisplay.prototype.clickResultIndicator = function(event) {
 //	event.preventDefault();		
-	console.log(params)
-	this.showStudentResults(params.scoId, params.studentId);	
+	console.log(event)
+	this.showStudentResults(event.scoId, event.studentId);	
 }
 
 SelectedResultsDisplay.prototype.clickFilterIndicator = function(event) {
