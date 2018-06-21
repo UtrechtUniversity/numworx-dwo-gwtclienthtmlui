@@ -141,7 +141,7 @@ EditPersonDisplay.prototype.setSingleSchoolStudent = function (json) {
 	this.editPersonDetailsForm.elements["familyName"].value = familyName;
 	this.editPersonDetailsForm.elements["givenName"].value = givenName;
 	this.editPersonDetailsForm.elements["insertion"].value = insertion;
-	this.editPersonDetailsForm.elements["role"].value = role == "TEACHER" ? "docent" : "leerling";
+	this.editPersonDetailsForm.elements["role"].value = "leerling";
 	
 	this.disableInputFieldsStudent();	
 }
