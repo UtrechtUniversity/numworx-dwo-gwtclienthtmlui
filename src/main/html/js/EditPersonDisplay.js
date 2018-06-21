@@ -168,8 +168,6 @@ EditPersonDisplay.prototype.setSchoolClasses = function (json) {
 		$row.prop('tabindex', i);
 		$row.find("#editPersonSchoolclassName").html( el.schoolClassName ).removeAttr("id");
 		
-		if (schoolclasses[id].tag == true) $row.find("input[type='checkbox'],input[type='radio']").attr("checked", "checked");
-
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;
 			
@@ -181,6 +179,9 @@ EditPersonDisplay.prototype.setSchoolClasses = function (json) {
 
 		$row.find("input[name='active[]']").on('change', $.proxy(this.changeActiveCheckbox,this));
 		this.$editPersonSchoolclassesTableBody.append($row);
+		
+		if (schoolclasses[id].tag == true) $row.find("input[type='checkbox'],input[type='radio']").attr("checked", "checked");
+		
 		i++;
 	}
 }
