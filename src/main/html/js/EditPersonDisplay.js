@@ -202,7 +202,7 @@ EditPersonDisplay.prototype.updatePerson = function() {
 	
 	// save student
 	//String givenName, String insertion, String familyName, String email, String curPassword, String newPassword, String newPasswordAgain
-	app.getPresenterFactory().getEditStudentPresenter().saveUser(id);
+	//app.getPresenterFactory().getEditStudentPresenter().saveUser(id);
 }
 EditPersonDisplay.prototype.removePerson = function() {
 	if (this.role == "TEACHER") return;
