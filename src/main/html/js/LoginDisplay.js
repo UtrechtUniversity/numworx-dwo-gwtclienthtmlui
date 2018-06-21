@@ -61,7 +61,7 @@ LoginDisplay.prototype.showWarning = function(msg) {
 	this.enable();
 }
 LoginDisplay.prototype.hideMsgBox = function(msg) {
-	console.log("hide!");
+	this.$messageBox.hide();
 }
 
 /*
@@ -83,6 +83,9 @@ LoginDisplay.prototype.submitLoginForm = function(event) {
 	    password = this.passwordField.value;
 	
 	this.disable();
+	
+	console.log(username);
+	console.log(password);
 	
 	this.loginAttempt(username, password);	
 };
