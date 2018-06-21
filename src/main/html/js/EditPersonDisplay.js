@@ -42,28 +42,32 @@ EditPersonDisplay.prototype.show = function() {
  * Map to java implementation
  */
 
-EditPersonDisplay.prototype.disableInputFieldsTeacher = function () {	
+EditPersonDisplay.prototype.disableAndHideInputFieldsTeacher = function () {	
 	for (var id in this.editPersonDetailsForm.elements) {
 		this.editPersonDetailsForm.elements[id].disabled = true;	
 	}
+	$(this.editPersonDetailsForm.elements["email"].parentNode).hide();
+	$(this.editPersonDetailsForm.elements["newPassword"].parentNode).hide();
 }
-EditPersonDisplay.prototype.disableInputFieldsRegularStudent = function () {	
-	// this.editPersonDetailsForm.elements["userName"].disabled = true;
-// 	this.editPersonDetailsForm.elements["familyName"].disabled = true;
-// 	this.editPersonDetailsForm.elements["insertion"].disabled = true;
-// 	this.editPersonDetailsForm.elements["givenName"].disabled = true;
-// 	this.editPersonDetailsForm.elements["password"].disabled = true;
-// 	this.editPersonDetailsForm.elements["email"].disabled = true;
-// 	this.editPersonDetailsForm.elements["role"].disabled = true;
+EditPersonDisplay.prototype.disableAndHideInputFieldsRegularStudent = function () {	
 	for (var id in this.editPersonDetailsForm.elements) {
 		this.editPersonDetailsForm.elements[id].disabled = true;	
 	}
+	$(this.editPersonDetailsForm.elements["email"].parentNode).hide();
+	$(this.editPersonDetailsForm.elements["newPassword"].parentNode).hide();
 }
+EditPersonDisplay.prototype.disableAndHideInputFieldsSingleSchoolStudent = function () {	
+	$(this.editPersonDetailsForm.elements["email"].parentNode).show();
+	$(this.editPersonDetailsForm.elements["newPassword"].parentNode).show();
+	this.editPersonDetailsForm.elements["userName"].disabled = true;
+	this.editPersonDetailsForm.elements["role"].disabled = true;
+}
+	
 EditPersonDisplay.prototype.hideSubmitButton = function () {	
 	$(this.editPersonDetailsForm.elements["submit"]).hide();
 }
 EditPersonDisplay.prototype.hideRemoveButton = function () {	
-	$(this.editPersonDetailsForm.elements["remove"]).hide();
+	$(this.editPersonDetailsForm.elements["remove"]).css('visibility', 'hidden');
 }
 
 
@@ -71,7 +75,7 @@ EditPersonDisplay.prototype.showSubmitButton = function () {
 	$(this.editPersonDetailsForm.elements["submit"]).show();
 }
 EditPersonDisplay.prototype.showRemoveButton = function () {	
-	$(this.editPersonDetailsForm.elements["remove"]).show();
+	$(this.editPersonDetailsForm.elements["remove"]).css('visibility', 'visible');
 }
 
 
@@ -119,11 +123,11 @@ EditPersonDisplay.prototype.setUser = function (role,json) {
 	console.log(this.role);
 	
 	if (this.role == "TEACHER") { 
-		this.disableInputFieldsTeacher();
-		this.hideButtons();
+		this.disableAndHideInputFieldsTeacher();
+		this.hideSubmitButton();
 	}
 	if (this.role == "STUDENT") { 
-		this.disableInputFieldsRegularStudent();	
+		this.disableAndHideInputFieldsRegularStudent();	
 	}
 }
 
@@ -143,7 +147,9 @@ EditPersonDisplay.prototype.setSingleSchoolStudent = function (json) {
 	this.editPersonDetailsForm.elements["insertion"].value = insertion;
 	this.editPersonDetailsForm.elements["role"].value = "leerling";
 	
-	this.disableInputFieldsStudent();	
+	//this.role = "STUDENT";
+	
+	this.disableAndHideInputFieldsSingleSchoolStudent();	
 }
 
 
