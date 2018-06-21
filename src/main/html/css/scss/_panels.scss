@@ -764,6 +764,23 @@ section.lightbox {
 			position: relative;
 			width: 100%;
 		}
+		
+		.icons {
+			position: absolute;
+			right: $gutter * 1px;
+			bottom: 0;
+			.icon {
+				
+				height: 32px;
+				margin-left: $gutter * 1px;
+				width: 32px;
+	
+				use { fill: $primary; }
+			}
+		}
+		
+		
+		
 	}
 }
 
@@ -797,6 +814,7 @@ section.lightbox {
 	&.result3 a { background-color: $scoreIndicator3; }
 	&.result4 a { background-color: $scoreIndicator4; }
 }
+
 
 
 

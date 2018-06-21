@@ -59,13 +59,18 @@ EditPersonDisplay.prototype.disableInputFieldsRegularStudent = function () {
 		this.editPersonDetailsForm.elements[id].disabled = true;	
 	}
 }
-EditPersonDisplay.prototype.hideButtons = function () {	
+EditPersonDisplay.prototype.hideSubmitButton = function () {	
 	$(this.editPersonDetailsForm.elements["submit"]).hide();
+}
+EditPersonDisplay.prototype.hideRemoveButton = function () {	
 	$(this.editPersonDetailsForm.elements["remove"]).hide();
 }
 
-EditPersonDisplay.prototype.showButtons = function () {	
+
+EditPersonDisplay.prototype.showSubmitButton = function () {	
 	$(this.editPersonDetailsForm.elements["submit"]).show();
+}
+EditPersonDisplay.prototype.showRemoveButton = function () {	
 	$(this.editPersonDetailsForm.elements["remove"]).show();
 }
 
@@ -86,7 +91,8 @@ EditPersonDisplay.prototype.clear = function () {
 	for (var id in this.editPersonDetailsForm.elements) {
 		this.editPersonDetailsForm.elements[id].disabled = false;	
 	}
-	this.showButtons();
+	this.showSubmitButton();
+	this.hideRemoveButton();
 }
 EditPersonDisplay.prototype.setHelp = function(url) {
 	this.$helpContentIFrame.attr('src', url );
@@ -94,6 +100,7 @@ EditPersonDisplay.prototype.setHelp = function(url) {
 
 EditPersonDisplay.prototype.setUser = function (role,json) {
 	console.log("set user");
+	console.log(json);
 	//var email = json.email;
 	var userName = json.userName;
 	var familyName = json.familyName;
