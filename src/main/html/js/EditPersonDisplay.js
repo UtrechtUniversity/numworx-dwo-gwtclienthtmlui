@@ -48,11 +48,16 @@ EditPersonDisplay.prototype.disableInputFieldsTeacher = function () {
 	}
 }
 EditPersonDisplay.prototype.disableInputFieldsRegularStudent = function () {	
-	this.editPersonDetailsForm.elements["userName"].disabled = true;
-	this.editPersonDetailsForm.elements["familyName"].disabled = true;
-	this.editPersonDetailsForm.elements["givenName"].disabled = true;
-	this.editPersonDetailsForm.elements["password"].disabled = true;	
-	this.editPersonDetailsForm.elements["role"].disabled = true;	
+	// this.editPersonDetailsForm.elements["userName"].disabled = true;
+// 	this.editPersonDetailsForm.elements["familyName"].disabled = true;
+// 	this.editPersonDetailsForm.elements["insertion"].disabled = true;
+// 	this.editPersonDetailsForm.elements["givenName"].disabled = true;
+// 	this.editPersonDetailsForm.elements["password"].disabled = true;
+// 	this.editPersonDetailsForm.elements["email"].disabled = true;
+// 	this.editPersonDetailsForm.elements["role"].disabled = true;
+	for (var id in this.editPersonDetailsForm.elements) {
+		this.editPersonDetailsForm.elements[id].disabled = true;	
+	}
 }
 EditPersonDisplay.prototype.hideButtons = function () {	
 	$(this.editPersonDetailsForm.elements["submit"]).hide();
@@ -149,6 +154,8 @@ EditPersonDisplay.prototype.setSchoolClasses = function (json) {
 		$row = this.$editPersonSchoolclassesRow.clone();
 		$row.prop('tabindex', i);
 		$row.find("#editPersonSchoolclassName").html( el.schoolClassName ).removeAttr("id");
+		
+		if (schoolclasses[id].tag == true) $row.find("input[type='checkbox'],input[type='radio']").attr("checked", "checked");
 
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;
@@ -194,6 +201,8 @@ EditPersonDisplay.prototype.updatePerson = function() {
 	if (this.role == "TEACHER") return;
 	
 	// save student
+	//String givenName, String insertion, String familyName, String email, String curPassword, String newPassword, String newPasswordAgain
+	app.getPresenterFactory().getEditStudentPresenter().saveUser(id);
 }
 EditPersonDisplay.prototype.removePerson = function() {
 	if (this.role == "TEACHER") return;
