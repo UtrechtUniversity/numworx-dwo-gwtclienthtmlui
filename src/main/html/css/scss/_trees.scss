@@ -128,7 +128,7 @@ a.icon {
 	cursor: pointer;
 	left: -24px; // in order to make node clickable
 	margin-right: -15px;
-	padding-left: 24px;
+	padding-left: 22px;
 	position: relative;
 	
 	&:before {
@@ -143,7 +143,12 @@ a.icon {
 		background: transparent url(../images/tree-folder.png);	
 	}
 	&.set:before {
-		background: red url(../images/tree-folder.png);	
+		background-image: url(../images/tree-set.svg);	
+		background-size: 24px;
+		height: 21px;
+		top: 0px;
+		left: -3px;
+		width: 21px;
 	}
 	&.item:before {
 		background: green url(../images/tree-folder.png);	
