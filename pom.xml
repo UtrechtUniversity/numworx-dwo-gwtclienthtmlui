@@ -37,6 +37,18 @@
                     </images>
                 </configuration>
             </plugin>
-        </plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <warSourceDirectory>src/main/html</warSourceDirectory>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>           
+                </configuration>
+            </plugin>
+         </plugins>
     </build>
+    <packaging>war</packaging>
+    <scm>
+    	<developerConnection>scm:git:ssh://git@git.science.uu.nl:dwoproject/DWO-LMS/DwoGwtClientHtmlUi.git</developerConnection>
+    </scm>
 </project>
