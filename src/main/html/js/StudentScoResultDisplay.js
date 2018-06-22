@@ -51,24 +51,24 @@ StudentScoResultDisplay.prototype.init = function (state) {
 	console.log("init StudentScoResultDisplay");
 	console.log(state);
 	
-	var activeModule, activeStudent;
+	var activeActivity, activeStudent;
 	this.resultState = state;
 	
 	//console.log(this.resultState.resultsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeModule].children[this.resultState.activeActivity]);
 	//console.log(this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeStudent]);
 	
 	// Set header titles
-	activeModule = this.resultState.resultsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeModule].children[this.resultState.activeActivity];
+	activeActivity = this.resultState.resultsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeModule].children[this.resultState.activeActivity];
 	activeStudent = this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeStudent];		
 	
 	
 	this.$nameHeader.html(activeStudent.givenName + " " + (activeStudent.insertion ? activeStudent.insertion+" ":"")  + activeStudent.familyName);
-	this.$activityHeader.html(activeModule.label);
+	this.$activityHeader.html(activeActivity.label);
 	
 	this.studentScoResultActionsForm.elements["seal"][1].checked = true;
-	for (scoContextId in activeModule.children) {
-		console.log(activeModule.children[scoContextId]);
-		if (activeModule.children[scoContextId]["user-id"] == this.resultState.activeStudent && activeModule.children[scoContextId].completionStatus == "completed") {
+	for (scoContextId in activeActivity.children) {
+		console.log(activeActivity.children[scoContextId]);
+		if (activeActivity.children[scoContextId]["user-id"] == this.resultState.activeStudent && activeActivity.children[scoContextId].completionStatus == "completed") {
 			this.studentScoResultActionsForm.elements["seal"][1].checked = false;
 			this.studentScoResultActionsForm.elements["seal"][0].checked = true;
 			break;

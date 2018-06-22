@@ -159,10 +159,10 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 	for (var amId in activeModules) {
 		matrix[0][j] = {};
 		matrix[0][j].label = modules[ activeModules[amId] ].label;
-		matrix[0][j].callback = this.activitiesStudents;
+		matrix[0][j].callback = this.clickModuleColumnHeader; //this.activitiesStudents;
 		matrix[0][j].params = { module: modules[ activeModules[amId] ]  };
 		matrix[0][j].linkLabel = "activiteiten";
-		matrix[0][j].linkCallback = this.activitiesStudents;
+		matrix[0][j].linkCallback = this.clickModuleColumnHeader;//this.activitiesStudents;
 		matrix[0][j].linkParams = { module: modules[ activeModules[amId] ]  };
 		
 		j++;
@@ -179,7 +179,7 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 			matrix[i][j].label = this.computeModuleScoreForStudent(modules[ activeModules[amId] ], studentId);
 			//matrix[i][j].callback = function() { this.activitiesStudent(modules[ activeModules[amId] ], studentId) };
 			//matrix[i][j].callback = $.proxy(this.activitiesStudent, this, modules[ activeModules[amId] ], studentId );
-			matrix[i][j].callback = this.activitiesStudent;
+			matrix[i][j].callback = this.clickModuleResultIndicator;
 			matrix[i][j].params = { moduleId: activeModules[amId], module: modules[ activeModules[amId] ], studentId: studentId };
 			j++;
 		}	
@@ -443,11 +443,21 @@ SelectedResultsDisplay.prototype.clickBackToModulesStudents = function(event) {
 	this.modulesStudents();
 }
 
-SelectedResultsDisplay.prototype.clickResultIndicator = function(event) {
-//	event.preventDefault();		
-	console.log(event)
-	this.showStudentResults(event.scoId, event.studentId);	
+// Class / module
+SelectedResultsDisplay.prototype.clickModuleResultIndicator = function(params, event) {
+	this.activitiesStudent(params);	
 }
+SelectedResultsDisplay.prototype.clickModuleColumnHeader = function(params, event) {
+	this.activitiesStudents(params);	
+}
+
+
+
+// Activities
+SelectedResultsDisplay.prototype.clickResultIndicator = function(params, event) {
+	this.showStudentResults(params.scoId, params.studentId);	
+}
+
 
 SelectedResultsDisplay.prototype.clickFilterIndicator = function(event) {
 	event.preventDefault();
