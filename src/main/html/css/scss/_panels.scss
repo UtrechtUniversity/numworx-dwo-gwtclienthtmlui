@@ -793,6 +793,16 @@ section.lightbox {
 	background-size: contain;
 }
 
+#selectedResultsDisplay {
+	.icon.btn {
+		height: 32px;
+		margin-left: $gutter * 1px;
+		width: 32px;
+
+		use { fill: $primary; }
+	}
+}
+
 
 .filterIndicators {
 	border-bottom: $borderThickness $primary solid;

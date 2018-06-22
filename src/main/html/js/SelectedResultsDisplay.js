@@ -34,9 +34,12 @@ function SelectedResultsDisplay() {
 	
 	this.$startCompareClassForm = $(this.startCompareClassForm);
 	
+	this.$printButton = $("#barActivitiesStudentsPrint");
+	
 	// Bind handlers
 	this.$filterIndicators.on('click', $.proxy(this.clickFilterIndicator, this));
 	this.$startCompareClassForm.on('submit', $.proxy(this.submitStartCompareClassForm, this));
+	this.$printButton.on('click', $.proxy(this.clickPrintButton, this));
 	
 	// Init
 	this.$panel.hide();
@@ -422,6 +425,11 @@ SelectedResultsDisplay.prototype.compareClass = function() {
 	app.getPresenterFactory().getSelectedResultsPresenter().compareSchoolClasses(this.resultState);
 }
 
+SelectedResultsDisplay.prototype.print = function() {
+	app.getPresenterFactory().getSelectedResultsPresenter().print(this.resultState); // TODO more params
+}
+
+
 /*
  * EVENT HANDLERS
  */
@@ -445,15 +453,23 @@ SelectedResultsDisplay.prototype.clickBackToModulesStudents = function(event) {
 
 // Class / module
 SelectedResultsDisplay.prototype.clickModuleResultIndicator = function(params, event) {
+	event.preventDefault();		
 	this.activitiesStudent(params);	
 }
 SelectedResultsDisplay.prototype.clickModuleColumnHeader = function(params, event) {
+	event.preventDefault();		
 	this.activitiesStudents(params);	
 }
 
 // Activities
 SelectedResultsDisplay.prototype.clickResultIndicator = function(params, event) {
+	event.preventDefault();		
 	this.showStudentResults(params.scoId, params.studentId);	
+}
+
+SelectedResultsDisplay.prototype.clickPrintButton = function(event) {
+	event.preventDefault();		
+	this.print();
 }
 
 
