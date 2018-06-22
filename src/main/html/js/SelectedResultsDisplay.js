@@ -451,8 +451,6 @@ SelectedResultsDisplay.prototype.clickModuleColumnHeader = function(params, even
 	this.activitiesStudents(params);	
 }
 
-
-
 // Activities
 SelectedResultsDisplay.prototype.clickResultIndicator = function(params, event) {
 	this.showStudentResults(params.scoId, params.studentId);	
