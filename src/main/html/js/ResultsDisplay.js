@@ -2,8 +2,8 @@ function ResultsDisplay() {
 	this.resultState = {};
 	this.resultState.resultsTree = null;
 	this.resultState.studentsTree = null;
-	this.resultState.showOpenModules = false;
-	this.resultState.showClosedModules = false;
+	//this.resultState.showOpenModules = false;
+	this.resultState.showOnlyClosedModules = false;
 	this.resultState.activeSchoolClass = null;
 	this.resultState.activeCourses = false;
 	
@@ -72,6 +72,7 @@ ResultsDisplay.prototype.setChooseClassTable = function() {
 ResultsDisplay.prototype.setChooseModulesTable = function() {
 	//console.log(this.activeClass);
 	//console.log(this.resultState.resultsTree.children[ this.activeClass ]); 
+	console.log(this.resultState);
 	
 	var i = 0, course;
 	
@@ -80,7 +81,10 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 
 	for (var id in this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children) { // loop over modules
 		course = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[id];
-
+		
+		if (this.resultState.showOnlyClosedModules == true && course.viewState != "invisible") continue;
+		if (this.resultState.showOnlyClosedModules == false && course.viewState != "studentsAndTeachers") continue;
+		
 		$row = this.$chooseModulesRow.clone();
 	
 		$row.find("#chooseClassAndModulesModuleName").html( course.label ).removeAttr("id");
@@ -172,10 +176,10 @@ ResultsDisplay.prototype.changeCheckboxOpenClosed = function(event) {
 		this.uncheckCheckboxOpenClosed();
 		event.target.checked = "checked";
 		
-		this.resultState.showOpenModules = false;
-		this.resultState.showClosedModules = false;
-		if (event.target.name=="open[]") this.resultState.showOpenModules = true;
-		if (event.target.name=="closed[]") this.resultState.showClosedModules = true;		
+		//this.resultState.showOpenModules = false;
+		this.resultState.showOnlyClosedModules = false;
+		//if (event.target.name=="open[]") this.resultState.showOpenModules = true;
+		if (event.target.name=="closed[]") this.resultState.showOnlyClosedModules = true;		
 		
 		this.resultState.activeSchoolClass = event.target.value;
 	} else {
