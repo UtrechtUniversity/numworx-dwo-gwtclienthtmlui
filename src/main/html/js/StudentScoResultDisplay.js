@@ -12,12 +12,18 @@ function StudentScoResultDisplay() {
 	this.$closeButton.on('click', $.proxy(this.clickStudentScoResultCloseButton, this));
 	
 	this.$sealButton = $(this.studentScoResultActionsForm.elements["seal"]);
+	this.$printButton = $("#studentScoResultPrint");
+	this.$downloadButton = $("#studentScoResultDownload");
+	this.$logButton = $("#studentScoResultLog");
 	
 	this.$nameHeader = $("#studentScoResultName");
 	this.$activityHeader = $("#studentScoResultActivity");
 	
 	// Bind handlers
-	this.$sealButton.on('change', $.proxy(this.changeSealButton,this));	
+	this.$sealButton.on('change', $.proxy(this.changeSealButton,this));
+	this.$printButton.on('click', $.proxy(this.clickPrintButton, this));	
+	this.$downloadButton.on('click', $.proxy(this.clickDownloadButton, this));	
+	this.$logButton.on('click', $.proxy(this.clickLogButton, this));	
 	
 	// Init
 	this.$panel.hide();
@@ -101,6 +107,15 @@ StudentScoResultDisplay.prototype.requestClose = function () {
 StudentScoResultDisplay.prototype.seal = function (state) {
 	app.getPresenterFactory().getStudentScoResultPresenter().sealSingleActivity(state);
 }
+StudentScoResultDisplay.prototype.print = function () {
+	app.getPresenterFactory().getStudentScoResultPresenter().print(this.resultState); 
+}
+StudentScoResultDisplay.prototype.download = function () {
+	app.getPresenterFactory().getStudentScoResultPresenter().download(this.resultState); 
+}
+StudentScoResultDisplay.prototype.log = function () {
+	app.getPresenterFactory().getStudentScoResultPresenter().log(this.resultState); 
+}
 
 /*
  * EVENT HANDLERS
@@ -119,5 +134,18 @@ StudentScoResultDisplay.prototype.changeSealButton = function(event) {
 	event.preventDefault();
 	if (event.target.value == 1) this.seal(true);	
 	else this.seal(false);
+}
+
+StudentScoResultDisplay.prototype.clickPrintButton = function(event) {
+	event.preventDefault();
+	this.print();
+}
+StudentScoResultDisplay.prototype.clickDownloadButton = function(event) {
+	event.preventDefault();
+	this.download();
+}
+StudentScoResultDisplay.prototype.clickLogButton = function(event) {
+	event.preventDefault();
+	this.log();
 }
 
