@@ -15,6 +15,8 @@ function StudentScoResultDisplay() {
 	this.$printButton = $("#studentScoResultPrint");
 	this.$downloadButton = $("#studentScoResultDownload");
 	this.$logButton = $("#studentScoResultLog");
+	this.$nextButton = $("#studentScoResultNext");
+	this.$previousButton = $("#studentScoResultPrevious");
 	
 	this.$nameHeader = $("#studentScoResultName");
 	this.$activityHeader = $("#studentScoResultActivity");
@@ -24,6 +26,8 @@ function StudentScoResultDisplay() {
 	this.$printButton.on('click', $.proxy(this.clickPrintButton, this));	
 	this.$downloadButton.on('click', $.proxy(this.clickDownloadButton, this));	
 	this.$logButton.on('click', $.proxy(this.clickLogButton, this));	
+	this.$nextButton.on('click', $.proxy(this.clickNextButton, this));	
+	this.$previousButton.on('click', $.proxy(this.clickPreviousButton, this));	
 	
 	// Init
 	this.$panel.hide();
@@ -117,6 +121,27 @@ StudentScoResultDisplay.prototype.log = function () {
 	app.getPresenterFactory().getStudentScoResultPresenter().log(this.resultState); 
 }
 
+StudentScoResultDisplay.prototype.showNextStudent = function () {
+	var previous = null;
+	
+	for (var studentId in this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children) {
+		if (previous = this.resultState.activeStudent) break;
+		previous = studentId;
+	}
+	
+	console.log(this.resultState);
+	console.log(studentId);
+	console.log(this.resultState.activeActivity)
+	console.log(this.resultState.activeSchoolClass)
+	
+	app.getPresenterFactory().getStudentScoResultPresenter().showStudentResults(this.resultState, studentId, this.resultState.activeActivity, this.resultState.activeSchoolClass); 
+}
+
+StudentScoResultDisplay.prototype.showPreviousStudent = function () {
+	//app.getPresenterFactory().getStudentScoResultPresenter().showStudentResults(context, studentId, scoId, schoolClassId); 
+}
+
+
 /*
  * EVENT HANDLERS
  */
@@ -147,5 +172,14 @@ StudentScoResultDisplay.prototype.clickDownloadButton = function(event) {
 StudentScoResultDisplay.prototype.clickLogButton = function(event) {
 	event.preventDefault();
 	this.log();
+}
+
+StudentScoResultDisplay.prototype.clickNextButton = function(event) {
+	event.preventDefault();
+	this.showNextStudent();
+}
+StudentScoResultDisplay.prototype.clickPreviousButton = function(event) {
+	event.preventDefault();
+	this.showPreviousStudent();
 }
 
