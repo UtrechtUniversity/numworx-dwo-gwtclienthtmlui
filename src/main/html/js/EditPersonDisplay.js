@@ -215,8 +215,12 @@ EditPersonDisplay.prototype.updatePerson = function() {
 	if (this.role == "TEACHER") return;
 	
 	// save student
-	//String givenName, String insertion, String familyName, String email, String curPassword, String newPassword, String newPasswordAgain
-	//app.getPresenterFactory().getEditStudentPresenter().saveUser(id);
+	//g givenName, String insertion, String familyName, String email, String password
+	app.getPresenterFactory().getEditStudentPresenter().saveUser(	this.editPersonDetailsForm.elements["givenName"].value,
+																	this.editPersonDetailsForm.elements["insertion"].value,
+																	this.editPersonDetailsForm.elements["familyName"].valuefunction,
+																	this.editPersonDetailsForm.elements["email"].value,
+																	this.editPersonDetailsForm.elements["password"].value);
 }
 EditPersonDisplay.prototype.removePerson = function() {
 	if (this.role == "TEACHER") return;

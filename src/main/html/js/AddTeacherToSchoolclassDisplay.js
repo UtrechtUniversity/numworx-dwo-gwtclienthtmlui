@@ -118,11 +118,11 @@ AddTeacherToSchoolclassDisplay.prototype.showTeachers = function(json) {
 }
 
 AddTeacherToSchoolclassDisplay.prototype.setEmptyTableMessage = function() {
-	console.log("setEmptyTableMessage");
+	this.$addTeacherTableBody.html('<tr class="empty"><td>Geen docenten gevonden.</td></tr>');
 }
 
 AddTeacherToSchoolclassDisplay.prototype.setLoadingTableMessage = function() {
-	console.log("setLoadingTableMessage");
+	this.$addTeacherTableBody.html('<tr class="empty"><td>Docenten worden geladen.</td></tr>');
 }
 
 

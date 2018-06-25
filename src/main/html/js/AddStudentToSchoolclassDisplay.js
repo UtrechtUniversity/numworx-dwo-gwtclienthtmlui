@@ -121,7 +121,7 @@ AddStudentToSchoolclassDisplay.prototype.setEmptyTableMessage = function() {
 }
 
 AddStudentToSchoolclassDisplay.prototype.setLoadingTableMessage = function() {
-	this.$addStudentTableBody.html('<tr class="loading"><td>Laden...</td></tr>');
+	this.$addStudentTableBody.html('<tr class="loading"><td>Leerlingen worden geladen.</td></tr>');
 }
 
 

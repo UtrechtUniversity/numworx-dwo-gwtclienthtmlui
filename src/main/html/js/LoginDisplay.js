@@ -48,12 +48,14 @@ LoginDisplay.prototype.hide = function() {
 	this.$panel.hide();
 }
 LoginDisplay.prototype.init = function() {	
+	this.enable();
 }
 
 
 LoginDisplay.prototype.showMessage = function(msg) {
 	this.$messageBox.find(".content").html(msg);
 	this.$messageBox.show();
+	this.enable();
 }
 LoginDisplay.prototype.showWarning = function(msg) {
 	this.$warningBox.html(msg);

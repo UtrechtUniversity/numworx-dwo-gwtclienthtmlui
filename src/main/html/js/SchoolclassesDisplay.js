@@ -79,7 +79,6 @@ SchoolclassesDisplay.prototype.updateView = function(json) {
 }
 
 SchoolclassesDisplay.prototype.setEmptyTableMessage = function(json) {
-	console.log("set emoty");
 	this.$chooseSchoolclassTableBody.html('<tr class="empty"><td>Geen klassen gevonden</td></tr>');
 }
 SchoolclassesDisplay.prototype.setLoadingTableMessage = function(json) {

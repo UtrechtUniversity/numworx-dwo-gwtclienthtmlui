@@ -146,26 +146,26 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.setSchoolClassB = function(schoo
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setEmptyTableMessageClasses = function() {
-	console.log("empty table classes");
+	this.$classesTableBody.html('<tr class="empty"><td>Geen klassen gevonden.</td></tr>');
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setLoadingTableMessageClasses = function() {
-	console.log("loading table classes");
+	this.$classesTableBody.html('<tr class="empty"><td>Klassen worden geladen.</td></tr>');
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setEmptyTableMessageA = function() {
-	console.log("empty table A");
+	this.$classATableBody.html('<tr class="empty"><td>Geen leerlingen gevonden.</td></tr>');
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setEmptyTableMessageB = function() {
-	console.log("empty table B");
+	this.$classBTableBody.html('<tr class="empty"><td>Geen leerlingen gevonden.</td></tr>');
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setLoadingTableMessageA = function() {
-	console.log("loading table A");
+	this.$classATableBody.html('<tr class="empty"><td>Leerlingen worden geladen.</td></tr>');
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setLoadingTableMessageB = function() {
-	console.log("loading table B");
+	this.$classBTableBody.html('<tr class="empty"><td>Leerlingen worden geladen.</td></tr>');
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudentsClassA = function(json) {

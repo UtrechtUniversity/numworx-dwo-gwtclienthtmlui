@@ -137,10 +137,10 @@ ResultsDisplay.prototype.setResultTree = function (resultTree, studentsTree) {
 }
 
 ResultsDisplay.prototype.setEmptyTableMessage = function () {
-	console.log("setEmptyTableMessage");
+	this.$chooseClassTableBody.html('<tr class="empty"><td>Geen klassen om weer te geven.</td></tr>');
 }
 ResultsDisplay.prototype.setLoadingTableMessage = function () {
-	console.log("setLoadingTableMessage");
+	this.$chooseClassTableBody.html('<tr class="empty"><td>De klassen worden geladen...</td></tr>');
 }
 
 // ResultsDisplay.prototype.setEmptyTableMessageModules = function () {

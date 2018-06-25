@@ -150,17 +150,16 @@ ModulesOfSchoolclassDisplay.prototype.setHelp = function(url) {
 }
 
 ModulesOfSchoolclassDisplay.prototype.setEmptyTableMessageModules = function () {
-	console.log("setEmptyTableMessageModules");
+	this.$treeWrapper.html('Geen beschikbare modules.');
 }
 ModulesOfSchoolclassDisplay.prototype.setLoadingTableMessageModules = function () {
-	console.log("setLoadingTableMessageModules");
+	this.$treeWrapper.html('Beschikbare modules worden geladen.');
 }
 ModulesOfSchoolclassDisplay.prototype.setEmptyTableMessageSelected = function () {
-	console.log("setEmptyTableMessageSelected");
-	//this.$selectTableBody.html('<tr class="empty"><td>Geen modules gevonden</td></tr>');
+	this.$selectTableBody.html('<tr class="empty"><td>Geen modules toegekend.</td></tr>');
 }
 ModulesOfSchoolclassDisplay.prototype.setLoadingTableMessageSelected = function () {
-	this.$selectTableBody.html('<tr class="loading"><td>Laden...</td></tr>');
+	this.$selectTableBody.html('<tr class="empty"><td>Modules worden geladen.</td></tr>');
 }
 
 ModulesOfSchoolclassDisplay.prototype.setTree = function(json) {
