@@ -157,17 +157,14 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 	matrix[0][0] = {};
 	matrix[0][0].label = "Modules"
 	
-	
-	
 	for (var amId in activeModules) {
 		matrix[0][j] = {};
 		matrix[0][j].label = modules[ activeModules[amId] ].label;
 		matrix[0][j].callback = this.clickModuleColumnHeader; //this.activitiesStudents;
-		matrix[0][j].params = { module: modules[ activeModules[amId] ]  };
+		matrix[0][j].params = { moduleId: activeModules[amId], module: modules[ activeModules[amId] ]  };
 		matrix[0][j].linkLabel = "activiteiten";
 		matrix[0][j].linkCallback = this.clickModuleColumnHeader;//this.activitiesStudents;
-		matrix[0][j].linkParams = { module: modules[ activeModules[amId] ]  };
-		
+		matrix[0][j].linkParams = { moduleId: activeModules[amId], module: modules[ activeModules[amId] ]  };
 		j++;
 	}
 	
@@ -312,9 +309,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 				
 		i++;	
 	}
-	
-	//console.log(JSON.stringify(this.resultState));
-	
+		
 	return matrix;
 }
 
@@ -415,6 +410,7 @@ SelectedResultsDisplay.prototype.showStudentResults = function(scoId, studentId)
 	this.resultState.activeActivity = scoId;
 	this.resultState.activeStudent = studentId;
 	//console.log(JSON.stringify(this.resultState));
+	console.log(this.resultState);
 	console.log(scoId);
 	console.log(studentId);
 	console.log(this.resultState.activeSchoolClass); 

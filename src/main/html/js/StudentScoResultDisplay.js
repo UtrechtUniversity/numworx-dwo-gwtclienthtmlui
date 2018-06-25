@@ -71,7 +71,7 @@ StudentScoResultDisplay.prototype.init = function (state) {
 	
 	this.studentScoResultActionsForm.elements["seal"][1].checked = true;
 	for (scoContextId in activeActivity.children) {
-		console.log(activeActivity.children[scoContextId]);
+		//console.log(activeActivity.children[scoContextId]);
 		if (activeActivity.children[scoContextId]["user-id"] == this.resultState.activeStudent && activeActivity.children[scoContextId].completionStatus == "completed") {
 			this.studentScoResultActionsForm.elements["seal"][1].checked = false;
 			this.studentScoResultActionsForm.elements["seal"][0].checked = true;
