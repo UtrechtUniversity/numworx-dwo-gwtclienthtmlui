@@ -9,7 +9,6 @@ function WelcomeDisplay() {
 }
 
 WelcomeDisplay.prototype.show = function() {
-	console.log("show welcome");
 	this.$panel.show();
 	Helpers.stretchHeight( [ this.$welcomeText ]);
 }

@@ -26,8 +26,14 @@ function LoginDisplay() {
  */
 
 LoginDisplay.prototype.show = function() {
+	this.localize();
 	this.$panel.show();
 }
+
+LoginDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
+
 
 LoginDisplay.prototype.disable = function() {
 	this.usernameField.disabled = true;

@@ -38,7 +38,12 @@ function AccountDisplay() {
 }
 
 AccountDisplay.prototype.show = function() {
+	this.localize();
 	this.$panel.show();
+}
+
+AccountDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
 }
 
 
