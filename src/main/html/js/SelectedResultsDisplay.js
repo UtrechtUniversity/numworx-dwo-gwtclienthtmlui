@@ -10,6 +10,8 @@ function SelectedResultsDisplay() {
 	this.$panel = jQuery("#selectedResultsDisplay");
 	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
 	
+	//this.$sealModuleActivitiesForm = $(this.sealModuleActivitiesForm);
+	
 	// Bottom bars
 	this.$bars = this.$panel.find(".bar");
 	this.$barModulesStudents = $("#barModulesStudents").hide();
@@ -35,10 +37,13 @@ function SelectedResultsDisplay() {
 	
 	this.$printButton = $("#barActivitiesStudentsPrint");
 	
+	this.$sealCheckbox = $(this.sealModuleActivitiesForm.elements['seal']);
+	
 	// Bind handlers
 	this.$filterIndicators.on('click', $.proxy(this.clickFilterIndicator, this));
 	this.$startCompareClassForm.on('submit', $.proxy(this.submitStartCompareClassForm, this));
 	this.$printButton.on('click', $.proxy(this.clickPrintButton, this));
+	this.$sealCheckbox.on('change', $.proxy(this.changeSealCheckbox, this));
 	
 	// Init
 	this.$panel.hide();
@@ -424,13 +429,16 @@ SelectedResultsDisplay.prototype.print = function() {
 	app.getPresenterFactory().getSelectedResultsPresenter().print(this.resultState); // TODO more params
 }
 
+SelectedResultsDisplay.prototype.sealModuleActivities = function() {
+	app.getPresenterFactory().getSelectedResultsPresenter().sealModuleActivities(this.resultState.activeModule, this.resultState.activeSchoolClass);
+}
+
 
 /*
  * EVENT HANDLERS
  */
 
 SelectedResultsDisplay.prototype.hoverColumnHeader = function(event) {
-	console.log("hover");
 	var $target = $(event.target);
 	if ($target.hasClass('active')) {
 		$target.removeClass('active');
@@ -488,5 +496,11 @@ SelectedResultsDisplay.prototype.clickFilterIndicator = function(event) {
 SelectedResultsDisplay.prototype.submitStartCompareClassForm = function(event) {
 	event.preventDefault();			
 	this.compareClass();
+}
+
+
+SelectedResultsDisplay.prototype.changeSealCheckbox = function(event) {
+	event.preventDefault();			
+	if (event.target.checked == 1) this.sealModuleActivities();
 }
 
