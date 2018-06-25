@@ -231,13 +231,15 @@ MainDisplay.prototype.closeDialogView = function(dialog) {
  */
 
 MainDisplay.prototype.openLightboxView = function(dialog) {
-	this.activeLightboxes.push(dialog);
+	//this.activeLightboxes.push(dialog);
 	this.$body.addClass("overlay");
 }
 MainDisplay.prototype.closeLightboxView = function(dialog) {
-	dialog = this.activeLightboxes.pop();
-	if (this.activeLightboxes.length == 0) this.$body.removeClass("overlay"); // remove overlay
-	else this.activeLightboxes[this.activeLightboxes.length - 1].setFocus(); // or set focus to next dialog
+	//dialog = this.activeLightboxes.pop();
+	//if (this.activeLightboxes.length == 0) this.$body.removeClass("overlay"); // remove overlay
+	//else this.activeLightboxes[this.activeLightboxes.length].setFocus(); // or set focus to next dialog
+	// 
+	 this.$body.removeClass("overlay");
 }
 
 /*

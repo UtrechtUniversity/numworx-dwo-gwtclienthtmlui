@@ -42,6 +42,20 @@ StudentScoResultDisplay.prototype.show = function() {
 }
 
 
+StudentScoResultDisplay.prototype.showHideNextAndPrevious = function() { 
+	var previous = null;
+	
+	this.$previousButton.show();
+	this.$nextButton.show()
+	
+	for (var studentId in this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children) {
+		if (studentId == this.resultState.activeStudent && previous == null) { this.$previousButton.hide(); }		
+		previous = studentId;
+	}	
+	if (previous == this.resultState.activeStudent) this.$nextButton.hide();
+}
+
+
 /*
  * VIEW FUNCTIONS
  * Map to java implementation
@@ -57,9 +71,6 @@ StudentScoResultDisplay.prototype.init = function (state) {
 	
 	var activeActivity, activeStudent;
 	this.resultState = state;
-	
-	//console.log(this.resultState.resultsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeModule].children[this.resultState.activeActivity]);
-	//console.log(this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeStudent]);
 	
 	// Set header titles
 	activeActivity = this.resultState.resultsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeModule].children[this.resultState.activeActivity];
@@ -78,6 +89,8 @@ StudentScoResultDisplay.prototype.init = function (state) {
 			break;
 		} 
 	}	
+	
+	this.showHideNextAndPrevious();
 	
 	this.$iframe.attr('src', '' );
 }
@@ -125,20 +138,28 @@ StudentScoResultDisplay.prototype.showNextStudent = function () {
 	var previous = null;
 	
 	for (var studentId in this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children) {
-		if (previous = this.resultState.activeStudent) break;
+		if (previous == this.resultState.activeStudent) break;
 		previous = studentId;
 	}
+	this.resultState.activeStudent = studentId;
 	
-	console.log(this.resultState);
 	console.log(studentId);
-	console.log(this.resultState.activeActivity)
-	console.log(this.resultState.activeSchoolClass)
 	
 	app.getPresenterFactory().getStudentScoResultPresenter().showStudentResults(this.resultState, studentId, this.resultState.activeActivity, this.resultState.activeSchoolClass); 
 }
 
 StudentScoResultDisplay.prototype.showPreviousStudent = function () {
-	//app.getPresenterFactory().getStudentScoResultPresenter().showStudentResults(context, studentId, scoId, schoolClassId); 
+	var previous = null;
+	
+	for (var studentId in this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children) {
+		if (studentId == this.resultState.activeStudent) { studentId = previous; break; }
+		previous = studentId;
+	}
+	this.resultState.activeStudent = studentId;
+	
+	console.log(studentId);
+	
+	app.getPresenterFactory().getStudentScoResultPresenter().showStudentResults(this.resultState, studentId, this.resultState.activeActivity, this.resultState.activeSchoolClass); 
 }
 
 
