@@ -1,16 +1,12 @@
 function ModulesOfSchoolclassDisplay() {	
-	// GWT vars
-	
+	// GWT vars	
 	this.nodes = [];
 	this.selectedNodeId = "";
-	//this.openNodes = [];
-	// this.activeModuleList = [];
 	
 	// Forms 
 	this.selectForm = document.forms["modulesOfSchoolclassDisplaySelect"];
 	this.settingsForm = document.forms["modulesOfSchoolclassDisplaySettings"];
 	this.searchForm = document.forms["modulesOfSchoolclassDisplaySearch"];
-	
 			
 	// jQuery objects
 	this.$panel = jQuery("#modulesOfSchoolclassDisplay");
@@ -115,9 +111,7 @@ ModulesOfSchoolclassDisplay.prototype.updateTable = function() {
 }
 ModulesOfSchoolclassDisplay.prototype.setSettings = function(id) {
 	if (!this.nodes.hasOwnProperty(id)) return;
-	
-	console.log(this.nodes[id]);
-	
+		
 	this.settingsForm.elements["key"].value = id;
 	this.settingsForm.elements["accessKey"].value = this.nodes[id].classCourse.accessKey ? this.nodes[id].classCourse.accessKey : "";
 	this.settingsForm.elements["from"].value = this.nodes[id].classCourse.notBefore ? this.nodes[id].classCourse.notBefore : "";
@@ -137,14 +131,18 @@ ModulesOfSchoolclassDisplay.prototype.setSettings = function(id) {
  * Map to java implementation
  */
 
-ModulesOfSchoolclassDisplay.prototype.clear = function () {
-	console.log("clear");
-}
-
 ModulesOfSchoolclassDisplay.prototype.init = function () {
-	console.log("init");
 	Helpers.stretchHeight( [this.$treeWrapper, this.$selectTableBody] );
 }
+
+ModulesOfSchoolclassDisplay.prototype.clear = function () {
+	this.settingsForm.elements["key"] = "";
+	this.settingsForm.elements["accessKey"] = "";
+	this.settingsForm.elements["from"] = "";
+	this.settingsForm.elements["to"] = "";
+	this.settingsForm.elements["name"] = "";
+}
+
 ModulesOfSchoolclassDisplay.prototype.setHelp = function(url) {
 	this.$helpContentIFrame.attr('src', url );
 }
@@ -163,9 +161,6 @@ ModulesOfSchoolclassDisplay.prototype.setLoadingTableMessageSelected = function 
 }
 
 ModulesOfSchoolclassDisplay.prototype.setTree = function(json) {
-	console.log("SET TREE");
-	console.log(json);	
-	
 	var tree = json, result, $result;
 		
 	var result = this.recursiveTreeBuilder(tree.children);
@@ -275,21 +270,14 @@ ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, dept
  */
 
 ModulesOfSchoolclassDisplay.prototype.attachItem = function(id) {
-	console.log("attach "+id);
 	app.getPresenterFactory().getModulesOfSchoolclassPresenter().attachItemToSchoolClass(id);
 }
 
 ModulesOfSchoolclassDisplay.prototype.detachItem = function(id) {
-	console.log("detach "+id);
 	app.getPresenterFactory().getModulesOfSchoolclassPresenter().detachItemFromSchoolClass(id);
 }
 
-// ModulesOfSchoolclassDisplay.prototype.detachItem = function(id) {
-// 	app.getPresenterFactory().getModulesOfSchoolclassPresenter.detachItemFromSchoolClass(id);
-// }
-
 ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
-	//String key, String typeString, String fromData, String toData, String accessKey
 
 	typeString = this.settingsForm.elements["locked[]"][0].checked ? "assesment" : "normal";
 		
@@ -299,6 +287,7 @@ ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
 																				this.settingsForm.elements["to"].value,
 																				this.settingsForm.elements["accessKey"].value);
 }
+
 
 /*
  * EVENT HANDLERS - tree 
@@ -349,6 +338,7 @@ ModulesOfSchoolclassDisplay.prototype.settingsFormToggle = function(value) {
 	if (value === true) this.$settingsForm.find(':submit').prop('disabled','');
 	else this.$settingsForm.find(':submit').prop('disabled','disabled');
 }
+
 
 /*
  * EVENT HANDLERS - settings

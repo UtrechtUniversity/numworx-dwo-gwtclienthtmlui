@@ -1,7 +1,4 @@
 function EditSchoolclassesDisplay() {	
-	// GWT vars
-	
-	
 	// Forms 
 	this.editSchoolclassForm = document.forms["editSchoolclass"];
 	this.changeStudentsForm = document.forms["changeStudents"];
@@ -100,11 +97,10 @@ EditSchoolclassesDisplay.prototype.setHelp = function(url) {
 }
 
 EditSchoolclassesDisplay.prototype.showSchoolClass = function(json) {	
-	console.log(json);
 	var schoolclass = json;
 	
 	this.editSchoolclassForm.elements["classname"].value = schoolclass.schoolClassName;
-	console.log(schoolclass.registrationKey == "");
+	
 	if (schoolclass.registrationKey != "") {
 		this.editSchoolclassForm.elements["useClasskey"][0].checked = true; //yes
 		this.editSchoolclassForm.elements["useClasskey"][1].checked = false;
@@ -181,10 +177,6 @@ EditSchoolclassesDisplay.prototype.showShowModels = function(json) { // TODO: ch
 		return;
 	}
 	
-	// Temporary forward to next view
-	//app.mainDisplay.showEditCoursesOfSchoolClassView();
-	//window.JsModulesOfSchoolclassDisplay.updateTable(json);
-	
 	var i = 1;
 	for (var id in modules) { // TODO: probably change to array
 		//console.log(modules[id]);
@@ -247,17 +239,14 @@ EditSchoolclassesDisplay.prototype.connectModules = function() {
  */
 EditSchoolclassesDisplay.prototype.submitEditSchoolclass = function(event) {
 	event.preventDefault();	
-	console.log("SAVE!");
 	this.saveSchoolclass();	
 }
 EditSchoolclassesDisplay.prototype.clickEditSchoolclassFormSaveButton = function(event) {
 	event.preventDefault();		
-	console.log("SAVE!");
 	this.saveSchoolclass();
 }
 EditSchoolclassesDisplay.prototype.clickEditSchoolclassFormDeleteButton = function(event) {
 	event.preventDefault();		
-	console.log("DELETE!");
 	this.deleteSchoolclass();
 }
 
@@ -269,17 +258,14 @@ EditSchoolclassesDisplay.prototype.submitChangeStudentsForm = function(event) {
 }
 EditSchoolclassesDisplay.prototype.clickChangeStudentsFormShowButton = function(event) {
 	event.preventDefault();		
-	console.log("Show students!");
 	this.showStudentsRequest();
 }
 EditSchoolclassesDisplay.prototype.clickChangeStudentsFormConnectButton = function(event) {
 	event.preventDefault();		
-	console.log("Connect students!");
 	this.connectStudents();
 }
 EditSchoolclassesDisplay.prototype.clickChangeStudentsFormCopyOrMoveButton = function(event) {
 	event.preventDefault();		
-	console.log("Copy or move students!");
 	this.copyOrMoveStudents();
 }
 
@@ -292,12 +278,10 @@ EditSchoolclassesDisplay.prototype.submitChangeTeachersForm = function(event) {
 }
 EditSchoolclassesDisplay.prototype.clickChangeTeachersFormShowButton = function(event) {
 	event.preventDefault();		
-	console.log("Show teachers!");
 	this.showTeachersRequest();
 }
 EditSchoolclassesDisplay.prototype.clickChangeTeachersFormConnectButton = function(event) {
 	event.preventDefault();		
-	console.log("Connect teachers!");
 	this.connectTeachers();
 }
 
@@ -309,12 +293,10 @@ EditSchoolclassesDisplay.prototype.submitChangeModulesForm = function(event) {
 }
 EditSchoolclassesDisplay.prototype.clickChangeModulesFormShowButton = function(event) {
 	event.preventDefault();		
-	console.log("Show modules!");
 	this.showModulesRequest();
 }
 EditSchoolclassesDisplay.prototype.clickChangeModulesFormConnectButton = function(event) {
 	event.preventDefault();		
-	console.log("Connect modules!");
 	this.connectModules();
 }
 

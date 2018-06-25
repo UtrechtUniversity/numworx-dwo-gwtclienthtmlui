@@ -14,7 +14,7 @@ WelcomeDisplay.prototype.show = function() {
 }
 
 WelcomeDisplay.prototype.clear = function() {
-	//this.$panel.find(".content").html("");
+	this.$welcomeText.html("");
 }
 
 WelcomeDisplay.prototype.setWelcomeText = function(html) {

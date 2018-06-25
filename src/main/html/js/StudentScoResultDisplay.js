@@ -37,8 +37,6 @@ StudentScoResultDisplay.prototype.show = function() {
 	window.app.mainDisplay.openLightboxView(this);
 	this.$panel.show();	
 	Helpers.stretchIframeHeight( this.$iframe ); // TODO: Action on Resizing
-	
-	//$(window).on('resize', $.proxy(Helpers.resizeHelpSection, this));
 }
 
 
@@ -61,14 +59,7 @@ StudentScoResultDisplay.prototype.showHideNextAndPrevious = function() {
  * Map to java implementation
  */
 
-StudentScoResultDisplay.prototype.clear = function () {
-	this.$iframe.attr('src', '' );
-}
-
 StudentScoResultDisplay.prototype.init = function (state) {
-	console.log("init StudentScoResultDisplay");
-	console.log(state);
-	
 	var activeActivity, activeStudent;
 	this.resultState = state;
 	
@@ -95,14 +86,15 @@ StudentScoResultDisplay.prototype.init = function (state) {
 	this.$iframe.attr('src', '' );
 }
 
+StudentScoResultDisplay.prototype.clear = function () {
+	this.$iframe.attr('src', '' );
+}
 
 StudentScoResultDisplay.prototype.openUrl = function (url) {
-	console.log(url);
 	this.$iframe.attr('src', url );
 }
 
 StudentScoResultDisplay.prototype.updateResultTree = function (resultsTree, studentsTree) {
-	console.log("update trees StudentScoResultDisplay");
 	this.resultState.resultsTree = resultsTree;
 	this.resultState.studentsTree = studentsTree;
 }
@@ -112,7 +104,9 @@ StudentScoResultDisplay.prototype.hide = function () {
 	window.app.mainDisplay.closeLightboxView(this);
 	this.$panel.hide();		
 }
+
 StudentScoResultDisplay.prototype.close = function () { console.log("check of je een close doet"); }
+
 
 /*
  * RETURN FUNCTIONS
@@ -121,15 +115,19 @@ StudentScoResultDisplay.prototype.close = function () { console.log("check of je
 StudentScoResultDisplay.prototype.requestClose = function () {
 	app.getPresenterFactory().getStudentScoResultPresenter().close(this.resultState);
 }
+
 StudentScoResultDisplay.prototype.seal = function (state) {
 	app.getPresenterFactory().getStudentScoResultPresenter().sealSingleActivity(state);
 }
+
 StudentScoResultDisplay.prototype.print = function () {
 	app.getPresenterFactory().getStudentScoResultPresenter().print(this.resultState); 
 }
+
 StudentScoResultDisplay.prototype.download = function () {
 	app.getPresenterFactory().getStudentScoResultPresenter().download(this.resultState); 
 }
+
 StudentScoResultDisplay.prototype.log = function () {
 	app.getPresenterFactory().getStudentScoResultPresenter().log(this.resultState); 
 }
@@ -143,8 +141,6 @@ StudentScoResultDisplay.prototype.showNextStudent = function () {
 	}
 	this.resultState.activeStudent = studentId;
 	
-	console.log(studentId);
-	
 	app.getPresenterFactory().getStudentScoResultPresenter().showStudentResults(this.resultState, studentId, this.resultState.activeActivity, this.resultState.activeSchoolClass); 
 }
 
@@ -156,8 +152,6 @@ StudentScoResultDisplay.prototype.showPreviousStudent = function () {
 		previous = studentId;
 	}
 	this.resultState.activeStudent = studentId;
-	
-	console.log(studentId);
 	
 	app.getPresenterFactory().getStudentScoResultPresenter().showStudentResults(this.resultState, studentId, this.resultState.activeActivity, this.resultState.activeSchoolClass); 
 }
@@ -186,10 +180,12 @@ StudentScoResultDisplay.prototype.clickPrintButton = function(event) {
 	event.preventDefault();
 	this.print();
 }
+
 StudentScoResultDisplay.prototype.clickDownloadButton = function(event) {
 	event.preventDefault();
 	this.download();
 }
+
 StudentScoResultDisplay.prototype.clickLogButton = function(event) {
 	event.preventDefault();
 	this.log();
@@ -199,8 +195,8 @@ StudentScoResultDisplay.prototype.clickNextButton = function(event) {
 	event.preventDefault();
 	this.showNextStudent();
 }
+
 StudentScoResultDisplay.prototype.clickPreviousButton = function(event) {
 	event.preventDefault();
 	this.showPreviousStudent();
 }
-

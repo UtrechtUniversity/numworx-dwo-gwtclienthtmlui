@@ -1,5 +1,4 @@
 function EditPersonDisplay() {
-	
 	// GWT vars
 	this.role = "";
 	
@@ -49,6 +48,7 @@ EditPersonDisplay.prototype.disableAndHideInputFieldsTeacher = function () {
 	$(this.editPersonDetailsForm.elements["email"].parentNode).hide();
 	$(this.editPersonDetailsForm.elements["newPassword"].parentNode).hide();
 }
+
 EditPersonDisplay.prototype.disableAndHideInputFieldsRegularStudent = function () {	
 	for (var id in this.editPersonDetailsForm.elements) {
 		this.editPersonDetailsForm.elements[id].disabled = true;	
@@ -56,6 +56,7 @@ EditPersonDisplay.prototype.disableAndHideInputFieldsRegularStudent = function (
 	$(this.editPersonDetailsForm.elements["email"].parentNode).hide();
 	$(this.editPersonDetailsForm.elements["newPassword"].parentNode).hide();
 }
+
 EditPersonDisplay.prototype.disableAndHideInputFieldsSingleSchoolStudent = function () {	
 	$(this.editPersonDetailsForm.elements["email"].parentNode).show();
 	$(this.editPersonDetailsForm.elements["newPassword"].parentNode).show();
@@ -66,14 +67,15 @@ EditPersonDisplay.prototype.disableAndHideInputFieldsSingleSchoolStudent = funct
 EditPersonDisplay.prototype.hideSubmitButton = function () {	
 	$(this.editPersonDetailsForm.elements["submit"]).hide();
 }
+
 EditPersonDisplay.prototype.hideRemoveButton = function () {	
 	$(this.editPersonDetailsForm.elements["remove"]).css('visibility', 'hidden');
 }
 
-
 EditPersonDisplay.prototype.showSubmitButton = function () {	
 	$(this.editPersonDetailsForm.elements["submit"]).show();
 }
+
 EditPersonDisplay.prototype.showRemoveButton = function () {	
 	$(this.editPersonDetailsForm.elements["remove"]).css('visibility', 'visible');
 }
@@ -85,7 +87,6 @@ EditPersonDisplay.prototype.showRemoveButton = function () {
  */
 
 EditPersonDisplay.prototype.clear = function () {
-	console.log("clear");
 	this.editPersonDetailsForm.elements["userName"].value = "";
 	this.editPersonDetailsForm.elements["familyName"].value = "";
 	this.editPersonDetailsForm.elements["givenName"].value = "";
@@ -103,15 +104,11 @@ EditPersonDisplay.prototype.setHelp = function(url) {
 }
 
 EditPersonDisplay.prototype.setUser = function (role,json) {
-	console.log("set user");
-	console.log(json);
-	//var email = json.email;
 	var userName = json.userName;
 	var familyName = json.familyName;
 	var givenName = json.givenName;
 	var insertion = json.insertion;
 
-	//this.editPersonDetailsForm.elements["email"].value = this.email;
 	this.editPersonDetailsForm.elements["userName"].value = userName;
 	this.editPersonDetailsForm.elements["familyName"].value = familyName;
 	this.editPersonDetailsForm.elements["givenName"].value = givenName;
@@ -119,9 +116,7 @@ EditPersonDisplay.prototype.setUser = function (role,json) {
 	this.editPersonDetailsForm.elements["role"].value = role == "TEACHER" ? "docent" : "leerling";
 	
 	this.role = role;
-	
-	console.log(this.role);
-	
+		
 	if (this.role == "TEACHER") { 
 		this.disableAndHideInputFieldsTeacher();
 		this.hideSubmitButton();
@@ -140,22 +135,19 @@ EditPersonDisplay.prototype.setSingleSchoolStudent = function (json) {
 	var givenName = json.givenName;
 	var insertion = json.insertion;
 
-	//this.editPersonDetailsForm.elements["email"].value = this.email;
 	this.editPersonDetailsForm.elements["userName"].value = userName;
 	this.editPersonDetailsForm.elements["familyName"].value = familyName;
 	this.editPersonDetailsForm.elements["givenName"].value = givenName;
 	this.editPersonDetailsForm.elements["insertion"].value = insertion;
 	this.editPersonDetailsForm.elements["role"].value = "leerling";
 	
-	//this.role = "STUDENT";
+	this.role = "STUDENT";
 	
 	this.disableAndHideInputFieldsSingleSchoolStudent();	
 }
 
 
 EditPersonDisplay.prototype.setSchoolClasses = function (json) {
-	console.log("setSchoolClasses");
-	console.log(json);
 	var schoolclasses = json;
 	
 	this.$editPersonSchoolclassesTableBody.html("");
@@ -163,7 +155,6 @@ EditPersonDisplay.prototype.setSchoolClasses = function (json) {
 	var i = 1;
 	for (var id in schoolclasses) { 
 		el = schoolclasses[id].schoolClass;
-		console.log(el); console.log(id);
 		$row = this.$editPersonSchoolclassesRow.clone();
 		$row.prop('tabindex', i);
 		$row.find("#editPersonSchoolclassName").html( el.schoolClassName ).removeAttr("id");
@@ -187,14 +178,11 @@ EditPersonDisplay.prototype.setSchoolClasses = function (json) {
 }
 
 EditPersonDisplay.prototype.setEmptyTableMessage = function (json) {
-	console.log("setEmptyTableMessage");
+	this.$editPersonSchoolclassesTableBody.html('<tr class="empty"><td>Geen klassen gevonden.</td></tr>');
 }
 EditPersonDisplay.prototype.setLoadingTableMessage = function (json) {
-	console.log("setLoadingTableMessage");
+	this.$editPersonSchoolclassesTableBody.html('<tr class="empty"><td>Klassen worden geladen.</td></tr>');
 }
-
-
-
 
 
 /*
@@ -206,6 +194,7 @@ EditPersonDisplay.prototype.submitPersonToSchoolClass = function(id) {
 	if (this.role == "TEACHER") app.getPresenterFactory().getEditTeacherPresenter().submitTeacherToSchoolClass(id);
 	if (this.role == "STUDENT") app.getPresenterFactory().getEditStudentPresenter().submitStudentToSchoolClass(id);
 }
+
 EditPersonDisplay.prototype.removePersonFromSchoolClass = function(id) {
 	if (this.role == "TEACHER") app.getPresenterFactory().getEditTeacherPresenter().removeTeacherFromSchoolClass(id);
 	if (this.role == "STUDENT") app.getPresenterFactory().getEditStudentPresenter().removeStudentFromSchoolClass(id);
@@ -214,7 +203,7 @@ EditPersonDisplay.prototype.removePersonFromSchoolClass = function(id) {
 EditPersonDisplay.prototype.updatePerson = function() {
 	if (this.role == "TEACHER") return;
 	
-	// save student
+	// TODO: save student
 	//g givenName, String insertion, String familyName, String email, String password
 	app.getPresenterFactory().getEditStudentPresenter().saveUser(	this.editPersonDetailsForm.elements["givenName"].value,
 																	this.editPersonDetailsForm.elements["insertion"].value,
@@ -222,10 +211,11 @@ EditPersonDisplay.prototype.updatePerson = function() {
 																	this.editPersonDetailsForm.elements["email"].value,
 																	this.editPersonDetailsForm.elements["password"].value);
 }
+
 EditPersonDisplay.prototype.removePerson = function() {
 	if (this.role == "TEACHER") return;
 	
-	// remove student
+	// TODO: remove student
 }
 
 
@@ -237,6 +227,7 @@ EditPersonDisplay.prototype.submitEditPersonDetails = function(event) {
 	event.preventDefault();		
 	if (this.role == "L") this.updatePerson();
 }
+
 EditPersonDisplay.prototype.clickRemoveButton = function(event) {
 	event.preventDefault();		
 	if (this.role == "L") this.removePerson();
@@ -253,5 +244,3 @@ EditPersonDisplay.prototype.changeActiveCheckbox = function(event) {
 		this.removePersonFromSchoolClass(event.target.value);
 	}
 }
-
-

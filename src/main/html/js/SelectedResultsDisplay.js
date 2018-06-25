@@ -1,6 +1,5 @@
 function SelectedResultsDisplay() {		
 	this.resultState = null;
-	//this.studentsTree = null;
 	
 	// Form
 	this.sealModuleActivitiesForm = document.forms["sealModuleActivities"];

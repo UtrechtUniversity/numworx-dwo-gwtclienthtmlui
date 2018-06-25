@@ -1,7 +1,4 @@
 function SchoolclassesDisplay() {	
-	// GWT vars
-	
-	
 	// Forms 
 	this.chooseSchoolclassForm = document.forms["chooseSchoolclass"];
 	this.addSchoolclassForm = document.forms["addSchoolclass"];
@@ -36,10 +33,17 @@ SchoolclassesDisplay.prototype.show = function() {
  * Map to java implementation
  */
 
-SchoolclassesDisplay.prototype.clear = function () {
-}
 
 SchoolclassesDisplay.prototype.init = function () {
+	this.addSchoolclassForm.elements["classname"].value = "";
+	this.addSchoolclassForm.elements["classkey"].value = "";
+	this.addSchoolclassForm.elements["useClasstree"][0].checked = false;
+	this.addSchoolclassForm.elements["useClasstree"][1].checked = true;
+	this.addSchoolclassForm.elements["useClasskey"][0].checked = false;
+	this.addSchoolclassForm.elements["useClasskey"][1].checked = true;
+}
+
+SchoolclassesDisplay.prototype.clear = function () {
 	this.addSchoolclassForm.elements["classname"].value = "";
 	this.addSchoolclassForm.elements["classkey"].value = "";
 	this.addSchoolclassForm.elements["useClasstree"][0].checked = false;
@@ -57,11 +61,9 @@ SchoolclassesDisplay.prototype.updateView = function(json) {
 	
 	this.$chooseSchoolclassTableBody.html("");
 	
-	//for (i = 0; i < this.schoolclasses.length; i++) {
 	var i = 1;
-	for (var id in schoolclasses) { // TODO: probably change to array
+	for (var id in schoolclasses) { 
 		el = schoolclasses[id];
-		//console.log(el); console.log(id);
 		$row = this.$chooseSchoolclassRow.clone();
 		$row.prop('tabindex', i);
 		$row.find("#chooseSchoolclassId").val( id ).removeAttr("id");
