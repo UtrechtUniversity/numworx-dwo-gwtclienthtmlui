@@ -173,11 +173,9 @@ Helpers.clickSortButton = function() {
 	$this.addClass("active");	
 }
 
-Helpers.translate = function(event) {
-	var $el = $(event.target);
-	
-	var translation = app.getTranslator().translate( $el.data("translation") );
-	
+Helpers.translate = function(index, value) {
+	var $el = $(value);
+	var translation = app.getTranslator().translate( $el.data("translate") );
 	if ($el.get(0).tagName == "SPAN" ||
 		$el.get(0).tagName == "P" ||
 		$el.get(0).tagName == "H1" ||

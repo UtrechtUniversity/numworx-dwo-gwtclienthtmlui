@@ -25,7 +25,7 @@ MainApp.prototype.getPresenterFactory = function() {
 
 MainApp.prototype.getTranslator = function() {
 	if (this.translator) return this.translator;
-	this.translator = window.dwoAPI.DwoMessageTranslator();
+	this.translator = new window.dwoAPI.jsDwoMessageTranslator();
 	return this.translator;
 }
 
