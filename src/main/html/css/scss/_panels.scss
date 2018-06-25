@@ -732,13 +732,27 @@ section.lightbox {
 		top: $elementMarginBottom;
 		
 		.closeButton {
-			background: #ff0000;
+//			background: #ff0000;
 			cursor: pointer;
 			height: 32px;
 			position: absolute;
 			right: 5px;
-			top: 5px;
+			top: 7px;
 			width: 32px;
+			
+			.icon {
+				display: block;
+				float: left;
+				
+				border-radius: 2px;
+				float: left;
+				height: 26px; //TODO var
+				margin-right: 0.5em;
+				width: 26px; //TODO var
+				
+				use { fill: $shade11; }
+			}
+			
 		}
 	}
 	section {
