@@ -188,16 +188,16 @@ body {
 				cursor: pointer;
 				margin-left: ($gutter + 1) * -1px;						
 			}			
-			.content {
-				
+			.content {				
 				background-color: $shade2;
 				border-left: 1px $shade2 solid;
 				bottom: 0;
-				display: none;				
+				display: block;				
 				padding: 2em $gutter * 1px;
 				position: fixed;
 				right: $siteMargin * 1px;			
 				top: ($headerHeight + $subpanelHeaderHeight + 1) * 1px;
+				visibility: hidden;
 				
 				iframe {
 					width: 100%;
@@ -240,7 +240,7 @@ body {
 					}	
 				}
 				.content {
-					display: block;
+					visibility: visible;
 					
 					@media #{$mediaQueryDesktop} {
 						border-left-color: $primary;
