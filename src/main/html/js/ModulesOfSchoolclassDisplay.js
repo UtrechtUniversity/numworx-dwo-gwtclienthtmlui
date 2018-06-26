@@ -2,6 +2,7 @@ function ModulesOfSchoolclassDisplay() {
 	// GWT vars	
 	this.nodes = [];
 	this.selectedNodeId = "";
+	this.dateTimePicker = null;
 	
 	// Forms 
 	this.selectForm = document.forms["modulesOfSchoolclassDisplaySelect"];
@@ -22,12 +23,17 @@ function ModulesOfSchoolclassDisplay() {
 	this.$settingsForm = $(this.settingsForm);	
 	this.$searchForm = $(this.searchForm);
 	
+	this.$settingsFormFrom = $(this.settingsForm.elements["from"]);
+	this.$settingsFormTo = $(this.settingsForm.elements["to"]);
+	
 	this.$reloadButton = $(this.searchForm.elements["reload"]);
 	
 	// Bind handlers
 	this.$settingsForm.on('submit', $.proxy(this.submitSettings,this));	
 	this.$searchForm.on('submit', $.proxy(this.submitSearch,this));	
-	this.$reloadButton.on('click', $.proxy(this.clickReload,this))
+	this.$reloadButton.on('click', $.proxy(this.clickReload,this));
+	this.$settingsFormFrom.on('click', $.proxy(this.clickDateField, this));
+	this.$settingsFormTo.on('click', $.proxy(this.clickDateField, this));
 	
 	// Init
 	this.$panel.hide();
@@ -111,7 +117,7 @@ ModulesOfSchoolclassDisplay.prototype.updateTable = function() {
 }
 ModulesOfSchoolclassDisplay.prototype.setSettings = function(id) {
 	if (!this.nodes.hasOwnProperty(id)) return;
-		
+	console.log(this.nodes[id]);
 	this.settingsForm.elements["key"].value = id;
 	this.settingsForm.elements["accessKey"].value = this.nodes[id].classCourse.accessKey ? this.nodes[id].classCourse.accessKey : "";
 	this.settingsForm.elements["from"].value = this.nodes[id].classCourse.notBefore ? this.nodes[id].classCourse.notBefore : "";
@@ -133,6 +139,7 @@ ModulesOfSchoolclassDisplay.prototype.setSettings = function(id) {
 
 ModulesOfSchoolclassDisplay.prototype.init = function () {
 	Helpers.stretchHeight( [this.$treeWrapper, this.$selectTableBody] );
+	this.dateTimePicker  = new MaterialDatetimePicker({});
 }
 
 ModulesOfSchoolclassDisplay.prototype.clear = function () {
@@ -162,7 +169,7 @@ ModulesOfSchoolclassDisplay.prototype.setLoadingTableMessageSelected = function 
 
 ModulesOfSchoolclassDisplay.prototype.setTree = function(json) {
 	var tree = json, result, $result;
-		
+			
 	var result = this.recursiveTreeBuilder(tree.children);
 	
 	result = '<ul id ="modulesOfSchoolclassDisplayTree" class="tree">'+result+'</li>';
@@ -279,13 +286,30 @@ ModulesOfSchoolclassDisplay.prototype.detachItem = function(id) {
 
 ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
 
-	typeString = this.settingsForm.elements["locked[]"][0].checked ? "assesment" : "normal";
+	var typeString = this.settingsForm.elements["locked[]"][0].checked ? "assesment" : "normal";
+	
+	var from = this.settingsForm.elements["from"].value;
+	var to = this.settingsForm.elements["to"].value;
+	
+	if (from) from = this.reformatDate( from );
+	if (to) to = this.reformatDate( to );
+	
+	console.log(from);
+	console.log(to);
 		
 	app.getPresenterFactory().getModulesOfSchoolclassPresenter().setModuleSettings(  this.settingsForm.elements["key"].value,
 																				typeString,
-																				this.settingsForm.elements["from"].value,
-																				this.settingsForm.elements["to"].value,
+																				from,
+																				to,
 																				this.settingsForm.elements["accessKey"].value);
+}
+
+ModulesOfSchoolclassDisplay.prototype.reformatDate = function(oldDate) {
+	var dateTime = oldDate.split(" ");
+	var d = dateTime[0], t = dateTime[1];
+	var ds = d.split("/");
+	var ts = t.split(":");
+	return ds[2]+"-"+ds[1]+"-"+ds[0]+"T"+ts[0]+":"+ts[1]+":00.000+0100";
 }
 
 
@@ -335,8 +359,8 @@ ModulesOfSchoolclassDisplay.prototype.clickSelectRow = function(event) {
 
 // helpers
 ModulesOfSchoolclassDisplay.prototype.settingsFormToggle = function(value) {
-	if (value === true) this.$settingsForm.find(':submit').prop('disabled','');
-	else this.$settingsForm.find(':submit').prop('disabled','disabled');
+	if (value === true) this.$settingsForm.find('input').prop('disabled','');
+	else this.$settingsForm.find('input').prop('disabled','disabled');
 }
 
 
@@ -347,6 +371,13 @@ ModulesOfSchoolclassDisplay.prototype.settingsFormToggle = function(value) {
 ModulesOfSchoolclassDisplay.prototype.submitSettings = function(event) {
 	event.preventDefault();	
 	this.setModuleSettings();
+}
+
+ModulesOfSchoolclassDisplay.prototype.clickDateField = function(event) {
+	event.preventDefault();		
+	this.dateTimePicker.off('submit');
+	this.dateTimePicker.on('submit', function(d) { var el = event.target; el.value = d.format("DD/MM/YYYY HH:mm"); } );	
+	this.dateTimePicker.open();
 }
 
 

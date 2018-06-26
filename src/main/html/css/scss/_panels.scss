@@ -830,6 +830,18 @@ section.lightbox {
 }
 
 
+.c-scrim {
+	z-index: 999;
+}
+.c-datepicker {
+	z-index: 9999;
+	
+	.c-datepicker__header-day, .c-datepicker__header-date {
+		background-color: $primary;
+	}
+}
+
+
 .filterIndicators {
 	border-bottom: $borderThickness $primary solid;
 	display: inline-block;

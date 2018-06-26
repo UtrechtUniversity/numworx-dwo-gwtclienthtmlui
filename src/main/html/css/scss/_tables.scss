@@ -13,7 +13,7 @@ TABLE STYLES
  * GENERAL TABLE STYLES
  */ 
 
-table {
+table:not(.c-datepicker__days) {
 	//table-layout: fixed;
 	max-width: 100%;
 	

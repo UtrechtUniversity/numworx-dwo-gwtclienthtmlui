@@ -21,13 +21,27 @@
 	<!-- TODO: decide whether to add Google fonts locally (consider licence) -->
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700" rel="stylesheet">
 	
-	<!-- Load styles AFTER GWT, because GWT outputs styles too -->
-	<link rel="stylesheet" href="css/styles.css" type="text/css" media="screen">
+	<!-- Font for the material icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	
+	<!-- Load styles AFTER GWT, because GWT outputs styles too -->
+	
+	
+	<link rel="stylesheet" href="css/styles.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="third-party/material-datetime-picker/dist/material-datetime-picker.css" type="text/css" media="screen">
+	
+		
 	<script src="js/jquery-3.2.1.min.js" type="text/javascript" language="javascript"></script>
 	
 	<!-- Helpers for interface stuff -->
 	<script src="js/helpers.js" type="text/javascript" charset="utf-8"></script>
+	
+	
+	<!-- Material Datetime picker -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/rome/2.1.22/rome.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
+	<script src="third-party/material-datetime-picker/dist/material-datetime-picker.js" type="text/javascript" charset="utf-8"></script>
+	
 	
 	<!-- Seperate script for each view, could be combined and minified in future -->
 	<script src="js/MainDisplay.js" type="text/javascript" charset="utf-8"></script>
@@ -1149,9 +1163,10 @@
 					</div>
 					<div class="col-6">
 						<h3>Instellingen geselecteerde module</h3>
-					
-						<div class="row">
-							<form name="modulesOfSchoolclassDisplaySettings">
+						
+						<form name="modulesOfSchoolclassDisplaySettings">
+							<div class="row">
+							
 								<input name="key" type="hidden" value="" />
 								<label for="modulesOfSchoolclassDisplayValidityFrom" class="col-2 input textoverflow">
 									Geldigsheidsduur (van - tot)
