@@ -326,13 +326,13 @@ SelectedResultsDisplay.prototype.getSealStateActivitiesStudentsInModule = functi
 	var students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children;
 	var sealed = 0, unsealed = 0, state = 0;
 	for (var studentId in students) {
-		// console.log( students[studentId].givenName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].familyName);
+		console.log( students[studentId].givenName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].familyName);
 		for (var actId in module.children) {
-			// console.log(module.children[actId]);
+			console.log(module.children[actId]);
 			for (var scoId in module.children[actId].children) { // Loop over activities
 				if (module.children[actId].children[scoId]["user-id"] == studentId) { 
-					// console.log(module.children[actId].children[scoId].label);
-// 					console.log(module.children[actId].children[scoId].completionStatus);
+					console.log(module.children[actId].children[scoId].label);
+					console.log(module.children[actId].children[scoId].completionStatus);
 					if (module.children[actId].children[scoId].completionStatus == "completed") sealed++;
 					else unsealed++;				
 				}
@@ -441,7 +441,7 @@ SelectedResultsDisplay.prototype.setHelp = function(url) {
 
 SelectedResultsDisplay.prototype.updateResultTree = function (resultsTree, studentsTree) {
 	console.log("updateTree");
-	console.log(studentsTree);
+	console.log(resultsTree);
 	this.resultState.resultsTree = resultsTree;
 	this.resultState.studentsTree = studentsTree;
 }
@@ -472,7 +472,7 @@ SelectedResultsDisplay.prototype.sealModuleActivities = function() {
 SelectedResultsDisplay.prototype.getPages = function(scoId) {
 	console.log(scoId);
 	console.log(this.resultState.activeSchoolClass);
-	app.getPresenterFactory().getSelectedResultsPresenter().preparePages(this.resultState, scoId, this.resultState.activeSchoolClass);	
+	app.getPresenterFactory().getSelectedResultsPresenter().preparePages(scoId, this.resultState.activeSchoolClass);	
 }
 
 
