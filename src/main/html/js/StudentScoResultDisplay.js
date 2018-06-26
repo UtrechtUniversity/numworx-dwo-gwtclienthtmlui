@@ -37,6 +37,11 @@ StudentScoResultDisplay.prototype.show = function() {
 	window.app.mainDisplay.openLightboxView(this);
 	this.$panel.show();	
 	Helpers.stretchIframeHeight( this.$iframe ); // TODO: Action on Resizing
+	
+	// Temporary hides - TODO: implement
+	this.$printButton.hide();
+	this.$downloadButton.hide();
+	this.$logButton.hide();
 }
 
 
