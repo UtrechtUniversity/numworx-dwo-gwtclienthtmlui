@@ -93,11 +93,16 @@ EditPersonDisplay.prototype.clear = function () {
 	this.editPersonDetailsForm.elements["insertion"].value = "";
 	this.editPersonDetailsForm.elements["role"].value = "";	
 	
+	this.role = "";
+	
 	for (var id in this.editPersonDetailsForm.elements) {
 		this.editPersonDetailsForm.elements[id].disabled = false;	
 	}
 	this.showSubmitButton();
 	this.hideRemoveButton();
+}
+EditPersonDisplay.prototype.init = function () {
+	console.log("init!");
 }
 EditPersonDisplay.prototype.setHelp = function(url) {
 	this.$helpContentIFrame.attr('src', url );
@@ -134,11 +139,15 @@ EditPersonDisplay.prototype.setSingleSchoolStudent = function (json) {
 	var familyName = json.familyName;
 	var givenName = json.givenName;
 	var insertion = json.insertion;
-
+	var email = json.email;
+	var password = json.password;
+//
 	this.editPersonDetailsForm.elements["userName"].value = userName;
 	this.editPersonDetailsForm.elements["familyName"].value = familyName;
 	this.editPersonDetailsForm.elements["givenName"].value = givenName;
 	this.editPersonDetailsForm.elements["insertion"].value = insertion;
+	this.editPersonDetailsForm.elements["email"].value = email;
+	this.editPersonDetailsForm.elements["newPassword"].value = password;
 	this.editPersonDetailsForm.elements["role"].value = "leerling";
 	
 	this.role = "STUDENT";
@@ -203,13 +212,15 @@ EditPersonDisplay.prototype.removePersonFromSchoolClass = function(id) {
 EditPersonDisplay.prototype.updatePerson = function() {
 	if (this.role == "TEACHER") return;
 	
+	
+	
 	// TODO: save student
 	//g givenName, String insertion, String familyName, String email, String password
 	app.getPresenterFactory().getEditStudentPresenter().saveUser(	this.editPersonDetailsForm.elements["givenName"].value,
 																	this.editPersonDetailsForm.elements["insertion"].value,
-																	this.editPersonDetailsForm.elements["familyName"].valuefunction,
+																	this.editPersonDetailsForm.elements["familyName"].value,
 																	this.editPersonDetailsForm.elements["email"].value,
-																	this.editPersonDetailsForm.elements["password"].value);
+																	this.editPersonDetailsForm.elements["newPassword"].value);
 }
 
 EditPersonDisplay.prototype.removePerson = function() {
@@ -225,12 +236,16 @@ EditPersonDisplay.prototype.removePerson = function() {
 
 EditPersonDisplay.prototype.submitEditPersonDetails = function(event) {
 	event.preventDefault();		
-	if (this.role == "L") this.updatePerson();
+	
+	console.log("SAVE!");
+	console.log(this);
+	
+	if (this.role == "STUDENT") this.updatePerson();
 }
 
 EditPersonDisplay.prototype.clickRemoveButton = function(event) {
 	event.preventDefault();		
-	if (this.role == "L") this.removePerson();
+	if (this.role == "STUDENT") this.removePerson();
 }
 
 /*
