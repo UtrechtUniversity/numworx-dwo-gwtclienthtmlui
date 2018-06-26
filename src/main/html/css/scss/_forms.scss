@@ -100,7 +100,7 @@ input[type="text"], input[type="password"] {
 	&:disabled {
 		background-color: $shade1;
 		border-color: $shade12;
-		color: $shade12;
+		//color: $shade12;
 		cursor: not-allowed;
 	}
 }
