@@ -53,6 +53,9 @@ SelectedResultsDisplay.prototype.show = function() {
 	this.$panel.show();	
 	
 	if (!app.getPresenterFactory().getSelectedResultsPresenter().hasCompareClasses()) this.$startCompareClassForm.hide();
+	
+	// temporary hide, TODO: implement
+	this.$printButton.hide();
 }
 
 /*
