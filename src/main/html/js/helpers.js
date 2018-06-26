@@ -46,7 +46,7 @@ Helpers.resizeHelpSection = function(event) {
 Helpers.toggleHelpSection = function() {
 	$(this).parent().toggleClass('active'); 
 	$(this).parent().css('z-index','9999');
-	$(this).parent().find("iframe").get(0).contentWindow.location.reload();
+	//$(this).parent().find("iframe").get(0).contentWindow.location.reload();
 }
 
 Helpers.stretchHeight = function(elements) {
