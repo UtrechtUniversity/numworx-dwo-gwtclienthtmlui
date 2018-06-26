@@ -317,6 +317,29 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 	return matrix;
 }
 
+SelectedResultsDisplay.prototype.getSealStateActivitiesStudentsInModule = function(module) {
+	var students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children;
+	var sealed = 0, unsealed = 0, state = 0;
+	for (var studentId in students) {
+		// console.log( students[studentId].givenName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].familyName);
+		for (var actId in module.children) {
+			// console.log(module.children[actId]);
+			for (var scoId in module.children[actId].children) { // Loop over activities
+				if (module.children[actId].children[scoId]["user-id"] == studentId) { 
+					// console.log(module.children[actId].children[scoId].label);
+// 					console.log(module.children[actId].children[scoId].completionStatus);
+					if (module.children[actId].children[scoId].completionStatus == "completed") sealed++;
+					else unsealed++;				
+				}
+			}	
+		}
+	}
+	
+	if (sealed == 0) return 0; // none sealed
+	if (sealed > 0 && unsealed > 0) return 1; // some sealed
+	if (sealed > 0 && unsealed == 0) return 2; // all sealed	
+}
+
 
 SelectedResultsDisplay.prototype.computeModuleScoreForStudent = function(module, studentId) {
 	var total = 0, totalCount = 0, scoreSet = false;
@@ -341,7 +364,6 @@ SelectedResultsDisplay.prototype.filterIndicator = function(nr) {
 	this.$selectResultsTableWrap.find(".result"+nr).show();
 }
 SelectedResultsDisplay.prototype.filterIndicatorReset = function() {
-	console.log("reset");
 	this.$selectResultsTableWrap.find(".resultIndicator").show();
 }
 
@@ -369,12 +391,23 @@ SelectedResultsDisplay.prototype.activitiesStudent = function(params) {
 
 SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
 	var matrix = this.buildMatrixActivitiesStudentsInModule(params.module);
+	var sealState = this.getSealStateActivitiesStudentsInModule(params.module);
+	
 	this.resultState.activeModule = params.moduleId;
 	this.plotMatrix(matrix);
 	this.$bars.hide();
 	this.$barActivitiesStudents.show();
 	//this.$barActivitiesStudentsBacklink.html("Terug naar <b>Alle geselecteerde modules</b>");
 	this.$barActivitiesStudentsBacklink.click($.proxy(this.clickBackToModulesStudents, this));
+	
+	// Sealed checkbox
+	this.$sealCheckbox.parent().removeClass("thirdState");
+	this.$sealCheckbox.parent().removeAttr("checked");
+	if (sealState == 1) this.$sealCheckbox.parent().addClass("thirdState");
+	else if (sealState == 2) {
+		this.$sealCheckbox.parent().attr("checked", "checked");
+		this.$sealCheckbox.attr("disabled", "disabled");
+	}
 }
 
 
@@ -501,6 +534,9 @@ SelectedResultsDisplay.prototype.submitStartCompareClassForm = function(event) {
 
 SelectedResultsDisplay.prototype.changeSealCheckbox = function(event) {
 	event.preventDefault();			
-	if (event.target.checked == 1) this.sealModuleActivities();
+	if (event.target.checked == 1) {
+		event.target.disabled = true;
+		this.sealModuleActivities();
+	}
 }
 
