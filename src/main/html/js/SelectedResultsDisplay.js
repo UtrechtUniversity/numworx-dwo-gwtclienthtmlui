@@ -278,6 +278,8 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 	for (var actId in module.children) {
 		matrix[0][j] = {};
 		matrix[0][j].label = module.children[actId].label;
+		matrix[0][j].callback = this.clickActivityColumnHeader;
+		matrix[0][j].params = { scoId: actId  };
 		j++;
 	}
 	
@@ -410,6 +412,9 @@ SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
 	}
 }
 
+SelectedResultsDisplay.prototype.pagesStudents = function(params) {
+	console.log("show functions to be implemented");
+}
 
 /*
  * VIEW FUNCTIONS
@@ -446,11 +451,6 @@ SelectedResultsDisplay.prototype.updateResultTree = function (resultsTree, stude
 SelectedResultsDisplay.prototype.showStudentResults = function(scoId, studentId) {
 	this.resultState.activeActivity = scoId;
 	this.resultState.activeStudent = studentId;
-	//console.log(JSON.stringify(this.resultState));
-	console.log(this.resultState);
-	console.log(scoId);
-	console.log(studentId);
-	console.log(this.resultState.activeSchoolClass); 
 	app.getPresenterFactory().getSelectedResultsPresenter().showStudentResults(this.resultState, scoId, studentId, this.resultState.activeSchoolClass);
 }
 
@@ -464,6 +464,12 @@ SelectedResultsDisplay.prototype.print = function() {
 
 SelectedResultsDisplay.prototype.sealModuleActivities = function() {
 	app.getPresenterFactory().getSelectedResultsPresenter().sealModuleActivities(this.resultState.activeModule, this.resultState.activeSchoolClass);
+}
+
+SelectedResultsDisplay.prototype.getPages = function(scoId) {
+	console.log(scoId);
+	console.log(this.resultState.activeSchoolClass);
+	app.getPresenterFactory().getSelectedResultsPresenter().preparePages(this.resultState, scoId, this.resultState.activeSchoolClass);	
 }
 
 
@@ -501,6 +507,12 @@ SelectedResultsDisplay.prototype.clickModuleColumnHeader = function(params, even
 SelectedResultsDisplay.prototype.clickResultIndicator = function(params, event) {
 	event.preventDefault();		
 	this.showStudentResults(params.scoId, params.studentId);	
+}
+
+SelectedResultsDisplay.prototype.clickActivityColumnHeader = function(params, event) {
+	event.preventDefault();	
+	this.getPages(params.scoId);
+	this.pagesStudents(params);	
 }
 
 SelectedResultsDisplay.prototype.clickPrintButton = function(event) {
