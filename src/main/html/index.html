@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="gwt:property" content="locale=nl" >
-    <title>DWOGwtClient</title>
+    <title>Numworx Teacher</title>
 		
     <script>
     	var API_1484_11;
@@ -161,15 +161,15 @@
 					<form id="formLogin" name="login" action="javascript: void(0);" method="POST">
 						<label for="username">&nbsp;<input type="text" name="username" placeholder="Gebruikersnaam" /></label>
 						<label for="password">&nbsp;<input type="password" name="password" placeholder="Wachtwoord" /></label>
-						<input type="submit" class="right" name="submit" value="Aanmelden" data-translate="NUM_Button_Login" /> <!-- data-translate="NUM_Button_Ok"  -->
+						<input type="submit" class="right" name="submit" value="Aanmelden" data-translate="NUM_BTN_Login" /> <!-- data-translate="NUM_Button_Ok"  -->
 						<span id="loginDisplayPanelWarningBox"></span>
 					</form>
 				</div>
 			
 				<ul>
-					<li><a href="#">Wachtwoord vergeten?</a></li>
-					<li><a href="#">Nog geen account?</a></li>
-					<li><a href="#">Meer informatie over Numworx</a></li>
+					<li><a href="#" data-translate="NUM_LBL_Q_PASWORD_FORGOTTEN">Wachtwoord vergeten?</a></li>
+					<li><a href="#" data-translate="NUM_LBL_Q_NO_ACCOUNT">Nog geen account?</a></li>
+					<li><a href="#" data-translate="NUM_LBL_MORE_ON_NUMWORX">Meer informatie over Numworx</a></li>
 				</ul>
 			</div>
 		</div>
@@ -245,11 +245,11 @@
 						<svg viewBox="0 0 64 64" class="icon">
 							<use xlink:href="#personen"></use>
 						</svg>
-						<h1>Account beheren</h1>
-						<h2 class="sectionhead"><span>Mijn persoonlijke gegevens veranderen</span></h2>					
+						<h1 data-translate="NUM_PNL_ACCOUNT">Account beheren</h1>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_ACCOUNT_CHANGE">Mijn persoonlijke gegevens veranderen</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader">Numworx Help</h2>
+						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -263,39 +263,39 @@
 					<form name="updateUser">
 						<fieldset>
 							<label for="updateUserPassword" class="col-2 input">
-								Huidig wachtwoord
+								<span data-translate="NUM_LBL_CUR_PASSWORD">huidig ww</span>
 								<input id="updateUserPassword" name="currentPassword" type="password" value="" />
 							</label>
 							<label for="updateUserNewPassword" class="col-2 input">
-								<span data-translate="NUM_Button_NewPassword">Nieuw ww</span>
+								<span data-translate="NUM_LBL_NEW_PASSWORD">Nieuw ww</span>
 								<input id="updateUserNewPassword" name="newPassword" type="password" value="" />
 							</label>
 							<label for="updateUserNewPasswordRepeat" class="col-2 input textoverflow">
-								Herhaal nieuw wachtwoord
+								<span data-translate="NUM_LBL_RPT_NEW_PASSWORD">herhaal ww</span>
 								<input id="updateUserNewPasswordRepeat" name="newPasswordAgain" type="password" value="" />
 							</label>
 							
 							<div class="clear"></div>
 							
 							<label for="updateUserGivenName" class="col-2 input">
-								Voornaam
+                                                            <span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 								<input id="updateUserGivenName" name="givenName" type="text" value="" />
 							</label>
 							<label for="updateUserInsertion" class="col-2 input">
-								Tussenvoegsel
+								<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
 								<input id="updateUserInsertion" name="insertion" type="text" value="" />
 							</label>
 							<label for="updateUserFamilyName" class="col-2 input">
-								Achternaam
+								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
 								<input id="updateUserFamilyName" name="familyName" type="text" value="" />
 							</label>
 							<label for="updateUserEmail" class="col-2 input">
-								Emailadres
+								<span data-translate="NUM_TBL_EMAIL">Email</span>
 								<input id="updateUserEmail" name="email" type="text" value="" />
 							</label>							
 							
 							<div class="col-4">
-								<input type="submit" class="primary right bottom" value="Sla op" />
+								<input type="submit" class="primary right bottom" data-translate="NUM_BTN_Apply" value="Sla op" />
 							</div>
 						</fieldset>						
 					</form>					
@@ -306,7 +306,7 @@
 			<section>
 				<div class="row">
 					<div class="col-12">
-						<h2 class="sectionhead"><span>Mijn loginmogelijkheden beheren</span></h2>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_ACCOUNT_SCHOOLLOGINS">Mijn loginmogelijkheden beheren</span></h2>
 					</div>
 				</div>				
 				<div class="row">
@@ -353,7 +353,7 @@
 			<section>
 				<div class="row">
 					<div class="col-12">
-						<h2 class="sectionhead"><span>Nieuwe loginmogelijkheid toevoegen<span></h2>						
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_ACCOUNT_SCHOOLLOGIN_ADD">Nieuwe loginmogelijkheid toevoegen<span></h2>						
 					</div>
 				</div>
 				<div class="row">
@@ -416,7 +416,7 @@
 						<h2 class="sectionhead"><span>Klassen bewerken</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader">Numworx Help</h2>
+						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -519,7 +519,7 @@
 						<h2 class="sectionhead"><span>Klas bewerken</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader">Numworx Help</h2>
+						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -690,7 +690,7 @@
 						<h2 class="sectionhead"><span>Zoek een leerling om te plaatsen in klas [KLAS]</span></h2>
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader">Numworx Help</h2>
+						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
 						<div class="content">
 							<h2>Help kop</h2>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium gravida dignissim. Aliquam id metus quam. Aenean consequat arcu sit amet commodo porttitor.</p><p>Proin viverra, enim non feugiat ornare, purus urna dignissim ante, consectetur faucibus libero diam id ligula.</p>
@@ -723,7 +723,7 @@
 						<h2 class="sectionhead"><span>Zoek een leerling om te plaatsen in klas [KLAS]</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader">Numworx Help</h2>
+						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -817,7 +817,7 @@
 						<h2 class="sectionhead"><span>Leerlingen overplaatsen</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader">Numworx Help</h2>
+						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -945,7 +945,7 @@
 						<h2 class="sectionhead"><span>Zoek een Docent om te koppelen aan klas [KLAS]</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader">Numworx Help</h2>
+						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -1036,7 +1036,7 @@
 						<h2 class="sectionhead"><span>Module aan klas [KLAS] koppelen</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader">Numworx Help</h2>
+						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -1208,7 +1208,7 @@
 						<h2 class="sectionhead"><span>Resultaten van een klas</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader">Numworx Help</h2>
+						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -1321,7 +1321,7 @@
 						<h2 class="sectionhead"><span>Resultaten</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader">Numworx Help</h2>
+						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -1558,7 +1558,7 @@
 						<h2 class="sectionhead"><span>Zoek een persoon om te bewerken</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader">Numworx Help</h2>
+						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -1696,7 +1696,7 @@
 						<h2 class="sectionhead"><span>Bewerk gegevens [NAAM]</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader">Numworx Help</h2>
+						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -1817,7 +1817,7 @@
 						<h2 class="sectionhead"><span>Nieuwe persoon toevoegen</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader">Numworx Help</h2>
+						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
