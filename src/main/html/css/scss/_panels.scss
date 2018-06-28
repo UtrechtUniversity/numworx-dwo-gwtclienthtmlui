@@ -198,6 +198,8 @@ body {
 				right: $siteMargin * 1px;			
 				top: ($headerHeight + $subpanelHeaderHeight + 1) * 1px;
 				visibility: hidden;
+				//display: none;
+				left: 100%;
 				
 				iframe {
 					width: 100%;
@@ -241,6 +243,7 @@ body {
 				}
 				.content {
 					visibility: visible;
+					left: auto;
 					
 					@media #{$mediaQueryDesktop} {
 						border-left-color: $primary;
