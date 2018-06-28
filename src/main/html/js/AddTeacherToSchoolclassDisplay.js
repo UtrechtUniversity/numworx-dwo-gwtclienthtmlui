@@ -75,6 +75,10 @@ AddTeacherToSchoolclassDisplay.prototype.setHelp = function(url) {
 	this.$helpContentIFrame.attr('src', url );
 }
 
+AddTeacherToSchoolclassDisplay.prototype.setSchoolClass = function(schoolClass) {
+	console.log("setting schooclass: "+schoolClass);
+}
+
 AddTeacherToSchoolclassDisplay.prototype.showTeachers = function(json) {
 	var teachers = json, teacherName;
 	

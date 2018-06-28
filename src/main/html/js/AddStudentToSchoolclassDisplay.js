@@ -73,6 +73,10 @@ AddStudentToSchoolclassDisplay.prototype.clear = function () {
 	this.addStudentSearchForm.elements["familyName"].value == "";
 }
 
+AddStudentToSchoolclassDisplay.prototype.setSchoolClass = function(schoolClass) {
+	console.log("setting schooclass: "+schoolClass);
+}
+
 AddStudentToSchoolclassDisplay.prototype.setHelp = function(url) {
 	this.$helpContentIFrame.attr('src', url );
 }
