@@ -1,6 +1,5 @@
 function SelectedResultsDisplay() {		
 	this.resultState = null;
-	//this.studentsTree = null;
 	
 	// Form
 	this.sealModuleActivitiesForm = document.forms["sealModuleActivities"];
@@ -10,6 +9,8 @@ function SelectedResultsDisplay() {
 	// jQuery objects
 	this.$panel = jQuery("#selectedResultsDisplay");
 	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
+	
+	//this.$sealModuleActivitiesForm = $(this.sealModuleActivitiesForm);
 	
 	// Bottom bars
 	this.$bars = this.$panel.find(".bar");
@@ -34,9 +35,15 @@ function SelectedResultsDisplay() {
 	
 	this.$startCompareClassForm = $(this.startCompareClassForm);
 	
+	this.$printButton = $("#barActivitiesStudentsPrint");
+	
+	this.$sealCheckbox = $(this.sealModuleActivitiesForm.elements['seal']);
+	
 	// Bind handlers
 	this.$filterIndicators.on('click', $.proxy(this.clickFilterIndicator, this));
 	this.$startCompareClassForm.on('submit', $.proxy(this.submitStartCompareClassForm, this));
+	this.$printButton.on('click', $.proxy(this.clickPrintButton, this));
+	this.$sealCheckbox.on('change', $.proxy(this.changeSealCheckbox, this));
 	
 	// Init
 	this.$panel.hide();
@@ -46,6 +53,9 @@ SelectedResultsDisplay.prototype.show = function() {
 	this.$panel.show();	
 	
 	if (!app.getPresenterFactory().getSelectedResultsPresenter().hasCompareClasses()) this.$startCompareClassForm.hide();
+	
+	// temporary hide, TODO: implement
+	this.$printButton.hide();
 }
 
 /*
@@ -154,17 +164,14 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 	matrix[0][0] = {};
 	matrix[0][0].label = "Modules"
 	
-	
-	
 	for (var amId in activeModules) {
 		matrix[0][j] = {};
 		matrix[0][j].label = modules[ activeModules[amId] ].label;
-		matrix[0][j].callback = this.activitiesStudents;
-		matrix[0][j].params = { module: modules[ activeModules[amId] ]  };
+		matrix[0][j].callback = this.clickModuleColumnHeader; //this.activitiesStudents;
+		matrix[0][j].params = { moduleId: activeModules[amId], module: modules[ activeModules[amId] ]  };
 		matrix[0][j].linkLabel = "activiteiten";
-		matrix[0][j].linkCallback = this.activitiesStudents;
-		matrix[0][j].linkParams = { module: modules[ activeModules[amId] ]  };
-		
+		matrix[0][j].linkCallback = this.clickModuleColumnHeader;//this.activitiesStudents;
+		matrix[0][j].linkParams = { moduleId: activeModules[amId], module: modules[ activeModules[amId] ]  };
 		j++;
 	}
 	
@@ -179,7 +186,7 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 			matrix[i][j].label = this.computeModuleScoreForStudent(modules[ activeModules[amId] ], studentId);
 			//matrix[i][j].callback = function() { this.activitiesStudent(modules[ activeModules[amId] ], studentId) };
 			//matrix[i][j].callback = $.proxy(this.activitiesStudent, this, modules[ activeModules[amId] ], studentId );
-			matrix[i][j].callback = this.activitiesStudent;
+			matrix[i][j].callback = this.clickModuleResultIndicator;
 			matrix[i][j].params = { moduleId: activeModules[amId], module: modules[ activeModules[amId] ], studentId: studentId };
 			j++;
 		}	
@@ -274,6 +281,8 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 	for (var actId in module.children) {
 		matrix[0][j] = {};
 		matrix[0][j].label = module.children[actId].label;
+		matrix[0][j].callback = this.clickActivityColumnHeader;
+		matrix[0][j].params = { scoId: actId  };
 		j++;
 	}
 	
@@ -309,10 +318,31 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 				
 		i++;	
 	}
-	
-	//console.log(JSON.stringify(this.resultState));
-	
+		
 	return matrix;
+}
+
+SelectedResultsDisplay.prototype.getSealStateActivitiesStudentsInModule = function(module) {
+	var students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children;
+	var sealed = 0, unsealed = 0, state = 0;
+	for (var studentId in students) {
+		console.log( students[studentId].givenName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].familyName);
+		for (var actId in module.children) {
+			console.log(module.children[actId]);
+			for (var scoId in module.children[actId].children) { // Loop over activities
+				if (module.children[actId].children[scoId]["user-id"] == studentId) { 
+					console.log(module.children[actId].children[scoId].label);
+					console.log(module.children[actId].children[scoId].completionStatus);
+					if (module.children[actId].children[scoId].completionStatus == "completed") sealed++;
+					else unsealed++;				
+				}
+			}	
+		}
+	}
+	
+	if (sealed == 0) return 0; // none sealed
+	if (sealed > 0 && unsealed > 0) return 1; // some sealed
+	if (sealed > 0 && unsealed == 0) return 2; // all sealed	
 }
 
 
@@ -339,7 +369,6 @@ SelectedResultsDisplay.prototype.filterIndicator = function(nr) {
 	this.$selectResultsTableWrap.find(".result"+nr).show();
 }
 SelectedResultsDisplay.prototype.filterIndicatorReset = function() {
-	console.log("reset");
 	this.$selectResultsTableWrap.find(".resultIndicator").show();
 }
 
@@ -367,14 +396,28 @@ SelectedResultsDisplay.prototype.activitiesStudent = function(params) {
 
 SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
 	var matrix = this.buildMatrixActivitiesStudentsInModule(params.module);
+	var sealState = this.getSealStateActivitiesStudentsInModule(params.module);
+	
 	this.resultState.activeModule = params.moduleId;
 	this.plotMatrix(matrix);
 	this.$bars.hide();
 	this.$barActivitiesStudents.show();
 	//this.$barActivitiesStudentsBacklink.html("Terug naar <b>Alle geselecteerde modules</b>");
 	this.$barActivitiesStudentsBacklink.click($.proxy(this.clickBackToModulesStudents, this));
+	
+	// Sealed checkbox
+	this.$sealCheckbox.parent().removeClass("thirdState");
+	this.$sealCheckbox.parent().removeAttr("checked");
+	if (sealState == 1) this.$sealCheckbox.parent().addClass("thirdState");
+	else if (sealState == 2) {
+		this.$sealCheckbox.parent().attr("checked", "checked");
+		this.$sealCheckbox.attr("disabled", "disabled");
+	}
 }
 
+SelectedResultsDisplay.prototype.pagesStudents = function(params) {
+	console.log("show functions to be implemented");
+}
 
 /*
  * VIEW FUNCTIONS
@@ -398,7 +441,7 @@ SelectedResultsDisplay.prototype.setHelp = function(url) {
 
 SelectedResultsDisplay.prototype.updateResultTree = function (resultsTree, studentsTree) {
 	console.log("updateTree");
-	console.log(studentsTree);
+	console.log(resultsTree);
 	this.resultState.resultsTree = resultsTree;
 	this.resultState.studentsTree = studentsTree;
 }
@@ -411,10 +454,6 @@ SelectedResultsDisplay.prototype.updateResultTree = function (resultsTree, stude
 SelectedResultsDisplay.prototype.showStudentResults = function(scoId, studentId) {
 	this.resultState.activeActivity = scoId;
 	this.resultState.activeStudent = studentId;
-	//console.log(JSON.stringify(this.resultState));
-	console.log(scoId);
-	console.log(studentId);
-	console.log(this.resultState.activeSchoolClass); 
 	app.getPresenterFactory().getSelectedResultsPresenter().showStudentResults(this.resultState, scoId, studentId, this.resultState.activeSchoolClass);
 }
 
@@ -422,12 +461,26 @@ SelectedResultsDisplay.prototype.compareClass = function() {
 	app.getPresenterFactory().getSelectedResultsPresenter().compareSchoolClasses(this.resultState);
 }
 
+SelectedResultsDisplay.prototype.print = function() {
+	app.getPresenterFactory().getSelectedResultsPresenter().print(this.resultState); // TODO more params
+}
+
+SelectedResultsDisplay.prototype.sealModuleActivities = function() {
+	app.getPresenterFactory().getSelectedResultsPresenter().sealModuleActivities(this.resultState.activeModule, this.resultState.activeSchoolClass);
+}
+
+SelectedResultsDisplay.prototype.getPages = function(scoId) {
+	console.log(scoId);
+	console.log(this.resultState.activeSchoolClass);
+	app.getPresenterFactory().getSelectedResultsPresenter().preparePages(scoId, this.resultState.activeSchoolClass);	
+}
+
+
 /*
  * EVENT HANDLERS
  */
 
 SelectedResultsDisplay.prototype.hoverColumnHeader = function(event) {
-	console.log("hover");
 	var $target = $(event.target);
 	if ($target.hasClass('active')) {
 		$target.removeClass('active');
@@ -443,11 +496,33 @@ SelectedResultsDisplay.prototype.clickBackToModulesStudents = function(event) {
 	this.modulesStudents();
 }
 
-SelectedResultsDisplay.prototype.clickResultIndicator = function(event) {
-//	event.preventDefault();		
-	console.log(event)
-	this.showStudentResults(event.scoId, event.studentId);	
+// Class / module
+SelectedResultsDisplay.prototype.clickModuleResultIndicator = function(params, event) {
+	event.preventDefault();		
+	this.activitiesStudent(params);	
 }
+SelectedResultsDisplay.prototype.clickModuleColumnHeader = function(params, event) {
+	event.preventDefault();		
+	this.activitiesStudents(params);	
+}
+
+// Activities
+SelectedResultsDisplay.prototype.clickResultIndicator = function(params, event) {
+	event.preventDefault();		
+	this.showStudentResults(params.scoId, params.studentId);	
+}
+
+SelectedResultsDisplay.prototype.clickActivityColumnHeader = function(params, event) {
+	event.preventDefault();	
+	this.getPages(params.scoId);
+	this.pagesStudents(params);	
+}
+
+SelectedResultsDisplay.prototype.clickPrintButton = function(event) {
+	event.preventDefault();		
+	this.print();
+}
+
 
 SelectedResultsDisplay.prototype.clickFilterIndicator = function(event) {
 	event.preventDefault();
@@ -469,5 +544,14 @@ SelectedResultsDisplay.prototype.clickFilterIndicator = function(event) {
 SelectedResultsDisplay.prototype.submitStartCompareClassForm = function(event) {
 	event.preventDefault();			
 	this.compareClass();
+}
+
+
+SelectedResultsDisplay.prototype.changeSealCheckbox = function(event) {
+	event.preventDefault();			
+	if (event.target.checked == 1) {
+		event.target.disabled = true;
+		this.sealModuleActivities();
+	}
 }
 

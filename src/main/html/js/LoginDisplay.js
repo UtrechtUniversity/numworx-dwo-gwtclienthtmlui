@@ -26,8 +26,14 @@ function LoginDisplay() {
  */
 
 LoginDisplay.prototype.show = function() {
+	this.localize();
 	this.$panel.show();
 }
+
+LoginDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
+
 
 LoginDisplay.prototype.disable = function() {
 	this.usernameField.disabled = true;
@@ -48,12 +54,14 @@ LoginDisplay.prototype.hide = function() {
 	this.$panel.hide();
 }
 LoginDisplay.prototype.init = function() {	
+	this.enable();
 }
 
 
 LoginDisplay.prototype.showMessage = function(msg) {
 	this.$messageBox.find(".content").html(msg);
 	this.$messageBox.show();
+	this.enable();
 }
 LoginDisplay.prototype.showWarning = function(msg) {
 	this.$warningBox.html(msg);
@@ -61,7 +69,7 @@ LoginDisplay.prototype.showWarning = function(msg) {
 	this.enable();
 }
 LoginDisplay.prototype.hideMsgBox = function(msg) {
-	console.log("hide!");
+	this.$messageBox.hide();
 }
 
 /*
@@ -83,6 +91,9 @@ LoginDisplay.prototype.submitLoginForm = function(event) {
 	    password = this.passwordField.value;
 	
 	this.disable();
+	
+	console.log(username);
+	console.log(password);
 	
 	this.loginAttempt(username, password);	
 };

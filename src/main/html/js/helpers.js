@@ -46,6 +46,7 @@ Helpers.resizeHelpSection = function(event) {
 Helpers.toggleHelpSection = function() {
 	$(this).parent().toggleClass('active'); 
 	$(this).parent().css('z-index','9999');
+	//$(this).parent().find("iframe").get(0).contentWindow.location.reload();
 }
 
 Helpers.stretchHeight = function(elements) {
@@ -171,5 +172,18 @@ Helpers.clickSortButton = function() {
 	
 	$('.sortButton').removeClass("active");
 	$this.addClass("active");	
+}
+
+Helpers.translate = function(index, value) {
+	var $el = $(value);
+	var translation = app.getTranslator().translate( $el.data("translate") );
+	if ($el.get(0).tagName == "SPAN" ||
+		$el.get(0).tagName == "P" ||
+		$el.get(0).tagName == "H1" ||
+		$el.get(0).tagName == "H2") {
+			$el.text(translation);
+	} else if ( $el.get(0).tagName == "INPUT") {
+		$el.val( translation );
+	}
 }
 

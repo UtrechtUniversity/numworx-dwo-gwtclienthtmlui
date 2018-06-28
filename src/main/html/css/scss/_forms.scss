@@ -1,4 +1,5 @@
 input[type="submit"], input[type="button"], button {
+	-webkit-appearance: none;
 	background-color: $primary;
 	border: $borderThickness $primary solid;
 	@include border-radius($defaultRadius);
@@ -7,6 +8,7 @@ input[type="submit"], input[type="button"], button {
 	padding: 6px 0px;
 	text-align: center;
 	width: 100%;
+	
 	
 	
 	//width: ((2 / 12 * $siteWidth) - $gutter) / $siteWidth * 100%;
@@ -31,7 +33,7 @@ input[type="submit"], input[type="button"], button {
 	
 	&.right, &.left {
 		//clear: right;
-		float: right;		
+		float: right;
 		//margin-right: ($gutter / 2) / ($siteWidth) * 100%;
 		margin-bottom: $elementMarginBottom;
 		//.col-4 & { margin-right: 0; }//($gutter / 2) / ($siteWidth * 4) * 100%; }
@@ -100,7 +102,7 @@ input[type="text"], input[type="password"] {
 	&:disabled {
 		background-color: $shade1;
 		border-color: $shade12;
-		color: $shade12;
+		//color: $shade12;
 		cursor: not-allowed;
 	}
 }
@@ -174,6 +176,10 @@ form {
 //				display: block;
 //			}
 		}
+		input:disabled ~ label {
+			background-color: $shade12;
+			border-color: $shade12;
+		}
 		
 	}
 		
@@ -246,7 +252,7 @@ form {
 	}
 	
 	// Styles for modules that have been activated once before, no impact on JS, only different unchecked style
-	&.previouslyChecked label.icon{
+	&.previouslyChecked label.icon, &.thirdState label.icon {
 		background-color: $shade12;
 		
 		border: $borderThickness $shade12 solid;

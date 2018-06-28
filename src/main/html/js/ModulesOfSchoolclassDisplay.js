@@ -1,16 +1,13 @@
 function ModulesOfSchoolclassDisplay() {	
-	// GWT vars
-	
+	// GWT vars	
 	this.nodes = [];
 	this.selectedNodeId = "";
-	//this.openNodes = [];
-	// this.activeModuleList = [];
+	this.dateTimePicker = null;
 	
 	// Forms 
 	this.selectForm = document.forms["modulesOfSchoolclassDisplaySelect"];
 	this.settingsForm = document.forms["modulesOfSchoolclassDisplaySettings"];
 	this.searchForm = document.forms["modulesOfSchoolclassDisplaySearch"];
-	
 			
 	// jQuery objects
 	this.$panel = jQuery("#modulesOfSchoolclassDisplay");
@@ -26,12 +23,17 @@ function ModulesOfSchoolclassDisplay() {
 	this.$settingsForm = $(this.settingsForm);	
 	this.$searchForm = $(this.searchForm);
 	
+	this.$settingsFormFrom = $(this.settingsForm.elements["from"]);
+	this.$settingsFormTo = $(this.settingsForm.elements["to"]);
+	
 	this.$reloadButton = $(this.searchForm.elements["reload"]);
 	
 	// Bind handlers
 	this.$settingsForm.on('submit', $.proxy(this.submitSettings,this));	
 	this.$searchForm.on('submit', $.proxy(this.submitSearch,this));	
-	this.$reloadButton.on('click', $.proxy(this.clickReload,this))
+	this.$reloadButton.on('click', $.proxy(this.clickReload,this));
+	this.$settingsFormFrom.on('click', $.proxy(this.clickDateField, this));
+	this.$settingsFormTo.on('click', $.proxy(this.clickDateField, this));
 	
 	// Init
 	this.$panel.hide();
@@ -115,9 +117,7 @@ ModulesOfSchoolclassDisplay.prototype.updateTable = function() {
 }
 ModulesOfSchoolclassDisplay.prototype.setSettings = function(id) {
 	if (!this.nodes.hasOwnProperty(id)) return;
-	
 	console.log(this.nodes[id]);
-	
 	this.settingsForm.elements["key"].value = id;
 	this.settingsForm.elements["accessKey"].value = this.nodes[id].classCourse.accessKey ? this.nodes[id].classCourse.accessKey : "";
 	this.settingsForm.elements["from"].value = this.nodes[id].classCourse.notBefore ? this.nodes[id].classCourse.notBefore : "";
@@ -137,38 +137,39 @@ ModulesOfSchoolclassDisplay.prototype.setSettings = function(id) {
  * Map to java implementation
  */
 
-ModulesOfSchoolclassDisplay.prototype.clear = function () {
-	console.log("clear");
+ModulesOfSchoolclassDisplay.prototype.init = function () {
+	Helpers.stretchHeight( [this.$treeWrapper, this.$selectTableBody] );
+	this.dateTimePicker  = new MaterialDatetimePicker({});
 }
 
-ModulesOfSchoolclassDisplay.prototype.init = function () {
-	console.log("init");
-	Helpers.stretchHeight( [this.$treeWrapper, this.$selectTableBody] );
+ModulesOfSchoolclassDisplay.prototype.clear = function () {
+	this.settingsForm.elements["key"] = "";
+	this.settingsForm.elements["accessKey"] = "";
+	this.settingsForm.elements["from"] = "";
+	this.settingsForm.elements["to"] = "";
+	this.settingsForm.elements["name"] = "";
 }
+
 ModulesOfSchoolclassDisplay.prototype.setHelp = function(url) {
 	this.$helpContentIFrame.attr('src', url );
 }
 
 ModulesOfSchoolclassDisplay.prototype.setEmptyTableMessageModules = function () {
-	console.log("setEmptyTableMessageModules");
+	this.$treeWrapper.html('Geen beschikbare modules.');
 }
 ModulesOfSchoolclassDisplay.prototype.setLoadingTableMessageModules = function () {
-	console.log("setLoadingTableMessageModules");
+	this.$treeWrapper.html('Beschikbare modules worden geladen.');
 }
 ModulesOfSchoolclassDisplay.prototype.setEmptyTableMessageSelected = function () {
-	console.log("setEmptyTableMessageSelected");
-	//this.$selectTableBody.html('<tr class="empty"><td>Geen modules gevonden</td></tr>');
+	this.$selectTableBody.html('<tr class="empty"><td>Geen modules toegekend.</td></tr>');
 }
 ModulesOfSchoolclassDisplay.prototype.setLoadingTableMessageSelected = function () {
-	this.$selectTableBody.html('<tr class="loading"><td>Laden...</td></tr>');
+	this.$selectTableBody.html('<tr class="empty"><td>Modules worden geladen.</td></tr>');
 }
 
 ModulesOfSchoolclassDisplay.prototype.setTree = function(json) {
-	console.log("SET TREE");
-	console.log(json);	
-	
 	var tree = json, result, $result;
-		
+			
 	var result = this.recursiveTreeBuilder(tree.children);
 	
 	result = '<ul id ="modulesOfSchoolclassDisplayTree" class="tree">'+result+'</li>';
@@ -276,30 +277,42 @@ ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, dept
  */
 
 ModulesOfSchoolclassDisplay.prototype.attachItem = function(id) {
-	console.log("attach "+id);
 	app.getPresenterFactory().getModulesOfSchoolclassPresenter().attachItemToSchoolClass(id);
 }
 
 ModulesOfSchoolclassDisplay.prototype.detachItem = function(id) {
-	console.log("detach "+id);
 	app.getPresenterFactory().getModulesOfSchoolclassPresenter().detachItemFromSchoolClass(id);
 }
 
-// ModulesOfSchoolclassDisplay.prototype.detachItem = function(id) {
-// 	app.getPresenterFactory().getModulesOfSchoolclassPresenter.detachItemFromSchoolClass(id);
-// }
-
 ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
-	//String key, String typeString, String fromData, String toData, String accessKey
 
-	typeString = this.settingsForm.elements["locked[]"][0].checked ? "assesment" : "normal";
+	var typeString = this.settingsForm.elements["locked[]"][0].checked ? "assesment" : "normal";
+	
+	var from = this.settingsForm.elements["from"].value;
+	var to = this.settingsForm.elements["to"].value;
+	
+//	if (from) from = this.reformatDate( from );
+//	if (to) to = this.reformatDate( to );
+	
+	console.log(from);
+	console.log(to);
 		
 	app.getPresenterFactory().getModulesOfSchoolclassPresenter().setModuleSettings(  this.settingsForm.elements["key"].value,
 																				typeString,
-																				this.settingsForm.elements["from"].value,
-																				this.settingsForm.elements["to"].value,
+																				from,
+																				to,
 																				this.settingsForm.elements["accessKey"].value);
 }
+
+ModulesOfSchoolclassDisplay.prototype.reformatDate = function(oldDate) {
+	var dateTime = oldDate.split(" ");
+	var d = dateTime[0], t = dateTime[1];
+	var ds = d.split("/");
+	var ts = t.split(":");
+        //Time
+	return ds[2]+"-"+ds[1]+"-"+ds[0]+"T"+ts[0]+":"+ts[1]+":00.000+0100";
+}
+
 
 /*
  * EVENT HANDLERS - tree 
@@ -347,9 +360,10 @@ ModulesOfSchoolclassDisplay.prototype.clickSelectRow = function(event) {
 
 // helpers
 ModulesOfSchoolclassDisplay.prototype.settingsFormToggle = function(value) {
-	if (value === true) this.$settingsForm.find(':submit').prop('disabled','');
-	else this.$settingsForm.find(':submit').prop('disabled','disabled');
+	if (value === true) this.$settingsForm.find('input').prop('disabled','');
+	else this.$settingsForm.find('input').prop('disabled','disabled');
 }
+
 
 /*
  * EVENT HANDLERS - settings
@@ -358,6 +372,13 @@ ModulesOfSchoolclassDisplay.prototype.settingsFormToggle = function(value) {
 ModulesOfSchoolclassDisplay.prototype.submitSettings = function(event) {
 	event.preventDefault();	
 	this.setModuleSettings();
+}
+
+ModulesOfSchoolclassDisplay.prototype.clickDateField = function(event) {
+	event.preventDefault();		
+	this.dateTimePicker.off('submit');
+	this.dateTimePicker.on('submit', function(d) { var el = event.target; el.value = d.format("YYYY-MM-DD HH:mm"); } );	
+	this.dateTimePicker.open();
 }
 
 

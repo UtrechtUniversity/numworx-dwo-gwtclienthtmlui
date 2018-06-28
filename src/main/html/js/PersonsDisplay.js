@@ -1,8 +1,4 @@
 function PersonsDisplay() {
-	
-	// GWT vars
-	
-	
 	// Forms 
 	this.personsSearchForm = document.forms["personsSearch"];
 	this.personsEditForm = document.forms["personsEdit"];
@@ -48,7 +44,6 @@ PersonsDisplay.prototype.show = function() {
  */
 
 PersonsDisplay.prototype.filterPersonsList = function () {
-	console.log("filter");
 	var personsSearchForm = this.personsSearchForm; // for the inline function
 	
 	if ( this.personsSearchForm.elements["userName"].value == "" &&
@@ -79,8 +74,11 @@ PersonsDisplay.prototype.filterPersonsList = function () {
  * Map to java implementation
  */
 
+PersonsDisplay.prototype.init = function (json) {
+	// do nothing
+}
+
 PersonsDisplay.prototype.clear = function () {
-	console.log("clear");
 	this.personsSearchFormToggle(false);	
 	this.$personsTableBody.html("");
 	this.personsEditFormToggle(false);
@@ -95,19 +93,13 @@ PersonsDisplay.prototype.clear = function () {
 	this.personsSearchForm.elements["familyName"].value == "";
 }
 
-PersonsDisplay.prototype.init = function (json) {
-	console.log("init");
-}
-
 PersonsDisplay.prototype.setHelp = function(url) {
 	this.$helpContentIFrame.attr('src', url );
 }
 
 PersonsDisplay.prototype.showPersons = function(json) {
 	var persons = json, personName;
-	
-	console.log(persons);
-	
+		
 	this.$personsTableBody.html("");
 	
 	// No Results
@@ -125,7 +117,11 @@ PersonsDisplay.prototype.showPersons = function(json) {
 		$row.find("#personsTableGivenName").html( persons[id].givenName ).removeAttr("id");
 		$row.find("#personsTableInsertion").html( persons[id].insertion ).removeAttr("id");
 		$row.find("#personsTableFamilyName").html( persons[id].familyName ).removeAttr("id");
-		$row.find("#personsTableSingleSchool").html( persons[id].singleSchool ? "ja" : "" ).removeAttr("id");
+		
+		
+		if (persons[id].singleSchool) $row.find("#personsTableEditDetails").addClass("active");
+		$row.find("#personsTableEditSchoolClasses").addClass("active").removeAttr("id");
+		$row.find("#personsTableEditDetails").removeAttr("id");
 				 
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;
@@ -142,15 +138,13 @@ PersonsDisplay.prototype.showPersons = function(json) {
 }
 
 PersonsDisplay.prototype.setEmptyTableMessage = function(json) {
-	console.log("setEmptyTableMessage");
+	this.$personsTableBody.html('<tr class="empty"><td>Geen personen gevonden. Doe een nieuwe zoekopdracht.</td></tr>');
 	
 }
 PersonsDisplay.prototype.setLoadingTableMessage = function(json) {
-	console.log("setLoadingTableMessage");
+	this.$personsTableBody.html('<tr class="empty"><td>Personen worden geladen.</td></tr>');
 	
 }
-
-
 
 
 /*
@@ -160,14 +154,12 @@ PersonsDisplay.prototype.setLoadingTableMessage = function(json) {
 
 PersonsDisplay.prototype.searchPersons = function() {
 	this.stateRole = this.personsSearchForm.elements["role"].value;
-	console.log(this.stateRole);
 	if (this.personsSearchForm.elements["role"].value == "L") app.getPresenterFactory().getPersonsPresenter().showStudentList();
 	if (this.personsSearchForm.elements["role"].value == "D") app.getPresenterFactory().getPersonsPresenter().showTeacherList();
 	
 }
 
 PersonsDisplay.prototype.editPerson = function(id) {
-	console.log(id);
 	if (this.stateRole == "L") app.getPresenterFactory().getPersonsPresenter().editStudent(id);
 	if (this.stateRole == "D") app.getPresenterFactory().getPersonsPresenter().editTeacher(id);
 }

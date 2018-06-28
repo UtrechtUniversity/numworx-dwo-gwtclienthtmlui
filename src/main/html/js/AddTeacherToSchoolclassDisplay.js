@@ -1,12 +1,7 @@
 function AddTeacherToSchoolclassDisplay() {	
-	// GWT vars
-	
-	
 	// Forms 
 	this.addTeacherSearchForm = document.forms["addTeacherSearch"];
 	this.addTeacherAddForm = document.forms["addTeacherAdd"];
-	
-	// Buttons 
 	
 	// jQuery objects
 	this.$panel = jQuery("#addTeacherToSchoolclassDisplay");
@@ -65,26 +60,22 @@ AddTeacherToSchoolclassDisplay.prototype.searchTeacher = function() {
  * Map to java implementation
  */
 
-AddTeacherToSchoolclassDisplay.prototype.clear = function () {
-	console.log("clear");
-}
-
 AddTeacherToSchoolclassDisplay.prototype.init = function () {
-	console.log("init");
 	Helpers.stretchHeight([ this.$addTeacherTableBody ]);
 }
+
+AddTeacherToSchoolclassDisplay.prototype.clear = function () {
+	this.addTeacherSearchForm.elements["username"].value == "";
+	this.addTeacherSearchForm.elements["givenName"].value == "";
+	this.addTeacherSearchForm.elements["insertion"].value == "";
+	this.addTeacherSearchForm.elements["familyName"].value == "";
+}
+
 AddTeacherToSchoolclassDisplay.prototype.setHelp = function(url) {
 	this.$helpContentIFrame.attr('src', url );
 }
 
-AddTeacherToSchoolclassDisplay.prototype.setSchoolClass = function(schoolclass) {
-	console.log("setSchoolClass: "+schoolclass);
-}
-
 AddTeacherToSchoolclassDisplay.prototype.showTeachers = function(json) {
-	console.log("showTeachers");
-	console.log(json);
-	
 	var teachers = json, teacherName;
 	
 	this.$addTeacherTableBody.html("");
@@ -118,11 +109,11 @@ AddTeacherToSchoolclassDisplay.prototype.showTeachers = function(json) {
 }
 
 AddTeacherToSchoolclassDisplay.prototype.setEmptyTableMessage = function() {
-	console.log("setEmptyTableMessage");
+	this.$addTeacherTableBody.html('<tr class="empty"><td>Geen docenten gevonden.</td></tr>');
 }
 
 AddTeacherToSchoolclassDisplay.prototype.setLoadingTableMessage = function() {
-	console.log("setLoadingTableMessage");
+	this.$addTeacherTableBody.html('<tr class="empty"><td>Docenten worden geladen.</td></tr>');
 }
 
 
@@ -145,7 +136,6 @@ AddTeacherToSchoolclassDisplay.prototype.submitAddTeacherAddForm = function(even
 }
 AddTeacherToSchoolclassDisplay.prototype.clickAddTeacherAddRow = function(event) {
 	Helpers.selectTableRow(event);
-	console.log(this.addTeacherAddForm.elements["id"].value);
 	if (this.addTeacherAddForm.elements["id"].value != "") this.addTeacherAddFormToggle(true);
 	else this.addTeacherAddFormToggle(false);	
 }

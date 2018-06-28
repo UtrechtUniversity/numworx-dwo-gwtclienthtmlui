@@ -9,13 +9,12 @@ function WelcomeDisplay() {
 }
 
 WelcomeDisplay.prototype.show = function() {
-	console.log("show welcome");
 	this.$panel.show();
 	Helpers.stretchHeight( [ this.$welcomeText ]);
 }
 
 WelcomeDisplay.prototype.clear = function() {
-	//this.$panel.find(".content").html("");
+	this.$welcomeText.html("");
 }
 
 WelcomeDisplay.prototype.setWelcomeText = function(html) {

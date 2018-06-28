@@ -11,6 +11,9 @@ function MainApp() {
 	this.mainDisplay = new MainDisplay();
 	window.jsMainDisplay = this.mainDisplay; // make it available for API
 	
+	this.presenterFactory = null;
+	this.translator = null;
+	
 	this.NAV_WIDTH = 200;	
 }
 
@@ -18,6 +21,12 @@ MainApp.prototype.getPresenterFactory = function() {
 	if (this.presenterFactory) return this.presenterFactory;
 	this.presenterFactory = window.dwoAPI.DwoPresenterFactory.getDwoPresenterFactory();
 	return this.presenterFactory = this.presenterFactory.getFac();
+}
+
+MainApp.prototype.getTranslator = function() {
+	if (this.translator) return this.translator;
+	this.translator = new window.dwoAPI.jsDwoMessageTranslator();
+	return this.translator;
 }
 
 $(document).ready(function(){ 

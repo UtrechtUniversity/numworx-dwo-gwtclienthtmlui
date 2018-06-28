@@ -188,16 +188,18 @@ body {
 				cursor: pointer;
 				margin-left: ($gutter + 1) * -1px;						
 			}			
-			.content {
-				
+			.content {				
 				background-color: $shade2;
 				border-left: 1px $shade2 solid;
 				bottom: 0;
-				display: none;				
+				display: block;				
 				padding: 2em $gutter * 1px;
 				position: fixed;
 				right: $siteMargin * 1px;			
 				top: ($headerHeight + $subpanelHeaderHeight + 1) * 1px;
+				visibility: hidden;
+				//display: none;
+				left: 100%;
 				
 				iframe {
 					width: 100%;
@@ -240,7 +242,8 @@ body {
 					}	
 				}
 				.content {
-					display: block;
+					visibility: visible;
+					left: auto;
 					
 					@media #{$mediaQueryDesktop} {
 						border-left-color: $primary;
@@ -732,13 +735,26 @@ section.lightbox {
 		top: $elementMarginBottom;
 		
 		.closeButton {
-			background: #ff0000;
+//			background: #ff0000;
 			cursor: pointer;
 			height: 32px;
 			position: absolute;
 			right: 5px;
-			top: 5px;
+			top: 7px;
 			width: 32px;
+			
+			.icon {
+				display: block;
+				float: left;
+				
+				border-radius: 2px;
+				float: left;
+				height: 26px; //TODO var
+				margin-right: 0.5em;
+				width: 26px; //TODO var
+				
+				use { fill: $shade11; }
+			}
 		}
 	}
 	section {
@@ -791,6 +807,41 @@ section.lightbox {
 #welcomeDisplayPanel {
 	background: transparent url(../images/bg-numworx-logo.png) no-repeat bottom right;
 	background-size: contain;
+}
+
+#personsDisplay {
+	.icon {
+		height: 24px;
+		margin-left: $gutter * 1px;
+		width: 24px;
+
+		use { fill: $shade12; }
+	}
+	.icon.active {
+		use { fill: $primary; }
+	}
+}
+
+#selectedResultsDisplay {
+	.icon.btn {
+		height: 32px;
+		margin-left: $gutter * 1px;
+		width: 32px;
+
+		use { fill: $primary; }
+	}
+}
+
+
+.c-scrim {
+	z-index: 999;
+}
+.c-datepicker {
+	z-index: 9999;
+	
+	.c-datepicker__header-day, .c-datepicker__header-date {
+		background-color: $primary;
+	}
 }
 
 

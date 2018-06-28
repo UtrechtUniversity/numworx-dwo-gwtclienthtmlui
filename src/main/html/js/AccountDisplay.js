@@ -38,7 +38,12 @@ function AccountDisplay() {
 }
 
 AccountDisplay.prototype.show = function() {
+	this.localize();
 	this.$panel.show();
+}
+
+AccountDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
 }
 
 
@@ -47,12 +52,20 @@ AccountDisplay.prototype.show = function() {
  * Map to java implementation
  */
 
-AccountDisplay.prototype.clear = function () {
-	console.log("clear");
-}
-
 AccountDisplay.prototype.init = function (json) {
 	Helpers.stretchHeight( [ this.$schoolLoginsTableBody ] )
+}
+
+AccountDisplay.prototype.clear = function () {
+	this.updateUserForm.elements["email"].value = "";
+	this.updateUserForm.elements["familyName"].value = "";
+	this.updateUserForm.elements["givenName"].value = "";
+	this.updateUserForm.elements["insertion"].value = "";
+	this.updateUserForm.elements["currentPassword"].value = "";
+	this.updateUserForm.elements["newPassword"].value = "";
+	this.updateUserForm.elements["newPasswordAgain"].value = "";
+	
+	this.clearAddSchoolLogin();
 }
 
 AccountDisplay.prototype.setHelp = function(url) {
@@ -85,8 +98,6 @@ AccountDisplay.prototype.updateSchoolLoginsView = function(json) {
 		
 		for (i = 0; i < this.schoolsRolesAndClassesList.length; i++) {
 			el = this.schoolsRolesAndClassesList[i];
-			console.log("EL");
-			console.log(el);
 			$row = this.$schoolLoginsRow.clone();
 			$row.find("#updateSchoolLoginsViewSchool").html( el.school.schoolName ).removeAttr("id");
 			$row.find("#updateSchoolLoginsViewRole").html( el.role.roleName ).removeAttr("id");	
@@ -151,7 +162,6 @@ AccountDisplay.prototype.saveSchoolLogins = function(event) {
 	
 	for (i = 0; i < this.updateSchoolLoginsViewForm.elements.length; i++) {
 		if (this.updateSchoolLoginsViewForm.elements[i].name == "remove[]" && this.updateSchoolLoginsViewForm.elements[i].checked) {
-			console.log("remove"+this.updateSchoolLoginsViewForm.elements[i].value);
 			app.getPresenterFactory().getAccountPresenter().removeASchoolLogin(this.updateSchoolLoginsViewForm.elements[i].value);
 		}
 	}
@@ -160,7 +170,6 @@ AccountDisplay.prototype.saveSchoolLogins = function(event) {
 }
 
 AccountDisplay.prototype.addSchoolLogin = function(event) {
-	console.log("add school login");
 	app.getPresenterFactory().getAccountPresenter().addASchoolLogin( this.addSchoolLoginForm.elements["role"].value,
 																this.addSchoolLoginForm.elements["schoolLogin"].value,
 																this.addSchoolLoginForm.elements["schoolCode"].value );	
@@ -196,7 +205,6 @@ AccountDisplay.prototype.submitSchoolLogins = function(event) {
 }
 
 AccountDisplay.prototype.changeActiveCheckbox = function(event) {
-	console.log("change active");
 	if (event.target.checked) {
 		// Set others unchecked
 		this.uncheckSchoolLoginsViewFormCheckboxes();

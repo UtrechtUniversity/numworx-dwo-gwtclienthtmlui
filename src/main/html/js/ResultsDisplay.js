@@ -2,16 +2,13 @@ function ResultsDisplay() {
 	this.resultState = {};
 	this.resultState.resultsTree = null;
 	this.resultState.studentsTree = null;
-	this.resultState.showOpenModules = false;
-	this.resultState.showClosedModules = false;
+	this.resultState.showOnlyClosedModules = false;
 	this.resultState.activeSchoolClass = null;
 	this.resultState.activeCourses = false;
 	
 	// Forms 
 	this.chooseClassModuleForm = document.forms["chooseClassAndModules"];
-	
-	// Buttons 
-	
+		
 	// jQuery objects
 	this.$panel = jQuery("#resultsDisplay");
 	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
@@ -69,10 +66,7 @@ ResultsDisplay.prototype.setChooseClassTable = function() {
 	this.$chooseModulesTableBody.html("");
 }
 
-ResultsDisplay.prototype.setChooseModulesTable = function() {
-	//console.log(this.activeClass);
-	//console.log(this.resultState.resultsTree.children[ this.activeClass ]); 
-	
+ResultsDisplay.prototype.setChooseModulesTable = function() {	
 	var i = 0, course;
 	
 	this.$chooseModulesTableBody.html("");
@@ -80,7 +74,10 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 
 	for (var id in this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children) { // loop over modules
 		course = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[id];
-
+		
+		if (this.resultState.showOnlyClosedModules == true && course.viewState != "invisible") continue;
+		if (this.resultState.showOnlyClosedModules == false && course.viewState != "studentsAndTeachers") continue;
+		
 		$row = this.$chooseModulesRow.clone();
 	
 		$row.find("#chooseClassAndModulesModuleName").html( course.label ).removeAttr("id");
@@ -133,10 +130,11 @@ ResultsDisplay.prototype.setResultTree = function (resultTree, studentsTree) {
 }
 
 ResultsDisplay.prototype.setEmptyTableMessage = function () {
-	console.log("setEmptyTableMessage");
+	this.$chooseClassTableBody.html('<tr class="empty"><td>Geen klassen om weer te geven.</td></tr>');
 }
+
 ResultsDisplay.prototype.setLoadingTableMessage = function () {
-	console.log("setLoadingTableMessage");
+	this.$chooseClassTableBody.html('<tr class="empty"><td>De klassen worden geladen...</td></tr>');
 }
 
 // ResultsDisplay.prototype.setEmptyTableMessageModules = function () {
@@ -172,10 +170,8 @@ ResultsDisplay.prototype.changeCheckboxOpenClosed = function(event) {
 		this.uncheckCheckboxOpenClosed();
 		event.target.checked = "checked";
 		
-		this.resultState.showOpenModules = false;
-		this.resultState.showClosedModules = false;
-		if (event.target.name=="open[]") this.resultState.showOpenModules = true;
-		if (event.target.name=="closed[]") this.resultState.showClosedModules = true;		
+		this.resultState.showOnlyClosedModules = false;
+		if (event.target.name=="closed[]") this.resultState.showOnlyClosedModules = true;		
 		
 		this.resultState.activeSchoolClass = event.target.value;
 	} else {
@@ -192,14 +188,12 @@ ResultsDisplay.prototype.uncheckCheckboxOpenClosed = function() {
 }
 
 ResultsDisplay.prototype.changeCheckboxSelect = function(event) {
-	console.log(this.chooseClassModuleForm.elements["select[]"].length);
 	this.resultState.activeCourses = [];
 	
 	if (!this.chooseClassModuleForm.elements["select[]"].length) {
 		if (this.chooseClassModuleForm.elements["select[]"].checked)  this.resultState.activeCourses.push(this.chooseClassModuleForm.elements["select[]"].value);
 	} else {
 		for (var i=0 ; i < this.chooseClassModuleForm.elements["select[]"].length; i++) {
-			console.log(this.chooseClassModuleForm.elements["select[]"][i]);
 			if (this.chooseClassModuleForm.elements["select[]"][i].checked)  this.resultState.activeCourses.push(this.chooseClassModuleForm.elements["select[]"][i].value);
 		}
 	}
@@ -214,7 +208,6 @@ ResultsDisplay.prototype.submitChooseClassModuleForm = function() {
 
 //helpers 
 ResultsDisplay.prototype.chooseClassModuleFormToggle = function() {
-	console.log("TOGGLE");
 	if ( this.resultState.activeCourses.length > 0 ) this.$chooseClassModuleForm.find(':submit').prop('disabled','');
 	else this.$chooseClassModuleForm.find(':submit').prop('disabled','disabled');
 }

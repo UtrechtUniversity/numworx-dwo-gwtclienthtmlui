@@ -6,10 +6,6 @@ function CopyOrMoveStudentToSchoolclassDisplay() {
 	this.classAForm = document.forms["copyOrMoveStudentToSchoolclassClassA"];
 	this.classBForm = document.forms["copyOrMoveStudentToSchoolclassClassB"];
 	this.classesForm = document.forms["updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelect"];
-		
-	
-	
-	// Buttons 
 	
 	// jQuery objects
 	this.$panel = jQuery("#copyOrMoveStudentToSchoolclassDisplay");
@@ -55,7 +51,6 @@ function CopyOrMoveStudentToSchoolclassDisplay() {
 	this.$classBMoveButton.on('click', $.proxy(this.submitOrClickABFormOrButton,this));	
 	this.$classBCopyButton.on('click', $.proxy(this.submitOrClickABFormOrButton,this));	
 	
-	
 	// Init
 	this.$panel.hide();
 }
@@ -72,7 +67,6 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.show = function() {
  */
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudents = function(json, $tableBody, $templateRow, nameId, changeCallback) {
-	console.log("show!");
 	var students = json, studentName;
 	
 	$tableBody.html("");
@@ -114,7 +108,6 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudents = function(json, $t
  */
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.clear = function () {
-	console.log("clear");
 	this.classAFormToggle(false);
 	this.classBFormToggle(false);
 	this.$classATableBody.html("");
@@ -124,7 +117,6 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.clear = function () {
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.init = function () {
-	console.log("init");
 	this.classAFormToggle(false);
 	this.classBFormToggle(false);
 	this.$classATableBody.html("");
@@ -146,26 +138,26 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.setSchoolClassB = function(schoo
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setEmptyTableMessageClasses = function() {
-	console.log("empty table classes");
+	this.$classesTableBody.html('<tr class="empty"><td>Geen klassen gevonden.</td></tr>');
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setLoadingTableMessageClasses = function() {
-	console.log("loading table classes");
+	this.$classesTableBody.html('<tr class="empty"><td>Klassen worden geladen.</td></tr>');
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setEmptyTableMessageA = function() {
-	console.log("empty table A");
+	this.$classATableBody.html('<tr class="empty"><td>Geen leerlingen gevonden.</td></tr>');
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setEmptyTableMessageB = function() {
-	console.log("empty table B");
+	this.$classBTableBody.html('<tr class="empty"><td>Geen leerlingen gevonden.</td></tr>');
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setLoadingTableMessageA = function() {
-	console.log("loading table A");
+	this.$classATableBody.html('<tr class="empty"><td>Leerlingen worden geladen.</td></tr>');
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setLoadingTableMessageB = function() {
-	console.log("loading table B");
+	this.$classBTableBody.html('<tr class="empty"><td>Leerlingen worden geladen.</td></tr>');
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudentsClassA = function(json) {
@@ -179,9 +171,7 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudentsClassB = function(js
 	this.classAFormToggle(true); // checks only if selected
 }
 
-CopyOrMoveStudentToSchoolclassDisplay.prototype.setClassList = function(schoolclasses) {
-	console.log(schoolclasses);
-		
+CopyOrMoveStudentToSchoolclassDisplay.prototype.setClassList = function(schoolclasses) {		
 	this.$classesTableBody.html("");
 	
 	//for (i = 0; i < this.schoolclasses.length; i++) {
@@ -212,25 +202,19 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.setClassList = function(schoolcl
  */
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setClass = function(classId) {
-	console.log("set class!");
-	console.log(classId);
 	app.getPresenterFactory().getCopyOrMoveStudentToSchoolclassPresenter().SelectClassB(classId);
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.copyAtoB = function(list) {
-	console.log(list);
 	app.getPresenterFactory().getCopyOrMoveStudentToSchoolclassPresenter().CopyStudentsToClassB(list);
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.moveAtoB = function(list) {
-	console.log(list);
 	app.getPresenterFactory().getCopyOrMoveStudentToSchoolclassPresenter().MoveStudentsToClassB(list);
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.copyBtoA = function(list) {
-	console.log(list);
 	app.getPresenterFactory().getCopyOrMoveStudentToSchoolclassPresenter().CopyStudentsToClassA(list);
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.moveBtoA = function(list) {
-	console.log(list);
 	app.getPresenterFactory().getCopyOrMoveStudentToSchoolclassPresenter().MoveStudentsToClassA(list);
 }
 

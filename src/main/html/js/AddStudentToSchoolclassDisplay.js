@@ -1,7 +1,4 @@
 function AddStudentToSchoolclassDisplay() {	
-	// GWT vars
-	
-	
 	// Forms 
 	this.addStudentSearchForm = document.forms["addStudentSearch"];
 	this.addStudentAddForm = document.forms["addStudentAdd"];
@@ -65,26 +62,22 @@ AddStudentToSchoolclassDisplay.prototype.searchStudent = function() {
  * Map to java implementation
  */
 
-AddStudentToSchoolclassDisplay.prototype.clear = function () {
-	console.log("clear");
-}
-
 AddStudentToSchoolclassDisplay.prototype.init = function () {
-	console.log("init");
 	Helpers.stretchHeight([ this.$addStudentTableBody ]);
 }
+
+AddStudentToSchoolclassDisplay.prototype.clear = function () {
+	this.addStudentSearchForm.elements["username"].value == "";
+	this.addStudentSearchForm.elements["givenName"].value == "";
+	this.addStudentSearchForm.elements["insertion"].value == "";
+	this.addStudentSearchForm.elements["familyName"].value == "";
+}
+
 AddStudentToSchoolclassDisplay.prototype.setHelp = function(url) {
 	this.$helpContentIFrame.attr('src', url );
 }
 
-AddStudentToSchoolclassDisplay.prototype.setSchoolClass = function(schoolclass) {
-	console.log("setSchoolClass: "+schoolclass);
-}
-
-AddStudentToSchoolclassDisplay.prototype.showStudents = function(json) {
-	console.log("- show students -");
-	console.log(json);
-		
+AddStudentToSchoolclassDisplay.prototype.showStudents = function(json) {	
 	var students = json, studentName;
 	
 	this.$addStudentTableBody.html("");
@@ -121,7 +114,7 @@ AddStudentToSchoolclassDisplay.prototype.setEmptyTableMessage = function() {
 }
 
 AddStudentToSchoolclassDisplay.prototype.setLoadingTableMessage = function() {
-	this.$addStudentTableBody.html('<tr class="loading"><td>Laden...</td></tr>');
+	this.$addStudentTableBody.html('<tr class="loading"><td>Leerlingen worden geladen.</td></tr>');
 }
 
 
@@ -143,7 +136,6 @@ AddStudentToSchoolclassDisplay.prototype.submitAddStudentAddForm = function(even
 }
 AddStudentToSchoolclassDisplay.prototype.clickAddStudentAddRow = function(event) {
 	Helpers.selectTableRow(event);
-	console.log(this.addStudentAddForm.elements["id"].value);
 	if (this.addStudentAddForm.elements["id"].value != "") this.addStudentAddFormToggle(true);
 	else this.addStudentAddFormToggle(false);	
 }
