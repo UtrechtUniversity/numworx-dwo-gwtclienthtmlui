@@ -291,8 +291,8 @@ ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
 	var from = this.settingsForm.elements["from"].value;
 	var to = this.settingsForm.elements["to"].value;
 	
-	if (from) from = this.reformatDate( from );
-	if (to) to = this.reformatDate( to );
+//	if (from) from = this.reformatDate( from );
+//	if (to) to = this.reformatDate( to );
 	
 	console.log(from);
 	console.log(to);
@@ -309,6 +309,7 @@ ModulesOfSchoolclassDisplay.prototype.reformatDate = function(oldDate) {
 	var d = dateTime[0], t = dateTime[1];
 	var ds = d.split("/");
 	var ts = t.split(":");
+        //Time
 	return ds[2]+"-"+ds[1]+"-"+ds[0]+"T"+ts[0]+":"+ts[1]+":00.000+0100";
 }
 
@@ -376,7 +377,7 @@ ModulesOfSchoolclassDisplay.prototype.submitSettings = function(event) {
 ModulesOfSchoolclassDisplay.prototype.clickDateField = function(event) {
 	event.preventDefault();		
 	this.dateTimePicker.off('submit');
-	this.dateTimePicker.on('submit', function(d) { var el = event.target; el.value = d.format("DD/MM/YYYY HH:mm"); } );	
+	this.dateTimePicker.on('submit', function(d) { var el = event.target; el.value = d.format("YYYY-MM-DD HH:mm"); } );	
 	this.dateTimePicker.open();
 }
 
