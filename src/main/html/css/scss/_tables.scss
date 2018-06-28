@@ -2,7 +2,7 @@
 
 TABLE STYLES
 
-- General table styles (heads, hoverable, selectable)
+- General dwo table styles (heads, hoverable, selectable)
 - Results table
 - Table wrapper (for XL tables)
 
@@ -13,7 +13,7 @@ TABLE STYLES
  * GENERAL TABLE STYLES
  */ 
 
-table { //:not(.c-datepicker__days)
+table.dwo { //:not(.c-datepicker__days)
 	//table-layout: fixed;
 	max-width: 100%;
 	
@@ -121,7 +121,7 @@ table { //:not(.c-datepicker__days)
  * RESULTS TABLE
  */ 
 
-table.results {
+table.dwo.results {
 	margin-right: 1 / 12 * $siteWidth * 1px;
 	max-height: 500px; height: auto;
 	overflow-x: scroll;
