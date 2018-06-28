@@ -14,6 +14,8 @@ function ModulesOfSchoolclassDisplay() {
 			
 	// jQuery objects
 	this.$panel = jQuery("#modulesOfSchoolclassDisplay");
+	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
+	
 	this.$treeWrapper = jQuery("#modulesOfSchoolclassDisplayTreeWrapper");
 	this.$tree = null;
 	
@@ -143,6 +145,9 @@ ModulesOfSchoolclassDisplay.prototype.init = function () {
 	console.log("init");
 	Helpers.stretchHeight( [this.$treeWrapper, this.$selectTableBody] );
 }
+ModulesOfSchoolclassDisplay.prototype.setHelp = function(url) {
+	this.$helpContentIFrame.attr('src', url );
+}
 
 ModulesOfSchoolclassDisplay.prototype.setEmptyTableMessageModules = function () {
 	console.log("setEmptyTableMessageModules");
@@ -211,12 +216,12 @@ ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, dept
 		this.nodes[id]=tree[id].data;		
 		
 				
-		if (tree[id].data.course.withChildren == true) {
+		if (tree[id].data.course.withChildren == true) { // Folder
 			subtree = this.recursiveTreeBuilder(tree[id].children, depth + 1, checkboxId);
 			liClass = "hasSub";
 			aClass = "folder";
 			checkboxDisabled = " disabled";
-		} else {
+		} else { // Set (course)
 			aClass="set";
 		}
 		
@@ -241,10 +246,14 @@ ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, dept
 		result += tree[id].data.course.name;		
 		result += '</a>';
 		
-		result += '<div class="checkbox '+checkboxClass+'">';
-		result += '<input type="checkbox" name="module" id="'+checkboxId+'" value="'+id+'" '+checked+checkboxDisabled+'>'; //tree[id].data.course.id.idString
-		result += '<label class="icon" for="'+checkboxId+'"></label>';
-		result += '</div>';
+		if (tree[id].data.course.withChildren != true) {
+			result += '<div class="checkbox '+checkboxClass+'">';
+			result += '<input type="checkbox" name="module" id="'+checkboxId+'" value="'+id+'" '+checked+checkboxDisabled+'>'; 
+			result += '<label class="icon" for="'+checkboxId+'"></label>';
+			result += '</div>';
+		} else {
+			if (checkboxClass || checked) result += '<span class="indicator '+checkboxClass+' '+(checked ? 'checked' : '')+'"></span>'; //
+		}
 		
 		if (subtree) result += subtree;		
 		

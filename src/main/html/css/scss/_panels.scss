@@ -189,6 +189,7 @@ body {
 				margin-left: ($gutter + 1) * -1px;						
 			}			
 			.content {
+				
 				background-color: $shade2;
 				border-left: 1px $shade2 solid;
 				bottom: 0;
@@ -198,6 +199,10 @@ body {
 				right: $siteMargin * 1px;			
 				top: ($headerHeight + $subpanelHeaderHeight + 1) * 1px;
 				
+				iframe {
+					width: 100%;
+					height: 100%;
+				}
 				
 				
 				@media #{$mediaQueryDesktopWide} {
@@ -297,10 +302,25 @@ body {
 		width: 580px;		
 	}
 	
+	#loginDisplayPanelMessageBox {
+		display: none;
+		left: 0;
+		position: absolute;
+		top: 175px;
+		width: 240 / 580 * 100%;
+		
+		.block.primary {
+			background-color: $primaryDark;
+			@include border-radius($defaultRadius);
+			color: $white;
+			padding: $gutter * 1px;
+		}
+	}
+	
 	#loginBox {
 		color: $primaryLight;
 		left: 270 / 580 * 100%;
-		margin-top: 123px;
+		margin-top: 175px;
 		position: relative;
 		width: 310 / 580 * 100%;
 		
@@ -331,6 +351,7 @@ body {
 			}
 			input[type="submit"] {
 				margin-top: $gutter * 1px;
+				margin-bottom: $rowMarginBottom;
 			}
 		}
 		
@@ -349,6 +370,17 @@ body {
 		a {
 			color: $white;
 			text-decoration: none;
+		}
+		
+		#loginDisplayPanelWarningBox {
+			background-color: $black;
+			@include border-box();
+			@include border-radius($defaultRadius);
+			color: $white;
+			display:none;
+			float: left;
+			padding: $gutter * 1px;
+			width: 100%;
 		}
 	}
 }
@@ -732,6 +764,23 @@ section.lightbox {
 			position: relative;
 			width: 100%;
 		}
+		
+		.icons {
+			position: absolute;
+			right: $gutter * 1px;
+			bottom: 0;
+			.icon {
+				
+				height: 32px;
+				margin-left: $gutter * 1px;
+				width: 32px;
+	
+				use { fill: $primary; }
+			}
+		}
+		
+		
+		
 	}
 }
 
@@ -743,3 +792,30 @@ section.lightbox {
 	background: transparent url(../images/bg-numworx-logo.png) no-repeat bottom right;
 	background-size: contain;
 }
+
+
+.filterIndicators {
+	border-bottom: $borderThickness $primary solid;
+	display: inline-block;
+	padding-bottom: $borderThickness;
+	
+	a {		
+		background-color: $primaryLight;
+		border: $borderThickness $shade11 solid;
+		@include border-radius($defaultRadius);
+		color: $black;
+		display: inline-block;
+		font-size: 12 / 17 * 1em;
+		padding: 3px 9px;
+		
+	}
+	&.result1 a { background-color: $scoreIndicator1; }
+	&.result2 a { background-color: $scoreIndicator2; }
+	&.result3 a { background-color: $scoreIndicator3; }
+	&.result4 a { background-color: $scoreIndicator4; }
+}
+
+
+
+
+

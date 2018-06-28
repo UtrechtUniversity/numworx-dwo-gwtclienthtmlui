@@ -53,17 +53,28 @@ StudentScoResultDisplay.prototype.init = function (state) {
 	
 	// Set header titles
 	activeModule = this.resultState.resultsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeModule].children[this.resultState.activeActivity];
-	//activeStudent = this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeStudent];		
+	activeStudent = this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeStudent];		
 	
 	
-	//this.$nameHeader.html(activeStudent.givenName + " " + (activeStudent.insertion ? activeStudent.insertion+" ":"")  + activeStudent.familyName);
+	this.$nameHeader.html(activeStudent.givenName + " " + (activeStudent.insertion ? activeStudent.insertion+" ":"")  + activeStudent.familyName);
 	this.$activityHeader.html(activeModule.label);
+	
+	this.studentScoResultActionsForm.elements["seal"][1].checked = true;
+	for (scoContextId in activeModule.children) {
+		console.log(activeModule.children[scoContextId]);
+		if (activeModule.children[scoContextId]["user-id"] == this.resultState.activeStudent && activeModule.children[scoContextId].completionStatus == "completed") {
+			this.studentScoResultActionsForm.elements["seal"][1].checked = false;
+			this.studentScoResultActionsForm.elements["seal"][0].checked = true;
+			break;
+		} 
+	}	
 	
 	this.$iframe.attr('src', '' );
 }
 
 
 StudentScoResultDisplay.prototype.openUrl = function (url) {
+	console.log(url);
 	this.$iframe.attr('src', url );
 }
 
@@ -78,6 +89,7 @@ StudentScoResultDisplay.prototype.hide = function () {
 	window.app.mainDisplay.closeLightboxView(this);
 	this.$panel.hide();		
 }
+StudentScoResultDisplay.prototype.close = function () { console.log("check of je een close doet"); }
 
 /*
  * RETURN FUNCTIONS
@@ -86,8 +98,8 @@ StudentScoResultDisplay.prototype.hide = function () {
 StudentScoResultDisplay.prototype.requestClose = function () {
 	app.getPresenterFactory().getStudentScoResultPresenter().close(this.resultState);
 }
-StudentScoResultDisplay.prototype.seal = function () {
-	app.getPresenterFactory().getStudentScoResultPresenter().sealSingleActivity();
+StudentScoResultDisplay.prototype.seal = function (state) {
+	app.getPresenterFactory().getStudentScoResultPresenter().sealSingleActivity(state);
 }
 
 /*
@@ -105,6 +117,7 @@ StudentScoResultDisplay.prototype.clickStudentScoResultCloseButton = function(ev
 
 StudentScoResultDisplay.prototype.changeSealButton = function(event) {
 	event.preventDefault();
-	if (event.target.value == 1) this.seal();	
+	if (event.target.value == 1) this.seal(true);	
+	else this.seal(false);
 }
 

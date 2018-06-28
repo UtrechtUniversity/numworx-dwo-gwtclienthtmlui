@@ -4,20 +4,22 @@ function SelectedResultsDisplay() {
 	
 	// Form
 	this.sealModuleActivitiesForm = document.forms["sealModuleActivities"];
+	this.startCompareClassForm = document.forms["startCompareClass"];
 	 
 	
 	// jQuery objects
 	this.$panel = jQuery("#selectedResultsDisplay");
+	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
 	
 	// Bottom bars
 	this.$bars = this.$panel.find(".bar");
 	this.$barModulesStudents = $("#barModulesStudents").hide();
+	
 	this.$barActivitiesStudent = $("#barActivitiesStudent").hide();
 	this.$barActivitiesStudentBacklink = $("#barActivitiesStudentBacklink");
 	this.$barActivitiesStudents = $("#barActivitiesStudents").hide();
 	this.$barActivitiesStudentsBacklink = $("#barActivitiesStudentsBacklink");
-	
-	
+		
 	this.$selectResultsTableWrap = $("#selectedResultsTableWrap");
 	
 	this.$selectedResultsTable = $("#selectedResultsTable").detach();	
@@ -28,8 +30,13 @@ function SelectedResultsDisplay() {
 	this.$selectedResultsRowCell = this.$selectedResultsTable.find("#selectedResultsTableRepeatableCell").detach();
 	this.$selectedResultsRow = this.$selectedResultsTable.find("tbody tr").detach();
 	
-	// Bind handlers
+	this.$filterIndicators = $(".filterIndicators");
 	
+	this.$startCompareClassForm = $(this.startCompareClassForm);
+	
+	// Bind handlers
+	this.$filterIndicators.on('click', $.proxy(this.clickFilterIndicator, this));
+	this.$startCompareClassForm.on('submit', $.proxy(this.submitStartCompareClassForm, this));
 	
 	// Init
 	this.$panel.hide();
@@ -37,6 +44,8 @@ function SelectedResultsDisplay() {
 
 SelectedResultsDisplay.prototype.show = function() {
 	this.$panel.show();	
+	
+	if (!app.getPresenterFactory().getSelectedResultsPresenter().hasCompareClasses()) this.$startCompareClassForm.hide();
 }
 
 /*
@@ -100,7 +109,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 			$rowCell = this.$selectedResultsRowCell.clone();
 			$rowCell.html("");
 			if (matrix[i][j].label != "") {
-				$value = $("<a class=\"resultIndicator\">" + matrix[i][j].label +"</a>");
+				$value = $("<a class=\"resultIndicator\" title=\""+matrix[i][j].label+"\">" + matrix[i][j].label +"</a>");
 				$value.attr("data-score", matrix[i][j].label );
 				$value.attr("data-sortvalue", matrix[i][j].label );
 				Helpers.setResultIndicatorColor($value);
@@ -131,7 +140,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 	this.$selectResultsTableWrap.html("");
 	this.$selectResultsTableWrap.append($table);
 	
-	console.log(JSON.stringify(this.resultState));
+	//console.log(JSON.stringify(this.resultState));
 	
 }
 
@@ -177,7 +186,7 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 		i++;	
 	}
 	
-	console.log(JSON.stringify(this.resultState));
+	//console.log(JSON.stringify(this.resultState));
 	
 	return matrix;
 	//resultState.studentsTree.schoolclasses[ resultState.activeSchoolClass ].children // students
@@ -234,7 +243,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function
 		for (var stuScoId in module.children[actId].children) { 
 			if (module.children[actId].children[stuScoId]["user-id"] == studentId) {
 				matrix[1][j] = {};
-				matrix[1][j].label = module.children[actId].children[stuScoId].sumScore;
+				matrix[1][j].label = module.children[actId].children[stuScoId].sumScore+" in "+module.children[actId].children[stuScoId].totalTime;
 				
 				matrix[1][j].callback = this.clickResultIndicator;		
 				matrix[1][j].params = { scoId: actId, studentId: studentId };
@@ -249,7 +258,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function
 		j++;
 	}
 	
-	console.log(JSON.stringify(this.resultState));
+	//console.log(JSON.stringify(this.resultState));
 	
 	return matrix;
 }
@@ -276,24 +285,32 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 		j = 1;
 		for (var actId in module.children) {
 			matrix[i][j] = {};
-			matrix[i][j].label = this.computeActivityScoreForStudent(module.children[actId], studentId);
-			matrix[i][j].callback = this.clickResultIndicator;
-			//for (var scoId in module.children[actId].children) // loop over activities
-			//	if (module.children[actId].children[scoId]["user-id"] == studentId) break;
+			score = null;
+			time = null;
 			
+			for (var scoId in module.children[actId].children) { // Loop over activities
+				if (module.children[actId].children[scoId]["user-id"] == studentId) { // Select student
+					scoreSet = true;
+					score = module.children[actId].children[scoId].sumScore; 
+					time = module.children[actId].children[scoId].totalTime; 
+				}	
+			}
+			
+			if (score != null || time != null) {
+				matrix[i][j].label = score + " in " + time;
+				matrix[i][j].callback = this.clickResultIndicator;
+			} else {
+				matrix[i][j].label = "";
+			}
+						
 			matrix[i][j].params = { scoId: actId, studentId: studentId };
 			j++;
 		}		
-		
-		// if (matrix[i][j] == undefined) {
-// 			matrix[i][j] = {};
-// 			matrix[i][j].label = "";
-// 		}
-		
+				
 		i++;	
 	}
 	
-	console.log(JSON.stringify(this.resultState));
+	//console.log(JSON.stringify(this.resultState));
 	
 	return matrix;
 }
@@ -317,19 +334,15 @@ SelectedResultsDisplay.prototype.computeModuleScoreForStudent = function(module,
 	return Math.round(total / totalCount);
 }
 
-SelectedResultsDisplay.prototype.computeActivityScoreForStudent = function(activity, studentId) {
-	var total = 0, totalCount = 0, scoreSet = false;
-	
-	for (var scoId in activity.children) { // Loop over activities
-		if (activity.children[scoId]["user-id"] == studentId) { // Select student
-			scoreSet = true;
-			total += parseInt(activity.children[scoId].sumScore); // Sum of scores
-		}	
-		totalCount++;
-	}
-	if (!scoreSet) return "";
-	return Math.round(total / totalCount);
+SelectedResultsDisplay.prototype.filterIndicator = function(nr) {
+	this.$selectResultsTableWrap.find(".resultIndicator").hide();
+	this.$selectResultsTableWrap.find(".result"+nr).show();
 }
+SelectedResultsDisplay.prototype.filterIndicatorReset = function() {
+	console.log("reset");
+	this.$selectResultsTableWrap.find(".resultIndicator").show();
+}
+
 
 /*
  * VIEWS
@@ -348,7 +361,7 @@ SelectedResultsDisplay.prototype.activitiesStudent = function(params) {
 	this.plotMatrix(matrix);
 	this.$bars.hide();
 	this.$barActivitiesStudent.show();
-	this.$barActivitiesStudentBacklink.html("Terug naar <b>Alle geselecteerde modules</b>");
+	//this.$barActivitiesStudentBacklink.html("Terug naar <b>Alle geselecteerde modules</b>");
 	this.$barActivitiesStudentBacklink.click($.proxy(this.clickBackToModulesStudents, this));
 }
 
@@ -358,7 +371,7 @@ SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
 	this.plotMatrix(matrix);
 	this.$bars.hide();
 	this.$barActivitiesStudents.show();
-	this.$barActivitiesStudentsBacklink.html("Terug naar <b>Alle geselecteerde modules</b>");
+	//this.$barActivitiesStudentsBacklink.html("Terug naar <b>Alle geselecteerde modules</b>");
 	this.$barActivitiesStudentsBacklink.click($.proxy(this.clickBackToModulesStudents, this));
 }
 
@@ -373,10 +386,14 @@ SelectedResultsDisplay.prototype.clear = function () {
 }
 
 SelectedResultsDisplay.prototype.init = function(resultState) {
+	console.log("init SelectedResultsDisplay");
 	console.log(resultState);
 	this.resultState = resultState;
-	this.modulesStudents();
-	
+	this.modulesStudents();	
+}
+
+SelectedResultsDisplay.prototype.setHelp = function(url) {
+	this.$helpContentIFrame.attr('src', url );
 }
 
 SelectedResultsDisplay.prototype.updateResultTree = function (resultsTree, studentsTree) {
@@ -394,11 +411,15 @@ SelectedResultsDisplay.prototype.updateResultTree = function (resultsTree, stude
 SelectedResultsDisplay.prototype.showStudentResults = function(scoId, studentId) {
 	this.resultState.activeActivity = scoId;
 	this.resultState.activeStudent = studentId;
-	console.log(JSON.stringify(this.resultState));
+	//console.log(JSON.stringify(this.resultState));
 	console.log(scoId);
 	console.log(studentId);
 	console.log(this.resultState.activeSchoolClass); 
 	app.getPresenterFactory().getSelectedResultsPresenter().showStudentResults(this.resultState, scoId, studentId, this.resultState.activeSchoolClass);
+}
+
+SelectedResultsDisplay.prototype.compareClass = function() {
+	app.getPresenterFactory().getSelectedResultsPresenter().compareSchoolClasses(this.resultState);
 }
 
 /*
@@ -422,8 +443,31 @@ SelectedResultsDisplay.prototype.clickBackToModulesStudents = function(event) {
 	this.modulesStudents();
 }
 
-SelectedResultsDisplay.prototype.clickResultIndicator = function(params) {
+SelectedResultsDisplay.prototype.clickResultIndicator = function(event) {
 //	event.preventDefault();		
-	console.log(params)
-	this.showStudentResults(params.scoId, params.studentId);	
+	console.log(event)
+	this.showStudentResults(event.scoId, event.studentId);	
 }
+
+SelectedResultsDisplay.prototype.clickFilterIndicator = function(event) {
+	event.preventDefault();
+	$el = $(event.target);
+	hadClass = $el.hasClass("active");
+	
+	this.$filterIndicators.find("a").removeClass("active");
+
+	if (hadClass) {		
+		this.filterIndicatorReset();
+	} else {
+		var nr = $el.data('filter');
+		if (nr < -1 || nr > 4) return;	
+		$el.addClass("active")	
+		this.filterIndicator(nr);
+	}	
+}
+
+SelectedResultsDisplay.prototype.submitStartCompareClassForm = function(event) {
+	event.preventDefault();			
+	this.compareClass();
+}
+

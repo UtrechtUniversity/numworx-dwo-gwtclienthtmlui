@@ -11,6 +11,7 @@ function StudentsInSchoolclassDisplay() {
 	
 	// jQuery objects
 	this.$panel = jQuery("#addStudentToSchoolclassDisplay");
+	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
 	
 	this.$addStudentSearchForm = $(this.addStudentSearchForm);
 	this.$addStudentAddForm = $(this.addStudentAddForm);
@@ -74,6 +75,9 @@ StudentsInSchoolclassDisplay.prototype.init = function () {
 	Helpers.stretchHeight([ this.$addStudentTableBody ]);
 }
 
+StudentsInSchoolclassDisplay.prototype.setHelp = function(url) {
+	this.$helpContentIFrame.attr('src', url );
+}
 
 StudentsInSchoolclassDisplay.prototype.showStudents = function(json) {
 	console.log("showStudents");

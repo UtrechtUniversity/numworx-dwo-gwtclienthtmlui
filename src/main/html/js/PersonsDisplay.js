@@ -11,6 +11,7 @@ function PersonsDisplay() {
 	
 	// jQuery objects
 	this.$panel = jQuery("#personsDisplay");
+	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
 	
 	this.$personsSearchForm = $(this.personsSearchForm);
 	this.$personsEditForm = $(this.personsEditForm);
@@ -34,6 +35,9 @@ function PersonsDisplay() {
 
 PersonsDisplay.prototype.show = function() {
 	this.$panel.show();
+	
+	if (!app.getPresenterFactory().getPersonsPresenter().hasImportPersons()) this.$personsImportForm.hide();
+	
 	Helpers.stretchHeight([ this.$personsTableBody ]);
 }
 
@@ -93,7 +97,10 @@ PersonsDisplay.prototype.clear = function () {
 
 PersonsDisplay.prototype.init = function (json) {
 	console.log("init");
-	
+}
+
+PersonsDisplay.prototype.setHelp = function(url) {
+	this.$helpContentIFrame.attr('src', url );
 }
 
 PersonsDisplay.prototype.showPersons = function(json) {
@@ -118,6 +125,7 @@ PersonsDisplay.prototype.showPersons = function(json) {
 		$row.find("#personsTableGivenName").html( persons[id].givenName ).removeAttr("id");
 		$row.find("#personsTableInsertion").html( persons[id].insertion ).removeAttr("id");
 		$row.find("#personsTableFamilyName").html( persons[id].familyName ).removeAttr("id");
+		$row.find("#personsTableSingleSchool").html( persons[id].singleSchool ? "ja" : "" ).removeAttr("id");
 				 
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;

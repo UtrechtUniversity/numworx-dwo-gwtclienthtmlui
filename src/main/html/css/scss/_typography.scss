@@ -46,6 +46,20 @@ ul {
 	}
 }
 
+.backlink {
+	color: $primaryLight;
+	
+	.icon {
+		display: inline-block;			
+		height: 13px; //TODO var	
+		margin-right: $gutter / 2 * 1px;		
+		width: 64/73.9 * 13px; //TODO var
+					
+		use { fill: $primaryLight; }
+	}
+	&:hover .icon use { fill: $primary; }
+}
+
 
 /*
  * HEADERS
@@ -176,10 +190,13 @@ label {
  */
 
 a.resultIndicator {
+
 	color: $black;	
 	font-size: 13 / 16 * 1em;
+	overflow-x: hidden;
 	text-align: center;
 	text-decoration: none;
+	white-space: nowrap;
 }
 
 table thead tr th {
@@ -253,3 +270,5 @@ table.results {
 		&.next .icon { margin-left: 6px; }
 	}
 }
+
+

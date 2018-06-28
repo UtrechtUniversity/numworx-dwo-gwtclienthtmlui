@@ -13,6 +13,7 @@ function CopyOrMoveStudentToSchoolclassDisplay() {
 	
 	// jQuery objects
 	this.$panel = jQuery("#copyOrMoveStudentToSchoolclassDisplay");
+	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
 	
 	this.classAMoveButton = this.classAForm.elements["move"];
 	this.classACopyButton = this.classAForm.elements["copy"];
@@ -131,6 +132,9 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.init = function () {
 	this.$classAClassName.val("");
 	this.$classBClassName.val("");
 	Helpers.stretchHeight([ this.$addStudentTableBody ]);
+}
+CopyOrMoveStudentToSchoolclassDisplay.prototype.setHelp = function(url) {
+	this.$helpContentIFrame.attr('src', url );
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setSchoolClassA = function(schoolclass) {

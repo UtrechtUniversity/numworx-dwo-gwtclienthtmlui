@@ -10,6 +10,7 @@ function AddStudentToSchoolclassDisplay() {
 	
 	// jQuery objects
 	this.$panel = jQuery("#addStudentToSchoolclassDisplay");
+	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
 		
 	this.$addStudentSearchForm = $(this.addStudentSearchForm);
 	this.$addStudentAddForm = $(this.addStudentAddForm);
@@ -71,6 +72,9 @@ AddStudentToSchoolclassDisplay.prototype.clear = function () {
 AddStudentToSchoolclassDisplay.prototype.init = function () {
 	console.log("init");
 	Helpers.stretchHeight([ this.$addStudentTableBody ]);
+}
+AddStudentToSchoolclassDisplay.prototype.setHelp = function(url) {
+	this.$helpContentIFrame.attr('src', url );
 }
 
 AddStudentToSchoolclassDisplay.prototype.setSchoolClass = function(schoolclass) {
@@ -135,7 +139,7 @@ AddStudentToSchoolclassDisplay.prototype.addStudent = function(id) {
 
 AddStudentToSchoolclassDisplay.prototype.submitAddStudentAddForm = function(event) {
 	event.preventDefault();	
-	this.addTeacher(this.addStudentAddForm.elements["id"].value);
+	this.addStudent(this.addStudentAddForm.elements["id"].value);
 }
 AddStudentToSchoolclassDisplay.prototype.clickAddStudentAddRow = function(event) {
 	Helpers.selectTableRow(event);

@@ -25,6 +25,7 @@ function EditSchoolclassesDisplay() {
 	
 	// jQuery objects
 	this.$panel = jQuery("#editSchoolclassesDisplayPanel");
+	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
 	
 	// Edit form elements
 	this.$editSchoolclassForm = $(this.editSchoolclassForm);	
@@ -92,8 +93,10 @@ EditSchoolclassesDisplay.prototype.init = function () {
 	this.$changeStudentsTableBody.html("");
 	this.$changeTeachersTableBody.html("");
 	this.$changeModulesTableBody.html("");
-	
-	
+}
+
+EditSchoolclassesDisplay.prototype.setHelp = function(url) {
+	this.$helpContentIFrame.attr('src', url );
 }
 
 EditSchoolclassesDisplay.prototype.showSchoolClass = function(json) {	
