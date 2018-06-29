@@ -185,9 +185,9 @@
 				</div>
 			
 				<ul>
-					<li><a href="#" data-translate="NUM_LBL_Q_PASWORD_FORGOTTEN">Wachtwoord vergeten?</a></li>
-					<li><a href="#" data-translate="NUM_LBL_Q_NO_ACCOUNT">Nog geen account?</a></li>
-					<li><a href="#" data-translate="NUM_LBL_MORE_ON_NUMWORX">Meer informatie over Numworx</a></li>
+                                    <li><a href="#"><span  data-translate="NUM_LBL_Q_PASWORD_FORGOTTEN">Wachtwoord vergeten?</span></a></li>
+                                    <li><a href="#"><span data-translate="NUM_LBL_Q_NO_ACCOUNT">Nog geen account?</span></a></li>
+                                    <li><a href="#"><span  data-translate="NUM_LBL_MORE_ON_NUMWORX">Meer informatie over Numworx</span></a></li>
 				</ul>
 			</div>
 		</div>
@@ -205,31 +205,31 @@
 			<div id="accountMenuBox">
 				<span id="accountMenuSchoolName">Voorbeeld van Naam</span>
 				<span id="accountMenuUserRole">Docent</span><span id="accountMenuPresentationName">Voorbeeldschool</span>
-				<a href="#ACCOUNT">Account beheren</a>
-				<a href="#LOGOUT">Uitloggen</a>
+                                <a href="#ACCOUNT"><span data-translate="NUM_MNU_MANAGE_ACCOUNT">Account beheren</span></a>
+                                <a href="#LOGOUT"><span data-translate="NUM_MNU_LOGOUT">Uitloggen</span></a>
 			</div>
 		</header>
 		
 		<nav>
 			<ul id="mainNav">
 				<li>
-					<a href="#RESULTS"><svg viewBox="0 0 64 64" class="icon">
+					<a href="#RESULTS" ><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#resultaten"></use>
-				    </svg><span class="name">Resultaten</span>
+				    </svg><span class="name" data-translate="NUM_MNU_RESULTS">Resultaten</span>
 				    </a>
 				</li>
 				<li><a href="#PERSONS"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#personen"></use>
-				    </svg><span class="name">Personen</span></a></li>
+				    </svg><span class="name" data-translate="NUM_MNU_PEOPLE">Personen</span></a></li>
 				<li><a href="#SCHOOLCLASSES"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#klassen"></use>
-				    </svg><span class="name">Klassen</span></a></li>
+				    </svg><span class="name" data-translate="MUM_MNU_CLASSES">Klassen</span></a></li>
 				<li><a href="#MODULES"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#modules"></use>
-				    </svg><span class="name">Modules</span></a></li>
+				    </svg><span class="name" data-translate="NUM_MNU_MODULES">Modules</span></a></li>
 				<!-- <li><a href="#"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#organisatie"></use>
-				    </svg><span class="name">Organisatie</span></a></li> -->
+				    </svg><span class="name" data-translate="NUM_MNU_MANAGE_ACCOUNT">Organisatie</span></a></li> -->
 			</ul>
 		</nav>
 		
@@ -333,10 +333,10 @@
 							<table class="dwo">
 								<thead>
 									<tr>
-										<th class="col-3" data-translate="NUM_TBL_SCHOOLLOGINOPTION">Login mogelijkheid</th>
-										<th class="col-1" data-translate="NUM_TBL_ROLE">Rol</th>
-										<th data-translate="NUM_TBL_STARTWITHSCHOOLLOGIN">Hiermee opstarten</th>
-										<th data-translate="NUM_TBL_REMOVESCHOOLLOGIN">Login verwijderen</th>
+                                                                            <th class="col-3"><span data-translate="NUM_TBL_SCHOOLLOGINOPTION">Login mogelijkheid</span></th>
+                                                                            <th class="col-1"><span data-translate="NUM_TBL_ROLE">Rol</span></th>
+                                                                            <th><span data-translate="NUM_TBL_STARTWITHSCHOOLLOGIN">Hiermee opstarten</span></th>
+                                                                            <th><span data-translate="NUM_TBL_REMOVESCHOOLLOGIN">Login verwijderen</span></th>
 									</tr>
 								</thead>
 								<tbody>	
@@ -378,34 +378,34 @@
 					<form name="addSchoolLogin">
 						<fieldset>
 							<div class="col-4 options">
-								<label>Docent, Schooladmin of Leerling?</label>
+                                                            <label><span data-translate="NUM_LBL_Q_WHICHROLE">Docent, Schooladmin of Leerling?</span></label>
 								<div class="option">
 							    	<input type="radio" name="role" id="roleD" value="TEACHER">
-									<label for="roleD">D</label>
+                                                                <label for="roleD"><span data-translate="NUM_LBL_TEACHERLETTER">D</span></label>
 								</div>
 								<div class="option">
 									<input type="radio" name="role" id="roleA" value="SCHOOLADMIN">
-									<label for="roleA">A</label>
+                                                                        <label for="roleA"><span data-translate="NUM_LBL_SCHOOLADMINLETTER">A</span></label>
 								</div> 
 								<div class="option">
 									<input type="radio" name="role" id="roleL" value="STUDENT">
-									<label for="roleL">L</label>
+                                                                        <label for="roleL"><span data-translate="NUM_LBL_STUDENTLETTER">L</span></label>
 								</div>
 							</div>
 							
 							
-							<label for="schoolLogin" class="col-2 input">
-								Sleutelcode school
+							<label for="schoolLogin" class="col-2 input"><span data-translate="NUM_LBL_SCHOOLLOGIN">
+                                                            school login</span>
 								<input id="schoolLogin" name="schoolLogin" type="text" value="" />
 							</label>
-							<label for="schoolCode" class="col-2 input">
-								Wachtwoord								
+							<label for="schoolCode" class="col-2 input"><span data-translate="NUM_LBL_SCHOOLPASSWORD">
+                                                                Sleutelcode school</span>
 								<input id="schoolCode" name="schoolCode" type="password" value="" />
 							</label>
 							
 							
 							<div class="col-4">
-								<input type="submit" class="primary right bottom" value="Voeg toe" />
+								<input type="submit" class="primary right bottom" data-translate="NUM_BTN_Add" value="Voeg toe" />
 							</div>							
 						</fieldset>						
 					</form>
@@ -430,8 +430,8 @@
 						<svg viewBox="0 0 64 64" class="icon">
 							<use xlink:href="#klassen"></use>
 						</svg>
-						<h1>Klassen bewerken of toevoegen</h1>
-						<h2 class="sectionhead"><span>Klassen bewerken</span></h2>					
+                                                <h1><span data-translate="NUM_PNL_CLASSES">Klassen bewerken of toevoegen</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_CLASSES_EDIT">Klassen bewerken</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
@@ -447,7 +447,7 @@
 				<div class="row">
 					<form name="chooseSchoolclass">							
 						<div class="col-8">
-							<h3>Kies een klas om te bewerken</h3>
+                                                    <h3><span data-translate="NUM_LBL_CLASSES_SELECTTOEDIT">Kies een klas om te bewerken</span></h3>
 						
 							<table class="dwo hoverable selectable">
 								<tbody>
@@ -462,7 +462,7 @@
 						
 						</div>
 						<div class="col-4">
-							<input type="submit" class="primary bottom right" value="Bewerken" />
+							<input type="submit" class="primary bottom right" data-translate="NUM_BTN_Edit" value="Bewerken" />
 						</div>
 					</form>
 				</div>								
@@ -472,7 +472,7 @@
 			<section>
 				<div class="row">
 					<div class="col-12">
-						<h2 class="sectionhead"><span>Klas toevoegen<span></h2>						
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_CLASSES_ADD">Klas toevoegen</span></h2>						
 					</div>
 				</div>
 				<div class="row">
@@ -483,25 +483,25 @@
 								<input id="classname" name="classname" type="text" value="" />
 							</label>
 							<div class="col-2 options">
-								<label>Boomstructuur?</label>
+								<label><span data-translate="NUM_LBL_CLASSES_TREESTRUCT">Boomstructuur?</span></label>
 								<div class="option">
 									<input type="radio" name="useClasstree" id="useClasstreeYes" value="1">
-									<label for="useClasstreeYes">Ja</label>
+                                                                        <label for="useClasstreeYes"><span data-translate="NUM_LBL_YES">Ja</span></label>
 								</div> 
 								<div class="option">
 									<input type="radio" name="useClasstree" id="useClasstreeNo" value="0" checked="checked">
-									<label for="useClasstreeNo">Nee</label>
+									<label for="useClasstreeNo"><span data-translate="NUM_LBL_NO">Nee</span></label>
 								</div>
 							</div>
 							<div class="col-2 options">
-								<label>Klassleutel?</label>
+								<label><span data-translate="NUM_LBL_CLASSES_ACCESSKEY">Klassleutel?</span></label>
 								<div class="option">
 							    	<input type="radio" name="useClasskey" id="useClasskeyYes" value="1">
-									<label for="useClasskeyYes">Ja</label>
+									<label for="useClasskeyYes"><span data-translate="NUM_LBL_YES">Ja</span></label>
 								</div>
 								<div class="option">
 									<input type="radio" name="useClasskey" id="useClasskeyNo" value="0" checked="checked">
-									<label for="useClasskeyNo">Nee</label>
+									<label for="useClasskeyNo"><span data-translate="NUM_LBL_NO">Nee</span></label>
 								</div> 
 							</div>
 							<label for="classkey" class="col-2 input">
@@ -509,7 +509,7 @@
 								<input id="classkey" name="classkey" type="text" value="" />
 							</label>
 							<div class="col-4">
-								<input type="submit" class="primary right bottom" value="Voeg klas toe" />
+								<input type="submit" class="primary right bottom" data-translate="NUM_BTN_Add" value="Voeg klas toe" />
 							</div>							
 						</fieldset>						
 					</form>
