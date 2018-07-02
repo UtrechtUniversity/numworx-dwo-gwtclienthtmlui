@@ -24,9 +24,14 @@ function AddStudentToSchoolclassDisplay() {
 }
 
 AddStudentToSchoolclassDisplay.prototype.show = function() {
+        this.localize();
 	this.$panel.show();
 }
 
+
+AddStudentToSchoolclassDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
 /*
  * GUI FUNCTIONS
  */

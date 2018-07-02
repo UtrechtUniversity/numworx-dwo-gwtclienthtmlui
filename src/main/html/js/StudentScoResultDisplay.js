@@ -35,6 +35,7 @@ function StudentScoResultDisplay() {
 
 StudentScoResultDisplay.prototype.show = function() {
 	window.app.mainDisplay.openLightboxView(this);
+        this.localize();
 	this.$panel.show();	
 	Helpers.stretchIframeHeight( this.$iframe ); // TODO: Action on Resizing
 	
@@ -44,6 +45,10 @@ StudentScoResultDisplay.prototype.show = function() {
 	this.$logButton.hide();
 }
 
+
+StudentScoResultDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
 
 StudentScoResultDisplay.prototype.showHideNextAndPrevious = function() { 
 	var previous = null;

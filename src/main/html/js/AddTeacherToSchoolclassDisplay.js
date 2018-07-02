@@ -23,9 +23,13 @@ function AddTeacherToSchoolclassDisplay() {
 }
 
 AddTeacherToSchoolclassDisplay.prototype.show = function() {
-	this.$panel.show();
+    this.initialize();
+    this.$panel.show();
 }
 
+AddTeacherToSchoolclassDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
 /*
  * GUI FUNCTIONS
  */

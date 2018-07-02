@@ -23,11 +23,15 @@ function SchoolclassesDisplay() {
 }
 
 SchoolclassesDisplay.prototype.show = function() {
+        this.localize();
 	this.$panel.show();
 	Helpers.stretchHeight( [ this.$chooseSchoolclassTableBody ]);
 }
 
 
+SchoolclassesDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
 /*
  * VIEW FUNCTIONS
  * Map to java implementation

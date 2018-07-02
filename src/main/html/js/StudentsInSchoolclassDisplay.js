@@ -28,7 +28,13 @@ function StudentsInSchoolclassDisplay() {
 }
 
 StudentsInSchoolclassDisplay.prototype.show = function() {
+        this.localize();
 	this.$panel.show();
+}
+
+
+StudentsInSchoolclassDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
 }
 
 /*
