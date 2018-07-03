@@ -20,6 +20,10 @@
 
 * icoontjes
 
+RESULTS 
+* sequence gebruiken
+* kolom header bij pages niet clickable
+
 tabindex? keyboard selection?
 
 # DONE

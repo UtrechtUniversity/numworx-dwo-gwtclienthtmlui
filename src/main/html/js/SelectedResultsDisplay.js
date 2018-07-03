@@ -20,6 +20,9 @@ function SelectedResultsDisplay() {
 	this.$barActivitiesStudentBacklink = $("#barActivitiesStudentBacklink");
 	this.$barActivitiesStudents = $("#barActivitiesStudents").hide();
 	this.$barActivitiesStudentsBacklink = $("#barActivitiesStudentsBacklink");
+	this.$barPagesStudents = $("#barPagesStudents").hide();
+	this.$barPagesStudentsBacklink = $("#barPagesStudentsBacklink");
+	
 		
 	this.$selectResultsTableWrap = $("#selectedResultsTableWrap");
 	
@@ -356,7 +359,7 @@ SelectedResultsDisplay.prototype.getSealStateActivitiesStudentsInModule = functi
 SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = function(activity) {
 	var matrix = [], i = 1, j = 1, maxPages = 0;
 	var students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children;
-	console.log(activity);
+	//console.log(activity);
 	
 	matrix[0] = [];
 	matrix[0][0] = {};
@@ -380,8 +383,8 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 		matrix[i] = [];
 		matrix[i][0] = {};
 		matrix[i][0].label = students[studentId].givenName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].familyName;
-		console.log(matrix[i][0].label);
-		console.log(i);
+		//console.log(matrix[i][0].label);
+		//console.log(i);
 		j = 1;
 		
 		for (var studenScoId in activity.children) {
@@ -392,8 +395,10 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 				
 				for (var pageId in activity.children[studenScoId].children) { // Loop over pages
 					matrix[i][j] = {};
-					console.log(activity.children[studenScoId].children[pageId]);
+					//console.log(activity.children[studenScoId].children[pageId]);
 					matrix[i][j].label = activity.children[studenScoId].children[pageId].sumScore + ( activity.children[studenScoId].children[pageId].bonus > 0 ? "+"+activity.children[studenScoId].children[pageId].bonus : "") +" / " + activity.children[studenScoId].children[pageId].maxScore;;
+					matrix[i][j].callback = this.clickPageResultIndicator;
+					matrix[i][j].params = { scoId: this.resultState.activeActivity, studentId: studentId, pageSequence: activity.children[studenScoId].children[pageId].sequence };
 					j++;
 				}	
 			}
@@ -463,6 +468,8 @@ SelectedResultsDisplay.prototype.activitiesStudent = function(params) {
 }
 
 SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
+	console.log(params);
+	
 	var matrix = this.buildMatrixActivitiesStudentsInModule(params.module);
 	var sealState = this.getSealStateActivitiesStudentsInModule(params.module);
 	
@@ -486,6 +493,16 @@ SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
 SelectedResultsDisplay.prototype.pagesStudents = function(params) {
 	var activity = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[ this.resultState.activeModule ].children[ this.resultState.activeActivity ];
 	var matrix = this.buildMatrixPagesActivityStudentsInModule(activity);
+	
+	this.$bars.hide();
+	this.$barPagesStudents.show();
+	
+	// Build backlink
+	var params = {};
+	params.module = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[ this.resultState.activeModule ];
+	params.moduleId = this.resultState.activeModule;
+	this.$barPagesStudentsBacklink.click($.proxy(this.activitiesStudents, this, params));
+	
 	this.plotMatrix(matrix);
 }
 
@@ -530,6 +547,11 @@ SelectedResultsDisplay.prototype.showStudentResults = function(scoId, studentId)
 	this.resultState.activeActivity = scoId;
 	this.resultState.activeStudent = studentId;
 	app.getPresenterFactory().getSelectedResultsPresenter().showStudentResults(this.resultState, scoId, studentId, this.resultState.activeSchoolClass);
+}
+SelectedResultsDisplay.prototype.showStudentResultsPage = function(scoId, studentId, page) {
+	this.resultState.activeActivity = scoId;
+	this.resultState.activeStudent = studentId;
+	app.getPresenterFactory().getSelectedResultsPresenter().showStudentResultsPage(this.resultState, scoId, studentId, this.resultState.activeSchoolClass, page);
 }
 
 SelectedResultsDisplay.prototype.compareClass = function() {
@@ -594,6 +616,12 @@ SelectedResultsDisplay.prototype.clickActivityColumnHeader = function(params, ev
 SelectedResultsDisplay.prototype.clickPrintButton = function(event) {
 	event.preventDefault();		
 	this.print();
+}
+
+// Pages
+SelectedResultsDisplay.prototype.clickPageResultIndicator = function(params, event) {
+	event.preventDefault();		
+	this.showStudentResultsPage(params.scoId, params.studentId, params.pageSequence);	
 }
 
 
