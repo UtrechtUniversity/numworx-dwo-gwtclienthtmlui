@@ -15,11 +15,13 @@
         var DwoMainPresenter;
         <!-- set to false in order to show the default user-interface -->
         var hideGwtGui="true";
+        
         </script>
 		
 		
 	<!-- TODO: change reference -->
-    <script type="text/javascript" language="javascript" src="/gwtclient/gwtclient/gwtclient.nocache.js"></script>
+        <script type="text/javascript" language="javascript" src="/gwtclient/gwtclient/gwtclient.nocache.js">
+        </script>
 	<!-- <script type="text/javascript" language="javascript" src="https://teuniz.dwo.nl/gwtclient/gwtclient/gwtclient.nocache.js"></script> -->
 	
 	<!-- TODO: decide whether to add Google fonts locally (consider licence) -->
@@ -479,8 +481,8 @@
 					<form name="addSchoolclass">
 						<fieldset>
 							<label for="classname" class="col-2 input">
-                                                            <span data-translate="NUM_LBL_CLASSES_CLASSNAME"> Naam klas</span>
-								<input id="classname" name="classname" type="text" data-translate="NUM_LBL_CLASSES_CLASSNAME" value="" />
+                                                            <span data-translate="NUM_TBL_CLASSES_CLASSNAME"> Naam klas</span>
+								<input id="classname" name="classname" type="text" value="" />
 							</label>
 							<div class="col-2 options">
 								<label><span data-translate="NUM_LBL_CLASSES_TREESTRUCT">Boomstructuur?</span></label>
@@ -554,7 +556,7 @@
 					<fieldset>
 						<div class="row">						
 							<label for="classname" class="col-2 input">
-								<span data-translate="NUM_LBL_CLASSES_CLASSNAME"> Naam klas</span>
+								<span data-translate="NUM_TBL_CLASSES_CLASSNAME"> Naam klas</span>
 								<input id="classnameEdit" name="classname" type="text" value="" >
 							</label>
 							
@@ -605,7 +607,7 @@
 			<section>
 				<div class="row">
 					<div class="col-12">
-						<h3><span data-translate="NUM_SEC_CLASSES_ADD">Gekoppelde gegevens van deze klas</h3>
+						<h3><span data-translate="NUM_LBL_ClassAssignments">Gekoppelde gegevens van deze klas</h3>
 					</div>					
 				</div>
 				
@@ -738,7 +740,7 @@
 							<use xlink:href="#klassen"></use>
 						</svg>
 						< <h1><span data-translate="NUM_PNL_CLASSES">Klassen bewerken</span></h1>
-						<h2 class="sectionhead"><span>Zoek een leerling om te plaatsen in klas [KLAS]</span></h2>					
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_AssignStudentToClass">Zoek een leerling om te plaatsen in klas</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
@@ -772,7 +774,7 @@
 							
 							
 							<div class="col-4">
-								<input type="submit" class="primary down right" data-translate="NUM_BTN_SEARCH" value="Toon resultaten" />
+								<input type="submit" class="primary down right" data-translate="NUM_BTN_Search" value="Toon resultaten" />
 							</div>
 						</fieldset>
 					</form>
@@ -960,7 +962,7 @@
 							<use xlink:href="#klassen"></use>
 						</svg>
 						 <h1><span data-translate="NUM_PNL_CLASSES">Klassen bewerken</span></h1>
-						<h2 class="sectionhead"><span>Zoek een Docent om te koppelen aan klas [KLAS]</span></h2>					
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_AssignTeacherToClass">Zoek een Docent om te koppelen aan klas [KLAS]</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
@@ -993,7 +995,7 @@
 							</label>
 							
 							<div class="col-4">
-								<input type="submit" class="primary down right"  data-translate="NUM_BTN_SEARCH" value="Toon resultaten" />
+								<input type="submit" class="primary down right"  data-translate="NUM_BTN_Search" value="Toon resultaten" />
 							</div>
 						</fieldset>
 					</form>
@@ -1051,7 +1053,7 @@
 							<use xlink:href="#klassen"></use>
 						</svg>
 						 <h1><span data-translate="NUM_PNL_CLASSES">Klassen bewerken</span></h1>
-						<h2 class="sectionhead"><span>Module aan klas [KLAS] koppelen</span></h2>					
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_AssignModulesToClass">Module aan klas [KLAS] koppelen</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
@@ -1065,7 +1067,7 @@
 			<section>
 				<div class="row">
 					<div class="col-6">
-						<h3>Selecteer de gewenste modules om toe te kennen</h3>
+                                            <h3><span data-translate="NUM_LBL_AssignModulesToClass">Selecteer de gewenste modules om toe te kennen</span></h3>
 					
 						<!-- 
 							Example format:
@@ -1107,7 +1109,7 @@
 					
 					</div>
 					<div class="col-6">
-						<h3>Toe te kennen voor klas [KLAS], zichtbaar voor leerling</h3>
+                                            <h3><span data-translate="NUM_LBL_ModulesVisibleForClass">Toe te kennen voor klas [KLAS], zichtbaar voor leerling</span></h3>
 					
 						<form name="modulesOfSchoolclassDisplaySelect">
 							<table class="dwo hoverable selectable">
@@ -1129,21 +1131,21 @@
 					<div class="col-6">
 						<div class="row">
 							<div class="col-2">
-								<h3>Nu toegekend</h3>
+                                                            <h3><span data-translate="NUM_CLASSMODULES_Visible">Nu toegekend</span></h3>
 								<div class="checkbox example">
 									<input type="checkbox" value="" checked="checked">
 									<label class="icon"></label>
 								</div>
 							</div>
 							<div class="col-2">
-								<h3>Ooit toegekend</h3>
+                                                            <h3><span data-translate="NUM_CLASSMODULES_InVisible">Ooit toegekend</span></h3>
 								<div class="checkbox example previouslyChecked">
 									<input type="checkbox" value="">
 									<label class="icon"></label>
 								</div>
 							</div>
 							<div class="col-2">
-								<h3>Niet toegekend</h3>
+                                                            <h3><span data-translate="NUM_CLASSMODULES_NeverAssigned">Niet toegekend</span></h3>
 								<div class="checkbox example">
 									<input type="checkbox" value="">
 									<label class="icon"></label>
@@ -1154,26 +1156,27 @@
 							<form name="modulesOfSchoolclassDisplaySearch">
 								<label for="modulesOfSchoolclassDisplaySearchWord" class="col-3 input">
 									&nbsp;
-									<input id="modulesOfSchoolclassDisplaySearchWord" name="name" type="text" value="" placeholder="of zoek een module" />
+									<input id="modulesOfSchoolclassDisplaySearchWord" name="name" type="text" data-translate="NUM_CLASSMODULES_FindAModule" value="" placeholder="of zoek een module" />
 								</label>
 								<div class="col-1">
-									<input type="submit" name="search" class="down secondary" value="Zoek" />
+									<input type="submit" name="search" class="down secondary" data-translate="NUM_BTN_Search" value="Zoek" />
 								</div>
 								<div class="col-2">
-									<input type="button" name="reload" class="down secondary" value="Reset" />
+									<input type="button" name="reload" class="down secondary" data-translate="NUM_BTN_Reset" value="Reset" />
 								</div>
 							</form>
 						</div>	
 					</div>
 					<div class="col-6">
-						<h3>Instellingen geselecteerde module</h3>
+                                            <h3><span data-translate="NUM_CLASSMODULES_SettingsModules">Instellingen geselecteerde module</span></h3>
 						
 						<form name="modulesOfSchoolclassDisplaySettings">
 							<div class="row">
 							
 								<input name="key" type="hidden" value="" />
 								<label for="modulesOfSchoolclassDisplayValidityFrom" class="col-2 input textoverflow">
-									Geldigsheidsduur (van - tot)
+                                                                    <span data-translate="NUM_CLASSMODULES_AccessPeriod">Geldigsheidsduur (van - tot)</span>
+                                                                    
 									<input id="modulesOfSchoolclassDisplayValidityFrom" name="from" type="text" value="" />
 								</label>
 								<label for="modulesOfSchoolclassDisplayValidityTo" class="col-2 input">
@@ -1181,25 +1184,25 @@
 									<input id="modulesOfSchoolclassDisplayValidityTo" name="to" type="text" value="" />
 								</label>
 								<div class="col-2 options">
-									<label>Type</label>
+                                                                    <label><span data-translate="NUM_CLASSMODULES_CourseType">Toets?</span></label>
 									<div class="option">
 										<input type="radio" name="locked[]" id="modulesOfSchoolclassDisplayTypeLocked" value="1">
-										<label for="modulesOfSchoolclassDisplayTypeLocked">dicht</label>
+										<label for="modulesOfSchoolclassDisplayTypeLocked"><span data-translate="NUM_LBL_YES">Ja</span></label>
 									</div> 
 									<div class="option">
 										<input type="radio" name="locked[]" id="modulesOfSchoolclassDisplayTypeUnlocked" value="0">
-										<label for="modulesOfSchoolclassDisplayTypeUnlocked">open</label>
+										<label for="modulesOfSchoolclassDisplayTypeUnlocked"><span data-translate="NUM_LBL_NO">Nee</span></label>
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<label for="field_1" class="col-2 input">
-									Wachtwoord
+                                                                    <span data-translate="NUM_TBL_PASSWORD"> Wachtwoord</span>
 									<input id="password" name="accessKey" type="text" value="" />
 								</label>
 							</div>
 					
-							<input type="submit" class="bottom right secondary" value="Sla op" />
+							<input type="submit" class="bottom right secondary" data-translate="NUM_BTN_Save" value="Sla op" />
 						</form>
 					</div>
 				</div>
