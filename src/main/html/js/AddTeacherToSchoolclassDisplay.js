@@ -23,7 +23,7 @@ function AddTeacherToSchoolclassDisplay() {
 }
 
 AddTeacherToSchoolclassDisplay.prototype.show = function() {
-    this.initialize();
+    this.localize();
     this.$panel.show();
 }
 
