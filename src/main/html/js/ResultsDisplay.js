@@ -29,9 +29,15 @@ function ResultsDisplay() {
 }
 
 ResultsDisplay.prototype.show = function() {
+        this.localize();
 	this.$panel.show();
 	this.chooseClassModuleFormToggle();
 	Helpers.stretchHeight( [ this.$chooseClassTableBody, this.$chooseModulesTableBody  ] )
+}
+
+
+ResultsDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
 }
 
 /*

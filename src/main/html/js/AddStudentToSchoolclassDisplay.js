@@ -24,9 +24,14 @@ function AddStudentToSchoolclassDisplay() {
 }
 
 AddStudentToSchoolclassDisplay.prototype.show = function() {
+        this.localize();
 	this.$panel.show();
 }
 
+
+AddStudentToSchoolclassDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
 /*
  * GUI FUNCTIONS
  */
@@ -71,6 +76,10 @@ AddStudentToSchoolclassDisplay.prototype.clear = function () {
 	this.addStudentSearchForm.elements["givenName"].value == "";
 	this.addStudentSearchForm.elements["insertion"].value == "";
 	this.addStudentSearchForm.elements["familyName"].value == "";
+}
+
+AddStudentToSchoolclassDisplay.prototype.setSchoolClass = function(schoolClass) {
+	console.log("setting schooclass: "+schoolClass);
 }
 
 AddStudentToSchoolclassDisplay.prototype.setHelp = function(url) {

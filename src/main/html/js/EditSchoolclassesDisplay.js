@@ -74,10 +74,15 @@ function EditSchoolclassesDisplay() {
 }
 
 EditSchoolclassesDisplay.prototype.show = function() {
+        this.localize();
 	this.$panel.show();
 	Helpers.stretchHeight( [ this.$changeStudentsTableBody, this.$changeTeachersTableBody, this.$changeModulesTableBody ]);
 }
 
+
+EditSchoolclassesDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
 /*
  * VIEW FUNCTIONS
  * Map to java implementation

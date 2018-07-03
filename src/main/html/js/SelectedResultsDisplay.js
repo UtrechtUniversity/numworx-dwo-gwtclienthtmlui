@@ -50,6 +50,7 @@ function SelectedResultsDisplay() {
 }
 
 SelectedResultsDisplay.prototype.show = function() {
+        this.localize();
 	this.$panel.show();	
 	
 	if (!app.getPresenterFactory().getSelectedResultsPresenter().hasCompareClasses()) this.$startCompareClassForm.hide();
@@ -58,6 +59,10 @@ SelectedResultsDisplay.prototype.show = function() {
 	this.$printButton.hide();
 }
 
+
+SelectedResultsDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
 /*
  * GUI FUNCTIONS
  */

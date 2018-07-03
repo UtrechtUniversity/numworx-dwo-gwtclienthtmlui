@@ -8,11 +8,15 @@ function ModulesDisplay() {
 }
 
 ModulesDisplay.prototype.show = function() {
+        this.localize();
 	this.$panel.show();
 	Helpers.stretchIframeHeight( this.$iframe );
 	$(window).on('resize', $.proxy(Helpers.resizeHelpSection, this));
 }
 
+ModulesDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
 
 /*
  * VIEW FUNCTIONS
@@ -33,3 +37,4 @@ ModulesDisplay.prototype.openUrl = function (url) {
 ModulesDisplay.prototype.resizeIframe = function(e) {
 	Helpers.stretchHeight( [ this.$iframe ] );
 }
+

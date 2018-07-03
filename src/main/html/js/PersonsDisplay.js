@@ -30,11 +30,16 @@ function PersonsDisplay() {
 }
 
 PersonsDisplay.prototype.show = function() {
+        this.localize();
 	this.$panel.show();
 	
 	if (!app.getPresenterFactory().getPersonsPresenter().hasImportPersons()) this.$personsImportForm.hide();
 	
 	Helpers.stretchHeight([ this.$personsTableBody ]);
+}
+
+PersonsDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
 }
 
 

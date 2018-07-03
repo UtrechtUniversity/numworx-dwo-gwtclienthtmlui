@@ -40,7 +40,13 @@ function ModulesOfSchoolclassDisplay() {
 }
 
 ModulesOfSchoolclassDisplay.prototype.show = function() {
+        this.localize();
 	this.$panel.show();
+}
+
+
+ModulesOfSchoolclassDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
 }
 
 /*

@@ -96,6 +96,7 @@ MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 	this.$subpanels.hide();
 	this.loginDisplay.hide();
 	this.setDefaultNavSize();
+        this.localize();
 }
 
 MainDisplay.prototype.setActiveView = function(view) {
@@ -280,3 +281,6 @@ MainDisplay.prototype.clickLogo = function(event) {
 	if (view) this.setActiveView(view)
 }
 
+MainDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}

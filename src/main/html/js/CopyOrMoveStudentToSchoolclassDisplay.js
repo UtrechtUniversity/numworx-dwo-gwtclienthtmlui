@@ -56,12 +56,16 @@ function CopyOrMoveStudentToSchoolclassDisplay() {
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.show = function() {
+        this.localize();
 	this.$panel.show();
 	this.classAFormToggle(false);
 	this.classBFormToggle(false);
 	Helpers.stretchHeight( [ this.$classATableBody, this.$classBTableBody, this.$classesTableBody ]);
 }
 
+CopyOrMoveStudentToSchoolclassDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
 /*
  * GUI FUNCTIONS
  */

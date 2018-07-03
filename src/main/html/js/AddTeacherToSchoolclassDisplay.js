@@ -23,9 +23,13 @@ function AddTeacherToSchoolclassDisplay() {
 }
 
 AddTeacherToSchoolclassDisplay.prototype.show = function() {
-	this.$panel.show();
+    this.initialize();
+    this.$panel.show();
 }
 
+AddTeacherToSchoolclassDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
 /*
  * GUI FUNCTIONS
  */
@@ -73,6 +77,10 @@ AddTeacherToSchoolclassDisplay.prototype.clear = function () {
 
 AddTeacherToSchoolclassDisplay.prototype.setHelp = function(url) {
 	this.$helpContentIFrame.attr('src', url );
+}
+
+AddTeacherToSchoolclassDisplay.prototype.setSchoolClass = function(schoolClass) {
+	console.log("setting schooclass: "+schoolClass);
 }
 
 AddTeacherToSchoolclassDisplay.prototype.showTeachers = function(json) {

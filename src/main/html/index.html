@@ -185,9 +185,9 @@
 				</div>
 			
 				<ul>
-					<li><a href="#" data-translate="NUM_LBL_Q_PASWORD_FORGOTTEN">Wachtwoord vergeten?</a></li>
-					<li><a href="#" data-translate="NUM_LBL_Q_NO_ACCOUNT">Nog geen account?</a></li>
-					<li><a href="#" data-translate="NUM_LBL_MORE_ON_NUMWORX">Meer informatie over Numworx</a></li>
+                                    <li><a href="#"><span  data-translate="NUM_LBL_Q_PASWORD_FORGOTTEN">Wachtwoord vergeten?</span></a></li>
+                                    <li><a href="#"><span data-translate="NUM_LBL_Q_NO_ACCOUNT">Nog geen account?</span></a></li>
+                                    <li><a href="#"><span  data-translate="NUM_LBL_MORE_ON_NUMWORX">Meer informatie over Numworx</span></a></li>
 				</ul>
 			</div>
 		</div>
@@ -205,31 +205,31 @@
 			<div id="accountMenuBox">
 				<span id="accountMenuSchoolName">Voorbeeld van Naam</span>
 				<span id="accountMenuUserRole">Docent</span><span id="accountMenuPresentationName">Voorbeeldschool</span>
-				<a href="#ACCOUNT">Account beheren</a>
-				<a href="#LOGOUT">Uitloggen</a>
+                                <a href="#ACCOUNT"><span data-translate="NUM_MNU_MANAGE_ACCOUNT">Account beheren</span></a>
+                                <a href="#LOGOUT"><span data-translate="NUM_MNU_LOGOUT">Uitloggen</span></a>
 			</div>
 		</header>
 		
 		<nav>
 			<ul id="mainNav">
 				<li>
-					<a href="#RESULTS"><svg viewBox="0 0 64 64" class="icon">
+					<a href="#RESULTS" ><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#resultaten"></use>
-				    </svg><span class="name">Resultaten</span>
+				    </svg><span class="name" data-translate="NUM_MNU_RESULTS">Resultaten</span>
 				    </a>
 				</li>
 				<li><a href="#PERSONS"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#personen"></use>
-				    </svg><span class="name">Personen</span></a></li>
+				    </svg><span class="name" data-translate="NUM_MNU_PEOPLE">Personen</span></a></li>
 				<li><a href="#SCHOOLCLASSES"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#klassen"></use>
-				    </svg><span class="name">Klassen</span></a></li>
+				    </svg><span class="name" data-translate="MUM_MNU_CLASSES">Klassen</span></a></li>
 				<li><a href="#MODULES"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#modules"></use>
-				    </svg><span class="name">Modules</span></a></li>
+				    </svg><span class="name" data-translate="NUM_MNU_MODULES">Modules</span></a></li>
 				<!-- <li><a href="#"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#organisatie"></use>
-				    </svg><span class="name">Organisatie</span></a></li> -->
+				    </svg><span class="name" data-translate="NUM_MNU_MANAGE_ACCOUNT">Organisatie</span></a></li> -->
 			</ul>
 		</nav>
 		
@@ -263,11 +263,11 @@
 						<svg viewBox="0 0 64 64" class="icon">
 							<use xlink:href="#personen"></use>
 						</svg>
-						<h1 data-translate="NUM_PNL_ACCOUNT">Account beheren</h1>
-						<h2 class="sectionhead"><span data-translate="NUM_SEC_ACCOUNT_CHANGE">Mijn persoonlijke gegevens veranderen</span></h2>					
+                                                <h1><span  data-translate="NUM_PNL_ACCOUNT"> Account beheren</span></h1>
+                                                <h2 class="sectionhead"><span data-translate="NUM_SEC_ACCOUNT_CHANGE"><span  data-translate="NUM_SEC_ACCOUNT_CHANGE">Mijn persoonlijke gegevens veranderen</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+                                            <h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -333,10 +333,10 @@
 							<table class="dwo">
 								<thead>
 									<tr>
-										<th class="col-3" data-translate="NUM_TBL_SCHOOLLOGINOPTION">Login mogelijkheid</th>
-										<th class="col-1" data-translate="NUM_TBL_ROLE">Rol</th>
-										<th data-translate="NUM_TBL_STARTWITHSCHOOLLOGIN">Hiermee opstarten</th>
-										<th data-translate="NUM_TBL_REMOVESCHOOLLOGIN">Login verwijderen</th>
+                                                                            <th class="col-3"><span data-translate="NUM_TBL_SCHOOLLOGINOPTION">Login mogelijkheid</span></th>
+                                                                            <th class="col-1"><span data-translate="NUM_TBL_ROLE">Rol</span></th>
+                                                                            <th><span data-translate="NUM_TBL_STARTWITHSCHOOLLOGIN">Hiermee opstarten</span></th>
+                                                                            <th><span data-translate="NUM_TBL_REMOVESCHOOLLOGIN">Login verwijderen</span></th>
 									</tr>
 								</thead>
 								<tbody>	
@@ -378,34 +378,34 @@
 					<form name="addSchoolLogin">
 						<fieldset>
 							<div class="col-4 options">
-								<label>Docent, Schooladmin of Leerling?</label>
+                                                            <label><span data-translate="NUM_LBL_Q_WHICHROLE">Docent, Schooladmin of Leerling?</span></label>
 								<div class="option">
 							    	<input type="radio" name="role" id="roleD" value="TEACHER">
-									<label for="roleD">D</label>
+                                                                <label for="roleD"><span data-translate="NUM_LBL_TEACHERLETTER">D</span></label>
 								</div>
 								<div class="option">
 									<input type="radio" name="role" id="roleA" value="SCHOOLADMIN">
-									<label for="roleA">A</label>
+                                                                        <label for="roleA"><span data-translate="NUM_LBL_SCHOOLADMINLETTER">A</span></label>
 								</div> 
 								<div class="option">
 									<input type="radio" name="role" id="roleL" value="STUDENT">
-									<label for="roleL">L</label>
+                                                                        <label for="roleL"><span data-translate="NUM_LBL_STUDENTLETTER">L</span></label>
 								</div>
 							</div>
 							
 							
-							<label for="schoolLogin" class="col-2 input">
-								Sleutelcode school
+							<label for="schoolLogin" class="col-2 input"><span data-translate="NUM_LBL_SCHOOLLOGIN">
+                                                            school login</span>
 								<input id="schoolLogin" name="schoolLogin" type="text" value="" />
 							</label>
-							<label for="schoolCode" class="col-2 input">
-								Wachtwoord								
+							<label for="schoolCode" class="col-2 input"><span data-translate="NUM_LBL_SCHOOLPASSWORD">
+                                                                Sleutelcode school</span>
 								<input id="schoolCode" name="schoolCode" type="password" value="" />
 							</label>
 							
 							
 							<div class="col-4">
-								<input type="submit" class="primary right bottom" value="Voeg toe" />
+								<input type="submit" class="primary right bottom" data-translate="NUM_BTN_Add" value="Voeg toe" />
 							</div>							
 						</fieldset>						
 					</form>
@@ -430,11 +430,11 @@
 						<svg viewBox="0 0 64 64" class="icon">
 							<use xlink:href="#klassen"></use>
 						</svg>
-						<h1>Klassen bewerken of toevoegen</h1>
-						<h2 class="sectionhead"><span>Klassen bewerken</span></h2>					
+                                                <h1><span data-translate="NUM_PNL_CLASSES">Klassen bewerken of toevoegen</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_CLASSES_EDIT">Klassen bewerken</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+                                            <h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -447,7 +447,7 @@
 				<div class="row">
 					<form name="chooseSchoolclass">							
 						<div class="col-8">
-							<h3>Kies een klas om te bewerken</h3>
+                                                    <h3><span data-translate="NUM_LBL_CLASSES_SELECTTOEDIT">Kies een klas om te bewerken</span></h3>
 						
 							<table class="dwo hoverable selectable">
 								<tbody>
@@ -462,7 +462,7 @@
 						
 						</div>
 						<div class="col-4">
-							<input type="submit" class="primary bottom right" value="Bewerken" />
+							<input type="submit" class="primary bottom right" data-translate="NUM_BTN_Edit" value="Bewerken" />
 						</div>
 					</form>
 				</div>								
@@ -472,36 +472,36 @@
 			<section>
 				<div class="row">
 					<div class="col-12">
-						<h2 class="sectionhead"><span>Klas toevoegen<span></h2>						
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_CLASSES_ADD">Klas toevoegen</span></h2>						
 					</div>
 				</div>
 				<div class="row">
 					<form name="addSchoolclass">
 						<fieldset>
 							<label for="classname" class="col-2 input">
-								Naam klas
-								<input id="classname" name="classname" type="text" value="" />
+                                                            <span data-translate="NUM_LBL_CLASSES_CLASSNAME"> Naam klas</span>
+								<input id="classname" name="classname" type="text" data-translate="NUM_LBL_CLASSES_CLASSNAME" value="" />
 							</label>
 							<div class="col-2 options">
-								<label>Boomstructuur?</label>
+								<label><span data-translate="NUM_LBL_CLASSES_TREESTRUCT">Boomstructuur?</span></label>
 								<div class="option">
 									<input type="radio" name="useClasstree" id="useClasstreeYes" value="1">
-									<label for="useClasstreeYes">Ja</label>
+                                                                        <label for="useClasstreeYes"><span data-translate="NUM_LBL_YES">Ja</span></label>
 								</div> 
 								<div class="option">
 									<input type="radio" name="useClasstree" id="useClasstreeNo" value="0" checked="checked">
-									<label for="useClasstreeNo">Nee</label>
+									<label for="useClasstreeNo"><span data-translate="NUM_LBL_NO">Nee</span></label>
 								</div>
 							</div>
 							<div class="col-2 options">
-								<label>Klassleutel?</label>
+								<label><span data-translate="NUM_LBL_CLASSES_ACCESSKEY">Klassleutel?</span></label>
 								<div class="option">
 							    	<input type="radio" name="useClasskey" id="useClasskeyYes" value="1">
-									<label for="useClasskeyYes">Ja</label>
+									<label for="useClasskeyYes"><span data-translate="NUM_LBL_YES">Ja</span></label>
 								</div>
 								<div class="option">
 									<input type="radio" name="useClasskey" id="useClasskeyNo" value="0" checked="checked">
-									<label for="useClasskeyNo">Nee</label>
+									<label for="useClasskeyNo"><span data-translate="NUM_LBL_NO">Nee</span></label>
 								</div> 
 							</div>
 							<label for="classkey" class="col-2 input">
@@ -509,7 +509,7 @@
 								<input id="classkey" name="classkey" type="text" value="" />
 							</label>
 							<div class="col-4">
-								<input type="submit" class="primary right bottom" value="Voeg klas toe" />
+								<input type="submit" class="primary right bottom" data-translate="NUM_BTN_Add" value="Voeg klas toe" />
 							</div>							
 						</fieldset>						
 					</form>
@@ -533,11 +533,11 @@
 						<svg viewBox="0 0 64 64" class="icon">
 							<use xlink:href="#klassen"></use>
 						</svg>
-						<h1>Klassen bewerken</h1>
-						<h2 class="sectionhead"><span>Klas bewerken</span></h2>					
+                                                <h1><span data-translate="NUM_PNL_CLASSES">Klassen bewerken</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_CLASSES_EDIT">Klas bewerken</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -554,47 +554,47 @@
 					<fieldset>
 						<div class="row">						
 							<label for="classname" class="col-2 input">
-								Naam klas
-								<input id="classnameEdit" name="classname" type="text" value="" />
+								<span data-translate="NUM_LBL_CLASSES_CLASSNAME"> Naam klas</span>
+								<input id="classnameEdit" name="classname" type="text" value="" >
 							</label>
 							
 							<div class="col-2 options">
-								<label>Klassleutel?</label>
+								<label><span data-translate="NUM_LBL_CLASSES_ACCESSKEY">Klassleutel?</span></label>
 								<div class="option">
 							    	<input type="radio" name="useClasskey" id="useClasskeyYesEdit" value="1">
-									<label for="useClasskeyYesEdit">Ja</label>
+									<label for="useClasskeyYesEdit"><span data-translate="NUM_LBL_YES">Ja</span></label>
 								</div>
 								<div class="option">
 									<input type="radio" name="useClasskey" id="useClasskeyNoEdit" value="0">
-									<label for="useClasskeyNoEdit">Nee</label>
+									<label for="useClasskeyNoEdit"><span data-translate="NUM_LBL_NO">Nee</span></label>
 								</div> 
 							</div>
 							<label for="classkey" class="col-2 input">
 								&nbsp;
-								<input id="classkeyEdit" name="classkey" type="text" value="" />
+								<input id="classkeyEdit" name="classkey" type="text" data-translate="NUM_LBL_CLASSES_CLASSNAME" value="" />
 							</label>
 						</div>
 						
 						<div class="row">
 							<div class="col-2 options">
-								<label>Boomstructuur?</label>
+								<label><span data-translate="NUM_LBL_CLASSES_TREESTRUCT">Boomstructuur?</span></label>
 								<div class="option">
 									<input type="radio" name="useClasstree" id="useClasstreeYesEdit" value="1">
-									<label for="useClasstreeYesEdit">Ja</label>
+									<label for="useClasstreeYesEdit"><span data-translate="NUM_LBL_YES">Ja</span></label>
 								</div> 
 								<div class="option">
 									<input type="radio" name="useClasstree" id="useClasstreeNoEdit" value="0">
-									<label for="useClasstreeNoEdit">Nee</label>
+									<label for="useClasstreeNoEdit"><span data-translate="NUM_LBL_NO">Nee</span></label>
 								</div>
 							</div>
 							<div class="col-6">
 								&nbsp;
 							</div>
 							<div class="col-2">
-								<input type="button" name="delete" class="danger right down" value="Verwijder" />								
+								<input type="button" name="delete" class="danger right down" data-translate="NUM_BTN_Remove"  value="Verwijder" />								
 							</div>
 							<div class="col-2">
-								<input type="submit" name="save" class="primary right down" value="Sla op" />
+								<input type="submit" name="save" class="primary right down" data-translate="NUM_BTN_Save" value="Sla op" />
 							</div>
 						</div>
 					</fieldset>	
@@ -605,7 +605,7 @@
 			<section>
 				<div class="row">
 					<div class="col-12">
-						<h3>Gekoppelde gegevens van deze klas</h3>
+						<h3><span data-translate="NUM_SEC_CLASSES_ADD">Gekoppelde gegevens van deze klas</h3>
 					</div>					
 				</div>
 				
@@ -616,21 +616,21 @@
 								<table class="dwo">
 									<thead>
 										<tr>
-											<th>Leerlingen</th>
+                                                                                    <th><span data-translate="NUM_TBL_STUDENTS">Leerlingen</span></th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
 											<td>
-												<span id="chooseStudentName">Schoolclass name</a>
+												<span id="chooseStudentName" data-translate="NUM_LBL_STUDENTNAME">student name</a>
 											</td>
 										</tr>
 									</tbody>
 								</table>
 												
-								<input type="button" name="show" class="primary left" value="Toon leerlingen" />
-								<input type="button" name="connect" class="primary right" value="Wijzigen" />
-								<input type="button" name="copyOrMove" class="primary right" value="Overplaatsen" />	
+								<input type="button" name="show" class="primary left" data-translate="NUM_BTN_RefreshList" value="Ververs lijst" />
+								<input type="button" name="connect" class="primary right" data-translate="NUM_BTN_Connect" value="Toewijzen" />
+								<input type="button" name="copyOrMove" class="primary right" data-translate="NUM_BTN_MOVECOPY" value="Overplaatsen" />	
 							</fieldset>
 						</form>					
 					</div>
@@ -641,20 +641,20 @@
 								<table class="dwo">
 									<thead>
 										<tr>
-											<th>Docenten</th>
+											<th><span data-translate="NUM_TBL_TEACHERS">Docenten</span></th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
 											<td>
-												<span id="chooseTeacherName">Teacher name</a>
+                                                                                            <span id="chooseTeacherName" data-translate="NUM_LBL_TEACHERNAME">Teacher name</span></a>
 											</td>
 										</tr>
 									</tbody>
 								</table>
 												
-								<input type="submit" name="show" class="primary left" value="Toon docenten" />
-								<input type="submit" name="connect" class="primary right" value="Wijzigen" />
+								<input type="submit" name="show" class="primary left"  data-translate="NUM_BTN_RefreshList" value="Ververs lijst" />
+								<input type="submit" name="connect" class="primary right" data-translate="NUM_BTN_Connect" value="Toewijzen" />
 							</fieldset>
 						</form>
 					</div>
@@ -665,20 +665,20 @@
 								<table class="dwo">
 									<thead>
 										<tr>
-											<th>Modules</th>
+											<th><span data-translate="NUM_TBL_MODULES">Modules</span></th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
 											<td>
-												<span id="chooseModuleName">Module name</a>
+												<span id="chooseModuleName" data-translate="NUM_LBL_MODULENAME" >Module name</a>
 											</td>
 										</tr>
 									</tbody>
 								</table>
 												
-								<input type="submit" name="show" class="primary left" value="Toon modules" />
-								<input type="submit" name="connect" class="primary right" value="Wijzigen" />
+								<input type="submit" name="show" class="primary left" data-translate="NUM_BTN_RefreshList" value="Ververs modules" />
+								<input type="submit" name="connect" class="primary right" data-translate="NUM_BTN_Connect" value="Toewijzigen" />
 							</fieldset>
 						</form>							
 					</div>					
@@ -737,11 +737,11 @@
 						<svg viewBox="0 0 64 64" class="icon">
 							<use xlink:href="#klassen"></use>
 						</svg>
-						<h1>Klassen bewerken</h1>
+						< <h1><span data-translate="NUM_PNL_CLASSES">Klassen bewerken</span></h1>
 						<h2 class="sectionhead"><span>Zoek een leerling om te plaatsen in klas [KLAS]</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -754,25 +754,25 @@
 					<form name="addStudentSearch">
 						<fieldset>
 							<label for="addStudentSearchUserName" class="col-2 input">
-								Gebruikersnaam
+                                                            <span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
 								<input id="addStudentSearchUserName" name="username" type="text" value="" />
 							</label>
 							<label for="addStudentSearchGivenName" class="col-2 input">
-								Voornaam
+								<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 								<input id="addStudentSearchGivenName" name="givenName" type="text" value="" />
 							</label>
 							<label for="addStudentSearchInsertion" class="col-2 input">
-								Tussenvoegsel
+								<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
 								<input id="addStudentSearchInsertion" name="insertion" type="text" value="" />
 							</label>
 							<label for="addStudentSearchFamilyName" class="col-2 input">
-								Achternaam
+								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
 								<input id="addStudentSearchFamilyName" name="familyName" type="text" value="" />
 							</label>
 							
 							
 							<div class="col-4">
-								<input type="submit" class="primary down right" value="Toon resultaten" />
+								<input type="submit" class="primary down right" data-translate="NUM_BTN_SEARCH" value="Toon resultaten" />
 							</div>
 						</fieldset>
 					</form>
@@ -780,16 +780,16 @@
 				
 				<div class="row">
 					<div class="col-12">
-						<h3>Gevonden leerlingen</h2>
+						<h3><span data-translate="NUM_TBL_STUDENTS">Leerlingen</span></h2>
 						<form name="addStudentAdd">
 							
 						<table class="dwo hoverable selectable">
 							<thead>
 								<tr>
-									<th class="col-2">Gebruikersnaam</th>
-									<th class="col-2">Voornaam</th>
-									<th class="col-2">Tussenvoegsel</th>
-									<th class="col-6">Achternaam</th>
+									<th class="col-2"><span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span></th>
+									<th class="col-2"><span data-translate="NUM_TBL_GIVENNAME">Voornaam</span></th>
+									<th class="col-2"><span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span></th>
+									<th class="col-6"><span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -807,7 +807,7 @@
 						</table>
 						
 						
-							<input type="submit" class="primary right" value="plaats leerling" />
+							<input type="submit" class="primary right"  data-translate="NUM_BTN_Connect" value="plaats leerling" />
 						</form>
 					</div>
 				</div>
@@ -831,11 +831,11 @@
 						<svg viewBox="0 0 64 64" class="icon">
 							<use xlink:href="#klassen"></use>
 						</svg>
-						<h1>Klassen bewerken</h1>
+						 <h1><span data-translate="NUM_PNL_CLASSES">Klassen bewerken</span></h1>
 						<h2 class="sectionhead"><span>Leerlingen overplaatsen</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -959,11 +959,11 @@
 						<svg viewBox="0 0 64 64" class="icon">
 							<use xlink:href="#klassen"></use>
 						</svg>
-						<h1>Klassen bewerken</h1>
+						 <h1><span data-translate="NUM_PNL_CLASSES">Klassen bewerken</span></h1>
 						<h2 class="sectionhead"><span>Zoek een Docent om te koppelen aan klas [KLAS]</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -976,24 +976,24 @@
 					<form name="addTeacherSearch">
 						<fieldset>
 							<label for="addTeacherSearchUserName" class="col-2 input">
-								Gebruikersnaam
+								<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
 								<input id="addTeacherSearchUserName" name="userName" type="text" value="" />
 							</label>
 							<label for="addTeacherSearchGivenName" class="col-2 input">
-								Voornaam
+								<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 								<input id="addTeacherSearchGivenName" name="givenName" type="text" value="" />
 							</label>
 							<label for="addTeacherSearchInsertion" class="col-2 input">
-								Tussenvoegsel
+								<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
 								<input id="addTeacherSearchInsertion" name="insertion" type="text" value="" />
 							</label>
 							<label for="addTeacherSearchFamilyName" class="col-2 input">
-								Achternaam
+								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
 								<input id="addTeacherSearchFamilyName" name="familyName" type="text" value="" />
 							</label>
 							
 							<div class="col-4">
-								<input type="submit" class="primary down right" value="Toon resultaten" />
+								<input type="submit" class="primary down right"  data-translate="NUM_BTN_SEARCH" value="Toon resultaten" />
 							</div>
 						</fieldset>
 					</form>
@@ -1001,16 +1001,16 @@
 				
 				<div class="row">
 					<div class="col-12">
-						<h3>Gevonden docenten</h2>
+						<h3><span data-translate="NUM_TBL_TEACHERS">Docenten</span></h2>
 						<form name="addTeacherAdd">
 							
 						<table class="dwo hoverable selectable">
 							<thead>
 								<tr>
-									<th class="col-2">Gebruikersnaam</th>
-									<th class="col-2">Voornaam</th>
-									<th class="col-2">Tussenvoegsel</th>
-									<th class="col-6">Achternaam</th>
+									<th class="col-2"><span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span></th>
+									<th class="col-2"><span data-translate="NUM_TBL_GIVENNAME">Voornaam</span></th>
+									<th class="col-2"><span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span></th>
+									<th class="col-6"><span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -1027,7 +1027,7 @@
 						</table>
 						
 						
-							<input type="submit" class="primary right" value="koppel docent" />
+							<input type="submit" class="primary right" data-translate="NUM_BTN_Connect" value="koppel docent" />
 						</form>
 					</div>
 				</div>
@@ -1050,11 +1050,11 @@
 						<svg viewBox="0 0 64 64" class="icon">
 							<use xlink:href="#klassen"></use>
 						</svg>
-						<h1>Klassen bewerken</h1>
+						 <h1><span data-translate="NUM_PNL_CLASSES">Klassen bewerken</span></h1>
 						<h2 class="sectionhead"><span>Module aan klas [KLAS] koppelen</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -1227,7 +1227,7 @@
 						<h2 class="sectionhead"><span>Resultaten van een klas</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -1340,7 +1340,7 @@
 						<h2 class="sectionhead"><span>Resultaten</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -1722,7 +1722,7 @@
 						<h2 class="sectionhead"><span>Bewerk gegevens [NAAM]</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>
@@ -1843,7 +1843,7 @@
 						<h2 class="sectionhead"><span>Nieuwe persoon toevoegen</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
 							<iframe src=""></iframe>
 						</div>

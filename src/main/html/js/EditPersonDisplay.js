@@ -31,10 +31,15 @@ function EditPersonDisplay() {
 }
 
 EditPersonDisplay.prototype.show = function() {
+        this.localize();
 	this.$panel.show();
 	Helpers.stretchHeight([ this.$editPersonSchoolclassesTableBody ]);
 }
 
+
+EditPersonDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
 
 /*
  * GUI Functions
