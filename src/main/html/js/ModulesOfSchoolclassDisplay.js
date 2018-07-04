@@ -161,16 +161,16 @@ ModulesOfSchoolclassDisplay.prototype.setHelp = function(url) {
 }
 
 ModulesOfSchoolclassDisplay.prototype.setEmptyTableMessageModules = function () {
-	this.$treeWrapper.html('Geen beschikbare modules.');
+	this.$treeWrapper.html('<span data-translate="NUM_TBL_EMPTYTABLE">Geen items gevonden</span>');
 }
 ModulesOfSchoolclassDisplay.prototype.setLoadingTableMessageModules = function () {
-	this.$treeWrapper.html('Beschikbare modules worden geladen.');
+	this.$treeWrapper.html('<span data-translate="NUM_TBL_FETCHINGDATA">Items worden opgevraagd</span>');
 }
 ModulesOfSchoolclassDisplay.prototype.setEmptyTableMessageSelected = function () {
-	this.$selectTableBody.html('<tr class="empty"><td>Geen modules toegekend.</td></tr>');
+	this.$selectTableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_EMPTYTABLE">Geen items gevonden</span></td></tr>');
 }
 ModulesOfSchoolclassDisplay.prototype.setLoadingTableMessageSelected = function () {
-	this.$selectTableBody.html('<tr class="empty"><td>Modules worden geladen.</td></tr>');
+	this.$selectTableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_FETCHINGDATA">Items worden opgevraagd</span></td></tr>');
 }
 
 ModulesOfSchoolclassDisplay.prototype.setTree = function(json) {

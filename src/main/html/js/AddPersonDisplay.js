@@ -99,10 +99,10 @@ AddPersonDisplay.prototype.showSchoolClasses = function(json) {
 
 
 AddPersonDisplay.prototype.setEmptyTableMessage = function (json) {
-	this.$addPersonSchoolclassesTableBody.html('<tr class="empty"><td>Geen klassen gevonden.</td></tr>');
+	this.$addPersonSchoolclassesTableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_EMPTYTABLE">Geen items gevonden</span></td></tr>');
 }
 AddPersonDisplay.prototype.setLoadingTableMessage = function (json) {
-	this.$addPersonSchoolclassesTableBody.html('<tr class="empty"><td>Klassen worden geladen.</td></tr>');
+	this.$addPersonSchoolclassesTableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_FETCHINGDATA">Items worden opgevraagd</span></td></tr>');
 }
 
 

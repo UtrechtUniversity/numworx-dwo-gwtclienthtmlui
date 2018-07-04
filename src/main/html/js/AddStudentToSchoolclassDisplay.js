@@ -94,7 +94,7 @@ AddStudentToSchoolclassDisplay.prototype.showStudents = function(json) {
 	// No Results
 	if ($.isEmptyObject(students)) {
 		$row = this.$addStudentRow.clone();
-		this.$addStudentTableBody.html('<tr colspan="4" class="empty"><td>Geen leerlingen gevonden.</td></tr>');
+		this.$addStudentTableBody.html('<tr colspan="4" class="empty"><td><span data-translate="NUM_TBL_EMPTYTABLE">Geen items gevonden</span></td></tr>');
 		return;
 	}
 	
@@ -119,11 +119,11 @@ AddStudentToSchoolclassDisplay.prototype.showStudents = function(json) {
 }
 
 AddStudentToSchoolclassDisplay.prototype.setEmptyTableMessage = function() {
-	this.$addStudentTableBody.html('<tr class="empty"><td>Geen leerlingen gevonden</td></tr>');
+	this.$addStudentTableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_EMPTYTABLE">Geen items gevonden</span></td></tr>');
 }
 
 AddStudentToSchoolclassDisplay.prototype.setLoadingTableMessage = function() {
-	this.$addStudentTableBody.html('<tr class="loading"><td>Leerlingen worden geladen.</td></tr>');
+	this.$addStudentTableBody.html('<tr class="loading"><td><span data-translate="NUM_TBL_FETCHINGDATA">Geen items gevonden</span></td></tr>');
 }
 
 

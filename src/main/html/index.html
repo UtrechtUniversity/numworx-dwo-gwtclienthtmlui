@@ -834,7 +834,7 @@
 							<use xlink:href="#klassen"></use>
 						</svg>
 						 <h1><span data-translate="NUM_PNL_CLASSES">Klassen bewerken</span></h1>
-						<h2 class="sectionhead"><span>Leerlingen overplaatsen</span></h2>					
+						<h2 class="sectionhead"><span data-translate=""NUM_SEC_CLASSEDITSTUDENTS">Leerlingen overplaatsen</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
@@ -848,14 +848,14 @@
 			<section>
 				<div class="row">
 					<div class="col-4">
-						<h3>Leerlingen gekozen klas</h3>
+                                            <h3><span data-translate="NUM_LBL_CLASSEDITSTUDENTS_STUDENTSLEFTCLASS">Leerlingen gekozen klas</span></h3>
 						<input type="text" id="copyOrMoveStudentToSchoolclassClassAClassname" value="" class="col-2" disabled="disabled" />
 					</div>					
 					<div class="col-4">
-						<h3>Kies een tweede klas om leerlingen it of naar te kopieren of te verplaatsen.</h3>
+						<h3><span data-translate="NUM_LBL_CLASSEDITSTUDENTS_MSG">Kies een tweede klas om leerlingen it of naar te kopieren of te verplaatsen.</h3>
 					</div>
 					<div class="col-4">
-						<h3>Leerlingen tweede gekozen klas</h3>
+                                            <h3><span data-translate="NUM_LBL_CLASSEDITSTUDENTS_STUDENTSRIGHTCLASS">Leerlingen tweede gekozen klas</span></h3>
 						<input type="text" id="copyOrMoveStudentToSchoolclassClassBClassname" value="" class="col-2" disabled="disabled" />
 					</div>
 				</div>
@@ -867,7 +867,7 @@
 								<thead>
 									<tr>
 										<th class="col-2">&nbsp;</th>										
-										<th>Selecteer</th>
+										<th><span data-translate="NUM_TBL_SELECT">Selecteer</span></th>
 									</tr>
 								</thead>
 								<tbody>	
@@ -885,8 +885,8 @@
 								</tbody>
 							</table>
 						
-							<input type="button" name="move" class="primary right clearbtn" value="Verplaats >" />
-							<input type="submit" name="copy" class="primary right clearbtn" value="Kopieer >" />							
+							<input type="button" name="move" class="primary right clearbtn" data-translate="NUM_BTN_MoveLeft" value="Verplaats >" />
+							<input type="submit" name="copy" class="primary right clearbtn" data-translate="NUM_BTN_CopyLeft" value="Kopieer >" />							
 						</form>	
 					</div>
 					<div class="col-4">
@@ -910,7 +910,7 @@
 								</tbody>
 							</table>
 						
-							<input type="submit" name="choose" class="primary center" value="Kies tweede klas" />						
+							<input type="submit" name="choose" class="primary center" data-translate="NUM_BTN_CLASSEDITSTUDENTS_SELECT2NDCLASS" value="Kies tweede klas" />						
 						</form>	
 					</div>
 					<div class="col-4">
@@ -919,7 +919,7 @@
 								<thead>
 									<tr>
 										<th class="col-2">&nbsp;</th>										
-										<th>Selecteer</th>
+										<th><span data-translate="NUM_TBL_SELECT">Selecteer</span></th>
 									</tr>
 								</thead>
 								<tbody>	
@@ -937,8 +937,8 @@
 								</tbody>
 							</table>
 						
-							<input type="button" name="move" class="primary left clearbtn" value="< Verplaats" />
-							<input type="submit" name="copy" class="primary left clearbtn" value="< Kopieer" />							
+							<input type="button" name="move" class="primary left clearbtn" data-translate="NUM_BTN_MoveRight" value="< Verplaats" />
+							<input type="submit" name="copy" class="primary left clearbtn" data-translate="NUM_BTN_CopyRight" value="< Kopieer" />							
 						</form>	
 					</div>
 				</div>
@@ -1298,7 +1298,7 @@
 								<thead>
 									<tr>
 										<th>&nbsp;</th>
-										<th>Selecteer</th>
+										<th><span data-translate="NUM_TBL_SELECT">Selecteer</span></th>
 									</tr>
 								</thead>
 								<tbody>	
@@ -1603,8 +1603,8 @@
 						<svg viewBox="0 0 64 64" class="icon">
 							<use xlink:href="#klassen"></use>
 						</svg>
-						<h1>Personen bewerken en toevoegen</h1>
-						<h2 class="sectionhead"><span>Zoek een persoon om te bewerken</span></h2>					
+                                                <h1><span data-translate="NUM_PNL_PERSONS_MANAGE">Personen bewerken en toevoegen</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_PERSONS_MANAGE">Zoek een persoon om te bewerken</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
@@ -1620,19 +1620,19 @@
 					<form name="personsSearch">
 						<fieldset>
 							<label for="personsSearchUserName" class="col-2 input">
-								Gebruikersnaam
+								<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
 								<input id="personsSearchUserName" name="userName" type="text" value="" />
 							</label>
 							<label for="personsSearchGivenName" class="col-2 input">
-								Voornaam
+								<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 								<input id="personsSearchGivenName" name="givenName" type="text" value="" />
 							</label>
 							<label for="personsSearchInsertion" class="col-2 input">
-								Tussenvoegsel
+								<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
 								<input id="personsSearchInsertion" name="insertion" type="text" value="" />
 							</label>
 							<label for="personsSearchFamilyName" class="col-2 input">
-								Achternaam
+								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
 								<input id="personsSearchFamilyName" name="familyName" type="text" value="" />
 							</label>
 							
@@ -1650,7 +1650,7 @@
 							</div>
 							
 							<div class="col-2">
-								<input type="submit" class="primary down right" value="Zoek" />
+								<input type="submit" class="primary down right" data-translate="NUM_BTN_Search" value="Zoek" />
 							</div>
 						</fieldset>
 					</form>
@@ -1664,11 +1664,11 @@
 						<table class="dwo hoverable selectable">
 							<thead>
 								<tr>
-									<th class="col-2">Gebruikersnaam</th>
-									<th class="col-2">Voornaam</th>
-									<th class="col-2">Tussenvoegsel</th>
-									<th class="col-4">Achternaam</th>
-									<th class="col-2">Bewerk opties</th>
+									<th class="col-2"><span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span></th>
+									<th class="col-2"><span data-translate="NUM_TBL_GIVENNAME">Voornaam</span></th>
+									<th class="col-2"><span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span></th>
+									<th class="col-4"><span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span></th>
+                                                                        <th class="col-2"><span data-translate="NUM_TBL_EDITOPTIONS">Bewerk opties</span></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -1693,7 +1693,7 @@
 						</table>
 						
 						
-							<input type="submit" class="primary right" value="Bewerk persoon" />
+							<input type="submit" class="primary right" data-translate="NUM_BTN_PERSONS_EDIT" value="Bewerk persoon" />
 						</form>
 					</div>
 				</div>
@@ -1701,12 +1701,12 @@
 				
 				<div class="row">					
 					<div class="col-6">
-						<h2 class="sectionhead"><span>Voeg een nieuwe leerling</span></h2>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_PERSONS_ADD">Voeg een nieuwe leerling</span></h2>
 						<form name="personsAdd">
 							<fieldset>
 								<label for="button_1">
-									Een enkele nieuwe leerling opvoeren
-									<input type="submit" class="secondary right" value="Toevoegen" />
+                                                                    <span data-translate="NUM_LBL_PERSONS_ADD">Een enkele nieuwe leerling opvoeren</span>
+									<input type="submit" class="secondary right" data-translate="NUM_BTN_PERSONS_ADD" value="Toevoegen" />
 								</label>
 							</fieldset>
 						</form>
@@ -1748,7 +1748,7 @@
 						<svg viewBox="0 0 64 64" class="icon">
 							<use xlink:href="#personen"></use>
 						</svg>
-						<h1>Personen bewerken</h1>
+                                                <h1><span data-translate="NUM_SEC_PERSONS_MANAGE">Personen bewerken</span></h1>
 						<h2 class="sectionhead"><span>Bewerk gegevens [NAAM]</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
@@ -1767,35 +1767,35 @@
 						<fieldset>
 							
 							<label for="editPersonUserName" class="col-2 input">
-								Username
+								<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
 								<input id="editPersonUserName" name="userName" type="text" value="" />
 							</label>
 							
 							<label for="editPersonGivenName" class="col-2 input">
-								Voornaam
+								<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 								<input id="editPersonGivenName" name="givenName" type="text" value="" />
 							</label>
 							<label for="editPersonInsertion" class="col-2 input">
-								Tussenvoegsel
+								<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
 								<input id="editPersonInsertion" name="insertion" type="text" value="" />
 							</label>
 							<label for="editPersonFamilyName" class="col-2 input">
-								Achternaam
+								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
 								<input id="editPersonFamilyName" name="familyName" type="text" value="" />
 							</label>
-							<label for="editPersonPassword" class="col-2 input">
-								Nieuw wachtwoord
-								<input id="editPersonPassword" name="newPassword" type="password" value="" />
-							</label>
 							<label for="editPersonEmail" class="col-2 input">
-								Emailadres
+								<span data-translate="NUM_TBL_EMAIL">Email adres</span>
 								<input id="editPersonEmail" name="email" type="text" value="" />
+							</label>
+							<label for="editPersonPassword" class="col-2 input">
+								<span data-translate="NUM_TBL_PASSWORD">Wachtwoord</span>
+								<input id="editPersonPassword" name="newPassword" type="password" value="" />
 							</label>
 							
 							<div class="clear"></div>
 							
 							<label for="editPersonRole" class="col-2 input">
-								Rol
+								<span data-translate="NUM_TBL_ROLE">rol</span>
 								<input id="editPersonRole" name="role" type="text" value="" />
 							</label>
 							<div class="col-6">
@@ -1827,7 +1827,7 @@
 								<thead>
 									<tr>
 										<th>&nbsp;</th>
-										<th>Selecteer</th>
+										<th><span data-translate="NUM_TBL_SELECT">Selecteer</span></th>
 									</tr>
 								</thead>
 								<tbody>	
@@ -1894,23 +1894,23 @@
 								</label>
 							
 								<label for="addPersonGivenName" class="col-2 input">
-									Voornaam
+									<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 									<input id="addPersonGivenName" name="givenName" type="text" value="" />
 								</label>
 								<label for="addPersonInsertion" class="col-2 input">
-									Tussenvoegsel
+									<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
 									<input id="addPersonInsertion" name="insertion" type="text" value="" />
 								</label>
 								<label for="addPersonFamilyName" class="col-2 input">
-									Achternaam
+									<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
 									<input id="addPersonFamilyName" name="familyName" type="text" value="" />
 								</label>
 								<label for="addPersonEmail" class="col-2 input">
-									Emailadres
+									<span data-translate="NUM_TBL_EMAIL">Email adres</span>
 									<input id="addPersonEmail" name="email" type="text" value="" />
 								</label>
 								<label for="addPersonPassword" class="col-2 input">
-									Wachtwoord
+									<span data-translate="NUM_TBL_PASSWORD">Wachtwoord</span>
 									<input id="addPersonPassword" name="password" type="password" value="" />
 								</label>
 							
@@ -1945,7 +1945,7 @@
 									<thead>
 										<tr>
 											<th>&nbsp;</th>
-											<th>Selecteer</th>
+											<th><span data-translate="NUM_TBL_SELECT">Selecteer</span></th>
 										</tr>
 									</thead>
 									<tbody>	

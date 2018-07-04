@@ -192,7 +192,7 @@ EditPersonDisplay.prototype.setSchoolClasses = function (json) {
 }
 
 EditPersonDisplay.prototype.setEmptyTableMessage = function (json) {
-	this.$editPersonSchoolclassesTableBody.html('<tr class="empty"><td>Geen klassen gevonden.</td></tr>');
+	this.$editPersonSchoolclassesTableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_EMPTYTABLE">Geen items gevonden</span></td></tr>');
 }
 EditPersonDisplay.prototype.setLoadingTableMessage = function (json) {
 	this.$editPersonSchoolclassesTableBody.html('<tr class="empty"><td>Klassen worden geladen.</td></tr>');

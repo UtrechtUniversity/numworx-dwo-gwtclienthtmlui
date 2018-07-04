@@ -136,11 +136,11 @@ ResultsDisplay.prototype.setResultTree = function (resultTree, studentsTree) {
 }
 
 ResultsDisplay.prototype.setEmptyTableMessage = function () {
-	this.$chooseClassTableBody.html('<tr class="empty"><td>Geen klassen om weer te geven.</td></tr>');
+	this.$chooseClassTableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_EMPTYTABLE">Geen items gevonden</span></td></tr>');
 }
 
 ResultsDisplay.prototype.setLoadingTableMessage = function () {
-	this.$chooseClassTableBody.html('<tr class="empty"><td>De klassen worden geladen...</td></tr>');
+	this.$chooseClassTableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_FETCHINGDATA">Items worden opgevraagd</span></td></tr>');
 }
 
 // ResultsDisplay.prototype.setEmptyTableMessageModules = function () {

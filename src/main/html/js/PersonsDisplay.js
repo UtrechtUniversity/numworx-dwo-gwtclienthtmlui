@@ -143,11 +143,11 @@ PersonsDisplay.prototype.showPersons = function(json) {
 }
 
 PersonsDisplay.prototype.setEmptyTableMessage = function(json) {
-	this.$personsTableBody.html('<tr class="empty"><td>Geen personen gevonden. Doe een nieuwe zoekopdracht.</td></tr>');
+	this.$personsTableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_EMPTYTABLE">Geen items gevonden</span></td></tr>');
 	
 }
 PersonsDisplay.prototype.setLoadingTableMessage = function(json) {
-	this.$personsTableBody.html('<tr class="empty"><td>Personen worden geladen.</td></tr>');
+	this.$personsTableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_FETCHINGDATA">Items worden opgevraagd</span></td></tr>');
 	
 }
 

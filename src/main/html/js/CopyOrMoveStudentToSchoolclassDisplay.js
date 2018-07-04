@@ -142,26 +142,26 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.setSchoolClassB = function(schoo
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setEmptyTableMessageClasses = function() {
-	this.$classesTableBody.html('<tr class="empty"><td>Geen klassen gevonden.</td></tr>');
+	this.$classesTableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_EMPTYTABLE">Geen items gevonden</span></td></tr>');
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setLoadingTableMessageClasses = function() {
-	this.$classesTableBody.html('<tr class="empty"><td>Klassen worden geladen.</td></tr>');
+	this.$classesTableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_FETCHINGDATA">Items worden opgevraagd</span></td></tr>');
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setEmptyTableMessageA = function() {
-	this.$classATableBody.html('<tr class="empty"><td>Geen leerlingen gevonden.</td></tr>');
+	this.$classATableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_EMPTYTABLE">Geen items gevonden</span></td></tr>');
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setEmptyTableMessageB = function() {
-	this.$classBTableBody.html('<tr class="empty"><td>Geen leerlingen gevonden.</td></tr>');
+	this.$classBTableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_EMPTYTABLE">Geen items gevonden</span></td></tr>');
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setLoadingTableMessageA = function() {
-	this.$classATableBody.html('<tr class="empty"><td>Leerlingen worden geladen.</td></tr>');
+	this.$classATableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_FETCHINGDATA">Items worden opgevraagd</span></td></tr>');
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setLoadingTableMessageB = function() {
-	this.$classBTableBody.html('<tr class="empty"><td>Leerlingen worden geladen.</td></tr>');
+	this.$classBTableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_FETCHINGDATA">Items worden opgevraagd</span></td></tr>');
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudentsClassA = function(json) {
