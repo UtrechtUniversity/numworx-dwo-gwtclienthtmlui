@@ -339,8 +339,7 @@ ModulesOfSchoolclassDisplay.prototype.addModule = function() {
 	var from = this.settingsForm.elements["from"].value;
 	var to = this.settingsForm.elements["to"].value;
 	
-	app.getPresenterFactory().getModulesOfSchoolclassPresenter().addModule(  	this.selectedNodeId, 
-																				this.settingsForm.elements["key"].value,
+	app.getPresenterFactory().getModulesOfSchoolclassPresenter().addModule(  	this.settingsForm.elements["key"].value,
 																				typeString,
 																				from,
 																				to,
