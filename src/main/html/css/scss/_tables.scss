@@ -100,6 +100,8 @@ table.dwo { //:not(.c-datepicker__days)
 		top: 2em;
 		display: block;
 		
+		-ms-overflow-style: -ms-autohiding-scrollbar;
+		
 		tr {					
 			td {
 				line-height: 1.8em;
@@ -384,7 +386,9 @@ table.dwo.results {
 	
 	&.overflow {
 		overflow-x: scroll;
-		overflow-y: visible;
+		overflow-y: auto;
+		
+		-ms-overflow-style: -ms-autohiding-scrollbar;
 		
 	
 		//position: relative;
