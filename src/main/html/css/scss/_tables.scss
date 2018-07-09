@@ -116,9 +116,10 @@ table.dwo { //:not(.c-datepicker__days)
 		}
 	}
 	
-	&.hoverable tr:hover td, &.hoverable tr:focus td,  { //&.hoverable tr:hover td span {
+	&.hoverable tr:hover td { // &.hoverable tr:focus td,  { //&.hoverable tr:hover td span {
 		background-color: $shade3;
-	}	
+	}
+		
 	&.selectable {
 		tr td {
 			cursor: pointer;

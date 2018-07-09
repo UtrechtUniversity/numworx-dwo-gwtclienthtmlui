@@ -204,3 +204,11 @@ Helpers.sortIndexedArrayOnSequenceNr = function(a, b) {
 	return parseInt(a.sequence) - parseInt(b.sequence);
 }
 
+// Helpers.nonTouchHover = function(event) {
+//
+// 	if (isTouchDevice) return;
+// 	$this = $(this);
+// 	$this.siblings().removeClass('hover');
+// 	$this.addClass("hover");
+// }
+

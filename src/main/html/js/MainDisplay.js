@@ -96,7 +96,8 @@ MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 	this.$subpanels.hide();
 	this.loginDisplay.hide();
 	this.setDefaultNavSize();
-        this.localize();
+	this.removeHoverableOnTouchDevices();
+    this.localize();
 }
 
 MainDisplay.prototype.setActiveView = function(view) {
@@ -254,6 +255,16 @@ MainDisplay.prototype.setDefaultNavSize = function() {
 	this.$panel.removeClass("expandedNav");
 }
 
+/*
+ * OTHER HELPERS
+ */
+MainDisplay.prototype.removeHoverableOnTouchDevices = function() {
+	var isTouchDevice = ('ontouchstart' in window || 'onmsgesturechange' in window);
+	if (isTouchDevice) {
+		$("table.hoverable").removeClass("hoverable");
+	}
+}
+
 
 /*
  * EVENT HANDLERS
@@ -284,3 +295,4 @@ MainDisplay.prototype.clickLogo = function(event) {
 MainDisplay.prototype.localize = function() {
 	this.$panel.find("[data-translate]").each( Helpers.translate );
 }
+	
