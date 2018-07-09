@@ -20,6 +20,7 @@ function AccountDisplay() {
 	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
 	this.$schoolLoginsRow = $(this.updateSchoolLoginsViewForm).find("tbody tr").detach();
 	this.$schoolLoginsTableBody = $(this.updateSchoolLoginsViewForm).find("tbody");
+	this.$schoolLoginsTableHead = $(this.updateSchoolLoginsViewForm).find("thead");
 	
 	this.$updateUserForm = $(this.updateUserForm);
 	this.$updateSchoolLoginsViewForm = $(this.updateSchoolLoginsViewForm);
@@ -31,6 +32,7 @@ function AccountDisplay() {
 	this.$addSchoolLoginForm.on('submit', $.proxy(this.submitSchoolLoginsViewForm,this));
 	$(this.updateUserForm.elements["currentPassword"]).on('keypress', $.proxy(this.changeCurrentPasswordInput,this));
 	this.$addSchoolLoginForm.find("input:radio").on('change', $.proxy(this.addSchoolLoginFormToggle,this));
+	this.$schoolLoginsTableHead.find(".sortButton").click(Helpers.clickSortButton);
 	
 	// Init
 	this.$panel.hide();
@@ -64,6 +66,8 @@ AccountDisplay.prototype.clear = function () {
 	this.updateUserForm.elements["currentPassword"].value = "";
 	this.updateUserForm.elements["newPassword"].value = "";
 	this.updateUserForm.elements["newPasswordAgain"].value = "";
+	
+	this.$schoolLoginsTableHead.find(".sortButton").removeClass("active");
 	
 	this.clearAddSchoolLogin();
 }
@@ -99,8 +103,8 @@ AccountDisplay.prototype.updateSchoolLoginsView = function(json) {
 		for (i = 0; i < this.schoolsRolesAndClassesList.length; i++) {
 			el = this.schoolsRolesAndClassesList[i];
 			$row = this.$schoolLoginsRow.clone();
-			$row.find("#updateSchoolLoginsViewSchool").html( el.school.schoolName ).removeAttr("id");
-			$row.find("#updateSchoolLoginsViewRole").html( el.role.roleName ).removeAttr("id");	
+			$row.find("#updateSchoolLoginsViewSchool").html( el.school.schoolName ).attr('data-sortvalue', el.school.schoolName).removeAttr("id");
+			$row.find("#updateSchoolLoginsViewRole").html( el.role.roleName ).attr('data-sortvalue', el.role.roleName).removeAttr("id");	
 			
 			$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 				this.value = el.hasRole.id.idString;

@@ -38,18 +38,21 @@ function EditSchoolclassesDisplay() {
 	this.$changeStudentsFormCopyOrMoveButton = $(this.changeStudentsFormCopyOrMoveButton);	
 	this.$changeStudentsRow = this.$changeStudentsForm.find("tbody tr").detach();
 	this.$changeStudentsTableBody = this.$changeStudentsForm.find("tbody");	
+	this.$changeStudentsTableHead = this.$changeStudentsForm.find("thead");	
 	
 	// Teacher box elements
 	this.$changeTeachersFormShowButton = $(this.changeTeachersFormShowButton);
 	this.$changeTeachersFormConnectButton = $(this.changeTeachersFormConnectButton);	
 	this.$changeTeachersRow = this.$changeTeachersForm.find("tbody tr").detach();
 	this.$changeTeachersTableBody = this.$changeTeachersForm.find("tbody");
+	this.$changeTeachersTableHead = this.$changeTeachersForm.find("thead");
 	
 	// Modules box elements
 	this.$changeModulesFormShowButton = $(this.changeModulesFormShowButton);
 	this.$changeModulesFormConnectButton = $(this.changeModulesFormConnectButton);	
 	this.$changeModulesRow = this.$changeModulesForm.find("tbody tr").detach();
 	this.$changeModulesTableBody = this.$changeModulesForm.find("tbody");
+	this.$changeModulesTableHead = this.$changeModulesForm.find("thead");
 		
 	// Bind handlers
 	this.$editSchoolclassForm.on('submit', $.proxy(this.submitEditSchoolclass, this));
@@ -60,14 +63,17 @@ function EditSchoolclassesDisplay() {
 	this.$changeStudentsFormShowButton.on('click', $.proxy(this.clickChangeStudentsFormShowButton, this));
 	this.$changeStudentsFormConnectButton.on('click', $.proxy(this.clickChangeStudentsFormConnectButton, this));
 	this.$changeStudentsFormCopyOrMoveButton.on('click', $.proxy(this.clickChangeStudentsFormCopyOrMoveButton, this));
+	this.$changeStudentsTableHead.find(".sortButton").click(Helpers.clickSortButton);
 	
 	this.$changeTeachersForm.on('submit', $.proxy(this.submitChangeTeachersForm, this));
 	this.$changeTeachersFormShowButton.on('click', $.proxy(this.clickChangeTeachersFormShowButton, this));
 	this.$changeTeachersFormConnectButton.on('click', $.proxy(this.clickChangeTeachersFormConnectButton, this));
+	this.$changeTeachersTableHead.find(".sortButton").click(Helpers.clickSortButton);
 	
 	this.$changeModulesForm.on('submit', $.proxy(this.submitChangeModulesForm, this));
 	this.$changeModulesFormShowButton.on('click', $.proxy(this.clickChangeModulesFormShowButton, this));
 	this.$changeModulesFormConnectButton.on('click', $.proxy(this.clickChangeModulesFormConnectButton, this));
+	this.$changeModulesTableHead.find(".sortButton").click(Helpers.clickSortButton);
 	
 	// Init
 	this.$panel.hide();
@@ -89,6 +95,23 @@ EditSchoolclassesDisplay.prototype.localize = function() {
  */
 
 EditSchoolclassesDisplay.prototype.clear = function () {
+	this.editSchoolclassForm.elements["classname"].value = "";
+		
+	this.editSchoolclassForm.elements["useClasskey"][0].checked = false;
+	this.editSchoolclassForm.elements["useClasskey"][1].checked = true;
+	
+	this.editSchoolclassForm.elements["useClasstree"][0].checked = false;
+	this.editSchoolclassForm.elements["useClasstree"][1].checked = true;
+	
+	this.editSchoolclassForm.elements["classkey"].value  = "";
+	
+	this.$changeStudentsTableBody.html("");
+	this.$changeTeachersTableBody.html("");
+	this.$changeModulesTableBody.html("");
+	
+	this.$changeStudentsTableHead.find(".sortButton").removeClass('active');
+	this.$changeTeachersTableHead.find(".sortButton").removeClass('active');
+	this.$changeModulesTableHead.find(".sortButton").removeClass('active');
 }
 
 EditSchoolclassesDisplay.prototype.init = function () {
@@ -140,8 +163,9 @@ EditSchoolclassesDisplay.prototype.showStudents = function(json) {
 	var i = 1;
 	for (var id in students) { // TODO: probably change to array
 		studentName = students[id].givenName + (students[id].insertion ? " "+students[id].insertion : "") + " " + students[id].familyName;
+		studentSortName = students[id].familyName + (students[id].insertion ? " "+students[id].insertion : "") + " " + students[id].givenName;
 		$row = this.$changeStudentsRow.clone();
-		$row.find("#chooseStudentName").html( studentName ).removeAttr("id");
+		$row.find("#chooseStudentName").html( studentName ).attr('data-sortvalue', studentSortName).removeAttr("id");
 		this.$changeStudentsTableBody.append($row);
 		i++;
 	}
@@ -162,8 +186,10 @@ EditSchoolclassesDisplay.prototype.showTeachers = function(json) {
 	var i = 1;
 	for (var id in teachers) { // TODO: probably change to array
 		teacherName = teachers[id].givenName + (teachers[id].insertion ? " "+teachers[id].insertion : "") + " " + teachers[id].familyName;
+		teacherSortName = teachers[id].familyName + (teachers[id].insertion ? " "+teachers[id].insertion : "") + " " + teachers[id].givenName;
+		
 		$row = this.$changeTeachersRow.clone();
-		$row.find("#chooseTeacherName").html( teacherName ).removeAttr("id");
+		$row.find("#chooseTeacherName").html( teacherName ).attr('data-sortvalue', teacherSortName).removeAttr("id");
 		this.$changeTeachersTableBody.append($row);
 		i++;
 	}
@@ -187,7 +213,7 @@ EditSchoolclassesDisplay.prototype.showShowModels = function(json) { // TODO: ch
 		//console.log(modules[id]);
 		moduleName = modules[id].name;
 		$row = this.$changeModulesRow.clone();
-		$row.find("#chooseModuleName").html( moduleName ).removeAttr("id");
+		$row.find("#chooseModuleName").html( moduleName ).attr('data-sortvalue', moduleName).removeAttr("id");
 		this.$changeModulesTableBody.append($row);
 		i++;
 	}	

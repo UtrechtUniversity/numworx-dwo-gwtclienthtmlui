@@ -810,14 +810,14 @@ section.lightbox {
 }
 
 #personsDisplay {
-	.icon {
+	.icon.editOptions {
 		height: 24px;
 		margin-left: $gutter * 1px;
 		width: 24px;
 
 		use { fill: $shade12; }
 	}
-	.icon.active {
+	.icon.editOptions.active {
 		use { fill: $primary; }
 	}
 }
