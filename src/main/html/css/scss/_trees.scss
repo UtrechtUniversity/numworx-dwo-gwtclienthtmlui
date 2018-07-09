@@ -14,8 +14,11 @@ Tree, its wrapper and icons
 	border: $borderThickness $primary solid;
 	@include border-radius($defaultRadius);
 	max-height: 80%;
-	overflow: scroll;
+	overflow-x: hidden;
+	overflow-y: auto;
 	padding: $gutter * 1px;
+	
+	-ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
 ul.tree {
