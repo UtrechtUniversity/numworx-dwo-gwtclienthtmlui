@@ -67,7 +67,21 @@ table.dwo { //:not(.c-datepicker__days)
 						use { fill: $shade3; }
 					}
 					&.active .icon use { fill: $primary; }
+					
+					
+					
 				}
+				
+				> .sortButton {
+					margin-left: 5px;
+				}
+				> .sortButton ~ .sortButton {
+					margin-left: -2px;
+				}
+				.sortButton:first-child { 
+					margin-left: 0;
+				}
+				
 			}
 		}		
 	}

@@ -28,6 +28,7 @@ function CopyOrMoveStudentToSchoolclassDisplay() {
 	this.$classACopyButton = $(this.classACopyButton);
 	this.$classARow = this.$classAForm.find("tbody tr").detach();
 	this.$classATableBody = this.$classAForm.find("tbody");	
+	this.$classATableHead = this.$classAForm.find("thead");	
 	
 	// Class B elements
 	this.$classBForm = $(this.classBForm);
@@ -35,12 +36,14 @@ function CopyOrMoveStudentToSchoolclassDisplay() {
 	this.$classBCopyButton = $(this.classBCopyButton);
 	this.$classBRow = this.$classBForm.find("tbody tr").detach();
 	this.$classBTableBody = this.$classBForm.find("tbody");	
+	this.$classBTableHead = this.$classBForm.find("thead");	
 	
 	// Classes elements
 	this.$classesForm = $(this.classesForm);
 	this.$classesChooseButton = $(this.classesChooseButton);	
 	this.$classesRow = this.$classesForm.find("tbody tr").detach();
 	this.$classesTableBody = this.$classesForm.find("tbody");	
+	this.$classesTableHead = this.$classesForm.find("thead");	
 			
 	// Bind handlers
 	this.$classesForm.on('submit', $.proxy(this.submitClassesForm,this));	
@@ -50,6 +53,10 @@ function CopyOrMoveStudentToSchoolclassDisplay() {
 	this.$classACopyButton.on('click', $.proxy(this.submitOrClickABFormOrButton,this));	
 	this.$classBMoveButton.on('click', $.proxy(this.submitOrClickABFormOrButton,this));	
 	this.$classBCopyButton.on('click', $.proxy(this.submitOrClickABFormOrButton,this));	
+	
+	this.$classATableHead.find(".sortButton").click(Helpers.clickSortButton);
+	this.$classBTableHead.find(".sortButton").click(Helpers.clickSortButton);
+	this.$classesTableHead.find(".sortButton").click(Helpers.clickSortButton);
 	
 	// Init
 	this.$panel.hide();
@@ -85,8 +92,10 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudents = function(json, $t
 	var i = 1;
 	for (var id in students) { 
 		studentName = students[id].givenName + (students[id].insertion ? " "+students[id].insertion : "") + " " + students[id].familyName;
+		studentSortName = students[id].familyName + (students[id].insertion ? " "+students[id].insertion : "") + " " + students[id].givenName;
+		
 		$row = $templateRow.clone();
-		$row.find(nameId).html( studentName ).removeAttr("id");
+		$row.find(nameId).html( studentName ).attr('data-sortvalue', studentSortName).removeAttr("id");
 		
 		
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
@@ -186,7 +195,7 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.setClassList = function(schoolcl
 		$row = this.$classesRow.clone();
 		$row.prop('tabindex', i);
 		$row.find("#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelectId").val( id ).removeAttr("id");
-		$row.find("#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelectClassName").html( el.schoolClassName ).removeAttr("id");
+		$row.find("#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelectClassName").html( el.schoolClassName ).attr('data-sortvalue', el.schoolClassName).removeAttr("id");
 
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;

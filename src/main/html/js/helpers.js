@@ -131,8 +131,12 @@ Helpers.tableSorterBubbleSort = function(tbody, index, attr, type, asc) { //bubb
 			
 			if (row1.children[index].firstChild && row1.children[index].firstChild.dataset) val1 = row1.children[index].firstChild.dataset[attr]; 
 			if (row2.children[index].firstChild && row2.children[index].firstChild.dataset) val2 = row2.children[index].firstChild.dataset[attr];
+			
+			console.log(row1);
+			console.log(index);
+			console.log(row1.children[index].firstChild);
 												
-			if (type == "string") {
+			if (val1 != 0 && val2 != 0 && type == "string") {
 				if ( (!asc && val2.localeCompare(val1) < 0) || (asc && val2.localeCompare(val1) > 0) ) { shouldSwitch = true; break; }
 			} else {
 				if ( (!asc && val2 < val1) || (asc && val2 > val1) ) { shouldSwitch = true; break; }
@@ -168,7 +172,7 @@ Helpers.clickSortButton = function() {
 		
 	Helpers.tableSorterBubbleSort(tbody, index, attr, type, asc);	
 	
-	$('.sortButton').removeClass("active");
+	$this.parent().find('.sortButton').removeClass("active");
 	$this.addClass("active");	
 }
 

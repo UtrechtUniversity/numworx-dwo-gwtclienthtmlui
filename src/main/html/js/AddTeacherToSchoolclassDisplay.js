@@ -12,10 +12,12 @@ function AddTeacherToSchoolclassDisplay() {
 	
 	this.$addTeacherRow = this.$addTeacherAddForm.find("tbody tr").detach();
 	this.$addTeacherTableBody = this.$addTeacherAddForm.find("tbody");
+	this.$addTeacherTableHead = this.$addTeacherAddForm.find("thead");
 		
 	// Bind handlers
 	this.$addTeacherAddForm.on('submit', $.proxy(this.submitAddTeacherAddForm, this));
 	this.$addTeacherSearchForm.on('submit', $.proxy(this.submitAddTeacherSearchForm, this));
+	this.$addTeacherTableHead.find(".sortButton").click(Helpers.clickSortButton);
 	
 	
 	// Init
@@ -73,6 +75,7 @@ AddTeacherToSchoolclassDisplay.prototype.clear = function () {
 	this.addTeacherSearchForm.elements["givenName"].value == "";
 	this.addTeacherSearchForm.elements["insertion"].value == "";
 	this.addTeacherSearchForm.elements["familyName"].value == "";
+	this.$addTeacherTableHead.find(".sortButton").removeClass('active');
 }
 
 AddTeacherToSchoolclassDisplay.prototype.setHelp = function(url) {
@@ -100,10 +103,10 @@ AddTeacherToSchoolclassDisplay.prototype.showTeachers = function(json) {
 	for (var id in teachers) { // TODO: probably change to array
 		$row = this.$addTeacherRow.clone();		
 		$row.find("#addTeacherAddId").val( id ).removeAttr("id");
-		$row.find("#addTeacherAddUserName").html( teachers[id].userName ).removeAttr("id");
-		$row.find("#addTeacherAddGivenName").html( teachers[id].givenName ).removeAttr("id");
-		$row.find("#addTeacherAddInsertion").html( teachers[id].insertion ).removeAttr("id");
-		$row.find("#addTeacherAddFamilyName").html( teachers[id].familyName ).removeAttr("id");
+		$row.find("#addTeacherAddUserName").html( teachers[id].userName ).attr('data-sortvalue',  teachers[id].userName).removeAttr("id");
+		$row.find("#addTeacherAddGivenName").html( teachers[id].givenName ).attr('data-sortvalue',  teachers[id].givenName).removeAttr("id");
+		$row.find("#addTeacherAddInsertion").html( teachers[id].insertion ).attr('data-sortvalue',  teachers[id].insertion).removeAttr("id");
+		$row.find("#addTeacherAddFamilyName").html( teachers[id].familyName ).attr('data-sortvalue',  teachers[id].familyName).removeAttr("id");
 		 
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;

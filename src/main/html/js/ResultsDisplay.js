@@ -16,13 +16,16 @@ function ResultsDisplay() {
 	this.$chooseClassModuleForm = $(this.chooseClassModuleForm);	
 	
 	this.$chooseClassRow = this.$chooseClassModuleForm.find("#resultsDisplayChooseClass tbody tr").detach();
+	this.$chooseClassTableHead = this.$chooseClassModuleForm.find("#resultsDisplayChooseClass thead");
 	this.$chooseClassTableBody = this.$chooseClassModuleForm.find("#resultsDisplayChooseClass tbody");
+	
 	
 	this.$chooseModulesRow = this.$chooseClassModuleForm.find("#resultsDisplayChooseModules tbody tr").detach();
 	this.$chooseModulesTableBody = this.$chooseClassModuleForm.find("#resultsDisplayChooseModules tbody");
 		
 	// Bind handlers
 	this.$chooseClassModuleForm.on('submit', $.proxy(this.submitChooseClassModuleForm,this));
+	this.$chooseClassTableHead.find(".sortButton").click(Helpers.clickSortButton);
 	
 	// Init
 	this.$panel.hide();
@@ -51,7 +54,7 @@ ResultsDisplay.prototype.setChooseClassTable = function() {
 	
 	for (var id in this.resultState.resultsTree.children) {
 		$row = this.$chooseClassRow.clone();
-		$row.find("#chooseClassAndModulesClassname").html( this.resultState.resultsTree.children[id].label ).removeAttr("id");
+		$row.find("#chooseClassAndModulesClassname").html( this.resultState.resultsTree.children[id].label ).attr('data-sortvalue', this.resultState.resultsTree.children[id].label).removeAttr("id");
 		
 		$row.find("input[type='checkbox'],input[type='radio']").each( function(index, el) {
 			el.value = id;
@@ -77,7 +80,7 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 	
 	this.$chooseModulesTableBody.html("");
 	
-	console.log(this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children);
+	if (this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children == undefined) return;
 	
 	sortedSchoolClassChildren = Helpers.getIndexedSortedArray(this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children);
 	

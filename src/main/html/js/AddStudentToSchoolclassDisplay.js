@@ -14,10 +14,12 @@ function AddStudentToSchoolclassDisplay() {
 	
 	this.$addStudentRow = this.$addStudentAddForm.find("tbody tr").detach();
 	this.$addStudentTableBody = this.$addStudentAddForm.find("tbody");
+	this.$addStudentTableHead = this.$addStudentAddForm.find("thead");
 		
 	// Bind handlers
 	this.$addStudentAddForm.on('submit', $.proxy(this.submitAddStudentAddForm, this));
 	this.$addStudentSearchForm.on('submit', $.proxy(this.submitAddStudentSearchForm, this));
+	this.$addStudentTableHead.find(".sortButton").click(Helpers.clickSortButton);
 	
 	// Init
 	this.$panel.hide();
@@ -76,6 +78,7 @@ AddStudentToSchoolclassDisplay.prototype.clear = function () {
 	this.addStudentSearchForm.elements["givenName"].value == "";
 	this.addStudentSearchForm.elements["insertion"].value == "";
 	this.addStudentSearchForm.elements["familyName"].value == "";
+	this.$addStudentTableHead.find(".sortButton").removeClass('active');
 }
 
 AddStudentToSchoolclassDisplay.prototype.setSchoolClass = function(schoolClass) {
@@ -102,10 +105,10 @@ AddStudentToSchoolclassDisplay.prototype.showStudents = function(json) {
 	for (var id in students) { // TODO: probably change to array
 		$row = this.$addStudentRow.clone();		
 		$row.find("#addStudentAddId").val( id ).removeAttr("id");
-		$row.find("#addStudentAddUsername").html( students[id].userName ).removeAttr("id");
-		$row.find("#addStudentAddGivenName").html( students[id].givenName ).removeAttr("id");
-		$row.find("#addStudentAddInsertion").html( students[id].insertion ).removeAttr("id");
-		$row.find("#addStudentAddFamilyName").html( students[id].familyName ).removeAttr("id");
+		$row.find("#addStudentAddUsername").html( students[id].userName ).attr('data-sortvalue',  students[id].userName).removeAttr("id");
+		$row.find("#addStudentAddGivenName").html( students[id].givenName ).attr('data-sortvalue',  students[id].givenName).removeAttr("id");
+		$row.find("#addStudentAddInsertion").html( students[id].insertion ).attr('data-sortvalue',  students[id].insertion).removeAttr("id");
+		$row.find("#addStudentAddFamilyName").html( students[id].familyName ).attr('data-sortvalue',  students[id].familyName).removeAttr("id");
 				 
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;

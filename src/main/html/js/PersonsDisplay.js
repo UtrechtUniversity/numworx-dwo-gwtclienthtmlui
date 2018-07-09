@@ -16,6 +16,7 @@ function PersonsDisplay() {
 	
 	this.$personsRow = this.$personsEditForm.find("tbody tr").detach();
 	this.$personsTableBody = this.$personsEditForm.find("tbody");
+	this.$personsTableHead = this.$personsEditForm.find("thead");
 	
 	// Bind handlers
 	this.$personsSearchForm.on('submit', $.proxy(this.submitPersonsSearchForm, this));
@@ -23,6 +24,7 @@ function PersonsDisplay() {
 	this.$personsEditForm.on('submit', $.proxy(this.submitPersonsEditForm, this));
 	this.$personsAddForm.on('submit', $.proxy(this.submitPersonsAddForm, this));
 	this.$personsImportForm.on('submit', $.proxy(this.submitPersonsImportForm, this));
+	this.$personsTableHead.find(".sortButton").click(Helpers.clickSortButton);
 	
 	// Init
 	this.$panel.hide();
@@ -118,10 +120,10 @@ PersonsDisplay.prototype.showPersons = function(json) {
 	for (var id in persons) { 
 		$row = this.$personsRow.clone();		
 		$row.find("#personsTableId").val( id ).removeAttr("id");
-		$row.find("#personsTableUserName").html( persons[id].userName ).removeAttr("id");
-		$row.find("#personsTableGivenName").html( persons[id].givenName ).removeAttr("id");
-		$row.find("#personsTableInsertion").html( persons[id].insertion ).removeAttr("id");
-		$row.find("#personsTableFamilyName").html( persons[id].familyName ).removeAttr("id");
+		$row.find("#personsTableUserName").html( persons[id].userName ).attr('data-sortvalue', persons[id].userName).removeAttr("id");
+		$row.find("#personsTableGivenName").html( persons[id].givenName ).attr('data-sortvalue', persons[id].givenName).removeAttr("id");
+		$row.find("#personsTableInsertion").html( persons[id].insertion ).attr('data-sortvalue', persons[id].insertion).removeAttr("id");
+		$row.find("#personsTableFamilyName").html( persons[id].familyName ).attr('data-sortvalue', persons[id].familyName).removeAttr("id");
 		
 		
 		if (persons[id].singleSchool) $row.find("#personsTableEditDetails").addClass("active");
@@ -136,7 +138,7 @@ PersonsDisplay.prototype.showPersons = function(json) {
 		this.$personsTableBody.append($row);
 		i++;
 	}
-	
+		
 	this.personsEditFormToggle(false);	
 	
 	this.filterPersonsList();	

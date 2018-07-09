@@ -10,6 +10,7 @@ function SchoolclassesDisplay() {
 	this.$chooseSchoolclassForm = $(this.chooseSchoolclassForm);
 	this.$chooseSchoolclassRow = this.$chooseSchoolclassForm.find("tbody tr").detach();
 	this.$chooseSchoolclassTableBody = this.$chooseSchoolclassForm.find("tbody");
+	this.$chooseSchoolclassTableHead = this.$chooseSchoolclassForm.find("thead");
 	
 	this.$addSchoolclassForm = $(this.addSchoolclassForm);
 	
@@ -17,7 +18,8 @@ function SchoolclassesDisplay() {
 	// Bind handlers
 	this.$chooseSchoolclassForm.on('submit', $.proxy(this.submitChooseSchoolclass,this));	
 	this.$addSchoolclassForm.on('submit', $.proxy(this.submitAddSchoolclass,this));	
-	
+	this.$chooseSchoolclassTableHead.find(".sortButton").click(Helpers.clickSortButton);
+		
 	// Init
 	this.$panel.hide();
 }
@@ -71,7 +73,7 @@ SchoolclassesDisplay.prototype.updateView = function(json) {
 		$row = this.$chooseSchoolclassRow.clone();
 		$row.prop('tabindex', i);
 		$row.find("#chooseSchoolclassId").val( id ).removeAttr("id");
-		$row.find("#chooseSchoolclassName").html( el ).removeAttr("id");
+		$row.find("#chooseSchoolclassName").html( el ).attr('data-sortvalue', el).removeAttr("id");
 
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;
