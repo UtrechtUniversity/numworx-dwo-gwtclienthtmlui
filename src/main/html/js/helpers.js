@@ -131,16 +131,14 @@ Helpers.tableSorterBubbleSort = function(tbody, index, attr, type, asc) { //bubb
 			
 			if (row1.children[index].firstChild && row1.children[index].firstChild.dataset) val1 = row1.children[index].firstChild.dataset[attr]; 
 			if (row2.children[index].firstChild && row2.children[index].firstChild.dataset) val2 = row2.children[index].firstChild.dataset[attr];
-									
+												
 			if (type == "string") {
 				if ( (!asc && val2.localeCompare(val1) < 0) || (asc && val2.localeCompare(val1) > 0) ) { shouldSwitch = true; break; }
 			} else {
 				if ( (!asc && val2 < val1) || (asc && val2 > val1) ) { shouldSwitch = true; break; }
-			}
-						
+			}						
 		}		
 		if (shouldSwitch == true) {	
-			console.log("switch");		
 			if (asc) tr[i].parentNode.insertBefore(tr[i + 1], tr[i]);
 			else {
 				(tr[i].parentNode).insertBefore(tr[i], tr[i+1].nextSibling);

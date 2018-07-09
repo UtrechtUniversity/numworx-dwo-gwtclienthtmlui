@@ -117,21 +117,37 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 		// row first column
 		$tableRowHeader = this.$selectedResultsRowHeader.clone();
 		$tableRowHeader.html("");
+		
 		$value = $("<span>" + matrix[i][0].label + "</span>");
-		$value.attr("data-sortvalue", matrix[i][0].label );		
+		if (matrix[i][0].sortValue) $value.attr("data-sortvalue", matrix[i][0].sortValue );		
+		else $value.attr("data-sortvalue", matrix[i][0].sortValue );		
+		
 		$tableRowHeader.append($value);
 		$row.append($tableRowHeader);
 		
 		// row rest of the columns
 		for (var j = 1; j < matrix[i].length; j++) {
+			
+			// Create fresh new row
 			$rowCell = this.$selectedResultsRowCell.clone();
 			$rowCell.html("");
+			
 			if (matrix[i][j].label != "") {
+				
+				// Label
 				$value = $("<a class=\"resultIndicator\" title=\""+matrix[i][j].label+"\">" + matrix[i][j].label +"</a>");
-				$value.attr("data-score", matrix[i][j].label );
-				$value.attr("data-sortvalue", matrix[i][j].label );
+				
+				// Coloring
+				if (matrix[i][j].score) $value.attr("data-score", matrix[i][j].score );
+				else $value.attr("data-score", matrix[i][j].label );
 				Helpers.setResultIndicatorColor($value);
 				
+				// Sorting
+				if (matrix[i][j].sortValue) $value.attr("data-sortvalue", matrix[i][j].sortValue );
+				else if (matrix[i][j].score) $value.attr("data-sortvalue", matrix[i][j].score );
+				else $value.attr("data-sortvalue", matrix[i][j].label );
+				
+				// Click callback				
 				if (matrix[i][j].callback) {
 					$value.on('click', $.proxy(matrix[i][j].callback, this, matrix[i][j].params));
 				}
@@ -140,9 +156,15 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 			} else {
 				$rowCell.html("&nbsp;");
 			}
+			
+			// Add new cell to row
 			$row.append($rowCell);
-		} 		
+		} 
+		
+		// add filler cell
 		$row.append('<td class="fill">&nbsp;</td>');
+		
+		// append row to table
 		$tbody.append($row);
 	}
 	
@@ -184,6 +206,7 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 		matrix[i] = [];
 		matrix[i][0] = {};
 		matrix[i][0].label = students[studentId].givenName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].familyName;
+		matrix[i][0].sortValue = students[studentId].familyName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].givenName;
 		
 		j = 1;
 		for (var amId in activeModules) {
@@ -215,6 +238,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function
 			matrix[1] = [];
 			matrix[1][0] = {};
 			matrix[1][0].label = students[studentId].givenName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].familyName;
+			matrix[1][0].sortValue = students[studentId].familyName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].givenName;
 			
 		}
 	}
@@ -234,6 +258,9 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function
 			if (sortedModuleChildren[n].children[stuScoId]["user-id"] == studentId) {
 				matrix[1][j] = {};
 				matrix[1][j].label = sortedModuleChildren[n].children[stuScoId].sumScore+" in "+sortedModuleChildren[n].children[stuScoId].totalTime;				
+				matrix[1][j].score = sortedModuleChildren[n].children[stuScoId].sumScore;
+				matrix[1][j].sortValue = sortedModuleChildren[n].children[stuScoId].sumScore;
+								
 				matrix[1][j].callback = this.clickResultIndicator;		
 				matrix[1][j].params = { scoId: sortedModuleChildren[n].id, studentId: studentId };
 			}
@@ -272,6 +299,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 		matrix[i] = [];
 		matrix[i][0] = {};
 		matrix[i][0].label = students[studentId].givenName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].familyName;
+		matrix[i][0].sortValue = students[studentId].familyName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].givenName;
 		
 		j = 1;
 
@@ -290,6 +318,8 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 			
 			if (score != null || time != null) {
 				matrix[i][j].label = score + " in " + time;
+				matrix[i][j].score = score;
+				matrix[i][j].sortValue = score;
 				matrix[i][j].callback = this.clickResultIndicator;
 			} else {
 				matrix[i][j].label = "";
@@ -353,6 +383,7 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 		matrix[i] = [];
 		matrix[i][0] = {};
 		matrix[i][0].label = students[studentId].givenName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].familyName;
+		matrix[i][0].sortValue = students[studentId].familyName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].givenName;//
 		j = 1;
 		
 		for (var studenScoId in activity.children) {
@@ -364,6 +395,8 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 				for (var n = 0; n < sortedStudentScoChildren.length; n++) {
 					matrix[i][j] = {};					
 					matrix[i][j].label = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ? "+"+sortedStudentScoChildren[n].bonus : "") +" / " + sortedStudentScoChildren[n].maxScore;
+					matrix[i][j].score = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ?sortedStudentScoChildren[n].bonus : 0);
+					matrix[i][j].sortValue = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ?sortedStudentScoChildren[n].bonus : 0);
 					matrix[i][j].callback = this.clickPageResultIndicator;
 					matrix[i][j].params = { scoId: this.resultState.activeActivity, studentId: studentId, pageSequence: sortedStudentScoChildren[n].sequence };
 					j++;
