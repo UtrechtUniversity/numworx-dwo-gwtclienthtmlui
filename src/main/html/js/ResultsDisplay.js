@@ -77,9 +77,15 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 	
 	this.$chooseModulesTableBody.html("");
 	
+	console.log(this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children);
+	
+	sortedSchoolClassChildren = Helpers.getIndexedSortedArray(this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children);
+	
+	for (var n = 0; n < sortedSchoolClassChildren.length; n++) {
 
-	for (var id in this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children) { // loop over modules
-		course = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[id];
+	//for (var id in this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children) { // loop over modules
+		//course = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[id];
+		course = sortedSchoolClassChildren[n];
 		
 		if (this.resultState.showOnlyClosedModules == true && course.viewState != "invisible") continue;
 		if (this.resultState.showOnlyClosedModules == false && course.viewState != "studentsAndTeachers") continue;
@@ -89,7 +95,7 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 		$row.find("#chooseClassAndModulesModuleName").html( course.label ).removeAttr("id");
 	
 		$row.find("input[type='checkbox'],input[type='radio']").each( function(index, el) {
-			el.value = id;
+			el.value = sortedSchoolClassChildren[n].id;
 		
 			// Change ID and label for-attributes
 			this.id = this.id + i;				

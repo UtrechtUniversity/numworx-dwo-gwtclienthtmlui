@@ -156,10 +156,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 	this.$selectResultsTableWrap.addClass("size-"+matrix[0].length);
 	
 	this.$selectResultsTableWrap.html("");
-	this.$selectResultsTableWrap.append($table);
-	
-	//console.log(JSON.stringify(this.resultState));
-	
+	this.$selectResultsTableWrap.append($table);	
 }
 
 SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function() {
@@ -170,8 +167,8 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 	
 	matrix[0] = [];
 	matrix[0][0] = {};
-	matrix[0][0].label = "Modules"
-	
+	matrix[0][0].label = "Modules";
+		
 	for (var amId in activeModules) {
 		matrix[0][j] = {};
 		matrix[0][j].label = modules[ activeModules[amId] ].label;
@@ -201,10 +198,7 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 		i++;	
 	}
 	
-	//console.log(JSON.stringify(this.resultState));
-	
 	return matrix;
-	//resultState.studentsTree.schoolclasses[ resultState.activeSchoolClass ].children // students
 }
 
 SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function(module, studentId) {
@@ -225,46 +219,23 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function
 		}
 	}
 	
-	// module.children[Symbol.iterator] = function() {
-// 	    var keys = [];
-// 	    var ref = this;
-// 	    for (var key in this) {
-// 	        keys.push(key);
-// 	    }
-//
-// 	    return {
-// 	        next: function() {
-// 	            if (this._keys && this._obj && this._index < this._keys.length) {
-// 	                var key = this._keys[this._index];
-// 	                this._index++;
-// 	                return { key: key, value: this._obj[key], done: false };
-// 	            } else {
-// 	                return { done: true };
-// 	            }
-// 	        },
-// 	        _index: 0,
-// 	        _keys: keys,
-// 	        _obj: ref
-// 	    };
-// 	}
-	
-	for (var actId in module.children) {
+	var sortedModuleChildren = Helpers.getIndexedSortedArray(module.children);
+			
+	for (var n = 0; n < sortedModuleChildren.length; n++) {
 		matrix[0][j] = {};
 
 		// set col headers
-		matrix[0][j].label = module.children[actId].label;
+		matrix[0][j].label = sortedModuleChildren[n].label;
 		matrix[0][j].callback = this.clickActivityColumnHeader;
-		matrix[0][j].params = { scoId: actId  };
+		matrix[0][j].params = { scoId: sortedModuleChildren[n].id  };
 
 		// set single row
-		//matrix[1] = [];
-		for (var stuScoId in module.children[actId].children) { 
-			if (module.children[actId].children[stuScoId]["user-id"] == studentId) {
+		for (var stuScoId in sortedModuleChildren[n].children) { 
+			if (sortedModuleChildren[n].children[stuScoId]["user-id"] == studentId) {
 				matrix[1][j] = {};
-				matrix[1][j].label = module.children[actId].children[stuScoId].sumScore+" in "+module.children[actId].children[stuScoId].totalTime;
-				
+				matrix[1][j].label = sortedModuleChildren[n].children[stuScoId].sumScore+" in "+sortedModuleChildren[n].children[stuScoId].totalTime;				
 				matrix[1][j].callback = this.clickResultIndicator;		
-				matrix[1][j].params = { scoId: actId, studentId: studentId };
+				matrix[1][j].params = { scoId: sortedModuleChildren[n].id, studentId: studentId };
 			}
 		}
 		
@@ -275,9 +246,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function
 		
 		j++;
 	}
-	
-	//console.log(JSON.stringify(this.resultState));
-	
+		
 	return matrix;
 }
 
@@ -289,11 +258,13 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 	matrix[0][0] = {};
 	matrix[0][0].label = "Activities";
 	
-	for (var actId in module.children) {
+	var sortedModuleChildren = Helpers.getIndexedSortedArray(module.children);
+			
+	for (var n = 0; n < sortedModuleChildren.length; n++) {
 		matrix[0][j] = {};
-		matrix[0][j].label = module.children[actId].label;
+		matrix[0][j].label = sortedModuleChildren[n].label;
 		matrix[0][j].callback = this.clickActivityColumnHeader;
-		matrix[0][j].params = { scoId: actId  };
+		matrix[0][j].params = { scoId: sortedModuleChildren[n].id  };
 		j++;
 	}
 	
@@ -303,16 +274,17 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 		matrix[i][0].label = students[studentId].givenName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].familyName;
 		
 		j = 1;
-		for (var actId in module.children) {
+
+		for (var n = 0; n < sortedModuleChildren.length; n++) {
 			matrix[i][j] = {};
 			score = null;
 			time = null;
 			
-			for (var scoId in module.children[actId].children) { // Loop over activities
-				if (module.children[actId].children[scoId]["user-id"] == studentId) { // Select student
+			for (var scoId in sortedModuleChildren[n].children) { // Loop over activities
+				if (sortedModuleChildren[n].children[scoId]["user-id"] == studentId) { // Select student
 					scoreSet = true;
-					score = module.children[actId].children[scoId].sumScore; 
-					time = module.children[actId].children[scoId].totalTime; 
+					score = sortedModuleChildren[n].children[scoId].sumScore; 
+					time = sortedModuleChildren[n].children[scoId].totalTime; 
 				}	
 			}
 			
@@ -323,7 +295,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 				matrix[i][j].label = "";
 			}
 						
-			matrix[i][j].params = { scoId: actId, studentId: studentId };
+			matrix[i][j].params = { scoId: sortedModuleChildren[n].id, studentId: studentId };
 			j++;
 		}		
 				
@@ -337,13 +309,9 @@ SelectedResultsDisplay.prototype.getSealStateActivitiesStudentsInModule = functi
 	var students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children;
 	var sealed = 0, unsealed = 0, state = 0;
 	for (var studentId in students) {
-		console.log( students[studentId].givenName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].familyName);
 		for (var actId in module.children) {
-			console.log(module.children[actId]);
 			for (var scoId in module.children[actId].children) { // Loop over activities
 				if (module.children[actId].children[scoId]["user-id"] == studentId) { 
-					console.log(module.children[actId].children[scoId].label);
-					console.log(module.children[actId].children[scoId].completionStatus);
 					if (module.children[actId].children[scoId].completionStatus == "completed") sealed++;
 					else unsealed++;				
 				}
@@ -359,19 +327,21 @@ SelectedResultsDisplay.prototype.getSealStateActivitiesStudentsInModule = functi
 SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = function(activity) {
 	var matrix = [], i = 1, j = 1, maxPages = 0;
 	var students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children;
-	//console.log(activity);
+	var sortedStudentScoChildren = null;
 	
 	matrix[0] = [];
 	matrix[0][0] = {};
 	matrix[0][0].label = "Pagina's";
 	
 	for (var studenScoId in activity.children) {
+		
 		if (activity.children[studenScoId].children) {  // first studentsco with children
-			for (var pageId in activity.children[studenScoId].children) {
+			
+			sortedStudentScoChildren = Helpers.getIndexedSortedArray(activity.children[studenScoId].children);
+			
+			for (var n = 0; n < sortedStudentScoChildren.length; n++) {
 				matrix[0][j] = {};
-				matrix[0][j].label = activity.children[studenScoId].children[pageId].label;
-				//matrix[0][j].callback = this.clickActivityColumnHeader;
-				//matrix[0][j].params = { scoId: actId  };
+				matrix[0][j].label = sortedStudentScoChildren[n].label;
 				j++;
 			}
 			break;
@@ -383,26 +353,22 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 		matrix[i] = [];
 		matrix[i][0] = {};
 		matrix[i][0].label = students[studentId].givenName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].familyName;
-		//console.log(matrix[i][0].label);
-		//console.log(i);
 		j = 1;
 		
 		for (var studenScoId in activity.children) {
-			
-			
 			if (activity.children[studenScoId]["user-id"] == studentId) { // Select student
 				j = 1;
 				
-				for (var pageId in activity.children[studenScoId].children) { // Loop over pages
-					matrix[i][j] = {};
-					//console.log(activity.children[studenScoId].children[pageId]);
-					matrix[i][j].label = activity.children[studenScoId].children[pageId].sumScore + ( activity.children[studenScoId].children[pageId].bonus > 0 ? "+"+activity.children[studenScoId].children[pageId].bonus : "") +" / " + activity.children[studenScoId].children[pageId].maxScore;;
+				sortedStudentScoChildren = Helpers.getIndexedSortedArray(activity.children[studenScoId].children);
+				
+				for (var n = 0; n < sortedStudentScoChildren.length; n++) {
+					matrix[i][j] = {};					
+					matrix[i][j].label = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ? "+"+sortedStudentScoChildren[n].bonus : "") +" / " + sortedStudentScoChildren[n].maxScore;
 					matrix[i][j].callback = this.clickPageResultIndicator;
-					matrix[i][j].params = { scoId: this.resultState.activeActivity, studentId: studentId, pageSequence: activity.children[studenScoId].children[pageId].sequence };
+					matrix[i][j].params = { scoId: this.resultState.activeActivity, studentId: studentId, pageSequence: sortedStudentScoChildren[n].sequence };
 					j++;
 				}	
-			}
-			
+			}			
 		}
 		
 		if (j == 1) { // apparantly no pages

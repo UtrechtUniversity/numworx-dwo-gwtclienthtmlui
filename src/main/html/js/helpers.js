@@ -187,3 +187,18 @@ Helpers.translate = function(index, value) {
 	}
 }
 
+Helpers.getIndexedSortedArray = function(associativeArray) {
+	var indexedArray = [];
+	for (var id in associativeArray) {
+		associativeArray[id].id = id;
+		indexedArray.push(associativeArray[id]);
+	}
+	indexedArray.sort( Helpers.sortIndexedArrayOnSequenceNr );
+	
+	return indexedArray;
+}
+
+Helpers.sortIndexedArrayOnSequenceNr = function(a, b) {
+	return parseInt(a.sequence) - parseInt(b.sequence);
+}
+
