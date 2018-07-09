@@ -77,6 +77,22 @@ ModulesOfSchoolclassDisplay.prototype.iterateNodesForSearch = function(index, el
 	}
 }
 
+ModulesOfSchoolclassDisplay.prototype.openTreeForId = function(id) {
+	$el = this.$tree.find("[data-id='"+id+"']");	
+	$el = $el.first();
+	$el.addClass("open");
+	
+	if (this.nodes[$el.data("id")]) this.nodes[$el.data("id")].open = true;
+
+	$el.parents().each( $.proxy( function(index, el) {
+		$el = $(el);
+		$el.addClass("open");
+		if (this.nodes[$el.data("id")]) this.nodes[$el.data("id")].open = true;
+	}, this));
+}
+
+
+
 ModulesOfSchoolclassDisplay.prototype.collapseTree = function() {
 	this.$tree.find("li").removeClass("open");
 	for (var id in this.nodes) {
@@ -95,46 +111,59 @@ ModulesOfSchoolclassDisplay.prototype.updateTable = function() {
 	var i = 1;
 	for (var id in modules) { 
 		el = modules[id];
-		
 		if (el.active == true) {
-		
-			$row = this.$selectRow.clone();
-			$row.prop('tabindex', i);
-			$row.find("#modulesOfSchoolclassDisplaySelectId").val( id ).removeAttr("id");
-			$row.find("#modulesOfSchoolclassDisplaySelectName").html( el.course.name ).removeAttr("id");
-		
-			$row.find("input[type='checkbox'],input[type='radio']").each( function() {
-				this.value = id;
-			});
-		
-			$row.on('click keypress', $.proxy(this.clickSelectRow, this));
-		
-			this.$selectTableBody.append($row);
-			
-			if (id === this.selectedNodeId) $row.trigger('click');
-
-			i++;
+			this.addRowToTable(el, id, i, id === this.selectedNodeId, false);
 		}
+		i++;
 	}
 	
-	this.settingsFormToggle(false);
+	//this.settingsFormToggle(false);
 	
 	return;
 }
+ModulesOfSchoolclassDisplay.prototype.addRowToTable = function(el, id, i, selected, newRow) {	
+		$row = this.$selectRow.clone();
+		$row.prop('tabindex', i);
+		$row.find("#modulesOfSchoolclassDisplaySelectId").val( id ).removeAttr("id");
+		$row.find("#modulesOfSchoolclassDisplaySelectName").html( el.course.name ).removeAttr("id");
+	
+		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
+			this.value = id;
+		});
+	
+		$row.on('click keypress', $.proxy(this.clickSelectRow, this));
+	
+		if (newRow) {
+			this.$selectTableBody.prepend($row);
+			$row.addClass("new");
+		} else {
+			this.$selectTableBody.append($row);
+		}
+		if (selected) $row.trigger( 'click' );
+}
+
+
 ModulesOfSchoolclassDisplay.prototype.setSettings = function(id) {
 	if (!this.nodes.hasOwnProperty(id)) return;
 	console.log(this.nodes[id]);
 	this.settingsForm.elements["key"].value = id;
-	this.settingsForm.elements["accessKey"].value = this.nodes[id].classCourse.accessKey ? this.nodes[id].classCourse.accessKey : "";
-	this.settingsForm.elements["from"].value = this.nodes[id].classCourse.notBefore ? this.nodes[id].classCourse.notBefore : "";
-	this.settingsForm.elements["to"].value = this.nodes[id].classCourse.notAfter ? this.nodes[id].classCourse.notAfter : "";
-	if (this.nodes[id].classCourse.courseType == "normal") {
-		this.settingsForm.elements["locked[]"][0].checked = "";
-		this.settingsForm.elements["locked[]"][1].checked = "checked";
-	} else  {
-		this.settingsForm.elements["locked[]"][0].checked = "checked";
-		this.settingsForm.elements["locked[]"][1].checked = "";
+	if (this.nodes[id].classCourse) {
+		this.settingsForm.elements["accessKey"].value = this.nodes[id].classCourse.accessKey ? this.nodes[id].classCourse.accessKey : "";
+		this.settingsForm.elements["from"].value = this.nodes[id].classCourse.notBefore ? this.nodes[id].classCourse.notBefore : "";
+		this.settingsForm.elements["to"].value = this.nodes[id].classCourse.notAfter ? this.nodes[id].classCourse.notAfter : "";
+		if (this.nodes[id].classCourse.courseType == "normal") {
+			this.settingsForm.elements["locked[]"][0].checked = "";
+			this.settingsForm.elements["locked[]"][1].checked = "checked";
+		} else  {
+			this.settingsForm.elements["locked[]"][0].checked = "checked";
+			this.settingsForm.elements["locked[]"][1].checked = "";
+		}
 	}
+}
+
+ModulesOfSchoolclassDisplay.prototype.temporaryAddModule = function(id) {
+	this.addRowToTable(this.nodes[id], id, 0, true, true);
+	this.setSettings(id);
 }
 
 
@@ -296,18 +325,27 @@ ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
 	
 	var from = this.settingsForm.elements["from"].value;
 	var to = this.settingsForm.elements["to"].value;
-	
-//	if (from) from = this.reformatDate( from );
-//	if (to) to = this.reformatDate( to );
-	
-	console.log(from);
-	console.log(to);
-		
+			
 	app.getPresenterFactory().getModulesOfSchoolclassPresenter().setModuleSettings(  this.settingsForm.elements["key"].value,
 																				typeString,
 																				from,
 																				to,
 																				this.settingsForm.elements["accessKey"].value);
+}
+
+ModulesOfSchoolclassDisplay.prototype.addModule = function() {
+	var typeString = this.settingsForm.elements["locked[]"][0].checked ? "assesment" : "normal";
+	
+	var from = this.settingsForm.elements["from"].value;
+	var to = this.settingsForm.elements["to"].value;
+	
+	app.getPresenterFactory().getModulesOfSchoolclassPresenter().addModule(  	this.selectedNodeId, 
+																				this.settingsForm.elements["key"].value,
+																				typeString,
+																				from,
+																				to,
+																				this.settingsForm.elements["accessKey"].value);
+																			
 }
 
 ModulesOfSchoolclassDisplay.prototype.reformatDate = function(oldDate) {
@@ -326,8 +364,17 @@ ModulesOfSchoolclassDisplay.prototype.reformatDate = function(oldDate) {
 
 ModulesOfSchoolclassDisplay.prototype.toggleTreeCheckbox = function(event) {
 	if (event.target.checked) {
-		this.attachItem(event.target.value);
 		this.selectedNodeId = event.target.value;
+		
+		if (!this.nodes.hasOwnProperty( this.selectedNodeId )) return;
+		console.log(this.nodes[this.selectedNodeId]);
+		if ( this.nodes[this.selectedNodeId].classCourse &&  this.nodes[this.selectedNodeId].classCourse.viewState == "invisible" ) {
+			this.attachItem( this.selectedNodeId );			
+		} else {
+			console.log("new to add");
+			this.temporaryAddModule( this.selectedNodeId );
+		}	
+		
 	} else {
 		this.detachItem(event.target.value);			
 	} 
@@ -335,14 +382,11 @@ ModulesOfSchoolclassDisplay.prototype.toggleTreeCheckbox = function(event) {
 
 ModulesOfSchoolclassDisplay.prototype.clickTreeNode = function(event) {
 	var $el = $(event.target).parent();
-	console.log($el);
 	if ($el.hasClass("open")) {
 		$el.removeClass("open");
-		//this.openNodes[$el.data("id")] = false;
 		this.nodes[$el.data("id")].open = false;
 	} else {
 		$el.addClass("open");
-		//this.openNodes[$el.data("id")] = true;
 		this.nodes[$el.data("id")].open = true;
 	}
 }
@@ -355,7 +399,10 @@ ModulesOfSchoolclassDisplay.prototype.clickTreeNode = function(event) {
 ModulesOfSchoolclassDisplay.prototype.clickSelectRow = function(event) {
 	Helpers.selectTableRow(event);
 	
+	console.log(this.selectForm.elements["module"].value);
+	
 	if (this.selectForm.elements["module"].value) {
+		this.openTreeForId(this.selectForm.elements["module"].value);
 		this.setSettings(this.selectForm.elements["module"].value);
 		this.selectedNodeId = this.selectForm.elements["module"].value;
 		this.settingsFormToggle(true);
@@ -366,7 +413,10 @@ ModulesOfSchoolclassDisplay.prototype.clickSelectRow = function(event) {
 
 // helpers
 ModulesOfSchoolclassDisplay.prototype.settingsFormToggle = function(value) {
-	if (value === true) this.$settingsForm.find('input').prop('disabled','');
+	if (value === true) {
+		this.$settingsForm.find('input').prop('disabled','');
+		this.settingsForm.elements["from"].focus();
+	}
 	else this.$settingsForm.find('input').prop('disabled','disabled');
 }
 
@@ -377,7 +427,12 @@ ModulesOfSchoolclassDisplay.prototype.settingsFormToggle = function(value) {
 
 ModulesOfSchoolclassDisplay.prototype.submitSettings = function(event) {
 	event.preventDefault();	
-	this.setModuleSettings();
+	
+	if ( this.nodes[this.selectedNodeId].classCourse &&  this.nodes[this.selectedNodeId].classCourse.viewState == "invisible" ) {
+		this.setModuleSettings();
+	} else {
+		this.addModule();
+	}
 }
 
 ModulesOfSchoolclassDisplay.prototype.clickDateField = function(event) {
