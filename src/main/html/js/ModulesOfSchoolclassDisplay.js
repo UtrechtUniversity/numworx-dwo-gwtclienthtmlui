@@ -136,7 +136,7 @@ ModulesOfSchoolclassDisplay.prototype.addRowToTable = function(el, id, i, select
 	
 		if (newRow) {
 			this.$selectTableBody.prepend($row);
-			$row.addClass("new");
+			$row.addClass("new selected");
 		} else {
 			this.$selectTableBody.append($row);
 		}
@@ -148,7 +148,6 @@ ModulesOfSchoolclassDisplay.prototype.addRowToTable = function(el, id, i, select
 
 ModulesOfSchoolclassDisplay.prototype.setSettings = function(id) {
 	if (!this.nodes.hasOwnProperty(id)) return;
-	console.log(this.nodes[id]);
 	this.settingsForm.elements["key"].value = id;
 	if (this.nodes[id].classCourse) {
 		this.settingsForm.elements["accessKey"].value = this.nodes[id].classCourse.accessKey ? this.nodes[id].classCourse.accessKey : "";
