@@ -3,6 +3,7 @@ function ModulesOfSchoolclassDisplay() {
 	this.nodes = [];
 	this.selectedNodeId = "";
 	this.dateTimePicker = null;
+	this.$temporaryRow = null;
 	
 	// Forms 
 	this.selectForm = document.forms["modulesOfSchoolclassDisplaySelect"];
@@ -117,7 +118,7 @@ ModulesOfSchoolclassDisplay.prototype.updateTable = function() {
 		i++;
 	}
 	
-	//this.settingsFormToggle(false);
+	this.settingsFormToggle(false);
 	
 	return;
 }
@@ -139,7 +140,9 @@ ModulesOfSchoolclassDisplay.prototype.addRowToTable = function(el, id, i, select
 		} else {
 			this.$selectTableBody.append($row);
 		}
-		if (selected) $row.trigger( 'click' );
+		if (selected) $row.trigger( 'click' ); 
+		
+		return $row;
 }
 
 
@@ -162,9 +165,27 @@ ModulesOfSchoolclassDisplay.prototype.setSettings = function(id) {
 }
 
 ModulesOfSchoolclassDisplay.prototype.temporaryAddModule = function(id) {
-	this.addRowToTable(this.nodes[id], id, 0, true, true);
+	this.removeTemporaryRow();
+	this.$temporaryRow = this.addRowToTable(this.nodes[id], id, 0, false, true);
 	this.setSettings(id);
+	
+	
+	// Go in edit settings mode
+	this.openTreeForId(this.selectForm.elements["module"].value);
+	this.setSettings(this.selectForm.elements["module"].value);
+	this.selectedNodeId = this.selectForm.elements["module"].value;
+	this.settingsFormToggle(true);
 }
+
+ModulesOfSchoolclassDisplay.prototype.removeTemporaryRow = function() {
+	if (this.$temporaryRow != null) {	
+		this.$temporaryRow.remove();
+		this.$temporaryRow = null;
+	}
+}
+
+
+
 
 
 /*
@@ -183,6 +204,10 @@ ModulesOfSchoolclassDisplay.prototype.clear = function () {
 	this.settingsForm.elements["from"] = "";
 	this.settingsForm.elements["to"] = "";
 	this.settingsForm.elements["name"] = "";
+	
+	this.searchForm.elements["name"] = "";
+	
+	this.settingsFormToggle(false);
 }
 
 ModulesOfSchoolclassDisplay.prototype.setHelp = function(url) {
@@ -366,14 +391,16 @@ ModulesOfSchoolclassDisplay.prototype.toggleTreeCheckbox = function(event) {
 		this.selectedNodeId = event.target.value;
 		
 		if (!this.nodes.hasOwnProperty( this.selectedNodeId )) return;
-		console.log(this.nodes[this.selectedNodeId]);
+
 		if ( this.nodes[this.selectedNodeId].classCourse &&  this.nodes[this.selectedNodeId].classCourse.viewState == "invisible" ) {
 			this.attachItem( this.selectedNodeId );			
 		} else {
-			console.log("new to add");
+			this.$tree.find(".temporary input").prop('checked','');
+			
+			$(event.target).parent().addClass("temporary");
 			this.temporaryAddModule( this.selectedNodeId );
 		}	
-		
+				
 	} else {
 		this.detachItem(event.target.value);			
 	} 
@@ -397,10 +424,14 @@ ModulesOfSchoolclassDisplay.prototype.clickTreeNode = function(event) {
 
 ModulesOfSchoolclassDisplay.prototype.clickSelectRow = function(event) {
 	Helpers.selectTableRow(event);
-	
-	console.log(this.selectForm.elements["module"].value);
-	
+		
+	// Remove other temporary row, if available
+	this.$tree.find(".temporary input").prop('checked','');
+	this.removeTemporaryRow();
+			
 	if (this.selectForm.elements["module"].value) {
+		
+		// Go in edit settings mode
 		this.openTreeForId(this.selectForm.elements["module"].value);
 		this.setSettings(this.selectForm.elements["module"].value);
 		this.selectedNodeId = this.selectForm.elements["module"].value;
