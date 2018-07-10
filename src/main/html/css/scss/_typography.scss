@@ -23,7 +23,7 @@ html {
 
 p {
 	color: $primary;
-	font-family: 'Ubuntu Condensed', sans-serif;
+	//font-family: 'Ubuntu Condensed', sans-serif;
 	font-size: 14/16 * 1em;
 	line-height: 24 / 18 * 1em;
 	margin-bottom: $elementMarginBottom;
@@ -39,7 +39,7 @@ p {
 ul {
 	#welcomeDisplayPanel &  {
 		color: $primary;
-		font-family: 'Ubuntu Condensed', sans-serif;
+		//font-family: 'Ubuntu Condensed', sans-serif;
 		font-size: 14/16 * 1em;
 		line-height: 24 / 18 * 1em;
 		margin-bottom: $elementMarginBottom;
@@ -68,7 +68,7 @@ ul {
 
 #mainPanel {
 	nav {
-		font-family: 'Ubuntu Condensed', sans-serif;		
+		//font-family: 'Ubuntu Condensed', sans-serif;		
 	}	
 }
 
@@ -78,7 +78,7 @@ ul {
  */
 
 h1 {
-	font-family: 'Ubuntu Condensed', sans-serif;
+	//font-family: 'Ubuntu Condensed', sans-serif;
 	font-size: 18 / 16 * 1em;
 //	font-stretch: condensed;
 	color: $primary;	
@@ -193,8 +193,8 @@ input[type="text"], input[type="password"] {
 
 label {
 	color: $primaryLight;
-	font-family: 'Ubuntu Condensed', sans-serif;
-	font-size: 13 / 16 * 1em; // kleiner dan ontworpen
+	//font-family: 'Ubuntu Condensed', sans-serif;
+	font-size: 14 / 16 * 1em;
 	//font-weight: bold;
 
 	
@@ -209,6 +209,11 @@ label {
  * TABLES TYPOGRAPHY
  */
 
+table td { // Nessecary because of GWT clean
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 16px;
+}
+
 a.resultIndicator {
 
 	color: $black;	
@@ -220,8 +225,8 @@ a.resultIndicator {
 }
 
 table thead tr th {
-	font-family: 'Ubuntu Condensed', sans-serif;
-	font-size: 13 / 16 * 1em;
+	//font-family: 'Ubuntu Condensed', sans-serif;
+	font-size: 14 / 16 * 1em;
 	text-transform: uppercase;
 	color: $primaryLight;
 }
