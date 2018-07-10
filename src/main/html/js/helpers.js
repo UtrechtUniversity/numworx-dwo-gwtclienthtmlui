@@ -62,23 +62,30 @@ Helpers.toggleHelpSection = function() {
 }
 
 Helpers.stretchHeight = function(elements) {
-	//console.log("STRETCH!");
+	console.log("STRETCH!");
 	if (elements.length < 1) return;
 	
 	subpanel = elements[0].closest('.subpanel');
 	subpanelHeight = subpanel.outerHeight();
 	bodyHeight = $(document.body).outerHeight();
 	freeSpace = bodyHeight - subpanelHeight;
-	
-	//console.log(bodyHeight);
-	//console.log(subpanelHeight);
-	//console.log(freeSpace);
-	
+		
 	for(i=0; i<elements.length; i++) {
 		newHeight = elements[i].height() + freeSpace;
 		elements[i].height(newHeight+"px");
 	}
 }
+
+// Helpers.strechHeightResize = function(event) {
+// 	subpanel = elements[0].closest('.subpanel');
+// 	subpanelHeight = subpanel.outerHeight();
+// 	bodyHeight = $(document.body).outerHeight();
+// 	freeSpace = bodyHeight - subpanelHeight;
+//
+// 	var $el = $(event.target);
+// 	newHeight = $el.height() + freeSpace;
+// 	$el.height(newHeight+"px");
+// }
 
 Helpers.stretchIframeHeight = function(iframe) {
 	console.log("STRETCH IFRAME!");

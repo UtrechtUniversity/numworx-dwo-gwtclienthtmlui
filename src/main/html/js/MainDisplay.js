@@ -1,6 +1,7 @@
 function MainDisplay() {
 	this.activeDialogs = [];
 	this.activeLightboxes = [];
+	this.stretchables = [];
 
 	// Bind DOM elements with jQuery
 	this.$body = $("body");
@@ -77,7 +78,7 @@ function MainDisplay() {
 	window.jsProgressDialogWithAbortDisplay = this.progressDialogWithAbortDisplay;
 	
 	// Bind events
-	$(window).resize(Helpers.resizeHelpSection);
+	$(window).resize( $.proxy(this.resizeWindow, this) );
 	$(".help h2").click(Helpers.toggleHelpSection);
 	$(".help .closeButton").click(Helpers.toggleHelpSection);
 	this.$logo.on('click', $.proxy(this.clickLogo, this));
@@ -273,11 +274,54 @@ MainDisplay.prototype.setDefaultNavSize = function() {
 /*
  * OTHER HELPERS
  */
+
 MainDisplay.prototype.removeHoverableOnTouchDevices = function() {
 	var isTouchDevice = ('ontouchstart' in window || 'onmsgesturechange' in window);
 	if (isTouchDevice) {
 		$("table.hoverable").removeClass("hoverable");
 	}
+}
+
+
+/*
+ * RESIZING
+ */
+
+MainDisplay.prototype.resizeWindow = function(event) {
+	Helpers.resizeHelpSection();
+	this.resizeStrechables();	
+}
+MainDisplay.prototype.registerStretchables = function( elements ) {
+	if (elements.length < 1) return;
+	
+	for (i=0; i<elements.length; i++) {
+		if ( this.stretchables.indexOf(elements[i]) === -1) {
+			console.log("PUSH STRETCHABLE");
+			this.stretchables.push( elements[i] );
+		}
+	}
+	this.resizeStrechables();
+}
+MainDisplay.prototype.resizeStrechables = function() {
+	if (this.stretchables.length < 1) return; 
+	
+	bodyHeight = $(document.body).outerHeight();
+		
+	for(i=0; i<this.stretchables.length; i++) {
+		subpanel = this.stretchables[i].closest('.subpanel');
+		
+		if (subpanel.data('originalHeight')) subpanelHeight = subpanel.data('originalHeight');
+		else {
+			subpanelHeight = subpanel.outerHeight();
+			subpanel.data('originalHeight', subpanelHeight);
+		}
+		freeSpace = bodyHeight - subpanelHeight;
+				
+		newHeight = this.stretchables[i].height() + freeSpace;
+		this.stretchables[i].height(newHeight+"px");
+	}
+	this.$subpanels.removeData('originalHeight');
+	return;
 }
 
 

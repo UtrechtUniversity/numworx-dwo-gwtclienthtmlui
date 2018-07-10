@@ -183,7 +183,9 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 	this.$selectResultsTableWrap.addClass("size-"+matrix[0].length);
 	
 	this.$selectResultsTableWrap.html("");
-	this.$selectResultsTableWrap.append($table);	
+	this.$selectResultsTableWrap.append($table);
+	
+	app.mainDisplay.registerStretchables( [ $tbody ] );	
 }
 
 SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function() {
@@ -522,6 +524,7 @@ SelectedResultsDisplay.prototype.clear = function () {
 SelectedResultsDisplay.prototype.init = function(resultState) {
 	console.log("init SelectedResultsDisplay");
 	console.log(resultState);
+	
 	this.resultState = resultState;
 	this.modulesStudents();	
 }

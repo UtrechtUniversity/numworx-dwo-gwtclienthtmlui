@@ -55,7 +55,8 @@ AccountDisplay.prototype.localize = function() {
  */
 
 AccountDisplay.prototype.init = function (json) {
-	Helpers.stretchHeight( [ this.$schoolLoginsTableBody ] )
+	app.mainDisplay.registerStretchables( [ this.$schoolLoginsTableBody ] );
+	//Helpers.stretchHeight( [ this.$schoolLoginsTableBody ] )
 }
 
 AccountDisplay.prototype.clear = function () {

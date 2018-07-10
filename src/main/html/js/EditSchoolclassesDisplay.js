@@ -82,7 +82,9 @@ function EditSchoolclassesDisplay() {
 EditSchoolclassesDisplay.prototype.show = function() {
         this.localize();
 	this.$panel.show();
-	Helpers.stretchHeight( [ this.$changeStudentsTableBody, this.$changeTeachersTableBody, this.$changeModulesTableBody ]);
+	
+	
+	//Helpers.stretchHeight( [ this.$changeStudentsTableBody, this.$changeTeachersTableBody, this.$changeModulesTableBody ]);
 }
 
 
@@ -115,9 +117,12 @@ EditSchoolclassesDisplay.prototype.clear = function () {
 }
 
 EditSchoolclassesDisplay.prototype.init = function () {
+	console.log("init2!");
 	this.$changeStudentsTableBody.html("");
 	this.$changeTeachersTableBody.html("");
 	this.$changeModulesTableBody.html("");
+	
+	app.mainDisplay.registerStretchables( [ this.$changeStudentsTableBody, this.$changeTeachersTableBody, this.$changeModulesTableBody ] );
 }
 
 EditSchoolclassesDisplay.prototype.setHelp = function(url) {

@@ -67,7 +67,8 @@ AddTeacherToSchoolclassDisplay.prototype.searchTeacher = function() {
  */
 
 AddTeacherToSchoolclassDisplay.prototype.init = function () {
-	Helpers.stretchHeight([ this.$addTeacherTableBody ]);
+	app.mainDisplay.registerStretchables( [ this.$addTeacherTableBody ] );
+	//Helpers.stretchHeight([ this.$addTeacherTableBody ]);
 }
 
 AddTeacherToSchoolclassDisplay.prototype.clear = function () {

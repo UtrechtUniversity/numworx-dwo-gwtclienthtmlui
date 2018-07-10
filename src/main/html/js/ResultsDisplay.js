@@ -27,15 +27,19 @@ function ResultsDisplay() {
 	this.$chooseClassModuleForm.on('submit', $.proxy(this.submitChooseClassModuleForm,this));
 	this.$chooseClassTableHead.find(".sortButton").click(Helpers.clickSortButton);
 	
+	
+	
 	// Init
 	this.$panel.hide();
 }
 
 ResultsDisplay.prototype.show = function() {
-        this.localize();
+    this.localize();
 	this.$panel.show();
-	this.chooseClassModuleFormToggle();
-	Helpers.stretchHeight( [ this.$chooseClassTableBody, this.$chooseModulesTableBody  ] )
+	this.chooseClassModuleFormToggle();	
+	
+	//app.mainDisplay.registerStretchables( [ this.$chooseClassTableBody, this.$chooseModulesTableBody  ] );	
+	//Helpers.stretchHeight( [ this.$chooseClassTableBody, this.$chooseModulesTableBody  ] )
 }
 
 
@@ -119,6 +123,10 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
  * VIEW FUNCTIONS
  * Map to java implementation
  */
+
+ResultsDisplay.prototype.init = function () {
+	app.mainDisplay.registerStretchables( [ this.$chooseClassTableBody, this.$chooseModulesTableBody  ] );
+}
 
 ResultsDisplay.prototype.clear = function () {
 	console.log("clear");

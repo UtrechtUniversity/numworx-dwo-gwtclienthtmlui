@@ -202,7 +202,9 @@ ModulesOfSchoolclassDisplay.prototype.removeTemporaryRow = function() {
  */
 
 ModulesOfSchoolclassDisplay.prototype.init = function () {
-	Helpers.stretchHeight( [this.$treeWrapper, this.$selectTableBody] );
+	app.mainDisplay.registerStretchables( [this.$treeWrapper, this.$selectTableBody] );
+		
+	//Helpers.stretchHeight( [this.$treeWrapper, this.$selectTableBody] );
 	this.dateTimePicker  = new MaterialDatetimePicker({});
 }
 

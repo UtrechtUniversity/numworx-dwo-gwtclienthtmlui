@@ -37,7 +37,8 @@ PersonsDisplay.prototype.show = function() {
 	
 	if (!app.getPresenterFactory().getPersonsPresenter().hasImportPersons()) this.$personsImportForm.hide();
 	
-	Helpers.stretchHeight([ this.$personsTableBody ]);
+	
+	//Helpers.stretchHeight([ this.$personsTableBody ]);
 }
 
 PersonsDisplay.prototype.localize = function() {
@@ -82,7 +83,8 @@ PersonsDisplay.prototype.filterPersonsList = function () {
  */
 
 PersonsDisplay.prototype.init = function (json) {
-	// do nothing
+	console.log("init!");
+	app.mainDisplay.registerStretchables( [ this.$personsTableBody ] );
 }
 
 PersonsDisplay.prototype.clear = function () {

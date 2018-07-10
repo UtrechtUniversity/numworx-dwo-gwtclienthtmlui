@@ -27,7 +27,9 @@ function SchoolclassesDisplay() {
 SchoolclassesDisplay.prototype.show = function() {
         this.localize();
 	this.$panel.show();
-	Helpers.stretchHeight( [ this.$chooseSchoolclassTableBody ]);
+	
+	
+	//Helpers.stretchHeight( [ this.$chooseSchoolclassTableBody ]);
 }
 
 
@@ -41,12 +43,15 @@ SchoolclassesDisplay.prototype.localize = function() {
 
 
 SchoolclassesDisplay.prototype.init = function () {
+	console.log("init!");
 	this.addSchoolclassForm.elements["classname"].value = "";
 	this.addSchoolclassForm.elements["classkey"].value = "";
 	this.addSchoolclassForm.elements["useClasstree"][0].checked = false;
 	this.addSchoolclassForm.elements["useClasstree"][1].checked = true;
 	this.addSchoolclassForm.elements["useClasskey"][0].checked = false;
 	this.addSchoolclassForm.elements["useClasskey"][1].checked = true;
+	
+	app.mainDisplay.registerStretchables( [ this.$chooseSchoolclassTableBody ] );
 }
 
 SchoolclassesDisplay.prototype.clear = function () {

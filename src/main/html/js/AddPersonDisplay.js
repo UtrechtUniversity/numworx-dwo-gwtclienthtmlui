@@ -23,7 +23,9 @@ function AddPersonDisplay() {
 AddPersonDisplay.prototype.show = function() {
         this.localize();
 	this.$panel.show();
-	Helpers.stretchHeight([ this.$addPersonSchoolclassesTableBody ]);
+	
+	
+	//Helpers.stretchHeight([ this.$addPersonSchoolclassesTableBody ]);
 }
 
 
@@ -46,7 +48,7 @@ AddPersonDisplay.prototype.localize = function() {
  */
 
 AddPersonDisplay.prototype.init = function () {
-	// do nothing
+	app.mainDisplay.registerStretchables( [ this.$addPersonSchoolclassesTableBody ] );
 }
 
 AddPersonDisplay.prototype.clear = function () {

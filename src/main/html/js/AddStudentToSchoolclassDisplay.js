@@ -26,7 +26,7 @@ function AddStudentToSchoolclassDisplay() {
 }
 
 AddStudentToSchoolclassDisplay.prototype.show = function() {
-        this.localize();
+    this.localize();
 	this.$panel.show();
 }
 
@@ -70,7 +70,8 @@ AddStudentToSchoolclassDisplay.prototype.searchStudent = function() {
  */
 
 AddStudentToSchoolclassDisplay.prototype.init = function () {
-	Helpers.stretchHeight([ this.$addStudentTableBody ]);
+	app.mainDisplay.registerStretchables( [ this.$addStudentTableBody ] );
+	//Helpers.stretchHeight([ this.$addStudentTableBody ]);
 }
 
 AddStudentToSchoolclassDisplay.prototype.clear = function () {
