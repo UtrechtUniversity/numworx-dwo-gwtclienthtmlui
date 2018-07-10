@@ -3,6 +3,7 @@ function ModulesOfSchoolclassDisplay() {
 	this.nodes = [];
 	this.selectedNodeId = "";
 	this.dateTimePicker = null;
+	this.$temporaryRow = null;
 	
 	// Forms 
 	this.selectForm = document.forms["modulesOfSchoolclassDisplaySelect"];
@@ -25,6 +26,7 @@ function ModulesOfSchoolclassDisplay() {
 	
 	this.$settingsFormFrom = $(this.settingsForm.elements["from"]);
 	this.$settingsFormTo = $(this.settingsForm.elements["to"]);
+	this.$settingsFormLocked = $(this.settingsForm.elements["locked[]"]);
 	
 	this.$reloadButton = $(this.searchForm.elements["reload"]);
 	
@@ -34,13 +36,14 @@ function ModulesOfSchoolclassDisplay() {
 	this.$reloadButton.on('click', $.proxy(this.clickReload,this));
 	this.$settingsFormFrom.on('click', $.proxy(this.clickDateField, this));
 	this.$settingsFormTo.on('click', $.proxy(this.clickDateField, this));
+	this.$settingsFormLocked.on('click', $.proxy(this.clickLockedField, this));
 	
 	// Init
 	this.$panel.hide();
 }
 
 ModulesOfSchoolclassDisplay.prototype.show = function() {
-        this.localize();
+       this.localize();
 	this.$panel.show();
 }
 
@@ -117,7 +120,7 @@ ModulesOfSchoolclassDisplay.prototype.updateTable = function() {
 		i++;
 	}
 	
-	//this.settingsFormToggle(false);
+	this.settingsFormToggle(false);
 	
 	return;
 }
@@ -135,11 +138,14 @@ ModulesOfSchoolclassDisplay.prototype.addRowToTable = function(el, id, i, select
 	
 		if (newRow) {
 			this.$selectTableBody.prepend($row);
-			$row.addClass("new");
+			$row.addClass("new selected");
+			$row.find("input[type='checkbox'],input[type='radio']").prop('checked','checked');
 		} else {
 			this.$selectTableBody.append($row);
 		}
-		if (selected) $row.trigger( 'click' );
+		if (selected) $row.trigger( 'click' ); 
+		
+		return $row;
 }
 
 
@@ -147,24 +153,47 @@ ModulesOfSchoolclassDisplay.prototype.setSettings = function(id) {
 	if (!this.nodes.hasOwnProperty(id)) return;
 	console.log(this.nodes[id]);
 	this.settingsForm.elements["key"].value = id;
+	
 	if (this.nodes[id].classCourse) {
+		
 		this.settingsForm.elements["accessKey"].value = this.nodes[id].classCourse.accessKey ? this.nodes[id].classCourse.accessKey : "";
 		this.settingsForm.elements["from"].value = this.nodes[id].classCourse.notBefore ? this.nodes[id].classCourse.notBefore : "";
 		this.settingsForm.elements["to"].value = this.nodes[id].classCourse.notAfter ? this.nodes[id].classCourse.notAfter : "";
+		
 		if (this.nodes[id].classCourse.courseType == "normal") {
 			this.settingsForm.elements["locked[]"][0].checked = "";
 			this.settingsForm.elements["locked[]"][1].checked = "checked";
+			this.accessKeyToggle(false);
 		} else  {
 			this.settingsForm.elements["locked[]"][0].checked = "checked";
 			this.settingsForm.elements["locked[]"][1].checked = "";
+			this.accessKeyToggle(true);
 		}
 	}
 }
 
 ModulesOfSchoolclassDisplay.prototype.temporaryAddModule = function(id) {
-	this.addRowToTable(this.nodes[id], id, 0, true, true);
+	this.removeTemporaryRow();
+	this.$temporaryRow = this.addRowToTable(this.nodes[id], id, 0, false, true);
 	this.setSettings(id);
+	
+	
+	// Go in edit settings mode
+	this.openTreeForId(this.selectForm.elements["module"].value);
+	this.setSettings(this.selectForm.elements["module"].value);
+	this.selectedNodeId = this.selectForm.elements["module"].value;
+	this.settingsFormToggle(true);
 }
+
+ModulesOfSchoolclassDisplay.prototype.removeTemporaryRow = function() {
+	if (this.$temporaryRow != null) {	
+		this.$temporaryRow.remove();
+		this.$temporaryRow = null;
+	}
+}
+
+
+
 
 
 /*
@@ -183,6 +212,14 @@ ModulesOfSchoolclassDisplay.prototype.clear = function () {
 	this.settingsForm.elements["from"] = "";
 	this.settingsForm.elements["to"] = "";
 	this.settingsForm.elements["name"] = "";
+	
+	this.searchForm.elements["name"] = "";
+	
+	this.settingsForm.elements["locked[]"][0].checked = "";
+	this.settingsForm.elements["locked[]"][1].checked = "checked";
+	
+	this.accessKeyToggleFormToggle(false);
+	this.settingsFormToggle(false);
 }
 
 ModulesOfSchoolclassDisplay.prototype.setHelp = function(url) {
@@ -366,14 +403,16 @@ ModulesOfSchoolclassDisplay.prototype.toggleTreeCheckbox = function(event) {
 		this.selectedNodeId = event.target.value;
 		
 		if (!this.nodes.hasOwnProperty( this.selectedNodeId )) return;
-		console.log(this.nodes[this.selectedNodeId]);
+
 		if ( this.nodes[this.selectedNodeId].classCourse &&  this.nodes[this.selectedNodeId].classCourse.viewState == "invisible" ) {
 			this.attachItem( this.selectedNodeId );			
 		} else {
-			console.log("new to add");
+			this.$tree.find(".temporary input").prop('checked','');
+			
+			$(event.target).parent().addClass("temporary");
 			this.temporaryAddModule( this.selectedNodeId );
 		}	
-		
+				
 	} else {
 		this.detachItem(event.target.value);			
 	} 
@@ -397,14 +436,20 @@ ModulesOfSchoolclassDisplay.prototype.clickTreeNode = function(event) {
 
 ModulesOfSchoolclassDisplay.prototype.clickSelectRow = function(event) {
 	Helpers.selectTableRow(event);
-	
-	console.log(this.selectForm.elements["module"].value);
-	
+		
+	// Remove other temporary row, if available
+	this.$tree.find(".temporary input").prop('checked','');
+	this.removeTemporaryRow();
+			
 	if (this.selectForm.elements["module"].value) {
+		
+		// Go in edit settings mode
+		this.settingsFormToggle(true);
 		this.openTreeForId(this.selectForm.elements["module"].value);
 		this.setSettings(this.selectForm.elements["module"].value);
 		this.selectedNodeId = this.selectForm.elements["module"].value;
-		this.settingsFormToggle(true);
+		
+		
 	} else {
 		this.settingsFormToggle(false);
 	}
@@ -427,7 +472,7 @@ ModulesOfSchoolclassDisplay.prototype.settingsFormToggle = function(value) {
 ModulesOfSchoolclassDisplay.prototype.submitSettings = function(event) {
 	event.preventDefault();	
 	
-	if ( this.nodes[this.selectedNodeId].classCourse &&  this.nodes[this.selectedNodeId].classCourse.viewState == "invisible" ) {
+	if ( this.nodes[this.selectedNodeId].classCourse) { //&&  this.nodes[this.selectedNodeId].classCourse.viewState == "invisible" ) {
 		this.setModuleSettings();
 	} else {
 		this.addModule();
@@ -439,6 +484,20 @@ ModulesOfSchoolclassDisplay.prototype.clickDateField = function(event) {
 	this.dateTimePicker.off('submit');
 	this.dateTimePicker.on('submit', function(d) { var el = event.target; el.value = d.format("YYYY-MM-DD HH:mm"); } );	
 	this.dateTimePicker.open();
+}
+
+ModulesOfSchoolclassDisplay.prototype.clickLockedField = function(event) {
+	//event.preventDefault();	
+	if (this.settingsForm.elements["locked[]"][0].checked) this.accessKeyToggle(true);
+	else this.accessKeyToggle(false);	
+}
+
+ModulesOfSchoolclassDisplay.prototype.accessKeyToggle = function(value) {
+	if (value === true) {
+		this.settingsForm.elements["accessKey"].disabled = false;
+		this.settingsForm.elements["accessKey"].focus();
+	}
+	else this.settingsForm.elements["accessKey"].disabled = true;
 }
 
 

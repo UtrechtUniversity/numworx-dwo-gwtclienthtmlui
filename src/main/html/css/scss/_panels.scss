@@ -904,6 +904,13 @@ section.lightbox {
 	.c-datepicker__header-day, .c-datepicker__header-date {
 		background-color: $primary;
 	}
+	.c-datepicker__back, .c-datepicker__next {
+		background-color: $shade22;
+		
+		&:hover {
+			background-color: $primary;
+		}
+	}
 }
 
 

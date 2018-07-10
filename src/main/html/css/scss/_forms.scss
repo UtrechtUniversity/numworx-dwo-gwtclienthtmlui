@@ -265,7 +265,7 @@ form {
 		}		
 	}
 	
-	&.ok {
+	&.ok, &.temporary {
 		input:checked ~ label.icon {
 			background-color: $ok;		
 			border: $borderThickness $ok solid;

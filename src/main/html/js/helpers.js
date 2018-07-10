@@ -145,9 +145,9 @@ Helpers.tableSorterBubbleSort = function(tbody, index, attr, type, asc) { //bubb
 			console.log(row1.children[index].firstChild);
 												
 			if (val1 != 0 && val2 != 0 && type == "string") {
-				if ( (!asc && val2.localeCompare(val1) < 0) || (asc && val2.localeCompare(val1) > 0) ) { shouldSwitch = true; break; }
+				if ( (asc && val2.localeCompare(val1) < 0) || (!asc && val2.localeCompare(val1) > 0) ) { shouldSwitch = true; break; }
 			} else {
-				if ( (!asc && val2 < val1) || (asc && val2 > val1) ) { shouldSwitch = true; break; }
+				if ( (asc && val2 < val1) || (!asc && val2 > val1) ) { shouldSwitch = true; break; }
 			}						
 		}		
 		if (shouldSwitch == true) {	
@@ -162,7 +162,6 @@ Helpers.tableSorterBubbleSort = function(tbody, index, attr, type, asc) { //bubb
 }
 
 Helpers.clickSortButton = function() {
-	console.log("click sort");
 	$this = $(this);
 	$table = $this.parents('table');
 	tbody = $table.find('tbody').get(0);
