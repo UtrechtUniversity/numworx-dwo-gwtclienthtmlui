@@ -36,6 +36,10 @@ columns and rows
 		display: block;
 		width: 100%;
 	}
+	
+	&:last-of-type {
+		margin-bottom: 3 * $rowMarginBottom;
+	}
 }
 .row .row {
 	margin-bottom: 0;
@@ -81,7 +85,7 @@ columns and rows
 .col-12  { width: (12 * $colWidth / 2 + $gutter *  5) * 1px; }
 
 
-td, th, input { // aparte style, want ze hebben een $gutter padding
+table.dwo tr td, table.dwo tr th, input { // aparte style, want ze hebben een $gutter padding
 	&.col-1  { width: (1 * $colWidth / 2 - $gutter * 0.5 - $gutter) * 1px; }
 	&.col-2  { width: (2 * $colWidth / 2 - $gutter * 0.5) * 1px; }
 	&.col-3  { width: (3 * $colWidth / 2 + $gutter * 0.5 - $gutter) * 1px; }

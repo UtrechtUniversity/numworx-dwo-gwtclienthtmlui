@@ -23,7 +23,8 @@ html {
 
 p {
 	color: $primary;
-	font-size: 18/16 * 1em;
+	//font-family: 'Ubuntu Condensed', sans-serif;
+	font-size: 14/16 * 1em;
 	line-height: 24 / 18 * 1em;
 	margin-bottom: $elementMarginBottom;
 	
@@ -38,7 +39,8 @@ p {
 ul {
 	#welcomeDisplayPanel &  {
 		color: $primary;
-		font-size: 18/16 * 1em;
+		//font-family: 'Ubuntu Condensed', sans-serif;
+		font-size: 14/16 * 1em;
 		line-height: 24 / 18 * 1em;
 		margin-bottom: $elementMarginBottom;
 		padding-left: 2em;
@@ -60,19 +62,33 @@ ul {
 	&:hover .icon use { fill: $primary; }
 }
 
+/*
+ * MAIN PANEL
+ */
+
+#mainPanel {
+	nav {
+		//font-family: 'Ubuntu Condensed', sans-serif;		
+	}	
+}
+
 
 /*
  * HEADERS
  */
 
 h1 {
+	//font-family: 'Ubuntu Condensed', sans-serif;
 	font-size: 18 / 16 * 1em;
+//	font-stretch: condensed;
 	color: $primary;	
-	font-weight: bold;
+	font-weight: 300;
 	margin-bottom:  ($gutter - 5) + 1px; //2 * $elementMarginBottom; //TODO
 	padding-top: $elementMarginBottom; //TODO
 }
 h2 {
+	
+	
 	margin-bottom: $elementMarginBottom;
 	header & { 
 		margin-bottom: 0; 
@@ -83,7 +99,7 @@ h2 {
 	
 	&.sectionhead {
 		border-bottom: 1px $primary solid;
-		font-size: 14 / 16 * 1em;
+		font-size: 13 / 16 * 1em;
 		line-height: $gutter * 1px;
 		width: 100%;
 		header & { border-bottom-style: none; }
@@ -99,20 +115,23 @@ h2 {
 	}
 	
 	&.helpheader {
-		background-color: $shade3;
-		color: $white;		
+		background-color: $shade12;
+		color: $primary;		
 		line-height: $gutter * 1px;
 		text-indent: 10px;
+		.desktop & {
+			color: $white;		
+		}
 	}
 }
 
 h3 {
 	color: $primary;
 	margin-bottom: $elementMarginBottom;
-	font-weight: bold;
+	font-weight: 500;
 	
 	.dialog & {
-		font-size: 18 / 16 * 1em;
+		font-size: 13 / 16 * 1em;
 	}
 	
 }
@@ -174,8 +193,9 @@ input[type="text"], input[type="password"] {
 
 label {
 	color: $primaryLight;
-	font-size: 13 / 17 * 1em;
-	font-weight: bold;
+	//font-family: 'Ubuntu Condensed', sans-serif;
+	font-size: 14 / 16 * 1em;
+	//font-weight: bold;
 
 	
 	&.input {
@@ -189,6 +209,11 @@ label {
  * TABLES TYPOGRAPHY
  */
 
+table td { // Nessecary because of GWT clean
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 16px;
+}
+
 a.resultIndicator {
 
 	color: $black;	
@@ -200,7 +225,8 @@ a.resultIndicator {
 }
 
 table thead tr th {
-	font-size: 13 / 16 * 1em;
+	//font-family: 'Ubuntu Condensed', sans-serif;
+	font-size: 14 / 16 * 1em;
 	text-transform: uppercase;
 	color: $primaryLight;
 }
