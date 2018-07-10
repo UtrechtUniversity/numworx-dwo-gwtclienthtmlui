@@ -46,9 +46,13 @@ Helpers.resizeHelpSection = function(event) {
 Helpers.toggleHelpSection = function() {
 	if (!$(this).parent().hasClass('desktop')) {
 		$(this).closest('.help').toggleClass('active'); 
+		
 		//$(this).closest('.help').css('z-index','9999');
-		if ($(this).closest('.help').hasClass('active')) app.mainDisplay.openHelp();
-		else  app.mainDisplay.closeHelp();
+		if ($(this).closest('.help').hasClass('active')) {
+			app.mainDisplay.openHelp();
+		} else {
+			app.mainDisplay.closeHelp();
+		}  
 		//$(this).parent().find("iframe").get(0).contentWindow.location.reload();
 	}
 }

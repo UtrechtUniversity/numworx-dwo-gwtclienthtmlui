@@ -252,9 +252,11 @@ MainDisplay.prototype.closeLightboxView = function(dialog) {
 
 MainDisplay.prototype.openHelp = function(dialog) {	
 	this.$body.addClass("overlay");
+	this.$body.addClass("helpOpen");
 }
 MainDisplay.prototype.closeHelp = function(dialog) {	
 	 this.$body.removeClass("overlay");
+	 this.$body.removeClass("helpOpen");
 }
 
 /*
