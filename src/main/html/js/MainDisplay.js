@@ -79,10 +79,12 @@ function MainDisplay() {
 	// Bind events
 	$(window).resize(Helpers.resizeHelpSection);
 	$(".help h2").click(Helpers.toggleHelpSection);
+	$(".help .closeButton").click(Helpers.toggleHelpSection);
 	this.$logo.on('click', $.proxy(this.clickLogo, this));
 	this.$nav.find('a').on('click', $.proxy(this.clickMenuItem, this));
 	this.$accountMenuBox.find('a').on('click', $.proxy(this.clickAccountMenuItem, this));
-	this.$accountMenuToggle.on('click', $.proxy(this.clickAccountMenuToggle, this));
+	this.$accountMenuToggle.on('mouseenter', $.proxy(this.mouseEnterAccountMenuIcon, this));
+	$(document).on('click', $.proxy(this.clickWherever, this));
 	
 	// Trigger window resize for initial help sizing
 	$(window).trigger('resize');
@@ -245,6 +247,17 @@ MainDisplay.prototype.closeLightboxView = function(dialog) {
 }
 
 /*
+ * HELP HELPERS
+ */
+
+MainDisplay.prototype.openHelp = function(dialog) {	
+	this.$body.addClass("overlay");
+}
+MainDisplay.prototype.closeHelp = function(dialog) {	
+	 this.$body.removeClass("overlay");
+}
+
+/*
  * MENU HELPER
  */
 
@@ -283,9 +296,21 @@ MainDisplay.prototype.clickAccountMenuItem = function(event) {
 		this.setActiveView(view);
 	}
 }
-MainDisplay.prototype.clickAccountMenuToggle = function(event) {
-	this.$accountMenuBox.toggle();
+MainDisplay.prototype.mouseEnterAccountMenuIcon = function(event) {
+	this.$accountMenuBox.show();
 }
+MainDisplay.prototype.clickWherever = function(event) {
+	if (this.$accountMenuBox.is(":visible")) {
+		$el = $(event.target)
+		if ($el.closest("#accountMenuToggle").length == 0
+			&& $el.closest("#accountMenuBox").length == 0) {
+			this.$accountMenuBox.hide();
+		}
+		event.preventDefault();
+	}
+}
+
+
 MainDisplay.prototype.clickLogo = function(event) {
 	event.preventDefault();
 	var view = event.currentTarget.hash.substr(1);

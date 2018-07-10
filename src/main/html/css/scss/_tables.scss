@@ -44,11 +44,12 @@ table.dwo { //:not(.c-datepicker__days)
 			//max-width: 100%;
 			//&.headers th:first-child { padding-left: 0; }
 			th { 
+//				overflow-x: hidden;
 				padding: $gutter / 2 * 1px!important;
 				width: ($colWidth - $gutter) * 1px;
 				float: none!important; // for if it has a col-class
 				
-				&:first-child { padding-left: 0!important; padding-right: $gutter * 1px!important; }
+				&:first-child { padding-left: 0!important; padding-right: $gutter/2 * 1px!important; }
 				
 				.sortButton {
 					cursor: pointer;
@@ -64,7 +65,7 @@ table.dwo { //:not(.c-datepicker__days)
 						height: 13px; //TODO var			
 						width: 64/73.9 * 13px; //TODO var
 									
-						use { fill: $shade3; }
+						use { fill: $shade12; }
 					}
 					&.active .icon use { fill: $primary; }
 					
@@ -119,7 +120,7 @@ table.dwo { //:not(.c-datepicker__days)
 	}
 	
 	&.hoverable tr:hover td { // &.hoverable tr:focus td,  { //&.hoverable tr:hover td span {
-		background-color: $shade3;
+		background-color: $shade12;
 	}
 		
 	&.selectable {
@@ -128,7 +129,7 @@ table.dwo { //:not(.c-datepicker__days)
 			@include transition(all 500ms ease);
 		}
 		tr.selected td {
-			background-color: $shade3;
+			background-color: $shade12;
 		}
 		tr.new td {
 			//background-color: $primary;
@@ -224,15 +225,15 @@ table.dwo.results {
 				}
 			}
 			&:nth-child(2) { // multiple headers
-				background-color: $shade2;
+				background-color: $shade11;
 				border-bottom: $borderThickness $line1 solid;
 			
 				th {
 					position: relative;
 					
 					span {
-						background-color: $shade2;
-						border: $borderThickness $shade3 solid;
+						background-color: $shade11;
+						border: $borderThickness $shade12 solid;
 						cursor: pointer;
 						display: block;
 						font-size: 13 / 16 * 1em;
@@ -242,6 +243,7 @@ table.dwo.results {
 						overflow: hidden;
 						padding: 3px 5px;
 						position: absolute;
+						text-align: left;
 						text-transform: none;
 						@include transition(background-color 200ms ease);
 						transition-property: background-color, color;
@@ -258,10 +260,10 @@ table.dwo.results {
 								top: 0;  
 	
 								/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#edeff1+0,edeff1+100&0+0,0+80,1+100 */
-								background: -moz-linear-gradient(left, $shade2RGBA0 0%, $shade2RGBA0 70%, $shade2RGBA1 100%); /* FF3.6-15 */
-								background: -webkit-linear-gradient(left, $shade2RGBA0 0%,$shade2RGBA0 70%,$shade2RGBA1 100%); /* Chrome10-25,Safari5.1-6 */
-								background: linear-gradient(to right, $shade2RGBA0 0%,$shade2RGBA0 70%,$shade2RGBA1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-								filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00edeff1', endColorstr='#{$shade2}',GradientType=1 ); /* IE6-9 */
+								background: -moz-linear-gradient(left, $shade11RGBA0 0%, $shade11RGBA0 70%, $shade11RGBA1 100%); /* FF3.6-15 */
+								background: -webkit-linear-gradient(left, $shade11RGBA0 0%,$shade11RGBA0 70%,$shade11RGBA1 100%); /* Chrome10-25,Safari5.1-6 */
+								background: linear-gradient(to right, $shade11RGBA0 0%,$shade11RGBA0 70%,$shade11RGBA1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+								filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00edeff1', endColorstr='#{$shade11}',GradientType=1 ); /* IE6-9 */
 							}
 							
 						}
@@ -275,13 +277,13 @@ table.dwo.results {
 							
 							a {
 								bottom: 3px;
-								color: $shade1;
+								color: $shade10;
 								display: none;
 								position: absolute;
 								right: 5px;
 								
 								&:after {
-									background-color: $shade1;
+									background-color: $shade10;
 									content: " ";
 									display: inline-block;
 									margin-left: 5px;
@@ -308,7 +310,7 @@ table.dwo.results {
 				}
 			}
 			&:nth-child(3) { //sorting
-				background-color: $shade2;
+				background-color: $shade11;
 				
 				th:first-child {
 					text-indent: 10px;
@@ -327,7 +329,7 @@ table.dwo.results {
 		td {	
 			
 			a.resultIndicator {
-				background-color: $shade2;
+				background-color: $shade11;
 				border-bottom: $borderThicknessResult $primary solid;
 				cursor: pointer;
 				display: block;			
@@ -402,10 +404,10 @@ table.dwo.results {
 			bottom: 0;
 			right: 0;
 			/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#edeff1+0,edeff1+100&0+0,1+100 */
-			background: -moz-linear-gradient(left, $shade1RGBA0 0%, $shade1RGBA1 100%); /* FF3.6-15 */
-			background: -webkit-linear-gradient(left, $shade1RGBA0 0%,$shade1RGBA1 100%); /* Chrome10-25,Safari5.1-6 */
-			background: linear-gradient(to right, $shade1RGBA0 0%,$shade1RGBA1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00edeff1', endColorstr='#{$shade1}',GradientType=1 ); /* IE6-9 */
+			background: -moz-linear-gradient(left, $shade10RGBA0 0%, $shade10RGBA1 100%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(left, $shade10RGBA0 0%,$shade10RGBA1 100%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to right, $shade10RGBA0 0%,$shade10RGBA1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00edeff1', endColorstr='#{$shade10}',GradientType=1 ); /* IE6-9 */
 		}
 	}
 }

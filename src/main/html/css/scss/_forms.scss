@@ -70,12 +70,12 @@ input[type="submit"], input[type="button"], button {
 	}
 	
 	&:hover {
-		background-color: $shade3;
-		border-color: $shade3;
+		background-color: $shade12;
+		border-color: $shade12;
 	}
 	&:disabled {
-		background-color: $shade3;
-		border-color: $shade3;
+		background-color: $shade12;
+		border-color: $shade12;
 		cursor: not-allowed;
 	}
 	
@@ -100,15 +100,15 @@ input[type="text"], input[type="password"] {
 	}
 	
 	&:disabled {
-		background-color: $shade1;
-		border-color: $shade12;
-		//color: $shade12;
+		background-color: $shade10;
+		border-color: $shade22;
+		//color: $shade22;
 		cursor: not-allowed;
 	}
 }
 
 label {
-	margin-bottom: $elementMarginBottom;
+	//margin-bottom: $elementMarginBottom;
 	
 	&.textoverflow {
 		overflow: visible;
@@ -131,6 +131,7 @@ form {
 	
 	label {
 		float: left;
+		margin-bottom: $elementMarginBottom;
 		width: 100%;
 	}
 	
@@ -154,7 +155,7 @@ form {
 		}
 		
 		label {
-			background-color: $primaryLight;
+			background-color: $shade12;
 			border: $borderThickness $primary solid;
 			@include border-radius($defaultRadius);
 			@include border-box;
@@ -177,8 +178,8 @@ form {
 //			}
 		}
 		input:disabled ~ label {
-			background-color: $shade12;
-			border-color: $shade12;
+			background-color: $shade22;
+			border-color: $shade22;
 		}
 		
 	}
@@ -208,8 +209,8 @@ form {
 		position: absolute;
 		top: 0;
 		left: 0;
-		height: 25px;
-		width: 25px;
+		height: 23px;
+		width: 23px;
 		
 		margin-bottom: 0;
 		background-color: $white;
@@ -218,7 +219,7 @@ form {
 		
 		cursor: pointer;
 		
-		border: $borderThickness $line1 solid;
+		border: $borderThicknessOption $line1 solid;
 		@include border-radius(100%);
 		@include border-box;
 		@include transition(all 200ms ease);
@@ -228,8 +229,8 @@ form {
 				position: absolute;
 				display: none;
 
-				left: 6px;
-				top: 2px;
+				left: 5px;
+				top: 1px;
 				width: 5px;
 				height: 10px;
 				border: solid white;
@@ -253,9 +254,9 @@ form {
 	
 	// Styles for modules that have been activated once before, no impact on JS, only different unchecked style
 	&.previouslyChecked label.icon, &.thirdState label.icon {
-		background-color: $shade12;
+		background-color: $shade22;
 		
-		border: $borderThickness $shade12 solid;
+		border: $borderThickness $shade22 solid;
 		&:after {
 			display: block;
 		}
@@ -285,8 +286,8 @@ form {
 
 			left: 5px;
 			top: 0px;
-			width: 7px;
-			height: 8px;
+			width: 6px;
+			height: 6px;
 			border: solid white;
 			border-width: 0 3px 3px 0;
 			-webkit-transform: rotate(45deg);
@@ -299,9 +300,9 @@ form {
 			display: none;
 
 			left: 5px;
-			top: 11px;
-			width: 7px;
-			height: 7px;
+			top: 9px;
+			width: 6px;
+			height: 6px;
 			border: solid white;
 			border-width: 0 3px 3px 0;
 			-webkit-transform: rotate(225deg);
