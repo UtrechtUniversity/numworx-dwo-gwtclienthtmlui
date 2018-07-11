@@ -196,14 +196,14 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 	
 	matrix[0] = [];
 	matrix[0][0] = {};
-	matrix[0][0].label = "Modules";
+	matrix[0][0].label = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_Modules");
 		
 	for (var amId in activeModules) {
 		matrix[0][j] = {};
 		matrix[0][j].label = modules[ activeModules[amId] ].label;
 		matrix[0][j].callback = this.clickModuleColumnHeader; //this.activitiesStudents;
 		matrix[0][j].params = { moduleId: activeModules[amId], module: modules[ activeModules[amId] ]  };
-		matrix[0][j].linkLabel = "activiteiten";
+		matrix[0][j].linkLabel = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_Activiteiten");
 		matrix[0][j].linkCallback = this.clickModuleColumnHeader;//this.activitiesStudents;
 		matrix[0][j].linkParams = { moduleId: activeModules[amId], module: modules[ activeModules[amId] ]  };
 		j++;
@@ -237,7 +237,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function
 	
 	matrix[0] = [];
 	matrix[0][0] = {};
-	matrix[0][0].label = "Activities"
+	matrix[0][0].label = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_Activiteiten")
 	
 	// Set row header
 	for (var stuId in students) {
@@ -290,7 +290,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 	
 	matrix[0] = [];
 	matrix[0][0] = {};
-	matrix[0][0].label = "Activities";
+	matrix[0][0].label = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_Activiteiten");
 	
 	var sortedModuleChildren = Helpers.getIndexedSortedArray(module.children);
 			
@@ -368,7 +368,7 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 	
 	matrix[0] = [];
 	matrix[0][0] = {};
-	matrix[0][0].label = "Pagina's";
+	matrix[0][0].label = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_Paginas");
 	
 	for (var studenScoId in activity.children) {
 		
