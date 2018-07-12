@@ -259,8 +259,11 @@ ModulesOfSchoolclassDisplay.prototype.setTree = function(json) {
 }
 
 // Helper:
-ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, depth = 0, checkboxId = 0) {
+ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, depth, checkboxId) {
 	var result, subtree, liClass, aClass, checkboxId, checked, checkboxClass, checkboxDisabled;
+	
+	depth = typeof depth !== 'undefined' ? depth : 0;
+	checkboxId = typeof checkboxId !== 'undefined' ? checkboxId : 0;
 	
 	if (!tree) return; //sometimes it is undefined
 	
