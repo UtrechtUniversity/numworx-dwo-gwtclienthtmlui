@@ -326,7 +326,28 @@ table.dwo.results {
 		border-top-style: none;
 		max-height: 500px;		
 		
-		td {	
+		td {
+			
+			&.studentName {
+				overflow-x: hidden;
+				position: relative;
+				white-space: nowrap;
+				
+				span {
+					width: auto;
+				}
+				
+				&.overflown:after {
+					background-color: $white;
+					content: "...";
+					display: block;
+					position: absolute;
+					right: 0;
+					top: 5px;
+					width: 20px;
+				}	
+				
+			}	
 			
 			a.resultIndicator {
 				background-color: $shade11;

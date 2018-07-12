@@ -222,4 +222,12 @@ Helpers.sortIndexedArrayOnSequenceNr = function(a, b) {
 	return parseInt(a.sequence) - parseInt(b.sequence);
 }
 
+Helpers.addClassIfOverflown = function(index, el) {
+	console.log(el.scrollWidth);
+	console.log(el.clientWidth);
+	if (el.scrollWidth > (el.clientWidth + 10)) {
+		$(el).addClass("overflown");
+	}	
+}
+
 

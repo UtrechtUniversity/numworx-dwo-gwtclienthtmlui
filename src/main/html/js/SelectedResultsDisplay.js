@@ -27,11 +27,11 @@ function SelectedResultsDisplay() {
 	this.$selectResultsTableWrap = $("#selectedResultsTableWrap");
 	
 	this.$selectedResultsTable = $("#selectedResultsTable").detach();	
-	this.$selectedResultsColumnHeaderName = this.$selectedResultsTable.find("#selectedResultsTableRepeatableColumnHeaderName").detach();	
-	this.$selectedResultsColumnHeaderSorting = this.$selectedResultsTable.find("#selectedResultsTableRepeatableColumnHeaderSorting").detach();	
+	this.$selectedResultsColumnHeaderName = this.$selectedResultsTable.find("#selectedResultsTableRepeatableColumnHeaderName").detach().removeAttr("id");	
+	this.$selectedResultsColumnHeaderSorting = this.$selectedResultsTable.find("#selectedResultsTableRepeatableColumnHeaderSorting").detach().removeAttr("id");	
 		
-	this.$selectedResultsRowHeader = this.$selectedResultsTable.find("#selectedResultsTableRowHeader").detach();
-	this.$selectedResultsRowCell = this.$selectedResultsTable.find("#selectedResultsTableRepeatableCell").detach();
+	this.$selectedResultsRowHeader = this.$selectedResultsTable.find("#selectedResultsTableRowHeader").detach().removeAttr("id");
+	this.$selectedResultsRowCell = this.$selectedResultsTable.find("#selectedResultsTableRepeatableCell").detach().removeAttr("id");
 	this.$selectedResultsRow = this.$selectedResultsTable.find("tbody tr").detach();
 	
 	this.$filterIndicators = $(".filterIndicators");
@@ -173,6 +173,8 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 		$tbody.append($row);
 	}
 	
+	
+	
 	// Sizing
 	if (matrix[0].length > 11) this.$selectResultsTableWrap.addClass("overflow");
 	else this.$selectResultsTableWrap.removeClass("overflow");
@@ -184,6 +186,9 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 	
 	this.$selectResultsTableWrap.html("");
 	this.$selectResultsTableWrap.append($table);
+	
+	// Add overflow class to names
+	$tbody.find(".studentName").each( Helpers.addClassIfOverflown );
 	
 	app.mainDisplay.registerStretchables( [ $tbody ] );	
 }
