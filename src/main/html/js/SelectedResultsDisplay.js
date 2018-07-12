@@ -118,7 +118,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 		$tableRowHeader = this.$selectedResultsRowHeader.clone();
 		$tableRowHeader.html("");
 		
-		$value = $("<span>" + matrix[i][0].label + "</span>");
+		$value = $("<span title=\""+matrix[i][0].label+"\">" + matrix[i][0].label + "</span>");
 		if (matrix[i][0].sortValue) $value.attr("data-sortvalue", matrix[i][0].sortValue );		
 		else $value.attr("data-sortvalue", matrix[i][0].sortValue );		
 		
