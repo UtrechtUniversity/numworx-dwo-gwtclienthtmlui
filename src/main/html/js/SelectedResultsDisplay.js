@@ -550,6 +550,14 @@ SelectedResultsDisplay.prototype.showPages = function(resultsTree) {
 	this.pagesStudents();	
 }
 
+SelectedResultsDisplay.prototype.setLoadingTableMessage = function () {
+	console.log("setLoadingTableMessage");
+}
+
+SelectedResultsDisplay.prototype.setEmtpyTableMessage = function () {
+	console.log("setEmptyTableMessage");
+}
+
 /*
  * RETURN FUNCTIONS
  * Use java callbacks
