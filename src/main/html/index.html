@@ -56,7 +56,6 @@
 	<script src="js/AccountDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/SchoolclassesDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/EditSchoolclassesDisplay.js" type="text/javascript" charset="utf-8"></script>
-	<!-- OLD <script src="js/StudentsInSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script> -->
 	<script src="js/AddStudentToSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/AddTeacherToSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/CopyOrMoveStudentToSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
@@ -2092,7 +2091,18 @@
 							<table class="dwo">
 								<thead>
 									<tr>
-										<th>&nbsp;</th>
+										<th>&nbsp;
+											<span class="sortButton asc" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>
 										<th><span data-translate="NUM_TBL_SELECT">Selecteer</span></th>
 									</tr>
 								</thead>
@@ -2215,7 +2225,18 @@
 								<table class="dwo">
 									<thead>
 										<tr>
-											<th>&nbsp;</th>
+											<th>&nbsp;
+												<span class="sortButton asc" data-order="asc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														  <use xlink:href="#arrowUp"></use>
+													</svg>
+												</span>
+												<span class="sortButton desc" data-order="desc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														  <use xlink:href="#arrowDown"></use>
+													</svg>
+												</span>
+											</th>
 											<th><span data-translate="NUM_TBL_SELECT">Selecteer</span></th>
 										</tr>
 									</thead>

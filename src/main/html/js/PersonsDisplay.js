@@ -32,17 +32,18 @@ function PersonsDisplay() {
 }
 
 PersonsDisplay.prototype.show = function() {
-        this.localize();
+    this.localize();
 	this.$panel.show();
 	
 	if (!app.getPresenterFactory().getPersonsPresenter().hasImportPersons()) this.$personsImportForm.hide();
-	
-	
-	//Helpers.stretchHeight([ this.$personsTableBody ]);
 }
 
 PersonsDisplay.prototype.localize = function() {
 	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
+
+PersonsDisplay.prototype.resetSorting = function() {
+	this.$personsTableHead.find(".sortButton").removeClass("active");
 }
 
 
@@ -87,19 +88,18 @@ PersonsDisplay.prototype.init = function (json) {
 	app.mainDisplay.registerStretchables( [ this.$personsTableBody ] );
 }
 
-PersonsDisplay.prototype.clear = function () {
-	this.personsSearchFormToggle(false);	
-	this.$personsTableBody.html("");
-	this.personsEditFormToggle(false);
-	
+PersonsDisplay.prototype.clear = function () {	
 	this.personsSearchForm.elements["role"][0].checked = true;
 	this.personsSearchForm.elements["role"][1].checked = false;
-	this.changePersonsSearchRole();
-	
 	this.personsSearchForm.elements["userName"].value == "";
 	this.personsSearchForm.elements["givenName"].value == "";
 	this.personsSearchForm.elements["insertion"].value == "";
 	this.personsSearchForm.elements["familyName"].value == "";
+	
+	this.resetSorting();	
+	this.personsSearchFormToggle(false);	
+	this.personsEditFormToggle(false);
+	this.changePersonsSearchRole();
 }
 
 PersonsDisplay.prototype.setHelp = function(url) {

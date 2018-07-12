@@ -32,6 +32,11 @@ AddTeacherToSchoolclassDisplay.prototype.show = function() {
 AddTeacherToSchoolclassDisplay.prototype.localize = function() {
 	this.$panel.find("[data-translate]").each( Helpers.translate );
 }
+
+AddTeacherToSchoolclassDisplay.prototype.resetSorting = function() {
+	this.$addTeacherTableHead.find(".sortButton").removeClass("active");
+}
+
 /*
  * GUI FUNCTIONS
  */
@@ -68,7 +73,7 @@ AddTeacherToSchoolclassDisplay.prototype.searchTeacher = function() {
 
 AddTeacherToSchoolclassDisplay.prototype.init = function () {
 	app.mainDisplay.registerStretchables( [ this.$addTeacherTableBody ] );
-	//Helpers.stretchHeight([ this.$addTeacherTableBody ]);
+	this.resetSorting();
 }
 
 AddTeacherToSchoolclassDisplay.prototype.clear = function () {
@@ -77,6 +82,7 @@ AddTeacherToSchoolclassDisplay.prototype.clear = function () {
 	this.addTeacherSearchForm.elements["insertion"].value == "";
 	this.addTeacherSearchForm.elements["familyName"].value == "";
 	this.$addTeacherTableHead.find(".sortButton").removeClass('active');
+	this.resetSorting();
 }
 
 AddTeacherToSchoolclassDisplay.prototype.setHelp = function(url) {

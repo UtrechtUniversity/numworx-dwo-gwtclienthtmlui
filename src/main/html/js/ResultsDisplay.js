@@ -47,6 +47,10 @@ ResultsDisplay.prototype.localize = function() {
 	this.$panel.find("[data-translate]").each( Helpers.translate );
 }
 
+ResultsDisplay.prototype.resetSorting = function() {
+	this.$chooseClassTableHead.find(".sortButton").removeClass("active");
+}
+
 /*
  * GUI FUNCTIONS
  */
@@ -125,11 +129,11 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
  */
 
 ResultsDisplay.prototype.init = function () {
+	console.log("init!");
 	app.mainDisplay.registerStretchables( [ this.$chooseClassTableBody, this.$chooseModulesTableBody  ] );
 }
 
 ResultsDisplay.prototype.clear = function () {
-	console.log("clear");
 	if (this.chooseClassModuleForm.elements['open']) {
 		for (var i = 0; i < this.chooseClassModuleForm.elements['open'].length; i++) this.chooseClassModuleForm.elements['open'][i].checked = false;
 	}
@@ -139,6 +143,7 @@ ResultsDisplay.prototype.clear = function () {
 	if (this.chooseClassModuleForm.elements['select[]']) {
 		for (var i = 0; i < this.chooseClassModuleForm.elements['select[]'].length; i++) this.chooseClassModuleForm.elements['select[]'][i].checked = false;
 	}
+	this.resetSorting();
 	this.chooseClassModuleFormToggle();
 }
 

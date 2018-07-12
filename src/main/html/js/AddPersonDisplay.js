@@ -10,10 +10,12 @@ function AddPersonDisplay() {
 	
 	this.$addPersonSchoolclassesRow = this.$addPersonForm.find("tbody tr").detach();
 	this.$addPersonSchoolclassesTableBody = this.$addPersonForm.find("tbody");
+	this.$addPersonSchoolclassesTableHead = this.$addPersonForm.find("thead");
 		
 	// Bind handlers
 	this.$addPersonForm.on('submit', $.proxy(this.submitAddPersonForm,this));	
 	this.$addPersonForm.find("input").on('change', $.proxy(this.changeInputField,this));	
+	this.$addPersonSchoolclassesTableHead.find(".sortButton").click(Helpers.clickSortButton);	
 	
 	// Init
 	this.$panel.hide();
@@ -21,17 +23,16 @@ function AddPersonDisplay() {
 }
 
 AddPersonDisplay.prototype.show = function() {
-        this.localize();
+    this.localize();
 	this.$panel.show();
-	
-	
-	//Helpers.stretchHeight([ this.$addPersonSchoolclassesTableBody ]);
 }
-
-
 
 AddPersonDisplay.prototype.localize = function() {
 	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
+
+AddPersonDisplay.prototype.resetSorting = function() {
+	this.$addPersonSchoolclassesTableHead.find(".sortButton").removeClass("active");
 }
 
 /*
@@ -49,6 +50,7 @@ AddPersonDisplay.prototype.localize = function() {
 
 AddPersonDisplay.prototype.init = function () {
 	app.mainDisplay.registerStretchables( [ this.$addPersonSchoolclassesTableBody ] );
+	this.resetSorting();
 }
 
 AddPersonDisplay.prototype.clear = function () {
@@ -62,6 +64,7 @@ AddPersonDisplay.prototype.clear = function () {
 	this.addPersonForm.elements['email'].value = "";
 	this.addPersonForm.elements['password'].value = "";
 	this.updateSchoolLoginsViewFormSubmitToggle();
+	this.resetSorting();
 }
 
 AddPersonDisplay.prototype.setHelp = function(url) {
@@ -78,7 +81,7 @@ AddPersonDisplay.prototype.showSchoolClasses = function(json) {
 		el = schoolclasses[id].schoolClass;
 		$row = this.$addPersonSchoolclassesRow.clone();
 		$row.prop('tabindex', i);
-		$row.find("#addPersonSchoolclassName").html( el.schoolClassName ).removeAttr("id");
+		$row.find("#addPersonSchoolclassName").html( el.schoolClassName ).attr('data-sortvalue', el.schoolClassName).removeAttr("id");
 	
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			

@@ -91,12 +91,20 @@ EditSchoolclassesDisplay.prototype.show = function() {
 EditSchoolclassesDisplay.prototype.localize = function() {
 	this.$panel.find("[data-translate]").each( Helpers.translate );
 }
+
+EditSchoolclassesDisplay.prototype.resetSorting = function() {
+	this.$changeStudentsTableHead.find(".sortButton").removeClass("active");
+	this.$changeTeachersTableHead.find(".sortButton").removeClass("active");
+	this.$changeModulesTableHead.find(".sortButton").removeClass("active");
+}
+
 /*
  * VIEW FUNCTIONS
  * Map to java implementation
  */
 
 EditSchoolclassesDisplay.prototype.clear = function () {
+	console.log("clear!");
 	this.editSchoolclassForm.elements["classname"].value = "";
 		
 	this.editSchoolclassForm.elements["useClasskey"][0].checked = false;
@@ -114,15 +122,18 @@ EditSchoolclassesDisplay.prototype.clear = function () {
 	this.$changeStudentsTableHead.find(".sortButton").removeClass('active');
 	this.$changeTeachersTableHead.find(".sortButton").removeClass('active');
 	this.$changeModulesTableHead.find(".sortButton").removeClass('active');
+	
+	this.resetSorting();
 }
 
 EditSchoolclassesDisplay.prototype.init = function () {
 	console.log("init2!");
-	this.$changeStudentsTableBody.html("");
-	this.$changeTeachersTableBody.html("");
-	this.$changeModulesTableBody.html("");
+	//this.$changeStudentsTableBody.html("");
+	//this.$changeTeachersTableBody.html("");
+	//this.$changeModulesTableBody.html("");
 	
 	app.mainDisplay.registerStretchables( [ this.$changeStudentsTableBody, this.$changeTeachersTableBody, this.$changeModulesTableBody ] );
+	this.resetSorting();
 }
 
 EditSchoolclassesDisplay.prototype.setHelp = function(url) {

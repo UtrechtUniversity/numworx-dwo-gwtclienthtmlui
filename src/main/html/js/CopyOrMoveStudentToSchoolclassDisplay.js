@@ -65,14 +65,19 @@ function CopyOrMoveStudentToSchoolclassDisplay() {
 CopyOrMoveStudentToSchoolclassDisplay.prototype.show = function() {
         this.localize();
 	this.$panel.show();
-	this.classAFormToggle(false);
-	this.classBFormToggle(false);
-	Helpers.stretchHeight( [ this.$classATableBody, this.$classBTableBody, this.$classesTableBody ]);
+	
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.localize = function() {
 	this.$panel.find("[data-translate]").each( Helpers.translate );
 }
+
+CopyOrMoveStudentToSchoolclassDisplay.prototype.resetSorting = function() {
+	this.$classATableHead.find(".sortButton").removeClass("active");
+	this.$classBTableHead.find(".sortButton").removeClass("active");
+	this.$classesTableHead.find(".sortButton").removeClass("active");
+}
+
 /*
  * GUI FUNCTIONS
  */
@@ -121,22 +126,26 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudents = function(json, $t
  */
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.clear = function () {
+	console.log("clear!");
 	this.classAFormToggle(false);
 	this.classBFormToggle(false);
 	this.$classATableBody.html("");
 	this.$classBTableBody.html("");
 	this.$classAClassName.val("");
 	this.$classBClassName.val("");
+	this.resetSorting();
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.init = function () {
+	console.log("clear!");
 	this.classAFormToggle(false);
 	this.classBFormToggle(false);
 	this.$classATableBody.html("");
 	this.$classBTableBody.html("");
 	this.$classAClassName.val("");
 	this.$classBClassName.val("");
-	Helpers.stretchHeight([ this.$addStudentTableBody ]);
+	app.mainDisplay.registerStretchables( [ this.$classATableBody, this.$classBTableBody, this.$classesTableBody ] );
+	this.resetSorting();
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setHelp = function(url) {
 	this.$helpContentIFrame.attr('src', url );

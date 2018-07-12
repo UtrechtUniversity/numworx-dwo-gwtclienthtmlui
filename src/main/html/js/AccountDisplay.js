@@ -48,6 +48,10 @@ AccountDisplay.prototype.localize = function() {
 	this.$panel.find("[data-translate]").each( Helpers.translate );
 }
 
+AccountDisplay.prototype.resetSorting = function() {
+	this.$schoolLoginsTableHead.find(".sortButton").removeClass("active");
+}
+
 
 /*
  * VIEW FUNCTIONS
@@ -68,7 +72,7 @@ AccountDisplay.prototype.clear = function () {
 	this.updateUserForm.elements["newPassword"].value = "";
 	this.updateUserForm.elements["newPasswordAgain"].value = "";
 	
-	this.$schoolLoginsTableHead.find(".sortButton").removeClass("active");
+	this.resetSorting();
 	
 	this.clearAddSchoolLogin();
 }

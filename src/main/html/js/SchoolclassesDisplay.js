@@ -36,6 +36,11 @@ SchoolclassesDisplay.prototype.show = function() {
 SchoolclassesDisplay.prototype.localize = function() {
 	this.$panel.find("[data-translate]").each( Helpers.translate );
 }
+
+SchoolclassesDisplay.prototype.resetSorting = function() {
+	this.$chooseSchoolclassTableHead.find(".sortButton").removeClass("active");
+}
+
 /*
  * VIEW FUNCTIONS
  * Map to java implementation
@@ -52,15 +57,21 @@ SchoolclassesDisplay.prototype.init = function () {
 	this.addSchoolclassForm.elements["useClasskey"][1].checked = true;
 	
 	app.mainDisplay.registerStretchables( [ this.$chooseSchoolclassTableBody ] );
+	
+	this.resetSorting();
 }
 
 SchoolclassesDisplay.prototype.clear = function () {
+	console.log("clear!");
+	
 	this.addSchoolclassForm.elements["classname"].value = "";
 	this.addSchoolclassForm.elements["classkey"].value = "";
 	this.addSchoolclassForm.elements["useClasstree"][0].checked = false;
 	this.addSchoolclassForm.elements["useClasstree"][1].checked = true;
 	this.addSchoolclassForm.elements["useClasskey"][0].checked = false;
 	this.addSchoolclassForm.elements["useClasskey"][1].checked = true;
+	
+	this.resetSorting();
 }
 
 SchoolclassesDisplay.prototype.setHelp = function(url) {

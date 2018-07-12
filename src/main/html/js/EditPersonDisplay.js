@@ -19,11 +19,13 @@ function EditPersonDisplay() {
 	this.$removeButton = $(this.removeButton);
 	
 	this.$editPersonSchoolclassesRow = this.$editPersonSchoolclassesForm.find("tbody tr").detach();
+	this.$editPersonSchoolclassesTableHead = this.$editPersonSchoolclassesForm.find("thead");
 	this.$editPersonSchoolclassesTableBody = this.$editPersonSchoolclassesForm.find("tbody");
 	
 	// Bind handlers
 	this.$editPersonDetailsForm.on('submit', $.proxy(this.submitEditPersonDetails,this));	
-	this.$removeButton.on('click', $.proxy(this.clickRemoveButton,this));	
+	this.$removeButton.on('click', $.proxy(this.clickRemoveButton,this));
+	this.$editPersonSchoolclassesTableHead.find(".sortButton").click(Helpers.clickSortButton);	
 	
 	// Init
 	this.$panel.hide();
@@ -39,6 +41,10 @@ EditPersonDisplay.prototype.show = function() {
 
 EditPersonDisplay.prototype.localize = function() {
 	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
+
+EditPersonDisplay.prototype.resetSorting = function() {
+	this.$editPersonSchoolclassesTableHead.find(".sortButton").removeClass("active");
 }
 
 /*
@@ -105,6 +111,7 @@ EditPersonDisplay.prototype.clear = function () {
 	}
 	this.showSubmitButton();
 	this.hideRemoveButton();
+	this.resetSorting();
 }
 EditPersonDisplay.prototype.init = function () {
 	console.log("init!");
@@ -171,7 +178,7 @@ EditPersonDisplay.prototype.setSchoolClasses = function (json) {
 		el = schoolclasses[id].schoolClass;
 		$row = this.$editPersonSchoolclassesRow.clone();
 		$row.prop('tabindex', i);
-		$row.find("#editPersonSchoolclassName").html( el.schoolClassName ).removeAttr("id");
+		$row.find("#editPersonSchoolclassName").html( el.schoolClassName ).attr('data-sortvalue', el.schoolClassName).removeAttr("id");
 		
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;
