@@ -247,15 +247,17 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.moveBtoA = function(list) {
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.clickClassesRow = function(event) {
 	Helpers.selectTableRow(event);
-	if (this.classesForm.elements["schoolclass"].value != "") this.classesFormToggle(true);
-	else this.classesFormToggle(false);	
+	if (this.classesForm.elements["schoolclass"].value != "") {
+		this.setClass(this.classesForm.elements["schoolclass"].value); // bypass submit
+		//this.classesFormToggle(true);
+	} else this.classesFormToggle(false);	
 }
 
-// helpers
-CopyOrMoveStudentToSchoolclassDisplay.prototype.classesFormToggle = function(value) {
-	if (value) this.$classesForm.find(':submit').prop('disabled','');
-	else this.$classesForm.find(':submit').prop('disabled','disabled');
-}
+// helpers - bypassed
+// CopyOrMoveStudentToSchoolclassDisplay.prototype.classesFormToggle = function(value) {
+// 	if (value) this.$classesForm.find(':submit').prop('disabled','');
+// 	else this.$classesForm.find(':submit').prop('disabled','disabled');
+// }
 
 /*
  * EVENT HANDLERS - class A or B
@@ -272,10 +274,11 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.changeSelectBCheckbox = function
 	else this.classBFormToggle(false);
 }
 
-CopyOrMoveStudentToSchoolclassDisplay.prototype.submitClassesForm = function(event) {
-	event.preventDefault();		
-	this.setClass(this.classesForm.elements["schoolclass"].value);
-}
+// This thing is bypassed
+// CopyOrMoveStudentToSchoolclassDisplay.prototype.submitClassesForm = function(event) {
+// 	event.preventDefault();
+// 	this.setClass(this.classesForm.elements["schoolclass"].value);
+// }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.submitOrClickABFormOrButton = function(event) {
 	event.preventDefault();		
