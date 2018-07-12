@@ -18,6 +18,10 @@ WelcomeDisplay.prototype.localize = function() {
 	this.$panel.find("[data-translate]").each( Helpers.translate );
 }
 
+WelcomeDisplay.prototype.init = function() {
+	// do nothing
+}
+
 WelcomeDisplay.prototype.clear = function() {
 	this.$welcomeText.html("");
 }

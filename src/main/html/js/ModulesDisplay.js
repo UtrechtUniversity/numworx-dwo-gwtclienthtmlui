@@ -23,6 +23,9 @@ ModulesDisplay.prototype.localize = function() {
  * Map to java implementation
  */
 
+ModulesDisplay.prototype.init = function () {
+	// do nothing
+}
 ModulesDisplay.prototype.clear = function () {
 	this.$iframe.attr('src', '' );
 }
