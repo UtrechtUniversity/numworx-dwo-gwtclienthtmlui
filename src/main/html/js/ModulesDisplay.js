@@ -33,6 +33,14 @@ ModulesDisplay.prototype.openUrl = function (url) {
 	this.$iframe.attr('src', url );
 }
 
+ModulesDisplay.prototype.setMainNavVisible = function(b) {
+	console.log("teunis implementeert setMainNavVisible " + b);
+}
+
+ModulesDisplay.prototype.isMainNavVisible = function() {
+	return true; // dummy, totdat teunis bovenstaande heeft geimplementeerd.
+}
+
 /*
  * EVENT HANDLERS
  */
