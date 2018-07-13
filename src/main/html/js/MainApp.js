@@ -29,11 +29,11 @@ MainApp.prototype.getTranslator = function() {
 	return this.translator;
 }
 
-$(document).ready(function(){ 
-	window.app = new MainApp();	
-});
-
-//window.jsInitMainApp() = function() {
+//$(document).ready(function(){ 
 //	window.app = new MainApp();	
-//}
+//});
+
+window.jsInitMainApp = function() {
+	window.app = new MainApp();	
+}
 	
