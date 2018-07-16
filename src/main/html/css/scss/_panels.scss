@@ -77,9 +77,9 @@ body {
 	
 	@media #{$mediaQueryDesktop} {
 		margin-right: $navWidthExpanded * -1px;
-		.collapsedNav & { // Expand
-			margin-right: $navWidthExpanded * -1px!important;
-		}
+		//.collapsedNav & { // Expand
+//			margin-right: $navWidthExpanded * -1px!important;
+//		}
 		//position: relative;
 	}
 	.hiddenNav & {
@@ -88,9 +88,9 @@ body {
 	.expandedNav & {
 		margin-right: $navWidthExpanded * -1px;
 	}
-	.collapsedNav & {
-		margin-right: $navWidth * -1px;
-	}
+	//.collapsedNav & {
+//		margin-right: $navWidth * -1px;
+//	}
 	.libraryPage & {
 		margin-right: $navWidthLibraryPage * -1px;
 		padding-top: ($headerHeight) * 1px;
@@ -574,9 +574,9 @@ body {
 			width: $navWidthExpanded * 1px;
 			z-index: 200;
 			
-			.collapsedNav & {
-				width: $navWidthExpanded * 1px;
-			}
+			//.collapsedNav & {
+//				width: $navWidthExpanded * 1px;
+//			}
 		}
 		
 		
