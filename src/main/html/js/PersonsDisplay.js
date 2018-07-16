@@ -62,14 +62,15 @@ PersonsDisplay.prototype.filterPersonsList = function () {
 			$result = this.$personsTableBody.find("tr");
 	} else {	
 		var $result = this.$personsTableBody.find("td span").filter(function() {
-			el = $(this).get(0);
+			var el = $(this).get(0);
+			var val = "";
 						
 			if (el.parentElement.cellIndex == 0) val = personsSearchForm.elements["userName"].value;
 			if (el.parentElement.cellIndex == 1) val = personsSearchForm.elements["givenName"].value;
 			if (el.parentElement.cellIndex == 2) val = personsSearchForm.elements["insertion"].value;
 			if (el.parentElement.cellIndex == 3) val = personsSearchForm.elements["familyName"].value;
 			
-			return el.innerHTML.toLowerCase() == val.toLowerCase();
+			return Helpers.searchCompare(el.innerHTML, val);			
 		}).closest("tr");
 	}
 	

@@ -53,14 +53,15 @@ AddStudentToSchoolclassDisplay.prototype.searchStudent = function() {
 			$result = this.$addStudentTableBody.find("tr");
 	} else {	
 		var $result = this.$addStudentTableBody.find("td span").filter(function() {
-			el = $(this).get(0);
+			var el = $(this).get(0);
+			var val = "";
 						
 			if (el.parentElement.cellIndex == 0) val = addStudentSearchForm.elements["username"].value;
 			if (el.parentElement.cellIndex == 1) val = addStudentSearchForm.elements["givenName"].value;
 			if (el.parentElement.cellIndex == 2) val = addStudentSearchForm.elements["insertion"].value;
 			if (el.parentElement.cellIndex == 3) val = addStudentSearchForm.elements["familyName"].value;
 			
-			return el.innerHTML.toLowerCase() == val.toLowerCase();
+			return Helpers.searchCompare(el.innerHTML, val);			
 		}).closest("tr");
 	}
 	

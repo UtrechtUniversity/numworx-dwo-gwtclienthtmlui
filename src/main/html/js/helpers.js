@@ -230,4 +230,12 @@ Helpers.addClassIfOverflown = function(index, el) {
 	}	
 }
 
+Helpers.searchCompare = function( val1, val2 ) {
+	if (val1 == "" || val2 == "") return false;
+	
+	regE = new RegExp( val2 , 'i' );
+	return val1.search(regE) != -1;
+}
+
+
 

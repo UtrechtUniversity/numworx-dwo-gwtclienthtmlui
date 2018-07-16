@@ -51,14 +51,15 @@ AddTeacherToSchoolclassDisplay.prototype.searchTeacher = function() {
 			$result = this.$addTeacherTableBody.find("tr");
 	} else {	
 		var $result = this.$addTeacherTableBody.find("td span").filter(function() {
-			el = $(this).get(0);
+			var el = $(this).get(0);
+			var val = "";
 						
 			if (el.parentElement.cellIndex == 0) val = addTeacherSearchForm.elements["userName"].value;
 			if (el.parentElement.cellIndex == 1) val = addTeacherSearchForm.elements["givenName"].value;
 			if (el.parentElement.cellIndex == 2) val = addTeacherSearchForm.elements["insertion"].value;
 			if (el.parentElement.cellIndex == 3) val = addTeacherSearchForm.elements["familyName"].value;
 			
-			return el.innerHTML.toLowerCase() == val.toLowerCase();
+			return Helpers.searchCompare(el.innerHTML, val);			
 		}).closest("tr");
 	}
 	
