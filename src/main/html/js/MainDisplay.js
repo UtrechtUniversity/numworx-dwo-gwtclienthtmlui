@@ -273,6 +273,17 @@ MainDisplay.prototype.setDefaultNavSize = function() {
 	this.$panel.addClass("collapsedNav");
 }
 
+MainDisplay.prototype.hideNav = function() {
+	this.$panel.addClass("hiddenNav");
+}
+MainDisplay.prototype.showNav = function() {
+	this.$panel.removeClass("hiddenNav");
+}
+MainDisplay.prototype.isNavVisible = function() {
+	return this.$panel.hasClass("hiddenNav") ? false : true; 
+}
+
+
 /*
  * OTHER HELPERS
  */

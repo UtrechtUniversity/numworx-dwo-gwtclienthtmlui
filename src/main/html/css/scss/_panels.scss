@@ -78,9 +78,12 @@ body {
 	@media #{$mediaQueryDesktop} {
 		margin-right: $navWidthExpanded * -1px;
 		.collapsedNav & { // Expand
-			margin-right: $navWidthExpanded * -1px;
+			margin-right: $navWidthExpanded * -1px!important;
 		}
 		//position: relative;
+	}
+	.hiddenNav & {
+		margin-right: 0;
 	}
 	.expandedNav & {
 		margin-right: $navWidthExpanded * -1px;
@@ -106,6 +109,10 @@ body {
 		
 		@media #{$mediaQueryDesktop} {
 			left: $navWidthExpanded * 1px;
+		}
+		
+		.hiddenNav & {
+			left: 0;
 		}
 		
 		iframe {						
@@ -566,6 +573,10 @@ body {
 			top: ($headerHeight) * 1px;
 			width: $navWidthExpanded * 1px;
 			z-index: 200;
+			
+			.collapsedNav & {
+				width: $navWidthExpanded * 1px;
+			}
 		}
 		
 		
@@ -718,8 +729,12 @@ body {
 				}
 			}
 		}
-		
 	}	
+	&.hiddenNav {
+		nav {
+			display: none;
+		}
+	}
 }
 
 //svg path { fill: inherit; }
