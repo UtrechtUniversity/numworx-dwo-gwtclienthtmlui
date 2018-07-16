@@ -266,9 +266,11 @@ MainDisplay.prototype.closeHelp = function(dialog) {
 
 MainDisplay.prototype.setExpandedNavSize = function() {
 	this.$panel.addClass("expandedNav");
+	this.$panel.removeClass("collapsedNav");
 }
 MainDisplay.prototype.setDefaultNavSize = function() {
 	this.$panel.removeClass("expandedNav");
+	this.$panel.addClass("collapsedNav");
 }
 
 /*

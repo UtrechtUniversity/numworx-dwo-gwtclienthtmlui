@@ -77,10 +77,16 @@ body {
 	
 	@media #{$mediaQueryDesktop} {
 		margin-right: $navWidthExpanded * -1px;
+		.collapsedNav & { // Expand
+			margin-right: $navWidthExpanded * -1px;
+		}
 		//position: relative;
 	}
 	.expandedNav & {
 		margin-right: $navWidthExpanded * -1px;
+	}
+	.collapsedNav & {
+		margin-right: $navWidth * -1px;
 	}
 	.libraryPage & {
 		margin-right: $navWidthLibraryPage * -1px;
