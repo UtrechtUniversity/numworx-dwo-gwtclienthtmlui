@@ -25,7 +25,7 @@
                             <run>
                                 <!--docker run -v `pwd`/src:/usr/local/apache2/htdocs/local -p 127.0.0.1:8888:80 -dit - -name local-ebs-dev-proxy docker-local-ebs-dev-proxy-->
                                 <ports>
-                                    <port>127.0.0.1:8888:80</port>
+                                    <port>0.0.0.0:8888:80</port>
                                 </ports>
                                 <volumes>
                                     <bind>
