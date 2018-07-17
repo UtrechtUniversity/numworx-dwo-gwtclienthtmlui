@@ -102,7 +102,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 		// Sort buttons
 		$headerSorting = this.$selectedResultsColumnHeaderSorting.clone();
 		$theadRow3.append($headerSorting);	
-		$theadRow3.find(".sortButton").click(Helpers.clickSortButton);
+		$theadRow3.find(".sortButton").off('click').click(Helpers.clickSortButton);
 	}
 	$theadRow3.append('<th class="fill">&nbsp;</th>');	
 	$theadRow2.append('<th class="fill">&nbsp;</th>');	
