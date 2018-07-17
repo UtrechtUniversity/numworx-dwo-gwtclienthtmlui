@@ -8,10 +8,12 @@ function ModulesDisplay() {
 }
 
 ModulesDisplay.prototype.show = function() {
+	app.mainDisplay.registerStretchables( [ this.$iframe ] );
+	this.$iframe.ready(function() { $(window).trigger('resize'); });
         this.localize();
 	this.$panel.show();
-	Helpers.stretchIframeHeight( this.$iframe );
-	$(window).on('resize', $.proxy(Helpers.resizeHelpSection, this));
+	
+	//$(window).on('resize', $.proxy(Helpers.resizeHelpSection, this));
 }
 
 ModulesDisplay.prototype.localize = function() {
@@ -31,6 +33,9 @@ ModulesDisplay.prototype.clear = function () {
 }
 ModulesDisplay.prototype.openUrl = function (url) {
 	this.$iframe.attr('src', url );
+	
+	
+	
 }
 
 ModulesDisplay.prototype.setMainNavVisible = function(b) {
@@ -42,12 +47,3 @@ ModulesDisplay.prototype.setMainNavVisible = function(b) {
 ModulesDisplay.prototype.isMainNavVisible = function() {
 	return app.mainDisplay.isNavVisible();
 }
-
-/*
- * EVENT HANDLERS
- */
-
-ModulesDisplay.prototype.resizeIframe = function(e) {
-	Helpers.stretchHeight( [ this.$iframe ] );
-}
-

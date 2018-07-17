@@ -97,15 +97,16 @@ body {
 	}
 	
 	&.iframepanel {
-		bottom: 0;
-		left: $navWidth * 1px;
+		//bottom: 0;
+		//left: $navWidth * 1px;
 		margin: 0;
-		overflow-y: hidden;	
-		padding: 0;
-		position: absolute;
-		right: 0;
-		top: ($headerHeight) * 1px;;
-		width: auto;
+		//overflow-y: hidden;	
+		//padding: 0;
+		//position: absolute;
+		//right: 0;
+		//top: ($headerHeight) * 1px;;
+		//width: auto;
+		padding-top: ($headerHeight) * 1px;;
 		
 		@media #{$mediaQueryDesktop} {
 			left: $navWidthExpanded * 1px;
@@ -117,6 +118,7 @@ body {
 		
 		iframe {						
 			margin: 0 0 0 auto;
+			//margin-top: ($headerHeight) * 1px;;
 			width: 100%;
 		}
 	}
