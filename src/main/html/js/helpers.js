@@ -127,7 +127,7 @@ Helpers.setResultIndicatorColor = function ($el) {
 
 Helpers.tableSorterBubbleSort = function(tbody, index, attr, type, asc) { //bubblesort
 	// In Vanilla JS for performance	
-	console.log("sort");
+	console.log("bubblesort");
 	
 	switching = true;
 	j = 0;
@@ -150,10 +150,6 @@ Helpers.tableSorterBubbleSort = function(tbody, index, attr, type, asc) { //bubb
 			
 			if (row1.children[index].firstChild && row1.children[index].firstChild.dataset) val1 = row1.children[index].firstChild.dataset[attr]; 
 			if (row2.children[index].firstChild && row2.children[index].firstChild.dataset) val2 = row2.children[index].firstChild.dataset[attr];
-			
-			console.log(row1);
-			console.log(index);
-			console.log(row1.children[index].firstChild);
 												
 			if (val1 != 0 && val2 != 0 && type == "string") {
 				if ( (asc && val2.localeCompare(val1) < 0) || (!asc && val2.localeCompare(val1) > 0) ) { shouldSwitch = true; break; }
@@ -172,6 +168,69 @@ Helpers.tableSorterBubbleSort = function(tbody, index, attr, type, asc) { //bubb
 	return;
 }
 
+Helpers.tableSorterMergeSort = function(tr, index, attr, type, asc) {
+	var tr = tbody.getElementsByTagName("TR");
+	
+	console.log("mergesort");
+	
+	// make an array of the nodelist
+	var arr = [];
+	for(var i = tr.length; i--; arr.unshift(tr[i]));
+	
+	arr = Helpers.tableSorterMergeSortRecursive(arr, index, attr, type, asc);
+	
+	$(tbody).html("").append(arr);
+} 
+
+Helpers.tableSorterMergeSortRecursive = function(arr, index, attr, type, asc) {
+	if (arr.length === 1) return arr;
+	
+    const middle = Math.floor(arr.length / 2) // get the middle item of the array rounded down
+    const left = arr.slice(0, middle) // items on the left side
+    const right = arr.slice(middle) // items on the right side
+	
+	return Helpers.tableSorterMergeSortMerge( 
+		Helpers.tableSorterMergeSortRecursive(left, index, attr, type, asc),
+		Helpers.tableSorterMergeSortRecursive(right, index, attr, type, asc), index, attr, type, asc );
+}
+Helpers.tableSorterMergeSortMerge = function(left, right, index, attr, type, asc) {
+    let result = [];
+    let indexLeft = 0;
+    let indexRight = 0;
+	let val1 = 0;
+	let val2 = 0;
+
+    while (indexLeft < left.length && indexRight < right.length) {
+		
+		if (left[indexLeft].children[index].children[0] && left[indexLeft].children[index].children[0].dataset) val1 = left[indexLeft].children[index].children[0].dataset[attr]; 
+		if (right[indexRight].children[index].children[0] && right[indexRight].children[index].children[0].dataset) val2 = right[indexRight].children[index].children[0].dataset[attr];
+		
+		if (val1 != 0 && val2 != 0 && type == "string") { // string sort
+			
+			if ( (asc && val2.localeCompare(val1) < 0) || (!asc && val2.localeCompare(val1) > 0) ) { 
+		        result.push(left[indexLeft])
+		        indexLeft++
+			} else {
+		        result.push(right[indexRight])
+		        indexRight++
+			}
+			
+		} else { // integer sort
+			
+			if ( (asc && val2 < val1) || (!asc && val2 > val1) ) { 	
+			    result.push(left[indexLeft])
+			    indexLeft++				
+			} else {
+		        result.push(right[indexRight])
+		        indexRight++
+			}
+		}
+    }
+
+    return result.concat(left.slice(indexLeft)).concat(right.slice(indexRight));
+}
+
+
 Helpers.clickSortButton = function() {
 	$this = $(this);
 	$table = $this.parents('table');
@@ -188,9 +247,17 @@ Helpers.clickSortButton = function() {
 	//if ($this.data("attr")) attr = $this.data("attr");
 	attr = "sortvalue";
 		
-	Helpers.tableSorterBubbleSort(tbody, index, attr, type, asc);	
+		
+	//var t0 = performance.now();
 	
-	$this.parent().find('.sortButton').removeClass("active");
+	//Helpers.tableSorterBubbleSort(tbody, index, attr, type, asc);	
+	Helpers.tableSorterMergeSort(tbody, index, attr, type, asc);	
+	
+	//var t1 = performance.now();
+	//console.log("Call took " + (t1 - t0) + " milliseconds.")
+	
+	
+	$this.closest("table").find('.sortButton').removeClass("active");
 	$this.addClass("active");	
 }
 
