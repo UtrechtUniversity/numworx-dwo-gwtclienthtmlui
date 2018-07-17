@@ -33,9 +33,6 @@ ModulesDisplay.prototype.clear = function () {
 }
 ModulesDisplay.prototype.openUrl = function (url) {
 	this.$iframe.attr('src', url );
-	
-	
-	
 }
 
 ModulesDisplay.prototype.setMainNavVisible = function(b) {
@@ -46,4 +43,9 @@ ModulesDisplay.prototype.setMainNavVisible = function(b) {
 
 ModulesDisplay.prototype.isMainNavVisible = function() {
 	return app.mainDisplay.isNavVisible();
+}
+
+ModulesDisplay.prototype.sendMessage = function(message) {
+	var domain = window.location.protocol + "//" + window.location.host;
+	this.$iframe[0].contentWindow.postMessage(message, domain);
 }
