@@ -27,6 +27,7 @@
 	<!-- TODO: decide whether to add Google fonts locally (consider licence) -->
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+	<!-- <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700" rel="stylesheet"> -->
 	
 	<!-- Font for the material icons -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -627,9 +628,7 @@
                                     				<span data-translate="NUM_TBL_CLASSES_ACCESSKEY">Klassleutel</span>
                                                                 <input id="classkeyEdit" name="classkey" type="text" data-translate="NUM_LBL_CLASSES_CLASSNAME" value="" />
 							</label>
-						</div>
 						
-						<div class="row">
 							<div class="col-2 options">
 								<label><span data-translate="NUM_LBL_CLASSES_TREESTRUCT">Boomstructuur?</span></label>
 								<div class="option">
@@ -641,9 +640,7 @@
 									<label for="useClasstreeNoEdit"><span data-translate="NUM_LBL_NO">Nee</span></label>
 								</div>
 							</div>
-							<div class="col-6">
-								&nbsp;
-							</div>
+							
 							<div class="col-2">
 								<input type="button" name="delete" class="danger right down" data-translate="NUM_BTN_Remove"  value="Verwijder" />								
 							</div>
@@ -670,7 +667,7 @@
 								<table class="dwo">
 									<thead>
 										<tr>
-											<th><span data-translate="NUM_TBL_STUDENTS">Studenten</span>
+											<th>
 												<span class="sortButton asc" data-order="asc" data-type="string">
 													<svg viewBox="0 0 74 74" class="icon">
 														  <use xlink:href="#arrowUp"></use>
@@ -681,6 +678,7 @@
 														  <use xlink:href="#arrowDown"></use>
 													</svg>
 												</span>
+												<span data-translate="NUM_TBL_STUDENTS">Studenten</span>
 											</th>
 										</tr>
 									</thead>
@@ -704,7 +702,7 @@
 								<table class="dwo">
 									<thead>
 										<tr>
-											<th><span data-translate="NUM_TBL_TEACHERS">Docenten</span>
+											<th>
 												<span class="sortButton asc" data-order="asc" data-type="string">
 													<svg viewBox="0 0 74 74" class="icon">
 														  <use xlink:href="#arrowUp"></use>
@@ -715,6 +713,7 @@
 														  <use xlink:href="#arrowDown"></use>
 													</svg>
 												</span>
+												<span data-translate="NUM_TBL_TEACHERS">Docenten</span>
 											</th>
 										</tr>
 									</thead>
@@ -737,7 +736,7 @@
 								<table class="dwo">
 									<thead>
 										<tr>
-											<th><span data-translate="NUM_TBL_MODULES">Modules</span>
+											<th>
 												<span class="sortButton asc" data-order="asc" data-type="string">
 													<svg viewBox="0 0 74 74" class="icon">
 														  <use xlink:href="#arrowUp"></use>
@@ -748,6 +747,7 @@
 														  <use xlink:href="#arrowDown"></use>
 													</svg>
 												</span>
+												<span data-translate="NUM_TBL_MODULES">Modules</span>
 											</th>
 										</tr>
 									</thead>
@@ -804,9 +804,9 @@
 				<div class="row">
 					<form name="addStudentSearch">
 						<fieldset>
-							<label for="addStudentSearchUserName" class="col-2 input">
-                                                            <span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
-								<input id="addStudentSearchUserName" name="username" type="text" value="" />
+							<label for="addStudentSearchFamilyName" class="col-2 input">
+								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+								<input id="addStudentSearchFamilyName" name="familyName" type="text" value="" />
 							</label>
 							<label for="addStudentSearchGivenName" class="col-2 input">
 								<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
@@ -816,9 +816,10 @@
 								<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
 								<input id="addStudentSearchInsertion" name="insertion" type="text" value="" />
 							</label>
-							<label for="addStudentSearchFamilyName" class="col-2 input">
-								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
-								<input id="addStudentSearchFamilyName" name="familyName" type="text" value="" />
+							
+							<label for="addStudentSearchUserName" class="col-2 input">
+                                                            <span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+								<input id="addStudentSearchUserName" name="username" type="text" value="" />
 							</label>
 							
 							
@@ -837,7 +838,7 @@
 						<table class="dwo hoverable selectable">
 							<thead>
 								<tr>
-									<th class="col-2"><span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+									<th class="col-3">
 										<span class="sortButton asc" data-order="asc" data-type="string">
 											<svg viewBox="0 0 74 74" class="icon">
 												  <use xlink:href="#arrowUp"></use>
@@ -848,8 +849,9 @@
 												  <use xlink:href="#arrowDown"></use>
 											</svg>
 										</span>
+										<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
 									</th>
-									<th class="col-2"><span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
+									<th class="col-3">
 										<span class="sortButton asc" data-order="asc" data-type="string">
 											<svg viewBox="0 0 74 74" class="icon">
 												  <use xlink:href="#arrowUp"></use>
@@ -860,9 +862,10 @@
 												  <use xlink:href="#arrowDown"></use>
 											</svg>
 										</span>
+										<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 									</th>
-									<th class="col-2"><span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span></th>
-									<th class="col-6"><span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+									<th class="col-3"><span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span></th>									
+									<th class="col-3">
 										<span class="sortButton asc" data-order="asc" data-type="string">
 											<svg viewBox="0 0 74 74" class="icon">
 												  <use xlink:href="#arrowUp"></use>
@@ -873,17 +876,20 @@
 												  <use xlink:href="#arrowDown"></use>
 											</svg>
 										</span>
+										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
 									</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr tabindex="1">
-									<td class="col-2"><span id="addStudentAddUsername"></span>
-										<input type="radio" id="addStudentAddId" name="id" class="hidden" value="bakker34">										
-									</td class="col-2">
-									<td class="col-2"><span id="addStudentAddGivenName"></span></td>
-									<td class="col-2"><span id="addStudentAddInsertion"></span></td>
-									<td class="col-6"><span id="addStudentAddFamilyName"></span></td>
+									<td class="col-3">
+										<input type="radio" id="addStudentAddId" name="id" class="hidden" value="bakker34">
+										<span id="addStudentAddFamilyName"></span>
+										
+									</td>
+									<td class="col-3"><span id="addStudentAddGivenName"></span></td>
+									<td class="col-3"><span id="addStudentAddInsertion"></span></td>									
+									<td class="col-3"><span id="addStudentAddUsername"></span></td>
 									
 								</tr>
 							</tbody>
@@ -942,7 +948,7 @@
 					</div>
 					<div class="col-4">
                                             <h3><span data-translate="NUM_LBL_CLASSEDITSTUDENTS_STUDENTSRIGHTCLASS">Leerlingen tweede gekozen klas</span></h3>
-						<input type="text" id="copyOrMoveStudentToSchoolclassClassBClassname" value="" class="col-2" disabled="disabled" />
+						<input type="text" id="copyOrMoveStudentToSchoolclassClassBClassname" value="" class="col-2" />
 					</div>
 				</div>
 				
@@ -1100,9 +1106,9 @@
 				<div class="row">
 					<form name="addTeacherSearch">
 						<fieldset>
-							<label for="addTeacherSearchUserName" class="col-2 input">
-								<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
-								<input id="addTeacherSearchUserName" name="userName" type="text" value="" />
+							<label for="addTeacherSearchFamilyName" class="col-2 input">
+								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+								<input id="addTeacherSearchFamilyName" name="familyName" type="text" value="" />
 							</label>
 							<label for="addTeacherSearchGivenName" class="col-2 input">
 								<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
@@ -1112,9 +1118,10 @@
 								<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
 								<input id="addTeacherSearchInsertion" name="insertion" type="text" value="" />
 							</label>
-							<label for="addTeacherSearchFamilyName" class="col-2 input">
-								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
-								<input id="addTeacherSearchFamilyName" name="familyName" type="text" value="" />
+							
+							<label for="addTeacherSearchUserName" class="col-2 input">
+								<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+								<input id="addTeacherSearchUserName" name="userName" type="text" value="" />
 							</label>
 							
 							<div class="col-4">
@@ -1132,7 +1139,7 @@
 						<table class="dwo hoverable selectable">
 							<thead>
 								<tr>
-									<th class="col-2"><span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+									<th class="col-3">
 										<span class="sortButton asc" data-order="asc" data-type="string">
 											<svg viewBox="0 0 74 74" class="icon">
 												  <use xlink:href="#arrowUp"></use>
@@ -1143,8 +1150,9 @@
 												  <use xlink:href="#arrowDown"></use>
 											</svg>
 										</span>
+										<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
 									</th>
-									<th class="col-2"><span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
+									<th class="col-3">
 										<span class="sortButton asc" data-order="asc" data-type="string">
 											<svg viewBox="0 0 74 74" class="icon">
 												  <use xlink:href="#arrowUp"></use>
@@ -1155,9 +1163,11 @@
 												  <use xlink:href="#arrowDown"></use>
 											</svg>
 										</span>
+										<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 									</th>
-									<th class="col-2"><span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span></th>
-									<th class="col-6"><span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+									<th class="col-3"><span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span></th>
+									
+									<th class="col-3">
 										<span class="sortButton asc" data-order="asc" data-type="string">
 											<svg viewBox="0 0 74 74" class="icon">
 												  <use xlink:href="#arrowUp"></use>
@@ -1168,17 +1178,22 @@
 												  <use xlink:href="#arrowDown"></use>
 											</svg>
 										</span>
+										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
 									</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr tabindex="1">
-									<td class="col-2"><span id="addTeacherAddUserName">Bakker34</span>
+									<td class="col-6">
 										<input type="radio" id="addTeacherAddId" name="id" class="hidden" value="bakker34">										
+										<span id="addTeacherAddFamilyName">Bakker</span>
 									</td>
 									<td class="col-2"><span id="addTeacherAddGivenName">Michel</span></td>
 									<td class="col-2"><span id="addTeacherAddInsertion">van</span></td>
-									<td class="col-6"><span id="addTeacherAddFamilyName">Bakker</span></td>
+									
+									<td class="col-2"><span id="addTeacherAddUserName">Bakker34</span>
+										
+									</td>
 								</tr>
 							</tbody>
 						</table>
@@ -1432,7 +1447,7 @@
 							<table id="resultsDisplayChooseClass" class="dwo">
 								<thead>
 									<tr>
-										<th>
+										<th class="col-2">
 											<span class="sortButton asc" data-order="asc" data-type="string">
 												<svg viewBox="0 0 74 74" class="icon">
 													  <use xlink:href="#arrowUp"></use>
@@ -1444,22 +1459,22 @@
 												</svg>
 											</span>
 										</th>
-										<th><span data-translate="NUM_TBL_RESULTS_OPEN">Open</span></th>
-										<th><span data-translate="NUM_TBL_RESULTS_CLOSED" >Gesloten</span></th>
+										<th class="col-2"><span data-translate="NUM_TBL_RESULTS_OPEN">Open</span></th>
+										<th class="col-2"><span data-translate="NUM_TBL_RESULTS_CLOSED" >Gesloten</span></th>
 									</tr>
 								</thead>
 								<tbody>	
 							
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
-										<td><span id="chooseClassAndModulesClassname">Klasnaam</span></td>
+										<td class="col-2"><span id="chooseClassAndModulesClassname">Klasnaam</span></td>
 
-										<td>
+										<td class="col-2">
 											<div class="checkbox">
 												<input type="radio" name="open[]" id="chooseClassAndModulesOpen" value="schoolclassID"><label class="icon" for="chooseClassAndModulesOpen"></label>
 											</div>											
 										</td>
-										<td>
+										<td class="col-2">
 											<div class="checkbox">
 												<input type="radio" name="closed[]" id="chooseClassAndModulesClassClosed" value="schooclassID"><label class="icon" for="chooseClassAndModulesClassClosed"></label>
 											</div>											
@@ -1475,17 +1490,17 @@
 							<table id="resultsDisplayChooseModules" class="dwo">
 								<thead>
 									<tr>
-										<th>&nbsp;</th>
-										<th><span data-translate="NUM_TBL_SELECT">Selecteer</span></th>
+										<th class="col-4">&nbsp;</th>
+										<th class="col-2"><span data-translate="NUM_TBL_SELECT">Selecteer</span></th>
 									</tr>
 								</thead>
 								<tbody>	
 							
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
-										<td><span id="chooseClassAndModulesModuleName">Module name</span></td>
+										<td class="col-5"><span id="chooseClassAndModulesModuleName">Module name</span></td>
 
-										<td>
+										<td class="col-1">
 											<div class="checkbox">
 												<input type="checkbox" name="select[]" id="chooseClassAndModulesModuleSelect" value="moduleID"><label class="icon" for="chooseClassAndModulesModuleSelect"></label>
 											</div>											
@@ -1807,9 +1822,9 @@
 				<div class="row">
 					<form name="personsSearch">
 						<fieldset>
-							<label for="personsSearchUserName" class="col-2 input">
-								<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
-								<input id="personsSearchUserName" name="userName" type="text" value="" />
+							<label for="personsSearchFamilyName" class="col-2 input">
+								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+								<input id="personsSearchFamilyName" name="familyName" type="text" value="" />
 							</label>
 							<label for="personsSearchGivenName" class="col-2 input">
 								<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
@@ -1819,9 +1834,10 @@
 								<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
 								<input id="personsSearchInsertion" name="insertion" type="text" value="" />
 							</label>
-							<label for="personsSearchFamilyName" class="col-2 input">
-								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
-								<input id="personsSearchFamilyName" name="familyName" type="text" value="" />
+							
+							<label for="personsSearchUserName" class="col-2 input">
+								<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+								<input id="personsSearchUserName" name="userName" type="text" value="" />
 							</label>
 							
 							
@@ -1852,8 +1868,40 @@
 						<table class="dwo hoverable selectable">
 							<thead>
 								<tr>
-									<th class="col-2">
-										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+									
+									<th class="col-3">
+										
+										<span class="sortButton asc" data-order="asc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowUp"></use>
+											</svg>
+										</span>
+										<span class="sortButton desc" data-order="desc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowDown"></use>
+											</svg>
+										</span>
+										<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+									</th>
+									<th class="col-3">
+										
+										<span class="sortButton asc" data-order="asc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowUp"></use>
+											</svg>
+										</span>
+										<span class="sortButton desc" data-order="desc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowDown"></use>
+											</svg>
+										</span>
+										<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
+									</th>
+									<th class="col-3">
+										<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
+									</th>
+									
+									<th class="col-3">										
 										<span class="sortButton asc" data-order="asc" data-type="string">
 											<svg viewBox="0 0 74 74" class="icon">
 												  <use xlink:href="#arrowUp"></use>
@@ -1864,55 +1912,31 @@
 												  <use xlink:href="#arrowDown"></use>
 											</svg>
 										</span>									
+										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
 									</th>
-									<th class="col-2">
-										<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
-										<span class="sortButton asc" data-order="asc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowUp"></use>
-											</svg>
-										</span>
-										<span class="sortButton desc" data-order="desc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowDown"></use>
-											</svg>
-										</span>
-									</th>
-									<th class="col-2">
-										<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
-									</th>
-									<th class="col-3">
-										<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
-										<span class="sortButton asc" data-order="asc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowUp"></use>
-											</svg>
-										</span>
-										<span class="sortButton desc" data-order="desc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowDown"></use>
-											</svg>
-										</span>
-									</th>
-									<th class="col-3"><span data-translate="NUM_TBL_EDITOPTIONS">Bewerk opties</span></th>
+									<!-- <th class="col-3"><span data-translate="NUM_TBL_EDITOPTIONS">Bewerk opties</span></th> -->
 								</tr>
 							</thead>
 							<tbody>
 								<tr tabindex="1">
-									<td class="col-2"><span id="personsTableUserName">Bakker34</span>
+									
+									<td class="col-3"><span id="personsTableFamilyName">Bakker</span>
 										<input type="radio" id="personsTableId" name="id" class="hidden" value="bakker34">										
 									</td>
-									<td class="col-2"><span id="personsTableGivenName">Michel</span></td>
-									<td class="col-2"><span id="personsTableInsertion">van</span></td>
-									<td class="col-3"><span id="personsTableFamilyName">Bakker</span></td>
-									<td class="col-3">
+									<td class="col-3"><span id="personsTableGivenName">Michel</span></td>
+									<td class="col-3"><span id="personsTableInsertion">van</span></td>		
+									<td class="col-3"><span id="personsTableUserName">Bakker34</span>
+										
+									</td>							
+									
+									<!-- <td class="col-3">
 										<svg id="personsTableEditDetails" viewBox="0 0 64 64" class="icon editOptions">
 											  <use xlink:href="#account"></use>
 										</svg>
 										<svg id="personsTableEditSchoolClasses" viewBox="0 0 64 64" class="icon editOptions">
 											  <use xlink:href="#klassen"></use>
 										</svg>
-									</td>
+									</td> -->
 								</tr>
 							</tbody>
 						</table>
@@ -1996,10 +2020,7 @@
 					<form name="editPersonDetails">
 						<fieldset>
 							
-							<label for="editPersonUserName" class="col-2 input">
-								<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
-								<input id="editPersonUserName" name="userName" type="text" value="" />
-							</label>
+							
 							
 							<label for="editPersonGivenName" class="col-2 input">
 								<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
@@ -2016,6 +2037,10 @@
 							<label for="editPersonEmail" class="col-2 input">
 								<span data-translate="NUM_TBL_EMAIL">Email adres</span>
 								<input id="editPersonEmail" name="email" type="text" value="" />
+							</label>
+							<label for="editPersonUserName" class="col-2 input">
+								<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+								<input id="editPersonUserName" name="userName" type="text" value="" />
 							</label>
 							<label for="editPersonPassword" class="col-2 input">
 								<span data-translate="NUM_TBL_PASSWORD">Wachtwoord</span>
@@ -2056,7 +2081,7 @@
 							<table class="dwo">
 								<thead>
 									<tr>
-										<th>&nbsp;
+										<th class="col-4">&nbsp;
 											<span class="sortButton asc" data-order="asc" data-type="string">
 												<svg viewBox="0 0 74 74" class="icon">
 													  <use xlink:href="#arrowUp"></use>
@@ -2068,15 +2093,15 @@
 												</svg>
 											</span>
 										</th>
-										<th><span data-translate="NUM_TBL_SELECT">Selecteer</span></th>
+										<th class="col-2"><span data-translate="NUM_TBL_SELECT">Selecteer</span></th>
 									</tr>
 								</thead>
 								<tbody>	
 									
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
-										<td class="col-3"><span id="editPersonSchoolclassName">Schoolnaam</span></td>
-										<td>
+										<td class="col-4"><span id="editPersonSchoolclassName">Schoolnaam</span></td>
+										<td class="col-2">
 											<div class="checkbox">
 												<input type="checkbox" name="active[]" id="editPersonSchoolclassActive" value="schoolid"><label class="icon" for="editPersonSchoolclassActive"></label>
 											</div>
@@ -2134,10 +2159,7 @@
 					
 							<fieldset>
 							
-								<label for="addPersonUserName" class="col-2 input">
-									Username
-									<input id="addPersonUserName" name="userName" type="text" value="" />
-								</label>
+								
 							
 								<label for="addPersonGivenName" class="col-2 input">
 									<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
@@ -2154,6 +2176,10 @@
 								<label for="addPersonEmail" class="col-2 input">
 									<span data-translate="NUM_TBL_EMAIL">Email adres</span>
 									<input id="addPersonEmail" name="email" type="text" value="" />
+								</label>
+								<label for="addPersonUserName" class="col-2 input">
+									Username
+									<input id="addPersonUserName" name="userName" type="text" value="" />
 								</label>
 								<label for="addPersonPassword" class="col-2 input">
 									<span data-translate="NUM_TBL_PASSWORD">Wachtwoord</span>
@@ -2190,7 +2216,7 @@
 								<table class="dwo">
 									<thead>
 										<tr>
-											<th>&nbsp;
+											<th  class="col-4">&nbsp;
 												<span class="sortButton asc" data-order="asc" data-type="string">
 													<svg viewBox="0 0 74 74" class="icon">
 														  <use xlink:href="#arrowUp"></use>
@@ -2202,15 +2228,15 @@
 													</svg>
 												</span>
 											</th>
-											<th><span data-translate="NUM_TBL_SELECT">Selecteer</span></th>
+											<th class="col-2"><span data-translate="NUM_TBL_SELECT">Selecteer</span></th>
 										</tr>
 									</thead>
 									<tbody>	
 									
 										<!-- The row is detached and used as a template by the JS -->								
 										<tr>
-											<td class="col-3"><span id="addPersonSchoolclassName">Schoolnaam</span></td>
-											<td>
+											<td class="col-4"><span id="addPersonSchoolclassName">Schoolnaam</span></td>
+											<td class="col-2">
 												<div class="checkbox">
 													<input type="radio" name="schoolclass" id="addPersonSchoolclassActive" value="schoolid"><label class="icon" for="addPersonSchoolclassActive"></label>
 												</div>

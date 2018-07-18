@@ -56,7 +56,7 @@ table.dwo { //:not(.c-datepicker__days)
 					display: inline-block;
 					width: 13px; height: 13px;
 					//width: 64px; height: 64px;
-					margin: 0 -2px;
+					margin: 0 5px 0 2px;
 					
 					//background-color: $primary;
 					
@@ -69,8 +69,6 @@ table.dwo { //:not(.c-datepicker__days)
 					}
 					&.active .icon use { fill: $primary; }
 					
-					
-					
 				}
 				
 				> .sortButton {
@@ -81,6 +79,7 @@ table.dwo { //:not(.c-datepicker__days)
 				}
 				.sortButton:first-child { 
 					margin-left: 0;
+					margin-right: 2px;
 				}
 				
 			}
@@ -105,11 +104,11 @@ table.dwo { //:not(.c-datepicker__days)
 		
 		tr {					
 			td {
-				line-height: 1.8em;
+				line-height: 1.3em;
 				border-bottom: 1px $line1 solid;
 				//padding: 5px 10px;
 				vertical-align: middle;
-				padding: $gutter / 2 * 1px!important;
+				padding: 9px $gutter / 2 * 1px!important;
 				width: ($colWidth - ($gutter)) * 1px;
 				float: none!important; // for if it has a col-class
 			}	
@@ -121,6 +120,7 @@ table.dwo { //:not(.c-datepicker__days)
 	
 	&.hoverable tr:hover td { // &.hoverable tr:focus td,  { //&.hoverable tr:hover td span {
 		background-color: $shade12;
+		color: $white;
 		
 		span:not(.sortButton) { 
 			background-color: $shade12;
@@ -134,6 +134,7 @@ table.dwo { //:not(.c-datepicker__days)
 		}
 		tr.selected td {
 			background-color: $shade12;
+			color: $white;
 		}
 		tr.new td {
 			//background-color: $primary;

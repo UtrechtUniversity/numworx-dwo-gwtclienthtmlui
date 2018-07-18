@@ -497,7 +497,7 @@ body {
 		#accountMenuToggle {
 			float: right;
 			margin-right: $siteMargin * 1px;
-			margin-top: 15px;
+			margin-top: 11px;
 
 			.icon {
 				display: block;
@@ -506,7 +506,7 @@ body {
 				border-radius: 2px;
 				float: left;
 				height: 26px; //TODO var
-				margin-right: 0.5em;
+				margin-right: 0;
 				width: 26px; //TODO var
 				
 				use { fill: $shade22; }
@@ -521,9 +521,9 @@ body {
 			min-width: $siteWidth / 12 * 2 * 1px; // TODO make flexible
 			padding: 10px;
 			position: absolute;
-			right: $gutter * 1px;
+			right: $siteMargin * 1px;
 			text-align: right;
-			top: $headerHeight - 15 * 1px;
+			top: $headerHeight - 11 * 1px;
 			
 			a {
 				clear: both;
@@ -559,7 +559,7 @@ body {
 	}
 	
 	nav {
-//		background-color: $shade10;
+		
 		bottom: 0;
 		color: $shade22;
 		//height: 100%;
@@ -718,6 +718,7 @@ body {
 	
 	&.expandedNav {
 		nav {
+			background-color: $shade21;
 			@include box-shadow(3px,0px,10px,0px,$shadow);
 			top: ($headerHeight) * 1px;
 			width: $navWidthExpanded * 1px;			
@@ -890,7 +891,7 @@ section.lightbox {
  */
 
 #welcomeDisplayPanel {
-	background: transparent url(../images/bg-numworx-logo.png) no-repeat bottom right;
+	background: $shade10 url(../images/bg-numworx-logo.png) no-repeat bottom right;
 	background-size: contain;
 }
 

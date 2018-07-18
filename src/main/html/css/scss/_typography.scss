@@ -78,17 +78,16 @@ ul {
  */
 
 h1 {
-	//font-family: 'Ubuntu Condensed', sans-serif;
+//	font-family: 'Ubuntu Condensed', sans-serif;
+//	font-family: 'Roboto Condensed', sans-serif;
 	font-size: 18 / 16 * 1em;
 //	font-stretch: condensed;
 	color: $primary;	
-	font-weight: 300;
+	font-weight: 700;
 	margin-bottom:  ($gutter - 5) + 1px; //2 * $elementMarginBottom; //TODO
 	padding-top: $elementMarginBottom; //TODO
 }
 h2 {
-	
-	
 	margin-bottom: $elementMarginBottom;
 	header & { 
 		margin-bottom: 0; 
@@ -100,6 +99,8 @@ h2 {
 	&.sectionhead {
 		border-bottom: 1px $primary solid;
 		font-size: 13 / 16 * 1em;
+		font-weight: 700;
+		letter-spacing: 0.3px;
 		line-height: $gutter * 1px;
 		width: 100%;
 		header & { border-bottom-style: none; }
@@ -116,7 +117,9 @@ h2 {
 	
 	&.helpheader {
 		background-color: $shade12;
-		color: $primary;		
+		color: $primary;
+		font-size: 13 / 16 * 1em;
+		font-weight: 700;		
 		line-height: $gutter * 1px;
 		text-indent: 10px;
 		.desktop & {
@@ -128,7 +131,8 @@ h2 {
 h3 {
 	color: $primary;
 	margin-bottom: $elementMarginBottom;
-	font-weight: 500;
+	font-weight: 700;
+	font-size: 13 / 16 * 1em;
 	
 	.dialog & {
 		font-size: 13 / 16 * 1em;
@@ -187,14 +191,20 @@ input[type="text"], input[type="password"] {
 	font-size: 1em;
 	line-height: 1em;	
 }
-.options .option label {
-	font-size: 12px;
+.options {
+	label {
+		text-transform: uppercase;
+	}
+	.option label {
+		font-size: 12px;
+		text-transform: uppercase;
+	}
 }
 
 label {
 	color: $primaryLight;
 	//font-family: 'Ubuntu Condensed', sans-serif;
-	font-size: 14 / 16 * 1em;
+	font-size: 13 / 16 * 1em;
 	//font-weight: bold;
 
 	
@@ -226,7 +236,7 @@ a.resultIndicator {
 
 table thead tr th {
 	//font-family: 'Ubuntu Condensed', sans-serif;
-	font-size: 14 / 16 * 1em;
+	font-size: 12 / 16 * 1em;
 	text-transform: uppercase;
 	color: $primaryLight;
 }

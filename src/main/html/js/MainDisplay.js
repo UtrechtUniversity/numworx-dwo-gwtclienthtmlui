@@ -85,6 +85,7 @@ function MainDisplay() {
 	this.$nav.find('a').on('click', $.proxy(this.clickMenuItem, this));
 	this.$accountMenuBox.find('a').on('click', $.proxy(this.clickAccountMenuItem, this));
 	this.$accountMenuToggle.on('mouseenter', $.proxy(this.mouseEnterAccountMenuIcon, this));
+	this.$accountMenuBox.on('mouseleave', $.proxy(this.mouseLeaveAccountMenuIcon, this));
 	$(document).on('click', $.proxy(this.clickWherever, this));
 	
 	// Trigger window resize for initial help sizing
@@ -357,6 +358,9 @@ MainDisplay.prototype.clickAccountMenuItem = function(event) {
 }
 MainDisplay.prototype.mouseEnterAccountMenuIcon = function(event) {
 	this.$accountMenuBox.show();
+}
+MainDisplay.prototype.mouseLeaveAccountMenuIcon = function(event) {
+	this.$accountMenuBox.hide();
 }
 MainDisplay.prototype.clickWherever = function(event) {
 	if (this.$accountMenuBox.is(":visible")) {

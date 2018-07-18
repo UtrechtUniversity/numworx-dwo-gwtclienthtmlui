@@ -220,7 +220,7 @@ ModulesOfSchoolclassDisplay.prototype.clear = function () {
 	this.settingsForm.elements["locked[]"][0].checked = "";
 	this.settingsForm.elements["locked[]"][1].checked = "checked";
 	
-	this.accessKeyToggleFormToggle(false);
+	this.accessKeyToggle(false);
 	this.settingsFormToggle(false);
 }
 

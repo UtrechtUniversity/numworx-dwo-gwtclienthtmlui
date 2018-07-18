@@ -29,6 +29,11 @@ input[type="submit"], input[type="button"], button {
 	&.danger {
 		background-color: $danger;
 		border-color: $danger;
+		
+		&:hover {
+			background-color: $dangerLight;
+			border-color: $dangerLight;
+		}
 	}
 	
 	&.right, &.left {
@@ -76,7 +81,7 @@ input[type="submit"], input[type="button"], button {
 	&:disabled {
 		background-color: $shade12;
 		border-color: $shade12;
-		cursor: not-allowed;
+		cursor: default;
 	}
 	
 	label & {
@@ -100,10 +105,10 @@ input[type="text"], input[type="password"] {
 	}
 	
 	&:disabled {
-		background-color: $shade10;
+		background-color: $shade20;
 		border-color: $shade22;
 		//color: $shade22;
-		cursor: not-allowed;
+		cursor: default;
 	}
 }
 

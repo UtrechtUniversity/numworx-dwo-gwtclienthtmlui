@@ -185,20 +185,20 @@ Helpers.tableSorterMergeSort = function(tr, index, attr, type, asc) {
 Helpers.tableSorterMergeSortRecursive = function(arr, index, attr, type, asc) {
 	if (arr.length === 1) return arr;
 	
-    const middle = Math.floor(arr.length / 2) // get the middle item of the array rounded down
-    const left = arr.slice(0, middle) // items on the left side
-    const right = arr.slice(middle) // items on the right side
+    var middle = Math.floor(arr.length / 2) // get the middle item of the array rounded down
+    var left = arr.slice(0, middle) // items on the left side
+    var right = arr.slice(middle) // items on the right side
 	
 	return Helpers.tableSorterMergeSortMerge( 
 		Helpers.tableSorterMergeSortRecursive(left, index, attr, type, asc),
 		Helpers.tableSorterMergeSortRecursive(right, index, attr, type, asc), index, attr, type, asc );
 }
 Helpers.tableSorterMergeSortMerge = function(left, right, index, attr, type, asc) {
-    let result = [];
-    let indexLeft = 0;
-    let indexRight = 0;
-	let val1 = 0;
-	let val2 = 0;
+    var result = [];
+    var indexLeft = 0;
+    var indexRight = 0;
+	var val1 = 0;
+	var val2 = 0;
 
     while (indexLeft < left.length && indexRight < right.length) {
 		
