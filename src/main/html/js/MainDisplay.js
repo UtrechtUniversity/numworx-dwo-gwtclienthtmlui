@@ -106,7 +106,7 @@ MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 
 MainDisplay.prototype.setActiveView = function(view) {
 	if (view == "LOGOUT") app.getPresenterFactory().getMainPresenter().logout();
-	app.getPresenterFactory().getMainPresenter().selectView(view);
+	else app.getPresenterFactory().getMainPresenter().selectView(view);
 }
 
 
