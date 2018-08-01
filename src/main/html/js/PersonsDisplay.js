@@ -197,13 +197,14 @@ PersonsDisplay.prototype.submitPersonsSearchForm = function(event) {
 
 PersonsDisplay.prototype.changePersonsSearchRole = function(event) {
 	if (this.personsSearchForm.elements["role"].value != "") this.personsSearchFormToggle(true);
-	else this.personsSearchFormToggle(false);	
+	else this.personsSearchFormToggle(false);        
+        this.searchPersons();        
 }
 
 // helpers
 PersonsDisplay.prototype.personsSearchFormToggle = function(value) {
 	if (value) this.$personsSearchForm.find(':submit').prop('disabled','');
-	else this.$personsSearchForm.find(':submit').prop('disabled','disabled');
+	else this.$personsSearchForm.find(':submit').prop('disabled','disabled');       
 }
 
 /*
