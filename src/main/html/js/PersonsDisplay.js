@@ -65,10 +65,10 @@ PersonsDisplay.prototype.filterPersonsList = function () {
 			var el = $(this).get(0);
 			var val = "";
 						
-			if (el.parentElement.cellIndex == 0) val = personsSearchForm.elements["userName"].value;
+			if (el.parentElement.cellIndex == 3) val = personsSearchForm.elements["userName"].value;
 			if (el.parentElement.cellIndex == 1) val = personsSearchForm.elements["givenName"].value;
 			if (el.parentElement.cellIndex == 2) val = personsSearchForm.elements["insertion"].value;
-			if (el.parentElement.cellIndex == 3) val = personsSearchForm.elements["familyName"].value;
+			if (el.parentElement.cellIndex == 0) val = personsSearchForm.elements["familyName"].value;
 			
 			return Helpers.searchCompare(el.innerHTML, val);			
 		}).closest("tr");
