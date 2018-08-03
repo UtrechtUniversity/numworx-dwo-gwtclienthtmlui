@@ -106,10 +106,10 @@ PersonsDisplay.prototype.init = function (json) {
 PersonsDisplay.prototype.clear = function () {	
 	this.personsSearchForm.elements["role"][0].checked = true;
 	this.personsSearchForm.elements["role"][1].checked = false;
-	this.personsSearchForm.elements["userName"].value == "";
-	this.personsSearchForm.elements["givenName"].value == "";
-	this.personsSearchForm.elements["insertion"].value == "";
-	this.personsSearchForm.elements["familyName"].value == "";
+	this.personsSearchForm.elements["userName"].value = "";
+	this.personsSearchForm.elements["givenName"].value = "";
+	this.personsSearchForm.elements["insertion"].value = "";
+	this.personsSearchForm.elements["familyName"].value = "";
 	
 	this.resetSorting();	
 	this.personsSearchFormToggle(false);	
