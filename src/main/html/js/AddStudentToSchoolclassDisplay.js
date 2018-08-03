@@ -3,8 +3,6 @@ function AddStudentToSchoolclassDisplay() {
 	this.addStudentSearchForm = document.forms["addStudentSearch"];
 	this.addStudentAddForm = document.forms["addStudentAdd"];
 	
-	// Buttons 
-	
 	// jQuery objects
 	this.$panel = jQuery("#addStudentToSchoolclassDisplay");
 	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
@@ -15,11 +13,16 @@ function AddStudentToSchoolclassDisplay() {
 	this.$addStudentRow = this.$addStudentAddForm.find("tbody tr").detach();
 	this.$addStudentTableBody = this.$addStudentAddForm.find("tbody");
 	this.$addStudentTableHead = this.$addStudentAddForm.find("thead");
-		
+
+	// Buttons 
+    	this.$resetButton = $(this.addStudentSearchForm.elements["reload"]);
+
 	// Bind handlers
 	this.$addStudentAddForm.on('submit', $.proxy(this.submitAddStudentAddForm, this));
 	this.$addStudentSearchForm.on('submit', $.proxy(this.submitAddStudentSearchForm, this));
 	this.$addStudentTableHead.find(".sortButton").click(Helpers.clickSortButton);
+	this.$addStudentTableHead.find(".sortButton").click(Helpers.clickSortButton);
+        this.$resetButton.on('click', $.proxy(this.clickReset,this));
 	
 	// Init
 	this.$panel.hide();
@@ -109,6 +112,18 @@ AddStudentToSchoolclassDisplay.prototype.clear = function () {
 	this.$addStudentTableHead.find(".sortButton").removeClass('active');
 	this.resetSorting();
 }
+
+
+AddStudentToSchoolclassDisplay.prototype.clickReset = function(event) {
+	this.addStudentSearchForm.elements["username"].value = "";
+	this.addStudentSearchForm.elements["givenName"].value = "";
+	this.addStudentSearchForm.elements["insertion"].value = "";
+	this.addStudentSearchForm.elements["familyName"].value = "";
+	this.$addStudentTableHead.find(".sortButton").removeClass('active');
+	this.resetSorting();
+	this.searchStudent();
+}
+
 
 AddStudentToSchoolclassDisplay.prototype.setSchoolClass = function(schoolClass) {
 	console.log("setting schooclass: "+schoolClass);

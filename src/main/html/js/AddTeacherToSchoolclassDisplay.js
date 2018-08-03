@@ -14,11 +14,14 @@ function AddTeacherToSchoolclassDisplay() {
 	this.$addTeacherTableBody = this.$addTeacherAddForm.find("tbody");
 	this.$addTeacherTableHead = this.$addTeacherAddForm.find("thead");
 		
+	// Buttons 
+    	this.$resetButton = $(this.addTeacherSearchForm.elements["reload"]);
+
 	// Bind handlers
 	this.$addTeacherAddForm.on('submit', $.proxy(this.submitAddTeacherAddForm, this));
 	this.$addTeacherSearchForm.on('submit', $.proxy(this.submitAddTeacherSearchForm, this));
 	this.$addTeacherTableHead.find(".sortButton").click(Helpers.clickSortButton);
-	
+        this.$resetButton.on('click', $.proxy(this.clickReset,this));
 	
 	// Init
 	this.$panel.hide();
@@ -106,6 +109,17 @@ AddTeacherToSchoolclassDisplay.prototype.clear = function () {
 	this.addTeacherSearchForm.elements["familyName"].value == "";
 	this.$addTeacherTableHead.find(".sortButton").removeClass('active');
 	this.resetSorting();
+}
+
+AddTeacherToSchoolclassDisplay.prototype.clickReset = function(event) {
+        this.searchTeacher();
+	this.addTeacherSearchForm.elements["userName"].value = "";
+	this.addTeacherSearchForm.elements["givenName"].value = "";
+	this.addTeacherSearchForm.elements["insertion"].value = "";
+	this.addTeacherSearchForm.elements["familyName"].value = "";
+	this.$addTeacherTableHead.find(".sortButton").removeClass('active');
+	this.resetSorting();
+	
 }
 
 AddTeacherToSchoolclassDisplay.prototype.setHelp = function(url) {
