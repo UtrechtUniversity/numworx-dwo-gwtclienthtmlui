@@ -24,8 +24,8 @@ function ModulesOfSchoolclassDisplay() {
 	this.$settingsForm = $(this.settingsForm);	
 	this.$searchForm = $(this.searchForm);
 	
-	this.$settingsFormFrom = $(this.settingsForm.elements["from"]);
-	this.$settingsFormTo = $(this.settingsForm.elements["to"]);
+	this.$settingsFormFrom = $(this.settingsForm.elements["modulesOfSchoolclassDisplayValidityFrom"]);
+	this.$settingsFormTo = $(this.settingsForm.elements["modulesOfSchoolclassDisplayValidityTo"]);
 	this.$settingsFormLocked = $(this.settingsForm.elements["locked[]"]);
 	
 	this.$reloadButton = $(this.searchForm.elements["reload"]);
@@ -210,18 +210,19 @@ ModulesOfSchoolclassDisplay.prototype.init = function () {
 
 ModulesOfSchoolclassDisplay.prototype.clear = function () {
 	this.settingsForm.elements["key"] = "";
-	this.settingsForm.elements["accessKey"] = "";
-	this.settingsForm.elements["from"] = "";
-	this.settingsForm.elements["to"] = "";
+	this.settingsForm.elements["accessKey"].value = "";
+	this.settingsForm.elements["from"].value = "";
+	this.settingsForm.elements["to"].value = "";
 	this.settingsForm.elements["name"] = "";
 	
-	this.searchForm.elements["name"] = "";
+	this.searchForm.elements["name"].value = "";
 	
 	this.settingsForm.elements["locked[]"][0].checked = "";
 	this.settingsForm.elements["locked[]"][1].checked = "checked";
 	
 	this.accessKeyToggle(false);
 	this.settingsFormToggle(false);
+	this.selectedNodeId=null;
 }
 
 ModulesOfSchoolclassDisplay.prototype.setHelp = function(url) {
@@ -363,12 +364,12 @@ ModulesOfSchoolclassDisplay.prototype.detachItem = function(id) {
 
 ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
 
-	var typeString = this.settingsForm.elements["locked[]"][0].checked ? "assesment" : "normal";
+	var typeString = this.settingsForm.elements["modulesOfSchoolclassDisplayTypeLocked"].checked ? "assesment" : "normal";
 	
 	var from = this.settingsForm.elements["from"].value;
 	var to = this.settingsForm.elements["to"].value;
 			
-	app.getPresenterFactory().getModulesOfSchoolclassPresenter().setModuleSettings(  this.settingsForm.elements["key"].value,
+	app.getPresenterFactory().getModulesOfSchoolclassPresenter().setModuleSettings(  this.selectedNodeId,
 																				typeString,
 																				from,
 																				to,
@@ -376,12 +377,12 @@ ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
 }
 
 ModulesOfSchoolclassDisplay.prototype.addModule = function() {
-	var typeString = this.settingsForm.elements["locked[]"][0].checked ? "assesment" : "normal";
+	var typeString = this.settingsForm.elements["modulesOfSchoolclassDisplayTypeLocked"].checked ? "assesment" : "normal";
 	
 	var from = this.settingsForm.elements["from"].value;
 	var to = this.settingsForm.elements["to"].value;
 	
-	app.getPresenterFactory().getModulesOfSchoolclassPresenter().addModule(  	this.settingsForm.elements["key"].value,
+	app.getPresenterFactory().getModulesOfSchoolclassPresenter().addModule(  	this.selectedNodeId,
 																				typeString,
 																				from,
 																				to,
@@ -441,7 +442,7 @@ ModulesOfSchoolclassDisplay.prototype.clickTreeNode = function(event) {
 
 ModulesOfSchoolclassDisplay.prototype.clickSelectRow = function(event) {
 	Helpers.selectTableRow(event);
-		
+	
 	// Remove other temporary row, if available
 	this.$tree.find(".temporary input").prop('checked','');
 	this.removeTemporaryRow();
@@ -464,7 +465,7 @@ ModulesOfSchoolclassDisplay.prototype.clickSelectRow = function(event) {
 ModulesOfSchoolclassDisplay.prototype.settingsFormToggle = function(value) {
 	if (value === true) {
 		this.$settingsForm.find('input').prop('disabled','');
-		this.settingsForm.elements["from"].focus();
+	//	this.settingsForm.elements["from"].focus();
 	}
 	else this.$settingsForm.find('input').prop('disabled','disabled');
 }
