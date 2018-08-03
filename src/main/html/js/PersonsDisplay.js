@@ -61,17 +61,31 @@ PersonsDisplay.prototype.filterPersonsList = function () {
 		 this.personsSearchForm.elements["familyName"].value == "" ) {
 			$result = this.$personsTableBody.find("tr");
 	} else {	
-		var $result = this.$personsTableBody.find("td span").filter(function() {
-			var el = $(this).get(0);
-			var val = "";
-						
-			if (el.parentElement.cellIndex == 0) val = personsSearchForm.elements["userName"].value;
-			if (el.parentElement.cellIndex == 1) val = personsSearchForm.elements["givenName"].value;
-			if (el.parentElement.cellIndex == 2) val = personsSearchForm.elements["insertion"].value;
-			if (el.parentElement.cellIndex == 3) val = personsSearchForm.elements["familyName"].value;
-			
-			return Helpers.searchCompare(el.innerHTML, val);			
-		}).closest("tr");
+                var $result;
+                var rows = this.$personsTableBody.find("tr");
+//                var rowList = rows.find("td span");
+                $result = rows.filter(function() {
+                    var el = $(this);
+                    var result = true;
+                    result = result && Helpers.searchCompare(el.get(0).children.item(0).innerText, personsSearchForm.elements["familyName"].value);
+                    result = result && Helpers.searchCompare(el.get(0).children.item(1).innerText, personsSearchForm.elements["givenName"].value);
+                    result = result && Helpers.searchCompare(el.get(0).children.item(2).innerText, personsSearchForm.elements["insertion"].value);
+                    result = result && Helpers.searchCompare(el.get(0).children.item(3).innerText, personsSearchForm.elements["userName"].value);
+                    return result;
+                }                   
+//		var $result = this.$personsTableBody.find("td span").filter(function() {
+//			var el = $(this).get(0);
+//			var val = "";
+//						
+//			if (el.parentElement.cellIndex == 3) val = personsSearchForm.elements["userName"].value;
+//			if (el.parentElement.cellIndex == 1) val = personsSearchForm.elements["givenName"].value;
+//                        if (el.parentElement.cellIndex == 2) val = personsSearchForm.elements["insertion"].value;
+//                        if (el.parentElement.cellIndex == 0) val = personsSearchForm.elements["familyName"].value;
+//                        return Helpers.searchCompare(el.innerHTML, val);
+//		}
+//                
+                ).closest("tr");
+            //$result = rows;
 	}
 	
 	this.$personsTableBody.find("tr").hide();

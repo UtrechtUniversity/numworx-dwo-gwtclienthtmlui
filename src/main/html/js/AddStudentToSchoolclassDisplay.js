@@ -45,25 +45,46 @@ AddStudentToSchoolclassDisplay.prototype.resetSorting = function() {
 
 AddStudentToSchoolclassDisplay.prototype.searchStudent = function() {
 	var addStudentSearchForm = this.addStudentSearchForm; // for the inline function
-	
-	if ( this.addStudentSearchForm.elements["username"].value == "" &&
-		 this.addStudentSearchForm.elements["givenName"].value == "" &&
-		 this.addStudentSearchForm.elements["insertion"].value == "" &&
-		 this.addStudentSearchForm.elements["familyName"].value == "" ) {
+	if ( this.addStudentSearchForm.elements["addStudentSearchFamilyName"].value == "" &&
+		 this.addStudentSearchForm.elements["addStudentSearchGivenName"].value == "" &&
+		 this.addStudentSearchForm.elements["addStudentSearchInsertion"].value == "" &&
+		 this.addStudentSearchForm.elements["addStudentSearchUserName"].value == "" ) {
 			$result = this.$addStudentTableBody.find("tr");
 	} else {	
-		var $result = this.$addStudentTableBody.find("td span").filter(function() {
-			var el = $(this).get(0);
-			var val = "";
-						
-			if (el.parentElement.cellIndex == 0) val = addStudentSearchForm.elements["username"].value;
-			if (el.parentElement.cellIndex == 1) val = addStudentSearchForm.elements["givenName"].value;
-			if (el.parentElement.cellIndex == 2) val = addStudentSearchForm.elements["insertion"].value;
-			if (el.parentElement.cellIndex == 3) val = addStudentSearchForm.elements["familyName"].value;
-			
-			return Helpers.searchCompare(el.innerHTML, val);			
-		}).closest("tr");
+                var $result;
+                var rows = this.$addStudentTableBody.find("tr");
+//                var rowList = rows.find("td span");
+                $result = rows.filter(function() {
+                    var el = $(this);
+                    var result = true;
+                    result = result && Helpers.searchCompare(el.get(0).children.item(0).innerText, addStudentSearchForm.elements["familyName"].value);
+                    result = result && Helpers.searchCompare(el.get(0).children.item(1).innerText, addStudentSearchForm.elements["givenName"].value);
+                    result = result && Helpers.searchCompare(el.get(0).children.item(2).innerText, addStudentSearchForm.elements["insertion"].value);
+                    result = result && Helpers.searchCompare(el.get(0).children.item(3).innerText, addStudentSearchForm.elements["username"].value);
+                    return result;
+                }                   
+                ).closest("tr");
+            //$result = rows;
 	}
+//        
+//	if ( this.addStudentSearchForm.elements["username"].value == "" &&
+//		 this.addStudentSearchForm.elements["givenName"].value == "" &&
+//		 this.addStudentSearchForm.elements["insertion"].value == "" &&
+//		 this.addStudentSearchForm.elements["familyName"].value == "" ) {
+//			$result = this.$addStudentTableBody.find("tr");
+//	} else {	
+//		var $result = this.$addStudentTableBody.find("td span").filter(function() {
+//			var el = $(this).get(0);
+//			var val = "";
+//						
+//			if (el.parentElement.cellIndex == 3) val = addStudentSearchForm.elements["username"].value;
+//			if (el.parentElement.cellIndex == 1) val = addStudentSearchForm.elements["givenName"].value;
+//			if (el.parentElement.cellIndex == 2) val = addStudentSearchForm.elements["insertion"].value;
+//			if (el.parentElement.cellIndex == 0) val = addStudentSearchForm.elements["familyName"].value;
+//			
+//			return Helpers.searchCompare(el.innerHTML, val);			
+//		}).closest("tr");
+//	}
 	
 	this.$addStudentTableBody.find("tr").hide()
 	$result.show();
