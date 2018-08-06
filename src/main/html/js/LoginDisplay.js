@@ -91,9 +91,10 @@ LoginDisplay.prototype.submitLoginForm = function(event) {
 	    password = this.passwordField.value;
 	
 	this.disable();
-	
-	console.log(username);
-	console.log(password);
+
+//security bug    
+//	console.log(username);
+//	console.log(password);
 	
 	this.loginAttempt(username, password);	
 };
