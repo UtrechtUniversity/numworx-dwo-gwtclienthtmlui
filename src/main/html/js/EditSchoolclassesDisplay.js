@@ -171,7 +171,7 @@ EditSchoolclassesDisplay.prototype.showStudents = function(json) {
 	
 	// No Results
 	if ($.isEmptyObject(students)) {
-		this.$changeStudentsTableBody.html('<tr class="empty"><td>Geen leerlingen in deze klas</td></tr>');
+		this.$changeStudentsTableBody.html('<tr class="empty"><td>Geen studenten in deze klas</td></tr>');
 		return;
 	}
 	

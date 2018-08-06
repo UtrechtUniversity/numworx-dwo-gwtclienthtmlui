@@ -89,7 +89,7 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudents = function(json, $t
 	
 	// No Results
 	if ($.isEmptyObject(students)) {
-		$tableBody.html('<tr class="empty"><td>Geen leerlingen in deze klas</td></tr>');
+		$tableBody.html('<tr class="empty"><td>Geen studenten in deze klas</td></tr>');
 		return;
 	}
 	

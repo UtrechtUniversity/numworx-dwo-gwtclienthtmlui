@@ -129,7 +129,7 @@ PersonsDisplay.prototype.showPersons = function(json) {
 	// No Results
 	if ($.isEmptyObject(persons)) {
 		$row = this.$personsRow.clone();
-		this.$personsTableBody.html('<tr colspan="4" class="empty"><td>Geen leerlingen gevonden.</td></tr>');
+		this.$personsTableBody.html('<tr colspan="4" class="empty"><td>Geen studenten gevonden.</td></tr>');
 		return;
 	}
 	

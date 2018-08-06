@@ -130,7 +130,7 @@ EditPersonDisplay.prototype.setUser = function (role,json) {
 	this.editPersonDetailsForm.elements["familyName"].value = familyName;
 	this.editPersonDetailsForm.elements["givenName"].value = givenName;
 	this.editPersonDetailsForm.elements["insertion"].value = insertion;
-	this.editPersonDetailsForm.elements["role"].value = role == "TEACHER" ? "docent" : "leerling";
+	this.editPersonDetailsForm.elements["role"].value = role == "TEACHER" ? "docent" : "student";
 	
 	this.role = role;
 		
@@ -160,7 +160,7 @@ EditPersonDisplay.prototype.setSingleSchoolStudent = function (json) {
 	this.editPersonDetailsForm.elements["insertion"].value = insertion;
 	this.editPersonDetailsForm.elements["email"].value = email;
 	this.editPersonDetailsForm.elements["newPassword"].value = password;
-	this.editPersonDetailsForm.elements["role"].value = "leerling";
+	this.editPersonDetailsForm.elements["role"].value = "student";
 	
 	this.role = "STUDENT";
 	
