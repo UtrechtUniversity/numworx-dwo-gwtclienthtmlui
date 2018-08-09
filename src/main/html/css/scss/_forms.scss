@@ -84,6 +84,7 @@ input[type="submit"], input[type="button"], button {
 		cursor: default;
 	}
 	
+	
 	label & {
 		display: block;
 		margin-top: $elementMarginBottom; // in fact, this is the labels bottom margin		
@@ -109,6 +110,9 @@ input[type="text"], input[type="password"] {
 		border-color: $shade22;
 		//color: $shade22;
 		cursor: default;
+	}
+	&.semiDisabled:disabled {
+		background-color: $white;
 	}
 }
 
@@ -323,5 +327,9 @@ form {
 		padding-bottom: 5px;
 	}
 	
+}
+
+.selectAllButton {
+	cursor: pointer;
 }
 	

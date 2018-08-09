@@ -238,22 +238,31 @@ ResultsDisplay.prototype.submitChooseClassModuleForm = function() {
 
 ResultsDisplay.prototype.clickSelectAllModules = function() {
 	event.preventDefault();
-	if (!this.chooseClassModuleForm.elements["select[]"].length) return;
+	if (typeof this.chooseClassModuleForm.elements["select[]"] == 'undefined' ) return;
 	
 	$el = $(event.target);
 	
 	if ($el.hasClass('active')) {
-		for (var i=0 ; i < this.chooseClassModuleForm.elements["select[]"].length; i++) {
-			this.chooseClassModuleForm.elements["select[]"][i].checked = false;
+		if (typeof this.chooseClassModuleForm.elements["select[]"].length == 'undefined') {
+			this.chooseClassModuleForm.elements["select[]"].checked = false;
+		} else {
+			for (var i=0 ; i < this.chooseClassModuleForm.elements["select[]"].length; i++) {
+				this.chooseClassModuleForm.elements["select[]"][i].checked = false;
+			}
 		}
 		this.resultState.activeCourses = [];
 		$el.removeClass("active");
 	} else {
-		for (var i=0 ; i < this.chooseClassModuleForm.elements["select[]"].length; i++) {
-			if (!this.chooseClassModuleForm.elements["select[]"][i].checked) {
-				this.chooseClassModuleForm.elements["select[]"][i].checked = true;
-				this.resultState.activeCourses.push(this.chooseClassModuleForm.elements["select[]"][i].value);
-			}  
+		if (typeof this.chooseClassModuleForm.elements["select[]"].length == 'undefined') {
+			this.chooseClassModuleForm.elements["select[]"].checked = true;
+			this.resultState.activeCourses.push(this.chooseClassModuleForm.elements["select[]"].value);
+		} else {
+			for (var i=0 ; i < this.chooseClassModuleForm.elements["select[]"].length; i++) {
+				if (!this.chooseClassModuleForm.elements["select[]"][i].checked) {
+					this.chooseClassModuleForm.elements["select[]"][i].checked = true;
+					this.resultState.activeCourses.push(this.chooseClassModuleForm.elements["select[]"][i].value);
+				}  
+			}
 		}
 		$el.addClass("active");
 	}

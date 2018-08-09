@@ -29,6 +29,7 @@ function CopyOrMoveStudentToSchoolclassDisplay() {
 	this.$classARow = this.$classAForm.find("tbody tr").detach();
 	this.$classATableBody = this.$classAForm.find("tbody");	
 	this.$classATableHead = this.$classAForm.find("thead");	
+	this.$classASelectAll = $("#copyOrMoveStudentToSchoolclassClassASelectAll");
 	
 	// Class B elements
 	this.$classBForm = $(this.classBForm);
@@ -37,6 +38,7 @@ function CopyOrMoveStudentToSchoolclassDisplay() {
 	this.$classBRow = this.$classBForm.find("tbody tr").detach();
 	this.$classBTableBody = this.$classBForm.find("tbody");	
 	this.$classBTableHead = this.$classBForm.find("thead");	
+	this.$classBSelectAll = $("#copyOrMoveStudentToSchoolclassClassBSelectAll");
 	
 	// Classes elements
 	this.$classesForm = $(this.classesForm);
@@ -57,6 +59,9 @@ function CopyOrMoveStudentToSchoolclassDisplay() {
 	this.$classATableHead.find(".sortButton").click(Helpers.clickSortButton);
 	this.$classBTableHead.find(".sortButton").click(Helpers.clickSortButton);
 	this.$classesTableHead.find(".sortButton").click(Helpers.clickSortButton);
+	
+	this.$classASelectAll.on('click', $.proxy(this.clickClassASelectAll, this));
+	this.$classBSelectAll.on('click', $.proxy(this.clickClassBSelectAll, this));	
 	
 	// Init
 	this.$panel.hide();
@@ -127,8 +132,8 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudents = function(json, $t
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.clear = function () {
 	console.log("clear!");
-	this.classAFormToggle(false);
-	this.classBFormToggle(false);
+	this.classAFormToggle();
+	this.classBFormToggle();
 	this.$classATableBody.html("");
 	this.$classBTableBody.html("");
 	this.$classAClassName.val("");
@@ -137,9 +142,9 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.clear = function () {
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.init = function () {
-	console.log("clear!");
-	this.classAFormToggle(false);
-	this.classBFormToggle(false);
+	console.log("init!");
+	this.classAFormToggle();
+	this.classBFormToggle();
 	this.$classATableBody.html("");
 	this.$classBTableBody.html("");
 	this.$classAClassName.val("");
@@ -184,13 +189,13 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.setLoadingTableMessageB = functi
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudentsClassA = function(json) {
 	this.showStudents(json, this.$classATableBody, this.$classARow, "#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentName", this.changeSelectACheckbox);
-	this.classAFormToggle(false);
+	this.classAFormToggle();
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudentsClassB = function(json) {
 	this.showStudents(json, this.$classBTableBody, this.$classBRow, "#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentName", this.changeSelectBCheckbox);
 	this.classBSet = true;
-	this.classBFormToggle(false);
-	this.classAFormToggle(true); // checks only if selected
+	this.classBFormToggle();
+	this.classAFormToggle(); 
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setClassList = function(schoolclasses) {		
@@ -214,7 +219,7 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.setClassList = function(schoolcl
 		this.$classesTableBody.append($row);
 		i++;
 	}
-	this.classesFormToggle(false);
+	//this.classesFormToggle(false);
 }
 
 
@@ -246,11 +251,23 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.moveBtoA = function(list) {
  */
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.clickClassesRow = function(event) {
+//	console.log($(event.target).closest("tr"));
+	if ($(event.target).closest("tr").find("input").get(0).checked == true) return;
+	
 	Helpers.selectTableRow(event);
 	if (this.classesForm.elements["schoolclass"].value != "") {
 		this.setClass(this.classesForm.elements["schoolclass"].value); // bypass submit
+		
 		//this.classesFormToggle(true);
-	} else this.classesFormToggle(false);	
+	} //else {
+	//	this.setEmptyTableMessageB();
+//		this.$classBClassName.val("");
+//		this.classBSet = false;
+//	}
+	//else this.classesFormToggle(false);	
+	
+	this.classAFormToggle();
+	this.classBFormToggle();
 }
 
 // helpers - bypassed
@@ -265,14 +282,72 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.clickClassesRow = function(event
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.changeSelectACheckbox = function(event) {
 	event.preventDefault();		
-	if (event.target.form.elements["students[]"].length > 0) this.classAFormToggle(true);
-	else this.classAFormToggle(false);
+	this.classAFormToggle();
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.changeSelectBCheckbox = function(event) {
 	event.preventDefault();		
-	if (event.target.form.elements["students[]"].length > 0) this.classBFormToggle(true);
-	else this.classBFormToggle(false);
+	this.classBFormToggle();	
 }
+
+CopyOrMoveStudentToSchoolclassDisplay.prototype.clickClassASelectAll = function(event) {
+	event.preventDefault();		
+	if (typeof this.classAForm.elements["students[]"] == 'undefined') return;	
+	
+	$el = $(event.target);
+	
+	if ($el.hasClass('active')) {
+		if (typeof this.classAForm.elements["students[]"].length == 'undefined') {
+			this.classAForm.elements["students[]"].checked = false;			
+		} else {
+			for (var i = 0; i < this.classAForm.elements["students[]"].length; i++) {
+				this.classAForm.elements["students[]"][i].checked = false;
+			}
+		}
+		$el.removeClass("active");
+	} else {
+		if (typeof this.classAForm.elements["students[]"].length == 'undefined') {
+			this.classAForm.elements["students[]"].checked = true;
+		} else {
+			for (var i = 0; i < this.classAForm.elements["students[]"].length; i++) {
+				this.classAForm.elements["students[]"][i].checked = true;
+			}
+		}
+		$el.addClass("active");
+	}
+	
+	this.classAFormToggle();
+}
+CopyOrMoveStudentToSchoolclassDisplay.prototype.clickClassBSelectAll = function(event) {
+	event.preventDefault();		
+	if (typeof this.classBForm.elements["students[]"] == 'undefined') return;	
+	
+	$el = $(event.target);
+	
+	if ($el.hasClass('active')) {
+		if (typeof this.classBForm.elements["students[]"].length == 'undefined') {
+			this.classBForm.elements["students[]"].checked = false;			
+		} else {
+			for (var i = 0; i < this.classBForm.elements["students[]"].length; i++) {
+				this.classBForm.elements["students[]"][i].checked = false;
+			}
+		}
+		$el.removeClass("active");
+	} else {
+		if (typeof this.classBForm.elements["students[]"].length == 'undefined') {
+			this.classBForm.elements["students[]"].checked = true;
+		} else {
+			for (var i = 0; i < this.classBForm.elements["students[]"].length; i++) {
+				this.classBForm.elements["students[]"][i].checked = true;
+			}
+		}
+		$el.addClass("active");
+	}	
+	
+	this.classBFormToggle();
+}
+
+
+
 
 // This thing is bypassed
 // CopyOrMoveStudentToSchoolclassDisplay.prototype.submitClassesForm = function(event) {
@@ -297,20 +372,44 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.getClassList = function(form) {
 }
 
 // helpers
-CopyOrMoveStudentToSchoolclassDisplay.prototype.classAFormToggle = function(value) {
-	var aChecked = false;
-	if (!this.classAForm.elements["students[]"]) return;
-	for (i = 0; i <  this.classAForm.elements["students[]"].length; i++) {
-		if (this.classAForm.elements["students[]"][i].checked) { 
-			aChecked = true 
-			break; 
+CopyOrMoveStudentToSchoolclassDisplay.prototype.classAFormToggle = function() {
+	
+	var studentChosen = false;
+	
+	if (typeof this.classAForm.elements["students[]"] == 'undefined') {
+		studentChosen = false;
+	} else if (typeof this.classAForm.elements["students[]"].length == 'undefined') {
+		studentChosen = this.classAForm.elements["students[]"].checked;
+	} else {
+		for (i = 0; i <  this.classAForm.elements["students[]"].length; i++) {
+			if (this.classAForm.elements["students[]"][i].checked) { 
+				studentChosen = true 
+				break; 
+			}
 		}
 	}
-	if (this.classBSet && aChecked && value) this.$classAForm.find(':submit, :button').prop('disabled','');
+	
+	if (this.classBSet && studentChosen) this.$classAForm.find(':submit, :button').prop('disabled','');
 	else this.$classAForm.find(':submit, :button').prop('disabled','disabled');
 }
-CopyOrMoveStudentToSchoolclassDisplay.prototype.classBFormToggle = function(value) {
-	if (value) this.$classBForm.find(':submit, :button').prop('disabled','');
+CopyOrMoveStudentToSchoolclassDisplay.prototype.classBFormToggle = function() {
+	
+	var studentChosen = false;
+	
+	if (typeof this.classBForm.elements["students[]"] == 'undefined') {
+		studentChosen = false;
+	} else if (typeof this.classBForm.elements["students[]"].length == 'undefined') {
+		studentChosen = this.classBForm.elements["students[]"].checked;
+	} else {
+		for (i = 0; i <  this.classBForm.elements["students[]"].length; i++) {
+			if (this.classBForm.elements["students[]"][i].checked) { 
+				studentChosen = true 
+				break; 
+			}
+		}
+	}
+	
+	if (this.classBSet && studentChosen) this.$classBForm.find(':submit, :button').prop('disabled','');
 	else this.$classBForm.find(':submit, :button').prop('disabled','disabled');
 }
 
