@@ -124,7 +124,7 @@ AccountDisplay.prototype.updateSchoolLoginsView = function(json) {
 			// Set active 'active' checkbox and change style of the others
 			if (activeSchoolId.localeCompare(el.school.id.idString) == 0
 				&& activeRoleId.localeCompare(el.role.id.idString) == 0) {
-				$row.find("input[name='active[]']").prop('checked','checked').prop('disabled','disabled').parent().addClass('ok');;
+				$row.find("input[name='active[]']").prop('checked','checked').prop('disabled','disabled').parent();
 			} 
 			
 			$row.find("input[name='active[]']").on('change', $.proxy(this.changeActiveCheckbox,this));
@@ -224,6 +224,7 @@ AccountDisplay.prototype.changeActiveCheckbox = function(event) {
 		
 		// Set current checked
 		event.target.checked = "checked";
+		$(event.target).parent().addClass('temporary');
 	} else {
 		event.target.checked = "";
 	}

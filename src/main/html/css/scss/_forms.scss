@@ -276,8 +276,18 @@ form {
 	
 	&.ok, &.temporary {
 		input:checked ~ label.icon {
-			background-color: $ok;		
-			border: $borderThickness $ok solid;
+			//background-color: $ok;
+//			border: $borderThickness $ok solid;
+
+			background-color: $white;
+			border: $borderThickness $primary solid;
+			
+			&:after {
+				border-color: $primary;
+			}
+			&:before {
+				border-color: $primary;
+			}	
 		}
 	}
 	
