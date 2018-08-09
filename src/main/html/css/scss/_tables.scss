@@ -148,20 +148,34 @@ table.dwo { //:not(.c-datepicker__days)
 	}
 	
 	&.sortable {
-		margin-top: (12 + 9 + 9) * 1px;
+		
+		&.headered {
+			margin-top: (12 + 9 + 9) * 1px;	
+		}
+		
 		thead {
-			@include border-radius(4px, 4px, 0px, 0px);
+			@include border-radius(4px, 4px, 0px, 0px); // doesn't work on tr
 			border-left: $borderThickness $primary solid;
 			border-top: $borderThickness $primary solid;
 			border-right: $borderThickness $primary solid;
 			
 			tr:nth-child(1) {
-				margin-top: (12 + 9 + 9) * -1px;
+				margin-top: (12 + 9 + 9) * -1px;				
 			}
 			
 			tr.sorting {
 				background-color: $shade11;				
+				margin-top: 0; // for when it is the first row
+				//padding-top: 0; // for when it is the first row
 			    @include border-box;
+				
+				&:nth-child(1) {
+					//margin-top: (12 + 9 + 9) * -1px;
+				}
+				
+				th {
+					margin-top: 0;
+				}
 				
 				th:first-child {
 					text-indent: 1px; // fix 
@@ -172,6 +186,10 @@ table.dwo { //:not(.c-datepicker__days)
 			@include border-radius(0px, 0px, 4px, 4px);
 			border-top-style: none;
 		}
+	}
+	
+	&.disabled tbody {
+		background-color: $shade20;
 	}
 }
 

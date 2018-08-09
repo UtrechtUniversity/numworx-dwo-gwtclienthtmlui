@@ -20,6 +20,7 @@ function ResultsDisplay() {
 	this.$chooseClassTableBody = this.$chooseClassModuleForm.find("#resultsDisplayChooseClass tbody");	
 	
 	this.$chooseModulesRow = this.$chooseClassModuleForm.find("#resultsDisplayChooseModules tbody tr").detach();
+	this.$chooseModulesTableHead = this.$chooseClassModuleForm.find("#resultsDisplayChooseModules thead");
 	this.$chooseModulesTableBody = this.$chooseClassModuleForm.find("#resultsDisplayChooseModules tbody");
 	
 	this.$selectAllModules = $("#resultsDisplayChooseModulesSelectAll");
@@ -28,6 +29,7 @@ function ResultsDisplay() {
 	// Bind handlers
 	this.$chooseClassModuleForm.on('submit', $.proxy(this.submitChooseClassModuleForm,this));
 	this.$chooseClassTableHead.find(".sortButton").click(Helpers.clickSortButton);
+	this.$chooseModulesTableHead.find(".sortButton").click(Helpers.clickSortButton);
 	this.$selectAllModules.on('click', $.proxy(this.clickSelectAllModules,this));
 	
 	
@@ -51,6 +53,7 @@ ResultsDisplay.prototype.localize = function() {
 
 ResultsDisplay.prototype.resetSorting = function() {
 	this.$chooseClassTableHead.find(".sortButton").removeClass("active");
+	this.$chooseModulesTableHead.find(".sortButton").removeClass("active");
 }
 
 /*
@@ -105,7 +108,7 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 		
 		$row = this.$chooseModulesRow.clone();
 	
-		$row.find("#chooseClassAndModulesModuleName").html( course.label ).removeAttr("id");
+		$row.find("#chooseClassAndModulesModuleName").html( course.label ).attr('data-sortvalue', course.label).removeAttr("id");
 	
 		$row.find("input[type='checkbox'],input[type='radio']").each( function(index, el) {
 			el.value = sortedSchoolClassChildren[n].id;

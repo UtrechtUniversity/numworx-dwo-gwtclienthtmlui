@@ -484,9 +484,9 @@
 						<div class="col-8">
                             <h3><span data-translate="NUM_LBL_CLASSES_SELECTTOEDIT">Kies een klas om te bewerken</span></h3>
 						
-							<table class="dwo hoverable selectable">
+							<table class="dwo hoverable selectable sortable">
 								<thead>
-									<tr>
+									<tr class="sorting">
 										<th>
 											<span class="sortButton asc" data-order="asc" data-type="string">
 												<svg viewBox="0 0 74 74" class="icon">
@@ -664,9 +664,14 @@
 					<div class="col-4">
 						<form name="changeStudents">
 							<fieldset>
-								<table class="dwo">
+								<table class="dwo sortable disabled headered">
 									<thead>
 										<tr>
+											<th>
+												<span data-translate="NUM_TBL_STUDENTS">Studenten</span>
+											</th>
+										</tr>
+										<tr class="sorting">
 											<th>
 												<span class="sortButton asc" data-order="asc" data-type="string">
 													<svg viewBox="0 0 74 74" class="icon">
@@ -678,7 +683,6 @@
 														  <use xlink:href="#arrowDown"></use>
 													</svg>
 												</span>
-												<span data-translate="NUM_TBL_STUDENTS">Studenten</span>
 											</th>
 										</tr>
 									</thead>
@@ -699,9 +703,14 @@
 					<div class="col-4">
 						<form name="changeTeachers">
 							<fieldset>
-								<table class="dwo">
+								<table class="dwo sortable disabled headered">
 									<thead>
 										<tr>
+											<th>
+												<span data-translate="NUM_TBL_TEACHERS">Docenten</span>
+											</th>
+										</tr>
+										<tr class="sorting">
 											<th>
 												<span class="sortButton asc" data-order="asc" data-type="string">
 													<svg viewBox="0 0 74 74" class="icon">
@@ -713,7 +722,6 @@
 														  <use xlink:href="#arrowDown"></use>
 													</svg>
 												</span>
-												<span data-translate="NUM_TBL_TEACHERS">Docenten</span>
 											</th>
 										</tr>
 									</thead>
@@ -733,9 +741,14 @@
 					<div class="col-4">
 						<form name="changeModules">
 							<fieldset>
-								<table class="dwo">
+								<table class="dwo sortable disabled headered">
 									<thead>
 										<tr>
+											<th>
+												<span data-translate="NUM_TBL_MODULES">Modules</span>
+											</th>
+										</tr>
+										<tr class="sorting">
 											<th>
 												<span class="sortButton asc" data-order="asc" data-type="string">
 													<svg viewBox="0 0 74 74" class="icon">
@@ -747,7 +760,6 @@
 														  <use xlink:href="#arrowDown"></use>
 													</svg>
 												</span>
-												<span data-translate="NUM_TBL_MODULES">Modules</span>
 											</th>
 										</tr>
 									</thead>
@@ -836,7 +848,7 @@
 						<h3><span data-translate="NUM_TBL_STUDENTS">Leerlingen</span></h2>
 						<form name="addStudentAdd">
 							
-						<table class="dwo hoverable selectable sortable">
+						<table class="dwo hoverable selectable sortable headered">
 							<thead>
 								<tr>
 									<th class="col-3">
@@ -967,9 +979,15 @@
 				<div class="row">
 					<div class="col-4">
 						<form name="copyOrMoveStudentToSchoolclassClassA">
-							<table class="dwo">
+							<table class="dwo sortable headered">
 								<thead>
 									<tr>
+										<th class="col-2">
+											&nbsp;
+										</th>										
+										<th><span id="copyOrMoveStudentToSchoolclassClassASelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT">Selecteer</span></span></th>
+									</tr>
+									<tr class="sorting">
 										<th class="col-2">
 											<span class="sortButton asc" data-order="asc" data-type="string">
 												<svg viewBox="0 0 74 74" class="icon">
@@ -982,7 +1000,7 @@
 												</svg>
 											</span>
 										</th>										
-										<th><span id="copyOrMoveStudentToSchoolclassClassASelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT">Selecteer</span></span></th>
+										<th>&nbsp;</th>
 									</tr>
 								</thead>
 								<tbody>	
@@ -1006,9 +1024,14 @@
 					</div>
 					<div class="col-4">
 						<form name="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelect">
-							<table class="dwo hoverable selectable">
+							<table class="dwo hoverable selectable sortable headered">
 								<thead>
 									<tr>
+										<th>
+											&nbsp;
+										</th>
+									</tr>
+									<tr class="sorting">
 										<th>
 											<span class="sortButton asc" data-order="asc" data-type="string">
 												<svg viewBox="0 0 74 74" class="icon">
@@ -1040,9 +1063,15 @@
 					</div>
 					<div class="col-4">
 						<form name="copyOrMoveStudentToSchoolclassClassB">
-							<table class="dwo">
+							<table class="dwo sortable headered">
 								<thead>
 									<tr>
+										<th class="col-2">
+											&nbsp;										
+										</th>										
+										<th><span id="copyOrMoveStudentToSchoolclassClassBSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT">Selecteer</span></span></th>
+									</tr>
+									<tr class="sorting">
 										<th class="col-2">
 											<span class="sortButton asc" data-order="asc" data-type="string">
 												<svg viewBox="0 0 74 74" class="icon">
@@ -1055,7 +1084,7 @@
 												</svg>
 											</span>											
 										</th>										
-										<th><span id="copyOrMoveStudentToSchoolclassClassBSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT">Selecteer</span></span></th>
+										<th>&nbsp;</th>
 									</tr>
 								</thead>
 								<tbody>	
@@ -1150,7 +1179,7 @@
 						<h3><span data-translate="NUM_TBL_TEACHERS">Docenten</span></h2>
 						<form name="addTeacherAdd">
 							
-						<table class="dwo hoverable selectable sortable">
+						<table class="dwo hoverable selectable sortable headered">
 							<thead>
 								<tr>
 									<th class="col-3">
@@ -1470,9 +1499,14 @@
 					<form name="chooseClassAndModules">
 						<div class="col-6">
 							<h3><span data-translate="NUM_LBL_RESULTS_SELECT">Selecteer klas en soort(en) modules</span></h3>
-							<table id="resultsDisplayChooseClass" class="dwo">
+							<table id="resultsDisplayChooseClass" class="dwo sortable headered">
 								<thead>
 									<tr>
+										<th class="col-2"></th>
+										<th class="col-2"><span data-translate="NUM_TBL_RESULTS_OPEN">Open</span></th>
+										<th class="col-2"><span data-translate="NUM_TBL_RESULTS_CLOSED" >Gesloten</span></th>
+									</tr>
+									<tr class="sorting">
 										<th class="col-2">
 											<span class="sortButton asc" data-order="asc" data-type="string">
 												<svg viewBox="0 0 74 74" class="icon">
@@ -1485,8 +1519,8 @@
 												</svg>
 											</span>
 										</th>
-										<th class="col-2"><span data-translate="NUM_TBL_RESULTS_OPEN">Open</span></th>
-										<th class="col-2"><span data-translate="NUM_TBL_RESULTS_CLOSED" >Gesloten</span></th>
+										<th class="col-2"></th>
+										<th class="col-2"></th>
 									</tr>
 								</thead>
 								<tbody>	
@@ -1513,11 +1547,26 @@
 					
 						<div class="col-6">
 							<h3><span data-translate="NUM_LBL_RESULTS_SELECT_MODULES">Selecteer module(s) om resultaten van de klas te zien</span></h3>
-							<table id="resultsDisplayChooseModules" class="dwo">
+							<table id="resultsDisplayChooseModules" class="dwo sortable headered">
 								<thead>
 									<tr>
 										<th class="col-4">&nbsp;</th>
 										<th class="col-2"><span id="resultsDisplayChooseModulesSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT">Selecteer</span></span></th>
+									</tr>
+									<tr class="sorting">
+										<th class="col-4">
+											<span class="sortButton asc" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>
+										<th class="col-2">&nbsp;</th>
 									</tr>
 								</thead>
 								<tbody>	
@@ -1891,7 +1940,7 @@
                                             <h3><span data-translate="NUM_LBL_PERSONS_FOUND">Gevonden personen</span></h2>
 						<form name="personsEdit">
 							
-						<table class="dwo hoverable selectable sortable">
+						<table class="dwo hoverable selectable sortable headered">
 							<thead>
 								<tr>
 									<th class="col-3">
@@ -2117,10 +2166,10 @@
 				<div class="row">
 					<form name="editPersonSchoolclasses">
 						<div class="col-6">
-							<table class="dwo">
+							<table class="dwo sortable">
 								<thead>
-									<tr>
-										<th class="col-4">&nbsp;
+									<tr class="sorting">
+										<th class="col-4">
 											<span class="sortButton asc" data-order="asc" data-type="string">
 												<svg viewBox="0 0 74 74" class="icon">
 													  <use xlink:href="#arrowUp"></use>
@@ -2252,9 +2301,9 @@
 					<div class="row">
 						<!-- <form name="addPersonSchoolclasses"> -->
 							<div class="col-6">
-								<table class="dwo">
+								<table class="dwo sortable">
 									<thead>
-										<tr>
+										<tr class="sorting">
 											<th  class="col-4">&nbsp;
 												<span class="sortButton asc" data-order="asc" data-type="string">
 													<svg viewBox="0 0 74 74" class="icon">
