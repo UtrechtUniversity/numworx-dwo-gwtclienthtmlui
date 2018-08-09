@@ -893,6 +893,11 @@ section.lightbox {
 #welcomeDisplayPanel {
 	background: $shade10 url(../images/bg-numworx-logo.png) no-repeat bottom right;
 	background-size: contain;
+	
+	a {
+		color: $primary;
+		font-weight: bold;
+	}
 }
 
 #personsDisplay {
