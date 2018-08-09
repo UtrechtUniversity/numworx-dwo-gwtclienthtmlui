@@ -1,0 +1,38 @@
+/*
+
+HELP-STYLES
+
+Stylesheet for the help page (in /helppage) that is loaded in an iframe.
+
+*/
+
+@import "_reset.scss";
+@import "_mixins.scss";
+@import "_vars.scss";
+
+html {
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 16px;
+	color: $primaryDark;
+}
+
+p {
+	
+	//font-family: 'Ubuntu Condensed', sans-serif;
+	font-size: 14/16 * 1em;
+	line-height: 24 / 18 * 1em;
+	margin-bottom: $elementMarginBottom;
+	
+	
+}
+
+h1 {
+	font-size: 18 / 16 * 1em;
+	color: $primaryDark;	
+	font-weight: 500;
+	margin-bottom:  ($gutter) + 1px;
+}
+
+section {
+	display: none; // to prevent flash
+}
