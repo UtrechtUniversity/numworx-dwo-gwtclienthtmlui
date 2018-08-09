@@ -25,11 +25,6 @@ Helpers.selectTableRow = function(event) {
 	}
 }
 
-Helpers.setHelp = function($frame, url) {
-	$frame.attr('src', '/local/testInIframe.html' );
-	$frame.contents().find("body").addClass("test"); // TODO: add id selection	
-}
-
 Helpers.resizeHelpSection = function(event) {
 	var $help = $(".help");
 	if ($(window).outerWidth() > (1366)) {

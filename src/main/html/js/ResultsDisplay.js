@@ -148,8 +148,7 @@ ResultsDisplay.prototype.clear = function () {
 }
 
 ResultsDisplay.prototype.setHelp = function(url) {
-	//this.$helpContentIFrame.attr('src', url );
-	Helpers.setHelp(this.$helpContentIFrame, url); // experimental code for new help 
+	this.$helpContentIFrame.attr('src', url );
 }
 
 ResultsDisplay.prototype.setResultTree = function (resultTree, studentsTree) {
