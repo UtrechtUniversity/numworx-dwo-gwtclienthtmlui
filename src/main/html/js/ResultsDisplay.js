@@ -4,7 +4,7 @@ function ResultsDisplay() {
 	this.resultState.studentsTree = null;
 	this.resultState.showOnlyClosedModules = false;
 	this.resultState.activeSchoolClass = null;
-	this.resultState.activeCourses = false;
+	this.resultState.activeCourses = [];
 	
 	// Forms 
 	this.chooseClassModuleForm = document.forms["chooseClassAndModules"];
@@ -17,16 +17,18 @@ function ResultsDisplay() {
 	
 	this.$chooseClassRow = this.$chooseClassModuleForm.find("#resultsDisplayChooseClass tbody tr").detach();
 	this.$chooseClassTableHead = this.$chooseClassModuleForm.find("#resultsDisplayChooseClass thead");
-	this.$chooseClassTableBody = this.$chooseClassModuleForm.find("#resultsDisplayChooseClass tbody");
-	
+	this.$chooseClassTableBody = this.$chooseClassModuleForm.find("#resultsDisplayChooseClass tbody");	
 	
 	this.$chooseModulesRow = this.$chooseClassModuleForm.find("#resultsDisplayChooseModules tbody tr").detach();
 	this.$chooseModulesTableBody = this.$chooseClassModuleForm.find("#resultsDisplayChooseModules tbody");
-		
+	
+	this.$selectAllModules = $("#resultsDisplayChooseModulesSelectAll");
+	
+			
 	// Bind handlers
 	this.$chooseClassModuleForm.on('submit', $.proxy(this.submitChooseClassModuleForm,this));
 	this.$chooseClassTableHead.find(".sortButton").click(Helpers.clickSortButton);
-	
+	this.$selectAllModules.on('click', $.proxy(this.clickSelectAllModules,this));
 	
 	
 	// Init
@@ -232,6 +234,31 @@ ResultsDisplay.prototype.changeCheckboxSelect = function(event) {
 ResultsDisplay.prototype.submitChooseClassModuleForm = function() {
 	event.preventDefault();
 	if (this.resultState.activeCourses.length > 0) this.showSelectedResults();	
+}
+
+ResultsDisplay.prototype.clickSelectAllModules = function() {
+	event.preventDefault();
+	if (!this.chooseClassModuleForm.elements["select[]"].length) return;
+	
+	$el = $(event.target);
+	
+	if ($el.hasClass('active')) {
+		for (var i=0 ; i < this.chooseClassModuleForm.elements["select[]"].length; i++) {
+			this.chooseClassModuleForm.elements["select[]"][i].checked = false;
+		}
+		this.resultState.activeCourses = [];
+		$el.removeClass("active");
+	} else {
+		for (var i=0 ; i < this.chooseClassModuleForm.elements["select[]"].length; i++) {
+			if (!this.chooseClassModuleForm.elements["select[]"][i].checked) {
+				this.chooseClassModuleForm.elements["select[]"][i].checked = true;
+				this.resultState.activeCourses.push(this.chooseClassModuleForm.elements["select[]"][i].value);
+			}  
+		}
+		$el.addClass("active");
+	}
+	
+	this.chooseClassModuleFormToggle();
 }
 
 //helpers 
