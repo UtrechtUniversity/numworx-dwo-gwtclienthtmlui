@@ -110,6 +110,8 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 	$table.find(".tableTitle").html(matrix[0][0].label);
 	
 	// BUILD BODY
+	$tbody.html("");
+	
 	for (var i = 1; i < matrix.length; i++) {
 		
 		$row = this.$selectedResultsRow.clone();
@@ -407,7 +409,7 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 				for (var n = 0; n < sortedStudentScoChildren.length; n++) {
 					matrix[i][j] = {};					
 					matrix[i][j].label = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ? "+"+sortedStudentScoChildren[n].bonus : "") +" / " + sortedStudentScoChildren[n].maxScore;
-					matrix[i][j].score = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ?sortedStudentScoChildren[n].bonus : 0);
+					matrix[i][j].score = (sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ? sortedStudentScoChildren[n].bonus : 0) ) / sortedStudentScoChildren[n].maxScore * 100;
 					matrix[i][j].sortValue = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ?sortedStudentScoChildren[n].bonus : 0);
 					matrix[i][j].callback = this.clickPageResultIndicator;
 					matrix[i][j].params = { scoId: this.resultState.activeActivity, studentId: studentId, pageSequence: sortedStudentScoChildren[n].sequence };
@@ -615,7 +617,8 @@ SelectedResultsDisplay.prototype.clickBackToModulesStudents = function(event) {
 // Class / module
 SelectedResultsDisplay.prototype.clickModuleResultIndicator = function(params, event) {
 	event.preventDefault();		
-	this.activitiesStudent(params);	
+	//this.activitiesStudent(params);	old single student implementation
+	this.activitiesStudents(params);	
 }
 SelectedResultsDisplay.prototype.clickModuleColumnHeader = function(params, event) {
 	event.preventDefault();		
