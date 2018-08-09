@@ -102,11 +102,11 @@ SchoolclassesDisplay.prototype.updateView = function(json) {
 	this.chooseSchoolclassFormToggle(false);
 }
 
-SchoolclassesDisplay.prototype.setEmptyTableMessage = function(json) {
-	this.$chooseSchoolclassTableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_EMPTYTABLE">Geen items gevonden</span></td></tr>');
+SchoolclassesDisplay.prototype.setEmptyTableMessage = function(json) {	
+	this.$chooseSchoolclassTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
 }
 SchoolclassesDisplay.prototype.setLoadingTableMessage = function(json) {
-	this.$chooseSchoolclassTableBody.html('<tr class="loading"><td><span data-translate="NUM_TBL_FETCHINGDATA">Items worden opgevraagd</span></td></tr>');
+	this.$chooseSchoolclassTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
 }
 
 /*

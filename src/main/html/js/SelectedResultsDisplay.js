@@ -551,11 +551,11 @@ SelectedResultsDisplay.prototype.showPages = function(resultsTree) {
 }
 
 SelectedResultsDisplay.prototype.setLoadingTableMessage = function () {
-	console.log("setLoadingTableMessage");
+	this.$selectedResultsTable.find("tbody").html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
 }
 
 SelectedResultsDisplay.prototype.setEmtpyTableMessage = function () {
-	console.log("setEmptyTableMessage");
+	this.$selectedResultsTable.find("tbody").html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
 }
 
 /*

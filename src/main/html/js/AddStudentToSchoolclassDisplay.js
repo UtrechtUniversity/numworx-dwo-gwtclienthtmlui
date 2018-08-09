@@ -166,11 +166,11 @@ AddStudentToSchoolclassDisplay.prototype.showStudents = function(json) {
 }
 
 AddStudentToSchoolclassDisplay.prototype.setEmptyTableMessage = function() {
-	this.$addStudentTableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_EMPTYTABLE">Geen items gevonden</span></td></tr>');
+	this.$addStudentTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
 }
 
 AddStudentToSchoolclassDisplay.prototype.setLoadingTableMessage = function() {
-	this.$addStudentTableBody.html('<tr class="loading"><td><span data-translate="NUM_TBL_FETCHINGDATA">Geen items gevonden</span></td></tr>');
+	this.$addStudentTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
 }
 
 

@@ -230,16 +230,16 @@ ModulesOfSchoolclassDisplay.prototype.setHelp = function(url) {
 }
 
 ModulesOfSchoolclassDisplay.prototype.setEmptyTableMessageModules = function () {
-	this.$treeWrapper.html('<span data-translate="NUM_TBL_EMPTYTABLE">Geen items gevonden</span>');
+	this.$treeWrapper.html(app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' ));		
 }
 ModulesOfSchoolclassDisplay.prototype.setLoadingTableMessageModules = function () {
-	this.$treeWrapper.html('<span data-translate="NUM_TBL_FETCHINGDATA">Items worden opgevraagd</span>');
+	this.$treeWrapper.html(app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' ));	
 }
 ModulesOfSchoolclassDisplay.prototype.setEmptyTableMessageSelected = function () {
-	this.$selectTableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_EMPTYTABLE">Geen items gevonden</span></td></tr>');
+	this.$selectTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
 }
 ModulesOfSchoolclassDisplay.prototype.setLoadingTableMessageSelected = function () {
-	this.$selectTableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_FETCHINGDATA">Items worden opgevraagd</span></td></tr>');
+	this.$selectTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
 }
 
 ModulesOfSchoolclassDisplay.prototype.setTree = function(json) {

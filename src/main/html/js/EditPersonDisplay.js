@@ -199,10 +199,10 @@ EditPersonDisplay.prototype.setSchoolClasses = function (json) {
 }
 
 EditPersonDisplay.prototype.setEmptyTableMessage = function (json) {
-	this.$editPersonSchoolclassesTableBody.html('<tr class="empty"><td><span data-translate="NUM_TBL_EMPTYTABLE">Geen items gevonden</span></td></tr>');
+	this.$editPersonSchoolclassesTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
 }
-EditPersonDisplay.prototype.setLoadingTableMessage = function (json) {
-	this.$editPersonSchoolclassesTableBody.html('<tr class="empty"><td>Klassen worden geladen.</td></tr>');
+EditPersonDisplay.prototype.setLoadingTableMessage = function (json) {	
+	this.$editPersonSchoolclassesTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
 }
 
 
