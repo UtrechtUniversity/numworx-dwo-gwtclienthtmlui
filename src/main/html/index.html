@@ -836,36 +836,23 @@
 						<h3><span data-translate="NUM_TBL_STUDENTS">Leerlingen</span></h2>
 						<form name="addStudentAdd">
 							
-						<table class="dwo hoverable selectable">
+						<table class="dwo hoverable selectable sortable">
 							<thead>
 								<tr>
 									<th class="col-3">
-										<span class="sortButton asc" data-order="asc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowUp"></use>
-											</svg>
-										</span>
-										<span class="sortButton desc" data-order="desc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowDown"></use>
-											</svg>
-										</span>
 										<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
 									</th>
 									<th class="col-3">
-										<span class="sortButton asc" data-order="asc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowUp"></use>
-											</svg>
-										</span>
-										<span class="sortButton desc" data-order="desc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowDown"></use>
-											</svg>
-										</span>
 										<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 									</th>
-									<th class="col-3"><span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span></th>									
+									<th class="col-3">
+										<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
+									</th>									
+									<th class="col-3">
+										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+									</th>
+								</tr>
+								<tr class="sorting">
 									<th class="col-3">
 										<span class="sortButton asc" data-order="asc" data-type="string">
 											<svg viewBox="0 0 74 74" class="icon">
@@ -877,7 +864,31 @@
 												  <use xlink:href="#arrowDown"></use>
 											</svg>
 										</span>
-										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+									</th>
+									<th class="col-3">
+										<span class="sortButton asc" data-order="asc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowUp"></use>
+											</svg>
+										</span>
+										<span class="sortButton desc" data-order="desc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowDown"></use>
+											</svg>
+										</span>
+									</th>
+									<th class="col-3"></th>									
+									<th class="col-3">
+										<span class="sortButton asc" data-order="asc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowUp"></use>
+											</svg>
+										</span>
+										<span class="sortButton desc" data-order="desc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowDown"></use>
+											</svg>
+										</span>
 									</th>
 								</tr>
 							</thead>
@@ -1139,10 +1150,25 @@
 						<h3><span data-translate="NUM_TBL_TEACHERS">Docenten</span></h2>
 						<form name="addTeacherAdd">
 							
-						<table class="dwo hoverable selectable">
+						<table class="dwo hoverable selectable sortable">
 							<thead>
 								<tr>
 									<th class="col-3">
+										<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+									</th>
+									<th class="col-3">
+										<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
+									</th>
+									<th class="col-3">
+										<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
+									</th>									
+									<th class="col-3">
+										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+									</th>
+								</tr>
+								
+								<tr class="sorting">
+									<th class="col-3">
 										<span class="sortButton asc" data-order="asc" data-type="string">
 											<svg viewBox="0 0 74 74" class="icon">
 												  <use xlink:href="#arrowUp"></use>
@@ -1153,7 +1179,6 @@
 												  <use xlink:href="#arrowDown"></use>
 											</svg>
 										</span>
-										<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
 									</th>
 									<th class="col-3">
 										<span class="sortButton asc" data-order="asc" data-type="string">
@@ -1166,9 +1191,8 @@
 												  <use xlink:href="#arrowDown"></use>
 											</svg>
 										</span>
-										<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 									</th>
-									<th class="col-3"><span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span></th>
+									<th class="col-3"></th>
 									
 									<th class="col-3">
 										<span class="sortButton asc" data-order="asc" data-type="string">
@@ -1181,7 +1205,6 @@
 												  <use xlink:href="#arrowDown"></use>
 											</svg>
 										</span>
-										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
 									</th>
 								</tr>
 							</thead>
@@ -1868,40 +1891,55 @@
                                             <h3><span data-translate="NUM_LBL_PERSONS_FOUND">Gevonden personen</span></h2>
 						<form name="personsEdit">
 							
-						<table class="dwo hoverable selectable">
+						<table class="dwo hoverable selectable sortable">
 							<thead>
 								<tr>
-									
 									<th class="col-3">
-										
-										<span class="sortButton asc" data-order="asc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowUp"></use>
-											</svg>
-										</span>
-										<span class="sortButton desc" data-order="desc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowDown"></use>
-											</svg>
-										</span>
 										<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
 									</th>
 									<th class="col-3">
-										
-										<span class="sortButton asc" data-order="asc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowUp"></use>
-											</svg>
-										</span>
-										<span class="sortButton desc" data-order="desc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowDown"></use>
-											</svg>
-										</span>
 										<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 									</th>
 									<th class="col-3">
 										<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
+									</th>									
+									<th class="col-3">																										
+										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+									</th>
+									<!-- <th class="col-3"><span data-translate="NUM_TBL_EDITOPTIONS">Bewerk opties</span></th> -->
+								</tr>
+								
+								<tr class="sorting">
+									<th class="col-3">
+										
+										<span class="sortButton asc" data-order="asc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowUp"></use>
+											</svg>
+										</span>
+										<span class="sortButton desc" data-order="desc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowDown"></use>
+											</svg>
+										</span>
+										
+									</th>
+									<th class="col-3">
+										
+										<span class="sortButton asc" data-order="asc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowUp"></use>
+											</svg>
+										</span>
+										<span class="sortButton desc" data-order="desc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowDown"></use>
+											</svg>
+										</span>
+										
+									</th>
+									<th class="col-3">
+										
 									</th>
 									
 									<th class="col-3">										
@@ -1915,9 +1953,7 @@
 												  <use xlink:href="#arrowDown"></use>
 											</svg>
 										</span>									
-										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
 									</th>
-									<!-- <th class="col-3"><span data-translate="NUM_TBL_EDITOPTIONS">Bewerk opties</span></th> -->
 								</tr>
 							</thead>
 							<tbody>
