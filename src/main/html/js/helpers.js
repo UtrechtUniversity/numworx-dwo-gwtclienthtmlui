@@ -168,18 +168,16 @@ Helpers.tableSorterBubbleSort = function(tbody, index, attr, type, asc) { //bubb
 	return;
 }
 
-Helpers.tableSorterMergeSort = function(tr, index, attr, type, asc) {
-	var tr = tbody.getElementsByTagName("TR");
-	
-	console.log("mergesort");
-	
+Helpers.tableSorterMergeSort = function($tbody, index, attr, type, asc) {	
+	var tr = $tbody.find("tr").detach();
+		
 	// make an array of the nodelist
 	var arr = [];
 	for(var i = tr.length; i--; arr.unshift(tr[i]));
 	
 	arr = Helpers.tableSorterMergeSortRecursive(arr, index, attr, type, asc);
-	
-	$(tbody).html("").append(arr);
+		
+	$tbody.append(arr);//.append(tr);
 } 
 
 Helpers.tableSorterMergeSortRecursive = function(arr, index, attr, type, asc) {
@@ -234,7 +232,7 @@ Helpers.tableSorterMergeSortMerge = function(left, right, index, attr, type, asc
 Helpers.clickSortButton = function() {
 	$this = $(this);
 	$table = $this.parents('table');
-	tbody = $table.find('tbody').get(0);
+	$tbody = $table.find('tbody');//.get(0);
 	index = $this.parent().index();
 	
 	asc = true;
@@ -243,19 +241,13 @@ Helpers.clickSortButton = function() {
 	type = "int";
 	if ($this.data("type") == "string") type = "string";
 	
-	//attr = "score";
-	//if ($this.data("attr")) attr = $this.data("attr");
 	attr = "sortvalue";
 		
-		
 	//var t0 = performance.now();
-	
 	//Helpers.tableSorterBubbleSort(tbody, index, attr, type, asc);	
-	Helpers.tableSorterMergeSort(tbody, index, attr, type, asc);	
-	
+	Helpers.tableSorterMergeSort($tbody, index, attr, type, asc);	
 	//var t1 = performance.now();
 	//console.log("Call took " + (t1 - t0) + " milliseconds.")
-	
 	
 	$this.closest("table").find('.sortButton').removeClass("active");
 	$this.addClass("active");	

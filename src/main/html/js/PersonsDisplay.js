@@ -155,7 +155,7 @@ PersonsDisplay.prototype.showPersons = function(json) {
 		this.$personsTableBody.append($row);
 		i++;
 	}
-		
+
 	this.personsEditFormToggle(false);	
 	
 	this.filterPersonsList();	
