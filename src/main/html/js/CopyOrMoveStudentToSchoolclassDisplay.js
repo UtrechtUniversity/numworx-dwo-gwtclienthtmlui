@@ -196,6 +196,7 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudentsClassB = function(js
 	this.classBSet = true;
 	this.classBFormToggle();
 	this.classAFormToggle(); 
+	this.resetSorting();
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setClassList = function(schoolclasses) {		
