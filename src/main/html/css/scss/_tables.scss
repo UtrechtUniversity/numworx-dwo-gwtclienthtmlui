@@ -141,8 +141,9 @@ table.dwo { //:not(.c-datepicker__days)
 			color: $white;
 		}
 		tr.new td {
-			//background-color: $primary;
-			color: $danger;
+			background-color: $primary;
+			color: $white;
+			//color: $danger;
 		}
 		input[type="checkbox"].hidden, input[type="radio"].hidden { position: absolute; opacity: 0;}
 	}

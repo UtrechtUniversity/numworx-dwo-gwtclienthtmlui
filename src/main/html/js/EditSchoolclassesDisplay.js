@@ -55,6 +55,7 @@ function EditSchoolclassesDisplay() {
 	this.$changeModulesTableHead = this.$changeModulesForm.find("thead");
 		
 	// Bind handlers
+	this.$editSchoolclassForm.find("input").on('keyup change', $.proxy(this.changeInputFieldEditSchoolclassForm,this));	
 	this.$editSchoolclassForm.on('submit', $.proxy(this.submitEditSchoolclass, this));
 	this.$editSchoolclassFormSaveButton.on('click', $.proxy(this.clickEditSchoolclassFormSaveButton, this));
 	this.$editSchoolclassFormDeleteButton.on('click', $.proxy(this.clickEditSchoolclassFormDeleteButton, this));
@@ -74,6 +75,7 @@ function EditSchoolclassesDisplay() {
 	this.$changeModulesFormShowButton.on('click', $.proxy(this.clickChangeModulesFormShowButton, this));
 	this.$changeModulesFormConnectButton.on('click', $.proxy(this.clickChangeModulesFormConnectButton, this));
 	this.$changeModulesTableHead.find(".sortButton").click(Helpers.clickSortButton);
+	
 	
 	// Init
 	this.$panel.hide();
@@ -127,13 +129,14 @@ EditSchoolclassesDisplay.prototype.clear = function () {
 }
 
 EditSchoolclassesDisplay.prototype.init = function () {
-	console.log("init2!");
+	//console.log("init2!");
 	//this.$changeStudentsTableBody.html("");
 	//this.$changeTeachersTableBody.html("");
 	//this.$changeModulesTableBody.html("");
 	
 	app.mainDisplay.registerStretchables( [ this.$changeStudentsTableBody, this.$changeTeachersTableBody, this.$changeModulesTableBody ] );
 	this.resetSorting();
+	this.classKeyToggle();
 }
 
 EditSchoolclassesDisplay.prototype.setHelp = function(url) {
@@ -320,6 +323,28 @@ EditSchoolclassesDisplay.prototype.clickEditSchoolclassFormDeleteButton = functi
 	event.preventDefault();		
 	this.deleteSchoolclass();
 }
+
+EditSchoolclassesDisplay.prototype.changeInputFieldEditSchoolclassForm = function(event) {
+	this.editSchoolclassFormToggle();
+	this.classKeyToggle();
+}
+
+EditSchoolclassesDisplay.prototype.editSchoolclassFormToggle = function(value) {
+	if (this.requiredFieldsEditSchoolclassForm()) this.$editSchoolclassForm.find(':submit').prop('disabled','');
+	else this.$editSchoolclassForm.find(':submit').prop('disabled','disabled');
+}
+
+EditSchoolclassesDisplay.prototype.requiredFieldsEditSchoolclassForm = function() {
+	return this.editSchoolclassForm.elements["classname"].value != ""
+			&& ( this.editSchoolclassForm.elements["useClasskey"][0].checked ? this.editSchoolclassForm.elements["classkey"].value  != "" : true);
+}
+
+EditSchoolclassesDisplay.prototype.classKeyToggle = function(value) {
+	if (this.editSchoolclassForm.elements["useClasskey"][0].checked) this.editSchoolclassForm.elements["classkey"].disabled = false;
+	else this.editSchoolclassForm.elements["classkey"].disabled = true;
+}
+
+
 
 /*
  * EVENT HANDLERS - Students

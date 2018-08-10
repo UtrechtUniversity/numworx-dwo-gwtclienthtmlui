@@ -15,14 +15,14 @@ function AddStudentToSchoolclassDisplay() {
 	this.$addStudentTableHead = this.$addStudentAddForm.find("thead");
 
 	// Buttons 
-    	this.$resetButton = $(this.addStudentSearchForm.elements["reload"]);
+    this.$resetButton = $(this.addStudentSearchForm.elements["reload"]);
 
 	// Bind handlers
 	this.$addStudentAddForm.on('submit', $.proxy(this.submitAddStudentAddForm, this));
 	this.$addStudentSearchForm.on('submit', $.proxy(this.submitAddStudentSearchForm, this));
 	this.$addStudentTableHead.find(".sortButton").click(Helpers.clickSortButton);
-	this.$addStudentTableHead.find(".sortButton").click(Helpers.clickSortButton);
-        this.$resetButton.on('click', $.proxy(this.clickReset,this));
+	//this.$addStudentTableHead.find(".sortButton").click(Helpers.clickSortButton);
+    this.$resetButton.on('click', $.proxy(this.clickReset,this));
 	
 	// Init
 	this.$panel.hide();
@@ -102,6 +102,7 @@ AddStudentToSchoolclassDisplay.prototype.searchStudent = function() {
 AddStudentToSchoolclassDisplay.prototype.init = function () {
 	app.mainDisplay.registerStretchables( [ this.$addStudentTableBody ] );
 	this.resetSorting();
+	this.addStudentAddFormToggle(false);
 }
 
 AddStudentToSchoolclassDisplay.prototype.clear = function () {
@@ -112,6 +113,7 @@ AddStudentToSchoolclassDisplay.prototype.clear = function () {
 	this.addStudentSearchForm.elements["familyName"].value == "";
 	this.$addStudentTableHead.find(".sortButton").removeClass('active');
 	this.resetSorting();
+	this.addStudentAddFormToggle(false);
 }
 
 
@@ -182,6 +184,7 @@ AddStudentToSchoolclassDisplay.prototype.setLoadingTableMessage = function() {
 AddStudentToSchoolclassDisplay.prototype.addStudent = function(id) {
 	app.getPresenterFactory().getAddStudentToSchoolclassPresenter().AddStudentToSchoolClass(id);
 }
+
 
 /*
  * EVENT HANDLERS - add

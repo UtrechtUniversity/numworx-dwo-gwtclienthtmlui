@@ -177,7 +177,6 @@ PersonsDisplay.prototype.searchPersons = function() {
 	this.stateRole = this.personsSearchForm.elements["role"].value;
 	if (this.personsSearchForm.elements["role"].value == "L") app.getPresenterFactory().getPersonsPresenter().showStudentList();
 	if (this.personsSearchForm.elements["role"].value == "D") app.getPresenterFactory().getPersonsPresenter().showTeacherList();
-	
 }
 
 PersonsDisplay.prototype.editPerson = function(id) {

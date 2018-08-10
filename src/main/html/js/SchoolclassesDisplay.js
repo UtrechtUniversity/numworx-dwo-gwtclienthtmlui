@@ -162,6 +162,7 @@ SchoolclassesDisplay.prototype.submitAddSchoolclass = function(event) {
 
 SchoolclassesDisplay.prototype.changeInputFieldAddSchoolclassForm = function(event) {
 	this.addSchoolclassFormToggle();
+	this.classKeyToggle();
 }
 
 SchoolclassesDisplay.prototype.addSchoolclassFormToggle = function(value) {
@@ -170,7 +171,13 @@ SchoolclassesDisplay.prototype.addSchoolclassFormToggle = function(value) {
 }
 
 SchoolclassesDisplay.prototype.requiredFieldsAddSchoolclassForm = function() {
-	return this.addSchoolclassForm.elements["classname"].value != "";
+	return this.addSchoolclassForm.elements["classname"].value != ""
+	 && ( this.addSchoolclassForm.elements["useClasskey"][0].checked ? this.addSchoolclassForm.elements["classkey"].value  != "" : true);
+}
+
+SchoolclassesDisplay.prototype.classKeyToggle = function(value) {
+	if (this.addSchoolclassForm.elements["useClasskey"][0].checked) this.addSchoolclassForm.elements["classkey"].disabled = false;
+	else this.addSchoolclassForm.elements["classkey"].disabled = true;
 }
 
 
