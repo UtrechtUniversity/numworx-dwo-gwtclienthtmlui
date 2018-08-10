@@ -145,6 +145,14 @@ AccountDisplay.prototype.clearAddSchoolLogin = function() {
 	this.addSchoolLoginForm.elements["schoolLogin"].value = "";
 }
 
+AccountDisplay.prototype.setEmptyTableMessage() = function() {
+	this.$schoolLoginsTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
+}
+
+AccountDisplay.prototype.setLoadingTableMessage() = function() {
+	this.$schoolLoginsTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');		
+}
+
 
 /*
  * RETURN FUNCTIONS
