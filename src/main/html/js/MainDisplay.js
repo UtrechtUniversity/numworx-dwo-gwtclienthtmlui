@@ -89,6 +89,12 @@ function MainDisplay() {
 	this.$accountMenuBox.on('mouseleave', $.proxy(this.mouseLeaveAccountMenuIcon, this));
 	$(document).on('click, touchstart', $.proxy(this.clickWherever, this));
 	
+	$("input").focus(function(event) {
+		window.scrollTo(0, 0);
+		document.body.scrollTop = 0;
+		event.preventDefault();
+	});
+	
 	// Trigger window resize for initial help sizing
 	$(window).trigger('resize');
 }
@@ -97,7 +103,12 @@ function MainDisplay() {
 
 MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 	this.$panels.hide();
-	this.$panel.show();	
+	
+	console.log(this.$panel);
+	
+	if (!this.$panel.is(":visible")) {
+		this.$panel.show();
+	} 
 	this.$subpanels.hide();
 	this.loginDisplay.hide();
 	this.setDefaultNavSize();
@@ -142,6 +153,7 @@ MainDisplay.prototype.showWelcomeView = function() {
 	this.initMainView();
 	this.setExpandedNavSize();
 	this.welcomeDisplay.show();
+	this.$panel.show();
 }
 
 MainDisplay.prototype.showAccountView = function(vars) {
@@ -181,7 +193,7 @@ MainDisplay.prototype.showEditCoursesOfSchoolClassView = function() {
 
 MainDisplay.prototype.showPersonsView = function() {
 	this.initMainView(); 
-	this.personsDisplay.show();
+	this.personsDisplay.show();	
 }
 MainDisplay.prototype.showEditPersonView = function() {
 	this.initMainView(); 
@@ -304,7 +316,8 @@ MainDisplay.prototype.removeHoverableOnTouchDevices = function() {
 
 MainDisplay.prototype.resizeWindow = function(event) {
 	Helpers.resizeHelpSection();
-	this.resizeStrechables();	
+	this.resizeStrechables();
+		
 }
 MainDisplay.prototype.registerStretchables = function( elements ) {
 	if (elements.length < 1) return;
@@ -347,7 +360,7 @@ MainDisplay.prototype.resizeStrechables = function() {
 MainDisplay.prototype.clickMenuItem = function(event) {
 	event.preventDefault();
 	var view = event.currentTarget.hash.substr(1);
-	if (view) this.setActiveView(view)
+	if (view) this.setActiveView(view);
 }
 MainDisplay.prototype.clickAccountMenuItem = function(event) {
 	event.preventDefault();

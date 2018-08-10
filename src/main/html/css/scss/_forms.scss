@@ -116,6 +116,12 @@ input[type="text"], input[type="password"] {
 	}
 }
 
+input {
+	&.hidden {
+		display: none;
+	}
+}
+
 label {
 	//margin-bottom: $elementMarginBottom;
 	

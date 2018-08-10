@@ -140,7 +140,7 @@ EditSchoolclassesDisplay.prototype.init = function () {
 }
 
 EditSchoolclassesDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', url );
+	this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
 }
 
 EditSchoolclassesDisplay.prototype.showSchoolClass = function(json) {	

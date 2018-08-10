@@ -126,7 +126,7 @@ AddTeacherToSchoolclassDisplay.prototype.clickReset = function(event) {
 }
 
 AddTeacherToSchoolclassDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', url );
+	this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
 }
 
 AddTeacherToSchoolclassDisplay.prototype.setSchoolClass = function(schoolClass) {

@@ -537,7 +537,7 @@ SelectedResultsDisplay.prototype.init = function(resultState) {
 }
 
 SelectedResultsDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', url );
+	this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
 }
 
 SelectedResultsDisplay.prototype.updateResultTree = function (resultsTree, studentsTree) {

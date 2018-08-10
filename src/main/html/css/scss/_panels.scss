@@ -21,17 +21,19 @@ including header, navigation, account menu
 html { 
 	height: 100%; 
 	overflow-y: hidden;
-	overflow-x: hidden;
+//	overflow-x: hidden;
 	width: 100%; 
 }
 body { 
 	height: 100%;  
-	min-width: $siteWidthTablet * 1px; 
+//	min-width: $siteWidthTablet * 1px;
 	overflow-y: auto;
 	overflow-x: hidden;
 	position: relative;
 	
 	-ms-overflow-style: -ms-autohiding-scrollbar;
+	
+	width: 100%;
 	
 	&.overlay {
 		overflow: hidden;
@@ -70,13 +72,17 @@ body {
 	margin-right: $navWidth * -1px;
 	
 	min-height: 100%;
-	overflow-y: scroll;	
+	//overflow-y: hidden;	//scroll
+	//overflow-x: hidden;
+	overflow: hidden;
 	padding-top: ($headerHeight + $subpanelHeaderHeight) * 1px;
 	width: 99.9%; // TODO bug Safari
+	position: static;
 	
 	
 	@media #{$mediaQueryDesktop} {
 		margin-right: $navWidthExpanded * -1px;
+		
 		//.collapsedNav & { // Expand
 //			margin-right: $navWidthExpanded * -1px!important;
 //		}
@@ -190,13 +196,13 @@ body {
 		
 		section#help { 
 			background-color: $shade11;
-			
+			bottom: -1px;
 			margin-top: -18px;
 			padding-top: 0;		
 			//padding-left: 0;	
-			position: fixed;
+			position: absolute;
 			right: $siteMargin * 1px;
-			top: ($headerHeight + $subpanelHeaderHeight) * 1px;			
+//			top: ($headerHeight + $subpanelHeaderHeight) * 1px;
 			//width: $colWidth * 1px;			
 			z-index: 400;
 			
@@ -215,9 +221,10 @@ body {
 				@include box-shadow(3px,3px,10px,0px,$shadow);
 				display: block;				
 				left: 100%;
+				margin-left: 0;
 				padding: 2em $gutter * 1px;
 				position: fixed;
-				right: 2 * $siteMargin * 1px;			
+				right: 2 * $siteMargin * 1px;
 				top: ($headerHeight + $subpanelHeaderHeight + 1) * 1px;
 				visibility: hidden;
 				//display: none;
@@ -470,8 +477,10 @@ body {
 #mainPanel {
 	background-color: $shade20;
 	min-height: 100%;
+//	overflow: hidden;
 	position: relative;
 	width: 100%;
+//	min-width: $siteWidthTablet * 1px;
 	
 	> header {
 		background-color: $primaryDark;		

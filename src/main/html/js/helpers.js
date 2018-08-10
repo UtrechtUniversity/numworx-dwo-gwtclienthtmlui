@@ -57,7 +57,6 @@ Helpers.toggleHelpSection = function() {
 }
 
 Helpers.stretchHeight = function(elements) {
-	console.log("STRETCH!");
 	if (elements.length < 1) return;
 	
 	subpanel = elements[0].closest('.subpanel');

@@ -11,6 +11,7 @@ function MainApp() {
 	this.mainDisplay = new MainDisplay();
 	window.jsMainDisplay = this.mainDisplay; // make it available for API
 	
+	
 	this.presenterFactory = null;
 	this.translator = null;
 	

@@ -28,12 +28,13 @@ function PersonsDisplay() {
 	
 	// Init
 	this.$panel.hide();
-	
+	// this.$panel.css('visibility', 'hidden');
 }
 
 PersonsDisplay.prototype.show = function() {
     this.localize();
 	this.$panel.show();
+	// this.$panel.css('visibility', 'visible');
 	
 	if (!app.getPresenterFactory().getPersonsPresenter().hasImportPersons()) this.$personsImportForm.hide();
 }
@@ -98,7 +99,7 @@ PersonsDisplay.prototype.filterPersonsList = function () {
  * Map to java implementation
  */
 
-PersonsDisplay.prototype.init = function (json) {
+PersonsDisplay.prototype.init = function (json) { 
 	app.mainDisplay.registerStretchables( [ this.$personsTableBody ] );
 }
 
@@ -116,11 +117,11 @@ PersonsDisplay.prototype.clear = function () {
 	this.changePersonsSearchRole();
 }
 
-PersonsDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', url );
+PersonsDisplay.prototype.setHelp = function(url) { 
+	this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
 }
 
-PersonsDisplay.prototype.showPersons = function(json) {
+PersonsDisplay.prototype.showPersons = function(json) {  
 	var persons = json, personName;
 		
 	this.$personsTableBody.html("");
