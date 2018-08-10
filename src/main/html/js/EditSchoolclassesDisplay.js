@@ -235,6 +235,30 @@ EditSchoolclassesDisplay.prototype.showShowModels = function(json) { // TODO: ch
 	}	
 }
 
+
+
+EditSchoolclassesDisplay.prototype.setEmptyStudentTableMessage() = function (json) {	
+   this.$changeStudentsTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
+}
+EditSchoolclassesDisplay.prototype.etLoadingStudentTableMessage() = function (json) {	
+   this.$changeStudentsTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
+}
+
+voEditSchoolclassesDisplay.prototype.setEmptyTeacherTableMessage() = function (json) {	
+   this.$changeTeachersTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
+}
+EditSchoolclassesDisplay.prototype.setLoadingTeacherTableMessage() = function (json) {	
+   this.$changeTeachersTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
+}
+
+EditSchoolclassesDisplay.prototype.setEmptyModulesTableMessage() = function (json) {	
+   this.$changeModulesTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
+}
+EditSchoolclassesDisplay.prototype.setLoadingModulesTableMessage() = function (json) {	
+   this.$changeModulesTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
+}
+
+
 /*
  * RETURN FUNCTIONS
  * Use java callbacks
