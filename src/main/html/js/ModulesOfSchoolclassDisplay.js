@@ -99,6 +99,7 @@ ModulesOfSchoolclassDisplay.prototype.openTreeForId = function(id) {
 
 
 ModulesOfSchoolclassDisplay.prototype.collapseTree = function() {
+	if (!this.$tree) return;
 	this.$tree.find("li").removeClass("open");
 	for (var id in this.nodes) {
 		this.nodes[id].open = false;
@@ -214,6 +215,7 @@ ModulesOfSchoolclassDisplay.prototype.init = function () {
 	
 	this.settingsFormAllFieldToggle(false);
 	this.searchFormToggle();
+	this.collapseTree();
 }
 
 ModulesOfSchoolclassDisplay.prototype.clear = function () {
@@ -222,6 +224,7 @@ ModulesOfSchoolclassDisplay.prototype.clear = function () {
 	this.searchFormToggle();
 	this.selectedNodeId = null;
 	this.$temporaryRow = null;
+	this.collapseTree();
 }
 
 ModulesOfSchoolclassDisplay.prototype.setHelp = function(url) {
