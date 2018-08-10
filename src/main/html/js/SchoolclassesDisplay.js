@@ -18,6 +18,7 @@ function SchoolclassesDisplay() {
 	// Bind handlers
 	this.$chooseSchoolclassForm.on('submit', $.proxy(this.submitChooseSchoolclass,this));	
 	this.$addSchoolclassForm.on('submit', $.proxy(this.submitAddSchoolclass,this));	
+	this.$addSchoolclassForm.find("input").on('keyup change', $.proxy(this.changeInputFieldAddSchoolclassForm,this));	
 	this.$chooseSchoolclassTableHead.find(".sortButton").click(Helpers.clickSortButton);
 		
 	// Init
@@ -58,12 +59,12 @@ SchoolclassesDisplay.prototype.init = function () {
 	
 	app.mainDisplay.registerStretchables( [ this.$chooseSchoolclassTableBody ] );
 	
+	this.changeInputFieldAddSchoolclassForm();
+	
 	this.resetSorting();
 }
 
-SchoolclassesDisplay.prototype.clear = function () {
-	console.log("clear!");
-	
+SchoolclassesDisplay.prototype.clear = function () {	
 	this.addSchoolclassForm.elements["classname"].value = "";
 	this.addSchoolclassForm.elements["classkey"].value = "";
 	this.addSchoolclassForm.elements["useClasstree"][0].checked = false;
@@ -71,6 +72,8 @@ SchoolclassesDisplay.prototype.clear = function () {
 	this.addSchoolclassForm.elements["useClasskey"][0].checked = false;
 	this.addSchoolclassForm.elements["useClasskey"][1].checked = true;
 	
+	this.changeInputFieldAddSchoolclassForm();
+		
 	this.resetSorting();
 }
 
@@ -155,6 +158,19 @@ SchoolclassesDisplay.prototype.chooseSchoolclassFormToggle = function(value) {
 SchoolclassesDisplay.prototype.submitAddSchoolclass = function(event) {
 	event.preventDefault();		
 	this.addClass();
+}
+
+SchoolclassesDisplay.prototype.changeInputFieldAddSchoolclassForm = function(event) {
+	this.addSchoolclassFormToggle();
+}
+
+SchoolclassesDisplay.prototype.addSchoolclassFormToggle = function(value) {
+	if (this.requiredFieldsAddSchoolclassForm()) this.$addSchoolclassForm.find(':submit').prop('disabled','');
+	else this.$addSchoolclassForm.find(':submit').prop('disabled','disabled');
+}
+
+SchoolclassesDisplay.prototype.requiredFieldsAddSchoolclassForm = function() {
+	return this.addSchoolclassForm.elements["classname"].value != "";
 }
 
 
