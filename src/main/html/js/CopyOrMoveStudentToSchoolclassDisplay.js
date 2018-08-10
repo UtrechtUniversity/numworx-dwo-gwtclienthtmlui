@@ -131,7 +131,6 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudents = function(json, $t
  */
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.clear = function () {
-	console.log("clear!");
 	this.classAFormToggle();
 	this.classBFormToggle();
 	this.$classATableBody.html("");
@@ -142,7 +141,6 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.clear = function () {
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.init = function () {
-	console.log("init!");
 	this.classAFormToggle();
 	this.classBFormToggle();
 	this.$classATableBody.html("");

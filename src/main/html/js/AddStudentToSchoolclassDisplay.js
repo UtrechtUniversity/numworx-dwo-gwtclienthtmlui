@@ -105,6 +105,7 @@ AddStudentToSchoolclassDisplay.prototype.init = function () {
 }
 
 AddStudentToSchoolclassDisplay.prototype.clear = function () {
+	console.log("AddStudentToSchoolclassDisplayCLEAR");
 	this.addStudentSearchForm.elements["username"].value == "";
 	this.addStudentSearchForm.elements["givenName"].value == "";
 	this.addStudentSearchForm.elements["insertion"].value == "";

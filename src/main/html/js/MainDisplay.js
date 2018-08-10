@@ -85,8 +85,9 @@ function MainDisplay() {
 	this.$nav.find('a').on('click', $.proxy(this.clickMenuItem, this));
 	this.$accountMenuBox.find('a').on('click', $.proxy(this.clickAccountMenuItem, this));
 	this.$accountMenuToggle.on('mouseenter', $.proxy(this.mouseEnterAccountMenuIcon, this));
+	this.$accountMenuToggle.on('touchstart', $.proxy(this.touchStartAccountMenuIcon, this));
 	this.$accountMenuBox.on('mouseleave', $.proxy(this.mouseLeaveAccountMenuIcon, this));
-	$(document).on('click', $.proxy(this.clickWherever, this));
+	$(document).on('click, touchstart', $.proxy(this.clickWherever, this));
 	
 	// Trigger window resize for initial help sizing
 	$(window).trigger('resize');
@@ -359,6 +360,10 @@ MainDisplay.prototype.clickAccountMenuItem = function(event) {
 MainDisplay.prototype.mouseEnterAccountMenuIcon = function(event) {
 	this.$accountMenuBox.show();
 }
+MainDisplay.prototype.touchStartAccountMenuIcon = function(event) {
+	if (this.$accountMenuBox.is(":visible")) this.$accountMenuBox.hide();
+	else this.$accountMenuBox.show();
+}
 MainDisplay.prototype.mouseLeaveAccountMenuIcon = function(event) {
 	this.$accountMenuBox.hide();
 }
@@ -369,7 +374,7 @@ MainDisplay.prototype.clickWherever = function(event) {
 			&& $el.closest("#accountMenuBox").length == 0) {
 			this.$accountMenuBox.hide();
 		}
-		event.preventDefault();
+		//event.preventDefault();
 	}
 }
 

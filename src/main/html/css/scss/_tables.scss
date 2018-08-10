@@ -15,7 +15,7 @@ TABLE STYLES
 
 table.dwo { //:not(.c-datepicker__days)
 	//table-layout: fixed;
-	max-width: 100%;
+//	max-width: 100%;
 	
 	border-collapse: collapse;
 	//float: left;
@@ -23,7 +23,7 @@ table.dwo { //:not(.c-datepicker__days)
 	position: relative;
 	margin-bottom: $elementMarginBottom;
 	text-align: left;
-	//width: 100%;
+	width: 100%;
 	
 	thead tr, tbody tr {
 	    display:table;
@@ -127,7 +127,7 @@ table.dwo { //:not(.c-datepicker__days)
 		color: $white;
 		
 		span:not(.sortButton) { 
-			background-color: $shade12;
+			//background-color: $shade12;
 		}
 	}
 		

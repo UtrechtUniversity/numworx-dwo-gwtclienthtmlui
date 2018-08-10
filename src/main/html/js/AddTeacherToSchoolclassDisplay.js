@@ -103,6 +103,7 @@ AddTeacherToSchoolclassDisplay.prototype.init = function () {
 }
 
 AddTeacherToSchoolclassDisplay.prototype.clear = function () {
+	console.log("AddTeacherToSchoolclassDisplayCLEAR");
 	this.addTeacherSearchForm.elements["username"].value == "";
 	this.addTeacherSearchForm.elements["givenName"].value == "";
 	this.addTeacherSearchForm.elements["insertion"].value == "";

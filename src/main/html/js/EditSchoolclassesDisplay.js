@@ -218,9 +218,9 @@ EditSchoolclassesDisplay.prototype.showShowModels = function(json) { // TODO: ch
 	
 	// No Results
 	if ($.isEmptyObject(modules)) {
-		$row = this.$changeModulesRow.clone();
-		$row.find("#chooseModulesName").html( "Geen modules gekoppeld" ).removeAttr("id");
-		this.$changeModulesTableBody.append($row);
+		//$row = this.$changeModulesRow.clone();
+		//$row.find("#chooseModulesName").html( "Geen modules gekoppeld" ).removeAttr("id");
+		//this.$changeModulesTableBody.append($row);
 		return;
 	}
 	
@@ -240,7 +240,7 @@ EditSchoolclassesDisplay.prototype.showShowModels = function(json) { // TODO: ch
 EditSchoolclassesDisplay.prototype.setEmptyStudentTableMessage = function (json) {	
    this.$changeStudentsTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
 }
-EditSchoolclassesDisplay.prototype.etLoadingStudentTableMessage = function (json) {	
+EditSchoolclassesDisplay.prototype.setLoadingStudentTableMessage = function (json) {	
    this.$changeStudentsTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
 }
 

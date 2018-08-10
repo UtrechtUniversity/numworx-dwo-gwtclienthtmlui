@@ -99,7 +99,6 @@ PersonsDisplay.prototype.filterPersonsList = function () {
  */
 
 PersonsDisplay.prototype.init = function (json) {
-	console.log("init!");
 	app.mainDisplay.registerStretchables( [ this.$personsTableBody ] );
 }
 

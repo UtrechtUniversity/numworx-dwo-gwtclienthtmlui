@@ -209,6 +209,7 @@ ModulesOfSchoolclassDisplay.prototype.init = function () {
 }
 
 ModulesOfSchoolclassDisplay.prototype.clear = function () {
+	console.log("ModulesOfSchoolclassDisplayCLEAR");
 	this.settingsForm.elements["key"] = "";
 	this.settingsForm.elements["accessKey"].value = "";
 	this.settingsForm.elements["from"].value = "";
