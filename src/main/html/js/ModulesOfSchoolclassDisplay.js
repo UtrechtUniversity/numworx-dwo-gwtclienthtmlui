@@ -179,7 +179,7 @@ ModulesOfSchoolclassDisplay.prototype.temporaryAddModule = function(id) {
 	this.removeTemporaryRow();
 	this.$temporaryRow = this.addRowToTable(this.nodes[id], id, 0, false, true);
 	
-	// this.$temporaryRow.trigger('click');
+	//this.$temporaryRow.trigger('click');
 	
 	// this.setSettings(id);
 		
@@ -228,7 +228,7 @@ ModulesOfSchoolclassDisplay.prototype.clear = function () {
 }
 
 ModulesOfSchoolclassDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html'+url );
+		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
 }
 
 ModulesOfSchoolclassDisplay.prototype.setEmptyTableMessageModules = function () {
@@ -425,6 +425,10 @@ ModulesOfSchoolclassDisplay.prototype.toggleTreeCheckbox = function(event) {
 		}	
 				
 	} else {
+		// If the item is selected, then disable settingsform
+		for (var i = 0; i < this.selectForm.elements["module"].length; i++) 
+			if (this.selectForm.elements["module"][i].checked) break;
+		if (event.target.value == this.selectForm.elements["module"][i].value) this.settingsFormAllFieldToggle(false);
 		this.detachItem(event.target.value);			
 	} 
 }
@@ -450,22 +454,21 @@ ModulesOfSchoolclassDisplay.prototype.clickSelectRow = function(event) {
 	
 	Helpers.selectTableRow(event);
 	
-	// Remove other temporary row, if available
-	
+	// Remove other temporary row, if available	
 	//this.$tree.find(".temporary input").prop('checked','');
-	
-	
 	//	this.removeTemporaryRow();
-		
+	
+	for (var i = 0; i < this.selectForm.elements["module"].length; i++) 
+		if (this.selectForm.elements["module"][i].checked) break;		
 			
-	if (this.selectForm.elements["module"].value) {		
+	if (this.selectForm.elements["module"][i].value != "") {		
 		// Go in edit settings mode
 		this.settingsFormAllFieldToggle(true);
 		this.settingsFormToggle();
 		this.changeInputFieldSettingsForm();
-		this.openTreeForId(this.selectForm.elements["module"].value);
-		this.setSettings(this.selectForm.elements["module"].value);
-		this.selectedNodeId = this.selectForm.elements["module"].value;
+		this.openTreeForId(this.selectForm.elements["module"][i].value);
+		this.setSettings(this.selectForm.elements["module"][i].value);
+		this.selectedNodeId = this.selectForm.elements["module"][i].value;
 	} else {
 		this.settingsFormAllFieldToggle(false);
 	}

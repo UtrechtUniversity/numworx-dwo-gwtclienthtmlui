@@ -105,7 +105,7 @@ AddTeacherToSchoolclassDisplay.prototype.init = function () {
 
 AddTeacherToSchoolclassDisplay.prototype.clear = function () {
 	console.log("AddTeacherToSchoolclassDisplayCLEAR");
-	this.addTeacherSearchForm.elements["username"].value == "";
+	this.addTeacherSearchForm.elements["userName"].value == "";
 	this.addTeacherSearchForm.elements["givenName"].value == "";
 	this.addTeacherSearchForm.elements["insertion"].value == "";
 	this.addTeacherSearchForm.elements["familyName"].value == "";
@@ -126,7 +126,7 @@ AddTeacherToSchoolclassDisplay.prototype.clickReset = function(event) {
 }
 
 AddTeacherToSchoolclassDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html'+url );
+		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
 }
 
 AddTeacherToSchoolclassDisplay.prototype.setSchoolClass = function(schoolClass) {

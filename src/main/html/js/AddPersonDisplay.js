@@ -68,7 +68,7 @@ AddPersonDisplay.prototype.clear = function () {
 }
 
 AddPersonDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html'+url );
+		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
 }
 
 AddPersonDisplay.prototype.showSchoolClasses = function(json) {
@@ -117,8 +117,11 @@ AddPersonDisplay.prototype.setLoadingTableMessage = function (json) {
  */
 
 AddPersonDisplay.prototype.addPerson = function() {
+	for (var i = 0; i < this.addPersonForm.elements["schoolclass"].length; i++) 
+		if (this.addPersonForm.elements["schoolclass"][i].checked) break;
+	
 	app.getPresenterFactory().getAddStudentPresenter().submitSingleSchoolStudent( 
-		this.addPersonForm.elements['schoolclass'].value,
+		this.addPersonForm.elements['schoolclass'][i].value,
 		this.addPersonForm.elements['userName'].value,
 		this.addPersonForm.elements['givenName'].value,
 		this.addPersonForm.elements['insertion'].value,

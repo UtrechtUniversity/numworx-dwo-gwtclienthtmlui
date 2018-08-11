@@ -78,7 +78,7 @@ SchoolclassesDisplay.prototype.clear = function () {
 }
 
 SchoolclassesDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html'+url );
+		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
 }
 
 SchoolclassesDisplay.prototype.updateView = function(json) {
