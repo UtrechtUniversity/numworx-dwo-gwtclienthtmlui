@@ -191,7 +191,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 	this.$selectResultsTableWrap.append($table);
 	
 	// Add overflow class to names
-	$tbody.find(".studentName span").each( Helpers.addClassIfOverflown );
+	$tbody.find(".studentName").each( Helpers.addClassIfOverflown );
 	
 	app.mainDisplay.registerStretchables( [ $tbody ] );	
 }
@@ -466,19 +466,20 @@ SelectedResultsDisplay.prototype.filterIndicatorReset = function() {
 
 SelectedResultsDisplay.prototype.modulesStudents = function() {
 	var matrix = this.buildMatrixModulesStudentsForClass();
-	this.plotMatrix(matrix);
 	this.$bars.hide();
 	this.$barModulesStudents.show();
+	this.plotMatrix(matrix);
 }
 
 SelectedResultsDisplay.prototype.activitiesStudent = function(params) {
 	var matrix = this.buildMatrixActivitiesStudentInModule(params.module, params.studentId);
 	this.resultState.activeModule = params.moduleId;
-	this.plotMatrix(matrix);
+	
 	this.$bars.hide();
 	this.$barActivitiesStudent.show();
 	//this.$barActivitiesStudentBacklink.html("Terug naar <b>Alle geselecteerde modules</b>");
 	this.$barActivitiesStudentBacklink.click($.proxy(this.clickBackToModulesStudents, this));
+	this.plotMatrix(matrix);
 }
 
 SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
@@ -488,7 +489,7 @@ SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
 	var sealState = this.getSealStateActivitiesStudentsInModule(params.module);
 	
 	this.resultState.activeModule = params.moduleId;
-	this.plotMatrix(matrix);
+	
 	this.$bars.hide();
 	this.$barActivitiesStudents.show();
 	//this.$barActivitiesStudentsBacklink.html("Terug naar <b>Alle geselecteerde modules</b>");
@@ -502,6 +503,8 @@ SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
 		this.$sealCheckbox.parent().attr("checked", "checked");
 		this.$sealCheckbox.attr("disabled", "disabled");
 	}
+	
+	this.plotMatrix(matrix);
 }
 
 SelectedResultsDisplay.prototype.pagesStudents = function(params) {
