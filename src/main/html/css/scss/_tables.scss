@@ -386,21 +386,23 @@ table.dwo.results {
 		td {
 			
 			&.studentName {
-				overflow-x: hidden;
+				//overflow-x: hidden;
 				position: relative;
 				white-space: nowrap;
+				width: (($colWidth) - $gutter) * 1px;
 				
 				span {
+					overflow-x: hidden;
 					width: auto;
 				}
 				
-				&.overflown:after {
+				span.overflown:after {
 					background-color: $white;
 					content: "...";
 					display: block;
 					position: absolute;
 					right: 0;
-					top: 9px;
+					top: 1px;
 					width: 20px;
 				}	
 				
@@ -427,7 +429,7 @@ table.dwo.results {
 			}						
 		}
 		tr:hover td.studentName.overflown:after {
-			background-color: $shade12;
+			background-color: $shade12!important;
 		}	
 	}
 	
@@ -485,10 +487,10 @@ table.dwo.results {
 			bottom: 0;
 			right: 0;
 			/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#edeff1+0,edeff1+100&0+0,1+100 */
-			background: -moz-linear-gradient(left, $shade10RGBA0 0%, $shade10RGBA1 100%); /* FF3.6-15 */
-			background: -webkit-linear-gradient(left, $shade10RGBA0 0%,$shade10RGBA1 100%); /* Chrome10-25,Safari5.1-6 */
-			background: linear-gradient(to right, $shade10RGBA0 0%,$shade10RGBA1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00edeff1', endColorstr='#{$shade10}',GradientType=1 ); /* IE6-9 */
+			background: -moz-linear-gradient(left, $shade20RGBA0 0%, $shade20RGBA1 100%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(left, $shade20RGBA0 0%,$shade20RGBA1 100%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to right, $shade20RGBA0 0%,$shade20RGBA1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00edeff1', endColorstr='#{$shade20}',GradientType=1 ); /* IE6-9 */
 		}
 	}
 }

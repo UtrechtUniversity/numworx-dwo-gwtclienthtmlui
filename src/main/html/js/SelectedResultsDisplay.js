@@ -47,6 +47,7 @@ function SelectedResultsDisplay() {
 	this.$startCompareClassForm.on('submit', $.proxy(this.submitStartCompareClassForm, this));
 	this.$printButton.on('click', $.proxy(this.clickPrintButton, this));
 	this.$sealCheckbox.on('change', $.proxy(this.changeSealCheckbox, this));
+	this.$selectResultsTableWrap.on('scroll', $.proxy(this.scrollTableWrap, this));	
 	
 	// Init
 	this.$panel.hide();
@@ -190,7 +191,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 	this.$selectResultsTableWrap.append($table);
 	
 	// Add overflow class to names
-	$tbody.find(".studentName").each( Helpers.addClassIfOverflown );
+	$tbody.find(".studentName span").each( Helpers.addClassIfOverflown );
 	
 	app.mainDisplay.registerStretchables( [ $tbody ] );	
 }
@@ -597,6 +598,14 @@ SelectedResultsDisplay.prototype.getPages = function(scoId) {
 /*
  * EVENT HANDLERS
  */
+
+SelectedResultsDisplay.prototype.scrollTableWrap = function(event) {
+	var $el = $(event.target);
+	var left = $el.scrollLeft();
+	if (left == 0) $el.removeClass('active');
+	else $el.addClass('active');
+	$el.find('td:first-child span').css('left',left+'px');
+}
 
 SelectedResultsDisplay.prototype.hoverColumnHeader = function(event) {
 	var $target = $(event.target);
