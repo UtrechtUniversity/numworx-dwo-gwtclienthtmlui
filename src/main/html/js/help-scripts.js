@@ -1,11 +1,9 @@
 var hashChange = function(event) {	
 					$("section").hide();
-					if(section = window.location.hash) {
-						$(section).show();
-					}
+					$(""+window.location.hash).show();
 				};
 
 $(document).ready(function(){ 
 	hashChange();
-	$(document).on('hashchange',hashChange);
+	$(window).on('hashchange',hashChange);
 });

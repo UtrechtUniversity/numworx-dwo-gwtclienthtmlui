@@ -152,7 +152,7 @@ ResultsDisplay.prototype.clear = function () {
 }
 
 ResultsDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
+	this.$helpContentIFrame.attr('src', 'https://localhost:8888/local/helppage/helpindex_nl.html'+url );
 }
 
 ResultsDisplay.prototype.setResultTree = function (resultTree, studentsTree) {
