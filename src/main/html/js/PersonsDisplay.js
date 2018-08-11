@@ -175,15 +175,15 @@ PersonsDisplay.prototype.setLoadingTableMessage = function(json) {
  */
 
 PersonsDisplay.prototype.searchPersons = function() {
-	this.stateRole = this.personsSearchForm.elements["role"].value;
-	if (this.personsSearchForm.elements["role"].value == "L") app.getPresenterFactory().getPersonsPresenter().showStudentList();
-	if (this.personsSearchForm.elements["role"].value == "D") app.getPresenterFactory().getPersonsPresenter().showTeacherList();
+	this.stateRole = this.personsSearchForm.elements["role"][0].checked ? "S" : "T";
+	if (this.stateRole == "S") app.getPresenterFactory().getPersonsPresenter().showStudentList();
+	if (this.stateRole == "T") app.getPresenterFactory().getPersonsPresenter().showTeacherList();
 }
 
 PersonsDisplay.prototype.editPerson = function(id) {
-	this.stateRole = this.personsSearchForm.elements["role"].value;
-	if (this.stateRole == "L") app.getPresenterFactory().getPersonsPresenter().editStudent(id);
-	if (this.stateRole == "D") app.getPresenterFactory().getPersonsPresenter().editTeacher(id);
+	this.stateRole = this.personsSearchForm.elements["role"][0].checked ? "S" : "T";
+	if (this.stateRole == "S") app.getPresenterFactory().getPersonsPresenter().editStudent(id);
+	if (this.stateRole == "T") app.getPresenterFactory().getPersonsPresenter().editTeacher(id);
 }
 
 
@@ -224,7 +224,11 @@ PersonsDisplay.prototype.personsSearchFormToggle = function(value) {
 
 PersonsDisplay.prototype.submitPersonsEditForm = function(event) {
 	event.preventDefault();	
-	this.editPerson(this.personsEditForm.elements["id"].value);
+	
+	for (var i = 0; i < this.personsEditForm.elements["id"].length; i++) 
+		if (this.personsEditForm.elements["id"][i].checked) break;
+	
+	this.editPerson(this.personsEditForm.elements["id"][i].value);
 }
 
 PersonsDisplay.prototype.clickPersonsRow = function(event) {

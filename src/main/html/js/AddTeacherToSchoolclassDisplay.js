@@ -190,7 +190,11 @@ AddTeacherToSchoolclassDisplay.prototype.addTeacher = function(id) {
 
 AddTeacherToSchoolclassDisplay.prototype.submitAddTeacherAddForm = function(event) {
 	event.preventDefault();	
-	this.addTeacher(this.addTeacherAddForm.elements["id"].value);
+	
+	for (var i = 0; i < this.addTeacherAddForm.elements["id"].length; i++) 
+		if (this.addTeacherAddForm.elements["id"][i].checked) break;
+	
+	this.addTeacher(this.addTeacherAddForm.elements["id"][i].value);
 }
 AddTeacherToSchoolclassDisplay.prototype.clickAddTeacherAddRow = function(event) {
 	Helpers.selectTableRow(event);

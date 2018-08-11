@@ -192,7 +192,11 @@ AddStudentToSchoolclassDisplay.prototype.addStudent = function(id) {
 
 AddStudentToSchoolclassDisplay.prototype.submitAddStudentAddForm = function(event) {
 	event.preventDefault();	
-	this.addStudent(this.addStudentAddForm.elements["id"].value);
+	
+	for (var i = 0; i < this.addStudentAddForm.elements["id"].length; i++) 
+		if (this.addStudentAddForm.elements["id"][i].checked) break;
+	
+	this.addStudent(this.addStudentAddForm.elements["id"][i].value);
 }
 AddStudentToSchoolclassDisplay.prototype.clickAddStudentAddRow = function(event) {
 	Helpers.selectTableRow(event);

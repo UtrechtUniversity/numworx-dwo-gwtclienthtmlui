@@ -136,7 +136,11 @@ SchoolclassesDisplay.prototype.addClass = function(id) {
 
 SchoolclassesDisplay.prototype.submitChooseSchoolclass = function(event) {
 	event.preventDefault();		
-	this.chooseClass(this.chooseSchoolclassForm.elements["schoolclass"].value);
+	
+	for (var i = 0; i < this.chooseSchoolclassForm.elements["schoolclass"].length; i++) 
+		if (this.chooseSchoolclassForm.elements["schoolclass"][i].checked) break;
+	
+	this.chooseClass(this.chooseSchoolclassForm.elements["schoolclass"][i].value);
 }
 SchoolclassesDisplay.prototype.clickChooseSchoolclassRow = function(event) {
 	Helpers.selectTableRow(event);
