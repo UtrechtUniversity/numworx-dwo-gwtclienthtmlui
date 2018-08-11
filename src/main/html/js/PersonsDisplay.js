@@ -118,7 +118,7 @@ PersonsDisplay.prototype.clear = function () {
 }
 
 PersonsDisplay.prototype.setHelp = function(url) { 
-	this.$helpContentIFrame.attr('src', 'https://localhost:8888/local/helppage/helpindex_nl.html'+url );
+	this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html'+url );
 }
 
 PersonsDisplay.prototype.showPersons = function(json) {  
