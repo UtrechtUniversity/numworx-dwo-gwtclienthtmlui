@@ -164,12 +164,12 @@ ResultsDisplay.prototype.setResultTree = function (resultTree, studentsTree) {
 ResultsDisplay.prototype.setEmptyTableMessage = function () {
 	console.log("setEmptyTableMessage");
 	this.$chooseClassTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
-	this.$chooseModuleTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
+//	this.$chooseModuleTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
 }
 
 ResultsDisplay.prototype.setLoadingTableMessage = function () {
 	this.$chooseClassTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
-	this.$chooseModuleTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
+//	this.$chooseModuleTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
 }
 
 // ResultsDisplay.prototype.setEmptyTableMessageModules = function () {
