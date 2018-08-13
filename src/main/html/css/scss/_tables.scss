@@ -113,7 +113,7 @@ table.dwo { //:not(.c-datepicker__days)
 				border-bottom: 1px $line1 solid;
 				//padding: 5px 10px;
 				vertical-align: middle;
-				padding: 7px $gutter / 2 * 1px!important;
+				padding: 8px $gutter / 2 * 1px!important;
 				width: ($colWidth - ($gutter)) * 1px;
 				float: none!important; // for if it has a col-class
 			}	
