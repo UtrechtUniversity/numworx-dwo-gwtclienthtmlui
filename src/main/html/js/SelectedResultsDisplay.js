@@ -500,7 +500,7 @@ SelectedResultsDisplay.prototype.modulesStudents = function() {
 	this.$bars.hide();
 	this.$barModulesStudents.show();
 	this.plotMatrix(matrix);
-	//this.filterIndicatorModulesStudents();
+	this.filterIndicatorModulesStudents();
 }
 
 SelectedResultsDisplay.prototype.activitiesStudent = function(params) {
