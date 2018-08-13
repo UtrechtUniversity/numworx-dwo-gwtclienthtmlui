@@ -33,7 +33,7 @@ function AccountDisplay() {
 	$(this.updateUserForm.elements["currentPassword"]).on('keypress', $.proxy(this.changeCurrentPasswordInput,this));
 	this.$addSchoolLoginForm.find("input:radio").on('change', $.proxy(this.addSchoolLoginFormToggle,this));
 	this.$schoolLoginsTableHead.find(".sortButton").click(Helpers.clickSortButton);
-	
+        
 	// Init
 	this.$panel.hide();
 	this.addSchoolLoginFormToggle();
@@ -108,8 +108,9 @@ AccountDisplay.prototype.updateSchoolLoginsView = function(json) {
 		for (i = 0; i < this.schoolsRolesAndClassesList.length; i++) {
 			el = this.schoolsRolesAndClassesList[i];
 			$row = this.$schoolLoginsRow.clone();
+                        
 			$row.find("#updateSchoolLoginsViewSchool").html( el.school.schoolName ).attr('data-sortvalue', el.school.schoolName).removeAttr("id");
-			$row.find("#updateSchoolLoginsViewRole").html( el.role.roleName ).attr('data-sortvalue', el.role.roleName).removeAttr("id");	
+			$row.find("#updateSchoolLoginsViewRole").html( app.getTranslator().translate(el.role.roleName)).attr('data-sortvalue', app.getTranslator().translate(el.role.roleName)).removeAttr("id");	
 			
 			$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 				this.value = el.hasRole.id.idString;
