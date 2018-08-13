@@ -130,6 +130,7 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 		i++;
 	}
 	
+	this.$selectAllModules.children().removeClass("active");
 	this.$chooseModulesTableHead.find(".sortButton.default").trigger('click');	
 	
 }
@@ -144,6 +145,7 @@ ResultsDisplay.prototype.init = function () {
 	app.mainDisplay.registerStretchables( [ this.$chooseClassTableBody, this.$chooseModulesTableBody  ] );
 	this.resultState.activeCourses = [];
 	this.chooseClassModuleFormToggle();
+	this.$selectAllModules.removeClass("active");
 }
 
 ResultsDisplay.prototype.clear = function () {
@@ -159,6 +161,7 @@ ResultsDisplay.prototype.clear = function () {
 	this.resetSorting();
 	this.resultState.activeCourses = [];
 	this.chooseClassModuleFormToggle();
+	this.$selectAllModules.children().removeClass("active");
 }
 
 ResultsDisplay.prototype.setHelp = function(url) {
