@@ -200,7 +200,12 @@ ResultsDisplay.prototype.showSelectedResults = function() {
  * EVENT HANDLERS
  */
 
-ResultsDisplay.prototype.changeCheckboxOpenClosed = function(event) {		
+ResultsDisplay.prototype.changeCheckboxOpenClosed = function(event) {
+	
+	// Reset previous modules chosen
+	this.resultState.activeCourses = [];
+	this.chooseClassModuleFormToggle();
+			
 	if (event.target.checked) {
 		this.uncheckCheckboxOpenClosed();
 		event.target.checked = "checked";
