@@ -98,6 +98,7 @@ AddPersonDisplay.prototype.showSchoolClasses = function(json) {
 		this.$addPersonSchoolclassesTableBody.append($row);
 		i++;
 	}
+	this.$addPersonSchoolclassesTableHead.find(".sortButton.default").trigger('click');
 	this.updateSchoolLoginsViewFormSubmitToggle();
 	
 }

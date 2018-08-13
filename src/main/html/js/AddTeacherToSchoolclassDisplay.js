@@ -163,6 +163,8 @@ AddTeacherToSchoolclassDisplay.prototype.showTeachers = function(json) {
 		this.$addTeacherTableBody.append($row);
 		i++;
 	}
+	
+	this.$addTeacherTableHead.find(".sortButton.default").trigger('click');
 	this.addTeacherAddFormToggle(false);
 }
 

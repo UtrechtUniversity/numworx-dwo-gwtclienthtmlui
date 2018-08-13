@@ -159,6 +159,8 @@ PersonsDisplay.prototype.showPersons = function(json) {
 	this.personsEditFormToggle(false);	
 	
 	this.filterPersonsList();	
+	
+	this.$personsEditForm.find(".sortButton.default").trigger('click');
 }
 
 PersonsDisplay.prototype.setEmptyTableMessage = function(json) {

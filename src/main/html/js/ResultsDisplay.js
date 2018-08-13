@@ -83,7 +83,9 @@ ResultsDisplay.prototype.setChooseClassTable = function() {
 		
 		this.$chooseClassTableBody.append($row);
 		i++;
-	}	
+	}
+	
+	this.$chooseClassTableHead.find(".sortButton.default").trigger('click');	
 	
 	this.$chooseModulesTableBody.html("");
 }
@@ -124,6 +126,8 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 		this.$chooseModulesTableBody.append($row);
 		i++;
 	}
+	
+	this.$chooseModulesTableHead.find(".sortButton.default").trigger('click');	
 	
 }
 

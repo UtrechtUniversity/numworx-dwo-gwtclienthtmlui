@@ -102,6 +102,9 @@ SchoolclassesDisplay.prototype.updateView = function(json) {
 		this.$chooseSchoolclassTableBody.append($row);
 		i++;
 	}
+	
+	this.$chooseSchoolclassTableHead.find(".sortButton.default").trigger('click');
+	
 	this.chooseSchoolclassFormToggle(false);
 }
 

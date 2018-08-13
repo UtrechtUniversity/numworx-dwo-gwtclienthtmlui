@@ -182,12 +182,14 @@ EditSchoolclassesDisplay.prototype.showStudents = function(json) {
 	var i = 1;
 	for (var id in students) { // TODO: probably change to array
 		studentName = students[id].givenName + (students[id].insertion ? " "+students[id].insertion : "") + " " + students[id].familyName;
-		studentSortName = students[id].familyName + (students[id].insertion ? " "+students[id].insertion : "") + " " + students[id].givenName;
+		studentSortName = students[id].familyName + " " + students[id].givenName + (students[id].insertion ? " "+students[id].insertion : "");
 		$row = this.$changeStudentsRow.clone();
 		$row.find("#chooseStudentName").html( studentName ).attr('data-sortvalue', studentSortName).removeAttr("id");
 		this.$changeStudentsTableBody.append($row);
 		i++;
 	}
+	
+	this.$changeStudentsTableHead.find(".sortButton.default").trigger('click');
 	
 }
 
@@ -205,7 +207,7 @@ EditSchoolclassesDisplay.prototype.showTeachers = function(json) {
 	var i = 1;
 	for (var id in teachers) { // TODO: probably change to array
 		teacherName = teachers[id].givenName + (teachers[id].insertion ? " "+teachers[id].insertion : "") + " " + teachers[id].familyName;
-		teacherSortName = teachers[id].familyName + (teachers[id].insertion ? " "+teachers[id].insertion : "") + " " + teachers[id].givenName;
+		teacherSortName = teachers[id].familyName + " " + teachers[id].givenName + (teachers[id].insertion ? " "+teachers[id].insertion : "");
 		
 		$row = this.$changeTeachersRow.clone();
 		$row.find("#chooseTeacherName").html( teacherName ).attr('data-sortvalue', teacherSortName).removeAttr("id");
@@ -213,6 +215,7 @@ EditSchoolclassesDisplay.prototype.showTeachers = function(json) {
 		i++;
 	}
 	
+	this.$changeTeachersTableHead.find(".sortButton.default").trigger('click');
 }
 
 EditSchoolclassesDisplay.prototype.showShowModels = function(json) { // TODO: change function name @Gert
@@ -236,6 +239,8 @@ EditSchoolclassesDisplay.prototype.showShowModels = function(json) { // TODO: ch
 		this.$changeModulesTableBody.append($row);
 		i++;
 	}	
+	
+	this.$changeModulesTableHead.find(".sortButton.default").trigger('click');
 }
 
 
