@@ -238,7 +238,7 @@ body {
 		section#help { 
 			//background-color: $shade11;
 			//bottom: -1px;
-			height: 75%;
+			
 			margin-top: -18px;
 			padding-top: 0;		
 			//padding-left: 0;	
@@ -247,6 +247,10 @@ body {
 			top: ($headerHeight + $subpanelHeaderHeight) * 1px;
 			//width: $colWidth * 1px;			
 			z-index: 500;
+			
+			&.active {
+				height: 75%;
+			}
 			
 			h2.helpheader {
 				border-bottom: 1px $primary solid;
