@@ -203,7 +203,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 	
 	app.mainDisplay.registerStretchables( [ $tbody ] );
 	
-	this.allFilterIndicatorsReset();
+	//this.allFilterIndicatorsReset();
 }
 
 SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function() {
@@ -500,6 +500,7 @@ SelectedResultsDisplay.prototype.modulesStudents = function() {
 	this.$bars.hide();
 	this.$barModulesStudents.show();
 	this.plotMatrix(matrix);
+	//this.filterIndicatorModulesStudents();
 }
 
 SelectedResultsDisplay.prototype.activitiesStudent = function(params) {
@@ -536,6 +537,7 @@ SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
 	}
 	
 	this.plotMatrix(matrix);
+	this.filterIndicatorActivitiesStudentsInModule();
 }
 
 SelectedResultsDisplay.prototype.pagesStudents = function(params) {
@@ -560,7 +562,7 @@ SelectedResultsDisplay.prototype.pagesStudents = function(params) {
  */
 
 SelectedResultsDisplay.prototype.clear = function () {
-	console.log("clear");	
+	this.allFilterIndicatorsReset();
 }
 
 SelectedResultsDisplay.prototype.init = function(resultState) {
