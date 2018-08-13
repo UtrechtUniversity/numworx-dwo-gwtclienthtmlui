@@ -135,6 +135,8 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 
 ResultsDisplay.prototype.init = function () {
 	app.mainDisplay.registerStretchables( [ this.$chooseClassTableBody, this.$chooseModulesTableBody  ] );
+	this.resultState.activeCourses = [];
+	this.chooseClassModuleFormToggle();
 }
 
 ResultsDisplay.prototype.clear = function () {
@@ -148,6 +150,7 @@ ResultsDisplay.prototype.clear = function () {
 		for (var i = 0; i < this.chooseClassModuleForm.elements['select[]'].length; i++) this.chooseClassModuleForm.elements['select[]'][i].checked = false;
 	}
 	this.resetSorting();
+	this.resultState.activeCourses = [];
 	this.chooseClassModuleFormToggle();
 }
 
