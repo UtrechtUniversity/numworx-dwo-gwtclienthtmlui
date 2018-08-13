@@ -39,7 +39,9 @@ Helpers.resizeHelpSection = function(event) {
 		if ($(window).outerWidth() > (1366 + 158 + 7 * 79)) $help.addClass('col-10'); else $help.removeClass('col-10');
 		if ($(window).outerWidth() > (1366 + 158 + 8 * 79)) $help.addClass('col-11'); else $help.removeClass('col-11');		
 	}		
-	else $help.removeClass('active desktop col-3 col-4 col-5 col-6');
+	else {
+		$help.removeClass('active desktop col-3 col-4 col-5 col-6');
+	}
 }
 
 Helpers.toggleHelpSection = function() {

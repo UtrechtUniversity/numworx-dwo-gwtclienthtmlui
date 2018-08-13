@@ -316,6 +316,7 @@ MainDisplay.prototype.removeHoverableOnTouchDevices = function() {
 
 MainDisplay.prototype.resizeWindow = function(event) {
 	Helpers.resizeHelpSection();
+	this.closeHelp();
 	this.resizeStrechables();
 		
 }
