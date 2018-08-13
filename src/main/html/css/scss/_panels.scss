@@ -1007,9 +1007,13 @@ section.lightbox {
 
 
 .filterIndicators {
-	border-bottom: $borderThickness $primary solid;
+	border-bottom: $borderThickness $shade20 solid;
 	display: inline-block;
 	padding-bottom: $borderThickness;
+	
+	&.active {
+		border-bottom: $borderThickness $primary solid;
+	}
 	
 	a {		
 		background-color: $primaryLight;
