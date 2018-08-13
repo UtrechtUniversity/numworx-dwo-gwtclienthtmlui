@@ -236,12 +236,12 @@ ResultsDisplay.prototype.changeCheckboxSelect = function(event) {
 	this.chooseClassModuleFormToggle();
 }
 
-ResultsDisplay.prototype.submitChooseClassModuleForm = function() {
+ResultsDisplay.prototype.submitChooseClassModuleForm = function(event) {
 	event.preventDefault();
 	if (this.resultState.activeCourses.length > 0) this.showSelectedResults();	
 }
 
-ResultsDisplay.prototype.clickSelectAllModules = function() {
+ResultsDisplay.prototype.clickSelectAllModules = function(event) {
 	event.preventDefault();
 	if (typeof this.chooseClassModuleForm.elements["select[]"] == 'undefined' ) return;
 	

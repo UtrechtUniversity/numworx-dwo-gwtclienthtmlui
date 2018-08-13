@@ -383,15 +383,15 @@ ModulesOfSchoolclassDisplay.prototype.addModule = function() {
 	
 	var from = this.settingsForm.elements["from"].value;
 	var to = this.settingsForm.elements["to"].value;
-	
-	this.$temporaryRow = null;
-	this.settingsFormAllFieldToggle(false);
 		
 	app.getPresenterFactory().getModulesOfSchoolclassPresenter().addModule(  	this.selectedNodeId,
 																				typeString,
 																				from,
 																				to,
 																				this.settingsForm.elements["accessKey"].value);
+		
+	this.$temporaryRow = null;
+	this.settingsFormAllFieldToggle(false);
 																			
 }
 

@@ -192,7 +192,7 @@ EditPersonDisplay.prototype.setSchoolClasses = function (json) {
 		$row.find("input[name='active[]']").on('change', $.proxy(this.changeActiveCheckbox,this));
 		this.$editPersonSchoolclassesTableBody.append($row);
 		
-		if (schoolclasses[id].tag == true) $row.find("input[type='checkbox'],input[type='radio']").attr("checked", "checked");
+		if (schoolclasses[id].tag == true) $row.find("input[type='checkbox'],input[type='radio']").prop("checked", "checked");
 		
 		i++;
 	}
