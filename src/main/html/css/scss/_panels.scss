@@ -20,37 +20,59 @@ including header, navigation, account menu
 
 html { 
 	height: 100%; 
-	overflow-y: scroll;
-	overflow-x: hidden;
+	overflow-y: hidden;
+//	overflow-x: hidden;
 	width: 100%; 
 }
 body { 
 	height: 100%;  
-	min-width: $siteWidthTablet * 1px; 
-	overflow-y: scroll;
+//	min-width: $siteWidthTablet * 1px;
+	overflow-y: auto;
 	overflow-x: hidden;
 	position: relative;
 	
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+	
+	width: 100%;
+	
 	&.overlay {
 		overflow: hidden;
-		&:after {
+		&:before {
 			background: $transBlack;
 			bottom: 0;
 			content: " ";
-			display: block;			
+			display: block;
 			height: 100%;
 			left: 0;
 			position: fixed;
-			top: 0; 
-			right: 0;  
-			width: 100%;			
-			z-index: 999;
-		}		
+			top: 0;
+			right: 0;
+			width: 100%;
+			z-index: 300;
+		}
 	}
 	&.login {
-		background-color: $shade2;
+		background-color: $shade11;
 	}
 }
+
+//#overlay {
+//	background: $transBlack;
+//	bottom: 0;
+//	content: " ";
+//	display: none;
+//	height: 100%;
+//	left: 0;
+//	position: fixed;
+//	top: 0;
+//	right: 0;
+//	width: 100%;
+//	z-index: 300;
+//
+//	.overlay & {
+//		display: block;
+//	}
+//}
 
 .panel {
 	background-color: $white;
@@ -66,41 +88,62 @@ body {
 .subpanel {
 	margin: 0 0 0 auto;
 	margin-right: $navWidth * -1px;
-	min-height: 100%;
-	overflow-y: scroll;	
+	
+//	min-height: 100%;
+//	height: 100%;
+	//overflow-y: hidden;	//scroll
+	//overflow-x: hidden;
+	overflow: hidden;
 	padding-top: ($headerHeight + $subpanelHeaderHeight) * 1px;
 	width: 99.9%; // TODO bug Safari
+	position: static;
 	
 	
 	@media #{$mediaQueryDesktop} {
 		margin-right: $navWidthExpanded * -1px;
+		
+		//.collapsedNav & { // Expand
+//			margin-right: $navWidthExpanded * -1px!important;
+//		}
 		//position: relative;
+	}
+	.hiddenNav & {
+		margin-right: 0;
 	}
 	.expandedNav & {
 		margin-right: $navWidthExpanded * -1px;
 	}
+	//.collapsedNav & {
+//		margin-right: $navWidth * -1px;
+//	}
 	.libraryPage & {
 		margin-right: $navWidthLibraryPage * -1px;
 		padding-top: ($headerHeight) * 1px;
 	}
 	
 	&.iframepanel {
-		bottom: 0;
-		left: $navWidth * 1px;
+		//bottom: 0;
+		//left: $navWidth * 1px;
 		margin: 0;
-		overflow-y: hidden;	
-		padding: 0;
-		position: absolute;
-		right: 0;
-		top: ($headerHeight) * 1px;;
-		width: auto;
+		//overflow-y: hidden;	
+		//padding: 0;
+		//position: absolute;
+		//right: 0;
+		//top: ($headerHeight) * 1px;;
+		//width: auto;
+		padding-top: ($headerHeight) * 1px;;
 		
 		@media #{$mediaQueryDesktop} {
 			left: $navWidthExpanded * 1px;
 		}
 		
+		.hiddenNav & {
+			left: 0;
+		}
+		
 		iframe {						
 			margin: 0 0 0 auto;
+			//margin-top: ($headerHeight) * 1px;;
 			width: 100%;
 		}
 	}
@@ -113,15 +156,33 @@ body {
 		min-height: $subpanelHeaderHeight * 1px;
 		left: 0;
 		top: $headerHeight * 1px;						
-		position: fixed;
+		position: fixed; 
 		width: 100%;
-		z-index: 150;
+		z-index: 600;
+		
+		.overlay &	{
+			border-bottom: 1px $primaryWithOverlay solid;
+			&:before {
+				background: $transBlack;
+				bottom: 0;
+				content: " ";
+				display: block;
+				height: 100%;
+				left: 0;
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 100%;
+				z-index: 400;
+			}
+		}
 		
 		@media #{$mediaQueryDesktop} {
 			margin-right: 0;
 			left: $navWidthExpanded * 1px;
-			//position: fixed;
+			position: fixed; // for IE 11
 			right: 0;
+			width: auto;
 			z-index: 150;
 		}
 		
@@ -136,9 +197,11 @@ body {
 			@media #{$mediaQueryDesktop} {
 				max-width: ($siteWidthDesktop - $navWidthExpanded) * 1px;
 			}
+			
+			
 		}
 		
-		.icon {
+		#accountMenuToggle, .pageIcon {
 			border-radius: 2px;
 			display: block;			
 			height: 26px; //TODO var
@@ -160,7 +223,9 @@ body {
 			margin-left: ($navWidth + $gutter) * 1px;	
 			position: absolute;
 			width: 100%;			
-			//position: absolute;		
+			//position: absolute;	
+			
+			
 			
 			@media #{$mediaQueryDesktop} {
 				//	width: ($siteWidth - $gutter) / $siteWidth * 100%;
@@ -171,72 +236,135 @@ body {
 		}
 		
 		section#help { 
-			background-color: $shade2;
+			//background-color: $shade11;
+			//bottom: -1px;
 			
 			margin-top: -18px;
 			padding-top: 0;		
 			//padding-left: 0;	
 			position: fixed;
 			right: $siteMargin * 1px;
-			top: ($headerHeight + $subpanelHeaderHeight) * 1px;			
+			top: ($headerHeight + $subpanelHeaderHeight) * 1px;
 			//width: $colWidth * 1px;			
-			z-index: 99;
+			z-index: 500;
+			
+			&.active {
+				height: 75%;
+			}
 			
 			h2.helpheader {
 				border-bottom: 1px $primary solid;
-				border-left: 1px $shade2 solid;
+				border-left: 1px $shade11 solid;
 				cursor: pointer;
 				margin-left: ($gutter + 1) * -1px;						
-			}			
-			.content {				
-				background-color: $shade2;
-				border-left: 1px $shade2 solid;
-				bottom: 0;
+				z-index: 400;
+			}	
+			
+			.content {
+				background-color: $shade11;
+//				border-left: 1px $shade11 solid;
+				bottom: 25%;
+				@include box-shadow(3px,3px,10px,0px,$shadow);
 				display: block;				
+				left: 100%;
+				margin-left: 0;
 				padding: 2em $gutter * 1px;
-				position: fixed;
-				right: $siteMargin * 1px;			
-				top: ($headerHeight + $subpanelHeaderHeight + 1) * 1px;
+//				position: absolute;
+				right: 2 * $siteMargin * 1px;
+//				top: ($headerHeight + $subpanelHeaderHeight + 1) * 1px;
+				top: 19px;
 				visibility: hidden;
 				//display: none;
-				left: 100%;
+				width: (3 * $colWidth / 2 + $gutter * 0.5 - $gutter) * 1px;
+				z-index: 500;
 				
+				
+			
 				iframe {
-					width: 100%;
 					height: 100%;
+					width: 100%;
 				}
 				
+				.closeButton {
+					cursor: pointer;
+					height: 32px;
+					position: absolute;
+					right: 5px;
+					bottom: 7px;
+					width: 32px;
+					z-index: 400;
+			
+					.icon {
+						display: block;
+						float: left;
 				
-				@media #{$mediaQueryDesktopWide} {
-					bottom: auto;
-					min-height: 50%;
+						border-radius: 2px;
+						float: left;
+						height: 26px; //TODO var
+						margin-right: 0.5em;
+						width: 26px; //TODO var
+				
+						use { fill: $shade23; }
+					}
 				}				
 			}
-			&.col-2 .content { width: (2 * $colWidth / 2 - $gutter) * 1px; }		
-			&.col-3 .content { width: (3 * $colWidth / 2 + $gutter * 0.5 - $gutter) * 1px; }		
-			&.col-4 .content { width: (4 * $colWidth / 2 + $gutter * 1.0 - $gutter) * 1px; }		
-			&.col-5 .content { width: (5 * $colWidth / 2 + $gutter * 1.5 - $gutter) * 1px; }		
-			&.col-6 .content { width: (6 * $colWidth / 2 + $gutter * 2.0 - $gutter) * 1px; }		
-			&.col-7 .content { width: (7 * $colWidth / 2 + $gutter * 2.5 - $gutter) * 1px; }		
-			&.col-8 .content { width: (8 * $colWidth / 2 + $gutter * 3.0 - $gutter) * 1px; }		
-			&.col-9 .content { width: (9 * $colWidth / 2 + $gutter * 3.5 - $gutter) * 1px; }		
-			&.col-10 .content { width: (10 * $colWidth / 2 + $gutter * 4.0 - $gutter) * 1px; }		
-			&.col-11 .content { width: (11 * $colWidth / 2 + $gutter * 4.5 - $gutter) * 1px; }		
-			&.col-12 .content { width: (12 * $colWidth / 2 + $gutter * 5.0 - $gutter) * 1px; }		
 			
-			&.active {
+			@media #{$mediaQueryDesktop} {	
+				.content {				
+//					background-color: $shade11;
+					border-left: 1px $shade11 solid;
+					@include box-shadow(0px,0px,0px,0px,$shadow);
+//					bottom: 40;
+					display: block;				
+//					padding: 2em $gutter * 1px;
+//					position: fixed;
+//					right: $siteMargin * 1px;
+					right: 0;
+//					top: ($headerHeight + $subpanelHeaderHeight + 1) * 1px;
+					visibility: hidden;
+					//display: none;
+					left: 100%;
 				
-				@media #{$mediaQueryDesktop} {
+					iframe {
+						width: 100%;
+						height: 100%;
+					}
+					
+					.closeButton {
+						display: none;
+					}
+				
+				
+					@media #{$mediaQueryDesktopWide} {
+						bottom: auto;
+						min-height: 50%;
+					}				
+				}
+				&.col-2 .content { width: (2 * $colWidth / 2 - $gutter) * 1px; }		
+				&.col-3 .content { width: (3 * $colWidth / 2 + $gutter * 0.5 - $gutter) * 1px; }		
+				&.col-4 .content { width: (4 * $colWidth / 2 + $gutter * 1.0 - $gutter) * 1px; }		
+				&.col-5 .content { width: (5 * $colWidth / 2 + $gutter * 1.5 - $gutter) * 1px; }		
+				&.col-6 .content { width: (6 * $colWidth / 2 + $gutter * 2.0 - $gutter) * 1px; }		
+				&.col-7 .content { width: (7 * $colWidth / 2 + $gutter * 2.5 - $gutter) * 1px; }		
+				&.col-8 .content { width: (8 * $colWidth / 2 + $gutter * 3.0 - $gutter) * 1px; }		
+				&.col-9 .content { width: (9 * $colWidth / 2 + $gutter * 3.5 - $gutter) * 1px; }		
+				&.col-10 .content { width: (10 * $colWidth / 2 + $gutter * 4.0 - $gutter) * 1px; }		
+				&.col-11 .content { width: (11 * $colWidth / 2 + $gutter * 4.5 - $gutter) * 1px; }		
+				&.col-12 .content { width: (12 * $colWidth / 2 + $gutter * 5.0 - $gutter) * 1px; }	
+				
+				&.active {	
 					right: 0;
 				}
-				
+			}
+			
+			&.active {	
 				h2.helpheader {
 					background-color: $primary;
 					border-left-color: $primary;
 					color: $white;
 					
 					@media #{$mediaQueryDesktop} {
-						background-color: $shade3;
+						background-color: $shade12;
 						border-left-color: $primary;
 						right: 0;
 					}	
@@ -279,6 +407,10 @@ body {
 			content: "";		    
 		    display: table;
 		}
+		
+		&:last-of-type {
+			margin-bottom: 2 * $rowMarginBottom;
+		}
 	}
 	
 	
@@ -292,7 +424,7 @@ body {
 
 #loginDisplayPanel {
 	@include align-items(center);
-	background-color: $shade4;
+	background-color: $shade122;
 	@include flex;	
 	@include justify-content(center);	
 	min-height: 100%;
@@ -396,10 +528,13 @@ body {
  */
 
 #mainPanel {
-	background-color: $shade1;
+	background-color: $shade20;
+//	height: 100%;
 	min-height: 100%;
+//	overflow: hidden;
 	position: relative;
 	width: 100%;
+//	min-width: $siteWidthTablet * 1px;
 	
 	> header {
 		background-color: $primaryDark;		
@@ -411,7 +546,11 @@ body {
 		right: 0;
 		top: 0;
 		width: 100%;
-		z-index: 200;
+		z-index: 700;
+		
+		.helpOpen & {
+			z-index: 200;
+		}
 		
 		#logo {
 			display: block;
@@ -421,7 +560,7 @@ body {
 		#accountMenuToggle {
 			float: right;
 			margin-right: $siteMargin * 1px;
-			margin-top: 15px;
+			margin-top: 11px;
 
 			.icon {
 				display: block;
@@ -430,10 +569,10 @@ body {
 				border-radius: 2px;
 				float: left;
 				height: 26px; //TODO var
-				margin-right: 0.5em;
+				margin-right: 0;
 				width: 26px; //TODO var
 				
-				use { fill: $shade12; }
+				use { fill: $shade22; }
 			}
 			
 		}
@@ -445,9 +584,9 @@ body {
 			min-width: $siteWidth / 12 * 2 * 1px; // TODO make flexible
 			padding: 10px;
 			position: absolute;
-			right: $gutter * 1px;
+			right: $siteMargin * 1px;
 			text-align: right;
-			top: $headerHeight - 15 * 1px;
+			top: $headerHeight - 11 * 1px;
 			
 			a {
 				clear: both;
@@ -463,7 +602,7 @@ body {
 			@include box-shadow(0px,0px,10px,0px,$shadow);
 			
 			#accountMenuPresentationName, #accountMenuSchoolName, #accountMenuUserRole {
-				color: $shade12;
+				color: $shade22;
 				display: inline;
 				padding: 0;
 			}
@@ -483,9 +622,9 @@ body {
 	}
 	
 	nav {
-		background-color: $shade1;
+		
 		bottom: 0;
-		color: $shade12;
+		color: $shade22;
 		//height: 100%;
 		left: 0;
 		position: fixed;
@@ -494,10 +633,15 @@ body {
 		z-index: 100;
 		
 		@media #{$mediaQueryDesktop} {
+			background-color: $shade21;
 			@include box-shadow(3px,0px,10px,0px,$shadow);
 			top: ($headerHeight) * 1px;
 			width: $navWidthExpanded * 1px;
 			z-index: 200;
+			
+			//.collapsedNav & {
+//				width: $navWidthExpanded * 1px;
+//			}
 		}
 		
 		
@@ -518,7 +662,7 @@ body {
 				margin-bottom: $gutter * 1px;
 				width: 26px; //TODO var
 			
-				use { fill: $shade12; }
+				use { fill: $shade22; }
 			}
 			
 			h2 { 
@@ -551,7 +695,7 @@ body {
 				margin: $gutter * 1px 0 0 0;
 				
 				a {
-					color: $shade12;
+					color: $shade22;
 					text-decoration: none;
 					
 					&:after {
@@ -562,11 +706,11 @@ body {
 					}
 					
 					&:hover {
-						color: $shade3;
+						color: $primary;
 						text-decoration: none;
 						
 						.icon {
-							use { fill: $shade3; }
+							use { fill: $primary; }
 						}
 						
 					}
@@ -602,7 +746,7 @@ body {
 						margin-right: 0.5em;
 						width: 26px; //TODO var
 						
-						use { fill: $shade12; }
+						use { fill: $shade22; }
 					}
 				}
 			}
@@ -616,12 +760,12 @@ body {
 					margin: 0;
 					
 					a {
-						border-bottom: 1px $shade12 solid;
+						border-bottom: 1px $shade22 solid;
 						display: block;
 						padding-left: $siteMargin * 1px;
 					}
 					&.active a {
-						background-color: $shade12;
+						background-color: $shade22;
 						color: $white;
 					}
 					span {
@@ -637,6 +781,7 @@ body {
 	
 	&.expandedNav {
 		nav {
+			background-color: $shade21;
 			@include box-shadow(3px,0px,10px,0px,$shadow);
 			top: ($headerHeight) * 1px;
 			width: $navWidthExpanded * 1px;			
@@ -650,8 +795,12 @@ body {
 				}
 			}
 		}
-		
 	}	
+	&.hiddenNav {
+		nav {
+			display: none;
+		}
+	}
 }
 
 //svg path { fill: inherit; }
@@ -662,7 +811,7 @@ body {
  */
 
 section.dialog {
-	background: $shade2;
+	background: $shade11;
 	display: none;
 	height: $dialogHeight * 1px;	
 	left: 50%;
@@ -687,7 +836,7 @@ section.dialog {
 		position: relative;
 	}
 	#progressBar {
-		background-color: $shade12;
+		background-color: $shade22;
 		font-size: 0;
 		height: 3px;
 		position: relative;
@@ -724,7 +873,7 @@ section.lightbox {
 	
 	header {
 		
-		border: $borderThickness $shade11 solid;
+		border: $borderThickness $shade21 solid;
 		@include border-radius($defaultRadius);
 		bottom: $elementMarginBottom;
 		height: 20px;
@@ -753,7 +902,7 @@ section.lightbox {
 				margin-right: 0.5em;
 				width: 26px; //TODO var
 				
-				use { fill: $shade11; }
+				use { fill: $shade21; }
 			}
 		}
 	}
@@ -769,7 +918,7 @@ section.lightbox {
 		}
 	}
 	footer {
-		border-top: $borderThickness $shade11 solid;
+		border-top: $borderThickness $shade21 solid;
 		bottom: 0;
 		height: 75px;
 		padding-top: $elementMarginBottom;
@@ -805,19 +954,24 @@ section.lightbox {
  */
 
 #welcomeDisplayPanel {
-	background: transparent url(../images/bg-numworx-logo.png) no-repeat bottom right;
+	background: $shade10 url(../images/bg-numworx-logo.png) no-repeat bottom right;
 	background-size: contain;
+	
+	a {
+		color: $primary;
+		font-weight: bold;
+	}
 }
 
 #personsDisplay {
-	.icon {
+	.icon.editOptions {
 		height: 24px;
 		margin-left: $gutter * 1px;
 		width: 24px;
 
-		use { fill: $shade12; }
+		use { fill: $shade22; }
 	}
-	.icon.active {
+	.icon.editOptions.active {
 		use { fill: $primary; }
 	}
 }
@@ -842,17 +996,28 @@ section.lightbox {
 	.c-datepicker__header-day, .c-datepicker__header-date {
 		background-color: $primary;
 	}
+	.c-datepicker__back, .c-datepicker__next {
+		background-color: $shade22;
+		
+		&:hover {
+			background-color: $primary;
+		}
+	}
 }
 
 
 .filterIndicators {
-	border-bottom: $borderThickness $primary solid;
+	border-bottom: $borderThickness $shade20 solid;
 	display: inline-block;
 	padding-bottom: $borderThickness;
 	
+	&.active {
+		border-bottom: $borderThickness $primary solid;
+	}
+	
 	a {		
 		background-color: $primaryLight;
-		border: $borderThickness $shade11 solid;
+		border: $borderThickness $shade21 solid;
 		@include border-radius($defaultRadius);
 		color: $black;
 		display: inline-block;

@@ -1,6 +1,7 @@
 function MainDisplay() {
 	this.activeDialogs = [];
 	this.activeLightboxes = [];
+	this.stretchables = [];
 
 	// Bind DOM elements with jQuery
 	this.$body = $("body");
@@ -77,12 +78,22 @@ function MainDisplay() {
 	window.jsProgressDialogWithAbortDisplay = this.progressDialogWithAbortDisplay;
 	
 	// Bind events
-	$(window).resize(Helpers.resizeHelpSection);
+	$(window).resize( $.proxy(this.resizeWindow, this) );
 	$(".help h2").click(Helpers.toggleHelpSection);
+	$(".help .closeButton").click(Helpers.toggleHelpSection);
 	this.$logo.on('click', $.proxy(this.clickLogo, this));
 	this.$nav.find('a').on('click', $.proxy(this.clickMenuItem, this));
 	this.$accountMenuBox.find('a').on('click', $.proxy(this.clickAccountMenuItem, this));
-	this.$accountMenuToggle.on('click', $.proxy(this.clickAccountMenuToggle, this));
+	this.$accountMenuToggle.on('mouseenter', $.proxy(this.mouseEnterAccountMenuIcon, this));
+	this.$accountMenuToggle.on('touchstart', $.proxy(this.touchStartAccountMenuIcon, this));
+	this.$accountMenuBox.on('mouseleave', $.proxy(this.mouseLeaveAccountMenuIcon, this));
+	$(document).on('click, touchstart', $.proxy(this.clickWherever, this));
+	
+	$("input").focus(function(event) {
+		window.scrollTo(0, 0);
+		document.body.scrollTop = 0;
+		event.preventDefault();
+	});
 	
 	// Trigger window resize for initial help sizing
 	$(window).trigger('resize');
@@ -92,15 +103,22 @@ function MainDisplay() {
 
 MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 	this.$panels.hide();
-	this.$panel.show();	
+	
+	console.log(this.$panel);
+	
+	if (!this.$panel.is(":visible")) {
+		this.$panel.show();
+	} 
 	this.$subpanels.hide();
 	this.loginDisplay.hide();
 	this.setDefaultNavSize();
+	this.removeHoverableOnTouchDevices();
+    this.localize();
 }
 
 MainDisplay.prototype.setActiveView = function(view) {
 	if (view == "LOGOUT") app.getPresenterFactory().getMainPresenter().logout();
-	app.getPresenterFactory().getMainPresenter().selectView(view);
+	else app.getPresenterFactory().getMainPresenter().selectView(view);
 }
 
 
@@ -135,6 +153,7 @@ MainDisplay.prototype.showWelcomeView = function() {
 	this.initMainView();
 	this.setExpandedNavSize();
 	this.welcomeDisplay.show();
+	this.$panel.show();
 }
 
 MainDisplay.prototype.showAccountView = function(vars) {
@@ -174,7 +193,7 @@ MainDisplay.prototype.showEditCoursesOfSchoolClassView = function() {
 
 MainDisplay.prototype.showPersonsView = function() {
 	this.initMainView(); 
-	this.personsDisplay.show();
+	this.personsDisplay.show();	
 }
 MainDisplay.prototype.showEditPersonView = function() {
 	this.initMainView(); 
@@ -243,14 +262,95 @@ MainDisplay.prototype.closeLightboxView = function(dialog) {
 }
 
 /*
+ * HELP HELPERS
+ */
+
+MainDisplay.prototype.openHelp = function(dialog) {	
+	this.$body.addClass("overlay");
+	this.$body.addClass("helpOpen");
+}
+MainDisplay.prototype.closeHelp = function(dialog) {	
+	 this.$body.removeClass("overlay");
+	 this.$body.removeClass("helpOpen");
+}
+
+/*
  * MENU HELPER
  */
 
 MainDisplay.prototype.setExpandedNavSize = function() {
 	this.$panel.addClass("expandedNav");
+	// this.$panel.removeClass("collapsedNav");
 }
 MainDisplay.prototype.setDefaultNavSize = function() {
 	this.$panel.removeClass("expandedNav");
+	// this.$panel.addClass("collapsedNav");
+}
+
+MainDisplay.prototype.hideNav = function() {
+	this.$panel.addClass("hiddenNav");
+}
+MainDisplay.prototype.showNav = function() {
+	this.$panel.removeClass("hiddenNav");
+}
+MainDisplay.prototype.isNavVisible = function() {
+	return this.$panel.hasClass("hiddenNav") ? false : true; 
+}
+
+
+/*
+ * OTHER HELPERS
+ */
+
+MainDisplay.prototype.removeHoverableOnTouchDevices = function() {
+	var isTouchDevice = ('ontouchstart' in window || 'onmsgesturechange' in window);
+	if (isTouchDevice) {
+		$("table.hoverable").removeClass("hoverable");
+	}
+}
+
+
+/*
+ * RESIZING
+ */
+
+MainDisplay.prototype.resizeWindow = function(event) {
+	Helpers.resizeHelpSection();
+	this.closeHelp();
+	this.resizeStrechables();
+		
+}
+MainDisplay.prototype.registerStretchables = function( elements ) {
+	if (elements.length < 1) return;
+	
+	for (i=0; i<elements.length; i++) {
+		if ( this.stretchables.indexOf(elements[i]) === -1) {
+			console.log("PUSH STRETCHABLE");
+			this.stretchables.push( elements[i] );
+		}
+	}
+	this.resizeStrechables();
+}
+MainDisplay.prototype.resizeStrechables = function() {
+	if (this.stretchables.length < 1) return; 
+	
+	bodyHeight = $(document.body).outerHeight();
+		
+	for(i=0; i<this.stretchables.length; i++) {
+		subpanel = this.stretchables[i].closest('.subpanel');
+		
+		if (subpanel.data('originalHeight')) subpanelHeight = subpanel.data('originalHeight');
+		else {
+			subpanelHeight = subpanel.outerHeight();
+			subpanel.data('originalHeight', subpanelHeight);
+		}
+		freeSpace = bodyHeight - subpanelHeight;
+				
+		newHeight = this.stretchables[i].height() + freeSpace;
+		this.stretchables[i].height(newHeight+"px");
+	}
+	this.$subpanels.removeData('originalHeight');
+	return;
 }
 
 
@@ -261,7 +361,7 @@ MainDisplay.prototype.setDefaultNavSize = function() {
 MainDisplay.prototype.clickMenuItem = function(event) {
 	event.preventDefault();
 	var view = event.currentTarget.hash.substr(1);
-	if (view) this.setActiveView(view)
+	if (view) this.setActiveView(view);
 }
 MainDisplay.prototype.clickAccountMenuItem = function(event) {
 	event.preventDefault();
@@ -271,12 +371,35 @@ MainDisplay.prototype.clickAccountMenuItem = function(event) {
 		this.setActiveView(view);
 	}
 }
-MainDisplay.prototype.clickAccountMenuToggle = function(event) {
-	this.$accountMenuBox.toggle();
+MainDisplay.prototype.mouseEnterAccountMenuIcon = function(event) {
+	this.$accountMenuBox.show();
 }
+MainDisplay.prototype.touchStartAccountMenuIcon = function(event) {
+	if (this.$accountMenuBox.is(":visible")) this.$accountMenuBox.hide();
+	else this.$accountMenuBox.show();
+}
+MainDisplay.prototype.mouseLeaveAccountMenuIcon = function(event) {
+	this.$accountMenuBox.hide();
+}
+MainDisplay.prototype.clickWherever = function(event) {
+	if (this.$accountMenuBox.is(":visible")) {
+		$el = $(event.target)
+		if ($el.closest("#accountMenuToggle").length == 0
+			&& $el.closest("#accountMenuBox").length == 0) {
+			this.$accountMenuBox.hide();
+		}
+		//event.preventDefault();
+	}
+}
+
+
 MainDisplay.prototype.clickLogo = function(event) {
 	event.preventDefault();
 	var view = event.currentTarget.hash.substr(1);
 	if (view) this.setActiveView(view)
 }
 
+MainDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
+	

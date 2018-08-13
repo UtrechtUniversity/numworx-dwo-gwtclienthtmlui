@@ -3,9 +3,17 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="gwt:property" content="locale=nl" >
+<<<<<<< HEAD
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="viewport" content="width=1024">
     <title>DWOGwtClient</title>
+=======
+	<meta name="apple-mobile-web-app-capable" content="yes">  
+	<meta name="viewport" content="width=1024, initial-scale=1, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> <!-- no scalable needed for android devices -->
+	
+	
+    <title>Numworx Docent</title>
+>>>>>>> teuniz
 		
     <script>
     	var API_1484_11;
@@ -13,22 +21,26 @@
         var DwoMainPresenter;
         <!-- set to false in order to show the default user-interface -->
         var hideGwtGui="true";
+        
         </script>
 		
 		
 	<!-- TODO: change reference -->
-    <script type="text/javascript" language="javascript" src="/gwtclient/gwtclient/gwtclient.nocache.js"></script>
+        <script type="text/javascript" language="javascript" src="/gwtclient/gwtclient/gwtclient.nocache.js">
+        </script>
 	<!-- <script type="text/javascript" language="javascript" src="https://teuniz.dwo.nl/gwtclient/gwtclient/gwtclient.nocache.js"></script> -->
 	
 	<!-- TODO: decide whether to add Google fonts locally (consider licence) -->
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700" rel="stylesheet">
+	<!-- <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet"> -->
+	<!-- <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700" rel="stylesheet"> -->
 	
 	<!-- Font for the material icons -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	
+	
+	
 	<!-- Load styles AFTER GWT, because GWT outputs styles too -->
-	
-	
 	<link rel="stylesheet" href="css/styles.css" type="text/css" media="screen">
 	<link rel="stylesheet" href="third-party/material-datetime-picker/dist/material-datetime-picker.css" type="text/css" media="screen">
 	
@@ -39,6 +51,124 @@
 	<script src="js/helpers.js" type="text/javascript" charset="utf-8"></script>
 	
 	
+
+	<!-- Polyfills needed for datetimepicker, sources: 
+		https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign 
+		https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
+		-->
+	<script type="text/javascript">
+		<!--
+		if (typeof Object.assign != 'function') {
+		  // Must be writable: true, enumerable: false, configurable: true
+		  Object.defineProperty(Object, "assign", {
+		    value: function assign(target, varArgs) { // .length of function is 2
+		      'use strict';
+		      if (target == null) { // TypeError if undefined or null
+		        throw new TypeError('Cannot convert undefined or null to object');
+		      }
+
+		      var to = Object(target);
+
+		      for (var index = 1; index < arguments.length; index++) {
+		        var nextSource = arguments[index];
+
+		        if (nextSource != null) { // Skip over if undefined or null
+		          for (var nextKey in nextSource) {
+		            // Avoid bugs when hasOwnProperty is shadowed
+		            if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+		              to[nextKey] = nextSource[nextKey];
+		            }
+		          }
+		        }
+		      }
+		      return to;
+		    },
+		    writable: true,
+		    configurable: true
+		  });
+		}
+		
+		// Production steps of ECMA-262, Edition 6, 22.1.2.1
+		if (!Array.from) {
+		  Array.from = (function () {
+		    var toStr = Object.prototype.toString;
+		    var isCallable = function (fn) {
+		      return typeof fn === 'function' || toStr.call(fn) === '[object Function]';
+		    };
+		    var toInteger = function (value) {
+		      var number = Number(value);
+		      if (isNaN(number)) { return 0; }
+		      if (number === 0 || !isFinite(number)) { return number; }
+		      return (number > 0 ? 1 : -1) * Math.floor(Math.abs(number));
+		    };
+		    var maxSafeInteger = Math.pow(2, 53) - 1;
+		    var toLength = function (value) {
+		      var len = toInteger(value);
+		      return Math.min(Math.max(len, 0), maxSafeInteger);
+		    };
+
+		    // The length property of the from method is 1.
+		    return function from(arrayLike/*, mapFn, thisArg */) {
+		      // 1. Let C be the this value.
+		      var C = this;
+
+		      // 2. Let items be ToObject(arrayLike).
+		      var items = Object(arrayLike);
+
+		      // 3. ReturnIfAbrupt(items).
+		      if (arrayLike == null) {
+		        throw new TypeError('Array.from requires an array-like object - not null or undefined');
+		      }
+
+		      // 4. If mapfn is undefined, then let mapping be false.
+		      var mapFn = arguments.length > 1 ? arguments[1] : void undefined;
+		      var T;
+		      if (typeof mapFn !== 'undefined') {
+		        // 5. else
+		        // 5. a If IsCallable(mapfn) is false, throw a TypeError exception.
+		        if (!isCallable(mapFn)) {
+		          throw new TypeError('Array.from: when provided, the second argument must be a function');
+		        }
+
+		        // 5. b. If thisArg was supplied, let T be thisArg; else let T be undefined.
+		        if (arguments.length > 2) {
+		          T = arguments[2];
+		        }
+		      }
+
+		      // 10. Let lenValue be Get(items, "length").
+		      // 11. Let len be ToLength(lenValue).
+		      var len = toLength(items.length);
+
+		      // 13. If IsConstructor(C) is true, then
+		      // 13. a. Let A be the result of calling the [[Construct]] internal method 
+		      // of C with an argument list containing the single item len.
+		      // 14. a. Else, Let A be ArrayCreate(len).
+		      var A = isCallable(C) ? Object(new C(len)) : new Array(len);
+
+		      // 16. Let k be 0.
+		      var k = 0;
+		      // 17. Repeat, while k < len… (also steps a - h)
+		      var kValue;
+		      while (k < len) {
+		        kValue = items[k];
+		        if (mapFn) {
+		          A[k] = typeof T === 'undefined' ? mapFn(kValue, k) : mapFn.call(T, kValue, k);
+		        } else {
+		          A[k] = kValue;
+		        }
+		        k += 1;
+		      }
+		      // 18. Let putStatus be Put(A, "length", len, true).
+		      A.length = len;
+		      // 20. Return A.
+		      return A;
+		    };
+		  }());
+		}
+		-->
+	</script>
+		
 	<!-- Material Datetime picker -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/rome/2.1.22/rome.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
@@ -51,7 +181,6 @@
 	<script src="js/AccountDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/SchoolclassesDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/EditSchoolclassesDisplay.js" type="text/javascript" charset="utf-8"></script>
-	<!-- OLD <script src="js/StudentsInSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script> -->
 	<script src="js/AddStudentToSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/AddTeacherToSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/CopyOrMoveStudentToSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
@@ -182,10 +311,10 @@
 					</form>
 				</div>
 			
-				<ul>
-					<li><a href="#" data-translate="NUM_LBL_Q_PASWORD_FORGOTTEN">Wachtwoord vergeten?</a></li>
-					<li><a href="#" data-translate="NUM_LBL_Q_NO_ACCOUNT">Nog geen account?</a></li>
-					<li><a href="#" data-translate="NUM_LBL_MORE_ON_NUMWORX">Meer informatie over Numworx</a></li>
+				<ul id="loginLinks">
+                                    <li><a href="/dwo/rest/public/user/requestNewPassword"><span  data-translate="NUM_LBL_Q_PASWORD_FORGOTTEN">Wachtwoord vergeten?</span></a></li>
+                                    <li><a href="/dwo/register/?locale=nl"><span data-translate="NUM_LBL_Q_NO_ACCOUNT">Nog geen account?</span></a></li>
+                                    <li><a href="www.numworx.nl"><span  data-translate="NUM_LBL_MORE_ON_NUMWORX">Meer informatie over Numworx</span></a></li>
 				</ul>
 			</div>
 		</div>
@@ -193,6 +322,9 @@
 	
 	
 	<main id="mainPanel" class="panel">
+		
+		
+		
 		<header>
 			<a href="#WELCOME" id="logo"><img src="images/header-logoNumworxDocent.png"></a>
 			<a href="javascript: void(0);" id="accountMenuToggle">
@@ -203,31 +335,31 @@
 			<div id="accountMenuBox">
 				<span id="accountMenuSchoolName">Voorbeeld van Naam</span>
 				<span id="accountMenuUserRole">Docent</span><span id="accountMenuPresentationName">Voorbeeldschool</span>
-				<a href="#ACCOUNT">Account beheren</a>
-				<a href="#LOGOUT">Uitloggen</a>
+                                <a href="#ACCOUNT"><span data-translate="NUM_MNU_MANAGE_ACCOUNT">Account beheren</span></a>
+                                <a href="#LOGOUT"><span data-translate="NUM_MNU_LOGOUT">Uitloggen</span></a>
 			</div>
 		</header>
 		
 		<nav>
 			<ul id="mainNav">
 				<li>
-					<a href="#RESULTS"><svg viewBox="0 0 64 64" class="icon">
+					<a href="#RESULTS" ><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#resultaten"></use>
-				    </svg><span class="name">Resultaten</span>
+				    </svg><span class="name" data-translate="NUM_MNU_RESULTS">Resultaten</span>
 				    </a>
 				</li>
 				<li><a href="#PERSONS"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#personen"></use>
-				    </svg><span class="name">Personen</span></a></li>
+				    </svg><span class="name" data-translate="NUM_MNU_PEOPLE">Personen</span></a></li>
 				<li><a href="#SCHOOLCLASSES"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#klassen"></use>
-				    </svg><span class="name">Klassen</span></a></li>
+				    </svg><span class="name" data-translate="MUM_MNU_CLASSES">Klassen</span></a></li>
 				<li><a href="#MODULES"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#modules"></use>
-				    </svg><span class="name">Modules</span></a></li>
+				    </svg><span class="name" data-translate="NUM_MNU_MODULES">Modules</span></a></li>
 				<!-- <li><a href="#"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#organisatie"></use>
-				    </svg><span class="name">Organisatie</span></a></li> -->
+				    </svg><span class="name" data-translate="NUM_MNU_MANAGE_ACCOUNT">Organisatie</span></a></li> -->
 			</ul>
 		</nav>
 		
@@ -258,16 +390,21 @@
 			<header>
 				<div class="container">
 					<div class="content">
-						<svg viewBox="0 0 64 64" class="icon">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
 							<use xlink:href="#personen"></use>
 						</svg>
-						<h1 data-translate="NUM_PNL_ACCOUNT">Account beheren</h1>
-						<h2 class="sectionhead"><span data-translate="NUM_SEC_ACCOUNT_CHANGE">Mijn persoonlijke gegevens veranderen</span></h2>					
+                                                <h1><span  data-translate="NUM_PNL_ACCOUNT"> Account beheren</span></h1>
+                                                <h2 class="sectionhead"><span data-translate="NUM_SEC_ACCOUNT_CHANGE"><span  data-translate="NUM_SEC_ACCOUNT_CHANGE">Mijn persoonlijke gegevens veranderen</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src=""></iframe>
+							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
 						</div>
 					</section>
 				</div>
@@ -328,21 +465,54 @@
 				<div class="row">
 					<form name="updateSchoolLoginsView">
 						<div class="col-8">
-							<table class="dwo">
+							<table class="dwo sortable headered">
 								<thead>
 									<tr>
-										<th class="col-3" data-translate="NUM_TBL_SCHOOLLOGINOPTION">Login mogelijkheid</th>
-										<th class="col-1" data-translate="NUM_TBL_ROLE">Rol</th>
-										<th data-translate="NUM_TBL_STARTWITHSCHOOLLOGIN">Hiermee opstarten</th>
-										<th data-translate="NUM_TBL_REMOVESCHOOLLOGIN">Login verwijderen</th>
+										<th class="col-2">
+											<span data-translate="NUM_TBL_SCHOOLLOGINOPTION">School</span>
+										</th>
+										<th class="col-2">
+											<span data-translate="NUM_TBL_ROLE">Rol</span>											
+										</th>
+										<th><span data-translate="NUM_TBL_STARTWITHSCHOOLLOGIN">Hiermee opstarten</span></th>
+										<th><span data-translate="NUM_TBL_REMOVESCHOOLLOGIN">Login verwijderen</span></th>
+									</tr>
+									
+									<tr class="sorting">
+										<th class="col-2">
+											<span class="sortButton asc default" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>
+										<th class="col-2">
+											<span class="sortButton asc" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>
+										<th>&nbsp;</th>
+										<th>&nbsp;</th>
 									</tr>
 								</thead>
 								<tbody>	
 									
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
-										<td class="col-3"><span id="updateSchoolLoginsViewSchool" >Schoolnaam</span></td>
-										<td class="col-1"><span id="updateSchoolLoginsViewRole">ROL</span></td>
+										<td class="col-2"><span id="updateSchoolLoginsViewSchool" >Schoolnaam</span></td>
+										<td class="col-2"><span id="updateSchoolLoginsViewRole">ROL</span></td>
 										<td>
 											<div class="checkbox">
 												<input type="checkbox" name="active[]" id="updateSchoolLoginsViewActive" value="schoolid"><label class="icon" for="updateSchoolLoginsViewActive"></label>
@@ -376,34 +546,34 @@
 					<form name="addSchoolLogin">
 						<fieldset>
 							<div class="col-4 options">
-								<label>Docent, Schooladmin of Leerling?</label>
+                                                            <label><span data-translate="NUM_LBL_Q_WHICHROLE">Docent, Schooladmin of Leerling?</span></label>
 								<div class="option">
 							    	<input type="radio" name="role" id="roleD" value="TEACHER">
-									<label for="roleD">D</label>
+                                                                <label for="roleD"><span data-translate="NUM_LBL_TEACHERLETTER">D</span></label>
 								</div>
 								<div class="option">
 									<input type="radio" name="role" id="roleA" value="SCHOOLADMIN">
-									<label for="roleA">A</label>
+                                                                        <label for="roleA"><span data-translate="NUM_LBL_SCHOOLADMINLETTER">A</span></label>
 								</div> 
 								<div class="option">
 									<input type="radio" name="role" id="roleL" value="STUDENT">
-									<label for="roleL">L</label>
+                                                                        <label for="roleL"><span data-translate="NUM_LBL_STUDENTLETTER">L</span></label>
 								</div>
 							</div>
 							
 							
-							<label for="schoolLogin" class="col-2 input">
-								Sleutelcode school
+							<label for="schoolLogin" class="col-2 input"><span data-translate="NUM_LBL_SCHOOLLOGIN">
+                                                            school login</span>
 								<input id="schoolLogin" name="schoolLogin" type="text" value="" />
 							</label>
-							<label for="schoolCode" class="col-2 input">
-								Wachtwoord								
+							<label for="schoolCode" class="col-2 input"><span data-translate="NUM_LBL_SCHOOLPASSWORD">
+                                                                Sleutelcode school</span>
 								<input id="schoolCode" name="schoolCode" type="password" value="" />
 							</label>
 							
 							
 							<div class="col-4">
-								<input type="submit" class="primary right bottom" value="Voeg toe" />
+								<input type="submit" class="primary right bottom" data-translate="NUM_BTN_Add" value="Voeg toe" />
 							</div>							
 						</fieldset>						
 					</form>
@@ -425,16 +595,21 @@
 			<header>
 				<div class="container">
 					<div class="content">
-						<svg viewBox="0 0 64 64" class="icon">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
 							<use xlink:href="#klassen"></use>
 						</svg>
-						<h1>Klassen bewerken of toevoegen</h1>
-						<h2 class="sectionhead"><span>Klassen bewerken</span></h2>					
+                                                <h1><span data-translate="NUM_PNL_CLASSES">Klassen bewerken of toevoegen</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_CLASSES_EDIT">Klassen bewerken</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+                                            <h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src=""></iframe>
+							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
 						</div>
 					</section>
 				</div>
@@ -445,22 +620,39 @@
 				<div class="row">
 					<form name="chooseSchoolclass">							
 						<div class="col-8">
-							<h3>Kies een klas om te bewerken</h3>
+                            <h3><span data-translate="NUM_LBL_CLASSES_SELECTTOEDIT">Kies een klas om te bewerken</span></h3>
 						
-							<table class="dwo hoverable selectable">
+							<table class="dwo hoverable selectable sortable">
+								<thead>
+									<tr class="sorting">
+										<th>
+											<span class="sortButton asc default" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>
+									</tr>
+								</thead>
 								<tbody>
 									<tr>
-										<td>
-											<input type="radio" name="schoolclass" id="chooseSchoolclassId" class="hidden" value="schoolclassId">
-											<span id="chooseSchoolclassName">Schoolclass name</a>
+										<td><span id="chooseSchoolclassName">Schoolclass name</span>
+											<input type="radio" name="schoolclass" id="chooseSchoolclassId" class="hidden" value="schoolclassId">											
 										</td>
 									</tr>
 								</tbody>
 							</table>
+							<input type="radio" name="schoolclass" class="hidden" value="schoolclassId">											
 						
 						</div>
 						<div class="col-4">
-							<input type="submit" class="primary bottom right" value="Bewerken" />
+							&nbsp; <!-- for IE -->
+							<input type="submit" class="primary bottom right" data-translate="NUM_BTN_Edit" value="Bewerken" />
 						</div>
 					</form>
 				</div>								
@@ -470,44 +662,44 @@
 			<section>
 				<div class="row">
 					<div class="col-12">
-						<h2 class="sectionhead"><span>Klas toevoegen<span></h2>						
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_CLASSES_ADD">Klas toevoegen</span></h2>						
 					</div>
 				</div>
 				<div class="row">
 					<form name="addSchoolclass">
 						<fieldset>
 							<label for="classname" class="col-2 input">
-								Naam klas
+                                                            <span data-translate="NUM_TBL_CLASSES_CLASSNAME"> Naam klas</span>
 								<input id="classname" name="classname" type="text" value="" />
 							</label>
 							<div class="col-2 options">
-								<label>Boomstructuur?</label>
+								<label><span data-translate="NUM_LBL_CLASSES_TREESTRUCT">Boomstructuur?</span></label>
 								<div class="option">
 									<input type="radio" name="useClasstree" id="useClasstreeYes" value="1">
-									<label for="useClasstreeYes">Ja</label>
+                                                                        <label for="useClasstreeYes"><span data-translate="NUM_LBL_YES">Ja</span></label>
 								</div> 
 								<div class="option">
 									<input type="radio" name="useClasstree" id="useClasstreeNo" value="0" checked="checked">
-									<label for="useClasstreeNo">Nee</label>
+									<label for="useClasstreeNo"><span data-translate="NUM_LBL_NO">Nee</span></label>
 								</div>
 							</div>
 							<div class="col-2 options">
-								<label>Klassleutel?</label>
+								<label><span data-translate="NUM_LBL_CLASSES_ACCESSKEY">Klassleutel?</span></label>
 								<div class="option">
 							    	<input type="radio" name="useClasskey" id="useClasskeyYes" value="1">
-									<label for="useClasskeyYes">Ja</label>
+									<label for="useClasskeyYes"><span data-translate="NUM_LBL_YES">Ja</span></label>
 								</div>
 								<div class="option">
 									<input type="radio" name="useClasskey" id="useClasskeyNo" value="0" checked="checked">
-									<label for="useClasskeyNo">Nee</label>
+									<label for="useClasskeyNo"><span data-translate="NUM_LBL_NO">Nee</span></label>
 								</div> 
 							</div>
 							<label for="classkey" class="col-2 input">
-								&nbsp;
+								<span data-translate="NUM_TBL_CLASSES_ACCESSKEY">Klassleutel</span>
 								<input id="classkey" name="classkey" type="text" value="" />
 							</label>
 							<div class="col-4">
-								<input type="submit" class="primary right bottom" value="Voeg klas toe" />
+								<input type="submit" class="primary right bottom" data-translate="NUM_BTN_Add" value="Voeg klas toe" />
 							</div>							
 						</fieldset>						
 					</form>
@@ -528,16 +720,21 @@
 			<header>
 				<div class="container">
 					<div class="content">
-						<svg viewBox="0 0 64 64" class="icon">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
 							<use xlink:href="#klassen"></use>
 						</svg>
-						<h1>Klassen bewerken</h1>
-						<h2 class="sectionhead"><span>Klas bewerken</span></h2>					
+                                                <h1><span data-translate="NUM_PNL_CLASSES_EDIT">Klassen bewerken</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_CLASSES_EDIT">Klas bewerken</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src=""></iframe>
+							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
 						</div>
 					</section>
 				</div>
@@ -552,47 +749,43 @@
 					<fieldset>
 						<div class="row">						
 							<label for="classname" class="col-2 input">
-								Naam klas
-								<input id="classnameEdit" name="classname" type="text" value="" />
+								<span data-translate="NUM_TBL_CLASSES_CLASSNAME"> Naam klas</span>
+								<input id="classnameEdit" name="classname" type="text" value="" >
 							</label>
 							
 							<div class="col-2 options">
-								<label>Klassleutel?</label>
+								<label><span data-translate="NUM_LBL_CLASSES_ACCESSKEY">Klassleutel?</span></label>
 								<div class="option">
 							    	<input type="radio" name="useClasskey" id="useClasskeyYesEdit" value="1">
-									<label for="useClasskeyYesEdit">Ja</label>
+									<label for="useClasskeyYesEdit"><span data-translate="NUM_LBL_YES">Ja</span></label>
 								</div>
 								<div class="option">
 									<input type="radio" name="useClasskey" id="useClasskeyNoEdit" value="0">
-									<label for="useClasskeyNoEdit">Nee</label>
+									<label for="useClasskeyNoEdit"><span data-translate="NUM_LBL_NO">Nee</span></label>
 								</div> 
 							</div>
 							<label for="classkey" class="col-2 input">
-								&nbsp;
-								<input id="classkeyEdit" name="classkey" type="text" value="" />
+                                    				<span data-translate="NUM_TBL_CLASSES_ACCESSKEY">Klassleutel</span>
+                                                                <input id="classkeyEdit" name="classkey" type="text" data-translate="NUM_LBL_CLASSES_CLASSNAME" value="" />
 							</label>
-						</div>
 						
-						<div class="row">
 							<div class="col-2 options">
-								<label>Boomstructuur?</label>
+								<label><span data-translate="NUM_LBL_CLASSES_TREESTRUCT">Boomstructuur?</span></label>
 								<div class="option">
 									<input type="radio" name="useClasstree" id="useClasstreeYesEdit" value="1">
-									<label for="useClasstreeYesEdit">Ja</label>
+									<label for="useClasstreeYesEdit"><span data-translate="NUM_LBL_YES">Ja</span></label>
 								</div> 
 								<div class="option">
 									<input type="radio" name="useClasstree" id="useClasstreeNoEdit" value="0">
-									<label for="useClasstreeNoEdit">Nee</label>
+									<label for="useClasstreeNoEdit"><span data-translate="NUM_LBL_NO">Nee</span></label>
 								</div>
 							</div>
-							<div class="col-6">
-								&nbsp;
+							
+							<div class="col-2">
+								<input type="button" name="delete" class="danger right down" data-translate="NUM_BTN_Remove"  value="Verwijder" />								
 							</div>
 							<div class="col-2">
-								<input type="button" name="delete" class="danger right down" value="Verwijder" />								
-							</div>
-							<div class="col-2">
-								<input type="submit" name="save" class="primary right down" value="Sla op" />
+								<input type="submit" name="save" class="primary right down" data-translate="NUM_BTN_Save" value="Sla op" />
 							</div>
 						</div>
 					</fieldset>	
@@ -603,7 +796,7 @@
 			<section>
 				<div class="row">
 					<div class="col-12">
-						<h3>Gekoppelde gegevens van deze klas</h3>
+                                            <h3><span data-translate="NUM_LBL_ClassAssignments">Gekoppelde gegevens van deze klas</span></h3>
 					</div>					
 				</div>
 				
@@ -611,24 +804,38 @@
 					<div class="col-4">
 						<form name="changeStudents">
 							<fieldset>
-								<table class="dwo">
+								<table class="dwo sortable disabled headered">
 									<thead>
 										<tr>
-											<th>Leerlingen</th>
+											<th>
+												<span data-translate="NUM_TBL_STUDENTS">Studenten</span>
+											</th>
+										</tr>
+										<tr class="sorting">
+											<th>
+												<span class="sortButton asc default" data-order="asc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														  <use xlink:href="#arrowUp"></use>
+													</svg>
+												</span>
+												<span class="sortButton desc" data-order="desc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														  <use xlink:href="#arrowDown"></use>
+													</svg>
+												</span>
+											</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											<td>
-												<span id="chooseStudentName">Schoolclass name</a>
-											</td>
+											<td><span id="chooseStudentName" data-translate="NUM_LBL_STUDENTNAME">student name</a></td>
 										</tr>
 									</tbody>
 								</table>
 												
-								<input type="button" name="show" class="primary left" value="Toon leerlingen" />
-								<input type="button" name="connect" class="primary right" value="Wijzigen" />
-								<input type="button" name="copyOrMove" class="primary right" value="Overplaatsen" />	
+								<input type="button" name="show" class="primary left" data-translate="NUM_BTN_RefreshList" value="Ververs lijst" />
+								<input type="button" name="connect" class="primary right" data-translate="NUM_BTN_AddStudents" value="Toewijzen" />
+								<input type="button" name="copyOrMove" class="primary right" data-translate="NUM_BTN_MOVECOPY" value="Overplaatsen" />	
 							</fieldset>
 						</form>					
 					</div>
@@ -636,23 +843,37 @@
 					<div class="col-4">
 						<form name="changeTeachers">
 							<fieldset>
-								<table class="dwo">
+								<table class="dwo sortable disabled headered">
 									<thead>
 										<tr>
-											<th>Docenten</th>
+											<th>
+												<span data-translate="NUM_TBL_TEACHERS">Docenten</span>
+											</th>
+										</tr>
+										<tr class="sorting">
+											<th>
+												<span class="sortButton asc default" data-order="asc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														  <use xlink:href="#arrowUp"></use>
+													</svg>
+												</span>
+												<span class="sortButton desc" data-order="desc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														  <use xlink:href="#arrowDown"></use>
+													</svg>
+												</span>
+											</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											<td>
-												<span id="chooseTeacherName">Teacher name</a>
-											</td>
+											<td><span id="chooseTeacherName" data-translate="NUM_LBL_TEACHERNAME">Teacher name</span></a></td>
 										</tr>
 									</tbody>
 								</table>
 												
-								<input type="submit" name="show" class="primary left" value="Toon docenten" />
-								<input type="submit" name="connect" class="primary right" value="Wijzigen" />
+								<input type="submit" name="show" class="primary left"  data-translate="NUM_BTN_RefreshList" value="Ververs lijst" />
+								<input type="submit" name="connect" class="primary right" data-translate="NUM_BTN_AddTeachers" value="Toewijzen" />
 							</fieldset>
 						</form>
 					</div>
@@ -660,23 +881,37 @@
 					<div class="col-4">
 						<form name="changeModules">
 							<fieldset>
-								<table class="dwo">
+								<table class="dwo sortable disabled headered">
 									<thead>
 										<tr>
-											<th>Modules</th>
+											<th>
+												<span data-translate="NUM_TBL_MODULES">Modules</span>
+											</th>
+										</tr>
+										<tr class="sorting">
+											<th>
+												<span class="sortButton asc default" data-order="asc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														  <use xlink:href="#arrowUp"></use>
+													</svg>
+												</span>
+												<span class="sortButton desc" data-order="desc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														  <use xlink:href="#arrowDown"></use>
+													</svg>
+												</span>
+											</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											<td>
-												<span id="chooseModuleName">Module name</a>
-											</td>
+											<td><span id="chooseModuleName" data-translate="NUM_LBL_MODULENAME" >Module name</a></td>
 										</tr>
 									</tbody>
 								</table>
 												
-								<input type="submit" name="show" class="primary left" value="Toon modules" />
-								<input type="submit" name="connect" class="primary right" value="Wijzigen" />
+								<input type="submit" name="show" class="primary left" data-translate="NUM_BTN_RefreshList" value="Ververs modules" />
+								<input type="submit" name="connect" class="primary right" data-translate="NUM_BTN_AssignModules" value="Toewijzigen" />
 							</fieldset>
 						</form>							
 					</div>					
@@ -686,42 +921,7 @@
 			
 		</section> 
 		<!-- end editSchoolclassesDisplayPanel -->
-		
-		
-		
-		
-		<!-- 
-		-
-		- OLD studentsInSchoolclassDisplayPanel
-		-
-		-->
-		<!-- <section id="studentsInSchoolclassDisplayPanel" class="subpanel">
-			<header>
-				<div class="container">
-					<div class="content">
-						<svg viewBox="0 0 64 64" class="icon">
-							<use xlink:href="#klassen"></use>
-						</svg>
-						<h1>Klassen bewerken</h1>
-						<h2 class="sectionhead"><span>Zoek een leerling om te plaatsen in klas [KLAS]</span></h2>
-					</div>
-					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
-						<div class="content">
-							<h2>Help kop</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium gravida dignissim. Aliquam id metus quam. Aenean consequat arcu sit amet commodo porttitor.</p><p>Proin viverra, enim non feugiat ornare, purus urna dignissim ante, consectetur faucibus libero diam id ligula.</p>
-						</div>
-					</section>
-				</div>
-			</header>
-
-			<section>
-				TODO
-			</section>
-
-		</section>  -->
-		<!-- end studentsInSchoolclassDisplayPanel -->
-		
+				
 		
 		<!-- 
 		-
@@ -732,16 +932,21 @@
 			<header>
 				<div class="container">
 					<div class="content">
-						<svg viewBox="0 0 64 64" class="icon">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
 							<use xlink:href="#klassen"></use>
 						</svg>
-						<h1>Klassen bewerken</h1>
-						<h2 class="sectionhead"><span>Zoek een leerling om te plaatsen in klas [KLAS]</span></h2>					
+						<h1><span data-translate="NUM_PNL_CLASSES_EDIT">Klassen bewerken</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_AssignStudentToClass">Zoek een leerling om te plaatsen in klas</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src=""></iframe>
+							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
 						</div>
 					</section>
 				</div>
@@ -751,26 +956,28 @@
 				<div class="row">
 					<form name="addStudentSearch">
 						<fieldset>
-							<label for="addStudentSearchUserName" class="col-2 input">
-								Gebruikersnaam
-								<input id="addStudentSearchUserName" name="username" type="text" value="" />
+							<label for="addStudentSearchFamilyName" class="col-2 input">
+								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+								<input id="addStudentSearchFamilyName" name="familyName" type="text" value="" />
 							</label>
 							<label for="addStudentSearchGivenName" class="col-2 input">
-								Voornaam
+								<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 								<input id="addStudentSearchGivenName" name="givenName" type="text" value="" />
 							</label>
 							<label for="addStudentSearchInsertion" class="col-2 input">
-								Tussenvoegsel
+								<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
 								<input id="addStudentSearchInsertion" name="insertion" type="text" value="" />
 							</label>
-							<label for="addStudentSearchFamilyName" class="col-2 input">
-								Achternaam
-								<input id="addStudentSearchFamilyName" name="familyName" type="text" value="" />
+							
+							<label for="addStudentSearchUserName" class="col-2 input">
+                                                            <span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+								<input id="addStudentSearchUserName" name="username" type="text" value="" />
 							</label>
-							
-							
-							<div class="col-4">
-								<input type="submit" class="primary down right" value="Toon resultaten" />
+							<div class="col-2">
+									<input type="button" name="reload" class="primary down right" data-translate="NUM_BTN_Reset" value="Reset" />
+								</div>							
+							<div class="col-2">
+								<input type="submit" class="primary down right" data-translate="NUM_BTN_Filter" value="Filter" />
 							</div>
 						</fieldset>
 					</form>
@@ -778,34 +985,82 @@
 				
 				<div class="row">
 					<div class="col-12">
-						<h3>Gevonden leerlingen</h2>
+						<h3><span data-translate="NUM_TBL_STUDENTS">Leerlingen</span></h2>
 						<form name="addStudentAdd">
 							
-						<table class="dwo hoverable selectable">
+						<table class="dwo hoverable selectable sortable headered">
 							<thead>
 								<tr>
-									<th class="col-2">Gebruikersnaam</th>
-									<th class="col-2">Voornaam</th>
-									<th class="col-2">Tussenvoegsel</th>
-									<th class="col-6">Achternaam</th>
+									<th class="col-3">
+										<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+									</th>
+									<th class="col-3">
+										<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
+									</th>
+									<th class="col-3">
+										<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
+									</th>									
+									<th class="col-3">
+										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+									</th>
+								</tr>
+								<tr class="sorting">
+									<th class="col-3">
+										<span class="sortButton asc default" data-order="asc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowUp"></use>
+											</svg>
+										</span>
+										<span class="sortButton desc" data-order="desc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowDown"></use>
+											</svg>
+										</span>
+									</th>
+									<th class="col-3">
+										<span class="sortButton asc" data-order="asc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowUp"></use>
+											</svg>
+										</span>
+										<span class="sortButton desc" data-order="desc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowDown"></use>
+											</svg>
+										</span>
+									</th>
+									<th class="col-3"></th>									
+									<th class="col-3">
+										<span class="sortButton asc" data-order="asc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowUp"></use>
+											</svg>
+										</span>
+										<span class="sortButton desc" data-order="desc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowDown"></use>
+											</svg>
+										</span>
+									</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr tabindex="1">
-									<td class="col-2">
+									<td class="col-3">
+										
+										<span id="addStudentAddFamilyName"></span>
 										<input type="radio" id="addStudentAddId" name="id" class="hidden" value="bakker34">
-										<span id="addStudentAddUsername"></span>
-									</td class="col-2">
-									<td class="col-2"><span id="addStudentAddGivenName"></span></td>
-									<td class="col-2"><span id="addStudentAddInsertion"></span></td>
-									<td class="col-6"><span id="addStudentAddFamilyName"></span></td>
+									</td>
+									<td class="col-3"><span id="addStudentAddGivenName"></span></td>
+									<td class="col-3"><span id="addStudentAddInsertion"></span></td>									
+									<td class="col-3"><span id="addStudentAddUsername"></span></td>
 									
 								</tr>
 							</tbody>
 						</table>
 						
-						
-							<input type="submit" class="primary right" value="plaats leerling" />
+							<input type="radio" name="id" class="hidden" value="">	<!-- empty option -->
+							<input type="submit" class="primary right"  data-translate="NUM_BTN_Connect" value="plaats leerling" />
 						</form>
 					</div>
 				</div>
@@ -826,16 +1081,21 @@
 			<header>
 				<div class="container">
 					<div class="content">
-						<svg viewBox="0 0 64 64" class="icon">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
 							<use xlink:href="#klassen"></use>
 						</svg>
-						<h1>Klassen bewerken</h1>
-						<h2 class="sectionhead"><span>Leerlingen overplaatsen</span></h2>					
+						 <h1><span data-translate="NUM_PNL_CLASSES_EDIT">Klassen bewerken</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_CLASSEDITSTUDENTS">Leerlingen overplaatsen</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src=""></iframe>
+							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
 						</div>
 					</section>
 				</div>
@@ -844,33 +1104,50 @@
 			<section>
 				<div class="row">
 					<div class="col-4">
-						<h3>Leerlingen gekozen klas</h3>
+                                            <h3><span data-translate="NUM_LBL_CLASSEDITSTUDENTS_STUDENTSLEFTCLASS">Leerlingen gekozen klas</span></h3>
 						<input type="text" id="copyOrMoveStudentToSchoolclassClassAClassname" value="" class="col-2" disabled="disabled" />
 					</div>					
 					<div class="col-4">
-						<h3>Kies een tweede klas om leerlingen it of naar te kopieren of te verplaatsen.</h3>
+						<h3><span data-translate="NUM_LBL_CLASSEDITSTUDENTS_MSG">Kies een tweede klas om leerlingen it of naar te kopieren of te verplaatsen.</h3>
 					</div>
 					<div class="col-4">
-						<h3>Leerlingen tweede gekozen klas</h3>
-						<input type="text" id="copyOrMoveStudentToSchoolclassClassBClassname" value="" class="col-2" disabled="disabled" />
+                                            <h3><span data-translate="NUM_LBL_CLASSEDITSTUDENTS_STUDENTSRIGHTCLASS">Leerlingen tweede gekozen klas</span></h3>
+						<input type="text" id="copyOrMoveStudentToSchoolclassClassBClassname" value="" class="col-2 semiDisabled" disabled="disabled" />
 					</div>
 				</div>
 				
 				<div class="row">
 					<div class="col-4">
 						<form name="copyOrMoveStudentToSchoolclassClassA">
-							<table class="dwo">
+							<table class="dwo sortable headered">
 								<thead>
 									<tr>
-										<th class="col-2">&nbsp;</th>										
-										<th>Selecteer</th>
+										<th class="col-2">
+											&nbsp;
+										</th>										
+										<th><span id="copyOrMoveStudentToSchoolclassClassASelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT">Selecteer</span></span></th>
+									</tr>
+									<tr class="sorting">
+										<th class="col-2">
+											<span class="sortButton asc default" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>										
+										<th>&nbsp;</th>
 									</tr>
 								</thead>
 								<tbody>	
 								
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
-										<td class="col-2"><span id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentName">Leerling naam</span></td>
+										<td class="col-2"><span id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentName">Student naam</span></td>
 										<td>
 											<div class="checkbox">
 												<input type="checkbox" name="students[]" id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentSelect" value=""><label class="icon" for="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentSelect"></label>
@@ -881,41 +1158,73 @@
 								</tbody>
 							</table>
 						
-							<input type="button" name="move" class="primary right clearbtn" value="Verplaats >" />
-							<input type="submit" name="copy" class="primary right clearbtn" value="Kopieer >" />							
+							<input type="button" name="move" class="primary right clearbtn" data-translate="NUM_BTN_MoveLeft" value="Verplaats >" />
+							<input type="submit" name="copy" class="primary right clearbtn" data-translate="NUM_BTN_CopyLeft" value="Kopieer >" />							
 						</form>	
 					</div>
 					<div class="col-4">
 						<form name="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelect">
-							<table class="dwo hoverable selectable">
+							<table class="dwo hoverable selectable sortable headered">
 								<thead>
 									<tr>
-										<th>&nbsp;</th>
+										<th>
+											&nbsp;
+										</th>
+									</tr>
+									<tr class="sorting">
+										<th>
+											<span class="sortButton asc default" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>
 									</tr>
 								</thead>
 								<tbody>	
 								
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
-										<td class="col-2">
-											<input type="radio" name="schoolclass" id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelectId" class="hidden" value="schoolclassId">
-											<span id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelectClassName">Naam klas</span>
+										<td class="col-2"><span id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelectClassName">Naam klas</span>
+											<input type="radio" name="schoolclass" id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelectId" class="hidden" value="schoolclassId">											
 										</td>										
 									</tr>
 																	
 								</tbody>
 							</table>
 						
-							<input type="submit" name="choose" class="primary center" value="Kies tweede klas" />						
+							<!-- Bypassed <input type="submit" name="choose" class="primary center" data-translate="NUM_BTN_CLASSEDITSTUDENTS_SELECT2NDCLASS" value="Kies tweede klas" />						 -->
 						</form>	
 					</div>
 					<div class="col-4">
 						<form name="copyOrMoveStudentToSchoolclassClassB">
-							<table class="dwo">
+							<table class="dwo sortable headered">
 								<thead>
 									<tr>
-										<th class="col-2">&nbsp;</th>										
-										<th>Selecteer</th>
+										<th class="col-2">
+											&nbsp;										
+										</th>										
+										<th><span id="copyOrMoveStudentToSchoolclassClassBSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT">Selecteer</span></span></th>
+									</tr>
+									<tr class="sorting">
+										<th class="col-2">
+											<span class="sortButton asc default" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>											
+										</th>										
+										<th>&nbsp;</th>
 									</tr>
 								</thead>
 								<tbody>	
@@ -933,8 +1242,8 @@
 								</tbody>
 							</table>
 						
-							<input type="button" name="move" class="primary left clearbtn" value="< Verplaats" />
-							<input type="submit" name="copy" class="primary left clearbtn" value="< Kopieer" />							
+							<input type="button" name="move" class="primary left clearbtn" data-translate="NUM_BTN_MoveRight" value="< Verplaats" />
+							<input type="submit" name="copy" class="primary left clearbtn" data-translate="NUM_BTN_CopyRight" value="< Kopieer" />							
 						</form>	
 					</div>
 				</div>
@@ -954,16 +1263,21 @@
 			<header>
 				<div class="container">
 					<div class="content">
-						<svg viewBox="0 0 64 64" class="icon">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
 							<use xlink:href="#klassen"></use>
 						</svg>
-						<h1>Klassen bewerken</h1>
-						<h2 class="sectionhead"><span>Zoek een Docent om te koppelen aan klas [KLAS]</span></h2>					
+						 <h1><span data-translate="NUM_PNL_CLASSES_EDIT">Klassen bewerken</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_AssignTeacherToClass">Zoek een Docent om te koppelen aan klas [KLAS]</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src=""></iframe>
+							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
 						</div>
 					</section>
 				</div>
@@ -973,25 +1287,28 @@
 				<div class="row">
 					<form name="addTeacherSearch">
 						<fieldset>
-							<label for="addTeacherSearchUserName" class="col-2 input">
-								Gebruikersnaam
-								<input id="addTeacherSearchUserName" name="userName" type="text" value="" />
+							<label for="addTeacherSearchFamilyName" class="col-2 input">
+								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+								<input id="addTeacherSearchFamilyName" name="familyName" type="text" value="" />
 							</label>
 							<label for="addTeacherSearchGivenName" class="col-2 input">
-								Voornaam
+								<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 								<input id="addTeacherSearchGivenName" name="givenName" type="text" value="" />
 							</label>
 							<label for="addTeacherSearchInsertion" class="col-2 input">
-								Tussenvoegsel
+								<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
 								<input id="addTeacherSearchInsertion" name="insertion" type="text" value="" />
 							</label>
-							<label for="addTeacherSearchFamilyName" class="col-2 input">
-								Achternaam
-								<input id="addTeacherSearchFamilyName" name="familyName" type="text" value="" />
-							</label>
 							
-							<div class="col-4">
-								<input type="submit" class="primary down right" value="Toon resultaten" />
+							<label for="addTeacherSearchUserName" class="col-2 input">
+								<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+								<input id="addTeacherSearchUserName" name="userName" type="text" value="" />
+							</label>
+							<div class="col-2">
+									<input type="button" name="reload" class="primary down right" data-translate="NUM_BTN_Reset" value="Reset" />
+								</div>							
+							<div class="col-2">
+								<input type="submit" class="primary down right"  data-translate="NUM_BTN_Filter" value="Filter" />
 							</div>
 						</fieldset>
 					</form>
@@ -999,33 +1316,85 @@
 				
 				<div class="row">
 					<div class="col-12">
-						<h3>Gevonden docenten</h2>
+						<h3><span data-translate="NUM_TBL_TEACHERS">Docenten</span></h2>
 						<form name="addTeacherAdd">
 							
-						<table class="dwo hoverable selectable">
+						<table class="dwo hoverable selectable sortable headered">
 							<thead>
 								<tr>
-									<th class="col-2">Gebruikersnaam</th>
-									<th class="col-2">Voornaam</th>
-									<th class="col-2">Tussenvoegsel</th>
-									<th class="col-6">Achternaam</th>
+									<th class="col-3">
+										<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+									</th>
+									<th class="col-3">
+										<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
+									</th>
+									<th class="col-3">
+										<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
+									</th>									
+									<th class="col-3">
+										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+									</th>
+								</tr>
+								
+								<tr class="sorting">
+									<th class="col-3">
+										<span class="sortButton asc default" data-order="asc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowUp"></use>
+											</svg>
+										</span>
+										<span class="sortButton desc" data-order="desc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowDown"></use>
+											</svg>
+										</span>
+									</th>
+									<th class="col-3">
+										<span class="sortButton asc" data-order="asc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowUp"></use>
+											</svg>
+										</span>
+										<span class="sortButton desc" data-order="desc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowDown"></use>
+											</svg>
+										</span>
+									</th>
+									<th class="col-3"></th>
+									
+									<th class="col-3">
+										<span class="sortButton asc" data-order="asc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowUp"></use>
+											</svg>
+										</span>
+										<span class="sortButton desc" data-order="desc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowDown"></use>
+											</svg>
+										</span>
+									</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr tabindex="1">
 									<td class="col-2">
-										<input type="radio" id="addTeacherAddId" name="id" class="hidden" value="bakker34">
-										<span id="addTeacherAddUserName">Bakker34</span>
+										<span id="addTeacherAddFamilyName">Bakker</span>
+										<input type="radio" id="addTeacherAddId" name="id" class="hidden" value="bakker34">										
 									</td>
 									<td class="col-2"><span id="addTeacherAddGivenName">Michel</span></td>
 									<td class="col-2"><span id="addTeacherAddInsertion">van</span></td>
-									<td class="col-6"><span id="addTeacherAddFamilyName">Bakker</span></td>
+									
+									<td class="col-2"><span id="addTeacherAddUserName">Bakker34</span>
+										
+									</td>
 								</tr>
 							</tbody>
 						</table>
 						
-						
-							<input type="submit" class="primary right" value="koppel docent" />
+							<input type="radio" name="id" class="hidden" value="">	<!-- empty option -->
+							<input type="submit" class="primary right" data-translate="NUM_BTN_Connect" value="koppel docent" />
 						</form>
 					</div>
 				</div>
@@ -1045,16 +1414,21 @@
 			<header>
 				<div class="container">
 					<div class="content">
-						<svg viewBox="0 0 64 64" class="icon">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
 							<use xlink:href="#klassen"></use>
 						</svg>
-						<h1>Klassen bewerken</h1>
-						<h2 class="sectionhead"><span>Module aan klas [KLAS] koppelen</span></h2>					
+						 <h1><span data-translate="NUM_PNL_CLASSES_EDIT">Klassen bewerken</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_AssignModulesToClass">Module aan klas [KLAS] koppelen</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src=""></iframe>
+							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
 						</div>
 					</section>
 				</div>
@@ -1063,7 +1437,7 @@
 			<section>
 				<div class="row">
 					<div class="col-6">
-						<h3>Selecteer de gewenste modules om toe te kennen</h3>
+                                            <h3><span data-translate="NUM_LBL_AssignModulesToClass">Selecteer de gewenste modules om toe te kennen</span></h3>
 					
 						<!-- 
 							Example format:
@@ -1105,7 +1479,7 @@
 					
 					</div>
 					<div class="col-6">
-						<h3>Toe te kennen voor klas [KLAS], zichtbaar voor leerling</h3>
+                        <h3><span data-translate="NUM_LBL_ModulesVisibleForClass">Toe te kennen voor klas [KLAS], zichtbaar voor leerling</span></h3>
 					
 						<form name="modulesOfSchoolclassDisplaySelect">
 							<table class="dwo hoverable selectable">
@@ -1118,6 +1492,7 @@
 									</tr>
 								</tbody>
 							</table>
+							<input type="radio" name="module" class="hidden" value=""> <!-- empty value -->
 						</form>
 					
 					
@@ -1127,21 +1502,21 @@
 					<div class="col-6">
 						<div class="row">
 							<div class="col-2">
-								<h3>Nu toegekend</h3>
+                                                            <h3><span data-translate="NUM_CLASSMODULES_Visible">Nu toegekend</span></h3>
 								<div class="checkbox example">
 									<input type="checkbox" value="" checked="checked">
 									<label class="icon"></label>
 								</div>
 							</div>
 							<div class="col-2">
-								<h3>Ooit toegekend</h3>
+                                                            <h3><span data-translate="NUM_CLASSMODULES_InVisible">Ooit toegekend</span></h3>
 								<div class="checkbox example previouslyChecked">
 									<input type="checkbox" value="">
 									<label class="icon"></label>
 								</div>
 							</div>
 							<div class="col-2">
-								<h3>Niet toegekend</h3>
+                                                            <h3><span data-translate="NUM_CLASSMODULES_NeverAssigned">Niet toegekend</span></h3>
 								<div class="checkbox example">
 									<input type="checkbox" value="">
 									<label class="icon"></label>
@@ -1152,52 +1527,55 @@
 							<form name="modulesOfSchoolclassDisplaySearch">
 								<label for="modulesOfSchoolclassDisplaySearchWord" class="col-3 input">
 									&nbsp;
-									<input id="modulesOfSchoolclassDisplaySearchWord" name="name" type="text" value="" placeholder="of zoek een module" />
+									<input id="modulesOfSchoolclassDisplaySearchWord" name="name" type="text" data-translate="NUM_CLASSMODULES_FindAModule" value="" placeholder="of zoek een module" />
 								</label>
 								<div class="col-1">
-									<input type="submit" name="search" class="down secondary" value="Zoek" />
+									<input type="submit" name="search" class="down secondary" data-translate="NUM_BTN_Search" value="Zoek" />
 								</div>
 								<div class="col-2">
-									<input type="button" name="reload" class="down secondary" value="Reset" />
+									<input type="button" name="reload" class="down secondary" data-translate="NUM_BTN_Reset" value="Reset" />
 								</div>
 							</form>
 						</div>	
 					</div>
 					<div class="col-6">
-						<h3>Instellingen geselecteerde module</h3>
+						<h3><span data-translate="NUM_CLASSMODULES_SettingsModules">Instellingen geselecteerde module</span></h3>
 						
 						<form name="modulesOfSchoolclassDisplaySettings">
 							<div class="row">
 							
 								<input name="key" type="hidden" value="" />
 								<label for="modulesOfSchoolclassDisplayValidityFrom" class="col-2 input textoverflow">
-									Geldigsheidsduur (van - tot)
+									<span data-translate="NUM_CLASSMODULES_AccessPeriod">Geldigsheidsduur (van - tot)</span>
+                                                                    
 									<input id="modulesOfSchoolclassDisplayValidityFrom" name="from" type="text" value="" />
 								</label>
 								<label for="modulesOfSchoolclassDisplayValidityTo" class="col-2 input">
-									&nbsp;
+									<span>&nbsp;</span>
 									<input id="modulesOfSchoolclassDisplayValidityTo" name="to" type="text" value="" />
 								</label>
+								
+							</div>
+							<div class="clear"></div>
+							<div class="row">
 								<div class="col-2 options">
-									<label>Type</label>
+									<label><span data-translate="NUM_CLASSMODULES_CourseType">Toets?</span></label>
 									<div class="option">
 										<input type="radio" name="locked[]" id="modulesOfSchoolclassDisplayTypeLocked" value="1">
-										<label for="modulesOfSchoolclassDisplayTypeLocked">dicht</label>
+										<label for="modulesOfSchoolclassDisplayTypeLocked"><span data-translate="NUM_LBL_YES">Ja</span></label>
 									</div> 
 									<div class="option">
 										<input type="radio" name="locked[]" id="modulesOfSchoolclassDisplayTypeUnlocked" value="0">
-										<label for="modulesOfSchoolclassDisplayTypeUnlocked">open</label>
+										<label for="modulesOfSchoolclassDisplayTypeUnlocked"><span data-translate="NUM_LBL_NO">Nee</span></label>
 									</div>
 								</div>
-							</div>
-							<div class="row">
 								<label for="field_1" class="col-2 input">
-									Wachtwoord
+                                                                    <span data-translate="NUM_TBL_PASSWORD"> Wachtwoord</span>
 									<input id="password" name="accessKey" type="text" value="" />
 								</label>
 							</div>
 					
-							<input type="submit" class="bottom right secondary" value="Sla op" />
+							<input type="submit" class="right secondary down" data-translate="NUM_BTN_Save" value="Sla op" />
 						</form>
 					</div>
 				</div>
@@ -1217,17 +1595,22 @@
 			<header>
 				<div class="container">
 					<div class="content">
-						<svg viewBox="0 0 64 64" class="icon">
-							<use xlink:href="#klassen"></use>
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
+							<use xlink:href="#resultaten"></use>
 						</svg>
-						<h1>Resultaten bekijken</h1>
+						<h1><span data-translate="NUM_LBL_RESULTS_SEE">Resultaten bekijken</span></h1>
 						<!-- <h2 class="sectionhead"><span>Resultaten van een leerling</span></h2>					 -->
-						<h2 class="sectionhead"><span>Resultaten van een klas</span></h2>					
+						<h2 class="sectionhead"><span data-translate="NUM_LBL_RESULTS_OF_CLASS">Resultaten van een klas</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src=""></iframe>
+							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
 						</div>
 					</section>
 				</div>
@@ -1256,27 +1639,43 @@
 				<div class="row">
 					<form name="chooseClassAndModules">
 						<div class="col-6">
-							<h3>Selecteer klas en soort(en) modules</h3>
-							<table id="resultsDisplayChooseClass" class="dwo">
+							<h3><span data-translate="NUM_LBL_RESULTS_SELECT">Selecteer klas en soort(en) modules</span></h3>
+							<table id="resultsDisplayChooseClass" class="dwo sortable headered">
 								<thead>
 									<tr>
-										<th>&nbsp;</th>
-										<th>Open</th>
-										<th>Gesloten</th>
+										<th class="col-2"></th>
+										<th class="col-2"><span data-translate="NUM_TBL_RESULTS_OPEN">Open</span></th>
+										<th class="col-2"><span data-translate="NUM_TBL_RESULTS_CLOSED" >Gesloten</span></th>
+									</tr>
+									<tr class="sorting">
+										<th class="col-2">
+											<span class="sortButton asc default" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>
+										<th class="col-2"></th>
+										<th class="col-2"></th>
 									</tr>
 								</thead>
 								<tbody>	
 							
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
-										<td><span id="chooseClassAndModulesClassname">Klasnaam</span></td>
+										<td class="col-2"><span id="chooseClassAndModulesClassname">Klasnaam</span></td>
 
-										<td>
+										<td class="col-2">
 											<div class="checkbox">
 												<input type="radio" name="open[]" id="chooseClassAndModulesOpen" value="schoolclassID"><label class="icon" for="chooseClassAndModulesOpen"></label>
 											</div>											
 										</td>
-										<td>
+										<td class="col-2">
 											<div class="checkbox">
 												<input type="radio" name="closed[]" id="chooseClassAndModulesClassClosed" value="schooclassID"><label class="icon" for="chooseClassAndModulesClassClosed"></label>
 											</div>											
@@ -1288,21 +1687,36 @@
 						</div>
 					
 						<div class="col-6">
-							<h3>Selecteer module(s) om resultaten van de klas te zien</h3>
-							<table id="resultsDisplayChooseModules" class="dwo">
+							<h3><span data-translate="NUM_LBL_RESULTS_SELECT_MODULES">Selecteer module(s) om resultaten van de klas te zien</span></h3>
+							<table id="resultsDisplayChooseModules" class="dwo sortable headered">
 								<thead>
 									<tr>
-										<th>&nbsp;</th>
-										<th>Selecteer</th>
+										<th class="col-4">&nbsp;</th>
+										<th class="col-2"><span id="resultsDisplayChooseModulesSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT">Selecteer</span></span></th>
+									</tr>
+									<tr class="sorting">
+										<th class="col-4">
+											<span class="sortButton asc default" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>
+										<th class="col-2">&nbsp;</th>
 									</tr>
 								</thead>
 								<tbody>	
 							
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
-										<td><span id="chooseClassAndModulesModuleName">Module name</span></td>
+										<td class="col-5"><span id="chooseClassAndModulesModuleName">Module name</span></td>
 
-										<td>
+										<td class="col-1">
 											<div class="checkbox">
 												<input type="checkbox" name="select[]" id="chooseClassAndModulesModuleSelect" value="moduleID"><label class="icon" for="chooseClassAndModulesModuleSelect"></label>
 											</div>											
@@ -1313,7 +1727,7 @@
 							</table>	
 						</div>
 						
-						<input type="submit" class="primary right" value="Toon resultaten" />
+						<input type="submit" class="primary right" data-translate="NUM_LBL_RESULTS_VIEW" value="Toon resultaten" />
 					</form>
 				</div>
 			</section>
@@ -1331,16 +1745,21 @@
 			<header>
 				<div class="container">
 					<div class="content">
-						<svg viewBox="0 0 64 64" class="icon">
-							<use xlink:href="#klassen"></use>
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
+							<use xlink:href="#resultaten"></use>
 						</svg>
-						<h1>Resultaten</h1>
-						<h2 class="sectionhead"><span>Resultaten</span></h2>					
+						<h1><span data-translate="NUM_PNL_SELECTEDRESULTS" >Resultaten</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_SELECTEDRESULTS">Resultaten</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src=""></iframe>
+							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
 						</div>
 					</section>
 				</div>
@@ -1363,7 +1782,7 @@
 									</tr>
 									<tr class="sorting">
 										<th>
-											<span class="sortButton asc" data-order="asc" data-type="string">
+											<span class="sortButton asc default" data-order="asc" data-type="string">
 												<svg viewBox="0 0 74 74" class="icon">
 													  <use xlink:href="#arrowUp"></use>
 												</svg>
@@ -1393,7 +1812,7 @@
 									
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
-										<td id="selectedResultsTableRowHeader"><span data-name="Klaasen, Klaas">Klaassen, Klaas</span></td>
+										<td id="selectedResultsTableRowHeader" class="studentName"><span data-name="Klaasen, Klaas">Klaassen, Klaas</span></td>
 										
 										<!-- The column is detached and used as a template by the JS -->								
 										<td id="selectedResultsTableRepeatableCell"><a id="selectedResultsTableResult" href="javascript:void(0);" class="resultIndicator" data-score="9" data-rowid="" data-colid="">9%</a></td>
@@ -1412,11 +1831,11 @@
 						<p>&nbsp;</p>
 					</div>
 					<div class="col-4">
-						<p>Toon: 
-							<span class="filterIndicators result1"><a href="javascript:void(0);" data-filter="1">1</a></span>
-							<span class="filterIndicators result2"><a href="javascript:void(0);" data-filter="2">2</a></span>
-							<span class="filterIndicators result3"><a href="javascript:void(0);" data-filter="3">3</a></span>
-							<span class="filterIndicators result4"><a href="javascript:void(0);" data-filter="4">4</a></span>
+						<p><span data-translate="NUM_LBL_SELECTEDRESULTS_SHOW">Toon:</span> 
+							<span class="filterIndicators result1" data-filter="1"><a href="javascript:void(0);">1</a></span>
+							<span class="filterIndicators result2" data-filter="2"><a href="javascript:void(0);">2</a></span>
+							<span class="filterIndicators result3" data-filter="3"><a href="javascript:void(0);">3</a></span>
+							<span class="filterIndicators result4" data-filter="4"><a href="javascript:void(0);">4</a></span>
 						</p>
 					</div>
 					<div class="col-2">
@@ -1431,7 +1850,7 @@
 						<p><a href="javascript:void(0);" id="barActivitiesStudentBacklink" class="backlink">
 							<svg viewBox="0 0 74 74" class="icon">
 									  <use xlink:href="#arrowLeft"></use>
-								</svg>Terug naar <b>alle geselecteerde modules</b></a></p>
+								</svg><span data-translate="NUM_LBL_SELECTEDRESULTS_BACKALL">Terug naar alle geselecteerde modules</span></a></p>
 					</div>
 				</div>
 				
@@ -1439,7 +1858,7 @@
 					
 					
 					<div class="col-5">
-						<p>Deze modules voor deze klas verzegelen?</p>
+						<p data-translate="NUM_LBL_SELECTEDRESULTS_SEALMODULES">Deze modules voor deze klas verzegelen?</p>
 					</div>
 					<div class="col-1">
 						<form name="sealModuleActivities">
@@ -1451,10 +1870,10 @@
 					
 					<div class="col-5">
 						<p>Toon: 
-							<span class="filterIndicators result1"><a href="javascript:void(0);" data-filter="1">1</a></span>
-							<span class="filterIndicators result2"><a href="javascript:void(0);" data-filter="2">2</a></span>
-							<span class="filterIndicators result3"><a href="javascript:void(0);" data-filter="3">3</a></span>
-							<span class="filterIndicators result4"><a href="javascript:void(0);" data-filter="4">4</a></span>
+							<span class="filterIndicators result1" data-filter="1"><a href="javascript:void(0);">1</a></span>
+							<span class="filterIndicators result2" data-filter="2"><a href="javascript:void(0);">2</a></span>
+							<span class="filterIndicators result3" data-filter="3"><a href="javascript:void(0);">3</a></span>
+							<span class="filterIndicators result4" data-filter="4"><a href="javascript:void(0);">4</a></span>
 						</p>
 					</div>
 					<div class="col-1">
@@ -1471,7 +1890,34 @@
 						<p><a href="javascript:void(0);" id="barActivitiesStudentsBacklink" class="backlink">
 							<svg viewBox="0 0 74 74" class="icon">
 									  <use xlink:href="#arrowLeft"></use>
-								</svg>Terug naar <b>alle geselecteerde modules</b></a></p>
+								</svg><span data-translate="NUM_LBL_SELECTEDRESULTS_BACKALL">Terug naar alle geselecteerde modules</span></a></p>
+					</div>
+					
+				</div>
+				
+				
+				
+				<div class="row bar" id="barPagesStudents">
+					
+					
+					<div class="col-6">
+						<p><a href="javascript:void(0);" id="barPagesStudentsBacklink" class="backlink">
+							<svg viewBox="0 0 74 74" class="icon">
+									  <use xlink:href="#arrowLeft"></use>
+								</svg><span data-translate="NUM_LBL_SELECTEDRESULTS_BACK">Terug naar geselecteerde module</span></a></p>
+					</div>
+					
+					
+					<div class="col-5">
+						<p><span data-translate="NUM_LBL_SELECTEDRESULTS_SHOW">Toon:</span> 
+							<span class="filterIndicators result1" data-filter="1"><a href="javascript:void(0);">1</a></span>
+							<span class="filterIndicators result2" data-filter="2"><a href="javascript:void(0);">2</a></span>
+							<span class="filterIndicators result3" data-filter="3"><a href="javascript:void(0);">3</a></span>
+							<span class="filterIndicators result4" data-filter="4"><a href="javascript:void(0);">4</a></span>
+						</p>
+					</div>
+					<div class="col-1">
+						<!-- icons -->
 					</div>
 					
 				</div>
@@ -1501,14 +1947,14 @@
 					<div class="row">
 						<form name="studentScoResultActions">				
 							<div class="col-3 options">
-								<label>Verzegelen voor deze leerling?</label>
+								<label><span data-translate="NUM_LBL_STUDENTSCO_SEAL">Verzegelen voor deze leerling?</span></label>
 								<div class="option">
 									<input type="radio" name="seal" id="studentScoResultSealYes" value="1">
-									<label for="studentScoResultSealYes">Ja</label>
+									<label for="studentScoResultSealYes"><span data-translate="NUM_LBL_YES">Ja</span></label>
 								</div> 
 								<div class="option">
 									<input type="radio" name="seal" id="studentScoResultSealNo" value="0">
-									<label for="studentScoResultSealNo">Nee</label>
+									<label for="studentScoResultSealNo"><span data-translate="NUM_LBL_NO">Nee</span></label>
 								</div>
 							</div>
 					
@@ -1519,13 +1965,13 @@
 						</form>
 					
 						<div class="col-4">
-							<p>Andere leerling</p>
+							<p data-translate="NUM_LBL_STUDENTSCO_OTHER">Andere leerling</p>
 							<p><a href="javascript: void(0);" id="studentScoResultPrevious" class="prev">
 								<svg viewBox="0 0 74 74" class="icon">
 									  <use xlink:href="#arrowLeft"></use>
-								</svg>Vorige</a>
+								</svg><span data-translate="NUM_LBL_STUDENTSCO_PREV">Vorige</span></a>
 							   <a href="javascript: void(0);" id="studentScoResultNext" class="next">
-								   Volgende<svg viewBox="0 0 74 74" class="icon">
+								   <span data-translate="NUM_LBL_STUDENTSCO_NEXT">Volgende</span><svg viewBox="0 0 74 74" class="icon">
 									  <use xlink:href="#arrowRight"></use>
 									</svg>
 							   </a>
@@ -1565,19 +2011,24 @@
 		-
 		-->
 		<section id="personsDisplay" class="subpanel">
-			<header>
+			<header>				
 				<div class="container">
 					<div class="content">
-						<svg viewBox="0 0 64 64" class="icon">
-							<use xlink:href="#klassen"></use>
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
+							<use xlink:href="#personen"></use>
 						</svg>
-						<h1>Personen bewerken en toevoegen</h1>
-						<h2 class="sectionhead"><span>Zoek een persoon om te bewerken</span></h2>					
+                                                <h1><span data-translate="NUM_PNL_PERSONS_MANAGE">Personen bewerken en toevoegen</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_PERSONS_MANAGE">Zoek een persoon om te bewerken</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
 						<div class="content">
-							<iframe src=""></iframe>
+							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
 						</div>
 					</section>
 				</div>
@@ -1587,38 +2038,39 @@
 				<div class="row">
 					<form name="personsSearch">
 						<fieldset>
-							<label for="personsSearchUserName" class="col-2 input">
-								Gebruikersnaam
-								<input id="personsSearchUserName" name="userName" type="text" value="" />
+							<label for="personsSearchFamilyName" class="col-2 input">
+								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+								<input id="personsSearchFamilyName" name="familyName" type="text" value="" />
 							</label>
 							<label for="personsSearchGivenName" class="col-2 input">
-								Voornaam
+								<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 								<input id="personsSearchGivenName" name="givenName" type="text" value="" />
 							</label>
 							<label for="personsSearchInsertion" class="col-2 input">
-								Tussenvoegsel
+								<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
 								<input id="personsSearchInsertion" name="insertion" type="text" value="" />
 							</label>
-							<label for="personsSearchFamilyName" class="col-2 input">
-								Achternaam
-								<input id="personsSearchFamilyName" name="familyName" type="text" value="" />
+							
+							<label for="personsSearchUserName" class="col-2 input">
+								<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+								<input id="personsSearchUserName" name="userName" type="text" value="" />
 							</label>
 							
 							
 							<div class="col-2 options">
-								<label>Type</label>
+                                                            <label><span data-translate="NUM_LBL_Q_WHICH2ROLES">rol</span></label>
 								<div class="option">
 									<input type="radio" name="role" id="personsSearchL" value="L">
-									<label for="personsSearchL">L</label>
+                                                                        <label for="personsSearchL"><span data-translate="NUM_LBL_STUDENTLETTER">L</span></label>
 								</div> 
 								<div class="option">
 									<input type="radio" name="role" id="personsSearchD" value="D">
-									<label for="personsSearchD">D</label>
+									<label for="personsSearchD"><span data-translate="NUM_LBL_TEACHERLETTER">D</span></label>
 								</div>
 							</div>
 							
 							<div class="col-2">
-								<input type="submit" class="primary down right" value="Zoek" />
+								<input type="submit" class="primary down right" data-translate="NUM_BTN_Filter" value="Filter" />
 							</div>
 						</fieldset>
 					</form>
@@ -1626,42 +2078,100 @@
 				
 				<div class="row">
 					<div class="col-12">
-						<h3>Gevonden personen</h2>
+                                            <h3><span data-translate="NUM_LBL_PERSONS_FOUND">Gevonden personen</span></h2>
 						<form name="personsEdit">
 							
-						<table class="dwo hoverable selectable">
+						<table class="dwo hoverable selectable sortable headered">
 							<thead>
 								<tr>
-									<th class="col-2">Gebruikersnaam</th>
-									<th class="col-2">Voornaam</th>
-									<th class="col-2">Tussenvoegsel</th>
-									<th class="col-4">Achternaam</th>
-									<th class="col-2">Bewerk opties</th>
+									<th class="col-3">
+										<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+									</th>
+									<th class="col-3">
+										<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
+									</th>
+									<th class="col-3">
+										<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
+									</th>									
+									<th class="col-3">																										
+										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+									</th>
+									<!-- <th class="col-3"><span data-translate="NUM_TBL_EDITOPTIONS">Bewerk opties</span></th> -->
+								</tr>
+								
+								<tr class="sorting">
+									<th class="col-3">
+										
+										<span class="sortButton asc default" data-order="asc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowUp"></use>
+											</svg>
+										</span>
+										<span class="sortButton desc" data-order="desc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowDown"></use>
+											</svg>
+										</span>
+										
+									</th>
+									<th class="col-3">
+										
+										<span class="sortButton asc" data-order="asc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowUp"></use>
+											</svg>
+										</span>
+										<span class="sortButton desc" data-order="desc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowDown"></use>
+											</svg>
+										</span>
+										
+									</th>
+									<th class="col-3">
+										
+									</th>
+									
+									<th class="col-3">										
+										<span class="sortButton asc" data-order="asc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowUp"></use>
+											</svg>
+										</span>
+										<span class="sortButton desc" data-order="desc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowDown"></use>
+											</svg>
+										</span>									
+									</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr tabindex="1">
-									<td class="col-2">
-										<input type="radio" id="personsTableId" name="id" class="hidden" value="bakker34">
-										<span id="personsTableUserName">Bakker34</span>
+									
+									<td class="col-3"><span id="personsTableFamilyName">Bakker</span>
+										<input type="radio" id="personsTableId" name="id" class="hidden" value="bakker34">										
 									</td>
-									<td class="col-2"><span id="personsTableGivenName">Michel</span></td>
-									<td class="col-2"><span id="personsTableInsertion">van</span></td>
-									<td class="col-4"><span id="personsTableFamilyName">Bakker</span></td>
-									<td class="col-2">
-										<svg id="personsTableEditDetails" viewBox="0 0 64 64" class="icon">
-											  <use xlink:href="#personen"></use>
+									<td class="col-3"><span id="personsTableGivenName">Michel</span></td>
+									<td class="col-3"><span id="personsTableInsertion">van</span></td>		
+									<td class="col-3"><span id="personsTableUserName">Bakker34</span>
+										
+									</td>							
+									
+									<!-- <td class="col-3">
+										<svg id="personsTableEditDetails" viewBox="0 0 64 64" class="icon editOptions">
+											  <use xlink:href="#account"></use>
 										</svg>
-										<svg id="personsTableEditSchoolClasses" viewBox="0 0 64 64" class="icon">
+										<svg id="personsTableEditSchoolClasses" viewBox="0 0 64 64" class="icon editOptions">
 											  <use xlink:href="#klassen"></use>
 										</svg>
-									</td>
+									</td> -->
 								</tr>
 							</tbody>
 						</table>
 						
-						
-							<input type="submit" class="primary right" value="Bewerk persoon" />
+							<input type="radio" name="id" class="hidden" value=""> <!-- empty option -->										
+							<input type="submit" class="primary right" data-translate="NUM_BTN_PERSONS_EDIT" value="Bewerk persoon" />
 						</form>
 					</div>
 				</div>
@@ -1669,12 +2179,12 @@
 				
 				<div class="row">					
 					<div class="col-6">
-						<h2 class="sectionhead"><span>Voeg een nieuwe leerling</span></h2>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_PERSONS_ADD">Voeg een nieuwe leerling</span></h2>
 						<form name="personsAdd">
 							<fieldset>
 								<label for="button_1">
-									Een enkele nieuwe leerling opvoeren
-									<input type="submit" class="secondary right" value="Toevoegen" />
+                                                                    <span data-translate="NUM_LBL_PERSONS_ADD">Een enkele nieuwe leerling opvoeren</span>
+									<input type="submit" class="secondary right" data-translate="NUM_BTN_Add" value="Toevoegen" />
 								</label>
 							</fieldset>
 						</form>
@@ -1713,16 +2223,21 @@
 			<header>
 				<div class="container">
 					<div class="content">
-						<svg viewBox="0 0 64 64" class="icon">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
 							<use xlink:href="#personen"></use>
 						</svg>
-						<h1>Personen bewerken</h1>
-						<h2 class="sectionhead"><span>Bewerk gegevens [NAAM]</span></h2>					
+                                                <h1><span data-translate="NUM_PNL_PERSONS_EDIT">Personen bewerken</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_PERSONS_EDIT">Bewerk persoonsgegevens</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src=""></iframe>
+							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
 						</div>
 					</section>
 				</div>
@@ -1734,46 +2249,47 @@
 					<form name="editPersonDetails">
 						<fieldset>
 							
-							<label for="editPersonUserName" class="col-2 input">
-								Username
-								<input id="editPersonUserName" name="userName" type="text" value="" />
-							</label>
+							
 							
 							<label for="editPersonGivenName" class="col-2 input">
-								Voornaam
+								<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 								<input id="editPersonGivenName" name="givenName" type="text" value="" />
 							</label>
 							<label for="editPersonInsertion" class="col-2 input">
-								Tussenvoegsel
+								<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
 								<input id="editPersonInsertion" name="insertion" type="text" value="" />
 							</label>
 							<label for="editPersonFamilyName" class="col-2 input">
-								Achternaam
+								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
 								<input id="editPersonFamilyName" name="familyName" type="text" value="" />
 							</label>
-							<label for="editPersonPassword" class="col-2 input">
-								Nieuw wachtwoord
-								<input id="editPersonPassword" name="newPassword" type="password" value="" />
-							</label>
 							<label for="editPersonEmail" class="col-2 input">
-								Emailadres
+								<span data-translate="NUM_TBL_EMAIL">Email adres</span>
 								<input id="editPersonEmail" name="email" type="text" value="" />
+							</label>
+							<label for="editPersonUserName" class="col-2 input">
+								<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+								<input id="editPersonUserName" name="userName" type="text" value="" />
+							</label>
+							<label for="editPersonPassword" class="col-2 input">
+								<span data-translate="NUM_TBL_PASSWORD">Wachtwoord</span>
+								<input id="editPersonPassword" name="newPassword" type="password" value="" />
 							</label>
 							
 							<div class="clear"></div>
 							
 							<label for="editPersonRole" class="col-2 input">
-								Rol
+								<span data-translate="NUM_TBL_ROLE">rol</span>
 								<input id="editPersonRole" name="role" type="text" value="" />
 							</label>
 							<div class="col-6">
 								&nbsp;
 							</div>
 							<div class="col-2">
-								<input type="button" name="remove" class="danger down" value="Verwijder" />
+								<input type="button" name="remove" class="danger down" data-translate="NUM_BTN_Remove" value="Verwijder" />
 							</div>	
 							<div class="col-2">
-								<input type="submit" name="submit" class="primary right down" value="Sla op" />
+								<input type="submit" name="submit" class="primary right down" data-translate="NUM_BTN_Save" value="Sla op" />
 							</div>						
 							
 						</fieldset>						
@@ -1785,25 +2301,36 @@
 			<section>
 				<div class="row">
 					<div class="col-12">
-						<h2 class="sectionhead"><span>Bewerk koppeling van deze persoon aan klas(sen)</span></h2>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_PERSONS_EDITCLASSES">Bewerk koppeling van deze persoon aan klas(sen)</span></h2>
 					</div>
 				</div>				
 				<div class="row">
 					<form name="editPersonSchoolclasses">
 						<div class="col-6">
-							<table class="dwo">
+							<table class="dwo sortable">
 								<thead>
-									<tr>
-										<th>&nbsp;</th>
-										<th>Selecteer</th>
+									<tr class="sorting">
+										<th class="col-4">
+											<span class="sortButton asc default" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>
+										<th class="col-2"></th>
 									</tr>
 								</thead>
 								<tbody>	
 									
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
-										<td class="col-3"><span id="editPersonSchoolclassName">Schoolnaam</span></td>
-										<td>
+										<td class="col-4"><span id="editPersonSchoolclassName">Schoolnaam</span></td>
+										<td class="col-2">
 											<div class="checkbox">
 												<input type="checkbox" name="active[]" id="editPersonSchoolclassActive" value="schoolid"><label class="icon" for="editPersonSchoolclassActive"></label>
 											</div>
@@ -1834,16 +2361,21 @@
 			<header>
 				<div class="container">
 					<div class="content">
-						<svg viewBox="0 0 64 64" class="icon">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
 							<use xlink:href="#personen"></use>
 						</svg>
 						<h1>Personen Toevoegen</h1>
 						<h2 class="sectionhead"><span>Nieuwe persoon toevoegen</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
-						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src=""></iframe>
+							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
 						</div>
 					</section>
 				</div>
@@ -1856,29 +2388,30 @@
 					
 							<fieldset>
 							
+								
+							
+								<label for="addPersonGivenName" class="col-2 input">
+									<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
+									<input id="addPersonGivenName" name="givenName" type="text" value="" />
+								</label>
+								<label for="addPersonInsertion" class="col-2 input">
+									<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
+									<input id="addPersonInsertion" name="insertion" type="text" value="" />
+								</label>
+								<label for="addPersonFamilyName" class="col-2 input">
+									<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+									<input id="addPersonFamilyName" name="familyName" type="text" value="" />
+								</label>
+								<label for="addPersonEmail" class="col-2 input">
+									<span data-translate="NUM_TBL_EMAIL">Email adres</span>
+									<input id="addPersonEmail" name="email" type="text" value="" />
+								</label>
 								<label for="addPersonUserName" class="col-2 input">
 									Username
 									<input id="addPersonUserName" name="userName" type="text" value="" />
 								</label>
-							
-								<label for="addPersonGivenName" class="col-2 input">
-									Voornaam
-									<input id="addPersonGivenName" name="givenName" type="text" value="" />
-								</label>
-								<label for="addPersonInsertion" class="col-2 input">
-									Tussenvoegsel
-									<input id="addPersonInsertion" name="insertion" type="text" value="" />
-								</label>
-								<label for="addPersonFamilyName" class="col-2 input">
-									Achternaam
-									<input id="addPersonFamilyName" name="familyName" type="text" value="" />
-								</label>
-								<label for="addPersonEmail" class="col-2 input">
-									Emailadres
-									<input id="addPersonEmail" name="email" type="text" value="" />
-								</label>
 								<label for="addPersonPassword" class="col-2 input">
-									Wachtwoord
+									<span data-translate="NUM_TBL_PASSWORD">Wachtwoord</span>
 									<input id="addPersonPassword" name="password" type="password" value="" />
 								</label>
 							
@@ -1909,19 +2442,30 @@
 					<div class="row">
 						<!-- <form name="addPersonSchoolclasses"> -->
 							<div class="col-6">
-								<table class="dwo">
+								<table class="dwo sortable">
 									<thead>
-										<tr>
-											<th>&nbsp;</th>
-											<th>Selecteer</th>
+										<tr class="sorting">
+											<th  class="col-4">&nbsp;
+												<span class="sortButton asc default" data-order="asc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														  <use xlink:href="#arrowUp"></use>
+													</svg>
+												</span>
+												<span class="sortButton desc" data-order="desc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														  <use xlink:href="#arrowDown"></use>
+													</svg>
+												</span>
+											</th>
+											<th class="col-2"></th>
 										</tr>
 									</thead>
 									<tbody>	
 									
 										<!-- The row is detached and used as a template by the JS -->								
 										<tr>
-											<td class="col-3"><span id="addPersonSchoolclassName">Schoolnaam</span></td>
-											<td>
+											<td class="col-4"><span id="addPersonSchoolclassName">Schoolnaam</span></td>
+											<td class="col-2">
 												<div class="checkbox">
 													<input type="radio" name="schoolclass" id="addPersonSchoolclassActive" value="schoolid"><label class="icon" for="addPersonSchoolclassActive"></label>
 												</div>
@@ -1930,6 +2474,7 @@
 																		
 									</tbody>
 								</table>
+								<input type="radio" name="schoolclass" value="schoolid" class="hidden"><!-- empty value -->
 							</div>
 							<div class="col-6">
 								<input type="submit" class="primary right bottom" value="Voeg persoon toe" />
@@ -1952,7 +2497,7 @@
 		-->
 		<section id="modulesDisplayPanel" class="subpanel iframepanel">
 			
-			<iframe src=""></iframe>
+			<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
 			
 		</section>
 		<!-- end modulesDisplay -->
@@ -1966,62 +2511,62 @@
 			
 		<section id="MsgDialogDisplay" class="dialog">
 			<header>
-				<h4>Mededeling</h4>
+				<h4><span data-translate="NUM_DLG_User_Message">Mededeling</span></h4>
 			</header>
 			<section>
 				<!-- <h3>De wijzigingen zijn opgeslagen</h3> -->
 				<p id="MsgDialogDisplayMessage">Kies DOORGAAN om verder te gaan.</p>
-				<input id="MsgDialogDisplayConfirmButton" type="button" class="right bottom" value="Doorgaan" />
+				<input id="MsgDialogDisplayConfirmButton" type="button" class="right bottom" data-translate="NUM_BTN_Ok" value="Doorgaan" />
 			</section>
 		</section>
 			
 		<section id="MsgDialogWithConfirmDisplay" class="dialog">
 			<header>
-				<h4>Mededeling</h4>
+				<h4><span data-translate="NUM_DLG_User_Message">Mededeling</span></h4>
 			</header>
 			<section>
 				<!-- <h3>De wijzigingen zijn opgeslagen</h3> -->
 				<p id="MsgDialogWithConfirmDisplayMessage">Kies DOORGAAN om verder te gaan.</p>
-				<input id="MsgDialogWithConfirmDisplayConfirmButton" type="button" class="right bottom" value="Doorgaan" />
+				<input id="MsgDialogWithConfirmDisplayConfirmButton" type="button" class="right bottom" data-translate="NUM_BTN_Ok" value="Doorgaan" />
 			</section>
 		</section>
 		
 		<section id="AlertDialogWithConfirmDisplay" class="dialog alert">
 			<header>
-				<h4>Attentie!</h4>
+				<h4><span data-translate="NUM_DLG_User_Alert">Attentie!</span></h4>
 			</header>
 			<section>
 				<!-- <h3>De wijzigingen zijn opgeslagen</h3> -->
 				<p id="AlertDialogWithConfirmDisplayMessage">Kies DOORGAAN om verder te gaan.</p>
-				<input id="AlertDialogWithConfirmDisplayConfirmButton" type="button" class="right bottom" value="Doorgaan" />
+				<input id="AlertDialogWithConfirmDisplayConfirmButton" type="button" class="right bottom" data-translate="NUM_BTN_Ok" value="Doorgaan" />
 			</section>
 		</section>
 		
 		<section id="AlertDialogWithConfirmCancelDisplay" class="dialog alert">
 			<header>
-				<h4>Attentie!</h4>
+				<h4><span data-translate="NUM_DLG_User_Alert">Attentie!</span></h4>
 			</header>
 			<section>
 				<!-- <h3>De wijzigingen zijn opgeslagen</h3> -->
 				<p id="AlertDialogWithConfirmCancelDisplayMessage">Kies DOORGAAN om verder te gaan.</p>
-				<input id="AlertDialogWithConfirmCancelDisplayConfirmButton" type="button" class="secondary left bottom" value="Doorgaan" />
-				<input id="AlertDialogWithConfirmCancelDisplayCancelButton" type="button" class="right bottom" value="Annuleren" />
+				<input id="AlertDialogWithConfirmCancelDisplayConfirmButton" type="button" class="secondary left bottom" data-translate="NUM_BTN_Ok" value="Doorgaan" />
+				<input id="AlertDialogWithConfirmCancelDisplayCancelButton" type="button" class="right bottom" data-translate="NUM_BTN_Cancel" value="Annuleren" />
 			</section>
 		</section>
 		
 		<section id="progressDialogWithAbortDisplay" class="dialog">
 			<header>
-				<h4>Voortgang</h4>
+				<h4><span data-translate="NUM_DLG_User_Progress">Voortgang</span></h4>
 			</header>
 			<section>
-				<h3>We zijn voor u bezig</h3>
+				<!--<h3>We zijn voor u bezig</h3>-->
 				<p id="ProgressDialogWithAbortDisplayMessage">Even geduld alstublieft</p>
 				
 				<div id="progressBar">
 					<div id="ProgressBarBar" class="bar"></div>
 				</div>				
 				
-				<input id="ProgressDialogWithAbortDisplayAbortButton" type="submit" class="right bottom danger" value="Stoppen" />
+				<input id="ProgressDialogWithAbortDisplayAbortButton" type="submit" class="right bottom danger" data-translate="NUM_BTN_Abort" value="Stoppen" />
 			</section>
 		</section>
 		<!-- end dialogs -->

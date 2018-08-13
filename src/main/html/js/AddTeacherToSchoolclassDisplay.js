@@ -12,18 +12,32 @@ function AddTeacherToSchoolclassDisplay() {
 	
 	this.$addTeacherRow = this.$addTeacherAddForm.find("tbody tr").detach();
 	this.$addTeacherTableBody = this.$addTeacherAddForm.find("tbody");
+	this.$addTeacherTableHead = this.$addTeacherAddForm.find("thead");
 		
+	// Buttons 
+    this.$resetButton = $(this.addTeacherSearchForm.elements["reload"]);
+
 	// Bind handlers
 	this.$addTeacherAddForm.on('submit', $.proxy(this.submitAddTeacherAddForm, this));
 	this.$addTeacherSearchForm.on('submit', $.proxy(this.submitAddTeacherSearchForm, this));
-	
+	this.$addTeacherTableHead.find(".sortButton").click(Helpers.clickSortButton);
+    this.$resetButton.on('click', $.proxy(this.clickReset,this));
 	
 	// Init
 	this.$panel.hide();
 }
 
 AddTeacherToSchoolclassDisplay.prototype.show = function() {
-	this.$panel.show();
+    this.localize();
+    this.$panel.show();
+}
+
+AddTeacherToSchoolclassDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
+
+AddTeacherToSchoolclassDisplay.prototype.resetSorting = function() {
+	this.$addTeacherTableHead.find(".sortButton").removeClass("active");
 }
 
 /*
@@ -32,24 +46,47 @@ AddTeacherToSchoolclassDisplay.prototype.show = function() {
 
 AddTeacherToSchoolclassDisplay.prototype.searchTeacher = function() {
 	var addTeacherSearchForm = this.addTeacherSearchForm;
-	
-	if ( addTeacherSearchForm.elements["userName"].value == "" &&
-		 addTeacherSearchForm.elements["givenName"].value == "" &&
-		 addTeacherSearchForm.elements["insertion"].value == "" &&
-	addTeacherSearchForm.elements["familyName"].value == "" ) {
+        
+        if ( this.addTeacherSearchForm.elements["familyName"].value == "" &&
+		 this.addTeacherSearchForm.elements["givenName"].value == "" &&
+		 this.addTeacherSearchForm.elements["insertion"].value == "" &&
+		 this.addTeacherSearchForm.elements["userName"].value == "" ) {
 			$result = this.$addTeacherTableBody.find("tr");
 	} else {	
-		var $result = this.$addTeacherTableBody.find("td span").filter(function() {
-			el = $(this).get(0);
-						
-			if (el.parentElement.cellIndex == 0) val = addTeacherSearchForm.elements["userName"].value;
-			if (el.parentElement.cellIndex == 1) val = addTeacherSearchForm.elements["givenName"].value;
-			if (el.parentElement.cellIndex == 2) val = addTeacherSearchForm.elements["insertion"].value;
-			if (el.parentElement.cellIndex == 3) val = addTeacherSearchForm.elements["familyName"].value;
-			
-			return el.innerHTML.toLowerCase() == val.toLowerCase();
-		}).closest("tr");
+                var $result;
+                var rows = this.$addTeacherTableBody.find("tr");
+//                var rowList = rows.find("td span");
+                $result = rows.filter(function() {
+                    var el = $(this);
+                    var result = true;
+                    result = result && Helpers.searchCompare(el.get(0).children.item(0).innerText, addTeacherSearchForm.elements["familyName"].value);
+                    result = result && Helpers.searchCompare(el.get(0).children.item(1).innerText, addTeacherSearchForm.elements["givenName"].value);
+                    result = result && Helpers.searchCompare(el.get(0).children.item(2).innerText, addTeacherSearchForm.elements["insertion"].value);
+                    result = result && Helpers.searchCompare(el.get(0).children.item(3).innerText, addTeacherSearchForm.elements["userName"].value);
+                    return result;
+                }                   
+                ).closest("tr");
+            //$result = rows;
 	}
+//        
+//	if ( addTeacherSearchForm.elements["userName"].value == "" &&
+//		 addTeacherSearchForm.elements["givenName"].value == "" &&
+//		 addTeacherSearchForm.elements["insertion"].value == "" &&
+//	addTeacherSearchForm.elements["familyName"].value == "" ) {
+//			$result = this.$addTeacherTableBody.find("tr");
+//	} else {	
+//		var $result = this.$addTeacherTableBody.find("td span").filter(function() {
+//			var el = $(this).get(0);
+//			var val = "";
+//						
+//			if (el.parentElement.cellIndex == 3) val = addTeacherSearchForm.elements["userName"].value;
+//			if (el.parentElement.cellIndex == 1) val = addTeacherSearchForm.elements["givenName"].value;
+//			if (el.parentElement.cellIndex == 2) val = addTeacherSearchForm.elements["insertion"].value;
+//			if (el.parentElement.cellIndex == 0) val = addTeacherSearchForm.elements["familyName"].value;
+//			
+//			return Helpers.searchCompare(el.innerHTML, val);			
+//		}).closest("tr");
+//	}
 	
 	this.$addTeacherTableBody.find("tr").hide()
 	$result.show();
@@ -61,18 +98,35 @@ AddTeacherToSchoolclassDisplay.prototype.searchTeacher = function() {
  */
 
 AddTeacherToSchoolclassDisplay.prototype.init = function () {
-	Helpers.stretchHeight([ this.$addTeacherTableBody ]);
+	app.mainDisplay.registerStretchables( [ this.$addTeacherTableBody ] );
+	this.resetSorting();
+	this.addTeacherAddFormToggle(false);
 }
 
 AddTeacherToSchoolclassDisplay.prototype.clear = function () {
-	this.addTeacherSearchForm.elements["username"].value == "";
+	console.log("AddTeacherToSchoolclassDisplayCLEAR");
+	this.addTeacherSearchForm.elements["userName"].value == "";
 	this.addTeacherSearchForm.elements["givenName"].value == "";
 	this.addTeacherSearchForm.elements["insertion"].value == "";
 	this.addTeacherSearchForm.elements["familyName"].value == "";
+	this.$addTeacherTableHead.find(".sortButton").removeClass('active');
+	this.resetSorting();
+	this.addTeacherAddFormToggle(false);
+}
+
+AddTeacherToSchoolclassDisplay.prototype.clickReset = function(event) {
+        this.searchTeacher();
+	this.addTeacherSearchForm.elements["userName"].value = "";
+	this.addTeacherSearchForm.elements["givenName"].value = "";
+	this.addTeacherSearchForm.elements["insertion"].value = "";
+	this.addTeacherSearchForm.elements["familyName"].value = "";
+	this.$addTeacherTableHead.find(".sortButton").removeClass('active');
+	this.resetSorting();
+	
 }
 
 AddTeacherToSchoolclassDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', url );
+		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
 }
 
 AddTeacherToSchoolclassDisplay.prototype.setSchoolClass = function(schoolClass) {
@@ -96,10 +150,10 @@ AddTeacherToSchoolclassDisplay.prototype.showTeachers = function(json) {
 	for (var id in teachers) { // TODO: probably change to array
 		$row = this.$addTeacherRow.clone();		
 		$row.find("#addTeacherAddId").val( id ).removeAttr("id");
-		$row.find("#addTeacherAddUserName").html( teachers[id].userName ).removeAttr("id");
-		$row.find("#addTeacherAddGivenName").html( teachers[id].givenName ).removeAttr("id");
-		$row.find("#addTeacherAddInsertion").html( teachers[id].insertion ).removeAttr("id");
-		$row.find("#addTeacherAddFamilyName").html( teachers[id].familyName ).removeAttr("id");
+		$row.find("#addTeacherAddFamilyName").html( teachers[id].familyName ).attr('data-sortvalue',  teachers[id].familyName).removeAttr("id");
+		$row.find("#addTeacherAddGivenName").html( teachers[id].givenName ).attr('data-sortvalue',  teachers[id].givenName).removeAttr("id");
+		$row.find("#addTeacherAddInsertion").html( teachers[id].insertion ).attr('data-sortvalue',  teachers[id].insertion).removeAttr("id");
+		$row.find("#addTeacherAddUserName").html( teachers[id].userName ).attr('data-sortvalue',  teachers[id].userName).removeAttr("id");
 		 
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;
@@ -109,15 +163,17 @@ AddTeacherToSchoolclassDisplay.prototype.showTeachers = function(json) {
 		this.$addTeacherTableBody.append($row);
 		i++;
 	}
+	
+	this.$addTeacherTableHead.find(".sortButton.default").trigger('click');
 	this.addTeacherAddFormToggle(false);
 }
 
 AddTeacherToSchoolclassDisplay.prototype.setEmptyTableMessage = function() {
-	this.$addTeacherTableBody.html('<tr class="empty"><td>Geen docenten gevonden.</td></tr>');
+	this.$addTeacherTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
 }
 
 AddTeacherToSchoolclassDisplay.prototype.setLoadingTableMessage = function() {
-	this.$addTeacherTableBody.html('<tr class="empty"><td>Docenten worden geladen.</td></tr>');
+	this.$addTeacherTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
 }
 
 
@@ -136,7 +192,11 @@ AddTeacherToSchoolclassDisplay.prototype.addTeacher = function(id) {
 
 AddTeacherToSchoolclassDisplay.prototype.submitAddTeacherAddForm = function(event) {
 	event.preventDefault();	
-	this.addTeacher(this.addTeacherAddForm.elements["id"].value);
+	
+	for (var i = 0; i < this.addTeacherAddForm.elements["id"].length; i++) 
+		if (this.addTeacherAddForm.elements["id"][i].checked) break;
+	
+	this.addTeacher(this.addTeacherAddForm.elements["id"][i].value);
 }
 AddTeacherToSchoolclassDisplay.prototype.clickAddTeacherAddRow = function(event) {
 	Helpers.selectTableRow(event);

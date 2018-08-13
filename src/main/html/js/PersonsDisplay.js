@@ -16,6 +16,7 @@ function PersonsDisplay() {
 	
 	this.$personsRow = this.$personsEditForm.find("tbody tr").detach();
 	this.$personsTableBody = this.$personsEditForm.find("tbody");
+	this.$personsTableHead = this.$personsEditForm.find("thead");
 	
 	// Bind handlers
 	this.$personsSearchForm.on('submit', $.proxy(this.submitPersonsSearchForm, this));
@@ -23,18 +24,27 @@ function PersonsDisplay() {
 	this.$personsEditForm.on('submit', $.proxy(this.submitPersonsEditForm, this));
 	this.$personsAddForm.on('submit', $.proxy(this.submitPersonsAddForm, this));
 	this.$personsImportForm.on('submit', $.proxy(this.submitPersonsImportForm, this));
+	this.$personsTableHead.find(".sortButton").click(Helpers.clickSortButton);
 	
 	// Init
 	this.$panel.hide();
-	
+	// this.$panel.css('visibility', 'hidden');
 }
 
 PersonsDisplay.prototype.show = function() {
+    this.localize();
 	this.$panel.show();
+	// this.$panel.css('visibility', 'visible');
 	
 	if (!app.getPresenterFactory().getPersonsPresenter().hasImportPersons()) this.$personsImportForm.hide();
-	
-	Helpers.stretchHeight([ this.$personsTableBody ]);
+}
+
+PersonsDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
+
+PersonsDisplay.prototype.resetSorting = function() {
+	this.$personsTableHead.find(".sortButton").removeClass("active");
 }
 
 
@@ -52,16 +62,31 @@ PersonsDisplay.prototype.filterPersonsList = function () {
 		 this.personsSearchForm.elements["familyName"].value == "" ) {
 			$result = this.$personsTableBody.find("tr");
 	} else {	
-		var $result = this.$personsTableBody.find("td span").filter(function() {
-			el = $(this).get(0);
-						
-			if (el.parentElement.cellIndex == 0) val = personsSearchForm.elements["userName"].value;
-			if (el.parentElement.cellIndex == 1) val = personsSearchForm.elements["givenName"].value;
-			if (el.parentElement.cellIndex == 2) val = personsSearchForm.elements["insertion"].value;
-			if (el.parentElement.cellIndex == 3) val = personsSearchForm.elements["familyName"].value;
-			
-			return el.innerHTML.toLowerCase() == val.toLowerCase();
-		}).closest("tr");
+                var $result;
+                var rows = this.$personsTableBody.find("tr");
+//                var rowList = rows.find("td span");
+                $result = rows.filter(function() {
+                    var el = $(this);
+                    var result = true;
+                    result = result && Helpers.searchCompare(el.get(0).children.item(0).innerText, personsSearchForm.elements["familyName"].value);
+                    result = result && Helpers.searchCompare(el.get(0).children.item(1).innerText, personsSearchForm.elements["givenName"].value);
+                    result = result && Helpers.searchCompare(el.get(0).children.item(2).innerText, personsSearchForm.elements["insertion"].value);
+                    result = result && Helpers.searchCompare(el.get(0).children.item(3).innerText, personsSearchForm.elements["userName"].value);
+                    return result;
+                }                   
+//		var $result = this.$personsTableBody.find("td span").filter(function() {
+//			var el = $(this).get(0);
+//			var val = "";
+//						
+//			if (el.parentElement.cellIndex == 3) val = personsSearchForm.elements["userName"].value;
+//			if (el.parentElement.cellIndex == 1) val = personsSearchForm.elements["givenName"].value;
+//                        if (el.parentElement.cellIndex == 2) val = personsSearchForm.elements["insertion"].value;
+//                        if (el.parentElement.cellIndex == 0) val = personsSearchForm.elements["familyName"].value;
+//                        return Helpers.searchCompare(el.innerHTML, val);
+//		}
+//                
+                ).closest("tr");
+            //$result = rows;
 	}
 	
 	this.$personsTableBody.find("tr").hide();
@@ -74,30 +99,29 @@ PersonsDisplay.prototype.filterPersonsList = function () {
  * Map to java implementation
  */
 
-PersonsDisplay.prototype.init = function (json) {
-	// do nothing
+PersonsDisplay.prototype.init = function (json) { 
+	app.mainDisplay.registerStretchables( [ this.$personsTableBody ] );
 }
 
-PersonsDisplay.prototype.clear = function () {
-	this.personsSearchFormToggle(false);	
-	this.$personsTableBody.html("");
-	this.personsEditFormToggle(false);
-	
+PersonsDisplay.prototype.clear = function () {	
 	this.personsSearchForm.elements["role"][0].checked = true;
 	this.personsSearchForm.elements["role"][1].checked = false;
-	this.changePersonsSearchRole();
+	this.personsSearchForm.elements["userName"].value = "";
+	this.personsSearchForm.elements["givenName"].value = "";
+	this.personsSearchForm.elements["insertion"].value = "";
+	this.personsSearchForm.elements["familyName"].value = "";
 	
-	this.personsSearchForm.elements["userName"].value == "";
-	this.personsSearchForm.elements["givenName"].value == "";
-	this.personsSearchForm.elements["insertion"].value == "";
-	this.personsSearchForm.elements["familyName"].value == "";
+	this.resetSorting();	
+	this.personsSearchFormToggle(false);	
+	this.personsEditFormToggle(false);
+	this.changePersonsSearchRole();
 }
 
-PersonsDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', url );
+PersonsDisplay.prototype.setHelp = function(url) { 
+		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
 }
 
-PersonsDisplay.prototype.showPersons = function(json) {
+PersonsDisplay.prototype.showPersons = function(json) {  
 	var persons = json, personName;
 		
 	this.$personsTableBody.html("");
@@ -105,7 +129,7 @@ PersonsDisplay.prototype.showPersons = function(json) {
 	// No Results
 	if ($.isEmptyObject(persons)) {
 		$row = this.$personsRow.clone();
-		this.$personsTableBody.html('<tr colspan="4" class="empty"><td>Geen leerlingen gevonden.</td></tr>');
+		this.$personsTableBody.html('<tr colspan="4" class="empty"><td>Geen studenten gevonden.</td></tr>');
 		return;
 	}
 	
@@ -113,10 +137,10 @@ PersonsDisplay.prototype.showPersons = function(json) {
 	for (var id in persons) { 
 		$row = this.$personsRow.clone();		
 		$row.find("#personsTableId").val( id ).removeAttr("id");
-		$row.find("#personsTableUserName").html( persons[id].userName ).removeAttr("id");
-		$row.find("#personsTableGivenName").html( persons[id].givenName ).removeAttr("id");
-		$row.find("#personsTableInsertion").html( persons[id].insertion ).removeAttr("id");
-		$row.find("#personsTableFamilyName").html( persons[id].familyName ).removeAttr("id");
+		$row.find("#personsTableUserName").html( persons[id].userName ).attr('data-sortvalue', persons[id].userName).removeAttr("id");
+		$row.find("#personsTableGivenName").html( persons[id].givenName ).attr('data-sortvalue', persons[id].givenName).removeAttr("id");
+		$row.find("#personsTableInsertion").html( persons[id].insertion ).attr('data-sortvalue', persons[id].insertion).removeAttr("id");
+		$row.find("#personsTableFamilyName").html( persons[id].familyName ).attr('data-sortvalue', persons[id].familyName).removeAttr("id");
 		
 		
 		if (persons[id].singleSchool) $row.find("#personsTableEditDetails").addClass("active");
@@ -131,19 +155,19 @@ PersonsDisplay.prototype.showPersons = function(json) {
 		this.$personsTableBody.append($row);
 		i++;
 	}
-	
+
 	this.personsEditFormToggle(false);	
 	
 	this.filterPersonsList();	
+	
+	this.$personsEditForm.find(".sortButton.default").trigger('click');
 }
 
 PersonsDisplay.prototype.setEmptyTableMessage = function(json) {
-	this.$personsTableBody.html('<tr class="empty"><td>Geen personen gevonden. Doe een nieuwe zoekopdracht.</td></tr>');
-	
+	this.$personsTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');
 }
 PersonsDisplay.prototype.setLoadingTableMessage = function(json) {
-	this.$personsTableBody.html('<tr class="empty"><td>Personen worden geladen.</td></tr>');
-	
+	this.$personsTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
 }
 
 
@@ -153,15 +177,15 @@ PersonsDisplay.prototype.setLoadingTableMessage = function(json) {
  */
 
 PersonsDisplay.prototype.searchPersons = function() {
-	this.stateRole = this.personsSearchForm.elements["role"].value;
-	if (this.personsSearchForm.elements["role"].value == "L") app.getPresenterFactory().getPersonsPresenter().showStudentList();
-	if (this.personsSearchForm.elements["role"].value == "D") app.getPresenterFactory().getPersonsPresenter().showTeacherList();
-	
+	this.stateRole = this.personsSearchForm.elements["role"][0].checked ? "S" : "T";
+	if (this.stateRole == "S") app.getPresenterFactory().getPersonsPresenter().showStudentList();
+	if (this.stateRole == "T") app.getPresenterFactory().getPersonsPresenter().showTeacherList();
 }
 
 PersonsDisplay.prototype.editPerson = function(id) {
-	if (this.stateRole == "L") app.getPresenterFactory().getPersonsPresenter().editStudent(id);
-	if (this.stateRole == "D") app.getPresenterFactory().getPersonsPresenter().editTeacher(id);
+	this.stateRole = this.personsSearchForm.elements["role"][0].checked ? "S" : "T";
+	if (this.stateRole == "S") app.getPresenterFactory().getPersonsPresenter().editStudent(id);
+	if (this.stateRole == "T") app.getPresenterFactory().getPersonsPresenter().editTeacher(id);
 }
 
 
@@ -186,13 +210,14 @@ PersonsDisplay.prototype.submitPersonsSearchForm = function(event) {
 
 PersonsDisplay.prototype.changePersonsSearchRole = function(event) {
 	if (this.personsSearchForm.elements["role"].value != "") this.personsSearchFormToggle(true);
-	else this.personsSearchFormToggle(false);	
+	else this.personsSearchFormToggle(false);        
+        this.searchPersons();        
 }
 
 // helpers
 PersonsDisplay.prototype.personsSearchFormToggle = function(value) {
 	if (value) this.$personsSearchForm.find(':submit').prop('disabled','');
-	else this.$personsSearchForm.find(':submit').prop('disabled','disabled');
+	else this.$personsSearchForm.find(':submit').prop('disabled','disabled');       
 }
 
 /*
@@ -201,7 +226,11 @@ PersonsDisplay.prototype.personsSearchFormToggle = function(value) {
 
 PersonsDisplay.prototype.submitPersonsEditForm = function(event) {
 	event.preventDefault();	
-	this.editPerson(this.personsEditForm.elements["id"].value);
+	
+	for (var i = 0; i < this.personsEditForm.elements["id"].length; i++) 
+		if (this.personsEditForm.elements["id"][i].checked) break;
+	
+	this.editPerson(this.personsEditForm.elements["id"][i].value);
 }
 
 PersonsDisplay.prototype.clickPersonsRow = function(event) {

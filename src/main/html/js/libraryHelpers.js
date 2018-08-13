@@ -134,6 +134,14 @@ $(document).ready(function(){
 	});
 	
 	
+	$('table.hoverable').find('tr').hover(function() {
+		var isTouchDevice = ('ontouchstart' in window || 'onmsgesturechange' in window);
+		if (isTouchDevice) return;
+		$(this).siblings().removeClass('hover');
+		$(this).addClass("hover");
+	});
+	
+	
 	$(".tree li.hasSub a").click(function() { $(this).parent().toggleClass("open"); });
 	
 	

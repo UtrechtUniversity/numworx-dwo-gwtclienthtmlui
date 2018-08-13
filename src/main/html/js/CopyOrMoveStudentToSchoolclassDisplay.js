@@ -28,6 +28,8 @@ function CopyOrMoveStudentToSchoolclassDisplay() {
 	this.$classACopyButton = $(this.classACopyButton);
 	this.$classARow = this.$classAForm.find("tbody tr").detach();
 	this.$classATableBody = this.$classAForm.find("tbody");	
+	this.$classATableHead = this.$classAForm.find("thead");	
+	this.$classASelectAll = $("#copyOrMoveStudentToSchoolclassClassASelectAll");
 	
 	// Class B elements
 	this.$classBForm = $(this.classBForm);
@@ -35,12 +37,15 @@ function CopyOrMoveStudentToSchoolclassDisplay() {
 	this.$classBCopyButton = $(this.classBCopyButton);
 	this.$classBRow = this.$classBForm.find("tbody tr").detach();
 	this.$classBTableBody = this.$classBForm.find("tbody");	
+	this.$classBTableHead = this.$classBForm.find("thead");	
+	this.$classBSelectAll = $("#copyOrMoveStudentToSchoolclassClassBSelectAll");
 	
 	// Classes elements
 	this.$classesForm = $(this.classesForm);
 	this.$classesChooseButton = $(this.classesChooseButton);	
 	this.$classesRow = this.$classesForm.find("tbody tr").detach();
 	this.$classesTableBody = this.$classesForm.find("tbody");	
+	this.$classesTableHead = this.$classesForm.find("thead");	
 			
 	// Bind handlers
 	this.$classesForm.on('submit', $.proxy(this.submitClassesForm,this));	
@@ -51,15 +56,31 @@ function CopyOrMoveStudentToSchoolclassDisplay() {
 	this.$classBMoveButton.on('click', $.proxy(this.submitOrClickABFormOrButton,this));	
 	this.$classBCopyButton.on('click', $.proxy(this.submitOrClickABFormOrButton,this));	
 	
+	this.$classATableHead.find(".sortButton").click(Helpers.clickSortButton);
+	this.$classBTableHead.find(".sortButton").click(Helpers.clickSortButton);
+	this.$classesTableHead.find(".sortButton").click(Helpers.clickSortButton);
+	
+	this.$classASelectAll.on('click', $.proxy(this.clickClassASelectAll, this));
+	this.$classBSelectAll.on('click', $.proxy(this.clickClassBSelectAll, this));	
+	
 	// Init
 	this.$panel.hide();
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.show = function() {
+        this.localize();
 	this.$panel.show();
-	this.classAFormToggle(false);
-	this.classBFormToggle(false);
-	Helpers.stretchHeight( [ this.$classATableBody, this.$classBTableBody, this.$classesTableBody ]);
+	
+}
+
+CopyOrMoveStudentToSchoolclassDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
+
+CopyOrMoveStudentToSchoolclassDisplay.prototype.resetSorting = function() {
+	this.$classATableHead.find(".sortButton").removeClass("active");
+	this.$classBTableHead.find(".sortButton").removeClass("active");
+	this.$classesTableHead.find(".sortButton").removeClass("active");
 }
 
 /*
@@ -73,7 +94,7 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudents = function(json, $t
 	
 	// No Results
 	if ($.isEmptyObject(students)) {
-		$tableBody.html('<tr class="empty"><td>Geen leerlingen in deze klas</td></tr>');
+		$tableBody.html('<tr class="empty"><td>Geen studenten in deze klas</td></tr>');
 		return;
 	}
 	
@@ -81,8 +102,10 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudents = function(json, $t
 	var i = 1;
 	for (var id in students) { 
 		studentName = students[id].givenName + (students[id].insertion ? " "+students[id].insertion : "") + " " + students[id].familyName;
+		studentSortName = students[id].familyName + " " + students[id].givenName + (students[id].insertion ? " "+students[id].insertion : "");
+		
 		$row = $templateRow.clone();
-		$row.find(nameId).html( studentName ).removeAttr("id");
+		$row.find(nameId).html( studentName ).attr('data-sortvalue', studentSortName).removeAttr("id");
 		
 		
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
@@ -108,25 +131,27 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudents = function(json, $t
  */
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.clear = function () {
-	this.classAFormToggle(false);
-	this.classBFormToggle(false);
+	this.classAFormToggle();
+	this.classBFormToggle();
 	this.$classATableBody.html("");
 	this.$classBTableBody.html("");
 	this.$classAClassName.val("");
 	this.$classBClassName.val("");
+	this.resetSorting();
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.init = function () {
-	this.classAFormToggle(false);
-	this.classBFormToggle(false);
+	this.classAFormToggle();
+	this.classBFormToggle();
 	this.$classATableBody.html("");
 	this.$classBTableBody.html("");
 	this.$classAClassName.val("");
 	this.$classBClassName.val("");
-	Helpers.stretchHeight([ this.$addStudentTableBody ]);
+	app.mainDisplay.registerStretchables( [ this.$classATableBody, this.$classBTableBody, this.$classesTableBody ] );
+	this.resetSorting();
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', url );
+		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setSchoolClassA = function(schoolclass) {
@@ -138,37 +163,40 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.setSchoolClassB = function(schoo
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setEmptyTableMessageClasses = function() {
-	this.$classesTableBody.html('<tr class="empty"><td>Geen klassen gevonden.</td></tr>');
+	this.$classesTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setLoadingTableMessageClasses = function() {
-	this.$classesTableBody.html('<tr class="empty"><td>Klassen worden geladen.</td></tr>');
+	this.$classesTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setEmptyTableMessageA = function() {
-	this.$classATableBody.html('<tr class="empty"><td>Geen leerlingen gevonden.</td></tr>');
+	this.$classATableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	;
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setEmptyTableMessageB = function() {
-	this.$classBTableBody.html('<tr class="empty"><td>Geen leerlingen gevonden.</td></tr>');
+	this.$classBTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	;
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setLoadingTableMessageA = function() {
-	this.$classATableBody.html('<tr class="empty"><td>Leerlingen worden geladen.</td></tr>');
+	this.$classATableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setLoadingTableMessageB = function() {
-	this.$classBTableBody.html('<tr class="empty"><td>Leerlingen worden geladen.</td></tr>');
+	this.$classBTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudentsClassA = function(json) {
 	this.showStudents(json, this.$classATableBody, this.$classARow, "#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentName", this.changeSelectACheckbox);
-	this.classAFormToggle(false);
+	this.$classATableHead.find(".sortButton.default").trigger('click');
+	this.classAFormToggle();
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudentsClassB = function(json) {
 	this.showStudents(json, this.$classBTableBody, this.$classBRow, "#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentName", this.changeSelectBCheckbox);
 	this.classBSet = true;
-	this.classBFormToggle(false);
-	this.classAFormToggle(true); // checks only if selected
+	this.classBFormToggle();
+	this.classAFormToggle();
+	this.$classBTableHead.find(".sortButton.default").trigger('click'); 
+//	this.resetSorting();
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setClassList = function(schoolclasses) {		
@@ -182,7 +210,7 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.setClassList = function(schoolcl
 		$row = this.$classesRow.clone();
 		$row.prop('tabindex', i);
 		$row.find("#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelectId").val( id ).removeAttr("id");
-		$row.find("#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelectClassName").html( el.schoolClassName ).removeAttr("id");
+		$row.find("#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelectClassName").html( el.schoolClassName ).attr('data-sortvalue', el.schoolClassName).removeAttr("id");
 
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;
@@ -192,7 +220,9 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.setClassList = function(schoolcl
 		this.$classesTableBody.append($row);
 		i++;
 	}
-	this.classesFormToggle(false);
+	
+	this.$classesTableHead.find(".sortButton.default").trigger('click');
+	//this.classesFormToggle(false);
 }
 
 
@@ -224,16 +254,30 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.moveBtoA = function(list) {
  */
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.clickClassesRow = function(event) {
+//	console.log($(event.target).closest("tr"));
+	if ($(event.target).closest("tr").find("input").get(0).checked == true) return;
+	
 	Helpers.selectTableRow(event);
-	if (this.classesForm.elements["schoolclass"].value != "") this.classesFormToggle(true);
-	else this.classesFormToggle(false);	
+	if (this.classesForm.elements["schoolclass"].value != "") {
+		this.setClass(this.classesForm.elements["schoolclass"].value); // bypass submit
+		
+		//this.classesFormToggle(true);
+	} //else {
+	//	this.setEmptyTableMessageB();
+//		this.$classBClassName.val("");
+//		this.classBSet = false;
+//	}
+	//else this.classesFormToggle(false);	
+	
+	this.classAFormToggle();
+	this.classBFormToggle();
 }
 
-// helpers
-CopyOrMoveStudentToSchoolclassDisplay.prototype.classesFormToggle = function(value) {
-	if (value) this.$classesForm.find(':submit').prop('disabled','');
-	else this.$classesForm.find(':submit').prop('disabled','disabled');
-}
+// helpers - bypassed
+// CopyOrMoveStudentToSchoolclassDisplay.prototype.classesFormToggle = function(value) {
+// 	if (value) this.$classesForm.find(':submit').prop('disabled','');
+// 	else this.$classesForm.find(':submit').prop('disabled','disabled');
+// }
 
 /*
  * EVENT HANDLERS - class A or B
@@ -241,19 +285,78 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.classesFormToggle = function(val
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.changeSelectACheckbox = function(event) {
 	event.preventDefault();		
-	if (event.target.form.elements["students[]"].length > 0) this.classAFormToggle(true);
-	else this.classAFormToggle(false);
+	this.classAFormToggle();
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.changeSelectBCheckbox = function(event) {
 	event.preventDefault();		
-	if (event.target.form.elements["students[]"].length > 0) this.classBFormToggle(true);
-	else this.classBFormToggle(false);
+	this.classBFormToggle();	
 }
 
-CopyOrMoveStudentToSchoolclassDisplay.prototype.submitClassesForm = function(event) {
+CopyOrMoveStudentToSchoolclassDisplay.prototype.clickClassASelectAll = function(event) {
 	event.preventDefault();		
-	this.setClass(this.classesForm.elements["schoolclass"].value);
+	if (typeof this.classAForm.elements["students[]"] == 'undefined') return;	
+	
+	$el = $(event.target);
+	
+	if ($el.hasClass('active')) {
+		if (typeof this.classAForm.elements["students[]"].length == 'undefined') {
+			this.classAForm.elements["students[]"].checked = false;			
+		} else {
+			for (var i = 0; i < this.classAForm.elements["students[]"].length; i++) {
+				this.classAForm.elements["students[]"][i].checked = false;
+			}
+		}
+		$el.removeClass("active");
+	} else {
+		if (typeof this.classAForm.elements["students[]"].length == 'undefined') {
+			this.classAForm.elements["students[]"].checked = true;
+		} else {
+			for (var i = 0; i < this.classAForm.elements["students[]"].length; i++) {
+				this.classAForm.elements["students[]"][i].checked = true;
+			}
+		}
+		$el.addClass("active");
+	}
+	
+	this.classAFormToggle();
 }
+CopyOrMoveStudentToSchoolclassDisplay.prototype.clickClassBSelectAll = function(event) {
+	event.preventDefault();		
+	if (typeof this.classBForm.elements["students[]"] == 'undefined') return;	
+	
+	$el = $(event.target);
+	
+	if ($el.hasClass('active')) {
+		if (typeof this.classBForm.elements["students[]"].length == 'undefined') {
+			this.classBForm.elements["students[]"].checked = false;			
+		} else {
+			for (var i = 0; i < this.classBForm.elements["students[]"].length; i++) {
+				this.classBForm.elements["students[]"][i].checked = false;
+			}
+		}
+		$el.removeClass("active");
+	} else {
+		if (typeof this.classBForm.elements["students[]"].length == 'undefined') {
+			this.classBForm.elements["students[]"].checked = true;
+		} else {
+			for (var i = 0; i < this.classBForm.elements["students[]"].length; i++) {
+				this.classBForm.elements["students[]"][i].checked = true;
+			}
+		}
+		$el.addClass("active");
+	}	
+	
+	this.classBFormToggle();
+}
+
+
+
+
+// This thing is bypassed
+// CopyOrMoveStudentToSchoolclassDisplay.prototype.submitClassesForm = function(event) {
+// 	event.preventDefault();
+// 	this.setClass(this.classesForm.elements["schoolclass"].value);
+// }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.submitOrClickABFormOrButton = function(event) {
 	event.preventDefault();		
@@ -272,20 +375,44 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.getClassList = function(form) {
 }
 
 // helpers
-CopyOrMoveStudentToSchoolclassDisplay.prototype.classAFormToggle = function(value) {
-	var aChecked = false;
-	if (!this.classAForm.elements["students[]"]) return;
-	for (i = 0; i <  this.classAForm.elements["students[]"].length; i++) {
-		if (this.classAForm.elements["students[]"][i].checked) { 
-			aChecked = true 
-			break; 
+CopyOrMoveStudentToSchoolclassDisplay.prototype.classAFormToggle = function() {
+	
+	var studentChosen = false;
+	
+	if (typeof this.classAForm.elements["students[]"] == 'undefined') {
+		studentChosen = false;
+	} else if (typeof this.classAForm.elements["students[]"].length == 'undefined') {
+		studentChosen = this.classAForm.elements["students[]"].checked;
+	} else {
+		for (i = 0; i <  this.classAForm.elements["students[]"].length; i++) {
+			if (this.classAForm.elements["students[]"][i].checked) { 
+				studentChosen = true 
+				break; 
+			}
 		}
 	}
-	if (this.classBSet && aChecked && value) this.$classAForm.find(':submit, :button').prop('disabled','');
+	
+	if (this.classBSet && studentChosen) this.$classAForm.find(':submit, :button').prop('disabled','');
 	else this.$classAForm.find(':submit, :button').prop('disabled','disabled');
 }
-CopyOrMoveStudentToSchoolclassDisplay.prototype.classBFormToggle = function(value) {
-	if (value) this.$classBForm.find(':submit, :button').prop('disabled','');
+CopyOrMoveStudentToSchoolclassDisplay.prototype.classBFormToggle = function() {
+	
+	var studentChosen = false;
+	
+	if (typeof this.classBForm.elements["students[]"] == 'undefined') {
+		studentChosen = false;
+	} else if (typeof this.classBForm.elements["students[]"].length == 'undefined') {
+		studentChosen = this.classBForm.elements["students[]"].checked;
+	} else {
+		for (i = 0; i <  this.classBForm.elements["students[]"].length; i++) {
+			if (this.classBForm.elements["students[]"][i].checked) { 
+				studentChosen = true 
+				break; 
+			}
+		}
+	}
+	
+	if (this.classBSet && studentChosen) this.$classBForm.find(':submit, :button').prop('disabled','');
 	else this.$classBForm.find(':submit, :button').prop('disabled','disabled');
 }
 

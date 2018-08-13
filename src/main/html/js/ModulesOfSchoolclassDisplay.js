@@ -3,6 +3,7 @@ function ModulesOfSchoolclassDisplay() {
 	this.nodes = [];
 	this.selectedNodeId = "";
 	this.dateTimePicker = null;
+	this.$temporaryRow = null;
 	
 	// Forms 
 	this.selectForm = document.forms["modulesOfSchoolclassDisplaySelect"];
@@ -23,8 +24,9 @@ function ModulesOfSchoolclassDisplay() {
 	this.$settingsForm = $(this.settingsForm);	
 	this.$searchForm = $(this.searchForm);
 	
-	this.$settingsFormFrom = $(this.settingsForm.elements["from"]);
-	this.$settingsFormTo = $(this.settingsForm.elements["to"]);
+	this.$settingsFormFrom = $(this.settingsForm.elements["modulesOfSchoolclassDisplayValidityFrom"]);
+	this.$settingsFormTo = $(this.settingsForm.elements["modulesOfSchoolclassDisplayValidityTo"]);
+	this.$settingsFormLocked = $(this.settingsForm.elements["locked[]"]);
 	
 	this.$reloadButton = $(this.searchForm.elements["reload"]);
 	
@@ -34,13 +36,22 @@ function ModulesOfSchoolclassDisplay() {
 	this.$reloadButton.on('click', $.proxy(this.clickReload,this));
 	this.$settingsFormFrom.on('click', $.proxy(this.clickDateField, this));
 	this.$settingsFormTo.on('click', $.proxy(this.clickDateField, this));
+	//this.$settingsFormLocked.on('click', $.proxy(this.clickLockedField, this));
+	this.$settingsForm.find("input").on('keyup change', $.proxy(this.changeInputFieldSettingsForm,this));	
+	this.$searchForm.find("input").on('keyup change', $.proxy(this.changeInputFieldSearchForm,this));	
 	
 	// Init
 	this.$panel.hide();
 }
 
 ModulesOfSchoolclassDisplay.prototype.show = function() {
+       this.localize();
 	this.$panel.show();
+}
+
+
+ModulesOfSchoolclassDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
 }
 
 /*
@@ -58,7 +69,7 @@ ModulesOfSchoolclassDisplay.prototype.searchModule = function() {
 ModulesOfSchoolclassDisplay.prototype.iterateNodesForSearch = function(index, el) {
 	searchWord = this.searchForm.elements["name"].value;
 	
-	if ( el.innerHTML.toLowerCase() == searchWord.toLowerCase() ) {
+	if ( Helpers.searchCompare(el.innerHTML.toLowerCase(), searchWord.toLowerCase()) ){
 		$el = $(el);
 		$el.addClass("open");
 		if (this.nodes[$el.data("id")]) this.nodes[$el.data("id")].open = true;
@@ -71,7 +82,24 @@ ModulesOfSchoolclassDisplay.prototype.iterateNodesForSearch = function(index, el
 	}
 }
 
+ModulesOfSchoolclassDisplay.prototype.openTreeForId = function(id) {
+	$el = this.$tree.find("[data-id='"+id+"']");	
+	$el = $el.first();
+	$el.addClass("open");
+	
+	if (this.nodes[$el.data("id")]) this.nodes[$el.data("id")].open = true;
+
+	$el.parents().each( $.proxy( function(index, el) {
+		$el = $(el);
+		$el.addClass("open");
+		if (this.nodes[$el.data("id")]) this.nodes[$el.data("id")].open = true;
+	}, this));
+}
+
+
+
 ModulesOfSchoolclassDisplay.prototype.collapseTree = function() {
+	if (!this.$tree) return;
 	this.$tree.find("li").removeClass("open");
 	for (var id in this.nodes) {
 		this.nodes[id].open = false;
@@ -89,47 +117,89 @@ ModulesOfSchoolclassDisplay.prototype.updateTable = function() {
 	var i = 1;
 	for (var id in modules) { 
 		el = modules[id];
-		
 		if (el.active == true) {
-		
-			$row = this.$selectRow.clone();
-			$row.prop('tabindex', i);
-			$row.find("#modulesOfSchoolclassDisplaySelectId").val( id ).removeAttr("id");
-			$row.find("#modulesOfSchoolclassDisplaySelectName").html( el.course.name ).removeAttr("id");
-		
-			$row.find("input[type='checkbox'],input[type='radio']").each( function() {
-				this.value = id;
-			});
-		
-			$row.on('click keypress', $.proxy(this.clickSelectRow, this));
-		
-			this.$selectTableBody.append($row);
-			
-			if (id === this.selectedNodeId) $row.trigger('click');
-
-			i++;
+			this.addRowToTable(el, id, i, false, false); // select the added element with id === this.selectedNodeId in the 4th parameter)
 		}
+		i++;
 	}
 	
-	this.settingsFormToggle(false);
+	this.settingsFormAllFieldsToggle(false);
 	
 	return;
 }
+ModulesOfSchoolclassDisplay.prototype.addRowToTable = function(el, id, i, selected, newRow) {	
+		$row = this.$selectRow.clone();
+		$row.prop('tabindex', i);
+		$row.find("#modulesOfSchoolclassDisplaySelectId").val( id ).removeAttr("id");
+		$row.find("#modulesOfSchoolclassDisplaySelectName").html( el.course.name ).removeAttr("id");
+	
+		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
+			this.value = id;
+		});
+	
+		$row.on('click keypress', $.proxy(this.clickSelectRow, this));
+	
+		if (newRow) {
+			this.$selectTableBody.prepend($row);
+			$row.addClass("new");
+			//$row.find("input[type='checkbox'],input[type='radio']").prop('checked','checked');
+		} else {
+			this.$selectTableBody.append($row);
+		}
+		if (selected || newRow) $row.trigger( 'click' ); 
+		
+		return $row;
+}
+
+
 ModulesOfSchoolclassDisplay.prototype.setSettings = function(id) {
 	if (!this.nodes.hasOwnProperty(id)) return;
-	console.log(this.nodes[id]);
+
 	this.settingsForm.elements["key"].value = id;
-	this.settingsForm.elements["accessKey"].value = this.nodes[id].classCourse.accessKey ? this.nodes[id].classCourse.accessKey : "";
-	this.settingsForm.elements["from"].value = this.nodes[id].classCourse.notBefore ? this.nodes[id].classCourse.notBefore : "";
-	this.settingsForm.elements["to"].value = this.nodes[id].classCourse.notAfter ? this.nodes[id].classCourse.notAfter : "";
-	if (this.nodes[id].classCourse.courseType == "normal") {
-		this.settingsForm.elements["locked[]"][0].checked = "";
-		this.settingsForm.elements["locked[]"][1].checked = "checked";
-	} else  {
-		this.settingsForm.elements["locked[]"][0].checked = "checked";
-		this.settingsForm.elements["locked[]"][1].checked = "";
+	
+	if (this.nodes[id].classCourse) {
+		
+		this.settingsForm.elements["accessKey"].value = this.nodes[id].classCourse.accessKey ? this.nodes[id].classCourse.accessKey : "";
+		this.settingsForm.elements["from"].value = this.nodes[id].classCourse.notBefore ? this.nodes[id].classCourse.notBefore : "";
+		this.settingsForm.elements["to"].value = this.nodes[id].classCourse.notAfter ? this.nodes[id].classCourse.notAfter : "";
+		
+		if (this.nodes[id].classCourse.courseType == "normal") {
+			this.settingsForm.elements["locked[]"][0].checked = "";
+			this.settingsForm.elements["locked[]"][1].checked = "checked";
+			this.accessKeyToggle(false);
+		} else  {
+			this.settingsForm.elements["locked[]"][0].checked = "checked";
+			this.settingsForm.elements["locked[]"][1].checked = "";
+			this.accessKeyToggle(true);
+		}
 	}
 }
+
+ModulesOfSchoolclassDisplay.prototype.temporaryAddModule = function(id) {
+	this.removeTemporaryRow();
+	this.$temporaryRow = this.addRowToTable(this.nodes[id], id, 0, false, true);
+	
+	//this.$temporaryRow.trigger('click');
+	
+	// this.setSettings(id);
+		
+	// Go in edit settings mode
+	// this.openTreeForId(this.selectForm.elements["module"].value);
+	// this.setSettings(this.selectForm.elements["module"].value);
+	// this.selectedNodeId = this.selectForm.elements["module"].value;
+	// this.settingsFormAllFieldToggle(true);
+	// this.settingsFormToggle();
+}
+
+ModulesOfSchoolclassDisplay.prototype.removeTemporaryRow = function() {
+	if (this.$temporaryRow != null) {	
+		this.$temporaryRow.remove();
+		this.$temporaryRow = null;
+	}
+}
+
+
+
 
 
 /*
@@ -138,33 +208,40 @@ ModulesOfSchoolclassDisplay.prototype.setSettings = function(id) {
  */
 
 ModulesOfSchoolclassDisplay.prototype.init = function () {
-	Helpers.stretchHeight( [this.$treeWrapper, this.$selectTableBody] );
+	app.mainDisplay.registerStretchables( [this.$treeWrapper, this.$selectTableBody] );
+		
+	//Helpers.stretchHeight( [this.$treeWrapper, this.$selectTableBody] );
 	this.dateTimePicker  = new MaterialDatetimePicker({});
+	
+	this.settingsFormAllFieldToggle(false);
+	this.searchFormToggle();
+	this.collapseTree();
 }
 
 ModulesOfSchoolclassDisplay.prototype.clear = function () {
-	this.settingsForm.elements["key"] = "";
-	this.settingsForm.elements["accessKey"] = "";
-	this.settingsForm.elements["from"] = "";
-	this.settingsForm.elements["to"] = "";
-	this.settingsForm.elements["name"] = "";
+	this.searchForm.elements["name"].value = "";
+	this.settingsFormAllFieldToggle(false);
+	this.searchFormToggle();
+	this.selectedNodeId = null;
+	this.$temporaryRow = null;
+	this.collapseTree();
 }
 
 ModulesOfSchoolclassDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', url );
+		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
 }
 
 ModulesOfSchoolclassDisplay.prototype.setEmptyTableMessageModules = function () {
-	this.$treeWrapper.html('Geen beschikbare modules.');
+	this.$treeWrapper.html(app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' ));		
 }
 ModulesOfSchoolclassDisplay.prototype.setLoadingTableMessageModules = function () {
-	this.$treeWrapper.html('Beschikbare modules worden geladen.');
+	this.$treeWrapper.html(app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' ));	
 }
 ModulesOfSchoolclassDisplay.prototype.setEmptyTableMessageSelected = function () {
-	this.$selectTableBody.html('<tr class="empty"><td>Geen modules toegekend.</td></tr>');
+	this.$selectTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
 }
 ModulesOfSchoolclassDisplay.prototype.setLoadingTableMessageSelected = function () {
-	this.$selectTableBody.html('<tr class="empty"><td>Modules worden geladen.</td></tr>');
+	this.$selectTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
 }
 
 ModulesOfSchoolclassDisplay.prototype.setTree = function(json) {
@@ -185,8 +262,11 @@ ModulesOfSchoolclassDisplay.prototype.setTree = function(json) {
 }
 
 // Helper:
-ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, depth = 0, checkboxId = 0) {
+ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, depth, checkboxId) {
 	var result, subtree, liClass, aClass, checkboxId, checked, checkboxClass, checkboxDisabled;
+	
+	depth = typeof depth !== 'undefined' ? depth : 0;
+	checkboxId = typeof checkboxId !== 'undefined' ? checkboxId : 0;
 	
 	if (!tree) return; //sometimes it is undefined
 	
@@ -286,22 +366,33 @@ ModulesOfSchoolclassDisplay.prototype.detachItem = function(id) {
 
 ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
 
-	var typeString = this.settingsForm.elements["locked[]"][0].checked ? "assesment" : "normal";
+	var typeString = this.settingsForm.elements["modulesOfSchoolclassDisplayTypeLocked"].checked ? "assesment" : "normal";
 	
 	var from = this.settingsForm.elements["from"].value;
 	var to = this.settingsForm.elements["to"].value;
-	
-//	if (from) from = this.reformatDate( from );
-//	if (to) to = this.reformatDate( to );
-	
-	console.log(from);
-	console.log(to);
-		
-	app.getPresenterFactory().getModulesOfSchoolclassPresenter().setModuleSettings(  this.settingsForm.elements["key"].value,
+			
+	app.getPresenterFactory().getModulesOfSchoolclassPresenter().setModuleSettings(  this.selectedNodeId,
 																				typeString,
 																				from,
 																				to,
 																				this.settingsForm.elements["accessKey"].value);
+}
+
+ModulesOfSchoolclassDisplay.prototype.addModule = function() {
+	var typeString = this.settingsForm.elements["modulesOfSchoolclassDisplayTypeLocked"].checked ? "assesment" : "normal";
+	
+	var from = this.settingsForm.elements["from"].value;
+	var to = this.settingsForm.elements["to"].value;
+		
+	app.getPresenterFactory().getModulesOfSchoolclassPresenter().addModule(  	this.selectedNodeId,
+																				typeString,
+																				from,
+																				to,
+																				this.settingsForm.elements["accessKey"].value);
+		
+	this.$temporaryRow = null;
+	this.settingsFormAllFieldToggle(false);
+																			
 }
 
 ModulesOfSchoolclassDisplay.prototype.reformatDate = function(oldDate) {
@@ -320,23 +411,35 @@ ModulesOfSchoolclassDisplay.prototype.reformatDate = function(oldDate) {
 
 ModulesOfSchoolclassDisplay.prototype.toggleTreeCheckbox = function(event) {
 	if (event.target.checked) {
-		this.attachItem(event.target.value);
 		this.selectedNodeId = event.target.value;
+		
+		if (!this.nodes.hasOwnProperty( this.selectedNodeId )) return;
+
+		if ( this.nodes[this.selectedNodeId].classCourse &&  this.nodes[this.selectedNodeId].classCourse.viewState == "invisible" ) {
+			this.attachItem( this.selectedNodeId );			
+		} else {
+			this.$tree.find(".temporary input").prop('checked','');
+			
+			$(event.target).parent().addClass("temporary");
+			this.temporaryAddModule( this.selectedNodeId );
+		}	
+				
 	} else {
+		// If the item is selected, then disable settingsform
+		for (var i = 0; i < this.selectForm.elements["module"].length; i++) 
+			if (this.selectForm.elements["module"][i].checked) break;
+		if (event.target.value == this.selectForm.elements["module"][i].value) this.settingsFormAllFieldToggle(false);
 		this.detachItem(event.target.value);			
 	} 
 }
 
 ModulesOfSchoolclassDisplay.prototype.clickTreeNode = function(event) {
 	var $el = $(event.target).parent();
-	console.log($el);
 	if ($el.hasClass("open")) {
 		$el.removeClass("open");
-		//this.openNodes[$el.data("id")] = false;
 		this.nodes[$el.data("id")].open = false;
 	} else {
 		$el.addClass("open");
-		//this.openNodes[$el.data("id")] = true;
 		this.nodes[$el.data("id")].open = true;
 	}
 }
@@ -347,21 +450,47 @@ ModulesOfSchoolclassDisplay.prototype.clickTreeNode = function(event) {
  */
 
 ModulesOfSchoolclassDisplay.prototype.clickSelectRow = function(event) {
+	if (this.$temporaryRow != null && !$(event.target).hasClass("new")) return;
+	
 	Helpers.selectTableRow(event);
 	
-	if (this.selectForm.elements["module"].value) {
-		this.setSettings(this.selectForm.elements["module"].value);
-		this.selectedNodeId = this.selectForm.elements["module"].value;
-		this.settingsFormToggle(true);
+	// Remove other temporary row, if available	
+	//this.$tree.find(".temporary input").prop('checked','');
+	//	this.removeTemporaryRow();
+	
+	for (var i = 0; i < this.selectForm.elements["module"].length; i++) 
+		if (this.selectForm.elements["module"][i].checked) break;		
+			
+	if (this.selectForm.elements["module"][i].value != "") {		
+		// Go in edit settings mode
+		this.settingsFormAllFieldToggle(true);
+		this.settingsFormToggle();
+		this.changeInputFieldSettingsForm();
+		this.openTreeForId(this.selectForm.elements["module"][i].value);
+		this.setSettings(this.selectForm.elements["module"][i].value);
+		this.selectedNodeId = this.selectForm.elements["module"][i].value;
 	} else {
-		this.settingsFormToggle(false);
+		this.settingsFormAllFieldToggle(false);
 	}
 }
 
 // helpers
-ModulesOfSchoolclassDisplay.prototype.settingsFormToggle = function(value) {
-	if (value === true) this.$settingsForm.find('input').prop('disabled','');
-	else this.$settingsForm.find('input').prop('disabled','disabled');
+ModulesOfSchoolclassDisplay.prototype.settingsFormAllFieldToggle = function(value) {
+	if (value === true) {
+		
+		this.$settingsForm.find('input').prop('disabled','');
+	//	this.settingsForm.elements["from"].focus();
+	}
+	else {
+		this.settingsForm.elements["key"] = "";
+		this.settingsForm.elements["accessKey"].value = "";
+		this.settingsForm.elements["from"].value = "";
+		this.settingsForm.elements["to"].value = "";
+		this.settingsForm.elements["name"] = "";
+		this.settingsForm.elements["locked[]"][0].checked = "";
+		this.settingsForm.elements["locked[]"][1].checked = "checked";
+		this.$settingsForm.find('input').prop('disabled','disabled');
+	}
 }
 
 
@@ -371,7 +500,12 @@ ModulesOfSchoolclassDisplay.prototype.settingsFormToggle = function(value) {
 
 ModulesOfSchoolclassDisplay.prototype.submitSettings = function(event) {
 	event.preventDefault();	
-	this.setModuleSettings();
+	
+	if ( this.nodes[this.selectedNodeId].classCourse) { //&&  this.nodes[this.selectedNodeId].classCourse.viewState == "invisible" ) {
+		this.setModuleSettings();
+	} else {
+		this.addModule();
+	}
 }
 
 ModulesOfSchoolclassDisplay.prototype.clickDateField = function(event) {
@@ -379,6 +513,44 @@ ModulesOfSchoolclassDisplay.prototype.clickDateField = function(event) {
 	this.dateTimePicker.off('submit');
 	this.dateTimePicker.on('submit', function(d) { var el = event.target; el.value = d.format("YYYY-MM-DD HH:mm"); } );	
 	this.dateTimePicker.open();
+}
+
+ModulesOfSchoolclassDisplay.prototype.clickLockedField = function(event) {
+	//event.preventDefault();	
+	if (this.settingsForm.elements["locked[]"][0].checked) this.accessKeyToggle(true);
+	else this.accessKeyToggle(false);	
+}
+
+// ModulesOfSchoolclassDisplay.prototype.accessKeyToggle = function(value) {
+// 	if (value === true) {
+// 		this.settingsForm.elements["accessKey"].disabled = false;
+// 		this.settingsForm.elements["accessKey"].focus();
+// 	}
+// 	else this.settingsForm.elements["accessKey"].disabled = true;
+// }
+ 
+ 
+ModulesOfSchoolclassDisplay.prototype.changeInputFieldSettingsForm = function(event) {
+	this.settingsFormToggle();
+	this.accessKeyToggle();
+}
+
+ModulesOfSchoolclassDisplay.prototype.settingsFormToggle = function(value) {
+	if (this.requiredFieldsSettingsForm()) this.$settingsForm.find(':submit').prop('disabled','');
+	else this.$settingsForm.find(':submit').prop('disabled','disabled');
+}
+
+ModulesOfSchoolclassDisplay.prototype.requiredFieldsSettingsForm = function() {
+	// Required are: module selected and if access key yes, then an access key
+	if (typeof this.selectForm.elements["module"] == "undefined") return false;
+
+	return this.selectForm.elements["module"].value != "" 
+			&& this.settingsForm.elements["locked[]"][0].checked ? this.settingsForm.elements["accessKey"].value  != "" : true;
+}
+
+ModulesOfSchoolclassDisplay.prototype.accessKeyToggle = function(value) {
+	if (this.settingsForm.elements["locked[]"][0].checked) this.settingsForm.elements["accessKey"].disabled = false;
+	else this.settingsForm.elements["accessKey"].disabled = true;
 }
 
 
@@ -394,6 +566,17 @@ ModulesOfSchoolclassDisplay.prototype.submitSearch = function(event) {
 ModulesOfSchoolclassDisplay.prototype.clickReload = function(event) {
 	event.preventDefault();	
 	this.reloadTree();
+}
+
+ModulesOfSchoolclassDisplay.prototype.changeInputFieldSearchForm = function(event) {
+	this.searchFormToggle();
+}
+ModulesOfSchoolclassDisplay.prototype.searchFormToggle = function(value) {
+	if (this.requiredFieldsSearchForm()) this.$searchForm.find(':submit').prop('disabled','');
+	else this.$searchForm.find(':submit').prop('disabled','disabled');
+}
+ModulesOfSchoolclassDisplay.prototype.requiredFieldsSearchForm = function() {
+	return this.searchForm.elements["name"].value != "";
 }
 
 

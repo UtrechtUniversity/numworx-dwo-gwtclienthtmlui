@@ -10,10 +10,12 @@ function AddPersonDisplay() {
 	
 	this.$addPersonSchoolclassesRow = this.$addPersonForm.find("tbody tr").detach();
 	this.$addPersonSchoolclassesTableBody = this.$addPersonForm.find("tbody");
+	this.$addPersonSchoolclassesTableHead = this.$addPersonForm.find("thead");
 		
 	// Bind handlers
 	this.$addPersonForm.on('submit', $.proxy(this.submitAddPersonForm,this));	
 	this.$addPersonForm.find("input").on('change', $.proxy(this.changeInputField,this));	
+	this.$addPersonSchoolclassesTableHead.find(".sortButton").click(Helpers.clickSortButton);	
 	
 	// Init
 	this.$panel.hide();
@@ -21,10 +23,17 @@ function AddPersonDisplay() {
 }
 
 AddPersonDisplay.prototype.show = function() {
+    this.localize();
 	this.$panel.show();
-	Helpers.stretchHeight([ this.$addPersonSchoolclassesTableBody ]);
 }
 
+AddPersonDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
+
+AddPersonDisplay.prototype.resetSorting = function() {
+	this.$addPersonSchoolclassesTableHead.find(".sortButton").removeClass("active");
+}
 
 /*
  * GUI Functions
@@ -40,7 +49,8 @@ AddPersonDisplay.prototype.show = function() {
  */
 
 AddPersonDisplay.prototype.init = function () {
-	// do nothing
+	app.mainDisplay.registerStretchables( [ this.$addPersonSchoolclassesTableBody ] );
+	this.resetSorting();
 }
 
 AddPersonDisplay.prototype.clear = function () {
@@ -54,10 +64,11 @@ AddPersonDisplay.prototype.clear = function () {
 	this.addPersonForm.elements['email'].value = "";
 	this.addPersonForm.elements['password'].value = "";
 	this.updateSchoolLoginsViewFormSubmitToggle();
+	this.resetSorting();
 }
 
 AddPersonDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', url );
+		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
 }
 
 AddPersonDisplay.prototype.showSchoolClasses = function(json) {
@@ -70,7 +81,7 @@ AddPersonDisplay.prototype.showSchoolClasses = function(json) {
 		el = schoolclasses[id].schoolClass;
 		$row = this.$addPersonSchoolclassesRow.clone();
 		$row.prop('tabindex', i);
-		$row.find("#addPersonSchoolclassName").html( el.schoolClassName ).removeAttr("id");
+		$row.find("#addPersonSchoolclassName").html( el.schoolClassName ).attr('data-sortvalue', el.schoolClassName).removeAttr("id");
 	
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			
@@ -87,16 +98,17 @@ AddPersonDisplay.prototype.showSchoolClasses = function(json) {
 		this.$addPersonSchoolclassesTableBody.append($row);
 		i++;
 	}
+	this.$addPersonSchoolclassesTableHead.find(".sortButton.default").trigger('click');
 	this.updateSchoolLoginsViewFormSubmitToggle();
 	
 }
 
 
-AddPersonDisplay.prototype.setEmptyTableMessage = function (json) {
-	this.$addPersonSchoolclassesTableBody.html('<tr class="empty"><td>Geen klassen gevonden.</td></tr>');
+AddPersonDisplay.prototype.setEmptyTableMessage = function (json) {	
+	this.$addPersonSchoolclassesTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
 }
-AddPersonDisplay.prototype.setLoadingTableMessage = function (json) {
-	this.$addPersonSchoolclassesTableBody.html('<tr class="empty"><td>Klassen worden geladen.</td></tr>');
+AddPersonDisplay.prototype.setLoadingTableMessage = function (json) {	
+	this.$addPersonSchoolclassesTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
 }
 
 
@@ -106,8 +118,11 @@ AddPersonDisplay.prototype.setLoadingTableMessage = function (json) {
  */
 
 AddPersonDisplay.prototype.addPerson = function() {
+	for (var i = 0; i < this.addPersonForm.elements["schoolclass"].length; i++) 
+		if (this.addPersonForm.elements["schoolclass"][i].checked) break;
+	
 	app.getPresenterFactory().getAddStudentPresenter().submitSingleSchoolStudent( 
-		this.addPersonForm.elements['schoolclass'].value,
+		this.addPersonForm.elements['schoolclass'][i].value,
 		this.addPersonForm.elements['userName'].value,
 		this.addPersonForm.elements['givenName'].value,
 		this.addPersonForm.elements['insertion'].value,

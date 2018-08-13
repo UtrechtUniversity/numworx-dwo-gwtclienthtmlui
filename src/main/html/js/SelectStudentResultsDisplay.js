@@ -9,6 +9,7 @@ function SelectStudentResultsDisplay() {
 }
 
 SelectStudentResultsDisplay.prototype.show = function() {
+        this.localize();
 	this.$panel.show();
 	
 	Helpers.stretchIframeHeight( this.$iframe );
@@ -16,6 +17,10 @@ SelectStudentResultsDisplay.prototype.show = function() {
 	//$(window).on('resize', $.proxy(Helpers.resizeHelpSection, this));
 }
 
+
+SelectStudentResultsDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
 
 /*
  * VIEW FUNCTIONS
@@ -31,7 +36,7 @@ SelectStudentResultsDisplay.prototype.init = function (context) {
 }
 
 SelectStudentResultsDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', url );
+		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
 }
 
 

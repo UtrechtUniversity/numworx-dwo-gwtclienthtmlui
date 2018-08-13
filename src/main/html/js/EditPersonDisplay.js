@@ -19,11 +19,13 @@ function EditPersonDisplay() {
 	this.$removeButton = $(this.removeButton);
 	
 	this.$editPersonSchoolclassesRow = this.$editPersonSchoolclassesForm.find("tbody tr").detach();
+	this.$editPersonSchoolclassesTableHead = this.$editPersonSchoolclassesForm.find("thead");
 	this.$editPersonSchoolclassesTableBody = this.$editPersonSchoolclassesForm.find("tbody");
 	
 	// Bind handlers
 	this.$editPersonDetailsForm.on('submit', $.proxy(this.submitEditPersonDetails,this));	
-	this.$removeButton.on('click', $.proxy(this.clickRemoveButton,this));	
+	this.$removeButton.on('click', $.proxy(this.clickRemoveButton,this));
+	this.$editPersonSchoolclassesTableHead.find(".sortButton").click(Helpers.clickSortButton);	
 	
 	// Init
 	this.$panel.hide();
@@ -31,10 +33,19 @@ function EditPersonDisplay() {
 }
 
 EditPersonDisplay.prototype.show = function() {
+        this.localize();
 	this.$panel.show();
 	Helpers.stretchHeight([ this.$editPersonSchoolclassesTableBody ]);
 }
 
+
+EditPersonDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
+
+EditPersonDisplay.prototype.resetSorting = function() {
+	this.$editPersonSchoolclassesTableHead.find(".sortButton").removeClass("active");
+}
 
 /*
  * GUI Functions
@@ -100,12 +111,13 @@ EditPersonDisplay.prototype.clear = function () {
 	}
 	this.showSubmitButton();
 	this.hideRemoveButton();
+	this.resetSorting();
 }
 EditPersonDisplay.prototype.init = function () {
 	console.log("init!");
 }
 EditPersonDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', url );
+		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
 }
 
 EditPersonDisplay.prototype.setUser = function (role,json) {
@@ -118,7 +130,7 @@ EditPersonDisplay.prototype.setUser = function (role,json) {
 	this.editPersonDetailsForm.elements["familyName"].value = familyName;
 	this.editPersonDetailsForm.elements["givenName"].value = givenName;
 	this.editPersonDetailsForm.elements["insertion"].value = insertion;
-	this.editPersonDetailsForm.elements["role"].value = role == "TEACHER" ? "docent" : "leerling";
+	this.editPersonDetailsForm.elements["role"].value = role == "TEACHER" ? "docent" : "student";
 	
 	this.role = role;
 		
@@ -148,7 +160,7 @@ EditPersonDisplay.prototype.setSingleSchoolStudent = function (json) {
 	this.editPersonDetailsForm.elements["insertion"].value = insertion;
 	this.editPersonDetailsForm.elements["email"].value = email;
 	this.editPersonDetailsForm.elements["newPassword"].value = password;
-	this.editPersonDetailsForm.elements["role"].value = "leerling";
+	this.editPersonDetailsForm.elements["role"].value = "student";
 	
 	this.role = "STUDENT";
 	
@@ -166,7 +178,7 @@ EditPersonDisplay.prototype.setSchoolClasses = function (json) {
 		el = schoolclasses[id].schoolClass;
 		$row = this.$editPersonSchoolclassesRow.clone();
 		$row.prop('tabindex', i);
-		$row.find("#editPersonSchoolclassName").html( el.schoolClassName ).removeAttr("id");
+		$row.find("#editPersonSchoolclassName").html( el.schoolClassName ).attr('data-sortvalue', el.schoolClassName).removeAttr("id");
 		
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;
@@ -180,17 +192,19 @@ EditPersonDisplay.prototype.setSchoolClasses = function (json) {
 		$row.find("input[name='active[]']").on('change', $.proxy(this.changeActiveCheckbox,this));
 		this.$editPersonSchoolclassesTableBody.append($row);
 		
-		if (schoolclasses[id].tag == true) $row.find("input[type='checkbox'],input[type='radio']").attr("checked", "checked");
+		if (schoolclasses[id].tag == true) $row.find("input[type='checkbox'],input[type='radio']").prop("checked", "checked");
 		
 		i++;
 	}
+	
+	this.$editPersonSchoolclassesTableHead.find(".sortButton.default").trigger('click');
 }
 
 EditPersonDisplay.prototype.setEmptyTableMessage = function (json) {
-	this.$editPersonSchoolclassesTableBody.html('<tr class="empty"><td>Geen klassen gevonden.</td></tr>');
+	this.$editPersonSchoolclassesTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
 }
-EditPersonDisplay.prototype.setLoadingTableMessage = function (json) {
-	this.$editPersonSchoolclassesTableBody.html('<tr class="empty"><td>Klassen worden geladen.</td></tr>');
+EditPersonDisplay.prototype.setLoadingTableMessage = function (json) {	
+	this.$editPersonSchoolclassesTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
 }
 
 

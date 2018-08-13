@@ -14,8 +14,11 @@ Tree, its wrapper and icons
 	border: $borderThickness $primary solid;
 	@include border-radius($defaultRadius);
 	max-height: 80%;
-	overflow: scroll;
+	overflow-x: hidden;
+	overflow-y: auto;
 	padding: $gutter * 1px;
+	
+	-ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
 ul.tree {
@@ -24,7 +27,7 @@ ul.tree {
 	list-style-type: none;
 	
 	li {
-		border-left: 1px $shade11 solid;
+		border-left: 1px $shade21 solid;
 		padding-left: $gutter * 1px;
 		position: relative;
 		white-space: nowrap;
@@ -103,7 +106,7 @@ ul.tree {
 			
 			width: 10px;
 			&.previouslyChecked {
-				background-color: $shade12;
+				background-color: $shade22;
 			}
 			&.checked {
 				background-color: $primary;

@@ -36,13 +36,14 @@ $colWidthLibraryPage : 117; //px
 
 $borderThickness : 2px;
 $borderThicknessResult : 5px;
+$borderThicknessOption: 4px;
 
 /*
  * MARGINS & PADDINGS
  */
 
 $elementMarginBottom : 10px;
-$rowMarginBottom : 30px;
+$rowMarginBottom : 16px;
 
 $panelSectionPaddingTop: 30px;
 
@@ -62,19 +63,22 @@ $white: #ffffff;
 $primaryLight: #7297c7; // 13
 $primary: #1b75bb; // 14
 $primaryDark: #314770; // 15
+$primaryWithOverlay: #03223c; // 4 + transBlack
 
-$shade1: #e4f2fb; //10
-$shade1RGBA0: rgba(228,242,251,0); 
-$shade1RGBA1: rgba(228,242,251,1); 
-$shade2: #d2e5f5; //11
-$shade2RGBA0: rgba(210,229,245,0); 
-$shade2RGBA1: rgba(210,229,245,1); 
-$shade3: #aac1dc; //12
-$shade4: #8ebee5; //12-2
-$shade10: #eff1f3; // 20
-$shade11: #dde0e3; // 20
-$shade12: #a8abb1; // 20
-$shade13: #798291; // 20
+$shade10: #e4f2fb; //10
+$shade10RGBA0: rgba(228,242,251,0); 
+$shade10RGBA1: rgba(228,242,251,1); 
+$shade11: #d2e5f5; //11
+$shade11RGBA0: rgba(210,229,245,0); 
+$shade11RGBA1: rgba(210,229,245,1); 
+$shade12: #aac1dc; //12
+$shade122: #8ebee5; //12-2
+$shade20: #eff1f3; // 20
+$shade20RGBA0: rgba(239,241,243,0); 
+$shade20RGBA1: rgba(239,241,243,1); 
+$shade21: #dde0e3; // 21
+$shade22: #a8abb1; // 22
+$shade23: #798291; // 23
 
 $scoreIndicator1: #009c4f;
 $scoreIndicator2: #fdcf2c;
@@ -86,6 +90,8 @@ $scoreIndicator4: #e72623;
 $line1: #dadbdd;
 
 $danger: #ff0000; // red
+$dangerLight: #fcb7b7;
+
 $ok: #00FF00; // green
 
 $transWhite: rgba(255,255,255,0.8);

@@ -20,6 +20,7 @@ function AccountDisplay() {
 	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
 	this.$schoolLoginsRow = $(this.updateSchoolLoginsViewForm).find("tbody tr").detach();
 	this.$schoolLoginsTableBody = $(this.updateSchoolLoginsViewForm).find("tbody");
+	this.$schoolLoginsTableHead = $(this.updateSchoolLoginsViewForm).find("thead");
 	
 	this.$updateUserForm = $(this.updateUserForm);
 	this.$updateSchoolLoginsViewForm = $(this.updateSchoolLoginsViewForm);
@@ -31,7 +32,8 @@ function AccountDisplay() {
 	this.$addSchoolLoginForm.on('submit', $.proxy(this.submitSchoolLoginsViewForm,this));
 	$(this.updateUserForm.elements["currentPassword"]).on('keypress', $.proxy(this.changeCurrentPasswordInput,this));
 	this.$addSchoolLoginForm.find("input:radio").on('change', $.proxy(this.addSchoolLoginFormToggle,this));
-	
+	this.$schoolLoginsTableHead.find(".sortButton").click(Helpers.clickSortButton);
+        
 	// Init
 	this.$panel.hide();
 	this.addSchoolLoginFormToggle();
@@ -46,6 +48,10 @@ AccountDisplay.prototype.localize = function() {
 	this.$panel.find("[data-translate]").each( Helpers.translate );
 }
 
+AccountDisplay.prototype.resetSorting = function() {
+	this.$schoolLoginsTableHead.find(".sortButton").removeClass("active");
+}
+
 
 /*
  * VIEW FUNCTIONS
@@ -53,7 +59,8 @@ AccountDisplay.prototype.localize = function() {
  */
 
 AccountDisplay.prototype.init = function (json) {
-	Helpers.stretchHeight( [ this.$schoolLoginsTableBody ] )
+	app.mainDisplay.registerStretchables( [ this.$schoolLoginsTableBody ] );
+	//Helpers.stretchHeight( [ this.$schoolLoginsTableBody ] )
 }
 
 AccountDisplay.prototype.clear = function () {
@@ -65,11 +72,13 @@ AccountDisplay.prototype.clear = function () {
 	this.updateUserForm.elements["newPassword"].value = "";
 	this.updateUserForm.elements["newPasswordAgain"].value = "";
 	
+	this.resetSorting();
+	
 	this.clearAddSchoolLogin();
 }
 
 AccountDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', url );
+		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
 }
 
 AccountDisplay.prototype.updateUserView = function(json) {
@@ -99,8 +108,9 @@ AccountDisplay.prototype.updateSchoolLoginsView = function(json) {
 		for (i = 0; i < this.schoolsRolesAndClassesList.length; i++) {
 			el = this.schoolsRolesAndClassesList[i];
 			$row = this.$schoolLoginsRow.clone();
-			$row.find("#updateSchoolLoginsViewSchool").html( el.school.schoolName ).removeAttr("id");
-			$row.find("#updateSchoolLoginsViewRole").html( el.role.roleName ).removeAttr("id");	
+                        
+			$row.find("#updateSchoolLoginsViewSchool").html( el.school.schoolName ).attr('data-sortvalue', el.school.schoolName).removeAttr("id");
+			$row.find("#updateSchoolLoginsViewRole").html( app.getTranslator().translate(el.role.roleName)).attr('data-sortvalue', app.getTranslator().translate(el.role.roleName)).removeAttr("id");	
 			
 			$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 				this.value = el.hasRole.id.idString;
@@ -115,7 +125,7 @@ AccountDisplay.prototype.updateSchoolLoginsView = function(json) {
 			// Set active 'active' checkbox and change style of the others
 			if (activeSchoolId.localeCompare(el.school.id.idString) == 0
 				&& activeRoleId.localeCompare(el.role.id.idString) == 0) {
-				$row.find("input[name='active[]']").prop('checked','checked').prop('disabled','disabled').parent().addClass('ok');;
+				$row.find("input[name='active[]']").prop('checked','checked').prop('disabled','disabled').parent();
 			} 
 			
 			$row.find("input[name='active[]']").on('change', $.proxy(this.changeActiveCheckbox,this));
@@ -124,6 +134,7 @@ AccountDisplay.prototype.updateSchoolLoginsView = function(json) {
 			this.$schoolLoginsTableBody.append($row);	
 		}
 		
+		this.$schoolLoginsTableHead.find(".sortButton.default").trigger('click');
 		this.updateSchoolLoginsViewFormSubmitToggle();
 	}
 }
@@ -134,6 +145,14 @@ AccountDisplay.prototype.clearAddSchoolLogin = function() {
 	this.addSchoolLoginForm.elements["role"][2].checked = false;
 	this.addSchoolLoginForm.elements["schoolCode"].value = "";
 	this.addSchoolLoginForm.elements["schoolLogin"].value = "";
+}
+
+AccountDisplay.prototype.setEmptyTableMessage = function() {
+	this.$schoolLoginsTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
+}
+
+AccountDisplay.prototype.setLoadingTableMessage = function() {
+	this.$schoolLoginsTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');		
 }
 
 
@@ -215,6 +234,7 @@ AccountDisplay.prototype.changeActiveCheckbox = function(event) {
 		
 		// Set current checked
 		event.target.checked = "checked";
+		$(event.target).parent().addClass('temporary');
 	} else {
 		event.target.checked = "";
 	}

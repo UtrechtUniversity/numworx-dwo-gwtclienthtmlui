@@ -20,6 +20,10 @@
 
 * icoontjes
 
+RESULTS 
+* sequence gebruiken
+* kolom header bij pages niet clickable
+
 tabindex? keyboard selection?
 
 # DONE
@@ -40,3 +44,12 @@ tabindex? keyboard selection?
 <meta
 name="apple-mobile-web-app-capable"
 content="yes">
+
+
+Bij schoolclasses wordt 'clear' niet aangeroepen / of is die functie niet nodig, want init wordt steeds aangeroepen.
+Idem voor editschoolclasses
+
+Bij CopyOrMoveStudentToSchoolclassDisplay wordt init EN clear niet aangeroepen.
+
+Bij results wordt 'init' niet aangeroepen.
+Bij persons wordt 'init' niet aangeroepen.

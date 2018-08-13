@@ -11,6 +11,7 @@ function MainApp() {
 	this.mainDisplay = new MainDisplay();
 	window.jsMainDisplay = this.mainDisplay; // make it available for API
 	
+	
 	this.presenterFactory = null;
 	this.translator = null;
 	
@@ -29,7 +30,11 @@ MainApp.prototype.getTranslator = function() {
 	return this.translator;
 }
 
-$(document).ready(function(){ 
+//$(document).ready(function(){ 
+//	window.app = new MainApp();	
+//});
+
+window.jsInitMainApp = function() {
 	window.app = new MainApp();	
-});
+}
 	

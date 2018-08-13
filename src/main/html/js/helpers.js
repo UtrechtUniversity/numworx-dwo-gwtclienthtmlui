@@ -25,7 +25,6 @@ Helpers.selectTableRow = function(event) {
 	}
 }
 
-
 Helpers.resizeHelpSection = function(event) {
 	var $help = $(".help");
 	if ($(window).outerWidth() > (1366)) {
@@ -40,33 +39,48 @@ Helpers.resizeHelpSection = function(event) {
 		if ($(window).outerWidth() > (1366 + 158 + 7 * 79)) $help.addClass('col-10'); else $help.removeClass('col-10');
 		if ($(window).outerWidth() > (1366 + 158 + 8 * 79)) $help.addClass('col-11'); else $help.removeClass('col-11');		
 	}		
-	else $help.removeClass('active desktop col-3 col-4 col-5 col-6');
+	else {
+		$help.removeClass('active desktop col-3 col-4 col-5 col-6');
+	}
 }
 
 Helpers.toggleHelpSection = function() {
-	$(this).parent().toggleClass('active'); 
-	$(this).parent().css('z-index','9999');
-	//$(this).parent().find("iframe").get(0).contentWindow.location.reload();
+	if (!$(this).parent().hasClass('desktop')) {
+		$(this).closest('.help').toggleClass('active'); 
+		
+		//$(this).closest('.help').css('z-index','9999');
+		if ($(this).closest('.help').hasClass('active')) {
+			app.mainDisplay.openHelp();
+		} else {
+			app.mainDisplay.closeHelp();
+		}  
+		//$(this).parent().find("iframe").get(0).contentWindow.location.reload();
+	}
 }
 
 Helpers.stretchHeight = function(elements) {
-	//console.log("STRETCH!");
 	if (elements.length < 1) return;
-	
 	subpanel = elements[0].closest('.subpanel');
 	subpanelHeight = subpanel.outerHeight();
 	bodyHeight = $(document.body).outerHeight();
 	freeSpace = bodyHeight - subpanelHeight;
-	
-	//console.log(bodyHeight);
-	//console.log(subpanelHeight);
-	//console.log(freeSpace);
-	
+		
 	for(i=0; i<elements.length; i++) {
 		newHeight = elements[i].height() + freeSpace;
 		elements[i].height(newHeight+"px");
 	}
 }
+
+// Helpers.strechHeightResize = function(event) {
+// 	subpanel = elements[0].closest('.subpanel');
+// 	subpanelHeight = subpanel.outerHeight();
+// 	bodyHeight = $(document.body).outerHeight();
+// 	freeSpace = bodyHeight - subpanelHeight;
+//
+// 	var $el = $(event.target);
+// 	newHeight = $el.height() + freeSpace;
+// 	$el.height(newHeight+"px");
+// }
 
 Helpers.stretchIframeHeight = function(iframe) {
 	console.log("STRETCH IFRAME!");
@@ -108,7 +122,7 @@ Helpers.setResultIndicatorColor = function ($el) {
 
 Helpers.tableSorterBubbleSort = function(tbody, index, attr, type, asc) { //bubblesort
 	// In Vanilla JS for performance	
-	console.log("sort");
+	console.log("bubblesort");
 	
 	switching = true;
 	j = 0;
@@ -131,16 +145,14 @@ Helpers.tableSorterBubbleSort = function(tbody, index, attr, type, asc) { //bubb
 			
 			if (row1.children[index].firstChild && row1.children[index].firstChild.dataset) val1 = row1.children[index].firstChild.dataset[attr]; 
 			if (row2.children[index].firstChild && row2.children[index].firstChild.dataset) val2 = row2.children[index].firstChild.dataset[attr];
-									
-			if (type == "string") {
-				if ( (!asc && val2.localeCompare(val1) < 0) || (asc && val2.localeCompare(val1) > 0) ) { shouldSwitch = true; break; }
+												
+			if (val1 != 0 && val2 != 0 && type == "string") {
+				if ( (asc && val2.localeCompare(val1) < 0) || (!asc && val2.localeCompare(val1) > 0) ) { shouldSwitch = true; break; }
 			} else {
-				if ( (!asc && val2 < val1) || (asc && val2 > val1) ) { shouldSwitch = true; break; }
-			}
-						
+				if ( (asc && val2 < val1) || (!asc && val2 > val1) ) { shouldSwitch = true; break; }
+			}						
 		}		
 		if (shouldSwitch == true) {	
-			console.log("switch");		
 			if (asc) tr[i].parentNode.insertBefore(tr[i + 1], tr[i]);
 			else {
 				(tr[i].parentNode).insertBefore(tr[i], tr[i+1].nextSibling);
@@ -151,11 +163,71 @@ Helpers.tableSorterBubbleSort = function(tbody, index, attr, type, asc) { //bubb
 	return;
 }
 
+Helpers.tableSorterMergeSort = function($tbody, index, attr, type, asc) {	
+	var tr = $tbody.find("tr").detach();
+		
+	// make an array of the nodelist
+	var arr = [];
+	for(var i = tr.length; i--; arr.unshift(tr[i]));
+	
+	arr = Helpers.tableSorterMergeSortRecursive(arr, index, attr, type, asc);
+		
+	$tbody.append(arr);//.append(tr);
+} 
+
+Helpers.tableSorterMergeSortRecursive = function(arr, index, attr, type, asc) {
+	if (arr.length === 1) return arr;
+	
+    var middle = Math.floor(arr.length / 2) // get the middle item of the array rounded down
+    var left = arr.slice(0, middle) // items on the left side
+    var right = arr.slice(middle) // items on the right side
+	
+	return Helpers.tableSorterMergeSortMerge( 
+		Helpers.tableSorterMergeSortRecursive(left, index, attr, type, asc),
+		Helpers.tableSorterMergeSortRecursive(right, index, attr, type, asc), index, attr, type, asc );
+}
+Helpers.tableSorterMergeSortMerge = function(left, right, index, attr, type, asc) {
+    var result = [];
+    var indexLeft = 0;
+    var indexRight = 0;
+	var val1 = 0;
+	var val2 = 0;
+
+    while (indexLeft < left.length && indexRight < right.length) {
+		
+		if (left[indexLeft].children[index].children[0] && left[indexLeft].children[index].children[0].dataset) val1 = left[indexLeft].children[index].children[0].dataset[attr]; 
+		if (right[indexRight].children[index].children[0] && right[indexRight].children[index].children[0].dataset) val2 = right[indexRight].children[index].children[0].dataset[attr];
+		
+		if (val1 != 0 && val2 != 0 && type == "string") { // string sort
+			
+			if ( (!asc && val2.localeCompare(val1) < 0) || (asc && val2.localeCompare(val1) > 0) ) { 
+		        result.push(left[indexLeft])
+		        indexLeft++
+			} else {
+		        result.push(right[indexRight])
+		        indexRight++
+			}
+			
+		} else { // integer sort
+			
+			if ( (!asc && val2 < val1) || (asc && val2 > val1) ) { 	
+			    result.push(left[indexLeft])
+			    indexLeft++				
+			} else {
+		        result.push(right[indexRight])
+		        indexRight++
+			}
+		}
+    }
+
+    return result.concat(left.slice(indexLeft)).concat(right.slice(indexRight));
+}
+
+
 Helpers.clickSortButton = function() {
-	console.log("click sort");
 	$this = $(this);
 	$table = $this.parents('table');
-	tbody = $table.find('tbody').get(0);
+	$tbody = $table.find('tbody');//.get(0);
 	index = $this.parent().index();
 	
 	asc = true;
@@ -164,13 +236,15 @@ Helpers.clickSortButton = function() {
 	type = "int";
 	if ($this.data("type") == "string") type = "string";
 	
-	//attr = "score";
-	//if ($this.data("attr")) attr = $this.data("attr");
 	attr = "sortvalue";
 		
-	Helpers.tableSorterBubbleSort(tbody, index, attr, type, asc);	
+	//var t0 = performance.now();
+	//Helpers.tableSorterBubbleSort(tbody, index, attr, type, asc);	
+	Helpers.tableSorterMergeSort($tbody, index, attr, type, asc);	
+	//var t1 = performance.now();
+	//console.log("Call took " + (t1 - t0) + " milliseconds.")
 	
-	$('.sortButton').removeClass("active");
+	$this.closest("table").find('.sortButton').removeClass("active");
 	$this.addClass("active");	
 }
 
@@ -186,4 +260,36 @@ Helpers.translate = function(index, value) {
 		$el.val( translation );
 	}
 }
+
+Helpers.getIndexedSortedArray = function(associativeArray) {
+	var indexedArray = [];
+	for (var id in associativeArray) {
+		associativeArray[id].id = id;
+		indexedArray.push(associativeArray[id]);
+	}
+	indexedArray.sort( Helpers.sortIndexedArrayOnSequenceNr );
+	
+	return indexedArray;
+}
+
+Helpers.sortIndexedArrayOnSequenceNr = function(a, b) {
+	return parseInt(a.sequence) - parseInt(b.sequence);
+}
+
+Helpers.addClassIfOverflown = function(index, el) {
+	console.log(el.scrollWidth);
+	console.log(el.clientWidth);
+	if (el.scrollWidth > (el.clientWidth + 10)) {
+		$(el).addClass("overflown");
+	}	
+}
+
+Helpers.searchCompare = function( val1, val2 ) {
+	//if (val1 == "" || val2 == "") return true;
+	
+	regE = new RegExp( val2 , 'i' );
+	return val1.search(regE) != -1;
+}
+
+
 

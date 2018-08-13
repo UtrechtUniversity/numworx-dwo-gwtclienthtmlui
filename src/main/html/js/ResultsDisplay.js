@@ -4,7 +4,7 @@ function ResultsDisplay() {
 	this.resultState.studentsTree = null;
 	this.resultState.showOnlyClosedModules = false;
 	this.resultState.activeSchoolClass = null;
-	this.resultState.activeCourses = false;
+	this.resultState.activeCourses = [];
 	
 	// Forms 
 	this.chooseClassModuleForm = document.forms["chooseClassAndModules"];
@@ -16,22 +16,44 @@ function ResultsDisplay() {
 	this.$chooseClassModuleForm = $(this.chooseClassModuleForm);	
 	
 	this.$chooseClassRow = this.$chooseClassModuleForm.find("#resultsDisplayChooseClass tbody tr").detach();
-	this.$chooseClassTableBody = this.$chooseClassModuleForm.find("#resultsDisplayChooseClass tbody");
+	this.$chooseClassTableHead = this.$chooseClassModuleForm.find("#resultsDisplayChooseClass thead");
+	this.$chooseClassTableBody = this.$chooseClassModuleForm.find("#resultsDisplayChooseClass tbody");	
 	
 	this.$chooseModulesRow = this.$chooseClassModuleForm.find("#resultsDisplayChooseModules tbody tr").detach();
+	this.$chooseModulesTableHead = this.$chooseClassModuleForm.find("#resultsDisplayChooseModules thead");
 	this.$chooseModulesTableBody = this.$chooseClassModuleForm.find("#resultsDisplayChooseModules tbody");
-		
+	
+	this.$selectAllModules = $("#resultsDisplayChooseModulesSelectAll");
+	
+			
 	// Bind handlers
 	this.$chooseClassModuleForm.on('submit', $.proxy(this.submitChooseClassModuleForm,this));
+	this.$chooseClassTableHead.find(".sortButton").click(Helpers.clickSortButton);
+	this.$chooseModulesTableHead.find(".sortButton").click(Helpers.clickSortButton);
+	this.$selectAllModules.on('click', $.proxy(this.clickSelectAllModules,this));
+	
 	
 	// Init
 	this.$panel.hide();
 }
 
 ResultsDisplay.prototype.show = function() {
+    this.localize();
 	this.$panel.show();
-	this.chooseClassModuleFormToggle();
-	Helpers.stretchHeight( [ this.$chooseClassTableBody, this.$chooseModulesTableBody  ] )
+	this.chooseClassModuleFormToggle();	
+	
+	//app.mainDisplay.registerStretchables( [ this.$chooseClassTableBody, this.$chooseModulesTableBody  ] );	
+	//Helpers.stretchHeight( [ this.$chooseClassTableBody, this.$chooseModulesTableBody  ] )
+}
+
+
+ResultsDisplay.prototype.localize = function() {
+	this.$panel.find("[data-translate]").each( Helpers.translate );
+}
+
+ResultsDisplay.prototype.resetSorting = function() {
+	this.$chooseClassTableHead.find(".sortButton").removeClass("active");
+	this.$chooseModulesTableHead.find(".sortButton").removeClass("active");
 }
 
 /*
@@ -45,7 +67,7 @@ ResultsDisplay.prototype.setChooseClassTable = function() {
 	
 	for (var id in this.resultState.resultsTree.children) {
 		$row = this.$chooseClassRow.clone();
-		$row.find("#chooseClassAndModulesClassname").html( this.resultState.resultsTree.children[id].label ).removeAttr("id");
+		$row.find("#chooseClassAndModulesClassname").html( this.resultState.resultsTree.children[id].label ).attr('data-sortvalue', this.resultState.resultsTree.children[id].label).removeAttr("id");
 		
 		$row.find("input[type='checkbox'],input[type='radio']").each( function(index, el) {
 			el.value = id;
@@ -61,9 +83,11 @@ ResultsDisplay.prototype.setChooseClassTable = function() {
 		
 		this.$chooseClassTableBody.append($row);
 		i++;
-	}	
+	}
 	
-	this.$chooseModulesTableBody.html("");
+	this.$chooseClassTableHead.find(".sortButton.default").trigger('click');	
+	
+	this.$chooseModulesTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_NOSELECTEDCLASS' )+'</td></tr>');	
 }
 
 ResultsDisplay.prototype.setChooseModulesTable = function() {	
@@ -71,19 +95,28 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 	
 	this.$chooseModulesTableBody.html("");
 	
+	if (this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children == undefined) {
+		this.$chooseModulesTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYMODULES' )+'</td></tr>');	
+		return;
+	}
+	
+	sortedSchoolClassChildren = Helpers.getIndexedSortedArray(this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children);
+	
+	for (var n = 0; n < sortedSchoolClassChildren.length; n++) {
 
-	for (var id in this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children) { // loop over modules
-		course = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[id];
+	//for (var id in this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children) { // loop over modules
+		//course = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[id];
+		course = sortedSchoolClassChildren[n];
 		
 		if (this.resultState.showOnlyClosedModules == true && course.viewState != "invisible") continue;
 		if (this.resultState.showOnlyClosedModules == false && course.viewState != "studentsAndTeachers") continue;
 		
 		$row = this.$chooseModulesRow.clone();
 	
-		$row.find("#chooseClassAndModulesModuleName").html( course.label ).removeAttr("id");
+		$row.find("#chooseClassAndModulesModuleName").html( course.label ).attr('data-sortvalue', course.label).removeAttr("id");
 	
 		$row.find("input[type='checkbox'],input[type='radio']").each( function(index, el) {
-			el.value = id;
+			el.value = sortedSchoolClassChildren[n].id;
 		
 			// Change ID and label for-attributes
 			this.id = this.id + i;				
@@ -97,6 +130,9 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 		i++;
 	}
 	
+	this.$selectAllModules.children().removeClass("active");
+	this.$chooseModulesTableHead.find(".sortButton.default").trigger('click');	
+	
 }
 
 
@@ -105,8 +141,14 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
  * Map to java implementation
  */
 
+ResultsDisplay.prototype.init = function () {
+	app.mainDisplay.registerStretchables( [ this.$chooseClassTableBody, this.$chooseModulesTableBody  ] );
+	this.resultState.activeCourses = [];
+	this.chooseClassModuleFormToggle();
+	this.$selectAllModules.removeClass("active");
+}
+
 ResultsDisplay.prototype.clear = function () {
-	console.log("clear");
 	if (this.chooseClassModuleForm.elements['open']) {
 		for (var i = 0; i < this.chooseClassModuleForm.elements['open'].length; i++) this.chooseClassModuleForm.elements['open'][i].checked = false;
 	}
@@ -116,11 +158,14 @@ ResultsDisplay.prototype.clear = function () {
 	if (this.chooseClassModuleForm.elements['select[]']) {
 		for (var i = 0; i < this.chooseClassModuleForm.elements['select[]'].length; i++) this.chooseClassModuleForm.elements['select[]'][i].checked = false;
 	}
+	this.resetSorting();
+	this.resultState.activeCourses = [];
 	this.chooseClassModuleFormToggle();
+	this.$selectAllModules.children().removeClass("active");
 }
 
 ResultsDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', url );
+		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
 }
 
 ResultsDisplay.prototype.setResultTree = function (resultTree, studentsTree) {
@@ -130,11 +175,14 @@ ResultsDisplay.prototype.setResultTree = function (resultTree, studentsTree) {
 }
 
 ResultsDisplay.prototype.setEmptyTableMessage = function () {
-	this.$chooseClassTableBody.html('<tr class="empty"><td>Geen klassen om weer te geven.</td></tr>');
+	console.log("setEmptyTableMessage");
+	this.$chooseClassTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
+//	this.$chooseModuleTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
 }
 
 ResultsDisplay.prototype.setLoadingTableMessage = function () {
-	this.$chooseClassTableBody.html('<tr class="empty"><td>De klassen worden geladen...</td></tr>');
+	this.$chooseClassTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
+	this.$chooseModulesTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
 }
 
 // ResultsDisplay.prototype.setEmptyTableMessageModules = function () {
@@ -165,7 +213,12 @@ ResultsDisplay.prototype.showSelectedResults = function() {
  * EVENT HANDLERS
  */
 
-ResultsDisplay.prototype.changeCheckboxOpenClosed = function(event) {		
+ResultsDisplay.prototype.changeCheckboxOpenClosed = function(event) {
+	
+	// Reset previous modules chosen
+	this.resultState.activeCourses = [];
+	this.chooseClassModuleFormToggle();
+			
 	if (event.target.checked) {
 		this.uncheckCheckboxOpenClosed();
 		event.target.checked = "checked";
@@ -201,9 +254,43 @@ ResultsDisplay.prototype.changeCheckboxSelect = function(event) {
 	this.chooseClassModuleFormToggle();
 }
 
-ResultsDisplay.prototype.submitChooseClassModuleForm = function() {
+ResultsDisplay.prototype.submitChooseClassModuleForm = function(event) {
 	event.preventDefault();
 	if (this.resultState.activeCourses.length > 0) this.showSelectedResults();	
+}
+
+ResultsDisplay.prototype.clickSelectAllModules = function(event) {
+	event.preventDefault();
+	if (typeof this.chooseClassModuleForm.elements["select[]"] == 'undefined' ) return;
+	
+	$el = $(event.target);
+	
+	if ($el.hasClass('active')) {
+		if (typeof this.chooseClassModuleForm.elements["select[]"].length == 'undefined') {
+			this.chooseClassModuleForm.elements["select[]"].checked = false;
+		} else {
+			for (var i=0 ; i < this.chooseClassModuleForm.elements["select[]"].length; i++) {
+				this.chooseClassModuleForm.elements["select[]"][i].checked = false;
+			}
+		}
+		this.resultState.activeCourses = [];
+		$el.removeClass("active");
+	} else {
+		if (typeof this.chooseClassModuleForm.elements["select[]"].length == 'undefined') {
+			this.chooseClassModuleForm.elements["select[]"].checked = true;
+			this.resultState.activeCourses.push(this.chooseClassModuleForm.elements["select[]"].value);
+		} else {
+			for (var i=0 ; i < this.chooseClassModuleForm.elements["select[]"].length; i++) {
+				if (!this.chooseClassModuleForm.elements["select[]"][i].checked) {
+					this.chooseClassModuleForm.elements["select[]"][i].checked = true;
+					this.resultState.activeCourses.push(this.chooseClassModuleForm.elements["select[]"][i].value);
+				}  
+			}
+		}
+		$el.addClass("active");
+	}
+	
+	this.chooseClassModuleFormToggle();
 }
 
 //helpers 
