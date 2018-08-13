@@ -87,7 +87,7 @@ ResultsDisplay.prototype.setChooseClassTable = function() {
 	
 	this.$chooseClassTableHead.find(".sortButton.default").trigger('click');	
 	
-	this.$chooseModulesTableBody.html("");
+	this.$chooseModulesTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_NOSELECTEDCLASS' )+'</td></tr>');	
 }
 
 ResultsDisplay.prototype.setChooseModulesTable = function() {	
@@ -95,7 +95,10 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 	
 	this.$chooseModulesTableBody.html("");
 	
-	if (this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children == undefined) return;
+	if (this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children == undefined) {
+		this.$chooseModulesTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYMODULES' )+'</td></tr>');	
+		return;
+	}
 	
 	sortedSchoolClassChildren = Helpers.getIndexedSortedArray(this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children);
 	
@@ -176,7 +179,7 @@ ResultsDisplay.prototype.setEmptyTableMessage = function () {
 
 ResultsDisplay.prototype.setLoadingTableMessage = function () {
 	this.$chooseClassTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
-//	this.$chooseModuleTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
+	this.$chooseModulesTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
 }
 
 // ResultsDisplay.prototype.setEmptyTableMessageModules = function () {
