@@ -38,7 +38,7 @@ columns and rows
 	}
 	
 	&:last-of-type {
-		margin-bottom: 3 * $rowMarginBottom;
+		margin-bottom: $rowMarginBottom;
 	}
 }
 .row .row {

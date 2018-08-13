@@ -407,6 +407,10 @@ body {
 			content: "";		    
 		    display: table;
 		}
+		
+		&:last-of-type {
+			margin-bottom: $rowMarginBottom;
+		}
 	}
 	
 	
