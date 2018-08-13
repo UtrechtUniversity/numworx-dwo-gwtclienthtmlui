@@ -134,6 +134,7 @@ AccountDisplay.prototype.updateSchoolLoginsView = function(json) {
 			this.$schoolLoginsTableBody.append($row);	
 		}
 		
+		this.$schoolLoginsTableHead.find(".sortButton.default").trigger('click');
 		this.updateSchoolLoginsViewFormSubmitToggle();
 	}
 }

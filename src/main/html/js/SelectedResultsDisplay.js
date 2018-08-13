@@ -174,6 +174,8 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 		
 		// append row to table
 		$tbody.append($row);
+		
+		$theadRow3.find(".sortButton.default").trigger('click');	
 	}
 	
 	
@@ -221,7 +223,7 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 		matrix[i] = [];
 		matrix[i][0] = {};
 		matrix[i][0].label = students[studentId].givenName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].familyName;
-		matrix[i][0].sortValue = students[studentId].familyName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].givenName;
+		matrix[i][0].sortValue = students[studentId].familyName + " " + students[studentId].givenName + (students[studentId].insertion ? " "+students[studentId].insertion : "") ;
 		
 		j = 1;
 		for (var amId in activeModules) {
@@ -253,7 +255,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function
 			matrix[1] = [];
 			matrix[1][0] = {};
 			matrix[1][0].label = students[studentId].givenName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].familyName;
-			matrix[1][0].sortValue = students[studentId].familyName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].givenName;
+			matrix[1][0].sortValue = students[studentId].familyName + " " + students[studentId].givenName + (students[studentId].insertion ? " "+students[studentId].insertion : "");
 			
 		}
 	}
@@ -314,7 +316,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 		matrix[i] = [];
 		matrix[i][0] = {};
 		matrix[i][0].label = students[studentId].givenName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].familyName;
-		matrix[i][0].sortValue = students[studentId].familyName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].givenName;
+		matrix[i][0].sortValue = students[studentId].familyName + " " + students[studentId].givenName + (students[studentId].insertion ? " "+students[studentId].insertion : "") ;
 		
 		j = 1;
 

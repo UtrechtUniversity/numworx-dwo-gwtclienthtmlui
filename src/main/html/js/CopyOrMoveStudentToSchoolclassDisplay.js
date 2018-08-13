@@ -102,7 +102,7 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudents = function(json, $t
 	var i = 1;
 	for (var id in students) { 
 		studentName = students[id].givenName + (students[id].insertion ? " "+students[id].insertion : "") + " " + students[id].familyName;
-		studentSortName = students[id].familyName + (students[id].insertion ? " "+students[id].insertion : "") + " " + students[id].givenName;
+		studentSortName = students[id].familyName + " " + students[id].givenName + (students[id].insertion ? " "+students[id].insertion : "");
 		
 		$row = $templateRow.clone();
 		$row.find(nameId).html( studentName ).attr('data-sortvalue', studentSortName).removeAttr("id");
@@ -187,14 +187,16 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.setLoadingTableMessageB = functi
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudentsClassA = function(json) {
 	this.showStudents(json, this.$classATableBody, this.$classARow, "#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentName", this.changeSelectACheckbox);
+	this.$classATableHead.find(".sortButton.default").trigger('click');
 	this.classAFormToggle();
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudentsClassB = function(json) {
 	this.showStudents(json, this.$classBTableBody, this.$classBRow, "#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentName", this.changeSelectBCheckbox);
 	this.classBSet = true;
 	this.classBFormToggle();
-	this.classAFormToggle(); 
-	this.resetSorting();
+	this.classAFormToggle();
+	this.$classBTableHead.find(".sortButton.default").trigger('click'); 
+//	this.resetSorting();
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setClassList = function(schoolclasses) {		
@@ -218,6 +220,8 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.setClassList = function(schoolcl
 		this.$classesTableBody.append($row);
 		i++;
 	}
+	
+	this.$classesTableHead.find(".sortButton.default").trigger('click');
 	//this.classesFormToggle(false);
 }
 

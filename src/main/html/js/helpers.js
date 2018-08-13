@@ -200,7 +200,7 @@ Helpers.tableSorterMergeSortMerge = function(left, right, index, attr, type, asc
 		
 		if (val1 != 0 && val2 != 0 && type == "string") { // string sort
 			
-			if ( (asc && val2.localeCompare(val1) < 0) || (!asc && val2.localeCompare(val1) > 0) ) { 
+			if ( (!asc && val2.localeCompare(val1) < 0) || (asc && val2.localeCompare(val1) > 0) ) { 
 		        result.push(left[indexLeft])
 		        indexLeft++
 			} else {
@@ -210,7 +210,7 @@ Helpers.tableSorterMergeSortMerge = function(left, right, index, attr, type, asc
 			
 		} else { // integer sort
 			
-			if ( (asc && val2 < val1) || (!asc && val2 > val1) ) { 	
+			if ( (!asc && val2 < val1) || (asc && val2 > val1) ) { 	
 			    result.push(left[indexLeft])
 			    indexLeft++				
 			} else {

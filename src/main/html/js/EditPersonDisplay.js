@@ -196,6 +196,8 @@ EditPersonDisplay.prototype.setSchoolClasses = function (json) {
 		
 		i++;
 	}
+	
+	this.$editPersonSchoolclassesTableHead.find(".sortButton.default").trigger('click');
 }
 
 EditPersonDisplay.prototype.setEmptyTableMessage = function (json) {

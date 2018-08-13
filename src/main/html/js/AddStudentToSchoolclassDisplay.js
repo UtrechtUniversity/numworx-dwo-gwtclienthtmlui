@@ -165,6 +165,8 @@ AddStudentToSchoolclassDisplay.prototype.showStudents = function(json) {
 		this.$addStudentTableBody.append($row);
 		i++;
 	}
+	
+	this.$addStudentTableHead.find(".sortButton.default").trigger('click');
 	this.addStudentAddFormToggle(false);
 }
 
