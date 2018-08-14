@@ -15,7 +15,7 @@ function SelectedResultsDisplay() {
 	// Bottom bars
 	this.$bars = this.$panel.find(".bar");
 	this.$barModulesStudents = $("#barModulesStudents").hide();
-	
+	this.$barModulesStudentsBacklink = $("#barModulesStudentsBacklink");
 	this.$barActivitiesStudent = $("#barActivitiesStudent").hide();
 	this.$barActivitiesStudentBacklink = $("#barActivitiesStudentBacklink");
 	this.$barActivitiesStudents = $("#barActivitiesStudents").hide();
@@ -487,6 +487,7 @@ SelectedResultsDisplay.prototype.changeFiltering = function() {
 SelectedResultsDisplay.prototype.modulesStudents = function() {
 	var matrix = this.buildMatrixModulesStudentsForClass();
 	this.$bars.hide();
+	this.$barModulesStudentsBacklink.click($.proxy(this.clickBackToResults, this));
 	this.$barModulesStudents.show();
 	this.plotMatrix(matrix);
 	//this.filterIndicatorModulesStudents();
@@ -621,6 +622,10 @@ SelectedResultsDisplay.prototype.getPages = function(scoId) {
 	app.getPresenterFactory().getSelectedResultsPresenter().preparePages(scoId, this.resultState.activeSchoolClass);	
 }
 
+SelectedResultsDisplay.prototype.backToResults = function(scoId) {
+	app.getPresenterFactory().getSelectedResultsPresenter().back(this.resultState);	
+}
+
 
 /*
  * EVENT HANDLERS
@@ -645,10 +650,7 @@ SelectedResultsDisplay.prototype.hoverColumnHeader = function(event) {
 	}	
 }
 
-SelectedResultsDisplay.prototype.clickBackToModulesStudents = function(event) {
-	event.preventDefault();		
-	this.modulesStudents();
-}
+
 
 // Class / module
 SelectedResultsDisplay.prototype.clickModuleResultIndicator = function(params, event) {
@@ -659,6 +661,11 @@ SelectedResultsDisplay.prototype.clickModuleResultIndicator = function(params, e
 SelectedResultsDisplay.prototype.clickModuleColumnHeader = function(params, event) {
 	event.preventDefault();		
 	this.activitiesStudents(params);	
+}
+
+SelectedResultsDisplay.prototype.clickBackToResults = function(event) {
+	event.preventDefault();		
+	this.backToResults();
 }
 
 // Activities
@@ -675,6 +682,11 @@ SelectedResultsDisplay.prototype.clickActivityColumnHeader = function(params, ev
 SelectedResultsDisplay.prototype.clickPrintButton = function(event) {
 	event.preventDefault();		
 	this.print();
+}
+
+SelectedResultsDisplay.prototype.clickBackToModulesStudents = function(event) {
+	event.preventDefault();		
+	this.modulesStudents();
 }
 
 // Pages

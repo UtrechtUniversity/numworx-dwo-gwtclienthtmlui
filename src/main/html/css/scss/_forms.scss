@@ -203,8 +203,9 @@ form {
 
 	
 .checkbox {
-	float: left;
-	display: block;
+	//float: left;
+//	display: block;
+	display: inline-block;
 	position: relative;
 	width: 25px;
 	height: 25px;

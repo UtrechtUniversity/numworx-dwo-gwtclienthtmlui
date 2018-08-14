@@ -55,6 +55,9 @@ table.dwo { //:not(.c-datepicker__days)
 //					padding-right: $gutter/2 * 1px!important;
 					text-indent: -9px;
 				}
+				&.centered {
+					text-align: center;
+				}
 				
 				.sortButton {
 					cursor: pointer;
@@ -116,10 +119,15 @@ table.dwo { //:not(.c-datepicker__days)
 				padding: 8px $gutter / 2 * 1px!important;
 				width: ($colWidth - ($gutter)) * 1px;
 				float: none!important; // for if it has a col-class
+				
+				&.centered {
+					text-align: center;
+				}
 			}	
 			&.empty td, &.loading td {
 				border-bottom-style: none;
 			}
+			
 		}
 	}
 	

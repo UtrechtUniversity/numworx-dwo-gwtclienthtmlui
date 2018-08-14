@@ -78,6 +78,11 @@ ResultsDisplay.prototype.setChooseClassTable = function() {
 			this.nextElementSibling.setAttribute("for", oldFor + i);
 		});
 		
+		if (id == this.resultState.activeClass) {
+			if (this.resultState.moduleState == 0 || this.resultState.moduleState == 2) $row.find("input[name='closed[]']").prop('checked', 'checked');
+			if (this.resultState.moduleState == 1 || this.resultState.moduleState == 2) $row.find("input[name='open[]']").prop('checked', 'checked');
+		}
+		
 		$row.find("input[name='open[]']").on('click', $.proxy(this.changeCheckboxOpenClosed,this));
 		$row.find("input[name='closed[]']").on('click', $.proxy(this.changeCheckboxOpenClosed,this));
 		
@@ -126,6 +131,8 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 			oldFor = this.nextElementSibling.getAttribute("for");
 			this.nextElementSibling.setAttribute("for", oldFor + i);
 		});
+		
+		if (typeof this.resultState.activeModules != "undefined" && this.resultState.activeModules.indexOf(sortedSchoolClassChildren[n].id) != -1) $row.find("input[name='select[]']").prop('checked', 'checked');
 	
 		$row.find("input[name='select[]']").on('change', $.proxy(this.changeCheckboxSelect,this));
 	
@@ -145,6 +152,7 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
  */
 
 ResultsDisplay.prototype.init = function () {
+	console.log("initResults");
 	app.mainDisplay.registerStretchables( [ this.$chooseClassTableBody, this.$chooseModulesTableBody  ] );
 	this.resultState.activeCourses = [];
 	this.chooseClassModuleFormToggle();
@@ -174,6 +182,14 @@ ResultsDisplay.prototype.setHelp = function(url) {
 ResultsDisplay.prototype.setResultTree = function (resultTree, studentsTree) {
 	this.resultState.resultsTree = resultTree;
 	this.resultState.studentsTree = studentsTree;	
+	this.setChooseClassTable();
+}
+
+ResultsDisplay.prototype.setResultTreeWithContext = function (resultTree, studentsTree, context) {
+	console.log("setResultTreeWithContext");
+	this.resultState = context;
+	this.resultState.resultsTree = resultTree;
+	this.resultState.studentsTree = studentsTree;
 	this.setChooseClassTable();
 }
 

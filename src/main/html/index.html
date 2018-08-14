@@ -1638,8 +1638,8 @@
 								<thead>
 									<tr>
 										<th class="col-2"></th>
-										<th class="col-2"><span data-translate="NUM_TBL_RESULTS_OPEN">Open</span></th>
-										<th class="col-2"><span data-translate="NUM_TBL_RESULTS_CLOSED" >Gesloten</span></th>
+										<th class="col-2 centered"><span data-translate="NUM_TBL_RESULTS_OPEN">Open</span></th>
+										<th class="col-2 centered"><span data-translate="NUM_TBL_RESULTS_CLOSED" >Gesloten</span></th>
 									</tr>
 									<tr class="sorting">
 										<th class="col-2">
@@ -1664,12 +1664,12 @@
 									<tr>
 										<td class="col-2"><span id="chooseClassAndModulesClassname">Klasnaam</span></td>
 
-										<td class="col-2">
+										<td class="col-2 centered">
 											<div class="checkbox">
 												<input type="radio" name="open[]" id="chooseClassAndModulesOpen" value="schoolclassID"><label class="icon" for="chooseClassAndModulesOpen"></label>
 											</div>											
 										</td>
-										<td class="col-2">
+										<td class="col-2 centered">
 											<div class="checkbox">
 												<input type="radio" name="closed[]" id="chooseClassAndModulesClassClosed" value="schooclassID"><label class="icon" for="chooseClassAndModulesClassClosed"></label>
 											</div>											
@@ -1688,7 +1688,7 @@
 								<thead>
 									<tr>
 										<th class="col-4">&nbsp;</th>
-										<th class="col-2"><span id="resultsDisplayChooseModulesSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT">Selecteer</span></span></th>
+										<th class="col-2 centered"><span id="resultsDisplayChooseModulesSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT">Selecteer</span></span></th>
 									</tr>
 									<tr class="sorting">
 										<th class="col-4">
@@ -1710,9 +1710,9 @@
 							
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
-										<td class="col-5"><span id="chooseClassAndModulesModuleName">Module name</span></td>
+										<td class="col-4"><span id="chooseClassAndModulesModuleName">Module name</span></td>
 
-										<td class="col-1">
+										<td class="col-2 centered">
 											<div class="checkbox">
 												<input type="checkbox" name="select[]" id="chooseClassAndModulesModuleSelect" value="moduleID"><label class="icon" for="chooseClassAndModulesModuleSelect"></label>
 											</div>											
@@ -1838,6 +1838,12 @@
 						<form name="startCompareClass">
 							<input type="submit" class="primary right" value="Vergelijk klas" />
 						</form>
+					</div>
+					<div class="col-12">
+						<p><a href="javascript:void(0);" id="barModulesStudentsBacklink" class="backlink">
+							<svg viewBox="0 0 74 74" class="icon">
+									  <use xlink:href="#arrowLeft"></use>
+								</svg><span data-translate="NUM_LBL_SELECTEDRESULTS_BACKTOSELECT">Terug naar start</span></a></p>
 					</div>
 				</div>
 				
