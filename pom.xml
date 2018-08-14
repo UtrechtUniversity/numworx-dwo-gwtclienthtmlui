@@ -8,7 +8,7 @@
     </parent>
     <groupId>nl.uu.fi.dwo.lms</groupId>
     <artifactId>DwoGwtClientHtmlUi</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1</version>
        
     <build>
         <plugins>
