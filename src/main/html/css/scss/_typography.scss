@@ -256,6 +256,9 @@ table thead tr th {
 		}
 	}
 }
+table.results thead tr th {
+	color: $primary;
+}
 
 table tbody tr td {
 	font-size: 13 / 16 * 1em;
