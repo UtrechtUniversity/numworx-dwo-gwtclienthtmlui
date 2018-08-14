@@ -352,9 +352,13 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 			
 			for (var scoId in sortedModuleChildren[n].children) { // Loop over activities
 				if (sortedModuleChildren[n].children[scoId]["user-id"] == studentId) { // Select student
-					scoreSet = true;
 					score = sortedModuleChildren[n].children[scoId].sumScore; 
 					time = sortedModuleChildren[n].children[scoId].totalTime; 
+
+					if ( (score == 0 && time == "0s") ||  sortedModuleChildren[n].children[scoId].completion_status == "not-attempted") {
+						score = null;
+						time = null;
+					}
 				}	
 			}
 			
@@ -441,7 +445,7 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 				sortedStudentScoChildren = Helpers.getIndexedSortedArray(activity.children[studenScoId].children);
 				
 				for (var n = 0; n < sortedStudentScoChildren.length; n++) {
-					matrix[i][j] = {};					
+					matrix[i][j] = {};
 					matrix[i][j].label = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ? "+"+sortedStudentScoChildren[n].bonus : "") +" / " + sortedStudentScoChildren[n].maxScore;
 					matrix[i][j].score = (sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ? sortedStudentScoChildren[n].bonus : 0) ) / sortedStudentScoChildren[n].maxScore * 100;
 					matrix[i][j].sortValue = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ?sortedStudentScoChildren[n].bonus : 0);
