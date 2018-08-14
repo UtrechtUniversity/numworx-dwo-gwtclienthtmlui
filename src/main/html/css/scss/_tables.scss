@@ -244,7 +244,8 @@ table.dwo.results {
 				bottom: 0;
 				display: block;
 				left: 0;
-				line-height: 41px; //1.8em;
+				//line-height: 41px; //1.8em;
+				line-height: 32px;
 				padding: 0px 10px;
 				position: absolute; 
 				top: 0;
@@ -285,19 +286,28 @@ table.dwo.results {
 			&:nth-child(2) { // multiple headers
 				background-color: $shade11;
 				border-bottom: $borderThickness $line1 solid;
+				
+				th:first-child {
+					padding-left: 0!important;
+					padding-right: 0!important;
+					width: $colWidth * 1px;
+				}
 			
 				th {
 					position: relative;
+					padding: $gutter / 2 * 1px $gutter / 2 * 1px!important;
+					width: (($colWidth / 2) - $gutter) * 1px;
 					
 					span {
 						background-color: $shade11;
 						border: $borderThickness $shade12 solid;
+						@include border-box();
 						cursor: pointer;
 						display: block;
 						font-size: 13 / 16 * 1em;
-						height: 3 * 1.3em;
+						height: 64px;
 						line-height: 1.3em;
-						margin: -3 * 1.3em 0 0 0;						
+						margin: -54px 0 0 0px;						
 						overflow: hidden;
 						padding: 3px 5px;
 						position: absolute;
@@ -305,7 +315,8 @@ table.dwo.results {
 						text-transform: none;
 						@include transition(background-color 200ms ease);
 						transition-property: background-color, color;
-						width: (($colWidth - $gutter) / 2 - 10) * 1px;
+						//width: (($colWidth - $gutter) / 2 - 10) * 1px;
+						width: (($colWidth / 2) - $gutter)  * 1px;
 						z-index: 9;
 						
 						.overflow & {
@@ -388,11 +399,13 @@ table.dwo.results {
 			
 			&.studentName {
 				//overflow-x: hidden;
+				overflow: hidden;
 				position: relative;
 				white-space: nowrap;
 				width: (($colWidth) - $gutter) * 1px;
 				
 				span {
+					height: 32px;
 					overflow-x: hidden;
 					width: auto;
 				}
@@ -437,7 +450,7 @@ table.dwo.results {
 		}	
 	}
 	
-	tbody td.fill, thead th.fill {
+	tbody tr td.fill, thead tr th.fill {
 		display: table-cell;
 		width: 25px;
 		//.size-2 & {	display: table-cell; width: (4.5 * ($colWidth + $gutter)) * 1px; }

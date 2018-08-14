@@ -192,7 +192,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 	this.$selectResultsTableWrap.append($table);
 	
 	// Add overflow class to names
-	$tbody.find(".studentName").each( Helpers.addClassIfOverflown );
+	$tbody.find(".studentName span").each( Helpers.addClassIfOverflown );
 	
 	app.mainDisplay.registerStretchables( [ $tbody ] );
 	
@@ -270,6 +270,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function
 		matrix[0][j].label = sortedModuleChildren[n].label;
 		matrix[0][j].callback = this.clickActivityColumnHeader;
 		matrix[0][j].params = { scoId: sortedModuleChildren[n].id  };
+		
 
 		// set single row
 		for (var stuScoId in sortedModuleChildren[n].children) { 
@@ -310,6 +311,9 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 		matrix[0][j].label = sortedModuleChildren[n].label;
 		matrix[0][j].callback = this.clickActivityColumnHeader;
 		matrix[0][j].params = { scoId: sortedModuleChildren[n].id  };
+		matrix[0][j].linkLabel = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_Paginas");
+		matrix[0][j].linkCallback = this.clickActivityColumnHeader;//this.activitiesStudents;
+		matrix[0][j].linkParams = { scoId: sortedModuleChildren[n].id  };
 		j++;
 	}
 	
