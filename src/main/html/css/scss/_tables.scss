@@ -396,6 +396,18 @@ table.dwo.results {
 		}
 	}
 	
+	&.alternativeHeader thead {
+		tr:nth-child(2), tr:nth-child(3) { 
+			background-color: $white;
+		}
+		tr:nth-child(2) {
+			border-bottom: 1px $line1 solid;
+		}
+		tr:nth-child(3) {
+			border-bottom: 1px $line1 solid;
+		}
+	}
+	
 	tbody {
 		//max-width: 100%;
 		//overflow: visible;

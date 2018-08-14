@@ -458,22 +458,22 @@
 				</div>				
 				<div class="row">
 					<form name="updateSchoolLoginsView">
-						<div class="col-8">
+						<div class="col-10">
 							<table class="dwo sortable headered">
 								<thead>
 									<tr>
-										<th class="col-2">
+										<th class="col-4">
 											<span data-translate="NUM_TBL_SCHOOLLOGINOPTION">School</span>
 										</th>
 										<th class="col-2">
 											<span data-translate="NUM_TBL_ROLE">Rol</span>											
 										</th>
-										<th><span data-translate="NUM_TBL_STARTWITHSCHOOLLOGIN">Hiermee opstarten</span></th>
-										<th><span data-translate="NUM_TBL_REMOVESCHOOLLOGIN">Login verwijderen</span></th>
+										<th class="col-2 centered"><span data-translate="NUM_TBL_STARTWITHSCHOOLLOGIN">Hiermee opstarten</span></th>
+										<th class="col-2 centered"><span data-translate="NUM_TBL_REMOVESCHOOLLOGIN">Login verwijderen</span></th>
 									</tr>
 									
 									<tr class="sorting">
-										<th class="col-2">
+										<th class="col-4">
 											<span class="sortButton asc default" data-order="asc" data-type="string">
 												<svg viewBox="0 0 74 74" class="icon">
 													  <use xlink:href="#arrowUp"></use>
@@ -505,14 +505,14 @@
 									
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
-										<td class="col-2"><span id="updateSchoolLoginsViewSchool" >Schoolnaam</span></td>
+										<td class="col-4"><span id="updateSchoolLoginsViewSchool" >Schoolnaam</span></td>
 										<td class="col-2"><span id="updateSchoolLoginsViewRole">ROL</span></td>
-										<td>
+										<td class="col-2 centered">
 											<div class="checkbox">
 												<input type="checkbox" name="active[]" id="updateSchoolLoginsViewActive" value="schoolid"><label class="icon" for="updateSchoolLoginsViewActive"></label>
 											</div>											
 										</td>
-										<td>
+										<td class="col-2 centered">
 											<div class="checkbox danger">
 												<input type="checkbox" name="remove[]" id="updateSchoolLoginsViewRemove" value="schoolid"><label class="icon" for="updateSchoolLoginsViewRemove"></label>
 											</div>											

@@ -256,9 +256,16 @@ body {
 				border-bottom: 1px $primary solid;
 				border-left: 1px $shade11 solid;
 				cursor: pointer;
-				margin-left: ($gutter + 1) * -1px;						
+				margin-left: ($gutter + 1) * -1px;		
+				width: ($colWidth - $gutter) * 1px;				
 				z-index: 400;
+				
+				@media #{$mediaQueryDesktop} {
+					width: auto;
+				}
 			}	
+			
+			
 			
 			.content {
 				background-color: $shade11;

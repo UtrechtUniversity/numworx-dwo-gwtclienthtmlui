@@ -82,6 +82,9 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 		$rowCell = null,
 		$value = null;
 	
+	// set extra table class
+	if (matrix[0][0].tableClass) $table.addClass(matrix[0][0].tableClass);
+	
 	// BUILD HEADER
 	for (var i = 1; i < matrix[0].length; i++) {
 				// Header names
@@ -249,6 +252,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function
 	matrix[0] = [];
 	matrix[0][0] = {};
 	matrix[0][0].label = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_Activiteiten")
+	matrix[0][0].tableClass = "alternativeHeader";
 	
 	// Set row header
 	for (var stuId in students) {
@@ -303,6 +307,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 	matrix[0] = [];
 	matrix[0][0] = {};
 	matrix[0][0].label = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_Activiteiten");
+	matrix[0][0].tableClass = "alternativeHeader";
 	
 	var sortedModuleChildren = Helpers.getIndexedSortedArray(module.children);
 			
@@ -384,6 +389,7 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 	matrix[0] = [];
 	matrix[0][0] = {};
 	matrix[0][0].label = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_Paginas");
+	matrix[0][0].tableClass = "alternativeHeader";
 	
 	for (var studenScoId in activity.children) {
 		
