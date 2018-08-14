@@ -23,7 +23,9 @@ function SelectedResultsDisplay() {
 	this.$barPagesStudents = $("#barPagesStudents").hide();
 	this.$barPagesStudentsBacklink = $("#barPagesStudentsBacklink");
 	
-		
+	
+	this.$selectedResultsTitle = $("#selectedResultsTitle");
+
 	this.$selectResultsTableWrap = $("#selectedResultsTableWrap");
 	
 	this.$selectedResultsTable = $("#selectedResultsTable").detach();	
@@ -81,6 +83,13 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 		$row = null,
 		$rowCell = null,
 		$value = null;
+	
+	// set title above table 
+	if (matrix[0][0].resultsTitle) this.$selectedResultsTitle.find(".text").html(matrix[0][0].resultsTitle); 
+	else this.$selectedResultsTitle.find(".text").html("");
+	if (matrix[0][0].resultsTitlePrefix) this.$selectedResultsTitle.find(".prefix").html(matrix[0][0].resultsTitlePrefix); 
+	else this.$selectedResultsTitle.find(".prefix").html("");
+	
 	
 	// set extra table class
 	if (matrix[0][0].tableClass) $table.addClass(matrix[0][0].tableClass);
@@ -211,6 +220,9 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 	matrix[0] = [];
 	matrix[0][0] = {};
 	matrix[0][0].label = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_Modules");
+	
+	matrix[0][0].resultsTitle = "";
+	matrix[0][0].resultsTitlePrefix = "Alle geselecteerde modules";
 		
 	for (var amId in activeModules) {
 		matrix[0][j] = {};
@@ -309,6 +321,9 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 	matrix[0][0].label = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_Activiteiten");
 	matrix[0][0].tableClass = "alternativeHeader";
 	
+	matrix[0][0].resultsTitle = module.label;
+	matrix[0][0].resultsTitlePrefix = "Module";
+	
 	var sortedModuleChildren = Helpers.getIndexedSortedArray(module.children);
 			
 	for (var n = 0; n < sortedModuleChildren.length; n++) {
@@ -390,6 +405,11 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 	matrix[0][0] = {};
 	matrix[0][0].label = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_Paginas");
 	matrix[0][0].tableClass = "alternativeHeader";
+	
+	matrix[0][0].resultsTitle = activity.label;
+	matrix[0][0].resultsTitlePrefix = "Activiteit";
+	
+	
 	
 	for (var studenScoId in activity.children) {
 		
