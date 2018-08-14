@@ -222,7 +222,7 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 	matrix[0][0].label = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_Modules");
 	
 	matrix[0][0].resultsTitle = "";
-	matrix[0][0].resultsTitlePrefix = "Alle geselecteerde modules";
+	matrix[0][0].resultsTitlePrefix = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_AllModules");
 		
 	for (var amId in activeModules) {
 		matrix[0][j] = {};
@@ -322,7 +322,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 	matrix[0][0].tableClass = "alternativeHeader";
 	
 	matrix[0][0].resultsTitle = module.label;
-	matrix[0][0].resultsTitlePrefix = "Module";
+	matrix[0][0].resultsTitlePrefix = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_Module");
 	
 	var sortedModuleChildren = Helpers.getIndexedSortedArray(module.children);
 			
@@ -411,7 +411,7 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 	matrix[0][0].tableClass = "alternativeHeader";
 	
 	matrix[0][0].resultsTitle = activity.label;
-	matrix[0][0].resultsTitlePrefix = "Activiteit";
+	matrix[0][0].resultsTitlePrefix = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_Activity");
 	
 	
 	
