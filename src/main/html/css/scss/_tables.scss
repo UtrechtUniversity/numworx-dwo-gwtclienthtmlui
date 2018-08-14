@@ -413,8 +413,11 @@ table.dwo.results {
 				background-color: $shade11;
 				border-bottom: $borderThicknessResult $primary solid;
 				cursor: pointer;
-				display: block;			
+				display: block;	
+				margin-top: -3px;		
+				margin-bottom:-2px;
 				width: 100%;
+				
 				
 				@include transition(all 200ms ease);
 				

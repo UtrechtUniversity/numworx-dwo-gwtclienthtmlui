@@ -35,9 +35,6 @@ function SelectedResultsDisplay() {
 	this.$selectedResultsRow = this.$selectedResultsTable.find("tbody tr").detach();
 	
 	this.$allFilterIndicators = $(".filterIndicators");
-	this.$filterIndicatorsModulesStudents = $("#barModulesStudents .filterIndicators");
-	this.$filterIndicatorsActivitiesStudentsInModule = $("#barActivitiesStudents .filterIndicators");
-	this.$filterIndicatorsPagesStudents = $("#barPagesStudents .filterIndicators");
 	
 	this.$startCompareClassForm = $(this.startCompareClassForm);
 	
@@ -46,9 +43,7 @@ function SelectedResultsDisplay() {
 	this.$sealCheckbox = $(this.sealModuleActivitiesForm.elements['seal']);
 	
 	// Bind handlers
-	this.$filterIndicatorsModulesStudents.on('click', $.proxy(this.clickFilterIndicatorModulesStudents, this));
-	this.$filterIndicatorsActivitiesStudentsInModule.on('click', $.proxy(this.clickFilterIndicatorActivitiesStudentsInModule, this));
-	this.$filterIndicatorsPagesStudents.on('click', $.proxy(this.clickFilterIndicatorPagesStudents, this));
+	this.$allFilterIndicators.on('click', $.proxy(this.clickFilterIndicator, this));
 	
 	this.$startCompareClassForm.on('submit', $.proxy(this.submitStartCompareClassForm, this));
 	this.$printButton.on('click', $.proxy(this.clickPrintButton, this));
@@ -78,8 +73,6 @@ SelectedResultsDisplay.prototype.localize = function() {
  */
 
 SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
-	console.log("PLOT!");
-	console.log(matrix);
 	var $table = this.$selectedResultsTable.clone(),
 		$tbody = $table.find('tbody');
 		$theadRow2 = $table.find('thead tr:nth-child(2)'),
@@ -203,7 +196,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 	
 	app.mainDisplay.registerStretchables( [ $tbody ] );
 	
-	//this.allFilterIndicatorsReset();
+	this.changeFiltering();
 }
 
 SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function() {
@@ -461,33 +454,25 @@ SelectedResultsDisplay.prototype.computeModuleScoreForStudent = function(module,
 	return Math.round(total / totalCount);
 }
 
-SelectedResultsDisplay.prototype.filterIndicator = function($indicators) {
-	this.$selectResultsTableWrap.find(".resultIndicator").hide();
-	var wrap = this.$selectResultsTableWrap;
-	
-	$indicators.each( function() {
-		$this = $(this);
-		if ($this.hasClass('active')) {
-			nr = $this.data('filter');
-			wrap.find(".result"+nr).show();
-		} 		
-	});	
-}
-
-SelectedResultsDisplay.prototype.filterIndicatorModulesStudents = function(nr) {
-	this.filterIndicator(this.$filterIndicatorsModulesStudents);
-}
-SelectedResultsDisplay.prototype.filterIndicatorActivitiesStudentsInModule = function(nr) {
-	this.filterIndicator(this.$filterIndicatorsActivitiesStudentsInModule);
-}
-SelectedResultsDisplay.prototype.filterIndicatorPagesStudents = function(nr) {
-	this.filterIndicator(this.$filterIndicatorsPagesStudents);
-}
-
-
 SelectedResultsDisplay.prototype.allFilterIndicatorsReset = function() {
-	this.$selectResultsTableWrap.find(".resultIndicator").show();
-	this.$allFilterIndicators.addClass("active");
+	this.resultState.activeIndicators = [1, 2, 3, 4];
+}
+SelectedResultsDisplay.prototype.showFilteredIndicators = function() {
+	console.log(this.resultState.activeIndicators);
+	this.$selectResultsTableWrap.find(".resultIndicator").hide();
+	for (var i = 0; i < this.resultState.activeIndicators.length; i++) {
+		this.$selectResultsTableWrap.find(".result"+this.resultState.activeIndicators[i]).show();
+	}
+}
+SelectedResultsDisplay.prototype.setActiveFilters = function() {
+	this.$allFilterIndicators.removeClass("active");
+	for (var i = 0; i < this.resultState.activeIndicators.length; i++) {		
+		$(".filterIndicators.result"+this.resultState.activeIndicators[i]).addClass("active");
+	}
+}
+SelectedResultsDisplay.prototype.changeFiltering = function() {
+	this.setActiveFilters();
+	this.showFilteredIndicators();
 }
 
 
@@ -500,7 +485,7 @@ SelectedResultsDisplay.prototype.modulesStudents = function() {
 	this.$bars.hide();
 	this.$barModulesStudents.show();
 	this.plotMatrix(matrix);
-	this.filterIndicatorModulesStudents();
+	//this.filterIndicatorModulesStudents();
 }
 
 SelectedResultsDisplay.prototype.activitiesStudent = function(params) {
@@ -537,7 +522,7 @@ SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
 	}
 	
 	this.plotMatrix(matrix);
-	this.filterIndicatorActivitiesStudentsInModule();
+	//this.filterIndicatorActivitiesStudentsInModule();
 }
 
 SelectedResultsDisplay.prototype.pagesStudents = function(params) {
@@ -562,7 +547,6 @@ SelectedResultsDisplay.prototype.pagesStudents = function(params) {
  */
 
 SelectedResultsDisplay.prototype.clear = function () {
-	this.allFilterIndicatorsReset();
 }
 
 SelectedResultsDisplay.prototype.init = function(resultState) {
@@ -570,6 +554,9 @@ SelectedResultsDisplay.prototype.init = function(resultState) {
 	console.log(resultState);
 	
 	this.resultState = resultState;
+	
+	this.allFilterIndicatorsReset();
+	
 	this.modulesStudents();	
 }
 
@@ -693,25 +680,15 @@ SelectedResultsDisplay.prototype.clickPageResultIndicator = function(params, eve
 }
 
 
-SelectedResultsDisplay.prototype.clickFilterIndicatorModulesStudents = function(event) {
-	event.preventDefault();
-	$(event.target).parent().toggleClass("active");
-	this.filterIndicatorModulesStudents();
+SelectedResultsDisplay.prototype.clickFilterIndicator = function(event) {
+	event.preventDefault();	
+	var nr = $(event.target).parent().data("filter");	
+	if (this.resultState.activeIndicators.indexOf(nr) == -1) this.resultState.activeIndicators.push(nr);
+	else {
+		this.resultState.activeIndicators.splice(this.resultState.activeIndicators.indexOf(nr),1)	
+	} 
+	this.changeFiltering();
 }
-
-SelectedResultsDisplay.prototype.clickFilterIndicatorActivitiesStudentsInModule = function(event) {
-	event.preventDefault();
-	$(event.target).parent().toggleClass("active");
-	this.filterIndicatorActivitiesStudentsInModule();
-}
-
-SelectedResultsDisplay.prototype.clickFilterIndicatorPagesStudents = function(event) {
-	event.preventDefault();
-	$(event.target).parent().toggleClass("active");
-	this.filterIndicatorPagesStudents();
-}
-
-
 
 SelectedResultsDisplay.prototype.submitStartCompareClassForm = function(event) {
 	event.preventDefault();			

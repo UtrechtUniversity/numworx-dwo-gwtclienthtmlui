@@ -78,8 +78,8 @@ ResultsDisplay.prototype.setChooseClassTable = function() {
 			this.nextElementSibling.setAttribute("for", oldFor + i);
 		});
 		
-		$row.find("input[name='open[]']").on('change', $.proxy(this.changeCheckboxOpenClosed,this));
-		$row.find("input[name='closed[]']").on('change', $.proxy(this.changeCheckboxOpenClosed,this));
+		$row.find("input[name='open[]']").on('click', $.proxy(this.changeCheckboxOpenClosed,this));
+		$row.find("input[name='closed[]']").on('click', $.proxy(this.changeCheckboxOpenClosed,this));
 		
 		this.$chooseClassTableBody.append($row);
 		i++;
@@ -108,8 +108,11 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 		//course = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[id];
 		course = sortedSchoolClassChildren[n];
 		
-		if (this.resultState.showOnlyClosedModules == true && course.viewState != "invisible") continue;
-		if (this.resultState.showOnlyClosedModules == false && course.viewState != "studentsAndTeachers") continue;
+		//if (this.resultState.showOnlyClosedModules == true && course.viewState != "invisible") continue;
+		//if (this.resultState.showOnlyClosedModules == false && course.viewState != "studentsAndTeachers") continue;
+		
+		if ( this.resultState.moduleState == 1 && course.viewState == "invisible" ) continue; 
+		if ( this.resultState.moduleState == 0 && course.viewState == "studentsAndTeachers" ) continue;
 		
 		$row = this.$chooseModulesRow.clone();
 	
@@ -214,29 +217,55 @@ ResultsDisplay.prototype.showSelectedResults = function() {
  */
 
 ResultsDisplay.prototype.changeCheckboxOpenClosed = function(event) {
-	
+	var openModules = false, closedModules = false;
+
 	// Reset previous modules chosen
 	this.resultState.activeCourses = [];
 	this.chooseClassModuleFormToggle();
-			
+	console.log(this.resultState.moduleState);
+	console.log(event.target.name);
+	console.log(this.resultState.activeSchoolClass);
+	console.log(event.target.value);
+	if ( this.resultState.moduleState == 2 && event.target.name == "closed[]" && this.resultState.activeSchoolClass == event.target.value) {
+		this.chooseClassModuleForm.elements["closed[]"][this.chooseClassModuleForm.elements["closed[]"].length-1].checked = true;
+		this.resultState.moduleState = 1;
+	}
+	else if ( this.resultState.moduleState == 2 && event.target.name == "open[]" && this.resultState.activeSchoolClass == event.target.value) {
+		this.chooseClassModuleForm.elements["open[]"][this.chooseClassModuleForm.elements["open[]"].length-1].checked = true;
+		this.resultState.moduleState = 0;
+	}
+	
 	if (event.target.checked) {
-		this.uncheckCheckboxOpenClosed();
-		event.target.checked = "checked";
+		// else {
+			this.resultState.activeSchoolClass = event.target.value;
+			
+			this.uncheckCheckboxOpenClosedExcept(event.target.value);
+			
+			for (i = 0; i < this.chooseClassModuleForm.elements["closed[]"].length; i++) {
+				if (this.chooseClassModuleForm.elements["closed[]"][i].checked) {				
+					closedModules = true;
+				}
+			}
+			
+			for (i = 0; i < this.chooseClassModuleForm.elements["open[]"].length; i++) {
+				if (this.chooseClassModuleForm.elements["open[]"][i].checked) {				
+					openModules = true;
+				}
+			}
+			
+			this.resultState.moduleState = openModules &&  closedModules ? 2 : closedModules ? 0 : 1; // open = 1, closed = 0, both = 2
+			
 		
-		this.resultState.showOnlyClosedModules = false;
-		if (event.target.name=="closed[]") this.resultState.showOnlyClosedModules = true;		
-		
-		this.resultState.activeSchoolClass = event.target.value;
-	} else {
-		this.resultState.activeSchoolClass = null;
-	}		
+	} //else {
+		//this.resultState.activeSchoolClass = null;
+		//}		
 	
 	this.setChooseModulesTable();	
 }
-ResultsDisplay.prototype.uncheckCheckboxOpenClosed = function() {
+ResultsDisplay.prototype.uncheckCheckboxOpenClosedExcept = function(id) {
 	for (i = 0; i < this.chooseClassModuleForm.elements.length; i++) {
 		if ( (this.chooseClassModuleForm.elements[i].name == "open[]" || this.chooseClassModuleForm.elements[i].name == "closed[]")
-			&& !this.chooseClassModuleForm.elements[i].disabled) this.chooseClassModuleForm.elements[i].checked = "";
+			&& !this.chooseClassModuleForm.elements[i].disabled && this.chooseClassModuleForm.elements[i].value != id) this.chooseClassModuleForm.elements[i].checked = "";
 	}
 }
 
