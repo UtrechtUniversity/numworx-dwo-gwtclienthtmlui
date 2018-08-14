@@ -157,6 +157,7 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 
 ResultsDisplay.prototype.init = function () {
 	app.mainDisplay.registerStretchables( [ this.$chooseClassTableBody, this.$chooseModulesTableBody  ] );
+	this.resultState = {};
 	this.resultState.activeCourses = [];
 	this.chooseClassModuleFormToggle();
 	this.$selectAllModules.removeClass("active");
