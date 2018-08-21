@@ -246,7 +246,7 @@ table.dwo.results {
 			position: relative;
 			text-align: left;
 			width: ($colWidth - $gutter) * 1px;
-			
+						
 			span:not(.sortButton) { 
 				background-color: $white;
 				bottom: 0;
@@ -296,6 +296,7 @@ table.dwo.results {
 					background-color: $primaryLight;
 					left: $gutter * 1px;
 					position: absolute;
+					@include transition(all 100ms ease-in-out);
 					width: (($colWidth) - $gutter - $gutter) * 1px;
 					z-index: 11;
 					
@@ -333,6 +334,7 @@ table.dwo.results {
 					position: absolute;
 					padding-left: 0!important;
 					padding-right: 0!important;
+					@include transition(all 100ms ease-in-out);
 					width: $colWidth * 1px;
 					z-index: 10;					
 				}
@@ -430,6 +432,7 @@ table.dwo.results {
 				th:first-child {
 					background-color: $shade11;
 					text-indent: 10px;
+					@include transition(all 100ms ease-in-out);
 				}			
 			}			
 		}
@@ -492,7 +495,9 @@ table.dwo.results {
 					height: 32px;
 					overflow-x: hidden;
 					overflow-y: hidden;
+					@include transition(all 100ms ease-in-out);
 					width: auto;
+					
 				}
 				
 				span.overflown:after {
