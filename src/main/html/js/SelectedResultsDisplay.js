@@ -471,7 +471,7 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 
 
 SelectedResultsDisplay.prototype.computeModuleScoreForStudent = function(module, studentId) {
-	var total = 0, totalCount = 0, scoreSet = false;
+	var total = 0, totalCount = 0, scoreSet = false, allZero = true;
 
 	for (var id in module.children) { // Loop over modules
 		if (module.children[id].children) { 
@@ -479,12 +479,18 @@ SelectedResultsDisplay.prototype.computeModuleScoreForStudent = function(module,
 				if (module.children[id].children[scoId]["user-id"] == studentId) { // Select student
 					scoreSet = true;
 					total += parseInt(module.children[id].children[scoId].sumScore); // Sum of scores
+					
+					if ( ! ( ( parseInt(module.children[id].children[scoId].sumScore) == 0 && parseInt(module.children[id].children[scoId].totalTime) == "0s") 
+								||  module.children[id].children[scoId].completion_status == "not-attempted" ) ) {
+								allZero = false;
+					}
 				}	
 			}
 		}
 		totalCount++;
 	}
-	if (!scoreSet) return "";
+	
+	if (!scoreSet || allZero) return "";
 	return Math.round(total / totalCount);
 }
 
@@ -664,9 +670,14 @@ SelectedResultsDisplay.prototype.backToResults = function(scoId) {
 SelectedResultsDisplay.prototype.scrollTableWrap = function(event) {
 	var $el = $(event.target);
 	var left = $el.scrollLeft();
-	if (left == 0) $el.removeClass('active');
-	else $el.addClass('active');
-	$el.find('td:first-child').css('left',left+'px');
+	if (left < 18) {
+		$el.removeClass('active');
+		$el.find('td:first-child, th:first-child').css('left','');
+	}
+	else {
+		$el.addClass('active');
+			$el.find('td:first-child, th:first-child').css('left',(left-4)+'px');
+	}
 }
 
 SelectedResultsDisplay.prototype.hoverColumnHeader = function(event) {
