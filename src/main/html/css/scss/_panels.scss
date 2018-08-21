@@ -890,6 +890,21 @@ section.lightbox {
 		right: $gutter * 1px;
 		top: $elementMarginBottom;
 		
+		.icons {
+			position: absolute;
+			right: (32 + $gutter) * 1px;
+			top: 4px;
+
+			.icon {
+				
+				height: 32px;
+				margin-left: $gutter * 1px;
+				width: 32px;
+	
+				use { fill: $primary; }
+			}
+		}
+		
 		.closeButton {
 //			background: #ff0000;
 			cursor: pointer;
@@ -936,22 +951,6 @@ section.lightbox {
 			position: relative;
 			width: 100%;
 		}
-		
-		.icons {
-			position: absolute;
-			right: $gutter * 1px;
-			bottom: 0;
-			.icon {
-				
-				height: 32px;
-				margin-left: $gutter * 1px;
-				width: 32px;
-	
-				use { fill: $primary; }
-			}
-		}
-		
-		
 		
 	}
 }

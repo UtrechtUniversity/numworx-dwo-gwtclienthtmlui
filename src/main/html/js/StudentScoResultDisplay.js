@@ -35,7 +35,7 @@ function StudentScoResultDisplay() {
 
 StudentScoResultDisplay.prototype.show = function() {
 	window.app.mainDisplay.openLightboxView(this);
-        this.localize();
+    this.localize();
 	this.$panel.show();	
 	Helpers.stretchIframeHeight( this.$iframe ); // TODO: Action on Resizing
 	

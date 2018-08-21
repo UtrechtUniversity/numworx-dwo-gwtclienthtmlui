@@ -1942,6 +1942,23 @@
 		<section id="studentScoResult" class="lightbox">
 			<header>
 				<span id="studentScoResultName">Naam leerling</span><span id="studentScoResultActivity" class="strong">Opgave</span>
+				<div class="icons">
+					<a href="javascript:void(0);" id="studentScoResultPrint">
+						<svg viewBox="0 0 64 64" class="icon">
+							  <use xlink:href="#print"></use>
+						</svg>
+					</a>
+					<a href="javascript:void(0);" id="studentScoResultDownload">
+						<svg viewBox="0 0 64 64" class="icon">
+							  <use xlink:href="#download"></use>
+						</svg>
+					</a>
+					<a href="javascript:void(0);" id="studentScoResultLog">
+						<svg viewBox="0 0 64 64" class="icon">
+							  <use xlink:href="#log"></use>
+						</svg>
+					</a>
+				</div>
 				<span id="studentScoResultCloseButton" class="closeButton">
 					<svg viewBox="0 0 64 64" class="icon">
 						<use xlink:href="#close"></use>
@@ -1954,7 +1971,7 @@
 			<footer>
 					<div class="row">
 						<form name="studentScoResultActions">				
-							<div class="col-3 options">
+							<div class="col-9 options">
 								<label><span data-translate="NUM_LBL_STUDENTSCO_SEAL">Verzegelen voor deze leerling?</span></label>
 								<div class="option">
 									<input type="radio" name="seal" id="studentScoResultSealYes" value="1">
@@ -1972,7 +1989,7 @@
 							</label> -->
 						</form>
 					
-						<div class="col-4">
+						<div class="col-3">
 							<p data-translate="NUM_LBL_STUDENTSCO_OTHER">Andere leerling</p>
 							<p><a href="javascript: void(0);" id="studentScoResultPrevious" class="prev">
 								<svg viewBox="0 0 74 74" class="icon">
@@ -1984,27 +2001,8 @@
 									</svg>
 							   </a>
 						   </p>
-						</div>
+						</div>						
 						
-						<div class="col-5">
-							<div class="icons">
-								<a href="javascript:void(0);" id="studentScoResultPrint">
-									<svg viewBox="0 0 64 64" class="icon">
-										  <use xlink:href="#print"></use>
-									</svg>
-								</a>
-								<a href="javascript:void(0);" id="studentScoResultDownload">
-									<svg viewBox="0 0 64 64" class="icon">
-										  <use xlink:href="#download"></use>
-									</svg>
-								</a>
-								<a href="javascript:void(0);" id="studentScoResultLog">
-									<svg viewBox="0 0 64 64" class="icon">
-										  <use xlink:href="#log"></use>
-									</svg>
-								</a>
-							</div>
-						</div>
 					</div>
 			</footer>
 		</section>
