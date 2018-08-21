@@ -1,5 +1,7 @@
 function SelectedResultsDisplay() {		
 	this.resultState = null;
+	this.prevLeft = 0; // Scroll state
+	this.scrollTimer = null; //scroll Timer
 	
 	// Form
 	this.sealModuleActivitiesForm = document.forms["sealModuleActivities"];
@@ -669,15 +671,34 @@ SelectedResultsDisplay.prototype.backToResults = function(scoId) {
 
 SelectedResultsDisplay.prototype.scrollTableWrap = function(event) {
 	var $el = $(event.target);
-	var left = $el.scrollLeft();
+	var left = event.target.scrollLeft;
+	
+	if (left + event.target.offsetWidth + 100 > event.target.scrollWidth) {
+		$el.addClass('end');
+	} else {
+		$el.removeClass('end');
+	}
+	
 	if (left < 18) {
 		$el.removeClass('active');
-		$el.find('td:first-child span, th:first-child').css('left','');
+		this.setStickyColumn($el,'');
 	}
 	else {
 		$el.addClass('active');
-			$el.find('td:first-child span, th:first-child').css('left',(left-4)+'px');
+		if (left > this.prevLeft) {
+			clearTimeout(this.scrollTimer);
+			this.scrollTimer = setTimeout($.proxy(function() { this.setStickyColumn($el,left); }, this), 500);
+			
+		}
+		else this.setStickyColumn($el,left);
 	}
+	
+	this.prevLeft = left;
+}
+
+SelectedResultsDisplay.prototype.setStickyColumn = function($el,leftOffset) {
+	if (leftOffset) $el.find('td:first-child span, th:first-child').css('left',(leftOffset-4)+'px');
+	else $el.find('td:first-child span, th:first-child').css('left','');
 }
 
 SelectedResultsDisplay.prototype.hoverColumnHeader = function(event) {

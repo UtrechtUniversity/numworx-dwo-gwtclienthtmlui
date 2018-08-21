@@ -211,7 +211,7 @@ table.dwo { //:not(.c-datepicker__days)
  */ 
 
 table.dwo.results {
-	margin-right: 1 / 12 * $siteWidth * 1px;
+	//margin-right: 1 / 12 * $siteWidth * 1px;
 	max-height: 500px; height: auto;
 	overflow-x: scroll;
 	overflow-y: visible;
@@ -228,14 +228,14 @@ table.dwo.results {
 	
 	
 		
-	&:after {
-		content: "\00A0";
-		display: block;
-		right: $colWidth * -1px;
-	    position: absolute;
-	    top: 0;		
-		width: $colWidth * 1px;
-	}
+	//&:after {
+//		content: "\00A0";
+//		display: block;
+//		right: $colWidth * -1px;
+//	    position: absolute;
+//	    top: 0;
+//		width: $colWidth * 1px;
+//	}
 		
 	th, td {
 		//width: (1 / 12 * $siteWidth - 20) * 1px;
@@ -296,7 +296,7 @@ table.dwo.results {
 					background-color: $primaryLight;
 					left: $gutter * 1px;
 					position: absolute;
-					@include transition(all 100ms ease-in-out);
+					@include transition(all 50ms ease-in-out);
 					width: (($colWidth) - $gutter - $gutter) * 1px;
 					z-index: 11;
 					
@@ -334,7 +334,7 @@ table.dwo.results {
 					position: absolute;
 					padding-left: 0!important;
 					padding-right: 0!important;
-					@include transition(all 100ms ease-in-out);
+					@include transition(all 50ms ease-in-out);
 					width: $colWidth * 1px;
 					z-index: 10;					
 				}
@@ -432,7 +432,7 @@ table.dwo.results {
 				th:first-child {
 					background-color: $shade11;
 					text-indent: 10px;
-					@include transition(all 100ms ease-in-out);
+					@include transition(all 50ms ease-in-out);
 				}			
 			}			
 		}
@@ -495,7 +495,7 @@ table.dwo.results {
 					height: 32px;
 					overflow-x: hidden;
 					overflow-y: hidden;
-					@include transition(all 100ms ease-in-out);
+					@include transition(all 50ms ease-in-out);
 					width: auto;
 					
 				}
@@ -597,11 +597,18 @@ table.dwo.results {
 			top: 0;
 			bottom: 0;
 			right: 0;
+			@include transition(all 600ms ease);
+			
 			/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#edeff1+0,edeff1+100&0+0,1+100 */
 			background: -moz-linear-gradient(left, $shade20RGBA0 0%, $shade20RGBA1 100%); /* FF3.6-15 */
 			background: -webkit-linear-gradient(left, $shade20RGBA0 0%,$shade20RGBA1 100%); /* Chrome10-25,Safari5.1-6 */
 			background: linear-gradient(to right, $shade20RGBA0 0%,$shade20RGBA1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00edeff1', endColorstr='#{$shade20}',GradientType=1 ); /* IE6-9 */
+			z-index: 100;
+		}
+		
+		&.end:after {
+			opacity: 0;
 		}
 	}
 }
