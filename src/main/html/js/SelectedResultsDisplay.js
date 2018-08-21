@@ -5,6 +5,7 @@ function SelectedResultsDisplay() {
 	
 	// Form
 	this.sealModuleActivitiesForm = document.forms["sealModuleActivities"];
+	this.activitiesStudentsClearResultsForm = document.forms["activitiesStudentsClearResults"];
 	this.startCompareClassForm = document.forms["startCompareClass"];
 	 
 	
@@ -41,6 +42,7 @@ function SelectedResultsDisplay() {
 	this.$allFilterIndicators = $(".filterIndicators");
 	
 	this.$startCompareClassForm = $(this.startCompareClassForm);
+	this.$activitiesStudentsClearResultsForm = $(this.activitiesStudentsClearResultsForm);
 	
 	this.$printButton = $("#barActivitiesStudentsPrint");
 	
@@ -50,6 +52,7 @@ function SelectedResultsDisplay() {
 	this.$allFilterIndicators.on('click', $.proxy(this.clickFilterIndicator, this));
 	
 	this.$startCompareClassForm.on('submit', $.proxy(this.submitStartCompareClassForm, this));
+	this.$activitiesStudentsClearResultsForm.on('submit', $.proxy(this.submitActivitiesStudentsClearResultsForm, this));
 	this.$printButton.on('click', $.proxy(this.clickPrintButton, this));
 	this.$sealCheckbox.on('change', $.proxy(this.changeSealCheckbox, this));
 	this.$selectResultsTableWrap.on('scroll', $.proxy(this.scrollTableWrap, this));	
@@ -664,6 +667,10 @@ SelectedResultsDisplay.prototype.backToResults = function(scoId) {
 	app.getPresenterFactory().getSelectedResultsPresenter().back(this.resultState);	
 }
 
+SelectedResultsDisplay.prototype.clearStudentScoResults = function() {
+	app.getPresenterFactory().getSelectedResultsPresenter().clearStudentScoResults(this.resultState.activeModule, this.resultState.activeSchoolClass);
+}
+
 
 /*
  * EVENT HANDLERS
@@ -687,7 +694,7 @@ SelectedResultsDisplay.prototype.scrollTableWrap = function(event) {
 		$el.addClass('active');
 		if (left > this.prevLeft) {
 			clearTimeout(this.scrollTimer);
-			this.scrollTimer = setTimeout($.proxy(function() { this.setStickyColumn($el,left); }, this), 500);
+			this.scrollTimer = setTimeout($.proxy(function() { this.setStickyColumn($el,left); }, this), 300);
 			
 		}
 		else this.setStickyColumn($el,left);
@@ -780,5 +787,10 @@ SelectedResultsDisplay.prototype.changeSealCheckbox = function(event) {
 		event.target.disabled = true;
 		this.sealModuleActivities();
 	}
+}
+
+SelectedResultsDisplay.prototype.submitActivitiesStudentsClearResultsForm = function() {
+	event.preventDefault();			
+	this.clearStudentScoResults();
 }
 
