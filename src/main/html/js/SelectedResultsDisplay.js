@@ -689,6 +689,7 @@ SelectedResultsDisplay.prototype.scrollTableWrap = function(event) {
 	if (left < 18) {
 		$el.removeClass('active');
 		this.setStickyColumn($el,'');
+		$el.find('td:first-child span, th:first-child').css('opacity', '1');
 	}
 	else {
 		$el.addClass('active');
@@ -697,7 +698,12 @@ SelectedResultsDisplay.prototype.scrollTableWrap = function(event) {
 			this.scrollTimer = setTimeout($.proxy(function() { this.setStickyColumn($el,left); }, this), 300);
 			
 		}
-		else this.setStickyColumn($el,left);
+		else {
+			$el.find('td:first-child span, th:first-child').css('opacity', '0');
+			this.setStickyColumn($el,left);			
+			this.scrollTimer = setTimeout($.proxy(function() { $el.find('td:first-child span, th:first-child').css('opacity', '1'); }, this), 250);
+			//this.setStickyColumn($el,left);
+		}
 	}
 	
 	this.prevLeft = left;
