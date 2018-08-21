@@ -106,7 +106,6 @@ EditSchoolclassesDisplay.prototype.resetSorting = function() {
  */
 
 EditSchoolclassesDisplay.prototype.clear = function () {
-	console.log("clear!");
 	this.editSchoolclassForm.elements["classname"].value = "";
 		
 	this.editSchoolclassForm.elements["useClasskey"][0].checked = false;
@@ -126,6 +125,7 @@ EditSchoolclassesDisplay.prototype.clear = function () {
 	this.$changeModulesTableHead.find(".sortButton").removeClass('active');
 	
 	this.resetSorting();
+	this.editSchoolclassFormToggle();
 }
 
 EditSchoolclassesDisplay.prototype.init = function () {
@@ -137,6 +137,7 @@ EditSchoolclassesDisplay.prototype.init = function () {
 	app.mainDisplay.registerStretchables( [ this.$changeStudentsTableBody, this.$changeTeachersTableBody, this.$changeModulesTableBody ] );
 	this.resetSorting();
 	this.classKeyToggle();
+	this.editSchoolclassFormToggle();
 }
 
 EditSchoolclassesDisplay.prototype.setHelp = function(url) {
@@ -147,24 +148,36 @@ EditSchoolclassesDisplay.prototype.showSchoolClass = function(json) {
 	var schoolclass = json;
 	
 	this.editSchoolclassForm.elements["classname"].value = schoolclass.schoolClassName;
+	this.editSchoolclassForm.elements["classname"].dataset.original = schoolclass.schoolClassName;
 	
 	if (schoolclass.registrationKey != "") {
 		this.editSchoolclassForm.elements["useClasskey"][0].checked = true; //yes
+		this.editSchoolclassForm.elements["useClasskey"][0].dataset.original = 1;
 		this.editSchoolclassForm.elements["useClasskey"][1].checked = false;
+		this.editSchoolclassForm.elements["useClasskey"][0].dataset.original = 0;
 	} else {
 		this.editSchoolclassForm.elements["useClasskey"][0].checked = false;
+		this.editSchoolclassForm.elements["useClasskey"][0].dataset.original = 0;
 		this.editSchoolclassForm.elements["useClasskey"][1].checked = true;
+		this.editSchoolclassForm.elements["useClasskey"][0].dataset.original = 1;
 	} 
 	
 	if (schoolclass.iconizer == true) {
 		this.editSchoolclassForm.elements["useClasstree"][0].checked = true;
+		this.editSchoolclassForm.elements["useClasstree"][0].dataset.original = 1;
 		this.editSchoolclassForm.elements["useClasstree"][1].checked = false;
+		this.editSchoolclassForm.elements["useClasstree"][1].dataset.original = 0;
 	} else {
 		this.editSchoolclassForm.elements["useClasstree"][0].checked = false;
+		this.editSchoolclassForm.elements["useClasstree"][0].dataset.original = 0;
 		this.editSchoolclassForm.elements["useClasstree"][1].checked = true;
+		this.editSchoolclassForm.elements["useClasstree"][1].dataset.original = 1;
 	} 
 		
-	this.editSchoolclassForm.elements["classkey"].value = schoolclass.registrationKey;
+	this.editSchoolclassForm.elements["classkey"].value = schoolclass.registrationKey;	
+	this.editSchoolclassForm.elements["classkey"].dataset.original = schoolclass.registrationKey;
+	
+	this.editSchoolclassFormToggle();
 }
 
 EditSchoolclassesDisplay.prototype.showStudents = function(json) {	
@@ -334,14 +347,18 @@ EditSchoolclassesDisplay.prototype.changeInputFieldEditSchoolclassForm = functio
 	this.classKeyToggle();
 }
 
-EditSchoolclassesDisplay.prototype.editSchoolclassFormToggle = function(value) {
+EditSchoolclassesDisplay.prototype.editSchoolclassFormToggle = function() {
 	if (this.requiredFieldsEditSchoolclassForm()) this.$editSchoolclassForm.find(':submit').prop('disabled','');
 	else this.$editSchoolclassForm.find(':submit').prop('disabled','disabled');
 }
 
 EditSchoolclassesDisplay.prototype.requiredFieldsEditSchoolclassForm = function() {
 	return this.editSchoolclassForm.elements["classname"].value != ""
-			&& ( this.editSchoolclassForm.elements["useClasskey"][0].checked ? this.editSchoolclassForm.elements["classkey"].value  != "" : true);
+			&& ( this.editSchoolclassForm.elements["useClasskey"][0].checked ? this.editSchoolclassForm.elements["classkey"].value  != "" : true)
+			&& (   this.editSchoolclassForm.elements["classname"].value != this.editSchoolclassForm.elements["classname"].dataset.original
+		 		   || this.editSchoolclassForm.elements["classkey"].value != this.editSchoolclassForm.elements["classkey"].dataset.original
+	 		       || (this.editSchoolclassForm.elements["useClasstree"][0].checked ? !this.editSchoolclassForm.elements["useClasstree"][0].dataset.original : this.editSchoolclassForm.elements["useClasstree"][0].dataset.original)
+				   || (this.editSchoolclassForm.elements["useClasskey"][0].checked ? !this.editSchoolclassForm.elements["useClasskey"][0].dataset.original : this.editSchoolclassForm.elements["useClasskey"][0].dataset.original) );
 }
 
 EditSchoolclassesDisplay.prototype.classKeyToggle = function(value) {
