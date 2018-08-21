@@ -248,7 +248,7 @@ table.dwo.results {
 			width: ($colWidth - $gutter) * 1px;
 			
 			span:not(.sortButton) { 
-				background-color: $transWhite;
+				background-color: $white;
 				bottom: 0;
 				display: block;
 				left: 0;
@@ -351,12 +351,13 @@ table.dwo.results {
 //						font-size: 13 / 16 * 1em;
 						height: 64px;
 						line-height: 1.3em;
-						margin: -54px 0 0 0px;						
+						margin: -38px 0 0 0px;	// -54
 						overflow: hidden;
 						padding: 3px 5px;
 						position: absolute;
 						text-align: left;
 						text-transform: none;
+						top: 0;
 						@include transition(background-color 200ms ease);
 						transition-property: background-color, color;
 						//width: (($colWidth - $gutter) / 2 - 10) * 1px;
@@ -482,7 +483,7 @@ table.dwo.results {
 				//overflow-x: hidden;
 				color: black;
 				height: 16px;
-				overflow: hidden;
+//				overflow-y: hidden;
 				position: relative;
 				white-space: nowrap;
 				width: (($colWidth) - $gutter) * 1px;
@@ -506,7 +507,7 @@ table.dwo.results {
 				}	
 				
 				.active & {
-					position: absolute;
+					//position: absolute;
 				}
 			}	
 			

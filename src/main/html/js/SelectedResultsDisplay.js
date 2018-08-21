@@ -672,11 +672,11 @@ SelectedResultsDisplay.prototype.scrollTableWrap = function(event) {
 	var left = $el.scrollLeft();
 	if (left < 18) {
 		$el.removeClass('active');
-		$el.find('td:first-child, th:first-child').css('left','');
+		$el.find('td:first-child span, th:first-child').css('left','');
 	}
 	else {
 		$el.addClass('active');
-			$el.find('td:first-child, th:first-child').css('left',(left-4)+'px');
+			$el.find('td:first-child span, th:first-child').css('left',(left-4)+'px');
 	}
 }
 
