@@ -416,19 +416,18 @@ ModulesOfSchoolclassDisplay.prototype.toggleTreeCheckbox = function(event) {
 		if (!this.nodes.hasOwnProperty( this.selectedNodeId )) return;
 
 		if ( this.nodes[this.selectedNodeId].classCourse &&  this.nodes[this.selectedNodeId].classCourse.viewState == "invisible" ) {
+			// If this course has been selected before, attach
 			this.attachItem( this.selectedNodeId );			
 		} else {
-			this.$tree.find(".temporary input").prop('checked','');
-			
+			// If not selected before, edit setting before attach
+			this.$tree.find(".temporary input").prop('checked','');			
 			$(event.target).parent().addClass("temporary");
 			this.temporaryAddModule( this.selectedNodeId );
 		}	
 				
 	} else {
-		// If the item is selected, then disable settingsform
-		for (var i = 0; i < this.selectForm.elements["module"].length; i++) 
-			if (this.selectForm.elements["module"][i].checked) break;
-		if (event.target.value == this.selectForm.elements["module"][i].value) this.settingsFormAllFieldToggle(false);
+		// If the item is selected, then disable settingsform and detach
+		this.settingsFormAllFieldToggle(false);		
 		this.detachItem(event.target.value);			
 	} 
 }
