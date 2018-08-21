@@ -241,6 +241,7 @@ table.dwo.results {
 		//width: (1 / 12 * $siteWidth - 20) * 1px;
 		text-align: center;
 		width: (($colWidth / 2) - $gutter) * 1px;
+		@include user-select-none();
 		
 		&:first-child {
 			position: relative;

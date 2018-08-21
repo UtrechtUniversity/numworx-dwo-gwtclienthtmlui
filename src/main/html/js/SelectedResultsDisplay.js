@@ -204,7 +204,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
     	return (className.match (/(^|\s)size-\S+/g) || []).join(' ');
 	});
 	this.$selectResultsTableWrap.addClass("size-"+matrix[0].length);
-	
+	this.$selectResultsTableWrap.removeClass("active");
 	this.$selectResultsTableWrap.html("");
 	this.$selectResultsTableWrap.append($table);
 	
@@ -693,16 +693,16 @@ SelectedResultsDisplay.prototype.scrollTableWrap = function(event) {
 	}
 	else {
 		$el.addClass('active');
+		clearTimeout(this.scrollTimer);
+		
 		if (left > this.prevLeft) {
-			clearTimeout(this.scrollTimer);
+			$el.find('td:first-child span, th:first-child').css('opacity', '1');
 			this.scrollTimer = setTimeout($.proxy(function() { this.setStickyColumn($el,left); }, this), 300);
-			
 		}
 		else {
 			$el.find('td:first-child span, th:first-child').css('opacity', '0');
 			this.setStickyColumn($el,left);			
 			this.scrollTimer = setTimeout($.proxy(function() { $el.find('td:first-child span, th:first-child').css('opacity', '1'); }, this), 250);
-			//this.setStickyColumn($el,left);
 		}
 	}
 	
