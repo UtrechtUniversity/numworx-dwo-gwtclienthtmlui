@@ -666,7 +666,7 @@ SelectedResultsDisplay.prototype.scrollTableWrap = function(event) {
 	var left = $el.scrollLeft();
 	if (left == 0) $el.removeClass('active');
 	else $el.addClass('active');
-	$el.find('td:first-child span').css('left',left+'px');
+	$el.find('td:first-child').css('left',left+'px');
 }
 
 SelectedResultsDisplay.prototype.hoverColumnHeader = function(event) {
