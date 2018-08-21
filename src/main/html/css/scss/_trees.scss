@@ -12,11 +12,12 @@ Tree, its wrapper and icons
 .treeWrapper {
 	background: $white;
 	border: $borderThickness $primary solid;
+	@include border-box;
 	@include border-radius($defaultRadius);
 	max-height: 80%;
 	overflow-x: hidden;
 	overflow-y: auto;
-	padding: $gutter * 1px;
+	padding: 0px $gutter * 1px;
 	
 	-ms-overflow-style: -ms-autohiding-scrollbar;
 }
@@ -25,6 +26,7 @@ ul.tree {
 	font-size: 14 / 16 * 1em;
 	line-height: 27 / 14 * 1em;
 	list-style-type: none;
+	margin: $gutter * 1px 0;
 	
 	li {
 		border-left: 1px $shade21 solid;

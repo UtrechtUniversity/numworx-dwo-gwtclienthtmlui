@@ -325,7 +325,6 @@ MainDisplay.prototype.registerStretchables = function( elements ) {
 	
 	for (i=0; i<elements.length; i++) {
 		if ( this.stretchables.indexOf(elements[i]) === -1) {
-			console.log("PUSH STRETCHABLE");
 			this.stretchables.push( elements[i] );
 		}
 	}
