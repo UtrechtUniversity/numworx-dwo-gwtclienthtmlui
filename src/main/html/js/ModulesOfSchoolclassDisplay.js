@@ -284,7 +284,7 @@ ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, dept
 			aClass="set";
 		}
 		
-		if (this.nodes[id].open == true) liClass += " o"; //open
+		if (this.nodes[id].open == true) liClass += " open"; //open
 
 		if (tree[id].data.classCourse != null) {
 			if (tree[id].data.classCourse.viewState === "invisible") {

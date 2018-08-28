@@ -81,7 +81,7 @@ ul.tree {
 			top: 0px;
 			width: 12px;
 		}		
-		&.hasSub.open:before , &.hS.o:before {
+		&.hasSub.open:before, &.hS.open:before {
 			background: transparent url(../images/tree-li-hassub-open.png);	
 			//content: "";
 //			display: inline-block;
@@ -96,7 +96,7 @@ ul.tree {
 			background: transparent url(../images/tree-li-hassub-closed-last.png);	
 			background-repeat: no-repeat;
 		}
-		&.hasSub.open:last-child:before, &hS.o:last-child:before {
+		&.hasSub.open:last-child:before, &.hS.open:last-child:before {
 			background: transparent url(../images/tree-li-hassub-open-last.png);	
 //			background-repeat: no-repeat;
 		}
