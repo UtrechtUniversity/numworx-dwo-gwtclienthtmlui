@@ -174,7 +174,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 				$rowCell.append($value);
 			} else {
 				// No result? Create invisible SPAN, used for sorting
-				$value = $("<span>&nbsp;</a>");
+				$value = $("<a>&nbsp;</a>");
 				if (matrix[i][j].sortValue) $value.attr("data-sortvalue", matrix[i][j].sortValue );
 				else if (matrix[i][j].score) $value.attr("data-sortvalue", matrix[i][j].score );
 				else $value.attr("data-sortvalue", "-1" );
