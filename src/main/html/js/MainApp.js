@@ -36,5 +36,6 @@ MainApp.prototype.getTranslator = function() {
 
 window.jsInitMainApp = function() {
 	window.app = new MainApp();	
+	app.mainDisplay.init();
 }
 	

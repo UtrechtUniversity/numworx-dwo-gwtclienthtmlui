@@ -464,22 +464,22 @@
 				</div>				
 				<div class="row">
 					<form name="updateSchoolLoginsView">
-						<div class="col-8">
+						<div class="col-10">
 							<table class="dwo sortable headered">
 								<thead>
 									<tr>
-										<th class="col-2">
+										<th class="col-4">
 											<span data-translate="NUM_TBL_SCHOOLLOGINOPTION">School</span>
 										</th>
 										<th class="col-2">
 											<span data-translate="NUM_TBL_ROLE">Rol</span>											
 										</th>
-										<th><span data-translate="NUM_TBL_STARTWITHSCHOOLLOGIN">Hiermee opstarten</span></th>
-										<th><span data-translate="NUM_TBL_REMOVESCHOOLLOGIN">Login verwijderen</span></th>
+										<th class="col-2 centered"><span data-translate="NUM_TBL_STARTWITHSCHOOLLOGIN">Hiermee opstarten</span></th>
+										<th class="col-2 centered"><span data-translate="NUM_TBL_REMOVESCHOOLLOGIN">Login verwijderen</span></th>
 									</tr>
 									
 									<tr class="sorting">
-										<th class="col-2">
+										<th class="col-4">
 											<span class="sortButton asc default" data-order="asc" data-type="string">
 												<svg viewBox="0 0 74 74" class="icon">
 													  <use xlink:href="#arrowUp"></use>
@@ -511,14 +511,14 @@
 									
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
-										<td class="col-2"><span id="updateSchoolLoginsViewSchool" >Schoolnaam</span></td>
+										<td class="col-4"><span id="updateSchoolLoginsViewSchool" >Schoolnaam</span></td>
 										<td class="col-2"><span id="updateSchoolLoginsViewRole">ROL</span></td>
-										<td>
+										<td class="col-2 centered">
 											<div class="checkbox">
 												<input type="checkbox" name="active[]" id="updateSchoolLoginsViewActive" value="schoolid"><label class="icon" for="updateSchoolLoginsViewActive"></label>
 											</div>											
 										</td>
-										<td>
+										<td class="col-2 centered">
 											<div class="checkbox danger">
 												<input type="checkbox" name="remove[]" id="updateSchoolLoginsViewRemove" value="schoolid"><label class="icon" for="updateSchoolLoginsViewRemove"></label>
 											</div>											
@@ -1158,8 +1158,8 @@
 								</tbody>
 							</table>
 						
-							<input type="button" name="move" class="primary right clearbtn" data-translate="NUM_BTN_MoveLeft" value="Verplaats >" />
-							<input type="submit" name="copy" class="primary right clearbtn" data-translate="NUM_BTN_CopyLeft" value="Kopieer >" />							
+							<input type="button" name="move" class="primary right clearbtn" data-translate="NUM_BTN_MoveLeft" value="Verplaats &#x25b6;" />
+							<input type="submit" name="copy" class="primary right clearbtn" data-translate="NUM_BTN_CopyLeft" value="Kopieer &#x25b6;" />							
 						</form>	
 					</div>
 					<div class="col-4">
@@ -1242,8 +1242,8 @@
 								</tbody>
 							</table>
 						
-							<input type="button" name="move" class="primary left clearbtn" data-translate="NUM_BTN_MoveRight" value="< Verplaats" />
-							<input type="submit" name="copy" class="primary left clearbtn" data-translate="NUM_BTN_CopyRight" value="< Kopieer" />							
+							<input type="button" name="move" class="primary left clearbtn" data-translate="NUM_BTN_MoveRight" value="&#x25c0; Verplaats" />
+							<input type="submit" name="copy" class="primary left clearbtn" data-translate="NUM_BTN_CopyRight" value="&#x25c0; Kopieer" />							
 						</form>	
 					</div>
 				</div>
@@ -1644,8 +1644,8 @@
 								<thead>
 									<tr>
 										<th class="col-2"></th>
-										<th class="col-2"><span data-translate="NUM_TBL_RESULTS_OPEN">Open</span></th>
-										<th class="col-2"><span data-translate="NUM_TBL_RESULTS_CLOSED" >Gesloten</span></th>
+										<th class="col-2 centered"><span data-translate="NUM_TBL_RESULTS_OPEN">Open</span></th>
+										<th class="col-2 centered"><span data-translate="NUM_TBL_RESULTS_CLOSED" >Gesloten</span></th>
 									</tr>
 									<tr class="sorting">
 										<th class="col-2">
@@ -1670,12 +1670,12 @@
 									<tr>
 										<td class="col-2"><span id="chooseClassAndModulesClassname">Klasnaam</span></td>
 
-										<td class="col-2">
+										<td class="col-2 centered">
 											<div class="checkbox">
 												<input type="radio" name="open[]" id="chooseClassAndModulesOpen" value="schoolclassID"><label class="icon" for="chooseClassAndModulesOpen"></label>
 											</div>											
 										</td>
-										<td class="col-2">
+										<td class="col-2 centered">
 											<div class="checkbox">
 												<input type="radio" name="closed[]" id="chooseClassAndModulesClassClosed" value="schooclassID"><label class="icon" for="chooseClassAndModulesClassClosed"></label>
 											</div>											
@@ -1684,6 +1684,8 @@
 																
 								</tbody>
 							</table>
+							<input type="radio" name="open[]" value="" class="hidden">
+							<input type="radio" name="closed[]" value="" class="hidden">
 						</div>
 					
 						<div class="col-6">
@@ -1692,7 +1694,7 @@
 								<thead>
 									<tr>
 										<th class="col-4">&nbsp;</th>
-										<th class="col-2"><span id="resultsDisplayChooseModulesSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT">Selecteer</span></span></th>
+										<th class="col-2 centered"><span id="resultsDisplayChooseModulesSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT">Selecteer</span></span></th>
 									</tr>
 									<tr class="sorting">
 										<th class="col-4">
@@ -1714,9 +1716,9 @@
 							
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
-										<td class="col-5"><span id="chooseClassAndModulesModuleName">Module name</span></td>
+										<td class="col-4"><span id="chooseClassAndModulesModuleName">Module name</span></td>
 
-										<td class="col-1">
+										<td class="col-2 centered">
 											<div class="checkbox">
 												<input type="checkbox" name="select[]" id="chooseClassAndModulesModuleSelect" value="moduleID"><label class="icon" for="chooseClassAndModulesModuleSelect"></label>
 											</div>											
@@ -1769,16 +1771,22 @@
 				
 				<div class="row">
 					<div class="col-12">
+						<h2 id="selectedResultsTitle"><span class="prefix">Activiteit</span> <span class="text">Voorbeeld</span></h2>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-12">
 						<div class="tablewrap" id="selectedResultsTableWrap">
 							<table id="selectedResultsTable" class="dwo hoverable results">
 								<thead>
 									<tr>
-										<th class="tableTitle" colspan="2">[colum type name]</th>
+										<th class="tableTitle">[colum type name]</th>
+										<th>&nbsp;</th>
 									</tr>
 									<tr class="headers">
 										<th>&nbsp;</th>
 										<th id="selectedResultsTableRepeatableColumnHeaderName"><span>Module naam in drie regels</span></th>
-										<!-- <th class="fill"></th> -->
 									</tr>
 									<tr class="sorting">
 										<th>
@@ -1793,6 +1801,7 @@
 												</svg>
 											</span>											
 										</th>
+										
 										<th id="selectedResultsTableRepeatableColumnHeaderSorting">
 											<span class="sortButton asc" data-order="asc" data-type="int">
 												<svg viewBox="0 0 74 74" class="icon">
@@ -1830,7 +1839,7 @@
 					<div class="col-6">
 						<p>&nbsp;</p>
 					</div>
-					<div class="col-4">
+					<div class="col-3">
 						<p><span data-translate="NUM_LBL_SELECTEDRESULTS_SHOW">Toon:</span> 
 							<span class="filterIndicators result1" data-filter="1"><a href="javascript:void(0);">1</a></span>
 							<span class="filterIndicators result2" data-filter="2"><a href="javascript:void(0);">2</a></span>
@@ -1838,10 +1847,16 @@
 							<span class="filterIndicators result4" data-filter="4"><a href="javascript:void(0);">4</a></span>
 						</p>
 					</div>
-					<div class="col-2">
+					<div class="col-3">
 						<form name="startCompareClass">
 							<input type="submit" class="primary right" value="Vergelijk klas" />
 						</form>
+					</div>
+					<div class="col-12">
+						<p><a href="javascript:void(0);" id="barModulesStudentsBacklink" class="backlink">
+							<svg viewBox="0 0 74 74" class="icon">
+									  <use xlink:href="#arrowLeft"></use>
+								</svg><span data-translate="NUM_LBL_SELECTEDRESULTS_BACKTOSELECT">Terug naar start</span></a></p>
 					</div>
 				</div>
 				
@@ -1868,7 +1883,7 @@
 						</form>
 					</div>
 					
-					<div class="col-5">
+					<div class="col-3">
 						<p>Toon: 
 							<span class="filterIndicators result1" data-filter="1"><a href="javascript:void(0);">1</a></span>
 							<span class="filterIndicators result2" data-filter="2"><a href="javascript:void(0);">2</a></span>
@@ -1876,6 +1891,13 @@
 							<span class="filterIndicators result4" data-filter="4"><a href="javascript:void(0);">4</a></span>
 						</p>
 					</div>
+					
+					<div class="col-2">
+						<form name="activitiesStudentsClearResults">
+							<input type="submit" class="primary right hidden" data-translate="NUM_LBL_SELECTEDRESULTS_ClearResults" value="Clear" />
+						</form>
+					</div>
+					
 					<div class="col-1">
 						<a href="javascript:void(0);" id="barActivitiesStudentsPrint">
 							<svg viewBox="0 0 64 64" class="icon btn">
@@ -1934,6 +1956,23 @@
 		<section id="studentScoResult" class="lightbox">
 			<header>
 				<span id="studentScoResultName">Naam leerling</span><span id="studentScoResultActivity" class="strong">Opgave</span>
+				<div class="icons">
+					<a href="javascript:void(0);" id="studentScoResultPrint">
+						<svg viewBox="0 0 64 64" class="icon">
+							  <use xlink:href="#print"></use>
+						</svg>
+					</a>
+					<a href="javascript:void(0);" id="studentScoResultDownload">
+						<svg viewBox="0 0 64 64" class="icon">
+							  <use xlink:href="#download"></use>
+						</svg>
+					</a>
+					<a href="javascript:void(0);" id="studentScoResultLog">
+						<svg viewBox="0 0 64 64" class="icon">
+							  <use xlink:href="#log"></use>
+						</svg>
+					</a>
+				</div>
 				<span id="studentScoResultCloseButton" class="closeButton">
 					<svg viewBox="0 0 64 64" class="icon">
 						<use xlink:href="#close"></use>
@@ -1946,7 +1985,7 @@
 			<footer>
 					<div class="row">
 						<form name="studentScoResultActions">				
-							<div class="col-3 options">
+							<div class="col-9 options">
 								<label><span data-translate="NUM_LBL_STUDENTSCO_SEAL">Verzegelen voor deze leerling?</span></label>
 								<div class="option">
 									<input type="radio" name="seal" id="studentScoResultSealYes" value="1">
@@ -1964,7 +2003,7 @@
 							</label> -->
 						</form>
 					
-						<div class="col-4">
+						<div class="col-3">
 							<p data-translate="NUM_LBL_STUDENTSCO_OTHER">Andere leerling</p>
 							<p><a href="javascript: void(0);" id="studentScoResultPrevious" class="prev">
 								<svg viewBox="0 0 74 74" class="icon">
@@ -1976,27 +2015,8 @@
 									</svg>
 							   </a>
 						   </p>
-						</div>
+						</div>						
 						
-						<div class="col-5">
-							<div class="icons">
-								<a href="javascript:void(0);" id="studentScoResultPrint">
-									<svg viewBox="0 0 64 64" class="icon">
-										  <use xlink:href="#print"></use>
-									</svg>
-								</a>
-								<a href="javascript:void(0);" id="studentScoResultDownload">
-									<svg viewBox="0 0 64 64" class="icon">
-										  <use xlink:href="#download"></use>
-									</svg>
-								</a>
-								<a href="javascript:void(0);" id="studentScoResultLog">
-									<svg viewBox="0 0 64 64" class="icon">
-										  <use xlink:href="#log"></use>
-									</svg>
-								</a>
-							</div>
-						</div>
 					</div>
 			</footer>
 		</section>
@@ -2182,7 +2202,7 @@
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_PERSONS_ADD">Voeg een nieuwe leerling</span></h2>
 						<form name="personsAdd">
 							<fieldset>
-								<label for="button_1">
+								<label class="buttonLabel" for="button_1">
                                                                     <span data-translate="NUM_LBL_PERSONS_ADD">Een enkele nieuwe leerling opvoeren</span>
 									<input type="submit" class="secondary right" data-translate="NUM_BTN_Add" value="Toevoegen" />
 								</label>
@@ -2196,7 +2216,7 @@
 						<h2 class="sectionhead"><span>Meerdere personen tegelijk toevoegen</span></h2>
 						
 							<fieldset>
-								<label for="button_1">
+								<label class="buttonLabel" for="button_1">
 									Importeer leerlingen of docenten vanuit een CSV bestand
 									<input type="submit" class="secondary right" value="Zoek bestand" />
 								</label>

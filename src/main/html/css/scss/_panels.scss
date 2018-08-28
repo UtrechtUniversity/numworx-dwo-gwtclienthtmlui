@@ -256,9 +256,16 @@ body {
 				border-bottom: 1px $primary solid;
 				border-left: 1px $shade11 solid;
 				cursor: pointer;
-				margin-left: ($gutter + 1) * -1px;						
+				margin-left: ($gutter + 1) * -1px;		
+				width: ($colWidth - $gutter) * 1px;				
 				z-index: 400;
+				
+				@media #{$mediaQueryDesktop} {
+					width: auto;
+				}
 			}	
+			
+			
 			
 			.content {
 				background-color: $shade11;
@@ -883,6 +890,21 @@ section.lightbox {
 		right: $gutter * 1px;
 		top: $elementMarginBottom;
 		
+		.icons {
+			position: absolute;
+			right: (32 + $gutter) * 1px;
+			top: 4px;
+
+			.icon {
+				
+				height: 32px;
+				margin-left: $gutter * 1px;
+				width: 32px;
+	
+				use { fill: $primary; }
+			}
+		}
+		
 		.closeButton {
 //			background: #ff0000;
 			cursor: pointer;
@@ -930,22 +952,6 @@ section.lightbox {
 			width: 100%;
 		}
 		
-		.icons {
-			position: absolute;
-			right: $gutter * 1px;
-			bottom: 0;
-			.icon {
-				
-				height: 32px;
-				margin-left: $gutter * 1px;
-				width: 32px;
-	
-				use { fill: $primary; }
-			}
-		}
-		
-		
-		
 	}
 }
 
@@ -960,6 +966,7 @@ section.lightbox {
 	a {
 		color: $primary;
 		font-weight: bold;
+		text-decoration: underline;
 	}
 }
 
@@ -986,6 +993,12 @@ section.lightbox {
 	}
 }
 
+#modulesOfSchoolclassDisplay {
+	tbody, #modulesOfSchoolclassDisplayTreeWrapper {
+		height: 500px;
+	}
+}
+
 
 .c-scrim {
 	z-index: 999;
@@ -1007,12 +1020,12 @@ section.lightbox {
 
 
 .filterIndicators {
-	border-bottom: $borderThickness $shade20 solid;
+	border-bottom: $borderThicknessResult $shade20 solid;
 	display: inline-block;
 	padding-bottom: $borderThickness;
 	
 	&.active {
-		border-bottom: $borderThickness $primary solid;
+		border-bottom: $borderThicknessResult $primary solid;
 	}
 	
 	a {		

@@ -50,6 +50,7 @@ ul {
 
 .backlink {
 	color: $primaryLight;
+	text-decoration: underline;
 	
 	.icon {
 		display: inline-block;			
@@ -94,6 +95,16 @@ h2 {
 	}
 	nav & {
 		font-size: 18 / 16 * 1em;
+	}
+	
+	&#selectedResultsTitle {
+		color: $primaryLight;
+		font-size: 14 / 16 * 1em;
+		letter-spacing: 0.3px;
+		margin-bottom: 0;
+		span.text {
+			font-weight: 700;
+		}
 	}
 	
 	&.sectionhead {
@@ -184,7 +195,9 @@ input[type="submit"], input[type="button"], button {
 	color: $white;
 	font-weight: bold;
 	letter-spacing: .3px;
+	line-height: 14px;
 	font-size: 12px;
+
 }
 input[type="text"], input[type="password"] {
 	font-family: 'Ubuntu', sans-serif;
@@ -205,8 +218,13 @@ label {
 	color: $primaryLight;
 	//font-family: 'Ubuntu Condensed', sans-serif;
 	font-size: 13 / 16 * 1em;
+	line-height: 14px;
 	//font-weight: bold;
 
+	&.buttonLabel {
+		color: $primary;
+		font-weight: bold;
+	}
 	
 	&.input {
 		text-transform: uppercase;
@@ -239,6 +257,15 @@ table thead tr th {
 	font-size: 12 / 16 * 1em;
 	text-transform: uppercase;
 	color: $primaryLight;
+	
+	span {
+		a {
+//			font-size: 10 / 12 * 1em;
+		}
+	}
+}
+table.results thead tr th {
+	color: $primary;
 }
 
 table tbody tr td {
@@ -270,6 +297,8 @@ table.results {
 .lightbox {
 	header {
 		color: $primaryLight;
+		font-size: 14 / 16 * 1em;
+		line-height: 16 / 14 * 1em;
 		text-transform: uppercase;
 		
 		span.strong {

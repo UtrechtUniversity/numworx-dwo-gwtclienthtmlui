@@ -203,14 +203,15 @@ form {
 
 	
 .checkbox {
-	float: left;
-	display: block;
+	//float: left;
+//	display: block;
+	display: inline-block;
 	position: relative;
 	width: 25px;
 	height: 25px;
 	cursor: pointer;
-	margin-top: -3px;
-	margin-bottom: -3px;
+	margin-top: 0px;
+	margin-bottom: -6px;
 
 	@include user-select(none);
   
@@ -349,5 +350,6 @@ form {
 
 .selectAllButton {
 	cursor: pointer;
+	text-decoration: underline;
 }
 	

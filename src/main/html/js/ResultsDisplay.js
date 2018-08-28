@@ -78,8 +78,13 @@ ResultsDisplay.prototype.setChooseClassTable = function() {
 			this.nextElementSibling.setAttribute("for", oldFor + i);
 		});
 		
-		$row.find("input[name='open[]']").on('change', $.proxy(this.changeCheckboxOpenClosed,this));
-		$row.find("input[name='closed[]']").on('change', $.proxy(this.changeCheckboxOpenClosed,this));
+		if (id == this.resultState.activeSchoolClass) {
+			if (this.resultState.moduleState == 0 || this.resultState.moduleState == 2) $row.find("input[name='closed[]']").prop('checked', 'checked');
+			if (this.resultState.moduleState == 1 || this.resultState.moduleState == 2) $row.find("input[name='open[]']").prop('checked', 'checked');
+		}
+		
+		$row.find("input[name='open[]']").on('click', $.proxy(this.changeCheckboxOpenClosed,this));
+		$row.find("input[name='closed[]']").on('click', $.proxy(this.changeCheckboxOpenClosed,this));
 		
 		this.$chooseClassTableBody.append($row);
 		i++;
@@ -108,8 +113,15 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 		//course = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[id];
 		course = sortedSchoolClassChildren[n];
 		
-		if (this.resultState.showOnlyClosedModules == true && course.viewState != "invisible") continue;
-		if (this.resultState.showOnlyClosedModules == false && course.viewState != "studentsAndTeachers") continue;
+		//if (this.resultState.showOnlyClosedModules == true && course.viewState != "invisible") continue;
+		//if (this.resultState.showOnlyClosedModules == false && course.viewState != "studentsAndTeachers") continue;
+		
+		if ( (this.resultState.moduleState == 1 && course.viewState == "invisible")
+	         || (this.resultState.moduleState == 0 && course.viewState == "studentsAndTeachers") ) {
+			// remove from list if previously selected
+			if (typeof this.resultState.activeCourses != "undefined" && this.resultState.activeCourses.indexOf(sortedSchoolClassChildren[n].id) != -1) this.resultState.activeCourses.splice(this.resultState.activeCourses.indexOf(sortedSchoolClassChildren[n].id), 1);
+			continue; 
+		}
 		
 		$row = this.$chooseModulesRow.clone();
 	
@@ -123,6 +135,8 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 			oldFor = this.nextElementSibling.getAttribute("for");
 			this.nextElementSibling.setAttribute("for", oldFor + i);
 		});
+		
+		if (typeof this.resultState.activeCourses != "undefined" && this.resultState.activeCourses.indexOf(sortedSchoolClassChildren[n].id) != -1) $row.find("input[name='select[]']").prop('checked', 'checked');
 	
 		$row.find("input[name='select[]']").on('change', $.proxy(this.changeCheckboxSelect,this));
 	
@@ -132,7 +146,7 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 	
 	this.$selectAllModules.children().removeClass("active");
 	this.$chooseModulesTableHead.find(".sortButton.default").trigger('click');	
-	
+	this.chooseClassModuleFormToggle();
 }
 
 
@@ -143,6 +157,7 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 
 ResultsDisplay.prototype.init = function () {
 	app.mainDisplay.registerStretchables( [ this.$chooseClassTableBody, this.$chooseModulesTableBody  ] );
+	this.resultState = {};
 	this.resultState.activeCourses = [];
 	this.chooseClassModuleFormToggle();
 	this.$selectAllModules.removeClass("active");
@@ -174,29 +189,23 @@ ResultsDisplay.prototype.setResultTree = function (resultTree, studentsTree) {
 	this.setChooseClassTable();
 }
 
+ResultsDisplay.prototype.setResultTreeWithContext = function (resultTree, studentsTree, context) {
+	this.resultState = context;
+	this.resultState.resultsTree = resultTree;
+	this.resultState.studentsTree = studentsTree;
+	this.setChooseClassTable();
+	this.setChooseModulesTable();
+	console.log(this.resultState);
+}
+
 ResultsDisplay.prototype.setEmptyTableMessage = function () {
-	console.log("setEmptyTableMessage");
 	this.$chooseClassTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
-//	this.$chooseModuleTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
 }
 
 ResultsDisplay.prototype.setLoadingTableMessage = function () {
 	this.$chooseClassTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
 	this.$chooseModulesTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_FETCHINGDATA' )+'</td></tr>');	
 }
-
-// ResultsDisplay.prototype.setEmptyTableMessageModules = function () {
-// 	console.log("setEmptyTableMessageModules");
-// }
-// ResultsDisplay.prototype.setLoadingTableMessageModules = function () {
-// 	console.log("setLoadingTableMessageModules");
-// }
-// ResultsDisplay.prototype.setEmptyTableMessageSelected = function () {
-// 	console.log("setEmptyTableMessageSelected");
-// }
-// ResultsDisplay.prototype.setLoadingTableMessageSelected = function () {
-// 	console.log("setLoadingTableMessageSelected");
-// }
 
 
 /*
@@ -214,29 +223,56 @@ ResultsDisplay.prototype.showSelectedResults = function() {
  */
 
 ResultsDisplay.prototype.changeCheckboxOpenClosed = function(event) {
+	var openModules = false, closedModules = false;
+
 	
-	// Reset previous modules chosen
-	this.resultState.activeCourses = [];
+	
 	this.chooseClassModuleFormToggle();
-			
+	
+	if ( this.resultState.moduleState == 2 && event.target.name == "closed[]" && this.resultState.activeSchoolClass == event.target.value) {
+		this.chooseClassModuleForm.elements["closed[]"][this.chooseClassModuleForm.elements["closed[]"].length-1].checked = true;
+		this.resultState.moduleState = 1;
+	}
+	else if ( this.resultState.moduleState == 2 && event.target.name == "open[]" && this.resultState.activeSchoolClass == event.target.value) {
+		this.chooseClassModuleForm.elements["open[]"][this.chooseClassModuleForm.elements["open[]"].length-1].checked = true;
+		this.resultState.moduleState = 0;
+	}
+	
 	if (event.target.checked) {
-		this.uncheckCheckboxOpenClosed();
-		event.target.checked = "checked";
+		// else {
+			if (this.resultState.activeSchoolClass != event.target.value) {
+				this.resultState.activeCourses = [];
+				this.resultState.activeSchoolClass = event.target.value;
+			}
+			
+			
+			this.uncheckCheckboxOpenClosedExcept(event.target.value);
+			
+			for (i = 0; i < this.chooseClassModuleForm.elements["closed[]"].length; i++) {
+				if (this.chooseClassModuleForm.elements["closed[]"][i].checked) {				
+					closedModules = true;
+				}
+			}
+			
+			for (i = 0; i < this.chooseClassModuleForm.elements["open[]"].length; i++) {
+				if (this.chooseClassModuleForm.elements["open[]"][i].checked) {				
+					openModules = true;
+				}
+			}
+			
+			this.resultState.moduleState = openModules &&  closedModules ? 2 : closedModules ? 0 : 1; // open = 1, closed = 0, both = 2
+			
 		
-		this.resultState.showOnlyClosedModules = false;
-		if (event.target.name=="closed[]") this.resultState.showOnlyClosedModules = true;		
-		
-		this.resultState.activeSchoolClass = event.target.value;
-	} else {
-		this.resultState.activeSchoolClass = null;
-	}		
+	} //else {
+		//this.resultState.activeSchoolClass = null;
+		//}		
 	
 	this.setChooseModulesTable();	
 }
-ResultsDisplay.prototype.uncheckCheckboxOpenClosed = function() {
+ResultsDisplay.prototype.uncheckCheckboxOpenClosedExcept = function(id) {
 	for (i = 0; i < this.chooseClassModuleForm.elements.length; i++) {
 		if ( (this.chooseClassModuleForm.elements[i].name == "open[]" || this.chooseClassModuleForm.elements[i].name == "closed[]")
-			&& !this.chooseClassModuleForm.elements[i].disabled) this.chooseClassModuleForm.elements[i].checked = "";
+			&& !this.chooseClassModuleForm.elements[i].disabled && this.chooseClassModuleForm.elements[i].value != id) this.chooseClassModuleForm.elements[i].checked = "";
 	}
 }
 
@@ -265,7 +301,12 @@ ResultsDisplay.prototype.clickSelectAllModules = function(event) {
 	
 	$el = $(event.target);
 	
-	if ($el.hasClass('active')) {
+	// Check if select all is active, based on the last element
+	var selectAllActive = false;
+	if (typeof this.chooseClassModuleForm.elements["select[]"].length == 'undefined' && this.chooseClassModuleForm.elements["select[]"].checked) selectAllActive = true;
+	else if (typeof this.chooseClassModuleForm.elements["select[]"].length != 'undefined'  && this.chooseClassModuleForm.elements["select[]"][this.chooseClassModuleForm.elements["select[]"].length-1].checked) selectAllActive = true;
+	
+	if (selectAllActive) {
 		if (typeof this.chooseClassModuleForm.elements["select[]"].length == 'undefined') {
 			this.chooseClassModuleForm.elements["select[]"].checked = false;
 		} else {
@@ -274,7 +315,6 @@ ResultsDisplay.prototype.clickSelectAllModules = function(event) {
 			}
 		}
 		this.resultState.activeCourses = [];
-		$el.removeClass("active");
 	} else {
 		if (typeof this.chooseClassModuleForm.elements["select[]"].length == 'undefined') {
 			this.chooseClassModuleForm.elements["select[]"].checked = true;
@@ -287,7 +327,6 @@ ResultsDisplay.prototype.clickSelectAllModules = function(event) {
 				}  
 			}
 		}
-		$el.addClass("active");
 	}
 	
 	this.chooseClassModuleFormToggle();

@@ -94,18 +94,18 @@ function MainDisplay() {
 		document.body.scrollTop = 0;
 		event.preventDefault();
 	});
-	
+		
 	// Trigger window resize for initial help sizing
 	$(window).trigger('resize');
 }
 
-
+MainDisplay.prototype.init = function() {
+	document.title = "Numworx " + app.getTranslator().translate( 'NUM_APP_TEACHER' );
+}
 
 MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 	this.$panels.hide();
-	
-	console.log(this.$panel);
-	
+		
 	if (!this.$panel.is(":visible")) {
 		this.$panel.show();
 	} 
@@ -325,7 +325,6 @@ MainDisplay.prototype.registerStretchables = function( elements ) {
 	
 	for (i=0; i<elements.length; i++) {
 		if ( this.stretchables.indexOf(elements[i]) === -1) {
-			console.log("PUSH STRETCHABLE");
 			this.stretchables.push( elements[i] );
 		}
 	}
