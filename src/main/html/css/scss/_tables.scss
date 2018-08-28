@@ -460,12 +460,14 @@ table.dwo.results {
 			
 			th:first-child {
 				background-color: $white;
+				height: auto;
 			}
 		}
 		tr:nth-child(3) {
 			border-bottom: 1px $line1 solid;
 			th:first-child {
 				background-color: $white;
+
 			}
 		}
 	}
@@ -491,6 +493,7 @@ table.dwo.results {
 				position: relative;
 				white-space: nowrap;
 				width: (($colWidth) - $gutter) * 1px;
+				z-index: 9;
 				
 				span {
 					height: 32px;
@@ -525,6 +528,7 @@ table.dwo.results {
 				margin-top: -3px;		
 				margin-bottom:-2px;
 				width: 100%;
+				z-index:10;
 				
 				
 				@include transition(all 200ms ease);
@@ -587,17 +591,19 @@ table.dwo.results {
 		
 		-ms-overflow-style: -ms-autohiding-scrollbar;
 		
+		-webkit-overflow-scrolling: touch;
+		
 	
 		//position: relative;
 		//border-right: $borderThickness $primary solid;
 	
 		&:after {
 			content: "";
-			position: absolute;
+			position: fixed;
 			width: 1 / 12 * $siteWidth * 1px;
 			top: 0;
 			bottom: 0;
-			right: 0;
+			right: -3px;
 			@include transition(all 600ms ease);
 			
 			/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#edeff1+0,edeff1+100&0+0,1+100 */

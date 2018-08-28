@@ -54,7 +54,7 @@ ul.tree {
 		}
 		
 		
-		&.hasSub {
+		&.hasSub, &.hS {
 			ul {
 				display: none;
 				//font-size: 1em;
@@ -69,7 +69,7 @@ ul.tree {
 			}
 		}
 		
-		&.hasSub:before {
+		&.hasSub:before, &.hS:before {
 			background: transparent url(../images/tree-li-hassub-closed.png);	
 			background-repeat: no-repeat;
 			content: "";
@@ -81,7 +81,7 @@ ul.tree {
 			top: 0px;
 			width: 12px;
 		}		
-		&.hasSub.open:before {
+		&.hasSub.open:before , &.hS.o:before {
 			background: transparent url(../images/tree-li-hassub-open.png);	
 			//content: "";
 //			display: inline-block;
@@ -92,30 +92,30 @@ ul.tree {
 //			width: 12px;
 		}
 		
-		&.hasSub:last-child:before {
+		&.hasSub:last-child:before, &.hS:last-child:before {
 			background: transparent url(../images/tree-li-hassub-closed-last.png);	
 			background-repeat: no-repeat;
 		}
-		&.hasSub.open:last-child:before {
+		&.hasSub.open:last-child:before, &hS.o:last-child:before {
 			background: transparent url(../images/tree-li-hassub-open-last.png);	
 //			background-repeat: no-repeat;
 		}
 		
-		span.indicator {
+		span.indicator, span.ind {
 			@include border-radius(50%);
 			display: inline-block;
 			height: 10px;
 			
 			width: 10px;
-			&.previouslyChecked {
+			&.previouslyChecked, &.pC {
 				background-color: $shade22;
 			}
-			&.checked {
+			&.checked, &.c {
 				background-color: $primary;
 			}
 		}
 		
-		div.checkbox {
+		div.checkbox, div.cb{
 			position: absolute;
 			right: 0;
 			top: 0;
@@ -144,7 +144,7 @@ a.icon {
 		margin-right: 10px;
 		width: 16px;		
 	}
-	&.folder:before {
+	&.folder:before, &.fl:before {
 		background: transparent url(../images/tree-folder.png);	
 	}
 	&.set:before {

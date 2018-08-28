@@ -123,7 +123,7 @@ ModulesOfSchoolclassDisplay.prototype.updateTable = function() {
 		i++;
 	}
 	
-	this.settingsFormAllFieldsToggle(false);
+	this.settingsFormAllFieldToggle(false);
 	
 	return;
 }
@@ -178,17 +178,6 @@ ModulesOfSchoolclassDisplay.prototype.setSettings = function(id) {
 ModulesOfSchoolclassDisplay.prototype.temporaryAddModule = function(id) {
 	this.removeTemporaryRow();
 	this.$temporaryRow = this.addRowToTable(this.nodes[id], id, 0, false, true);
-	
-	//this.$temporaryRow.trigger('click');
-	
-	// this.setSettings(id);
-		
-	// Go in edit settings mode
-	// this.openTreeForId(this.selectForm.elements["module"].value);
-	// this.setSettings(this.selectForm.elements["module"].value);
-	// this.selectedNodeId = this.selectForm.elements["module"].value;
-	// this.settingsFormAllFieldToggle(true);
-	// this.settingsFormToggle();
 }
 
 ModulesOfSchoolclassDisplay.prototype.removeTemporaryRow = function() {
@@ -245,44 +234,35 @@ ModulesOfSchoolclassDisplay.prototype.setLoadingTableMessageSelected = function 
 }
 
 ModulesOfSchoolclassDisplay.prototype.setTree = function(json) {
-	var tree = json, result, $result;
+	var tree = json, result;
+	var result = this.recursiveTreeBuilder(tree.children, 0, "mOS");
+		
+	result.unshift('<ul id="modulesOfSchoolclassDisplayTree" class="tree">');
+	result.push('</ul>');
+	document.getElementById('modulesOfSchoolclassDisplayTreeWrapper').innerHTML = result.join('');//+'</ul>'
 			
-	var result = this.recursiveTreeBuilder(tree.children);
-	
-	result = '<ul id ="modulesOfSchoolclassDisplayTree" class="tree">'+result+'</li>';
-	$result = $(result);
-	$result.find("li.hasSub a").on('click', $.proxy(this.clickTreeNode, this)); 
-	$result.find("input").on('change', $.proxy(this.toggleTreeCheckbox, this));
-	
-	this.$tree = $result;
-	this.$treeWrapper.html("");
-	this.$treeWrapper.append($result);
-	
+	this.$tree = this.$treeWrapper.find('#modulesOfSchoolclassDisplayTree');	
+	this.$tree.find("li.hS a").on('click', $.proxy(this.clickTreeNode, this)); 
+	this.$tree.find("input").on('change', $.proxy(this.toggleTreeCheckbox, this));
+			
 	this.updateTable();
 }
 
-// Helper:
 ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, depth, checkboxId) {
-	var result, subtree, liClass, aClass, checkboxId, checked, checkboxClass, checkboxDisabled;
+	if (depth > 25 || !tree) return []; // quit on very deep or empty trees
 	
-	depth = typeof depth !== 'undefined' ? depth : 0;
-	checkboxId = typeof checkboxId !== 'undefined' ? checkboxId : 0;
-	
-	if (!tree) return; //sometimes it is undefined
-	
-	if (depth > 0) {
-		result = "<ul>";
-	} else {
-		result = "";
-		checkboxId = "modulesOfSchoolclassDisplayTreeCheckbox";
-	} 
+	var result = [], subtree, liClass, aClass, checkboxId, checked, checkboxClass, checkboxDisabled, i = 0, currentCheckboxId;
 			
-	i = 0;
+	if (depth > 0) {
+		result.push("<ul>");
+	} 			
+	depth++;
+	checkboxId += depth;
 	
 	for (var id in tree) {
 		
 		// initiate variables
-		checkboxId += "" + depth + i
+		currentCheckboxId = checkboxId + i;
 		liClass = "";
 		aClass = "";
 		checkboxClass = "";
@@ -295,22 +275,20 @@ ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, dept
 			tree[id].data.open = this.nodes[id].open;
 		}		
 		this.nodes[id]=tree[id].data;		
-		
 				
-		if (tree[id].data.course.withChildren == true) { // Folder
-			subtree = this.recursiveTreeBuilder(tree[id].children, depth + 1, checkboxId);
-			liClass = "hasSub";
-			aClass = "folder";
+		if (tree[id].data.course.withChildren == true) { // Folder			
+			liClass = "hS"; //hasSub
+			aClass = "fl"; //folder
 			checkboxDisabled = " disabled";
 		} else { // Set (course)
 			aClass="set";
 		}
 		
-		if (this.nodes[id].open == true) liClass += " open";
+		if (this.nodes[id].open == true) liClass += " o"; //open
 
 		if (tree[id].data.classCourse != null) {
 			if (tree[id].data.classCourse.viewState === "invisible") {
-				checkboxClass += " previouslyChecked";
+				checkboxClass += " pC"; //previouslyChecked
 				this.nodes[id].active = false;
 			 } else {
 				 checked = 'checked="checked"';
@@ -322,33 +300,28 @@ ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, dept
 			this.nodes[id].active = false;
 		}		
 		
-		result += '<li class="'+liClass+'" data-id="'+id+'">';
-		result += '<a class="icon '+aClass+'">';
-		result += tree[id].data.course.name;		
-		result += '</a>';
+		result.push('<li class="'+liClass+'" data-id="'+id+'"><a class="icon '+aClass+'">'+tree[id].data.course.name+'</a>');
 		
 		if (tree[id].data.course.withChildren != true) {
-			result += '<div class="checkbox '+checkboxClass+'">';
-			result += '<input type="checkbox" name="module" id="'+checkboxId+'" value="'+id+'" '+checked+checkboxDisabled+'>'; 
-			result += '<label class="icon" for="'+checkboxId+'"></label>';
-			result += '</div>';
+			result.push('<div class="checkbox '+checkboxClass+'"><input type="checkbox" name="module" id="'+currentCheckboxId+'" value="'+id+'" '+checked+checkboxDisabled+'><label class="icon" for="'+currentCheckboxId+'"></label></div>');
 		} else {
-			if (checkboxClass || checked) result += '<span class="indicator '+checkboxClass+' '+(checked ? 'checked' : '')+'"></span>'; //
+			if (checkboxClass || checked) result.push('<span class="ind '+checkboxClass+' '+(checked ? 'checked' : '')+'"></span>'); // indicator
 		}
 		
-		if (subtree) result += subtree;		
+		if (tree[id].data.course.withChildren == true) {
+			subtree = this.recursiveTreeBuilder(tree[id].children, depth, currentCheckboxId);
+			result = result.concat(subtree);		
+		}
 		
-		result += "</li>";
+		result.push("</li>");
 		
 		i++;
 	}
 	
-	if (depth > 0) result += "</ul>";
+	if (depth > 0) result.push("</ul>");
 		
 	return result;
 }
-
-
 
 
 /*
@@ -476,7 +449,6 @@ ModulesOfSchoolclassDisplay.prototype.clickSelectRow = function(event) {
 // helpers
 ModulesOfSchoolclassDisplay.prototype.settingsFormAllFieldToggle = function(value) {
 	if (value === true) {
-		
 		this.$settingsForm.find('input').prop('disabled','');
 	//	this.settingsForm.elements["from"].focus();
 	}
