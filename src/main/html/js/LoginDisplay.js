@@ -27,6 +27,7 @@ function LoginDisplay() {
 
 LoginDisplay.prototype.show = function() {
 	this.localize();
+		
 	this.$panel.show();
 }
 

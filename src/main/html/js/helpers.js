@@ -257,7 +257,8 @@ Helpers.translate = function(index, value) {
 		$el.get(0).tagName == "H2") {
 			$el.text(translation);
 	} else if ( $el.get(0).tagName == "INPUT") {
-		$el.val( translation );
+		if ($el.attr('placeholder')) $el.attr( 'placeholder', translation );
+		else $el.val( translation );
 	}
 }
 
@@ -287,6 +288,21 @@ Helpers.searchCompare = function( val1, val2 ) {
 	
 	regE = new RegExp( val2 , 'i' );
 	return val1.search(regE) != -1;
+}
+
+Helpers.getUrlParameter = function(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
 }
 
 

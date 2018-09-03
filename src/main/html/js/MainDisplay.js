@@ -100,7 +100,14 @@ function MainDisplay() {
 }
 
 MainDisplay.prototype.init = function() {
+	// Localize title
 	document.title = "Numworx " + app.getTranslator().translate( 'NUM_APP_TEACHER' );
+	
+	// Localize logo
+	if (Helpers.getUrlParameter('locale') == 'en') {
+		this.$body.addClass("localeEn");
+		this.$logo.find('img').attr('src', 'images/header-logoNumworxTeacher.png');
+	}
 }
 
 MainDisplay.prototype.initMainView = function() { // TODO:	remember state
