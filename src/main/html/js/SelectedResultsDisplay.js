@@ -4,7 +4,7 @@ function SelectedResultsDisplay() {
 	this.scrollTimer = null; //scroll Timer
 	
 	// Form
-	this.sealModuleActivitiesForm = document.forms["sealModuleActivities"];
+	// disabled this.sealModuleActivitiesForm = document.forms["sealModuleActivities"];
 	this.activitiesStudentsClearResultsForm = document.forms["activitiesStudentsClearResults"];
 	this.startCompareClassForm = document.forms["startCompareClass"];
 	 
@@ -46,7 +46,7 @@ function SelectedResultsDisplay() {
 	
 	this.$printButton = $("#barActivitiesStudentsPrint");
 	
-	this.$sealCheckbox = $(this.sealModuleActivitiesForm.elements['seal']);
+	// disabled this.$sealCheckbox = $(this.sealModuleActivitiesForm.elements['seal']);
 	
 	// Bind handlers
 	this.$allFilterIndicators.on('click', $.proxy(this.clickFilterIndicator, this));
@@ -54,7 +54,7 @@ function SelectedResultsDisplay() {
 	this.$startCompareClassForm.on('submit', $.proxy(this.submitStartCompareClassForm, this));
 	this.$activitiesStudentsClearResultsForm.on('submit', $.proxy(this.submitActivitiesStudentsClearResultsForm, this));
 	this.$printButton.on('click', $.proxy(this.clickPrintButton, this));
-	this.$sealCheckbox.on('change', $.proxy(this.changeSealCheckbox, this));
+	// disabled this.$sealCheckbox.on('change', $.proxy(this.changeSealCheckbox, this));
 	this.$selectResultsTableWrap.on('scroll', $.proxy(this.scrollTableWrap, this));	
 	
 	// Init
@@ -559,13 +559,13 @@ SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
 	this.$barActivitiesStudentsBacklink.click($.proxy(this.clickBackToModulesStudents, this));
 	
 	// Sealed checkbox
-	this.$sealCheckbox.parent().removeClass("thirdState");
-	this.$sealCheckbox.parent().removeAttr("checked");
-	if (sealState == 1) this.$sealCheckbox.parent().addClass("thirdState");
-	else if (sealState == 2) {
-		this.$sealCheckbox.parent().attr("checked", "checked");
-		this.$sealCheckbox.attr("disabled", "disabled");
-	}
+	// disabled this.$sealCheckbox.parent().removeClass("thirdState");
+	// disabled this.$sealCheckbox.parent().removeAttr("checked");
+	// disabled if (sealState == 1) this.$sealCheckbox.parent().addClass("thirdState");
+	// disabled else if (sealState == 2) {
+	// disabled 	this.$sealCheckbox.parent().attr("checked", "checked");
+	// disabled 	this.$sealCheckbox.attr("disabled", "disabled");
+	// disabled }
 	
 	this.plotMatrix(matrix);
 	//this.filterIndicatorActivitiesStudentsInModule();
