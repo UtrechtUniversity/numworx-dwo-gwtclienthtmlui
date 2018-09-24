@@ -658,6 +658,11 @@ SelectedResultsDisplay.prototype.sealModuleActivities = function() {
 	app.getPresenterFactory().getSelectedResultsPresenter().sealModuleActivities(this.resultState.activeModule, this.resultState.activeSchoolClass);
 }
 
+SelectedResultsDisplay.prototype.sealSingleActivity = function() {
+	app.getPresenterFactory().getSelectedResultsPresenter().sealSingleActivity(this.resultState.activeActivity, this.resultState.activeSchoolClass);
+	
+}
+
 SelectedResultsDisplay.prototype.getPages = function(scoId) {
 	this.resultState.activeActivity = scoId;
 	app.getPresenterFactory().getSelectedResultsPresenter().preparePages(scoId, this.resultState.activeSchoolClass);	
