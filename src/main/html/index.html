@@ -15,6 +15,16 @@
         var DwoMainPresenter;
         <!-- set to false in order to show the default user-interface -->
         var hideGwtGui="true";
+
+        // SAML hook, called when saml login active
+        function logout() {
+    		if (window != window.parent)
+    		{
+    			window.parent.logout();
+    		}
+    	}
+
+        
         
         </script>
 		
@@ -203,7 +213,7 @@
   <body>
 	  <!-- ICON SPRITE 
 		  should be first in body, should be inline (IE doesn't support external) 
-		  contains 64px square svg icons, copied from Adobe Illutrator
+		  contains 64px square svg icons, copied from Adobe Illustrator
 	  -->
 	  <svg style="display: none">
 	    <defs>
