@@ -68,7 +68,7 @@ AddPersonDisplay.prototype.clear = function () {
 }
 
 AddPersonDisplay.prototype.setHelp = function(url) {
-		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
+		this.$helpContentIFrame.attr('src', url );
 }
 
 AddPersonDisplay.prototype.showSchoolClasses = function(json) {

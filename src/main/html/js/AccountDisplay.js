@@ -78,7 +78,7 @@ AccountDisplay.prototype.clear = function () {
 }
 
 AccountDisplay.prototype.setHelp = function(url) {
-		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
+		this.$helpContentIFrame.attr('src', url );
 }
 
 AccountDisplay.prototype.updateUserView = function(json) {

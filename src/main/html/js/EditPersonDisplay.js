@@ -117,7 +117,7 @@ EditPersonDisplay.prototype.init = function () {
 	console.log("init!");
 }
 EditPersonDisplay.prototype.setHelp = function(url) {
-		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
+		this.$helpContentIFrame.attr('src', url );
 }
 
 EditPersonDisplay.prototype.setUser = function (role,json) {
