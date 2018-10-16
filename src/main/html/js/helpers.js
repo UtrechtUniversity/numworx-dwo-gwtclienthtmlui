@@ -176,7 +176,7 @@ Helpers.tableSorterMergeSort = function($tbody, index, attr, type, asc) {
 } 
 
 Helpers.tableSorterMergeSortRecursive = function(arr, index, attr, type, asc) {
-	if (arr.length === 1) return arr;
+	if (arr.length === 1 || arr.length === 0) return arr;
 	
     var middle = Math.floor(arr.length / 2) // get the middle item of the array rounded down
     var left = arr.slice(0, middle) // items on the left side
