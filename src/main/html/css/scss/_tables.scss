@@ -603,6 +603,7 @@ table.dwo.results {
 			width: 1 / 12 * $siteWidth * 1px;
 			top: 0;
 			bottom: 0;
+			pointer-events: none; /* click thru div to "verzegelen" of "copy to clipboard", anders bottom: 100px */
 			right: -3px;
 			@include transition(all 600ms ease);
 			
