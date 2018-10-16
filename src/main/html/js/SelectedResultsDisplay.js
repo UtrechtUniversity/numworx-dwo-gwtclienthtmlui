@@ -21,13 +21,15 @@ function SelectedResultsDisplay() {
 	this.$bars = this.$panel.find(".bar");
 	this.$barModulesStudents = $("#barModulesStudents").hide();
 	this.$barModulesStudentsBacklink = $("#barModulesStudentsBacklink");
+	this.$barModulesStudentsDownload = this.initModulesStudentsDownload("#barModulesStudentsDownload");
 	this.$barActivitiesStudent = $("#barActivitiesStudent").hide();
 	this.$barActivitiesStudentBacklink = $("#barActivitiesStudentBacklink");
 	this.$barActivitiesStudents = $("#barActivitiesStudents").hide();
 	this.$barActivitiesStudentsBacklink = $("#barActivitiesStudentsBacklink");
+	this.$barActivitiesStudentsDownload = this.initActivitiesStudentsDownload("#barActivitiesStudentsDownload");
 	this.$barPagesStudents = $("#barPagesStudents").hide();
 	this.$barPagesStudentsBacklink = $("#barPagesStudentsBacklink");
-	
+	this.$barPagesStudentsDownload = this.initPagesStudentsDownload("#barPagesStudentsDownload")
 	
 	this.$selectedResultsTitle = $("#selectedResultsTitle");
 
@@ -46,7 +48,7 @@ function SelectedResultsDisplay() {
 	this.$startCompareClassForm = $(this.startCompareClassForm);
 	this.$activitiesStudentsClearResultsForm = $(this.activitiesStudentsClearResultsForm);
 	
-	this.$printButton = $("#barActivitiesStudentsPrint");
+	
 	
 	// disabled this.$sealCheckbox = $(this.sealModuleActivitiesForm.elements['seal']);
 	this.$sealSingleActivityCheckbox = $(this.sealSingleActivityForm.elements['seal']);
@@ -56,7 +58,6 @@ function SelectedResultsDisplay() {
 	
 	this.$startCompareClassForm.on('submit', $.proxy(this.submitStartCompareClassForm, this));
 	this.$activitiesStudentsClearResultsForm.on('submit', $.proxy(this.submitActivitiesStudentsClearResultsForm, this));
-	this.$printButton.on('click', $.proxy(this.clickPrintButton, this));
 	// disabled this.$sealCheckbox.on('change', $.proxy(this.changeSealCheckbox, this));
 	this.$sealSingleActivityCheckbox.on('change', $.proxy(this.changeSealSingleActivityCheckbox, this));
 	this.$selectResultsTableWrap.on('scroll', $.proxy(this.scrollTableWrap, this));	
@@ -69,10 +70,9 @@ SelectedResultsDisplay.prototype.show = function() {
         this.localize();
 	this.$panel.show();	
 	
-	if (!app.getPresenterFactory().getSelectedResultsPresenter().hasCompareClasses()) this.$startCompareClassForm.hide();
-	
-	// temporary hide, TODO: implement
-	this.$printButton.hide();
+	if (!app.getPresenterFactory().getSelectedResultsPresenter().hasCompareClasses()) this.$startCompareClassForm.css('visibility','hidden');
+
+	this.$activitiesStudentsClearResultsForm.css('visibility','hidden'); // Not implemented?
 }
 
 
@@ -849,4 +849,67 @@ SelectedResultsDisplay.prototype.submitActivitiesStudentsClearResultsForm = func
 	event.preventDefault();			
 	this.clearStudentScoResults();
 }
+
+
+SelectedResultsDisplay.prototype.buildMatrix = function(matrix) {
+	var result = "";
+	var SEP = "\t";
+	var LINE = "\n";
+	
+	for( var i = 0; i < matrix.length; i++ ) {
+		var row = matrix[i];
+		for (var j = 0; j < row.length; j++ )  {
+			if(j > 0) 
+				result = result += SEP;
+			result +=  row[j].label ; // iets met ""?
+		}
+		result = result + LINE;
+	}
+	return result;
+}
+
+
+SelectedResultsDisplay.prototype.modulesStudentsDownload = function(trigger) {
+	console.log("ModulesStudentsDownload trigger");
+	var matrix = this.buildMatrixModulesStudentsForClass();
+	return this.buildMatrix(matrix);
+}
+
+SelectedResultsDisplay.prototype.initModulesStudentsDownload = function(node) {
+	var display = this;
+	return new ClipboardJS(node, {
+	    text: $.proxy(display.modulesStudentsDownload, display)
+	});
+}
+
+SelectedResultsDisplay.prototype.activitiesStudentsDownload = function(trigger) {
+	console.log("ActivitiesStudentsDownload trigger");
+	var module = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[ this.resultState.activeModule ]
+	var matrix = this.buildMatrixActivitiesStudentsInModule(module);
+	return this.buildMatrix(matrix);
+}
+
+SelectedResultsDisplay.prototype.initActivitiesStudentsDownload = function(node) {
+	var display = this;
+	return new ClipboardJS(node, {
+	    text: $.proxy(display.activitiesStudentsDownload, display)
+	});
+}
+
+SelectedResultsDisplay.prototype.pagesStudentsDownload = function(trigger) {
+	console.log("PagesStudentsDownload trigger");
+	var module = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[ this.resultState.activeModule ]
+	var activity = module.children[ this.resultState.activeActivity ];
+	var matrix = this.buildMatrixPagesActivityStudentsInModule(activity);
+	return this.buildMatrix(matrix);
+}
+
+SelectedResultsDisplay.prototype.initPagesStudentsDownload = function(node) {
+	var display = this;
+	return new ClipboardJS(node, {
+	    text: $.proxy(display.pagesStudentsDownload, display)
+	});
+}
+
+
 

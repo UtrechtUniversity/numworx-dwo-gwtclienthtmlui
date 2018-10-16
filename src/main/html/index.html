@@ -177,7 +177,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/rome/2.1.22/rome.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
 	<script src="third-party/material-datetime-picker/dist/material-datetime-picker.js" type="text/javascript" charset="utf-8"></script>
-	
+	<!-- Clipboard.js -->
+	<script src="third-party/clipboard/clipboard.js" ></script>
 	
 	<!-- Seperate script for each view, could be combined and minified in future -->
 	<script src="js/MainDisplay.js" type="text/javascript" charset="utf-8"></script>
@@ -1852,12 +1853,19 @@
 							<span class="filterIndicators result4" data-filter="4"><a href="javascript:void(0);">4</a></span>
 						</p>
 					</div>
-					<div class="col-4">
+					<div class="col-3">
 						<form name="startCompareClass">
 							<input type="submit" class="primary right" value="Vergelijk klas" />
 						</form>
 					</div>
-					
+
+					<div class="col-1">
+						<a href="javascript:void(0);" id="barModulesStudentsDownload" title='Copy to clipboard'>
+							<svg viewBox="0 0 74 74" class="icon btn">
+									  <use xlink:href="#download"></use>
+							</svg>
+						</a>
+					</div>					
 				</div>
 				
 				<div class="row bar" id="barActivitiesStudent">
@@ -1901,14 +1909,14 @@
 					
 					<div class="col-3">
 						<form name="activitiesStudentsClearResults">
-							<input type="submit" class="primary right hidden" data-translate="NUM_LBL_SELECTEDRESULTS_ClearResults" value="Clear" />
+							<input type="submit" class="primary right" data-translate="NUM_LBL_SELECTEDRESULTS_ClearResults" value="Clear" />
 						</form>
 					</div>
 					
 					<div class="col-1">
-						<a href="javascript:void(0);" id="barActivitiesStudentsPrint">
+						<a href="javascript:void(0);" id="barActivitiesStudentsDownload" title='Copy to clipboard'>
 							<svg viewBox="0 0 64 64" class="icon btn">
-								  <use xlink:href="#print"></use>
+								  <use xlink:href="#download"></use>
 							</svg>
 						</a>
 					</div>					
@@ -1928,7 +1936,7 @@
 					</div>
 					
 					
-					<div class="col-4">
+					<div class="col-3">
 						<p><span data-translate="NUM_LBL_SELECTEDRESULTS_SHOW">Toon:</span> 
 							<span class="filterIndicators result1" data-filter="1"><a href="javascript:void(0);">1</a></span>
 							<span class="filterIndicators result2" data-filter="2"><a href="javascript:void(0);">2</a></span>
@@ -1952,9 +1960,13 @@
 						</form>
 					</div>
 					
-					<!-- <div class="col-1">
-						icons 
-					</div> -->
+					<div class="col-1">
+						<a href="javascript:void(0);" id="barPagesStudentsDownload" title='Copy to clipboard'>
+							<svg viewBox="0 0 64 64" class="icon btn">
+								  <use xlink:href="#download"></use>
+							</svg>
+						</a>
+					</div>					
 					
 				</div>
 				
