@@ -49,6 +49,8 @@ function MainDisplay() {
 	window.jsEditPersonDisplay = this.editPersonDisplay;
 	this.addPersonDisplay = new AddPersonDisplay();
 	window.jsAddPersonDisplay = this.addPersonDisplay;
+	this.importPersonsDisplay = new ImportPersonsDisplay();
+	window.jsImportPersonsDisplay = this.importPersonsDisplay;
 	
 	// RESULTS
 	this.resultsDisplay = new ResultsDisplay();
@@ -236,6 +238,10 @@ MainDisplay.prototype.showModulesView = function() {
 	this.modulesDisplay.show();
 }
 
+MainDisplay.prototype.showImportPersonsView = function() {
+	this.initMainView();
+	this.importPersonsDisplay.show();
+}
 
 
 /*
