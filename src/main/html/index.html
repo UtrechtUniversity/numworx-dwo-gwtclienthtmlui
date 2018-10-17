@@ -2564,7 +2564,94 @@
 			</header>
 			
 			<section>
-		
+				<div class='row'>
+					<div class='col-12'>
+						<h3><span>De volgende personen zijn in uw bestand gevonden</span></h3>
+						<table class="dwo headered" >
+							<thead>
+								<tr>
+									<th class="col-2">
+										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+									</th>
+									<th class="col-2">
+									<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
+									</th>
+									<th class="col-2">
+										<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
+									</th>									
+									<th class="col-2">
+										<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+									</th>
+									<th class="col-2">
+										<span data-translate="NUM_TBL_EMAIL">EMAILADRES</span>
+									</th>
+									<th class="col-2">
+										<span data-translate="NUM_TBL_PASSWORD">WACHTWOORD</span>
+									</th>									
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="col-2">Bakker23</td>
+									<td class="col-2">Arthur</td>
+									<td class="col-2">van der</td>
+									<td class="col-2">Begijnen</td>
+									<td class="col-2">A.vdBegijnen@outlook.com</td>
+									<td class="col-2">geheim</td>
+								</tr>
+							
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="row">
+						<h3 class="col-12"><span>Importeren als student/docent?</span></h3>
+						<div class="col-12" style="height: 2em"> <!-- voor teunis, hoe moet dit netjes? -->
+							<div class="options">
+									<div class="option">
+										<input type="radio" name="role" id="importPersonsL" value="L" checked="checked">
+	                                    <label for="importPersonsL"><span data-translate="NUM_LBL_STUDENTLETTER">L</span></label>
+									</div> 
+									<div class="option">
+										<input type="radio" name="role" id="importPersonsD" value="D" > <!-- disabled="disabled" -->
+										<label for="importPersonsD"><span data-translate="NUM_LBL_TEACHERLETTER">D</span></label>
+									</div>
+							</div>
+						</div>
+				</div>
+				<div class="row">
+						<h3 class="col-12"><span>Kies een klas om personen in te importeren</span></h3>
+				</div>
+				<div class="row">						
+						<div class="col-6" >	
+							<table class="dwo selectable" >
+								<tbody style="height: 200px">
+									<tr><td class="col-4">Atheneum 6</td><td class="col-2">
+										<div class="checkbox">
+											<input type="radio" name="schoolclass" id="importPersonsSchoolclassActive1" value="MYSQL;PersistentSchoolClass;00000000000000010045"><label class="icon" for="importPersonsSchoolclassActive1"></label>
+										</div>
+									</td></tr>
+									<tr><td class="col-4">Atheneum 5</td><td class="col-2">
+										<div class="checkbox">
+											<input type="radio" name="schoolclass" id="importPersonsSchoolclassActive2" value="MYSQL;PersistentSchoolClass;00000000000000020045"><label class="icon" for="importPersonsSchoolclassActive2"></label>
+										</div>
+									</td></tr>
+									<tr><td>Atheneum 4</td></tr>
+									<tr><td>Atheneum 3</td></tr>
+									<tr><td>Atheneum 2</td></tr>
+									<tr><td>Havo 5</td></tr>
+									<tr><td>Havo 4</td></tr>
+									<tr><td>Havo 3</td></tr>
+									<tr><td>Havo 2</td></tr>
+									<tr><td>Brugklas</td></tr>
+								</tbody>						
+							</table>
+						</div>
+						<div class="col-6">
+							<input class="primary right bottom" type="submit" value="importeer" action="#">
+						</div>					
+					</div>
+				</div>
 			</section>
 		</section>
 		<!-- end importPersonsDisplay -->
