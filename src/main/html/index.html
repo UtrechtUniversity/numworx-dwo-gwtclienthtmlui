@@ -2253,7 +2253,8 @@
     margin-bottom: 10px;
     display: inline-block;
     color: white;
-    padding: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
     border: 2px #1b75bb solid;
     border-radius: 4px;
     font-family: 'Ubuntu', sans-serif;
@@ -2262,6 +2263,9 @@
     letter-spacing: .3px;
     line-height: 14px;
     font-size: 12px;
+    float: right;
+    width: 136px;
+    text-align:center;
 "
 									
 									
@@ -2645,8 +2649,36 @@
 				</div>
 				<div class="row">						
 						<div class="col-6" >	
-							<table class="dwo selectable" >
+							<table class="dwo sortable"  id='importPersonsSchoolClassesTable'>
+									<thead>
+										<tr class="sorting">
+											<th  class="col-4">&nbsp;
+												<span class="sortButton asc default" data-order="asc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														  <use xlink:href="#arrowUp"></use>
+													</svg>
+												</span>
+												<span class="sortButton desc" data-order="desc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														  <use xlink:href="#arrowDown"></use>
+													</svg>
+												</span>
+											</th>
+											<th class="col-2"></th>
+										</tr>
+									</thead>
 								<tbody style="height: 200px">
+																		<!-- The row is detached and used as a template by the JS -->								
+										<tr>
+											<td class="col-4"><span id="importPersonsSchoolclassName">Schoolnaam</span></td>
+											<td class="col-2">
+												<div class="checkbox">
+													<input type="radio" name="schoolclass" id="importPersonsSchoolclassActive" value="schoolid"><label class="icon" for="importPersonsSchoolclassActive"></label>
+												</div>
+											</td>
+										</tr>
+								
+								
 									<tr><td class="col-4">Atheneum 6</td><td class="col-2">
 										<div class="checkbox">
 											<input type="radio" name="schoolclass" id="importPersonsSchoolclassActive1" value="MYSQL;PersistentSchoolClass;00000000000000010045"><label class="icon" for="importPersonsSchoolclassActive1"></label>
