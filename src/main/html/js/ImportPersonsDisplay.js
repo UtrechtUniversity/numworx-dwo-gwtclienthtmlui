@@ -157,9 +157,9 @@ ImportPersonsDisplay.prototype.importPersons = function() {
 	console.log(JSON.stringify(role.value))
 
 	if (role.value === 'L')
-		app.getPresenterFactory().getImportPersonsPresenter().submitInputStudents(persons, schoolclass.value);
+		app.getPresenterFactory().getImportPersonsPresenter().submitImportStudents(persons, schoolclass.value);
 	else if (role.value == 'D')
-		app.getPresenterFactory().getImportPersonsPresenter().submitInputTeachers(persons, schoolclass.value);
+		app.getPresenterFactory().getImportPersonsPresenter().submitImportTeachers(persons, schoolclass.value);
 }
 
 /// Events
