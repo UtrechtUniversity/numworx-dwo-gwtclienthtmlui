@@ -2587,12 +2587,12 @@
 					</section>
 				</div>
 			</header>
-			
+		    <form name='importPersonsForm'>
 			<section>
 				<div class='row'>
 					<div class='col-12'>
 						<h3><span>De volgende personen zijn in uw bestand gevonden</span></h3>
-						<table class="dwo headered" >
+						<table class="dwo headered" id='importPersonsTable'>
 							<thead>
 								<tr>
 									<th class="col-2">
@@ -2617,19 +2617,18 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td class="col-2">Bakker23</td>
-									<td class="col-2">Arthur</td>
-									<td class="col-2">van der</td>
-									<td class="col-2">Begijnen</td>
-									<td class="col-2">A.vdBegijnen@outlook.com</td>
-									<td class="col-2">geheim</td>
-								</tr>
-							
+									<td class="col-2"><input type='text' value='Bakker23' id='importPersonsUsername' name='userName' ></td>
+									<td class="col-2"><input type='text' value='Arthur' id='importPersonsGivenName' name='givenName' ></td>
+									<td class="col-2"><input type='text' value='van der' id='importPersonsInsertion' name='insertion'></td>
+									<td class="col-2"><input type='text' value='Begijnen' id='importPersonsSurname' name='familyName'></td>
+									<td class="col-2"><input type='text' value='A.vdBegijnen@outlook.com' id='importPersonsMail' name='email'></td>
+									<td class="col-2"><input type='text' value='geheim' id='importPersonsPassword' name='password'></td>
+								</tr>					
 							</tbody>
 						</table>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" id='importPersonsRoles'>
 						<h3 class="col-12"><span>Importeren als student/docent?</span></h3>
 						<div class="col-12" style="height: 2em"> <!-- voor teunis, hoe moet dit netjes? -->
 							<div class="options">
@@ -2699,13 +2698,15 @@
 									<tr><td>Brugklas</td></tr>
 								</tbody>						
 							</table>
+							<input type="radio" name="schoolclass" value="schoolid" class="hidden"><!-- empty value -->
 						</div>
 						<div class="col-6">
-							<input class="primary right bottom" type="submit" value="importeer" action="#">
+							<input class="primary right bottom" type="submit" value="importeer" >
 						</div>					
 					</div>
 				</div>
 			</section>
+			</form>			
 		</section>
 		<!-- end importPersonsDisplay -->
 
