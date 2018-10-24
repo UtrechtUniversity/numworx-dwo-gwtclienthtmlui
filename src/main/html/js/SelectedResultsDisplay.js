@@ -47,7 +47,7 @@ function SelectedResultsDisplay() {
 	
 	this.$startCompareClassForm = $(this.startCompareClassForm);
 	this.$activitiesStudentsClearResultsForm = $(this.activitiesStudentsClearResultsForm);
-	
+	this.$studentsLog = $('#barPagesStudentsLog')
 	
 	
 	// disabled this.$sealCheckbox = $(this.sealModuleActivitiesForm.elements['seal']);
@@ -60,7 +60,8 @@ function SelectedResultsDisplay() {
 	this.$activitiesStudentsClearResultsForm.on('submit', $.proxy(this.submitActivitiesStudentsClearResultsForm, this));
 	// disabled this.$sealCheckbox.on('change', $.proxy(this.changeSealCheckbox, this));
 	this.$sealSingleActivityCheckbox.on('change', $.proxy(this.changeSealSingleActivityCheckbox, this));
-	this.$selectResultsTableWrap.on('scroll', $.proxy(this.scrollTableWrap, this));	
+	this.$selectResultsTableWrap.on('scroll', $.proxy(this.scrollTableWrap, this));
+	this.$studentsLog.on('click', $.proxy(this.logResultsClick, this));
 	
 	// Init
 	this.$panel.hide();
@@ -71,6 +72,7 @@ SelectedResultsDisplay.prototype.show = function() {
 	this.$panel.show();	
 	
 	if (!app.getPresenterFactory().getSelectedResultsPresenter().hasCompareClasses()) this.$startCompareClassForm.css('visibility','hidden');
+	if (!app.getPresenterFactory().getSelectedResultsPresenter().hasLogResults()) this.$studentsLog.css('visibility', 'hidden');
 
 	this.$activitiesStudentsClearResultsForm.css('visibility','hidden'); // Not implemented?
 }
@@ -697,7 +699,6 @@ SelectedResultsDisplay.prototype.sealModuleActivities = function() {
 
 SelectedResultsDisplay.prototype.sealSingleActivity = function() {
 	app.getPresenterFactory().getSelectedResultsPresenter().sealSingleActivity(this.resultState.activeActivity, this.resultState.activeSchoolClass);
-	
 }
 
 SelectedResultsDisplay.prototype.getPages = function(scoId) {
@@ -713,6 +714,12 @@ SelectedResultsDisplay.prototype.clearStudentScoResults = function() {
 	app.getPresenterFactory().getSelectedResultsPresenter().clearStudentScoResults(this.resultState.activeModule, this.resultState.activeSchoolClass);
 }
 
+SelectedResultsDisplay.prototype.logResults = function() {
+	var context = this.resultState;
+	var scoid = this.resultState.activeActivity;
+	var classid = this.resultState.activeSchoolClass;
+	app.getPresenterFactory().getSelectedResultsPresenter().showLogResults(context, scoid, classid);
+}
 
 /*
  * EVENT HANDLERS
@@ -845,7 +852,7 @@ SelectedResultsDisplay.prototype.changeSealSingleActivityCheckbox = function(eve
 	}
 }
 
-SelectedResultsDisplay.prototype.submitActivitiesStudentsClearResultsForm = function() {
+SelectedResultsDisplay.prototype.submitActivitiesStudentsClearResultsForm = function(event) {
 	event.preventDefault();			
 	this.clearStudentScoResults();
 }
@@ -867,6 +874,9 @@ SelectedResultsDisplay.prototype.buildMatrix = function(matrix) {
 	}
 	return result;
 }
+
+
+
 
 
 SelectedResultsDisplay.prototype.modulesStudentsDownload = function(trigger) {
@@ -911,5 +921,10 @@ SelectedResultsDisplay.prototype.initPagesStudentsDownload = function(node) {
 	});
 }
 
+SelectedResultsDisplay.prototype.logResultsClick = function(event) {
+	event.preventDefault();
+	console.log("PagesStudentsLog trigger");
+	this.logResults();
+}
 
 
