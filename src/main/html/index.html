@@ -1994,7 +1994,62 @@
 				    </svg>
 				</span>
 			</header>
-		
+			<section>
+				<div class='row'>
+				<form name='logResultsTabber'>
+					<div class='col-12'>
+					<div class='options'>
+					 <div class='option'>
+							<input type='radio' name='logResultsTab' id='logResultsTabA' checked=checked value='A' />
+							<label for='logResultsTabA'>Antwoorden</label>
+					</div>
+					<div class='option' >
+							<input type='radio' name='logResultsTab' id='logResultsTabS' value='S' />
+							<label for='logResultsTabS'>Scores</label>
+					</div>
+					<div class='option'>
+							<input type='radio' name='logResultsTab' id='logResultsTabF' value='F' />
+							<label for='logResultsTabF'>Fouten</label>
+					</div>
+					<div class='option'>
+							<input type='radio' name='logResultsTab' id='logResultsTabP' value='P' />
+							<label for='logResultsTabP'>Pogingen</label>
+					</div>
+					<div class='option'>
+							<input type='radio' name='logResultsTab' id='logResultsTabD' value='D' />
+							<label for='logResultsTabD'>Data</label>
+					</div>
+					<div class='option'>
+							<input type='radio' name='logResultsTab' id='logResultsTabDS' value='DS' />
+							<label for='logResultsTabDS'>Deelscores</label>
+					</div>
+				</div></div>
+				</form>
+				</div>
+				<div class='row'>
+					<div class='col-12'>
+						<div class='tablewrap' >
+							<table class='dwo scrollable'>
+								<thead>								
+									<tr>
+										<th>&nbsp;</th>
+										<th>T2.1a</th>
+										<th>T.2.1.a.zt</th>
+										<th>T.2.1.b</th>
+								</thead>
+								<tbody>
+									<tr>
+										<td class='studentname'><span>Van Waveren, Frank</span></td>
+										<td>1/6</td>
+										<td>A</td>
+										<td>(2*s*sqrt(3))</td>									
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</section>
 		</section>
 		<!-- 
 		-
@@ -2266,33 +2321,7 @@
 							<fieldset>
 									<label class="buttonLabel">Importeer leerlingen of docenten vanuit een CSV bestand</label>
 									<input id="zoekBestand" name="zoekBestand" type="file" accept=".csv" style="opacity:0"/>
-	<!-- TODO moet nog gefatsoeneerd worden -->
-									<label class="pseudobutton secondary right" for="zoekBestand"
-									style="
-    background-color: #1b75bb;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    display: inline-block;
-    color: white;
-    padding-top: 6px;
-    padding-bottom: 6px;
-    border: 2px #1b75bb solid;
-    border-radius: 4px;
-    font-family: 'Ubuntu', sans-serif;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: .3px;
-    line-height: 14px;
-    font-size: 12px;
-    float: right;
-    width: 136px;
-    text-align:center;
-"
-									
-									
-									
-									
-									>Zoek bestand</label>
+									<label class="pseudobutton secondary right" for="zoekBestand" >Zoek bestand</label>
 							</fieldset>
 						</form>	
 					</div>
