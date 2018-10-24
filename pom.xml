@@ -25,7 +25,7 @@
                  					<include>*.scss</include>
              					</includes>
 	         				</source>
-	         				<destination>${project.build.finalName}/css</destination>
+	         				<destination>${project.build.directory}/${project.build.finalName}/css</destination>
        					</resource>
      				</resources>
      				<relativeOutputDirectory>../..</relativeOutputDirectory>
