@@ -1,4 +1,4 @@
-input[type="submit"], input[type="button"], button {
+input[type="submit"], input[type="button"], button, .pseudobutton {
 	-webkit-appearance: none;
 	background-color: $primary;
 	border: $borderThickness $primary solid;
