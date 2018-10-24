@@ -12,6 +12,36 @@
        
     <build>
         <plugins>
+        	<plugin>
+        	    <groupId>nl.geodienstencentrum.maven</groupId>
+        		<artifactId>sass-maven-plugin</artifactId>
+        		<version>3.6.1</version>
+        		<configuration>
+        			<resources>
+        				<resource>
+         					<source>
+             					<directory>src/main/html/css/scss</directory>
+             					<includes>
+                 					<include>*.scss</include>
+             					</includes>
+	         				</source>
+	         				<destination>${project.build.finalName}/css</destination>
+       					</resource>
+     				</resources>
+     				<relativeOutputDirectory>../..</relativeOutputDirectory>
+     				<sassOptions>
+     					<style>:compressed</style>
+     				</sassOptions>
+        		</configuration>
+        		<executions>
+        			<execution>
+        				<goals>
+        					<goal>update-stylesheets</goal>
+        				</goals>
+        			</execution>
+        		
+        		</executions> 
+        	</plugin>
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
