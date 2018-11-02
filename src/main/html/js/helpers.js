@@ -212,6 +212,9 @@ Helpers.tableSorterMergeSortMerge = function(left, right, index, attr, type, asc
 			
 		} else { // integer sort
 			
+			val1 = parseInt(val1);
+			val2 = parseInt(val2);
+			
 			if ( (!asc && val2 < val1) || (asc && val2 > val1) ) { 	
 			    result.push(left[indexLeft])
 			    indexLeft++				
