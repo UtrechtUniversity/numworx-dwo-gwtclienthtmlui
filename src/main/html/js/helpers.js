@@ -146,9 +146,11 @@ Helpers.tableSorterBubbleSort = function(tbody, index, attr, type, asc) { //bubb
 			if (row1.children[index].firstChild && row1.children[index].firstChild.dataset) val1 = row1.children[index].firstChild.dataset[attr]; 
 			if (row2.children[index].firstChild && row2.children[index].firstChild.dataset) val2 = row2.children[index].firstChild.dataset[attr];
 												
-			if (val1 != 0 && val2 != 0 && type == "string") {
+			if (type == "string") { // removed val1 != 0 && val2 != 0 && 
 				if ( (asc && val2.localeCompare(val1) < 0) || (!asc && val2.localeCompare(val1) > 0) ) { shouldSwitch = true; break; }
-			} else {
+			} else { // int
+				val1 = parseInt(val1);
+				val2 = parseInt(val2);
 				if ( (asc && val2 < val1) || (!asc && val2 > val1) ) { shouldSwitch = true; break; }
 			}						
 		}		

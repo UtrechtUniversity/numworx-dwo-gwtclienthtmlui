@@ -168,7 +168,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 				Helpers.setResultIndicatorColor($value);
 				
 				// Sorting
-				if (matrix[i][j].sortValue) $value.attr("data-sortvalue", matrix[i][j].sortValue );
+				if (matrix[i][j].sortValue || matrix[i][j].sortValue === 0) $value.attr("data-sortvalue", matrix[i][j].sortValue );
 				else if (matrix[i][j].score) $value.attr("data-sortvalue", matrix[i][j].score );
 				else $value.attr("data-sortvalue", matrix[i][j].label );
 				
