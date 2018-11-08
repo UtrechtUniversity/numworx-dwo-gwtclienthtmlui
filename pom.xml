@@ -84,4 +84,7 @@
          </plugins>
     </build>
     <packaging>war</packaging>
+    <scm>
+    	<developerConnection>scm:git:git@git.science.uu.nl:dwoproject/DWO-LMS/DwoGwtClientHtmlUi.git</developerConnection>
+    </scm>
 </project>
