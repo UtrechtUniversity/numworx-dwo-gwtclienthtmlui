@@ -97,4 +97,7 @@
             <url>https://repos.dwo.nl/artifactory/libs-release-local</url>    
         </repository>
     </distributionManagement>
+    <scm>
+    	<developerConnection>scm:git:git@git.science.uu.nl:dwoproject/DWO-LMS/DwoGwtClientHtmlUi.git</developerConnection>
+    </scm>
 </project>
