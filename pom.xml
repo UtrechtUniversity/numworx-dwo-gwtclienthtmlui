@@ -84,4 +84,17 @@
          </plugins>
     </build>
     <packaging>war</packaging>
+    <!-- automagically use snapshot/release, not in parent pom -->
+   <distributionManagement>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>libs-snapshot</name>
+            <url>https://repos.dwo.nl/artifactory/libs-snapshot-local</url>    
+        </snapshotRepository>
+        <repository>
+            <id>release</id>
+            <name>libs-release</name>
+            <url>https://repos.dwo.nl/artifactory/libs-release-local</url>    
+        </repository>
+    </distributionManagement>
 </project>
