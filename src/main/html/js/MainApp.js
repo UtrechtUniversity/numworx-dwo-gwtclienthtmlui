@@ -18,6 +18,11 @@ function MainApp() {
 	this.NAV_WIDTH = 200;	
 }
 
+MainApp.prototype.reset = function() {
+	this.presenterFactory = null;
+	this.translator = null;	
+}
+
 MainApp.prototype.getPresenterFactory = function() {
 	if (this.presenterFactory) return this.presenterFactory;
 	this.presenterFactory = window.dwoAPI.DwoPresenterFactory.getDwoPresenterFactory();
@@ -38,4 +43,10 @@ window.jsInitMainApp = function() {
 	window.app = new MainApp();	
 	app.mainDisplay.init();
 }
+
+window.jsResetMainApp = function() {
+	app.reset();
+}
+
+
 	
