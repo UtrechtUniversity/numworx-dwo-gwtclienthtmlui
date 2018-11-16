@@ -22,13 +22,9 @@ function ImportPersonsDisplay() {
 	this.$form = $(this.form);
 	this.$form.on('submit', $.proxy(this.submitImportPersonsForm, this));
 	
-	this.$roles = $("#importPersonsRoles");
-	
 }
 
 ImportPersonsDisplay.prototype.show = function() {
-	if (true) // for Teacher, false for SchoolAdmin
-		this.$roles.hide();
 	this.$panel.show();
 }
 
