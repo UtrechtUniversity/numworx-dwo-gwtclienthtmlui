@@ -143,7 +143,10 @@ MainDisplay.prototype.setSchoolName = function (schoolName) {
 	this.$accountMenuSchoolName.html(schoolName);
 };
 MainDisplay.prototype.setUserRole = function (role) {
+	this.$body.removeClass("TEACHER"); this.$body.removeClass("SCHOOLADMIN"); this.$body.addClass(role);
+	role = app.getTranslator().translate( 'NUM_APP_' + role);
     this.$accountMenuUserRole.html(role);
+	document.title = "Numworx " + role;
 };
 MainDisplay.prototype.setPresentationName = function (presentationName) {
 	this.$accountMenuPresentationName.html(presentationName);
