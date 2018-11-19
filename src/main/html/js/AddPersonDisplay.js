@@ -120,7 +120,13 @@ AddPersonDisplay.prototype.setLoadingTableMessage = function (json) {
 AddPersonDisplay.prototype.addPerson = function() {
 	for (var i = 0; i < this.addPersonForm.elements["schoolclass"].length; i++) 
 		if (this.addPersonForm.elements["schoolclass"][i].checked) break;
-	
+	var role;
+	for (var j = 0; j < this.addPersonForm.elements["role"].length; j++) 
+	{	role = this.form.elements["role"][j]
+		if (role.checked) break;
+	}
+
+	if (role.value === 'L')	
 	app.getPresenterFactory().getAddStudentPresenter().submitSingleSchoolStudent( 
 		this.addPersonForm.elements['schoolclass'][i].value,
 		this.addPersonForm.elements['userName'].value,
@@ -130,6 +136,16 @@ AddPersonDisplay.prototype.addPerson = function() {
 		this.addPersonForm.elements['email'].value,
 		this.addPersonForm.elements['password'].value
 	);	
+	else if (role.value == 'D')
+		app.getPresenterFactory().getAddStudentPresenter().submitTeacher( 
+				this.addPersonForm.elements['schoolclass'][i].value,
+				this.addPersonForm.elements['userName'].value,
+				this.addPersonForm.elements['givenName'].value,
+				this.addPersonForm.elements['insertion'].value,
+				this.addPersonForm.elements['familyName'].value,
+				this.addPersonForm.elements['email'].value,
+				this.addPersonForm.elements['password'].value
+			);	
 }
 
 
