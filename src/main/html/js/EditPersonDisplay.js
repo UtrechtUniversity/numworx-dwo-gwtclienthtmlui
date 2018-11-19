@@ -129,7 +129,8 @@ EditPersonDisplay.prototype.setUser = function (role,json) {
 	this.editPersonDetailsForm.elements["userName"].value = userName;
 	this.editPersonDetailsForm.elements["familyName"].value = familyName;
 	this.editPersonDetailsForm.elements["givenName"].value = givenName;
-	this.editPersonDetailsForm.elements["insertion"].value = insertion;
+	this.editPersonDetailsForm.elements["insertion"].value = insertion; 
+// FIXME vertalen
 	this.editPersonDetailsForm.elements["role"].value = role == "TEACHER" ? "docent" : "student";
 	
 	this.role = role;
