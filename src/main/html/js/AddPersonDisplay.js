@@ -120,11 +120,11 @@ AddPersonDisplay.prototype.setLoadingTableMessage = function (json) {
  */
 
 AddPersonDisplay.prototype.addPerson = function() {
-	for (var i = 0; i < this.addPersonForm.elements["schoolclass"].length; i++) 
+	for (var i = 0; i < this.addPersonForm.elements["schoolclass"].length-1; i++) 
 		if (this.addPersonForm.elements["schoolclass"][i].checked) break;
 	var role;
 	for (var j = 0; j < this.addPersonForm.elements["role"].length; j++) 
-	{	role = this.form.elements["role"][j]
+	{	role = this.addPersonForm.elements["role"][j]
 		if (role.checked) break;
 	}
 
@@ -173,8 +173,7 @@ AddPersonDisplay.prototype.updateSchoolLoginsViewFormSubmitToggle = function() {
 
 AddPersonDisplay.prototype.requiredFields = function() {
 	if (this.role === "SCHOOLADMIN") { // no need for schoolclass
-		return 	
-	   	this.addPersonForm.elements['userName'].value != "" &&
+		return this.addPersonForm.elements['userName'].value != "" &&
 	   	this.addPersonForm.elements['givenName'].value != "" &&
 		this.addPersonForm.elements['familyName'].value != "" &&
 		this.addPersonForm.elements['email'].value != "" &&
