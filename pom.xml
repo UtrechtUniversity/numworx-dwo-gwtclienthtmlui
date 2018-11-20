@@ -81,18 +81,6 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>           
                 </configuration>
             </plugin>
-			<plugin>
-            	<groupId>external.atlassian.jgitflow</groupId>
-            	<artifactId>jgitflow-maven-plugin</artifactId>
-            	<version>1.0-m5.1</version>
-            	<configuration>
-                	<!-- see goals wiki page for configuration options -->
-                	<flowInitContext>
-             			<developBranchName>teuniz</developBranchName>       	
-                	</flowInitContext>
-                	
-            	</configuration>
-        	</plugin>
         </plugins>
     </build>
     <packaging>war</packaging>
@@ -112,4 +100,24 @@
     <scm>
     	<developerConnection>scm:git:git@git.science.uu.nl:dwoproject/DWO-LMS/DwoGwtClientHtmlUi.git</developerConnection>
     </scm>
+    <profiles>
+    	<profile>
+    		<id>gitflow</id>
+    		<build><plugins>
+   			<plugin>
+            	<groupId>external.atlassian.jgitflow</groupId>
+            	<artifactId>jgitflow-maven-plugin</artifactId>
+            	<version>1.0-m5.1</version>
+            	<configuration>
+                	<!-- see goals wiki page for configuration options -->
+                	<flowInitContext>
+             			<developBranchName>teuniz</developBranchName>       	
+                	</flowInitContext>                	
+            	</configuration>
+        	</plugin>
+    		</plugins></build>
+    	</profile>
+    
+    
+    </profiles>
 </project>

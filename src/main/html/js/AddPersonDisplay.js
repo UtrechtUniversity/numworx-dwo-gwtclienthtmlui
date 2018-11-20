@@ -1,4 +1,5 @@
 function AddPersonDisplay() {
+	this.role = "TEACHER"
 	// Forms 
 	this.addPersonForm = document.forms["addPerson"];	
 	
@@ -48,9 +49,10 @@ AddPersonDisplay.prototype.resetSorting = function() {
  * Map to java implementation
  */
 
-AddPersonDisplay.prototype.init = function () {
+AddPersonDisplay.prototype.init = function (role) {
 	app.mainDisplay.registerStretchables( [ this.$addPersonSchoolclassesTableBody ] );
 	this.resetSorting();
+	this.role = role;
 }
 
 AddPersonDisplay.prototype.clear = function () {
@@ -126,7 +128,7 @@ AddPersonDisplay.prototype.addPerson = function() {
 		if (role.checked) break;
 	}
 
-	if (role.value === 'L')	
+	if (role.value === 'L' || this.role === "TEACHER")	
 	app.getPresenterFactory().getAddStudentPresenter().submitSingleSchoolStudent( 
 		this.addPersonForm.elements['schoolclass'][i].value,
 		this.addPersonForm.elements['userName'].value,
@@ -136,7 +138,7 @@ AddPersonDisplay.prototype.addPerson = function() {
 		this.addPersonForm.elements['email'].value,
 		this.addPersonForm.elements['password'].value
 	);	
-	else if (role.value == 'D')
+	else if (role.value == 'D' && this.role === "SCHOOLADMIN")
 		app.getPresenterFactory().getAddStudentPresenter().submitTeacher( 
 				this.addPersonForm.elements['schoolclass'][i].value,
 				this.addPersonForm.elements['userName'].value,
@@ -170,6 +172,14 @@ AddPersonDisplay.prototype.updateSchoolLoginsViewFormSubmitToggle = function() {
 }
 
 AddPersonDisplay.prototype.requiredFields = function() {
+	if (this.role === "SCHOOLADMIN") { // no need for schoolclass
+		return 	
+	   	this.addPersonForm.elements['userName'].value != "" &&
+	   	this.addPersonForm.elements['givenName'].value != "" &&
+		this.addPersonForm.elements['familyName'].value != "" &&
+		this.addPersonForm.elements['email'].value != "" &&
+		this.addPersonForm.elements['password'].value != "";
+	}
 	if (!this.addPersonForm.elements['schoolclass']) return false;
 	return 	this.addPersonForm.elements['schoolclass'].value != "" &&
 		   	this.addPersonForm.elements['userName'].value != "" &&
