@@ -117,7 +117,7 @@ EditPersonDisplay.prototype.init = function () {
 	console.log("init!");
 }
 EditPersonDisplay.prototype.setHelp = function(url) {
-		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
+		this.$helpContentIFrame.attr('src', url );
 }
 
 EditPersonDisplay.prototype.setUser = function (role,json) {
@@ -129,8 +129,10 @@ EditPersonDisplay.prototype.setUser = function (role,json) {
 	this.editPersonDetailsForm.elements["userName"].value = userName;
 	this.editPersonDetailsForm.elements["familyName"].value = familyName;
 	this.editPersonDetailsForm.elements["givenName"].value = givenName;
-	this.editPersonDetailsForm.elements["insertion"].value = insertion;
-	this.editPersonDetailsForm.elements["role"].value = role == "TEACHER" ? "docent" : "student";
+	this.editPersonDetailsForm.elements["insertion"].value = insertion; 
+// FIXME vertalen
+	var value = app.getTranslator().translate(role);
+	this.editPersonDetailsForm.elements["role"].value = value;
 	
 	this.role = role;
 		
@@ -154,15 +156,15 @@ EditPersonDisplay.prototype.setSingleSchoolStudent = function (json) {
 	var email = json.email;
 	var password = json.password;
 //
+	this.role = "STUDENT";
 	this.editPersonDetailsForm.elements["userName"].value = userName;
 	this.editPersonDetailsForm.elements["familyName"].value = familyName;
 	this.editPersonDetailsForm.elements["givenName"].value = givenName;
 	this.editPersonDetailsForm.elements["insertion"].value = insertion;
 	this.editPersonDetailsForm.elements["email"].value = email;
 	this.editPersonDetailsForm.elements["newPassword"].value = password;
-	this.editPersonDetailsForm.elements["role"].value = "student";
-	
-	this.role = "STUDENT";
+	var value = app.getTranslator().translate(this.role);
+	this.editPersonDetailsForm.elements["role"].value = value;
 	
 	this.disableAndHideInputFieldsSingleSchoolStudent();	
 }

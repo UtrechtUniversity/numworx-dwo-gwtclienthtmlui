@@ -1,4 +1,4 @@
-input[type="submit"], input[type="button"], button {
+input[type="submit"], input[type="button"], button, .pseudobutton {
 	-webkit-appearance: none;
 	background-color: $primary;
 	border: $borderThickness $primary solid;
@@ -91,6 +91,13 @@ input[type="submit"], input[type="button"], button {
 	}
 	
 }
+
+	label.pseudobutton {
+		display: block;
+		margin-top: $elementMarginBottom; // in fact, this is the labels bottom margin		
+	}
+
+
 
 input[type="text"], input[type="password"] {
 	border: $borderThickness $primary solid;

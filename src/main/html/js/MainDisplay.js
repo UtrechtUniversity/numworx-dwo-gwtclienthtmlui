@@ -49,6 +49,8 @@ function MainDisplay() {
 	window.jsEditPersonDisplay = this.editPersonDisplay;
 	this.addPersonDisplay = new AddPersonDisplay();
 	window.jsAddPersonDisplay = this.addPersonDisplay;
+	this.importPersonsDisplay = new ImportPersonsDisplay();
+	window.jsImportPersonsDisplay = this.importPersonsDisplay;
 	
 	// RESULTS
 	this.resultsDisplay = new ResultsDisplay();
@@ -59,6 +61,8 @@ function MainDisplay() {
 	window.jsStudentScoResultDisplay = this.studentScoResultDisplay;
 	this.selectStudentResultsDisplay = new SelectStudentResultsDisplay();
 	window.jsSelectStudentResultsDisplay = this.selectStudentResultsDisplay;
+	this.logResultsDisplay = new LogResultsDisplay();
+	window.jsLogResultsDisplay = this.logResultsDisplay;
 	
 	// MODULES
 	this.modulesDisplay = new ModulesDisplay();
@@ -100,7 +104,14 @@ function MainDisplay() {
 }
 
 MainDisplay.prototype.init = function() {
+	// Localize title
 	document.title = "Numworx " + app.getTranslator().translate( 'NUM_APP_TEACHER' );
+	
+	// Localize logo
+	if (Helpers.getUrlParameter('locale') == 'en') {
+		this.$body.addClass("localeEn");
+		this.$logo.find('img').attr('src', 'images/header-logoNumworxTeacher.png');
+	}
 }
 
 MainDisplay.prototype.initMainView = function() { // TODO:	remember state
@@ -132,7 +143,10 @@ MainDisplay.prototype.setSchoolName = function (schoolName) {
 	this.$accountMenuSchoolName.html(schoolName);
 };
 MainDisplay.prototype.setUserRole = function (role) {
+	this.$body.removeClass("TEACHER"); this.$body.removeClass("SCHOOLADMIN"); this.$body.addClass(role);
+	role = app.getTranslator().translate( 'NUM_APP_' + role);
     this.$accountMenuUserRole.html(role);
+	document.title = "Numworx " + role;
 };
 MainDisplay.prototype.setPresentationName = function (presentationName) {
 	this.$accountMenuPresentationName.html(presentationName);
@@ -219,6 +233,11 @@ MainDisplay.prototype.showStudentScoResultView = function() {
 	this.studentScoResultDisplay.show();
 }
 
+MainDisplay.prototype.showLogResultsView = function() {
+	this.initMainView();
+	this.logResultsDisplay.show();
+}
+
 MainDisplay.prototype.showSelectStudentResultsView = function() {
 	this.initMainView(); 
 	this.selectStudentResultsDisplay.show();
@@ -229,6 +248,10 @@ MainDisplay.prototype.showModulesView = function() {
 	this.modulesDisplay.show();
 }
 
+MainDisplay.prototype.showImportPersonsView = function() {
+	this.initMainView();
+	this.importPersonsDisplay.show();
+}
 
 
 /*

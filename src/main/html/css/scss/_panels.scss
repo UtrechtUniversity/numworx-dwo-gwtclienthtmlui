@@ -441,8 +441,14 @@ body {
 		background-size: contain;
 		max-width: 100%;		
 		position: relative;
-		width: 580px;		
+		width: 580px;
+		
+		.localeEn & {
+			background: transparent url(../images/login-containerBackgroundEn.jpg) no-repeat top left; // TODO: replace by def image
+		} 		
 	}
+	
+	
 	
 	#loginDisplayPanelMessageBox {
 		display: none;

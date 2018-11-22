@@ -4,7 +4,8 @@ function SelectedResultsDisplay() {
 	this.scrollTimer = null; //scroll Timer
 	
 	// Form
-	this.sealModuleActivitiesForm = document.forms["sealModuleActivities"];
+	// disabled this.sealModuleActivitiesForm = document.forms["sealModuleActivities"];
+	this.sealSingleActivityForm = document.forms["sealSingleActivity"];
 	this.activitiesStudentsClearResultsForm = document.forms["activitiesStudentsClearResults"];
 	this.startCompareClassForm = document.forms["startCompareClass"];
 	 
@@ -14,18 +15,21 @@ function SelectedResultsDisplay() {
 	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
 	
 	//this.$sealModuleActivitiesForm = $(this.sealModuleActivitiesForm);
+	this.$sealSingleActivityForm = $(this.sealSingleActivityForm);
 	
 	// Bottom bars
 	this.$bars = this.$panel.find(".bar");
 	this.$barModulesStudents = $("#barModulesStudents").hide();
 	this.$barModulesStudentsBacklink = $("#barModulesStudentsBacklink");
+	this.$barModulesStudentsDownload = this.initModulesStudentsDownload("#barModulesStudentsDownload");
 	this.$barActivitiesStudent = $("#barActivitiesStudent").hide();
 	this.$barActivitiesStudentBacklink = $("#barActivitiesStudentBacklink");
 	this.$barActivitiesStudents = $("#barActivitiesStudents").hide();
 	this.$barActivitiesStudentsBacklink = $("#barActivitiesStudentsBacklink");
+	this.$barActivitiesStudentsDownload = this.initActivitiesStudentsDownload("#barActivitiesStudentsDownload");
 	this.$barPagesStudents = $("#barPagesStudents").hide();
 	this.$barPagesStudentsBacklink = $("#barPagesStudentsBacklink");
-	
+	this.$barPagesStudentsDownload = this.initPagesStudentsDownload("#barPagesStudentsDownload")
 	
 	this.$selectedResultsTitle = $("#selectedResultsTitle");
 
@@ -43,19 +47,21 @@ function SelectedResultsDisplay() {
 	
 	this.$startCompareClassForm = $(this.startCompareClassForm);
 	this.$activitiesStudentsClearResultsForm = $(this.activitiesStudentsClearResultsForm);
+	this.$studentsLog = $('#barPagesStudentsLog')
 	
-	this.$printButton = $("#barActivitiesStudentsPrint");
 	
-	this.$sealCheckbox = $(this.sealModuleActivitiesForm.elements['seal']);
+	// disabled this.$sealCheckbox = $(this.sealModuleActivitiesForm.elements['seal']);
+	this.$sealSingleActivityCheckbox = $(this.sealSingleActivityForm.elements['seal']);
 	
 	// Bind handlers
 	this.$allFilterIndicators.on('click', $.proxy(this.clickFilterIndicator, this));
 	
 	this.$startCompareClassForm.on('submit', $.proxy(this.submitStartCompareClassForm, this));
 	this.$activitiesStudentsClearResultsForm.on('submit', $.proxy(this.submitActivitiesStudentsClearResultsForm, this));
-	this.$printButton.on('click', $.proxy(this.clickPrintButton, this));
-	this.$sealCheckbox.on('change', $.proxy(this.changeSealCheckbox, this));
-	this.$selectResultsTableWrap.on('scroll', $.proxy(this.scrollTableWrap, this));	
+	// disabled this.$sealCheckbox.on('change', $.proxy(this.changeSealCheckbox, this));
+	this.$sealSingleActivityCheckbox.on('change', $.proxy(this.changeSealSingleActivityCheckbox, this));
+	this.$selectResultsTableWrap.on('scroll', $.proxy(this.scrollTableWrap, this));
+	this.$studentsLog.on('click', $.proxy(this.logResultsClick, this));
 	
 	// Init
 	this.$panel.hide();
@@ -65,10 +71,10 @@ SelectedResultsDisplay.prototype.show = function() {
         this.localize();
 	this.$panel.show();	
 	
-	if (!app.getPresenterFactory().getSelectedResultsPresenter().hasCompareClasses()) this.$startCompareClassForm.hide();
-	
-	// temporary hide, TODO: implement
-	this.$printButton.hide();
+	if (!app.getPresenterFactory().getSelectedResultsPresenter().hasCompareClasses()) this.$startCompareClassForm.css('visibility','hidden');
+	if (!app.getPresenterFactory().getSelectedResultsPresenter().hasLogResults()) this.$studentsLog.css('visibility', 'hidden');
+
+	this.$activitiesStudentsClearResultsForm.css('visibility','hidden'); // Not implemented?
 }
 
 
@@ -162,7 +168,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 				Helpers.setResultIndicatorColor($value);
 				
 				// Sorting
-				if (matrix[i][j].sortValue) $value.attr("data-sortvalue", matrix[i][j].sortValue );
+				if (matrix[i][j].sortValue || matrix[i][j].sortValue === 0) $value.attr("data-sortvalue", matrix[i][j].sortValue );
 				else if (matrix[i][j].score) $value.attr("data-sortvalue", matrix[i][j].score );
 				else $value.attr("data-sortvalue", matrix[i][j].label );
 				
@@ -386,6 +392,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 	return matrix;
 }
 
+// Below is not in use anymore
 SelectedResultsDisplay.prototype.getSealStateActivitiesStudentsInModule = function(module) {
 	var students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children;
 	var sealed = 0, unsealed = 0, state = 0;
@@ -474,6 +481,25 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 	return matrix;	
 }
 
+SelectedResultsDisplay.prototype.getSealStateSingleActivity = function(activity) {
+	var students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children;
+	var sealed = 0, unsealed = 0, state = 0;
+	for (var studentId in students) {
+		for (var studenScoId in activity.children) { // Loop over activities
+			if (activity.children[studenScoId]["user-id"] == studentId) { 
+				console.log(activity.children[studenScoId].completionStatus);
+				if (activity.children[studenScoId].completionStatus == "completed") sealed++;
+				else unsealed++;				
+			}
+		}	
+		
+	}
+	
+	if (sealed == 0) return 0; // none sealed
+	if (sealed > 0 && unsealed > 0) return 1; // some sealed
+	if (sealed > 0 && unsealed == 0) return 2; // all sealed	
+}
+
 
 SelectedResultsDisplay.prototype.computeModuleScoreForStudent = function(module, studentId) {
 	var total = 0, totalCount = 0, scoreSet = false, allZero = true;
@@ -503,7 +529,7 @@ SelectedResultsDisplay.prototype.allFilterIndicatorsReset = function() {
 	this.resultState.activeIndicators = [1, 2, 3, 4];
 }
 SelectedResultsDisplay.prototype.showFilteredIndicators = function() {
-	console.log(this.resultState.activeIndicators);
+	//console.log(this.resultState.activeIndicators);
 	this.$selectResultsTableWrap.find(".resultIndicator").hide();
 	for (var i = 0; i < this.resultState.activeIndicators.length; i++) {
 		this.$selectResultsTableWrap.find(".result"+this.resultState.activeIndicators[i]).show();
@@ -549,7 +575,7 @@ SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
 	console.log(params);
 	
 	var matrix = this.buildMatrixActivitiesStudentsInModule(params.module);
-	var sealState = this.getSealStateActivitiesStudentsInModule(params.module);
+	//var sealState = this.getSealStateActivitiesStudentsInModule(params.module);
 	
 	this.resultState.activeModule = params.moduleId;
 	
@@ -559,13 +585,13 @@ SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
 	this.$barActivitiesStudentsBacklink.click($.proxy(this.clickBackToModulesStudents, this));
 	
 	// Sealed checkbox
-	this.$sealCheckbox.parent().removeClass("thirdState");
-	this.$sealCheckbox.parent().removeAttr("checked");
-	if (sealState == 1) this.$sealCheckbox.parent().addClass("thirdState");
-	else if (sealState == 2) {
-		this.$sealCheckbox.parent().attr("checked", "checked");
-		this.$sealCheckbox.attr("disabled", "disabled");
-	}
+	// disabled this.$sealCheckbox.parent().removeClass("thirdState");
+	// disabled this.$sealCheckbox.parent().removeAttr("checked");
+	// disabled if (sealState == 1) this.$sealCheckbox.parent().addClass("thirdState");
+	// disabled else if (sealState == 2) {
+	// disabled 	this.$sealCheckbox.parent().attr("checked", "checked");
+	// disabled 	this.$sealCheckbox.attr("disabled", "disabled");
+	// disabled }
 	
 	this.plotMatrix(matrix);
 	//this.filterIndicatorActivitiesStudentsInModule();
@@ -575,6 +601,9 @@ SelectedResultsDisplay.prototype.pagesStudents = function(params) {
 	var activity = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[ this.resultState.activeModule ].children[ this.resultState.activeActivity ];
 	var matrix = this.buildMatrixPagesActivityStudentsInModule(activity);
 	
+	var sealState = this.getSealStateSingleActivity(activity);
+	console.log(sealState);
+	
 	this.$bars.hide();
 	this.$barPagesStudents.show();
 	
@@ -583,6 +612,16 @@ SelectedResultsDisplay.prototype.pagesStudents = function(params) {
 	params.module = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[ this.resultState.activeModule ];
 	params.moduleId = this.resultState.activeModule;
 	this.$barPagesStudentsBacklink.click($.proxy(this.activitiesStudents, this, params));
+	
+	// Sealed checkbox
+	this.$sealSingleActivityCheckbox.parent().removeClass("thirdState");
+	this.$sealSingleActivityCheckbox.removeAttr("checked");
+	this.$sealSingleActivityCheckbox.removeAttr("disabled");
+	if (sealState == 1) this.$sealSingleActivityCheckbox.parent().addClass("thirdState");
+	else if (sealState == 2) {
+		this.$sealSingleActivityCheckbox.attr("checked", "checked");
+		this.$sealSingleActivityCheckbox.attr("disabled", "disabled");
+	}
 	
 	this.plotMatrix(matrix);
 }
@@ -607,7 +646,7 @@ SelectedResultsDisplay.prototype.init = function(resultState) {
 }
 
 SelectedResultsDisplay.prototype.setHelp = function(url) {
-		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
+		this.$helpContentIFrame.attr('src', url );
 }
 
 SelectedResultsDisplay.prototype.updateResultTree = function (resultsTree, studentsTree) {
@@ -658,6 +697,10 @@ SelectedResultsDisplay.prototype.sealModuleActivities = function() {
 	app.getPresenterFactory().getSelectedResultsPresenter().sealModuleActivities(this.resultState.activeModule, this.resultState.activeSchoolClass);
 }
 
+SelectedResultsDisplay.prototype.sealSingleActivity = function() {
+	app.getPresenterFactory().getSelectedResultsPresenter().sealSingleActivity(this.resultState.activeActivity, this.resultState.activeSchoolClass);
+}
+
 SelectedResultsDisplay.prototype.getPages = function(scoId) {
 	this.resultState.activeActivity = scoId;
 	app.getPresenterFactory().getSelectedResultsPresenter().preparePages(scoId, this.resultState.activeSchoolClass);	
@@ -671,6 +714,12 @@ SelectedResultsDisplay.prototype.clearStudentScoResults = function() {
 	app.getPresenterFactory().getSelectedResultsPresenter().clearStudentScoResults(this.resultState.activeModule, this.resultState.activeSchoolClass);
 }
 
+SelectedResultsDisplay.prototype.logResults = function() {
+	var context = this.resultState;
+	var scoid = this.resultState.activeActivity;
+	var classid = this.resultState.activeSchoolClass;
+	app.getPresenterFactory().getSelectedResultsPresenter().showLogResults(context, scoid, classid);
+}
 
 /*
  * EVENT HANDLERS
@@ -795,8 +844,87 @@ SelectedResultsDisplay.prototype.changeSealCheckbox = function(event) {
 	}
 }
 
-SelectedResultsDisplay.prototype.submitActivitiesStudentsClearResultsForm = function() {
+SelectedResultsDisplay.prototype.changeSealSingleActivityCheckbox = function(event) {
+	event.preventDefault();			
+	if (event.target.checked == 1) {
+		event.target.disabled = true;
+		this.sealSingleActivity();
+	}
+}
+
+SelectedResultsDisplay.prototype.submitActivitiesStudentsClearResultsForm = function(event) {
 	event.preventDefault();			
 	this.clearStudentScoResults();
 }
+
+
+SelectedResultsDisplay.prototype.buildMatrix = function(matrix) {
+	var result = "";
+	var SEP = "\t";
+	var LINE = "\n";
+	
+	for( var i = 0; i < matrix.length; i++ ) {
+		var row = matrix[i];
+		for (var j = 0; j < row.length; j++ )  {
+			if(j > 0) 
+				result = result += SEP;
+			result +=  row[j].label ; // iets met ""?
+		}
+		result = result + LINE;
+	}
+	return result;
+}
+
+
+
+
+
+SelectedResultsDisplay.prototype.modulesStudentsDownload = function(trigger) {
+	console.log("ModulesStudentsDownload trigger");
+	var matrix = this.buildMatrixModulesStudentsForClass();
+	return this.buildMatrix(matrix);
+}
+
+SelectedResultsDisplay.prototype.initModulesStudentsDownload = function(node) {
+	var display = this;
+	return new ClipboardJS(node, {
+	    text: $.proxy(display.modulesStudentsDownload, display)
+	});
+}
+
+SelectedResultsDisplay.prototype.activitiesStudentsDownload = function(trigger) {
+	console.log("ActivitiesStudentsDownload trigger");
+	var module = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[ this.resultState.activeModule ]
+	var matrix = this.buildMatrixActivitiesStudentsInModule(module);
+	return this.buildMatrix(matrix);
+}
+
+SelectedResultsDisplay.prototype.initActivitiesStudentsDownload = function(node) {
+	var display = this;
+	return new ClipboardJS(node, {
+	    text: $.proxy(display.activitiesStudentsDownload, display)
+	});
+}
+
+SelectedResultsDisplay.prototype.pagesStudentsDownload = function(trigger) {
+	console.log("PagesStudentsDownload trigger");
+	var module = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[ this.resultState.activeModule ]
+	var activity = module.children[ this.resultState.activeActivity ];
+	var matrix = this.buildMatrixPagesActivityStudentsInModule(activity);
+	return this.buildMatrix(matrix);
+}
+
+SelectedResultsDisplay.prototype.initPagesStudentsDownload = function(node) {
+	var display = this;
+	return new ClipboardJS(node, {
+	    text: $.proxy(display.pagesStudentsDownload, display)
+	});
+}
+
+SelectedResultsDisplay.prototype.logResultsClick = function(event) {
+	event.preventDefault();
+	console.log("PagesStudentsLog trigger");
+	this.logResults();
+}
+
 

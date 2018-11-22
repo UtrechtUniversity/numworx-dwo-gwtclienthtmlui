@@ -21,6 +21,16 @@
         var DwoMainPresenter;
         <!-- set to false in order to show the default user-interface -->
         var hideGwtGui="true";
+
+        // SAML hook, called when saml login active
+        function logout() {
+    		if (window != window.parent)
+    		{
+    			window.parent.logout();
+    		}
+    	}
+
+        
         
         </script>
 		
@@ -42,6 +52,14 @@
 	
 	<!-- Load styles AFTER GWT, because GWT outputs styles too -->
 	<link rel="stylesheet" href="css/styles.css" type="text/css" media="screen">
+<!-- opnemen in styles.scss -->
+<style type="text/css">
+.TEACHER .schooladmin-only { display: none; }
+.SCHOOLADMIN .teacher-only { display: none; }
+</style>
+
+
+
 	<link rel="stylesheet" href="third-party/material-datetime-picker/dist/material-datetime-picker.css" type="text/css" media="screen">
 	
 		
@@ -173,7 +191,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/rome/2.1.22/rome.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
 	<script src="third-party/material-datetime-picker/dist/material-datetime-picker.js" type="text/javascript" charset="utf-8"></script>
-	
+	<!-- Clipboard.js -->
+	<script src="third-party/clipboard/clipboard.js" ></script>
 	
 	<!-- Seperate script for each view, could be combined and minified in future -->
 	<script src="js/MainDisplay.js" type="text/javascript" charset="utf-8"></script>
@@ -190,11 +209,13 @@
 	<script src="js/PersonsDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/EditPersonDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/AddPersonDisplay.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/ImportPersonsDisplay.js" type="text/javascript" charset="utf-8"></script>
 	
 	<script src="js/ResultsDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/SelectedResultsDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/StudentScoResultDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/SelectStudentResultsDisplay.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/LogResultsDisplay.js" type="text/javascript" charset="utf-8"></script>
 	
 	<script src="js/ModulesDisplay.js" type="text/javascript" charset="utf-8"></script>
 	
@@ -209,7 +230,7 @@
   <body>
 	  <!-- ICON SPRITE 
 		  should be first in body, should be inline (IE doesn't support external) 
-		  contains 64px square svg icons, copied from Adobe Illutrator
+		  contains 64px square svg icons, copied from Adobe Illustrator
 	  -->
 	  <svg style="display: none">
 	    <defs>
@@ -304,8 +325,8 @@
 			<div id="loginBox">
 				<div class="block primary">			
 					<form id="formLogin" name="login" action="javascript: void(0);" method="POST">
-						<label for="username">&nbsp;<input type="text" name="username" placeholder="Gebruikersnaam" /></label>
-						<label for="password">&nbsp;<input type="password" name="password" placeholder="Wachtwoord" /></label>
+						<label for="username">&nbsp;<input type="text" name="username" data-translate="NUM_LBL_USERNAME" placeholder="Gebruikersnaam" /></label>
+						<label for="password">&nbsp;<input type="password" name="password" data-translate="NUM_LBL_PASSWORD" placeholder="Wachtwoord" /></label>
 						<input type="submit" class="right" name="submit" value="Aanmelden" data-translate="NUM_BTN_LOGIN" /> <!-- data-translate="NUM_Button_Ok"  -->
 						<span id="loginDisplayPanelWarningBox"></span>
 					</form>
@@ -322,8 +343,6 @@
 	
 	
 	<main id="mainPanel" class="panel">
-		
-		
 		
 		<header>
 			<a href="#WELCOME" id="logo"><img src="images/header-logoNumworxDocent.png"></a>
@@ -342,7 +361,7 @@
 		
 		<nav>
 			<ul id="mainNav">
-				<li>
+				<li class='teacher-only'>
 					<a href="#RESULTS" ><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#resultaten"></use>
 				    </svg><span class="name" data-translate="NUM_MNU_RESULTS">Resultaten</span>
@@ -357,9 +376,9 @@
 				<li><a href="#MODULES"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#modules"></use>
 				    </svg><span class="name" data-translate="NUM_MNU_MODULES">Modules</span></a></li>
-				<!-- <li><a href="#"><svg viewBox="0 0 64 64" class="icon">
+				 <li class='schooladmin-only'><a href="#ORGANISATION"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#organisatie"></use>
-				    </svg><span class="name" data-translate="NUM_MNU_MANAGE_ACCOUNT">Organisatie</span></a></li> -->
+				    </svg><span class="name" data-translate="NUM_MNU_ORGANIZATION">Organisatie</span></a></li>
 			</ul>
 		</nav>
 		
@@ -604,7 +623,7 @@
 					<section id="help" class="col-2 help">
                                             <h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -729,7 +748,7 @@
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -878,7 +897,7 @@
 						</form>
 					</div>
 					
-					<div class="col-4">
+					<div class="col-4 teacher-only">
 						<form name="changeModules">
 							<fieldset>
 								<table class="dwo sortable disabled headered">
@@ -1836,8 +1855,11 @@
 				</div>
 				
 				<div class="row bar" id="barModulesStudents">					
-					<div class="col-6">
-						<p>&nbsp;</p>
+					<div class="col-5">
+						<p><a href="javascript:void(0);" id="barModulesStudentsBacklink" class="backlink">
+							<svg viewBox="0 0 74 74" class="icon">
+									  <use xlink:href="#arrowLeft"></use>
+								</svg><span data-translate="NUM_LBL_SELECTEDRESULTS_BACKTOSELECT">Terug naar start</span></a></p>
 					</div>
 					<div class="col-3">
 						<p><span data-translate="NUM_LBL_SELECTEDRESULTS_SHOW">Toon:</span> 
@@ -1852,12 +1874,14 @@
 							<input type="submit" class="primary right" value="Vergelijk klas" />
 						</form>
 					</div>
-					<div class="col-12">
-						<p><a href="javascript:void(0);" id="barModulesStudentsBacklink" class="backlink">
-							<svg viewBox="0 0 74 74" class="icon">
-									  <use xlink:href="#arrowLeft"></use>
-								</svg><span data-translate="NUM_LBL_SELECTEDRESULTS_BACKTOSELECT">Terug naar start</span></a></p>
-					</div>
+
+					<div class="col-1">
+						<a href="javascript:void(0);" id="barModulesStudentsDownload" title='Copy to clipboard'>
+							<svg viewBox="0 0 74 74" class="icon btn">
+									  <use xlink:href="#download"></use>
+							</svg>
+						</a>
+					</div>					
 				</div>
 				
 				<div class="row bar" id="barActivitiesStudent">
@@ -1872,7 +1896,7 @@
 				<div class="row bar" id="barActivitiesStudents">
 					
 					
-					<div class="col-5">
+					<!-- <div class="col-5">
 						<p data-translate="NUM_LBL_SELECTEDRESULTS_SEALMODULES">Deze modules voor deze klas verzegelen?</p>
 					</div>
 					<div class="col-1">
@@ -1881,6 +1905,13 @@
 								<input type="checkbox" name="seal" id="sealModuleActivitiesCheckbox" value="1"><label class="icon" for="sealModuleActivitiesCheckbox"></label>
 							</div>
 						</form>
+					</div> -->
+						
+					<div class="col-5">
+						<p><a href="javascript:void(0);" id="barActivitiesStudentsBacklink" class="backlink">
+							<svg viewBox="0 0 74 74" class="icon">
+									  <use xlink:href="#arrowLeft"></use>
+								</svg><span data-translate="NUM_LBL_SELECTEDRESULTS_BACKALL">Terug naar alle geselecteerde modules</span></a></p>
 					</div>
 					
 					<div class="col-3">
@@ -1892,28 +1923,19 @@
 						</p>
 					</div>
 					
-					<div class="col-2">
+					<div class="col-3">
 						<form name="activitiesStudentsClearResults">
-							<input type="submit" class="primary right hidden" data-translate="NUM_LBL_SELECTEDRESULTS_ClearResults" value="Clear" />
+							<input type="submit" class="primary right" data-translate="NUM_LBL_SELECTEDRESULTS_ClearResults" value="Clear" />
 						</form>
 					</div>
 					
 					<div class="col-1">
-						<a href="javascript:void(0);" id="barActivitiesStudentsPrint">
+						<a href="javascript:void(0);" id="barActivitiesStudentsDownload" title='Copy to clipboard'>
 							<svg viewBox="0 0 64 64" class="icon btn">
-								  <use xlink:href="#print"></use>
+								  <use xlink:href="#download"></use>
 							</svg>
 						</a>
-					</div>
-					
-					<div class="clear"></div>
-					
-					<div class="col-12">
-						<p><a href="javascript:void(0);" id="barActivitiesStudentsBacklink" class="backlink">
-							<svg viewBox="0 0 74 74" class="icon">
-									  <use xlink:href="#arrowLeft"></use>
-								</svg><span data-translate="NUM_LBL_SELECTEDRESULTS_BACKALL">Terug naar alle geselecteerde modules</span></a></p>
-					</div>
+					</div>					
 					
 				</div>
 				
@@ -1922,7 +1944,7 @@
 				<div class="row bar" id="barPagesStudents">
 					
 					
-					<div class="col-6">
+					<div class="col-4">
 						<p><a href="javascript:void(0);" id="barPagesStudentsBacklink" class="backlink">
 							<svg viewBox="0 0 74 74" class="icon">
 									  <use xlink:href="#arrowLeft"></use>
@@ -1930,7 +1952,7 @@
 					</div>
 					
 					
-					<div class="col-5">
+					<div class="col-3">
 						<p><span data-translate="NUM_LBL_SELECTEDRESULTS_SHOW">Toon:</span> 
 							<span class="filterIndicators result1" data-filter="1"><a href="javascript:void(0);">1</a></span>
 							<span class="filterIndicators result2" data-filter="2"><a href="javascript:void(0);">2</a></span>
@@ -1938,16 +1960,111 @@
 							<span class="filterIndicators result4" data-filter="4"><a href="javascript:void(0);">4</a></span>
 						</p>
 					</div>
-					<div class="col-1">
-						<!-- icons -->
+					
+					
+					
+					<div class="col-2">
+						<label for="sealSingleActivityCheckbox"><span data-translate="NUM_LBL_SELECTEDRESULTS_SEALSINGLEACTIVITY">Alles verzegelen</span></label>
 					</div>
+					
+					<div class="col-1">
+						
+						<form name="sealSingleActivity">
+							<div class="checkbox">
+								<input type="checkbox" name="seal" id="sealSingleActivityCheckbox" value="1"><label class="icon" for="sealSingleActivityCheckbox"></label>
+							</div>
+						</form>
+					</div>
+					
+					<div class="col-2">
+						<a href="javascript:void(0);" id="barPagesStudentsDownload" title='Copy to clipboard' style='float:right; margin-right:11px'>
+							<svg viewBox="0 0 64 64" class="icon btn" style='margin-left:0px'>
+								  <use xlink:href="#download"></use>
+							</svg>
+						</a>
+						<a href="javascript:void(0);" id="barPagesStudentsLog" title='Logs' style='float:right'>
+							<svg viewBox="0 0 64 64" class="icon btn">
+								  <use xlink:href="#log"></use>
+							</svg>
+						</a>
+					</div>					
 					
 				</div>
 				
 			</section>
 		</section>		
 		<!-- end selectedResultsDisplay -->
-		
+		<!-- 
+		-
+		- logResultsDisplay
+		-
+		-->
+		<section id='logResultsDisplay' class="lightbox">
+			<header>
+				<span id="logResultsName">Naam klas</span> <span id="logResultsActivity" class="strong">Opgave</span>
+				<span id="logResultsCloseButton" class="closeButton">
+					<svg viewBox="0 0 64 64" class="icon">
+						<use xlink:href="#close"></use>
+				    </svg>
+				</span>
+			</header>
+			<section>
+				<div class='row'>
+				<form name='logResultsTabber'>
+					<div class='col-12'>
+					<div class='options'>
+					 <div class='option'>
+							<input type='radio' name='logResultsTab' id='logResultsTabA' checked=checked value='A' />
+							<label for='logResultsTabA'>Antwoorden</label>
+					</div>
+					<div class='option' >
+							<input type='radio' name='logResultsTab' id='logResultsTabS' value='S' />
+							<label for='logResultsTabS'>Scores</label>
+					</div>
+					<div class='option'>
+							<input type='radio' name='logResultsTab' id='logResultsTabF' value='F' />
+							<label for='logResultsTabF'>Fouten</label>
+					</div>
+					<div class='option'>
+							<input type='radio' name='logResultsTab' id='logResultsTabP' value='P' />
+							<label for='logResultsTabP'>Pogingen</label>
+					</div>
+					<div class='option'>
+							<input type='radio' name='logResultsTab' id='logResultsTabD' value='D' />
+							<label for='logResultsTabD'>Data</label>
+					</div>
+					<div class='option'>
+							<input type='radio' name='logResultsTab' id='logResultsTabDS' value='DS' />
+							<label for='logResultsTabDS'>Deelscores</label>
+					</div>
+				</div></div>
+				</form>
+				</div>
+				<div class='row'>
+					<div class='col-12'>
+						<div class='tablewrap' >
+							<table class='dwo scrollable'>
+								<thead>								
+									<tr>
+										<th>&nbsp;</th>
+										<th>T2.1a</th>
+										<th>T.2.1.a.zt</th>
+										<th>T.2.1.b</th>
+								</thead>
+								<tbody>
+									<tr>
+										<td class='studentname'><span>Van Waveren, Frank</span></td>
+										<td>1/6</td>
+										<td>A</td>
+										<td>(2*s*sqrt(3))</td>									
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</section>
+		</section>
 		<!-- 
 		-
 		- studentScoResultDisplay (lightbox)
@@ -2043,7 +2160,7 @@
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
 						<div class="content">
-							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -2203,7 +2320,8 @@
 						<form name="personsAdd">
 							<fieldset>
 								<label class="buttonLabel" for="button_1">
-                                                                    <span data-translate="NUM_LBL_PERSONS_ADD">Een enkele nieuwe leerling opvoeren</span>
+                                                                    <span class='teacher-only' data-translate="NUM_LBL_PERSONS_ADD">Een enkele nieuwe leerling opvoeren</span>
+                                                                    <span class='schooladmin-only' data-xtranslate="NUM_LBL_PERSONS_ADD_S">Voeg een nieuwe leerling of docent toe</span>
 									<input type="submit" class="secondary right" data-translate="NUM_BTN_Add" value="Toevoegen" />
 								</label>
 							</fieldset>
@@ -2212,14 +2330,13 @@
 					
 					
 					<div class="col-6">
-						<form name="personsImport"> <!-- form tag on the outside, for hiding -->
+						<form name="personsImport" method="post" enctype="multipart/form-data"> <!-- form tag on the outside, for hiding -->
 						<h2 class="sectionhead"><span>Meerdere personen tegelijk toevoegen</span></h2>
 						
 							<fieldset>
-								<label class="buttonLabel" for="button_1">
-									Importeer leerlingen of docenten vanuit een CSV bestand
-									<input type="submit" class="secondary right" value="Zoek bestand" />
-								</label>
+									<label class="buttonLabel">Importeer leerlingen of docenten vanuit een CSV bestand</label>
+									<input id="zoekBestand" name="zoekBestand" type="file" accept=".csv" style="opacity:0"/>
+									<label class="pseudobutton secondary right" for="zoekBestand" >Zoek bestand</label>
 							</fieldset>
 						</form>	
 					</div>
@@ -2300,7 +2417,9 @@
 							
 							<label for="editPersonRole" class="col-2 input">
 								<span data-translate="NUM_TBL_ROLE">rol</span>
-								<input id="editPersonRole" name="role" type="text" value="" />
+								<input 
+									style='text-transform: lowercase'
+									id="editPersonRole" name="role" type="text" value="" />
 							</label>
 							<div class="col-6">
 								&nbsp;
@@ -2407,9 +2526,7 @@
 					<div class="row">
 					
 							<fieldset>
-							
-								
-							
+														
 								<label for="addPersonGivenName" class="col-2 input">
 									<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 									<input id="addPersonGivenName" name="givenName" type="text" value="" />
@@ -2446,6 +2563,21 @@
 										<label for="addPersonD">D</label>
 									</div>
 								</div>		 -->					
+								<div class="row schooladmin-only" style='margin-top: 1em' > <!-- FIXME -->
+										<h3 class="col-12"><span>Toevoegen als student/docent?</span></h3>
+										<div class="col-12" style="height: 2em"> <!-- voor teunis, hoe moet dit netjes? -->
+											<div class="options">
+													<div class="option">
+														<input type="radio" name="role" id="addPersonL" value="L" checked="checked">
+					                                    <label for="addPersonL"><span data-translate="NUM_LBL_STUDENTLETTER">L</span></label>
+													</div> 
+													<div class="option">
+														<input type="radio" name="role" id="addPersonD" value="D" > <!-- disabled="disabled" -->
+														<label for="addPersonD"><span data-translate="NUM_LBL_TEACHERLETTER">D</span></label>
+													</div>
+											</div>
+										</div>
+								</div>
 							
 							</fieldset>						
 						<!-- </form>					 -->
@@ -2506,10 +2638,158 @@
 			
 		</section> 
 		<!-- end addPersonDisplay -->
-		
-		
-		
-		
+
+		<!-- 
+		-
+		- importPersonsDisplay
+		-
+		-->		
+		<section id="importPersonsDisplay" class="subpanel">
+			<header>				
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
+							<use xlink:href="#personen"></use>
+						</svg>
+                        <h1><span data-xtranslate="NUM_PNL_IMPORT_PERSONS">Personen importeren</span></h1>
+						<h2 class="sectionhead"><span data-xtranslate="NUM_SEC_IMPORT_PERSONS">Personen importeren vanuit bestand</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<div class="content">
+							<iframe src="helppage/helpindex_nl.html#importPersons"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
+						</div>
+					</section>
+				</div>
+			</header>
+		    <form name='importPersonsForm'>
+			<section>
+				<div class='row'>
+					<div class='col-12'>
+						<h3><span>De volgende personen zijn in uw bestand gevonden</span></h3>
+						<table class="dwo headered" id='importPersonsTable'>
+							<thead>
+								<tr>
+									<th class="col-2">
+										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+									</th>
+									<th class="col-2">
+									<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
+									</th>
+									<th class="col-2">
+										<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
+									</th>									
+									<th class="col-2">
+										<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+									</th>
+									<th class="col-2">
+										<span data-translate="NUM_TBL_EMAIL">EMAILADRES</span>
+									</th>
+									<th class="col-2">
+										<span data-translate="NUM_TBL_PASSWORD">WACHTWOORD</span>
+									</th>									
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="col-2"><input type='text' value='Bakker23' id='importPersonsUsername' name='userName' ></td>
+									<td class="col-2"><input type='text' value='Arthur' id='importPersonsGivenName' name='givenName' ></td>
+									<td class="col-2"><input type='text' value='van der' id='importPersonsInsertion' name='insertion'></td>
+									<td class="col-2"><input type='text' value='Begijnen' id='importPersonsSurname' name='familyName'></td>
+									<td class="col-2"><input type='text' value='A.vdBegijnen@outlook.com' id='importPersonsMail' name='email'></td>
+									<td class="col-2"><input type='text' value='geheim' id='importPersonsPassword' name='password'></td>
+								</tr>					
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="row schooladmin-only" >
+						<h3 class="col-12"><span>Importeren als student/docent?</span></h3>
+						<div class="col-12" style="height: 2em"> <!-- voor teunis, hoe moet dit netjes? -->
+							<div class="options">
+									<div class="option">
+										<input type="radio" name="role" id="importPersonsL" value="L" checked="checked">
+	                                    <label for="importPersonsL"><span data-translate="NUM_LBL_STUDENTLETTER">L</span></label>
+									</div> 
+									<div class="option">
+										<input type="radio" name="role" id="importPersonsD" value="D" > <!-- disabled="disabled" -->
+										<label for="importPersonsD"><span data-translate="NUM_LBL_TEACHERLETTER">D</span></label>
+									</div>
+							</div>
+						</div>
+				</div>
+				<div class="row">
+						<h3 class="col-12"><span>Kies een klas om personen in te importeren</span></h3>
+				</div>
+				<div class="row">						
+						<div class="col-6" >	
+							<table class="dwo sortable"  id='importPersonsSchoolClassesTable'>
+									<thead>
+										<tr class="sorting">
+											<th  class="col-4">&nbsp;
+												<span class="sortButton asc default" data-order="asc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														  <use xlink:href="#arrowUp"></use>
+													</svg>
+												</span>
+												<span class="sortButton desc" data-order="desc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														  <use xlink:href="#arrowDown"></use>
+													</svg>
+												</span>
+											</th>
+											<th class="col-2"></th>
+										</tr>
+									</thead>
+								<tbody style="height: 200px">
+																		<!-- The row is detached and used as a template by the JS -->								
+										<tr>
+											<td class="col-4"><span id="importPersonsSchoolclassName">Schoolnaam</span></td>
+											<td class="col-2">
+												<div class="checkbox">
+													<input type="radio" name="schoolclass" id="importPersonsSchoolclassActive" value="schoolid"><label class="icon" for="importPersonsSchoolclassActive"></label>
+												</div>
+											</td>
+										</tr>
+								
+								
+									<tr><td class="col-4">Atheneum 6</td><td class="col-2">
+										<div class="checkbox">
+											<input type="radio" name="schoolclass" id="importPersonsSchoolclassActive1" value="MYSQL;PersistentSchoolClass;00000000000000010045"><label class="icon" for="importPersonsSchoolclassActive1"></label>
+										</div>
+									</td></tr>
+									<tr><td class="col-4">Atheneum 5</td><td class="col-2">
+										<div class="checkbox">
+											<input type="radio" name="schoolclass" id="importPersonsSchoolclassActive2" value="MYSQL;PersistentSchoolClass;00000000000000020045"><label class="icon" for="importPersonsSchoolclassActive2"></label>
+										</div>
+									</td></tr>
+									<tr><td>Atheneum 4</td></tr>
+									<tr><td>Atheneum 3</td></tr>
+									<tr><td>Atheneum 2</td></tr>
+									<tr><td>Havo 5</td></tr>
+									<tr><td>Havo 4</td></tr>
+									<tr><td>Havo 3</td></tr>
+									<tr><td>Havo 2</td></tr>
+									<tr><td>Brugklas</td></tr>
+								</tbody>						
+							</table>
+							<input type="radio" name="schoolclass" value="schoolid" class="hidden"><!-- empty value -->
+						</div>
+						<div class="col-6">
+							<input class="primary right bottom" type="submit" value="importeer" >
+						</div>					
+					</div>
+				</div>
+			</section>
+			</form>			
+		</section>
+		<!-- end importPersonsDisplay -->
+
 		<!-- 
 		-
 		- modulesDisplay
@@ -2517,7 +2797,7 @@
 		-->
 		<section id="modulesDisplayPanel" class="subpanel iframepanel">
 			
-			<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+			<iframe src="helppage/helpindex_nl.html"></iframe>
 			
 		</section>
 		<!-- end modulesDisplay -->

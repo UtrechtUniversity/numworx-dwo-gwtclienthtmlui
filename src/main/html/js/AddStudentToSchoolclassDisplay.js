@@ -133,7 +133,7 @@ AddStudentToSchoolclassDisplay.prototype.setSchoolClass = function(schoolClass) 
 }
 
 AddStudentToSchoolclassDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
+	this.$helpContentIFrame.attr('src', url );
 }
 
 AddStudentToSchoolclassDisplay.prototype.showStudents = function(json) {	

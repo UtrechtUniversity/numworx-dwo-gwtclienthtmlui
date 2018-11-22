@@ -91,7 +91,7 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudents = function(json, $t
 	var students = json, studentName;
 	
 	$tableBody.html("");
-	
+	console.log(students);
 	// No Results
 	if ($.isEmptyObject(students)) {
 		$tableBody.html('<tr class="empty"><td>Geen studenten in deze klas</td></tr>');
@@ -151,7 +151,7 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.init = function () {
 	this.resetSorting();
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setHelp = function(url) {
-		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
+		this.$helpContentIFrame.attr('src', url );
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setSchoolClassA = function(schoolclass) {
@@ -258,16 +258,11 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.clickClassesRow = function(event
 	if ($(event.target).closest("tr").find("input").get(0).checked == true) return;
 	
 	Helpers.selectTableRow(event);
-	if (this.classesForm.elements["schoolclass"].value != "") {
-		this.setClass(this.classesForm.elements["schoolclass"].value); // bypass submit
-		
-		//this.classesFormToggle(true);
-	} //else {
-	//	this.setEmptyTableMessageB();
-//		this.$classBClassName.val("");
-//		this.classBSet = false;
-//	}
-	//else this.classesFormToggle(false);	
+	
+	for (var i = 0; i < this.classesForm.elements["schoolclass"].length; i++) 
+		if (this.classesForm.elements["schoolclass"][i].checked) break;
+	
+	this.setClass(this.classesForm.elements["schoolclass"][i].value); // bypass submit
 	
 	this.classAFormToggle();
 	this.classBFormToggle();

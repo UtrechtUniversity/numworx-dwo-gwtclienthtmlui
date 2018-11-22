@@ -146,9 +146,11 @@ Helpers.tableSorterBubbleSort = function(tbody, index, attr, type, asc) { //bubb
 			if (row1.children[index].firstChild && row1.children[index].firstChild.dataset) val1 = row1.children[index].firstChild.dataset[attr]; 
 			if (row2.children[index].firstChild && row2.children[index].firstChild.dataset) val2 = row2.children[index].firstChild.dataset[attr];
 												
-			if (val1 != 0 && val2 != 0 && type == "string") {
+			if (type == "string") { // removed val1 != 0 && val2 != 0 && 
 				if ( (asc && val2.localeCompare(val1) < 0) || (!asc && val2.localeCompare(val1) > 0) ) { shouldSwitch = true; break; }
-			} else {
+			} else { // int
+				val1 = parseInt(val1);
+				val2 = parseInt(val2);
 				if ( (asc && val2 < val1) || (!asc && val2 > val1) ) { shouldSwitch = true; break; }
 			}						
 		}		
@@ -176,7 +178,7 @@ Helpers.tableSorterMergeSort = function($tbody, index, attr, type, asc) {
 } 
 
 Helpers.tableSorterMergeSortRecursive = function(arr, index, attr, type, asc) {
-	if (arr.length === 1) return arr;
+	if (arr.length === 1 || arr.length === 0) return arr;
 	
     var middle = Math.floor(arr.length / 2) // get the middle item of the array rounded down
     var left = arr.slice(0, middle) // items on the left side
@@ -209,6 +211,9 @@ Helpers.tableSorterMergeSortMerge = function(left, right, index, attr, type, asc
 			}
 			
 		} else { // integer sort
+			
+			val1 = parseInt(val1);
+			val2 = parseInt(val2);
 			
 			if ( (!asc && val2 < val1) || (asc && val2 > val1) ) { 	
 			    result.push(left[indexLeft])
@@ -257,7 +262,8 @@ Helpers.translate = function(index, value) {
 		$el.get(0).tagName == "H2") {
 			$el.text(translation);
 	} else if ( $el.get(0).tagName == "INPUT") {
-		$el.val( translation );
+		if ($el.attr('placeholder')) $el.attr( 'placeholder', translation );
+		else $el.val( translation );
 	}
 }
 
@@ -287,6 +293,21 @@ Helpers.searchCompare = function( val1, val2 ) {
 	
 	regE = new RegExp( val2 , 'i' );
 	return val1.search(regE) != -1;
+}
+
+Helpers.getUrlParameter = function(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
 }
 
 

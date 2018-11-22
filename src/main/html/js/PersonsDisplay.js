@@ -4,6 +4,8 @@ function PersonsDisplay() {
 	this.personsEditForm = document.forms["personsEdit"];
 	this.personsAddForm = document.forms["personsAdd"];
 	this.personsImportForm = document.forms["personsImport"];
+	this.zoekBestand = document.querySelector("#zoekBestand");
+	this.$zoekBestand = $("#zoekBestand");
 	
 	// jQuery objects
 	this.$panel = jQuery("#personsDisplay");
@@ -23,7 +25,8 @@ function PersonsDisplay() {
 	this.$personsSearchForm.find('input[type="radio"]').on('change', $.proxy(this.changePersonsSearchRole, this));
 	this.$personsEditForm.on('submit', $.proxy(this.submitPersonsEditForm, this));
 	this.$personsAddForm.on('submit', $.proxy(this.submitPersonsAddForm, this));
-	this.$personsImportForm.on('submit', $.proxy(this.submitPersonsImportForm, this));
+	//this.$personsImportForm.on('submit', $.proxy(this.submitPersonsImportForm, this));
+	this.$zoekBestand.on('change', $.proxy(this.submitPersonsImportForm, this));
 	this.$personsTableHead.find(".sortButton").click(Helpers.clickSortButton);
 	
 	// Init
@@ -118,7 +121,7 @@ PersonsDisplay.prototype.clear = function () {
 }
 
 PersonsDisplay.prototype.setHelp = function(url) { 
-		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
+		this.$helpContentIFrame.attr('src', url );
 }
 
 PersonsDisplay.prototype.showPersons = function(json) {  
@@ -192,8 +195,9 @@ PersonsDisplay.prototype.editPerson = function(id) {
 PersonsDisplay.prototype.addPerson = function() {
 	app.getPresenterFactory().getPersonsPresenter().addPerson();
 }
-PersonsDisplay.prototype.importPersons = function() {
-	app.getPresenterFactory().getPersonsPresenter().importPersons();
+PersonsDisplay.prototype.importPersons = function(file) {
+	console.log("import file " + file.name + " " + file.type + " " + file.size + " bytes");
+	app.getPresenterFactory().getPersonsPresenter().importPersons(file);
 }
 
 
@@ -253,9 +257,15 @@ PersonsDisplay.prototype.submitPersonsAddForm = function(event) {
 	event.preventDefault();	
 	this.addPerson();
 }
+
 PersonsDisplay.prototype.submitPersonsImportForm = function(event) {
-	event.preventDefault();	
-	this.importPersons();
+	event.preventDefault();
+	var files = event.target.files; // zoek bestand
+	if (files.length > 0) {
+		var file = files[0];
+		event.target.value = ''; // reset files array to empty see https://stackoverflow.com/questions/20549241/how-to-reset-input-type-file
+		this.importPersons(file);
+	}
 }
 
 

@@ -217,7 +217,7 @@ ModulesOfSchoolclassDisplay.prototype.clear = function () {
 }
 
 ModulesOfSchoolclassDisplay.prototype.setHelp = function(url) {
-		this.$helpContentIFrame.attr('src', 'https://teuniz.dwo.nl/gwtclient/'+url );
+		this.$helpContentIFrame.attr('src', url );
 }
 
 ModulesOfSchoolclassDisplay.prototype.setEmptyTableMessageModules = function () {
@@ -337,6 +337,15 @@ ModulesOfSchoolclassDisplay.prototype.detachItem = function(id) {
 	app.getPresenterFactory().getModulesOfSchoolclassPresenter().detachItemFromSchoolClass(id);
 }
 
+ModulesOfSchoolclassDisplay.prototype.hasToets = function() {
+	try {
+		return app.getPresenterFactory().getModulesOfSchoolclassPresenter().hasToets();
+	} catch (e) {
+		return false;
+	}
+}
+
+
 ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
 
 	var typeString = this.settingsForm.elements["modulesOfSchoolclassDisplayTypeLocked"].checked ? "assesment" : "normal";
@@ -451,6 +460,8 @@ ModulesOfSchoolclassDisplay.prototype.settingsFormAllFieldToggle = function(valu
 	if (value === true) {
 		this.$settingsForm.find('input').prop('disabled','');
 	//	this.settingsForm.elements["from"].focus();
+		if (!this.hasToets())
+			this.settingsForm.elements["locked[]"][0].disabled = true;
 	}
 	else {
 		this.settingsForm.elements["key"] = "";
