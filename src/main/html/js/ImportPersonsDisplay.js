@@ -65,21 +65,34 @@ ImportPersonsDisplay.prototype.setPersonImportList = function(json) {
 		var input;
 		input = $row.find("#importPersonsUsername");
 		input.val(person.userName); input.removeAttr('id');
+		input.on('change', $.proxy(this.checkUsername, this));
+		this.checkUsername( { 'target': input[0]});
+		if( !!person.id ) { // If the person has an ID, it must be a duplicate.
+			input.attr('class', 'duplicate');
+		}
 
 		input = $row.find("#importPersonsGivenName");
 		input.val(person.givenName); input.removeAttr('id');
+		input.on('change', $.proxy(this.checkNotEmpty, this));
+		this.checkNotEmpty( { 'target': input[0]});
 
 		input = $row.find("#importPersonsInsertion");
 		input.val(person.insertion); input.removeAttr('id');
 
 		input = $row.find("#importPersonsSurname");
 		input.val(person.familyName); input.removeAttr('id');
+		input.on('change', $.proxy(this.checkNotEmpty, this));
+		this.checkNotEmpty( { 'target': input[0]});
 
 		input = $row.find("#importPersonsMail");
 		input.val(person.email); input.removeAttr('id');
+		input.on('change', $.proxy(this.checkEmail, this));
+		this.checkEmail( { 'target': input[0]});
 
 		input = $row.find("#importPersonsPassword");
 		input.val(person.password); input.removeAttr('id');
+		input.on('change', $.proxy(this.checkPassword, this));
+		this.checkPassword( { 'target': input[0]});
 
 		this.$personsTableBody.append($row);
 	}
@@ -90,6 +103,51 @@ ImportPersonsDisplay.prototype.setPersonImportList = function(json) {
 ImportPersonsDisplay.prototype.changeInputField = function(event) {
 	// validate all fields.
 }
+
+ImportPersonsDisplay.prototype.checkUsername = function(event) {
+	var source = event.target;
+	var value  = source.value;
+	var b = !! value.match(/^[-a-z0-9_]+$/i); //app.getPresenterFactory().getImportPersonsPresenter().checkUsername(value);
+	if (!b) {
+		$(source).attr('class', 'error');
+	} else {
+		$(source).removeAttr('class');
+	}
+}
+
+ImportPersonsDisplay.prototype.checkNotEmpty = function(event) {
+	var source = event.target;
+	var value  = source.value;
+	var b = !!value && value.trim() != "";//app.getPresenterFactory().getImportPersonsPresenter().checkNotEmpty(value);
+	if (!b) {
+		$(source).attr('class', 'error');
+	} else {
+		$(source).removeAttr('class');
+	}
+}
+
+ImportPersonsDisplay.prototype.checkPassword = function(event) {
+	var source = event.target;
+	var value  = source.value;
+	var b = !!value && value.length >= 4 && !value.match(/^ /) && !value.match(/ $/); //app.getPresenterFactory().getImportPersonsPresenter().checkPassword(value);
+	if (!b) {
+		$(source).attr('class', 'error');
+	} else {
+		$(source).removeAttr('class');
+	}
+}
+ImportPersonsDisplay.prototype.checkEmail = function(event) {
+	var source = event.target;
+	var value  = source.value;
+	var b = !!value && value.trim().length >= 5; //app.getPresenterFactory().getImportPersonsPresenter().checkEmail(value);
+	if (!b) {
+		$(source).attr('class', 'error');
+	} else {
+		$(source).removeAttr('class');
+	}
+}
+
+
 
 
 ImportPersonsDisplay.prototype.showSchoolClasses = function(json) {

@@ -121,6 +121,15 @@ input[type="text"], input[type="password"] {
 	&.semiDisabled:disabled {
 		background-color: $white;
 	}
+	&.error {
+		background-color: $danger;
+		color: $white;
+	}
+	&.error::selection { background: $dangerLight; }
+	
+	&.duplicate {
+		color: $danger;
+	}
 }
 
 input {
