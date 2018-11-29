@@ -57,18 +57,10 @@ OrganisationDisplay.prototype.setLoadingTableMessage = function() {
  * Fills the list view with the list of persons. It requires a JSONObject
  * with each field the item key, and a converted TaggedDomUser as value.
  *
- * @param data a map with a string as key.
+ * @param data a StudentsTree, a TeacherTree, a SchoolAdminTree,
  * @param role STUDENT, TEACHER, SCHOOLADMIN
  */
 OrganisationDisplay.prototype.showPersons = function(data, role) {
-	
-}
-
-/**
- * initialise the choose class radio buttons
- * @param bool ja/nee
- */
-OrganisationDisplay.prototype.initChooseClass = function(bool) {
 	
 }
 
@@ -80,6 +72,12 @@ OrganisationDisplay.prototype.initEditModules = function(bool) {
 	
 }
 
+/**
+ * Extra: showSchoolClasses. Voor de filtering.
+ */
+OrganisationDisplay.prototype.showSchoolClasses = function(json) {
+	var schoolclasses = json;
+}
 /*
  * API of OrganisationPresenter
 */
@@ -112,7 +110,7 @@ OrganisationDisplay.prototype.selectRole = function(role) {
 
 
 /**
- * delete Persons, with list of persons and role
+ * delete Persons, with list of persons (ids) and role
  * role = { STUDENT, TEACHER, SCHOOLADMIN }
  * upcall to presenter
  * presenter calls showPersons, with a reduced list of persons (or setEmptyTableMessage
