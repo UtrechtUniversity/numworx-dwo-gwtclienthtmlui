@@ -6,6 +6,7 @@ function ImportPersonsDisplay() {
 	// jQuery objects
 	this.$panel = jQuery("#importPersonsDisplay");
 	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
+	this.$schoolclassesTitle = $("#importPersonsSchoolClassesTitle");
 	
 	this.$schoolclassesTable = $("#importPersonsSchoolClassesTable");
 	this.$schoolclassesRow = this.$schoolclassesTable.find("tbody tr").first().detach();
@@ -21,7 +22,8 @@ function ImportPersonsDisplay() {
 	this.form = document.forms['importPersonsForm'];
 	this.$form = $(this.form);
 	this.$form.on('submit', $.proxy(this.submitImportPersonsForm, this));
-	
+	this.$form.find('input[type="radio"]').on('change', $.proxy(this.changeRole, this));
+
 }
 
 ImportPersonsDisplay.prototype.show = function() {
@@ -100,8 +102,19 @@ ImportPersonsDisplay.prototype.setPersonImportList = function(json) {
 	
 }
 
-ImportPersonsDisplay.prototype.changeInputField = function(event) {
-	// validate all fields.
+ImportPersonsDisplay.prototype.changeRole = function(event) {
+	var role;
+	for (var i = 0; i < this.form.elements["role"].length; i++) 
+	{	role = this.form.elements["role"][i]
+		if (role.checked) break;
+	}
+	if (role.value == 'L' ) {
+		this.$schoolclassesTable.show();
+		this.$schoolclassesTitle.show();
+	} else {
+		this.$schoolclassesTable.hide();
+		this.$schoolclassesTitle.hide();
+	}
 }
 
 ImportPersonsDisplay.prototype.checkUsername = function(event) {
@@ -213,7 +226,7 @@ ImportPersonsDisplay.prototype.importPersons = function() {
 	if (role.value === 'L')
 		app.getPresenterFactory().getImportPersonsPresenter().submitImportStudents(persons, schoolclass.value);
 	else if (role.value == 'D')
-		app.getPresenterFactory().getImportPersonsPresenter().submitImportTeachers(persons, schoolclass.value);
+		app.getPresenterFactory().getImportPersonsPresenter().submitImportTeachers(persons, null);
 }
 
 /// Events
