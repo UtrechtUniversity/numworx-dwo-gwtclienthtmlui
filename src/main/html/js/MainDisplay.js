@@ -253,6 +253,11 @@ MainDisplay.prototype.showImportPersonsView = function() {
 	this.importPersonsDisplay.show();
 }
 
+MainDisplay.prototype.showOrganisationView = function() {
+//	this.initMainView();
+//	this.organisationDisplay.show();
+}
+
 
 /*
  * DIALOG VIEW HELPERS

@@ -3,17 +3,11 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="gwt:property" content="locale=nl" >
-<<<<<<< HEAD
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="viewport" content="width=1024">
-    <title>DWOGwtClient</title>
-=======
 	<meta name="apple-mobile-web-app-capable" content="yes">  
 	<meta name="viewport" content="width=1024, initial-scale=1, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> <!-- no scalable needed for android devices -->
 	
 	
     <title>Numworx Docent</title>
->>>>>>> teuniz
 		
     <script>
     	var API_1484_11;
@@ -2676,9 +2670,6 @@
 							<thead>
 								<tr>
 									<th class="col-2">
-										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
-									</th>
-									<th class="col-2">
 									<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 									</th>
 									<th class="col-2">
@@ -2688,21 +2679,24 @@
 										<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
 									</th>
 									<th class="col-2">
-										<span data-translate="NUM_TBL_EMAIL">EMAILADRES</span>
+										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
 									</th>
 									<th class="col-2">
 										<span data-translate="NUM_TBL_PASSWORD">WACHTWOORD</span>
 									</th>									
+									<th class="col-2">
+										<span data-translate="NUM_TBL_EMAIL">EMAILADRES</span>
+									</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td class="col-2"><input type='text' value='Bakker23' id='importPersonsUsername' name='userName' ></td>
 									<td class="col-2"><input type='text' value='Arthur' id='importPersonsGivenName' name='givenName' ></td>
 									<td class="col-2"><input type='text' value='van der' id='importPersonsInsertion' name='insertion'></td>
 									<td class="col-2"><input type='text' value='Begijnen' id='importPersonsSurname' name='familyName'></td>
-									<td class="col-2"><input type='text' value='A.vdBegijnen@outlook.com' id='importPersonsMail' name='email'></td>
+									<td class="col-2"><input type='text' value='Bakker23' id='importPersonsUsername' name='userName' ></td>
 									<td class="col-2"><input type='text' value='geheim' id='importPersonsPassword' name='password'></td>
+									<td class="col-2"><input type='text' value='A.vdBegijnen@outlook.com' id='importPersonsMail' name='email'></td>
 								</tr>					
 							</tbody>
 						</table>
@@ -2723,7 +2717,7 @@
 							</div>
 						</div>
 				</div>
-				<div class="row">
+				<div class="row" id='importPersonsSchoolClassesTitle'>
 						<h3 class="col-12"><span>Kies een klas om personen in te importeren</span></h3>
 				</div>
 				<div class="row">						
@@ -2801,6 +2795,17 @@
 			
 		</section>
 		<!-- end modulesDisplay -->
+
+		<!-- 
+		-
+		- organisationDisplay
+		-
+		-->
+		<section id="organisationDisplayPanel" class="subpanel schooladmin-only">
+			
+			
+		</section>
+		<!-- end organisationDisplay -->
 		
 		
 		<!-- 

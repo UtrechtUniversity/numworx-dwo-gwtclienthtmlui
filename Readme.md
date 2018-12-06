@@ -111,3 +111,16 @@ mvn docker:build
 running:
 
 mvn docker:run
+
+SCSS
+
+In de css directory een scss watcher aanzetten:
+
+cd src/main/html/css
+scss --watch scss:.
+
+Terzijde
+
+maven package 
+
+bouwt de css mbv een maven scss plugin
