@@ -267,7 +267,8 @@ ResultsDisplay.prototype.changeCheckboxOpenClosed = function(event) {
 		//this.resultState.activeSchoolClass = null;
 		//}		
 	
-	this.setChooseModulesTable();	
+	//this.setChooseModulesTable();	
+	app.getPresenterFactory().getResultsPresenter().setChooseModulesTable( this.resultState.activeSchoolClass);
 }
 ResultsDisplay.prototype.uncheckCheckboxOpenClosedExcept = function(id) {
 	for (i = 0; i < this.chooseClassModuleForm.elements.length; i++) {
