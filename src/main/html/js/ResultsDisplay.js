@@ -214,7 +214,7 @@ ResultsDisplay.prototype.setLoadingTableMessage = function () {
  */
 
 ResultsDisplay.prototype.showSelectedResults = function() {	
-	app.getPresenterFactory().getResultsPresenter().showSelectedResults( this.resultState );
+	app.getPresenterFactory().getResultsPresenter().showSelectedResults( this.resultState, this.resultState.activeSchoolClass, this.resultState.activeCourses );
 }
 
 
