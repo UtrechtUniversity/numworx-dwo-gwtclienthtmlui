@@ -213,6 +213,8 @@
 	
 	<script src="js/ModulesDisplay.js" type="text/javascript" charset="utf-8"></script>
 	
+	<script src="js/OrganisationDisplay.js" type="text/javascript" charset="utf-8"></script>
+	
 	<script src="js/WelcomeDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/dialogs.js" type="text/javascript" charset="utf-8"></script>
 	
@@ -266,7 +268,7 @@
 					z M19.6,53.8H9.8V44h9.8V53.8z M19.6,37H9.8v-9.8h9.8V37z M19.6,19.5H9.8V9.6h9.8V19.5z M36.7,53.8h-9.8V44h9.8V53.8z M36.7,37h-9.8
 					v-9.8h9.8V37z M36.7,19.5h-9.8V9.6h9.8V19.5z M53.9,53.8h-9.8V44h9.8V53.8z M53.9,37h-9.8v-9.8h9.8V37z M53.9,19.5h-9.8V9.6h9.8
 					V19.5z"/>
-			</g>			
+			</g>	
 			
 			<g id="arrowUp">				
 				<path class="st0" d="M64, 73.9 L0, 37 L64, 0V73.9z" transform="rotate(90 38 42)"/>
@@ -2803,6 +2805,264 @@
 		-->
 		<section id="organisationDisplayPanel" class="subpanel schooladmin-only">
 			
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
+							<use xlink:href="#personen"></use>
+						</svg>
+						<h1><span data-translate="NUM_SEC_ORGANIZATION_MANAGE">Organisatie beheren</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_ORGANIZATION_SETTINGS_MANAGE">Instellingen van school beheren</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
+						<div class="content">
+							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
+						</div>
+					</section>
+				</div>
+			</header>
+			
+			<section>
+			
+				<div class="row">
+					<form name="organisationSettings">
+						<div class="col-6"> 
+							<h3><span>Leerlingen kunnen zelf klas kiezen</span></h3>
+							<div class="options">
+									<div class="option">
+										<input type="radio" name="chooseClass" id="chooseClassY" value="Y" checked="checked">
+	                                    <label for="chooseClassY"><span data-translate="NUM_LBL_ORGANISATION_CHOOSECLASS_YES">JA</span></label>
+									</div> 
+									<div class="option">
+										<input type="radio" name="chooseClass" id="chooseClassN" value="N" > 
+										<label for="chooseClassN"><span data-translate="NUM_LBL_ORGANISATION_CHOOSECLASS_NO">NEE</span></label>
+									</div>
+							</div>
+						</div>
+						<div class="col-6"> 
+							<h3><span>Docenten kunnen zelf modules aanpassen</span></h3>
+							<div class="options">
+									<div class="option">
+										<input type="radio" name="editModules" id="editModulesY" value="Y" checked="checked">
+	                                    <label for="editModulesY"><span data-translate="NUM_LBL_ORGANISATION_EDITMODULES_YES">JA</span></label>
+									</div> 
+									<div class="option">
+										<input type="radio" name="editModules" id="editModulesN" value="N" > 
+										<label for="editModulesN"><span data-translate="NUM_LBL_ORGANISATION_EDITMODULES_NO">NEE</span></label>
+									</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				
+				<div class="row">
+					<div class="col-12">
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_ORGANISATION_MANAGE_ACCOUNTS">Accounts van school beheren</span></h2>						
+					</div>
+				</div>
+				
+				<div class="row">					
+					<form name="organisationPersonsFilter">
+						<fieldset>
+							<label for="organisationPersonsFilterFamilyName" class="col-2 input">
+								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+								<input id="organisationPersonsFilterFamilyName" name="familyName" type="text" value="" />
+							</label>
+							<label for="organisationPersonsFilterGivenName" class="col-2 input">
+								<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
+								<input id="organisationPersonsFilterGivenName" name="givenName" type="text" value="" />
+							</label>
+							<label for="organisationPersonsFilterInsertion" class="col-2 input">
+								<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
+								<input id="organisationPersonsFilterInsertion" name="insertion" type="text" value="" />
+							</label>
+							<label for="organisationPersonsFilterUserName" class="col-2 input">
+								<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+								<input id="organisationPersonsFilterUserName" name="userName" type="text" value="" />
+							</label>
+							<label for="organisationPersonsFilterEmail" class="col-2 input">
+								<span data-translate="NUM_TBL_EMAIL">Email adres</span>
+								<input id="organisationPersonsFilterEmail" name="email" type="text" value="" />
+							</label>
+							
+							<div class="clear"></div>
+							
+							<div class="col-4 down">
+								<h3 class="right"><span data-translate="NUM_SEC_ORGANISATION_ROLE">Student / Docent / Schooladmin?</span></h3>
+							</div>
+							
+							<div class="col-2">
+								<div class="options down">
+										<div class="option">
+											<input type="radio" name="organisationPersonsFilterRole" id="organisationPersonsFilterRoleS" value="Y" checked="checked">
+		                                    <label for="organisationPersonsFilterRoleS"><span data-translate="NUM_LBL_STUDENTLETTER">S</span></label>
+										</div> 
+										<div class="option">
+											<input type="radio" name="organisationPersonsFilterRole" id="organisationPersonsFilterRoleT" value="N" > 
+											<label for="organisationPersonsFilterRoleT"><span data-translate="NUM_LBL_TEACHERLETTER">D</span></label>
+										</div>
+										<div class="option">
+											<input type="radio" name="organisationPersonsFilterRole" id="organisationPersonsFilterRoleA" value="N" > 
+											<label for="organisationPersonsFilterRoleA"><span data-translate="NUM_LBL_SCHOOLADMINLETTER">A</span></label>
+										</div>
+								</div>
+							</div>
+							<label class="col-4 input">
+								<span data-translate="NUM_SEC_LBL_CHOOSECLASS">Kies eventueel een klas</span>
+								<select name="organisationPersonsFilterSchoolClass">
+									<option value="id">klasnaam</option>
+								</select>
+							</label>
+							<div class="col-2">
+								<input type="submit" name="submit" class="primary right down" data-translate="NUM_BTN_Search" value="Zoek" />
+							</div>						
+							
+						</fieldset>						
+					</form>					
+				</div>
+				
+				<div class="row">
+					<div class="col-12">
+                        <h3><span data-translate="NUM_LBL_PERSONS_FOUND">Gevonden personen</span></h2>
+						<form name="organisationPersons">
+							
+							<table class="dwo hoverable sortable headered">
+								<thead>
+									<tr>
+										<th class="col-2">
+											<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+										</th>
+										<th class="col-2">
+											<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
+										</th>
+										<th class="col-1">
+											<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
+										</th>									
+										<th class="col-2">																										
+											<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+										</th>
+										<th class="col-2">																										
+											<span data-translate="NUM_TBL_SCHOOLCLASS">Klas</span>
+										</th>
+										<th class="col-2">																										
+											<span data-translate="NUM_TBL_EMAIL">Emailadres</span>
+										</th>									
+										<th class="col-1">																										
+											<span data-translate="NUM_TBL_REMOVE">Verwijderen</span>
+										</th>
+
+									</tr>
+								
+									<tr class="sorting">
+										<th class="col-2">
+										
+											<span class="sortButton asc default" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										
+										</th>
+										<th class="col-2">
+										
+											<span class="sortButton asc" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										
+										</th>
+										<th class="col-1">
+										
+										</th>
+									
+										<th class="col-2">										
+											<span class="sortButton asc" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>									
+										</th>
+									
+										<th class="col-2">										
+											<span class="sortButton asc" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>									
+										</th>
+									
+										<th class="col-2">										
+											<span class="sortButton asc" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>									
+										</th>
+										<th class="col-1">
+											&nbsp;
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr tabindex="1">
+										<td class="col-2"><span id="organisationPersonsTableFamilyName">Bakker</span>
+											<input type="radio" id="organisationPersonsTableId" name="id" class="hidden" value="bakker34">										
+										</td>
+										<td class="col-2"><span id="organisationPersonsTableGivenName">Michel</span></td>
+										<td class="col-1"><span id="organisationPersonsTableInsertion">van</span></td>		
+										<td class="col-2"><span id="organisationPersonsTableUserName">Bakker34</span></td>							
+										<td class="col-2"><span id="organisationPersonsTableSchoolclass">atheneum 3-1</span></td>							
+										<td class="col-2"><span id="organisationPersonsTableEmail">Bakker34</span></td>	
+										<td class="col-1 centered">
+											<div class="checkbox danger">
+												<input type="checkbox" name="remove[]" id="organisationPersonsRemove" value="bakker34"><label class="icon" for="organisationPersonsRemove"></label>
+											</div>											
+										</td>						
+									</tr>
+								</tbody>
+							</table>
+						
+							<input type="radio" name="id" class="hidden" value=""> <!-- empty option -->
+							<input type="radio" name="remove" class="hidden" value=""> <!-- empty option -->										
+							<input type="submit" class="danger right" data-translate="NUM_BTN_ORGANISATION_REMOVE" value="Verwijder" />
+						</form>
+					</div>
+				</div>
+				
+				
+			</section>
 			
 		</section>
 		<!-- end organisationDisplay -->

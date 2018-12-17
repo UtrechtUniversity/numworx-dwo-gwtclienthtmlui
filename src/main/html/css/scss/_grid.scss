@@ -63,6 +63,15 @@ columns and rows
 [class*="col-"] {
 	float: left;
 	padding: 0 0 0 $gutter * 1px;	
+	
+	&:after {
+	    content: "";
+	    clear: both;
+		display: block;
+		width: 100%;
+	}
+	
+	&.down { margin-top: 22 / 12 * 1em;}
 }
 [class*="col-"] [class*="col-"] {
 	padding-left: 0;

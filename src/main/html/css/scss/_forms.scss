@@ -158,8 +158,11 @@ form {
 }
 
 .options {
+	min-height: 3em;
 	float: left;
-	
+		
+	&.down { margin-top: 22 / 12 * 1em;}
+			
 	label {
 		float: left;
 		margin-bottom: $elementMarginBottom;
@@ -171,7 +174,7 @@ form {
 		display: block;
 		position: relative;
 		//padding-left: 60px;
-		width: 60px;
+		width: 45px;
 		margin-bottom: 12px;
 		cursor: pointer;
 	
@@ -192,7 +195,7 @@ form {
 			@include border-box;
 			color: $white;
 			cursor: pointer;
-			font-size: 13 / 16 * 1em;
+			
 			left: 0;
 			padding: 6px 0px;
 			position: absolute;
@@ -200,7 +203,7 @@ form {
 			text-transform: uppercase;
 			@include transition(all 300ms ease);
 			top: 0;			
-			width: 60px;
+			width: 45px;
 		}
 		input:checked ~ label {
 			background-color: $primary;
@@ -362,6 +365,19 @@ form {
 		padding-bottom: 5px;
 	}
 	
+}
+
+select {
+	-webkit-appearance: none;
+	border: $borderThickness $primary solid;
+	@include border-box;
+	@include border-radius($defaultRadius);	
+	padding: 6px $gutter / 2 * 1px;	
+	width: 100%;
+	
+	label & {
+		margin-top: $elementMarginBottom; // in fact, this is the labels bottom margin		
+	}
 }
 
 .selectAllButton {
