@@ -83,6 +83,10 @@ input[type="submit"], input[type="button"], button, .pseudobutton {
 		border-color: $shade12;
 		cursor: default;
 	}
+	&.danger:disabled {
+		background-color: $dangerLight;
+		border-color: $dangerLight;
+	}
 	
 	
 	label & {

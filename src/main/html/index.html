@@ -2886,10 +2886,10 @@
 								<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
 								<input id="organisationPersonsFilterUserName" name="userName" type="text" value="" />
 							</label>
-							<label for="organisationPersonsFilterEmail" class="col-2 input">
+							<!-- <label for="organisationPersonsFilterEmail" class="col-2 input">
 								<span data-translate="NUM_TBL_EMAIL">Email adres</span>
 								<input id="organisationPersonsFilterEmail" name="email" type="text" value="" />
-							</label>
+							</label> -->
 							
 							<div class="clear"></div>
 							
@@ -2900,22 +2900,22 @@
 							<div class="col-2">
 								<div class="options down">
 										<div class="option">
-											<input type="radio" name="organisationPersonsFilterRole" id="organisationPersonsFilterRoleS" value="Y" checked="checked">
+											<input type="radio" name="role" id="organisationPersonsFilterRoleS" value="STUDENT" checked="checked">
 		                                    <label for="organisationPersonsFilterRoleS"><span data-translate="NUM_LBL_STUDENTLETTER">S</span></label>
 										</div> 
 										<div class="option">
-											<input type="radio" name="organisationPersonsFilterRole" id="organisationPersonsFilterRoleT" value="N" > 
+											<input type="radio" name="role" id="organisationPersonsFilterRoleT" value="TEACHER" > 
 											<label for="organisationPersonsFilterRoleT"><span data-translate="NUM_LBL_TEACHERLETTER">D</span></label>
 										</div>
 										<div class="option">
-											<input type="radio" name="organisationPersonsFilterRole" id="organisationPersonsFilterRoleA" value="N" > 
+											<input type="radio" name="role" id="organisationPersonsFilterRoleA" value="ADMIN" > 
 											<label for="organisationPersonsFilterRoleA"><span data-translate="NUM_LBL_SCHOOLADMINLETTER">A</span></label>
 										</div>
 								</div>
 							</div>
 							<label class="col-4 input">
 								<span data-translate="NUM_SEC_LBL_CHOOSECLASS">Kies eventueel een klas</span>
-								<select name="organisationPersonsFilterSchoolClass">
+								<select name="schoolClass">
 									<option value="id">klasnaam</option>
 								</select>
 							</label>
@@ -2941,7 +2941,7 @@
 										<th class="col-2">
 											<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 										</th>
-										<th class="col-1">
+										<th class="col-2">
 											<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
 										</th>									
 										<th class="col-2">																										
@@ -2950,10 +2950,10 @@
 										<th class="col-2">																										
 											<span data-translate="NUM_TBL_SCHOOLCLASS">Klas</span>
 										</th>
-										<th class="col-2">																										
+										<!-- <th class="col-2">
 											<span data-translate="NUM_TBL_EMAIL">Emailadres</span>
-										</th>									
-										<th class="col-1">																										
+										</th>	 -->								
+										<th class="col-2">																										
 											<span data-translate="NUM_TBL_REMOVE">Verwijderen</span>
 										</th>
 
@@ -2988,7 +2988,7 @@
 											</span>
 										
 										</th>
-										<th class="col-1">
+										<th class="col-2">
 										
 										</th>
 									
@@ -3018,7 +3018,7 @@
 											</span>									
 										</th>
 									
-										<th class="col-2">										
+										<!-- <th class="col-2">
 											<span class="sortButton asc" data-order="asc" data-type="string">
 												<svg viewBox="0 0 74 74" class="icon">
 													  <use xlink:href="#arrowUp"></use>
@@ -3028,9 +3028,9 @@
 												<svg viewBox="0 0 74 74" class="icon">
 													  <use xlink:href="#arrowDown"></use>
 												</svg>
-											</span>									
-										</th>
-										<th class="col-1">
+											</span>
+										</th> -->
+										<th class="col-2">
 											&nbsp;
 										</th>
 									</tr>
@@ -3038,14 +3038,16 @@
 								<tbody>
 									<tr tabindex="1">
 										<td class="col-2"><span id="organisationPersonsTableFamilyName">Bakker</span>
-											<input type="radio" id="organisationPersonsTableId" name="id" class="hidden" value="bakker34">										
+											<!-- <input type="radio" id="organisationPersonsTableId" name="id" class="hidden" value="bakker34">										 -->
 										</td>
 										<td class="col-2"><span id="organisationPersonsTableGivenName">Michel</span></td>
-										<td class="col-1"><span id="organisationPersonsTableInsertion">van</span></td>		
+										<td class="col-2"><span id="organisationPersonsTableInsertion">van</span></td>		
 										<td class="col-2"><span id="organisationPersonsTableUserName">Bakker34</span></td>							
-										<td class="col-2"><span id="organisationPersonsTableSchoolclass">atheneum 3-1</span></td>							
-										<td class="col-2"><span id="organisationPersonsTableEmail">Bakker34</span></td>	
-										<td class="col-1 centered">
+										<td class="col-2"><span id="organisationPersonsTableSchoolClass">atheneum 3-1</span>
+										<!-- <input type="hidden" id="organisationPersonsTableSchoolclassId" name="organisationPersonsTableSchoolclassId" class="hidden" value=""> -->
+										</td>							
+										<!-- <td class="col-2"><span id="organisationPersonsTableEmail">Bakker34</span></td>	 -->
+										<td class="col-2 centered">
 											<div class="checkbox danger">
 												<input type="checkbox" name="remove[]" id="organisationPersonsRemove" value="bakker34"><label class="icon" for="organisationPersonsRemove"></label>
 											</div>											
