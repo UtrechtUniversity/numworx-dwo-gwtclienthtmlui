@@ -377,6 +377,7 @@ select {
 	@include border-box;
 	@include border-radius($defaultRadius);	
 	padding: 6px $gutter / 2 * 1px;	
+	text-transform: none;
 	width: 100%;
 	
 	label & {
