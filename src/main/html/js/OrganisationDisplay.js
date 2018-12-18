@@ -80,31 +80,37 @@ OrganisationDisplay.prototype.filterPersonsList = function () {
 		 this.personsFilterForm.elements["schoolClass"].value == "" ) {
 			$result = this.$personsTableBody.find("tr");
 	} else {	
-                var $result;
-                var rows = this.$personsTableBody.find("tr");
+        var $result;
+        var rows = this.$personsTableBody.find("tr");
 
-                $result = rows.filter(function() {
-                    var el = $(this);
-                    var result = true;
-					var schoolClasses = $(el.get(0).children.item(4)).find("span").attr('data-ids');
-					if (schoolClasses) schoolClasses = JSON.parse( schoolClasses );
-					
-                    result = result && Helpers.searchCompare(el.get(0).children.item(0).innerText, personsFilterForm.elements["familyName"].value);
-                    result = result && Helpers.searchCompare(el.get(0).children.item(1).innerText, personsFilterForm.elements["givenName"].value);
-                    result = result && Helpers.searchCompare(el.get(0).children.item(2).innerText, personsFilterForm.elements["insertion"].value);
-                    result = result && Helpers.searchCompare(el.get(0).children.item(3).innerText, personsFilterForm.elements["userName"].value);					
-					if (schoolClasses && personsFilterForm.elements["schoolClass"].value !== "") {
-						result = result && schoolClasses.indexOf(personsFilterForm.elements["schoolClass"].value) != -1;
-					}
-					
-                    return result;
-                }                   
-               
-                ).closest("tr");
+        $result = rows.filter(function() {
+            var el = $(this);
+            var result = true;
+			var schoolClasses = $(el.get(0).children.item(4)).find("span").attr('data-ids');
+			if (schoolClasses) schoolClasses = JSON.parse( schoolClasses );
+			
+            result = result && Helpers.searchCompare(el.get(0).children.item(0).innerText, personsFilterForm.elements["familyName"].value);
+            result = result && Helpers.searchCompare(el.get(0).children.item(1).innerText, personsFilterForm.elements["givenName"].value);
+            result = result && Helpers.searchCompare(el.get(0).children.item(2).innerText, personsFilterForm.elements["insertion"].value);
+            result = result && Helpers.searchCompare(el.get(0).children.item(3).innerText, personsFilterForm.elements["userName"].value);					
+			if (schoolClasses && personsFilterForm.elements["schoolClass"].value !== "") {
+				result = result && schoolClasses.indexOf(personsFilterForm.elements["schoolClass"].value) != -1;
+			}
+			
+            return result;
+        }                   
+       
+        ).closest("tr");
 	}
 	
 	this.$personsTableBody.find("tr").hide();
-	$result.show();
+	if ($result.length > 0) {
+		$result.show();
+		this.$personsTableBody.find(".empty").hide();
+	} else {
+		if ( this.$personsTableBody.find(".empty").length > 0 ) this.$personsTableBody.find(".empty").show();
+		else this.$personsTableBody.append('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
+	}
 }
 
 
@@ -128,6 +134,9 @@ OrganisationDisplay.prototype.clear = function() {
 	this.personsFilterForm.elements["insertion"].value = "";
 	this.personsFilterForm.elements["familyName"].value = "";
 	
+	this.personsFilterForm.elements["role"][0].checked = "checked";
+	//this.selectRole("STUDENT"); not needed
+	
 	this.resetSorting();	
 	this.$personsForm.find(".sortButton.default").trigger('click');
 }
@@ -143,8 +152,8 @@ OrganisationDisplay.prototype.setHelp = function(url) {
  * setEmptyTableMessage show an indicator that the table is empty.
  */
 OrganisationDisplay.prototype.setEmptyTableMessage = function() {
-	console.log("empty");
-	//this.$personsTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
+	//console.log("empty");
+	this.$personsTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
 }
 
 /**
@@ -162,7 +171,7 @@ OrganisationDisplay.prototype.setLoadingTableMessage = function() {
  * @param role STUDENT, TEACHER, SCHOOLADMIN
  */
 OrganisationDisplay.prototype.showPersons = function(data, role) {
-	var persons = data, personName, oldFor;
+	var persons = data, personName, oldFor, schoolClassName;
 	
 	console.log(data);
 	this.$personsTableBody.html("");
@@ -181,10 +190,17 @@ OrganisationDisplay.prototype.showPersons = function(data, role) {
 		$row.find("#organisationPersonsTableGivenName").html( persons[id].user.givenName ).attr('data-sortvalue', persons[id].user.givenName).removeAttr("id");
 		$row.find("#organisationPersonsTableInsertion").html( persons[id].user.insertion ).attr('data-sortvalue', persons[id].user.insertion).removeAttr("id");
 		$row.find("#organisationPersonsTableFamilyName").html( persons[id].user.familyName ).attr('data-sortvalue', persons[id].user.familyName).removeAttr("id");		
-		console.log(persons[id].memberOf.length);
+
 		if (persons[id].memberOf.length > 0) {
-			console.log(this.schoolClasses[persons[id].memberOf[0]].schoolClass.schoolClassName);
-			$row.find("#organisationPersonsTableSchoolClass").attr( "data-ids", JSON.stringify(persons[id].memberOf) ).html( this.schoolClasses[ persons[id].memberOf[0] ].schoolClass.schoolClassName ).attr('data-sortvalue', this.schoolClasses[persons[id].memberOf[0]].schoolClass.schoolClassName).removeAttr("id");
+			schoolClassName = "";
+			for (var j = 0; j < persons[id].memberOf.length; j++) {
+				schoolClassName += this.schoolClasses[ persons[id].memberOf[j] ].schoolClass.schoolClassName+", ";
+			}
+			schoolClassName = schoolClassName.substr(0, schoolClassName.length - 2);
+
+			$row.find("#organisationPersonsTableSchoolClass").attr( "data-ids", JSON.stringify(persons[id].memberOf) ).html( schoolClassName ).attr('data-sortvalue', schoolClassName).attr("title", schoolClassName).removeAttr("id");
+		} else {
+			$row.find("#organisationPersonsTableSchoolClass").attr( "data-ids", JSON.stringify(persons[id].memberOf) ).html( "" ).attr('data-sortvalue', "").removeAttr("id");
 		}
 				 
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
@@ -197,9 +213,7 @@ OrganisationDisplay.prototype.showPersons = function(data, role) {
 		});
 		
 		$row.prop('tabindex', i);
-		
-		console.log($row);
-		
+				
 		//$row.on('click keypress', $.proxy(this.clickPersonsRow, this));
 		this.$personsTableBody.append($row);
 		i++;
@@ -209,7 +223,7 @@ OrganisationDisplay.prototype.showPersons = function(data, role) {
 	
 	this.$personsForm.find("input[type='checkbox'],input[type='radio']").on('change', $.proxy(this.changePersonsRemoveCheckbox,this));
 	
-	//this.filterPersonsList();	
+	this.filterPersonsList();
 	
 	this.$personsForm.find(".sortButton.default").trigger('click');
 }
@@ -240,7 +254,7 @@ OrganisationDisplay.prototype.initEditModules = function(bool) {
 OrganisationDisplay.prototype.showSchoolClasses = function(json) {
 	var $option;
 	this.schoolClasses = json;
-	
+	console.log(json);
 	this.$schoolClassSelect.html("");
 	
 	$option = this.$schoolClassSelectOption.clone();		
@@ -313,11 +327,10 @@ OrganisationDisplay.prototype.changeEditModulesButton = function(event) {
 
 OrganisationDisplay.prototype.changeSelectRoleButton = function(event) {
 	event.preventDefault();	
-	console.log(this.selectRoleButton.value);
 	this.selectRole(this.selectRoleButton.value);
 }
 
-OrganisationDisplay.prototype.submitPersonsFilterForm = function(value) {
+OrganisationDisplay.prototype.submitPersonsFilterForm = function(event) {
 	event.preventDefault();	
 	this.filterPersonsList();
 }
