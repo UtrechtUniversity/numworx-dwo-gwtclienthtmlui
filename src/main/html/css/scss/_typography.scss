@@ -176,6 +176,12 @@ h4 {
 	}
 }
 
+h1, h2, h3, h4 {
+	&.right {
+		text-align: right;
+	}
+}
+
 #help .content {
 	h1, h2, h3, h4 {
 		font-size: 20 / 16 * 1em;
@@ -199,17 +205,18 @@ input[type="submit"], input[type="button"], button, .pseudobutton {
 	font-size: 12px;
 
 }
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], select {
 	font-family: 'Ubuntu', sans-serif;
 	font-size: 1em;
 	line-height: 1em;	
 }
 .options {
+	font-size: 13 / 16 * 1em;
 	label {
 		text-transform: uppercase;
 	}
 	.option label {
-		font-size: 12px;
+		font-size: 13px;
 		text-transform: uppercase;
 	}
 }

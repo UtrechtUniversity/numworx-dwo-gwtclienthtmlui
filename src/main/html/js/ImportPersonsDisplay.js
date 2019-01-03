@@ -142,17 +142,18 @@ ImportPersonsDisplay.prototype.checkNotEmpty = function(event) {
 ImportPersonsDisplay.prototype.checkPassword = function(event) {
 	var source = event.target;
 	var value  = source.value;
-	var b = !!value && value.length >= 4 && !value.match(/^ /) && !value.match(/ $/); //app.getPresenterFactory().getImportPersonsPresenter().checkPassword(value);
+	var b = !!value && value.length >= 4 && !value.match(/^ /) && !value.match(/ $/); //app.getPresenterFactory().getImportPersonsPresenter().verifyPassword(value);
 	if (!b) {
 		$(source).attr('class', 'error');
 	} else {
 		$(source).removeAttr('class');
 	}
 }
+
 ImportPersonsDisplay.prototype.checkEmail = function(event) {
 	var source = event.target;
 	var value  = source.value;
-	var b = !!value && value.trim().length >= 5; //app.getPresenterFactory().getImportPersonsPresenter().checkEmail(value);
+	var b = app.getPresenterFactory().getImportPersonsPresenter().verifyEmail(value);
 	if (!b) {
 		$(source).attr('class', 'error');
 	} else {

@@ -123,6 +123,11 @@ table.dwo { //:not(.c-datepicker__days)
 				&.centered {
 					text-align: center;
 				}
+				&.shortened {			
+					overflow: hidden;	
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
 			}	
 			&.empty td, &.loading td {
 				border-bottom-style: none;

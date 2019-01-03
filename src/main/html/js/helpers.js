@@ -256,6 +256,9 @@ Helpers.clickSortButton = function() {
 Helpers.translate = function(index, value) {
 	var $el = $(value);
 	var translation = app.getTranslator().translate( $el.data("translate") );
+	
+	if (translation === $el.data("translate")) return;
+	
 	if ($el.get(0).tagName == "SPAN" ||
 		$el.get(0).tagName == "P" ||
 		$el.get(0).tagName == "H1" ||

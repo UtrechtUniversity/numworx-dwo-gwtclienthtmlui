@@ -68,6 +68,10 @@ function MainDisplay() {
 	this.modulesDisplay = new ModulesDisplay();
 	window.jsModulesDisplay = this.modulesDisplay;
 	
+	// ORGANISATION
+	this.organisationDisplay = new OrganisationDisplay();
+	window.jsOrganisationDisplay = this.organisationDisplay;
+	
 		
 	// Dialog Displays
 	this.msgDialogDisplay = new MsgDialogDisplay();
@@ -254,8 +258,8 @@ MainDisplay.prototype.showImportPersonsView = function() {
 }
 
 MainDisplay.prototype.showOrganisationView = function() {
-//	this.initMainView();
-//	this.organisationDisplay.show();
+	this.initMainView();
+	this.organisationDisplay.show();
 }
 
 
