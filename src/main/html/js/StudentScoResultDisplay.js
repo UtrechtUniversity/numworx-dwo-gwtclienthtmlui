@@ -104,6 +104,13 @@ StudentScoResultDisplay.prototype.openUrl = function (url) {
 	this.$iframe.attr('src', url );
 }
 
+StudentScoResultDisplay.prototype.resetSeal = function (bool) {
+	this.studentScoResultActionsForm.elements["seal"][1].checked = !bool;
+	this.studentScoResultActionsForm.elements["seal"][0].checked = bool;
+
+}
+
+
 StudentScoResultDisplay.prototype.updateResultTree = function (resultsTree, studentsTree) {
 	this.resultState.resultsTree = resultsTree;
 	this.resultState.studentsTree = studentsTree;
