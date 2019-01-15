@@ -209,10 +209,14 @@ input[type="submit"], input[type="button"], button, .pseudobutton {
 input[type="text"], input[type="password"], select {
 	font-family: 'Ubuntu', sans-serif;
 	font-size: 1em;
-	line-height: 1em;	
+	line-height: 1em;
+	
+	:not(label) > & {
+		font-size: 12 / 16 * 1em;
+	}	
 }
 .options {
-	font-size: 13 / 16 * 1em;
+//	font-size: 13 / 16 * 1em;
 	label {
 		text-transform: uppercase;
 	}
