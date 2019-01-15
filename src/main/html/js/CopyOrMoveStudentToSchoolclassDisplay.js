@@ -151,7 +151,7 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.init = function () {
 	this.resetSorting();
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setHelp = function(url) {
-		this.$helpContentIFrame.attr('src', url );
+		if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setSchoolClassA = function(schoolclass) {

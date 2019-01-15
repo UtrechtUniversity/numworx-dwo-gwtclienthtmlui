@@ -36,7 +36,7 @@ SelectStudentResultsDisplay.prototype.init = function (context) {
 }
 
 SelectStudentResultsDisplay.prototype.setHelp = function(url) {
-		this.$helpContentIFrame.attr('src', url );
+		if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
 }
 
 

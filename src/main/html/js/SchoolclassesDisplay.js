@@ -26,10 +26,8 @@ function SchoolclassesDisplay() {
 }
 
 SchoolclassesDisplay.prototype.show = function() {
-        this.localize();
+    this.localize();
 	this.$panel.show();
-	
-	
 	//Helpers.stretchHeight( [ this.$chooseSchoolclassTableBody ]);
 }
 
@@ -78,7 +76,7 @@ SchoolclassesDisplay.prototype.clear = function () {
 }
 
 SchoolclassesDisplay.prototype.setHelp = function(url) {
-		this.$helpContentIFrame.attr('src', url );
+	if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
 }
 
 SchoolclassesDisplay.prototype.updateView = function(json) {

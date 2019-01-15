@@ -141,7 +141,7 @@ EditSchoolclassesDisplay.prototype.init = function () {
 }
 
 EditSchoolclassesDisplay.prototype.setHelp = function(url) {
-		this.$helpContentIFrame.attr('src', url );
+		if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
 }
 
 EditSchoolclassesDisplay.prototype.showSchoolClass = function(json) {	

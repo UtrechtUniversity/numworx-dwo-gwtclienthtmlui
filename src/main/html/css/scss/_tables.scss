@@ -336,7 +336,7 @@ table.dwo.results {
 				
 				th:first-child {
 					background-color: $shade11;
-					height: 17px;
+					//height: 17px;
 					position: absolute;
 					padding-left: 0!important;
 					padding-right: 0!important;
@@ -604,7 +604,7 @@ table.dwo.results {
 	
 		&:after {
 			content: "";
-			position: fixed;
+			position: absolute;
 			width: 1 / 12 * $siteWidth * 1px;
 			top: 0;
 			bottom: 0;

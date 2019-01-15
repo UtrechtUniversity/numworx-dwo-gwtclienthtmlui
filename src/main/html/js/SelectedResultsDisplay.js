@@ -646,7 +646,7 @@ SelectedResultsDisplay.prototype.init = function(resultState) {
 }
 
 SelectedResultsDisplay.prototype.setHelp = function(url) {
-		this.$helpContentIFrame.attr('src', url );
+		if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
 }
 
 SelectedResultsDisplay.prototype.updateResultTree = function (resultsTree, studentsTree) {
