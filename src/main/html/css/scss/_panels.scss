@@ -396,7 +396,7 @@ body {
 		}
 		
 		&:last-of-type {
-			margin-bottom: 2 * $rowMarginBottom;
+			padding-bottom: 2 * $rowMarginBottom; // was margin
 		}
 	}
 	
@@ -946,8 +946,15 @@ section.lightbox {
  */
 
 #welcomeDisplayPanel {
+//	background-color: $shade10;
+	
 	background: $shade10 url(../images/bg-numworx-logo.png) no-repeat bottom right;
 	background-size: contain;
+	padding-top: 0;
+	section {
+		
+		padding-top: ($headerHeight + $subpanelHeaderHeight) * 1px;
+	}
 	
 	a {
 		color: $primary;
