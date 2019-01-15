@@ -137,6 +137,7 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.clear = function () {
 	this.$classBTableBody.html("");
 	this.$classAClassName.val("");
 	this.$classBClassName.val("");
+	this.classBSet = false;
 	this.resetSorting();
 }
 
@@ -147,6 +148,7 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.init = function () {
 	this.$classBTableBody.html("");
 	this.$classAClassName.val("");
 	this.$classBClassName.val("");
+	this.classBSet = false;
 	app.mainDisplay.registerStretchables( [ this.$classATableBody, this.$classBTableBody, this.$classesTableBody ] );
 	this.resetSorting();
 }
