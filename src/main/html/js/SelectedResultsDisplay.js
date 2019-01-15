@@ -765,6 +765,10 @@ SelectedResultsDisplay.prototype.setStickyColumn = function($el,leftOffset) {
 
 SelectedResultsDisplay.prototype.hoverColumnHeader = function(event) {
 	var $target = $(event.target);
+	
+	// Avoid multiple active headers on quick mouse hovers over headers 
+	$(".headers .active").not($target).removeClass("active");
+	
 	if ($target.hasClass('active')) {
 		$target.removeClass('active');
 		$target.find('a').hide();
