@@ -189,7 +189,10 @@ AccountDisplay.prototype.saveSchoolLogins = function(event) {
 }
 
 AccountDisplay.prototype.addSchoolLogin = function(event) {
-	app.getPresenterFactory().getAccountPresenter().addASchoolLogin( this.addSchoolLoginForm.elements["role"].value,
+	var role;
+	role = this.addSchoolLoginForm.elements["role"].value; // Niet in IE11
+	role = document.querySelector('form[name=addSchoolLogin] input[name=role]:checked').value;
+	app.getPresenterFactory().getAccountPresenter().addASchoolLogin( role,
 																this.addSchoolLoginForm.elements["schoolLogin"].value,
 																this.addSchoolLoginForm.elements["schoolCode"].value );	
 }
