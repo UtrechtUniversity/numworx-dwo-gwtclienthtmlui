@@ -48,8 +48,17 @@
 	<link rel="stylesheet" href="css/styles.css" type="text/css" media="screen">
 <!-- opnemen in styles.scss -->
 <style type="text/css">
-.TEACHER .schooladmin-only { display: none; }
-.SCHOOLADMIN .teacher-only { display: none; }
+.TEACHER .schooladmin-only,
+.SCHOOLADMIN .teacher-only,
+.STUDENT .teacher-only,
+.STUDENT .schooladmin-only,
+.STUDENT .no-student,
+.SINGLESTUDENT .no-single,
+.SINGLESTUDENT .teacher-only,
+.SINGLESTUDENT .schooladmin-only,
+.SINGLESTUDENT .no-student
+ { display: none; }
+
 </style>
 
 
@@ -363,7 +372,7 @@
 				    </svg><span class="name" data-translate="NUM_MNU_RESULTS">Resultaten</span>
 				    </a>
 				</li>
-				<li><a href="#PERSONS"><svg viewBox="0 0 64 64" class="icon">
+				<li class='no-student'><a href="#PERSONS"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#personen"></use>
 				    </svg><span class="name" data-translate="NUM_MNU_PEOPLE">Personen</span></a></li>
 				<li><a href="#SCHOOLCLASSES"><svg viewBox="0 0 64 64" class="icon">
@@ -471,7 +480,7 @@
 			</section>
 			
 			<!-- Current login abilities -->
-			<section>
+			<section class="no-single">
 				<div class="row">
 					<div class="col-12">
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_ACCOUNT_SCHOOLLOGINS">Mijn loginmogelijkheden beheren</span></h2>
@@ -551,7 +560,7 @@
 			</section>
 			
 			<!-- Add login ability -->
-			<section>
+			<section class="no-single">
 				<div class="row">
 					<div class="col-12">
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_ACCOUNT_SCHOOLLOGIN_ADD">Nieuwe loginmogelijkheid toevoegen<span></h2>						

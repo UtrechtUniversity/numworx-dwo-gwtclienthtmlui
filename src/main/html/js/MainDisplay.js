@@ -150,6 +150,8 @@ MainDisplay.prototype.setUserRole = function (role) {
 	this.$body.removeClass("ANONYMOUS");
 	this.$body.removeClass("TEACHER");
 	this.$body.removeClass("SCHOOLADMIN");
+	this.$body.removeClass("STUDENT");
+	this.$body.removeClass("SINGLESTUDENT");
 	this.$body.addClass(role);
 	role = app.getTranslator().translate( 'NUM_APP_' + role);
     this.$accountMenuUserRole.html(role);
