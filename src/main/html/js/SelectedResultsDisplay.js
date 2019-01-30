@@ -13,6 +13,7 @@ function SelectedResultsDisplay() {
 	// jQuery objects
 	this.$panel = jQuery("#selectedResultsDisplay");
 	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
+	this.$sectionTitle = $("#selectedResultsSectionTitle");
 	
 	//this.$sealModuleActivitiesForm = $(this.sealModuleActivitiesForm);
 	this.$sealSingleActivityForm = $(this.sealSingleActivityForm);
@@ -635,25 +636,21 @@ SelectedResultsDisplay.prototype.clear = function () {
 }
 
 SelectedResultsDisplay.prototype.init = function(resultState) {
-	console.log("init SelectedResultsDisplay");
-	console.log(resultState);
-	
-	this.resultState = resultState;
-	
-	this.allFilterIndicatorsReset();
-	
+	this.resultState = resultState;	
+	this.allFilterIndicatorsReset();	
 	this.modulesStudents();	
+		
+	schoolClassName = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].label;
+	this.$sectionTitle.html( app.getTranslator().translate("NUM_SEC_SELECTEDRESULTS")+" "+schoolClassName );
 }
 
 SelectedResultsDisplay.prototype.setHelp = function(url) {
-		if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
+	if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
 }
 
 SelectedResultsDisplay.prototype.updateResultTree = function (resultsTree, studentsTree) {
-	console.log("updateTree");	
 	this.resultState.resultsTree = resultsTree;
-	this.resultState.studentsTree = studentsTree;
-	console.log(this.resultState);
+	this.resultState.studentsTree = studentsTree;	
 }
 
 SelectedResultsDisplay.prototype.showPages = function(resultsTree) {
