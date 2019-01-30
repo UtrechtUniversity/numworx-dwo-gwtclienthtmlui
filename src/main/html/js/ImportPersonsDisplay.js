@@ -53,7 +53,7 @@ ImportPersonsDisplay.prototype.setLoadingSchoolClassesTableMessage = function() 
 }
 
 ImportPersonsDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', url );
+	if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
 }
 
 ImportPersonsDisplay.prototype.setPersonImportList = function(json) {

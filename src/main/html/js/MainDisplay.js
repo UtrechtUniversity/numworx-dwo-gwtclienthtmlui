@@ -123,7 +123,8 @@ MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 		
 	if (!this.$panel.is(":visible")) {
 		this.$panel.show();
-	} 
+	}
+
 	this.$subpanels.hide();
 	this.loginDisplay.hide();
 	this.setDefaultNavSize();

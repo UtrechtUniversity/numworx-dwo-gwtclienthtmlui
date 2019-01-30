@@ -116,7 +116,7 @@ table.dwo { //:not(.c-datepicker__days)
 				border-bottom: 1px $line1 solid;
 				//padding: 5px 10px;
 				vertical-align: middle;
-				padding: 8px $gutter / 2 * 1px!important;
+				padding: 4px $gutter / 2 * 1px!important;
 				width: ($colWidth - ($gutter)) * 1px;
 				float: none!important; // for if it has a col-class
 				
@@ -259,7 +259,7 @@ table.dwo.results {
 				display: block;
 				left: 0;
 				//line-height: 41px; //1.8em;
-				line-height: 32px;
+				line-height: 26px;
 				padding: 0px 10px;
 				position: absolute; 
 				top: 0;
@@ -336,7 +336,7 @@ table.dwo.results {
 				
 				th:first-child {
 					background-color: $shade11;
-					height: 17px;
+					//height: 17px;
 					position: absolute;
 					padding-left: 0!important;
 					padding-right: 0!important;
@@ -485,7 +485,7 @@ table.dwo.results {
 		max-height: 500px;	
 		
 		tr {
-			height: 32px;
+			height: 26px;
 		}
 		
 		td {
@@ -501,7 +501,7 @@ table.dwo.results {
 				z-index: 9;
 				
 				span {
-					height: 32px;
+					height: 26px;
 					overflow-x: hidden;
 					overflow-y: hidden;
 					@include transition(all 50ms ease-in-out);
@@ -604,7 +604,7 @@ table.dwo.results {
 	
 		&:after {
 			content: "";
-			position: fixed;
+			position: absolute;
 			width: 1 / 12 * $siteWidth * 1px;
 			top: 0;
 			bottom: 0;

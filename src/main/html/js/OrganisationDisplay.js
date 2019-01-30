@@ -145,7 +145,7 @@ OrganisationDisplay.prototype.clear = function() {
  * setHelp shows help url
  */
 OrganisationDisplay.prototype.setHelp = function(url) {
-	this.$helpContentIFrame.attr('src', url );
+	if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
 }
 
 /**
@@ -327,7 +327,9 @@ OrganisationDisplay.prototype.changeEditModulesButton = function(event) {
 
 OrganisationDisplay.prototype.changeSelectRoleButton = function(event) {
 	event.preventDefault();	
-	this.selectRole(this.selectRoleButton.value);
+	var role = this.selectRoleButton.value;
+	role = document.querySelector('form[name=organisationPersonsFilter] input[name=role]:checked').value;
+	this.selectRole(role);
 }
 
 OrganisationDisplay.prototype.submitPersonsFilterForm = function(event) {
@@ -355,8 +357,10 @@ OrganisationDisplay.prototype.changePersonsRemoveCheckbox = function(event) {
 OrganisationDisplay.prototype.submitPersonsForm = function(event) {
 	event.preventDefault();	
 	
-	var role = this.selectRoleButton.value,
+	var role = this.selectRoleButton.value, // undefined in IE11
 		persons = [];
+	role = document.querySelector('form[name=organisationPersonsFilter] input[name=role]:checked').value
+	
 	for (i = 0; i < this.personsForm.elements.length; i++) {
 		if (this.personsForm.elements[i].name == "remove[]" && this.personsForm.elements[i].checked) persons.push(this.personsForm.elements[i].value);
 	}

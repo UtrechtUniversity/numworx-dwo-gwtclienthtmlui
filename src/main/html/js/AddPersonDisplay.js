@@ -70,7 +70,7 @@ AddPersonDisplay.prototype.clear = function () {
 }
 
 AddPersonDisplay.prototype.setHelp = function(url) {
-		this.$helpContentIFrame.attr('src', url );
+		if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
 }
 
 AddPersonDisplay.prototype.showSchoolClasses = function(json) {

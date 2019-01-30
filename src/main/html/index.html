@@ -396,7 +396,7 @@
 		<section id="welcomeDisplayPanel" class="subpanel">			
 			<section>	
 				<div class="row">
-					<div class="col-12">
+					<div class="col-9"> <!-- no 12 cols width available because of wide navigation -->
 						<div id="welcomeText"></div>
 					</div>
 			</section>
@@ -552,7 +552,8 @@
 								</tbody>
 							</table>
 						</div>
-						<div class="col-4">
+						<div class="col-2">
+						    &nbsp; <!-- for IE -->
 							<input type="submit" class="primary right bottom" data-translate="NUM_BTN_Apply" value="Sla op" />
 						</div>
 					</form>
@@ -1129,14 +1130,14 @@
 				<div class="row">
 					<div class="col-4">
                                             <h3><span data-translate="NUM_LBL_CLASSEDITSTUDENTS_STUDENTSLEFTCLASS">Leerlingen gekozen klas</span></h3>
-						<input type="text" id="copyOrMoveStudentToSchoolclassClassAClassname" value="" class="col-2" disabled="disabled" />
+						<input type="text" id="copyOrMoveStudentToSchoolclassClassAClassname" value="" disabled="disabled" />
 					</div>					
 					<div class="col-4">
 						<h3><span data-translate="NUM_LBL_CLASSEDITSTUDENTS_MSG">Kies een tweede klas om leerlingen it of naar te kopieren of te verplaatsen.</h3>
 					</div>
 					<div class="col-4">
                                             <h3><span data-translate="NUM_LBL_CLASSEDITSTUDENTS_STUDENTSRIGHTCLASS">Leerlingen tweede gekozen klas</span></h3>
-						<input type="text" id="copyOrMoveStudentToSchoolclassClassBClassname" value="" class="col-2 semiDisabled" disabled="disabled" />
+						<input type="text" id="copyOrMoveStudentToSchoolclassClassBClassname" value="" class="semiDisabled" disabled="disabled" />
 					</div>
 				</div>
 				
@@ -1149,7 +1150,7 @@
 										<th class="col-2">
 											&nbsp;
 										</th>										
-										<th><span id="copyOrMoveStudentToSchoolclassClassASelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT">Selecteer</span></span></th>
+										<th class="col-1 centered"><span id="copyOrMoveStudentToSchoolclassClassASelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT_ALL">Selecteer</span></span></th>
 									</tr>
 									<tr class="sorting">
 										<th class="col-2">
@@ -1172,7 +1173,7 @@
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
 										<td class="col-2"><span id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentName">Student naam</span></td>
-										<td>
+										<td class="col-1 centered">
 											<div class="checkbox">
 												<input type="checkbox" name="students[]" id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentSelect" value=""><label class="icon" for="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentSelect"></label>
 											</div>											
@@ -1233,7 +1234,7 @@
 										<th class="col-2">
 											&nbsp;										
 										</th>										
-										<th><span id="copyOrMoveStudentToSchoolclassClassBSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT">Selecteer</span></span></th>
+										<th class="col-1 centered"><span id="copyOrMoveStudentToSchoolclassClassBSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT_ALL">Selecteer</span></span></th>
 									</tr>
 									<tr class="sorting">
 										<th class="col-2">
@@ -1256,7 +1257,7 @@
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
 										<td class="col-2"><span id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentName">Leerling naam</span></td>
-										<td>
+										<td class="col-1 centered">
 											<div class="checkbox">
 												<input type="checkbox" name="students[]" id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentSelect" value=""><label class="icon" for="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentSelect"></label>
 											</div>											
@@ -1718,7 +1719,7 @@
 								<thead>
 									<tr>
 										<th class="col-4">&nbsp;</th>
-										<th class="col-2 centered"><span id="resultsDisplayChooseModulesSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT">Selecteer</span></span></th>
+										<th class="col-2 centered"><span id="resultsDisplayChooseModulesSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT_ALL">Selecteer</span></span></th>
 									</tr>
 									<tr class="sorting">
 										<th class="col-4">
@@ -1775,7 +1776,7 @@
 							<use xlink:href="#resultaten"></use>
 						</svg>
 						<h1><span data-translate="NUM_PNL_SELECTEDRESULTS" >Resultaten</span></h1>
-						<h2 class="sectionhead"><span data-translate="NUM_SEC_SELECTEDRESULTS">Resultaten</span></h2>					
+						<h2 class="sectionhead"><span id="selectedResultsSectionTitle" >Resultaten</span></h2>					<!-- data-translate="NUM_SEC_SELECTEDRESULTS" -->
 					</div>
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
@@ -2453,6 +2454,10 @@
 						<div class="col-6">
 							<table class="dwo sortable">
 								<thead>
+									<tr>
+										<th class="col-4">&nbsp;</th>
+										<th class="col-2 centered"><span data-translate="NUM_TBL_SELECT">Selecteer</span></th>
+									</tr>
 									<tr class="sorting">
 										<th class="col-4">
 											<span class="sortButton asc default" data-order="asc" data-type="string">
@@ -2474,7 +2479,7 @@
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
 										<td class="col-4"><span id="editPersonSchoolclassName">Schoolnaam</span></td>
-										<td class="col-2">
+										<td class="col-2 centered">
 											<div class="checkbox">
 												<input type="checkbox" name="active[]" id="editPersonSchoolclassActive" value="schoolid"><label class="icon" for="editPersonSchoolclassActive"></label>
 											</div>
@@ -2601,6 +2606,10 @@
 							<div class="col-6">
 								<table class="dwo sortable">
 									<thead>
+										<tr>
+											<th class="col-4">&nbsp;</th>
+											<th class="col-2 centered"><span data-translate="NUM_TBL_SELECT">Selecteer</span></th>
+										</tr>
 										<tr class="sorting">
 											<th  class="col-4">&nbsp;
 												<span class="sortButton asc default" data-order="asc" data-type="string">
@@ -2622,7 +2631,7 @@
 										<!-- The row is detached and used as a template by the JS -->								
 										<tr>
 											<td class="col-4"><span id="addPersonSchoolclassName">Schoolnaam</span></td>
-											<td class="col-2">
+											<td class="col-2 centered">
 												<div class="checkbox">
 													<input type="radio" name="schoolclass" id="addPersonSchoolclassActive" value="schoolid"><label class="icon" for="addPersonSchoolclassActive"></label>
 												</div>
