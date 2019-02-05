@@ -34,7 +34,9 @@ ImportPersonsDisplay.prototype.clear = function () {
 	this.$schoolclassesTableHead.find(".sortButton").removeClass("active");
 }
 
-ImportPersonsDisplay.prototype.init = function() {}
+ImportPersonsDisplay.prototype.init = function() {
+	app.mainDisplay.registerStretchables( [ this.$personsTableBody ] );
+}
 
 ImportPersonsDisplay.prototype.setEmptyPeopleTableMessage = function() {
 	this.$personsTableBody.html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');		
@@ -142,7 +144,7 @@ ImportPersonsDisplay.prototype.checkNotEmpty = function(event) {
 ImportPersonsDisplay.prototype.checkPassword = function(event) {
 	var source = event.target;
 	var value  = source.value;
-	var b = !!value && value.length >= 4 && !value.match(/^ /) && !value.match(/ $/); //app.getPresenterFactory().getImportPersonsPresenter().verifyPassword(value);
+	var b = !!value && value.length >= 5 && !value.match(/^ /) && !value.match(/ $/); //app.getPresenterFactory().getImportPersonsPresenter().verifyPassword(value);
 	if (!b) {
 		$(source).attr('class', 'error');
 	} else {
