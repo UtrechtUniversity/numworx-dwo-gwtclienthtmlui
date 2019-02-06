@@ -16,6 +16,7 @@ function MainDisplay() {
 	this.$accountMenuPresentationName = jQuery("#accountMenuPresentationName");
 	this.$accountMenuBox = jQuery("#accountMenuBox");
 	this.$accountMenuToggle = $("#accountMenuToggle");
+	this.$headerPresentationName = $("#headerPresentationName");
 	
 	
 	// Setup Display objects
@@ -161,6 +162,7 @@ MainDisplay.prototype.setUserRole = function (role) {
 };
 MainDisplay.prototype.setPresentationName = function (presentationName) {
 	this.$accountMenuPresentationName.html(presentationName);
+	this.$headerPresentationName.html(presentationName);
 };
 
 

@@ -41,7 +41,8 @@
 	
 	<!-- Font for the material icons -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	
+	<!-- Awesome font 4.1 -->
+	<link href="//cdn.dwo.nl/apps/images/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" >
 	
 	
 	<!-- Load styles AFTER GWT, because GWT outputs styles too -->
@@ -353,7 +354,7 @@
 			<a href="#WELCOME" id="logo"><img src="images/logo-Numworx-grijs.svg"><span
 			style=" /* FIXME verplaatsen naar scss */
     font-size: 22px;
-    font-family: ubuntu;
+    font-family: Ubuntu;
     text-transform: uppercase;
     vertical-align: super;
     padding-left: 10px;
@@ -366,6 +367,23 @@
 		  		  <use xlink:href="#account"></use>
 			    </svg>
 			</a>
+			<span style='
+			float: right;
+			font-size: 13px;
+			margin-right: 10px;
+			margin-top: 18px;
+			color: #7297c7;
+			font-family: Ubuntu;
+			font-weight: bold;
+			' 
+			id='headerPresentationName'>Voorbeeld</span>
+			<a 
+				style='float:right;margin-top:8px;margin-right:10px;'
+				href='javascript:void(0);' 
+				id='headerArrowUp' >
+				<i class="fa fa-2x fa-arrow-up" style="color:#798291"></i>
+			</a>
+			
 			<div id="accountMenuBox">
 				<span id="accountMenuSchoolName">Voorbeeld van Naam</span>
 				<span id="accountMenuUserRole">Docent</span><span id="accountMenuPresentationName">Voorbeeldschool</span>
