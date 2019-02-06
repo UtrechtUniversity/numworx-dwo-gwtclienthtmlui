@@ -17,6 +17,7 @@ function MainDisplay() {
 	this.$accountMenuBox = jQuery("#accountMenuBox");
 	this.$accountMenuToggle = $("#accountMenuToggle");
 	this.$headerPresentationName = $("#headerPresentationName");
+	this.$headerArrowUp = $("#headerArrowUp");
 	
 	
 	// Setup Display objects
@@ -96,7 +97,10 @@ function MainDisplay() {
 	this.$accountMenuToggle.on('mouseenter', $.proxy(this.mouseEnterAccountMenuIcon, this));
 	this.$accountMenuToggle.on('touchstart', $.proxy(this.touchStartAccountMenuIcon, this));
 	this.$accountMenuBox.on('mouseleave', $.proxy(this.mouseLeaveAccountMenuIcon, this));
+	this.$headerArrowUp.on("click", $.proxy(this.onArrowUp, this));
 	$(document).on('click, touchstart', $.proxy(this.clickWherever, this));
+
+	this.$headerArrowUp.hide();
 	
 	$("input").focus(function(event) {
 		window.scrollTo(0, 0);
@@ -121,6 +125,7 @@ MainDisplay.prototype.init = function() {
 
 MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 	this.$panels.hide();
+	this.$headerArrowUp.hide();
 		
 	if (!this.$panel.is(":visible")) {
 		this.$panel.show();
@@ -257,7 +262,8 @@ MainDisplay.prototype.showSelectStudentResultsView = function() {
 }
 
 MainDisplay.prototype.showModulesView = function() {
-	this.initMainView(); 
+	this.initMainView();
+	this.setArrowUp(true);
 	this.modulesDisplay.show();
 }
 
@@ -271,6 +277,16 @@ MainDisplay.prototype.showOrganisationView = function() {
 	this.organisationDisplay.show();
 }
 
+MainDisplay.prototype.onArrowUp = function() {
+	app.getPresenterFactory().getMainPresenter().onArrowUp()
+}
+
+MainDisplay.prototype.setArrowUp = function(show) {
+	if (show)
+		this.$headerArrowUp.show();
+	else 
+		thos.$headerArrowUp.hide();
+}
 
 /*
  * DIALOG VIEW HELPERS
@@ -439,6 +455,10 @@ MainDisplay.prototype.clickLogo = function(event) {
 	if (view) this.setActiveView(view)
 }
 
+MainDisplay.prototype.clickArrowUp = function(event) {
+	event.preventDefault();
+	this.onArrowUp();
+}
 MainDisplay.prototype.localize = function() {
 	this.$panel.find("[data-translate]").each( Helpers.translate );
 }
