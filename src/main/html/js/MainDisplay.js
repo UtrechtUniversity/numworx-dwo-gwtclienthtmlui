@@ -114,7 +114,7 @@ MainDisplay.prototype.init = function() {
 	// Localize logo
 	if (Helpers.getUrlParameter('locale') == 'en') {
 		this.$body.addClass("localeEn");
-		this.$logo.find('img').attr('src', 'images/header-logoNumworxTeacher.png');
+		//this.$logo.find('img').attr('src', 'images/header-logoNumworxTeacher.png');
 	}
 }
 
@@ -157,6 +157,7 @@ MainDisplay.prototype.setUserRole = function (role) {
 	role = app.getTranslator().translate( 'NUM_APP_' + role);
     this.$accountMenuUserRole.html(role);
 	document.title = "Numworx " + role;
+	this.$logo.find("span").html(role);
 };
 MainDisplay.prototype.setPresentationName = function (presentationName) {
 	this.$accountMenuPresentationName.html(presentationName);
