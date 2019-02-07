@@ -119,7 +119,6 @@ input[type="text"], input[type="password"] {
 	&:disabled {
 		background-color: $shade20;
 		border-color: $shade22;
-		//color: $shade22;
 		cursor: default;
 	}
 	&.semiDisabled:disabled {

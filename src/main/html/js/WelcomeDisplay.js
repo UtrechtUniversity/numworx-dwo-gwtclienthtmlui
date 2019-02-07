@@ -9,9 +9,8 @@ function WelcomeDisplay() {
 }
 
 WelcomeDisplay.prototype.show = function() {
-        this.localize();
+    this.localize();
 	this.$panel.show();
-	Helpers.stretchHeight( [ this.$welcomeText ]);
 }
 
 WelcomeDisplay.prototype.localize = function() {
@@ -19,7 +18,7 @@ WelcomeDisplay.prototype.localize = function() {
 }
 
 WelcomeDisplay.prototype.init = function() {
-	// do nothing
+	app.mainDisplay.registerStretchables( [ this.$welcomeText  ] );
 }
 
 WelcomeDisplay.prototype.clear = function() {

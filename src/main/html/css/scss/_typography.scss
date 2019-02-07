@@ -144,6 +144,7 @@ h3 {
 	margin-bottom: $elementMarginBottom;
 	font-weight: 700;
 	font-size: 13 / 16 * 1em;
+	line-height: 18 / 13 * 1em;
 	
 	.dialog & {
 		font-size: 13 / 16 * 1em;
@@ -208,10 +209,14 @@ input[type="submit"], input[type="button"], button, .pseudobutton {
 input[type="text"], input[type="password"], select {
 	font-family: 'Ubuntu', sans-serif;
 	font-size: 1em;
-	line-height: 1em;	
+	line-height: 1em;
+	
+	:not(label) > & {
+		font-size: 12 / 16 * 1em;
+	}	
 }
 .options {
-	font-size: 13 / 16 * 1em;
+//	font-size: 13 / 16 * 1em;
 	label {
 		text-transform: uppercase;
 	}
@@ -224,7 +229,7 @@ input[type="text"], input[type="password"], select {
 label {
 	color: $primaryLight;
 	//font-family: 'Ubuntu Condensed', sans-serif;
-	font-size: 13 / 16 * 1em;
+	font-size: 12 / 16 * 1em;
 	line-height: 14px;
 	//font-weight: bold;
 

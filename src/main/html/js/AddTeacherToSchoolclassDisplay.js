@@ -126,7 +126,7 @@ AddTeacherToSchoolclassDisplay.prototype.clickReset = function(event) {
 }
 
 AddTeacherToSchoolclassDisplay.prototype.setHelp = function(url) {
-		this.$helpContentIFrame.attr('src', url );
+		if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
 }
 
 AddTeacherToSchoolclassDisplay.prototype.setSchoolClass = function(schoolClass) {

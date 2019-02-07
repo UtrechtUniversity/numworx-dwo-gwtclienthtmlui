@@ -86,7 +86,7 @@ body {
  */
 
 .subpanel {
-	margin: 0 0 0 auto;
+	margin: 0px 0px 0px auto;
 	margin-right: $navWidth * -1px;
 	
 //	min-height: 100%;
@@ -96,16 +96,18 @@ body {
 	overflow: hidden;
 	padding-top: ($headerHeight + $subpanelHeaderHeight) * 1px;
 	width: 99.9%; // TODO bug Safari
+	//width: 100%;
 	position: static;
 	
 	
 	@media #{$mediaQueryDesktop} {
+		
 		margin-right: $navWidthExpanded * -1px;
 		
 		//.collapsedNav & { // Expand
 //			margin-right: $navWidthExpanded * -1px!important;
 //		}
-		//position: relative;
+//		position: relative;
 	}
 	.hiddenNav & {
 		margin-right: 0;
@@ -113,7 +115,8 @@ body {
 	.expandedNav & {
 		margin-right: $navWidthExpanded * -1px;
 	}
-	//.collapsedNav & {
+//	.collapsedNav & {
+//		margin: 0px 0px 0px auto;
 //		margin-right: $navWidth * -1px;
 //	}
 	.libraryPage & {
@@ -223,29 +226,18 @@ body {
 			margin-left: ($navWidth + $gutter) * 1px;	
 			position: absolute;
 			width: 100%;			
-			//position: absolute;	
 			
-			
-			
-			@media #{$mediaQueryDesktop} {
-				//	width: ($siteWidth - $gutter) / $siteWidth * 100%;
-				//padding: 0 ($gutter / 2) / $siteWidth * 100%;
-				
+			@media #{$mediaQueryDesktop} {	
 				margin-left: ($gutter) * 1px;			
 			}
 		}
 		
 		section#help { 
-			//background-color: $shade11;
-			//bottom: -1px;
-			
 			margin-top: -18px;
 			padding-top: 0;		
-			//padding-left: 0;	
 			position: fixed;
 			right: $siteMargin * 1px;
 			top: ($headerHeight + $subpanelHeaderHeight) * 1px;
-			//width: $colWidth * 1px;			
 			z-index: 500;
 			
 			&.active {
@@ -256,36 +248,31 @@ body {
 				border-bottom: 1px $primary solid;
 				border-left: 1px $shade11 solid;
 				cursor: pointer;
-				margin-left: ($gutter + 1) * -1px;		
+				float: right;
+				//margin-left: ($gutter + 1) * -1px;		
 				width: ($colWidth - $gutter) * 1px;				
 				z-index: 400;
 				
 				@media #{$mediaQueryDesktop} {
+					float: none;
+					margin-left: ($gutter + 1) * -1px;		
 					width: auto;
 				}
-			}	
-			
-			
+			}
 			
 			.content {
 				background-color: $shade11;
-//				border-left: 1px $shade11 solid;
 				bottom: 25%;
 				@include box-shadow(3px,3px,10px,0px,$shadow);
 				display: block;				
 				left: 100%;
 				margin-left: 0;
 				padding: 2em $gutter * 1px;
-//				position: absolute;
-				right: 2 * $siteMargin * 1px;
-//				top: ($headerHeight + $subpanelHeaderHeight + 1) * 1px;
+				right: 36px;
 				top: 19px;
 				visibility: hidden;
-				//display: none;
 				width: (3 * $colWidth / 2 + $gutter * 0.5 - $gutter) * 1px;
 				z-index: 500;
-				
-				
 			
 				iframe {
 					height: 100%;
@@ -318,20 +305,13 @@ body {
 			
 			@media #{$mediaQueryDesktop} {	
 				.content {				
-//					background-color: $shade11;
 					border-left: 1px $shade11 solid;
 					@include box-shadow(0px,0px,0px,0px,$shadow);
-//					bottom: 40;
 					display: block;				
-//					padding: 2em $gutter * 1px;
-//					position: fixed;
-//					right: $siteMargin * 1px;
-					right: 0;
-//					top: ($headerHeight + $subpanelHeaderHeight + 1) * 1px;
-					visibility: hidden;
-					//display: none;
 					left: 100%;
-				
+					right: 0;
+					visibility: hidden;
+					
 					iframe {
 						width: 100%;
 						height: 100%;
@@ -416,7 +396,7 @@ body {
 		}
 		
 		&:last-of-type {
-			margin-bottom: 2 * $rowMarginBottom;
+			padding-bottom: 2 * $rowMarginBottom; // was margin
 		}
 	}
 	
@@ -492,7 +472,7 @@ body {
 			input[type="text"], input[type="password"] {
 				background: $primary;
 				color: $white;				
-								
+				font-size: 1.5em;				
 				@include placeholder {
 					color: $white;
 				}
@@ -966,8 +946,15 @@ section.lightbox {
  */
 
 #welcomeDisplayPanel {
+//	background-color: $shade10;
+	
 	background: $shade10 url(../images/bg-numworx-logo.png) no-repeat bottom right;
 	background-size: contain;
+	padding-top: 0;
+	section {
+		
+		padding-top: ($headerHeight + $subpanelHeaderHeight) * 1px;
+	}
 	
 	a {
 		color: $primary;

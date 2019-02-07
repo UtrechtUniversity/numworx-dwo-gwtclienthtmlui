@@ -41,15 +41,25 @@
 	
 	<!-- Font for the material icons -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	
+	<!-- Awesome font 4.1 -->
+	<link href="//cdn.dwo.nl/apps/images/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" >
 	
 	
 	<!-- Load styles AFTER GWT, because GWT outputs styles too -->
 	<link rel="stylesheet" href="css/styles.css" type="text/css" media="screen">
 <!-- opnemen in styles.scss -->
 <style type="text/css">
-.TEACHER .schooladmin-only { display: none; }
-.SCHOOLADMIN .teacher-only { display: none; }
+.TEACHER .schooladmin-only,
+.SCHOOLADMIN .teacher-only,
+.STUDENT .teacher-only,
+.STUDENT .schooladmin-only,
+.STUDENT .no-student,
+.SINGLESTUDENT .no-single,
+.SINGLESTUDENT .teacher-only,
+.SINGLESTUDENT .schooladmin-only,
+.SINGLESTUDENT .no-student
+ { display: none; }
+
 </style>
 
 
@@ -341,12 +351,39 @@
 	<main id="mainPanel" class="panel">
 		
 		<header>
-			<a href="#WELCOME" id="logo"><img src="images/header-logoNumworxDocent.png"></a>
+			<a href="#WELCOME" id="logo"><img src="images/logo-Numworx-grijs.svg"><span
+			style=" /* FIXME verplaatsen naar scss */
+    font-size: 22px;
+    font-family: Ubuntu;
+    text-transform: uppercase;
+    vertical-align: super;
+    padding-left: 10px;
+    color: #7297c7;
+"
+			
+			>Docent</span></a>
 			<a href="javascript: void(0);" id="accountMenuToggle">
 				<svg viewBox="0 0 64 64" class="icon">
 		  		  <use xlink:href="#account"></use>
 			    </svg>
 			</a>
+			<span style='
+			float: right;
+			font-size: 13px;
+			margin-right: 10px;
+			margin-top: 18px;
+			color: #7297c7;
+			font-family: Ubuntu;
+			font-weight: bold;
+			' 
+			id='headerPresentationName'>Voorbeeld</span>
+			<a 
+				style='float:right;margin-top:8px;margin-right:10px;'
+				href='javascript:void(0);' 
+				id='headerArrowUp' >
+				<i class="fa fa-2x fa-arrow-up" style="color:#798291"></i>
+			</a>
+			
 			<div id="accountMenuBox">
 				<span id="accountMenuSchoolName">Voorbeeld van Naam</span>
 				<span id="accountMenuUserRole">Docent</span><span id="accountMenuPresentationName">Voorbeeldschool</span>
@@ -363,7 +400,7 @@
 				    </svg><span class="name" data-translate="NUM_MNU_RESULTS">Resultaten</span>
 				    </a>
 				</li>
-				<li><a href="#PERSONS"><svg viewBox="0 0 64 64" class="icon">
+				<li class='no-student'><a href="#PERSONS"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#personen"></use>
 				    </svg><span class="name" data-translate="NUM_MNU_PEOPLE">Personen</span></a></li>
 				<li><a href="#SCHOOLCLASSES"><svg viewBox="0 0 64 64" class="icon">
@@ -387,7 +424,7 @@
 		<section id="welcomeDisplayPanel" class="subpanel">			
 			<section>	
 				<div class="row">
-					<div class="col-12">
+					<div class="col-9"> <!-- no 12 cols width available because of wide navigation -->
 						<div id="welcomeText"></div>
 					</div>
 			</section>
@@ -471,7 +508,7 @@
 			</section>
 			
 			<!-- Current login abilities -->
-			<section>
+			<section class="no-single">
 				<div class="row">
 					<div class="col-12">
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_ACCOUNT_SCHOOLLOGINS">Mijn loginmogelijkheden beheren</span></h2>
@@ -543,7 +580,8 @@
 								</tbody>
 							</table>
 						</div>
-						<div class="col-4">
+						<div class="col-2">
+						    &nbsp; <!-- for IE -->
 							<input type="submit" class="primary right bottom" data-translate="NUM_BTN_Apply" value="Sla op" />
 						</div>
 					</form>
@@ -551,7 +589,7 @@
 			</section>
 			
 			<!-- Add login ability -->
-			<section>
+			<section class="no-single">
 				<div class="row">
 					<div class="col-12">
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_ACCOUNT_SCHOOLLOGIN_ADD">Nieuwe loginmogelijkheid toevoegen<span></h2>						
@@ -1120,14 +1158,14 @@
 				<div class="row">
 					<div class="col-4">
                                             <h3><span data-translate="NUM_LBL_CLASSEDITSTUDENTS_STUDENTSLEFTCLASS">Leerlingen gekozen klas</span></h3>
-						<input type="text" id="copyOrMoveStudentToSchoolclassClassAClassname" value="" class="col-2" disabled="disabled" />
+						<input type="text" id="copyOrMoveStudentToSchoolclassClassAClassname" value="" disabled="disabled" />
 					</div>					
 					<div class="col-4">
 						<h3><span data-translate="NUM_LBL_CLASSEDITSTUDENTS_MSG">Kies een tweede klas om leerlingen it of naar te kopieren of te verplaatsen.</h3>
 					</div>
 					<div class="col-4">
                                             <h3><span data-translate="NUM_LBL_CLASSEDITSTUDENTS_STUDENTSRIGHTCLASS">Leerlingen tweede gekozen klas</span></h3>
-						<input type="text" id="copyOrMoveStudentToSchoolclassClassBClassname" value="" class="col-2 semiDisabled" disabled="disabled" />
+						<input type="text" id="copyOrMoveStudentToSchoolclassClassBClassname" value="" class="semiDisabled" disabled="disabled" />
 					</div>
 				</div>
 				
@@ -1140,7 +1178,7 @@
 										<th class="col-2">
 											&nbsp;
 										</th>										
-										<th><span id="copyOrMoveStudentToSchoolclassClassASelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT">Selecteer</span></span></th>
+										<th class="col-1 centered"><span id="copyOrMoveStudentToSchoolclassClassASelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT_ALL">Selecteer</span></span></th>
 									</tr>
 									<tr class="sorting">
 										<th class="col-2">
@@ -1163,7 +1201,7 @@
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
 										<td class="col-2"><span id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentName">Student naam</span></td>
-										<td>
+										<td class="col-1 centered">
 											<div class="checkbox">
 												<input type="checkbox" name="students[]" id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentSelect" value=""><label class="icon" for="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentSelect"></label>
 											</div>											
@@ -1224,7 +1262,7 @@
 										<th class="col-2">
 											&nbsp;										
 										</th>										
-										<th><span id="copyOrMoveStudentToSchoolclassClassBSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT">Selecteer</span></span></th>
+										<th class="col-1 centered"><span id="copyOrMoveStudentToSchoolclassClassBSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT_ALL">Selecteer</span></span></th>
 									</tr>
 									<tr class="sorting">
 										<th class="col-2">
@@ -1247,7 +1285,7 @@
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
 										<td class="col-2"><span id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentName">Leerling naam</span></td>
-										<td>
+										<td class="col-1 centered">
 											<div class="checkbox">
 												<input type="checkbox" name="students[]" id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentSelect" value=""><label class="icon" for="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentSelect"></label>
 											</div>											
@@ -1709,7 +1747,7 @@
 								<thead>
 									<tr>
 										<th class="col-4">&nbsp;</th>
-										<th class="col-2 centered"><span id="resultsDisplayChooseModulesSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT">Selecteer</span></span></th>
+										<th class="col-2 centered"><span id="resultsDisplayChooseModulesSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT_ALL">Selecteer</span></span></th>
 									</tr>
 									<tr class="sorting">
 										<th class="col-4">
@@ -1766,7 +1804,7 @@
 							<use xlink:href="#resultaten"></use>
 						</svg>
 						<h1><span data-translate="NUM_PNL_SELECTEDRESULTS" >Resultaten</span></h1>
-						<h2 class="sectionhead"><span data-translate="NUM_SEC_SELECTEDRESULTS">Resultaten</span></h2>					
+						<h2 class="sectionhead"><span id="selectedResultsSectionTitle" >Resultaten</span></h2>					<!-- data-translate="NUM_SEC_SELECTEDRESULTS" -->
 					</div>
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
@@ -2444,6 +2482,10 @@
 						<div class="col-6">
 							<table class="dwo sortable">
 								<thead>
+									<tr>
+										<th class="col-4">&nbsp;</th>
+										<th class="col-2 centered"><span data-translate="NUM_TBL_SELECT">Selecteer</span></th>
+									</tr>
 									<tr class="sorting">
 										<th class="col-4">
 											<span class="sortButton asc default" data-order="asc" data-type="string">
@@ -2465,7 +2507,7 @@
 									<!-- The row is detached and used as a template by the JS -->								
 									<tr>
 										<td class="col-4"><span id="editPersonSchoolclassName">Schoolnaam</span></td>
-										<td class="col-2">
+										<td class="col-2 centered">
 											<div class="checkbox">
 												<input type="checkbox" name="active[]" id="editPersonSchoolclassActive" value="schoolid"><label class="icon" for="editPersonSchoolclassActive"></label>
 											</div>
@@ -2592,6 +2634,10 @@
 							<div class="col-6">
 								<table class="dwo sortable">
 									<thead>
+										<tr>
+											<th class="col-4">&nbsp;</th>
+											<th class="col-2 centered"><span data-translate="NUM_TBL_SELECT">Selecteer</span></th>
+										</tr>
 										<tr class="sorting">
 											<th  class="col-4">&nbsp;
 												<span class="sortButton asc default" data-order="asc" data-type="string">
@@ -2613,7 +2659,7 @@
 										<!-- The row is detached and used as a template by the JS -->								
 										<tr>
 											<td class="col-4"><span id="addPersonSchoolclassName">Schoolnaam</span></td>
-											<td class="col-2">
+											<td class="col-2 centered">
 												<div class="checkbox">
 													<input type="radio" name="schoolclass" id="addPersonSchoolclassActive" value="schoolid"><label class="icon" for="addPersonSchoolclassActive"></label>
 												</div>
@@ -2742,7 +2788,7 @@
 											<th class="col-2"></th>
 										</tr>
 									</thead>
-								<tbody style="height: 200px">
+								<tbody style="height: 100px">
 																		<!-- The row is detached and used as a template by the JS -->								
 										<tr>
 											<td class="col-4"><span id="importPersonsSchoolclassName">Schoolnaam</span></td>

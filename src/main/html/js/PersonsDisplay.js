@@ -121,7 +121,7 @@ PersonsDisplay.prototype.clear = function () {
 }
 
 PersonsDisplay.prototype.setHelp = function(url) { 
-		this.$helpContentIFrame.attr('src', url );
+		if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
 }
 
 PersonsDisplay.prototype.showPersons = function(json) {  

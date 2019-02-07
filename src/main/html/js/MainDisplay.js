@@ -16,6 +16,8 @@ function MainDisplay() {
 	this.$accountMenuPresentationName = jQuery("#accountMenuPresentationName");
 	this.$accountMenuBox = jQuery("#accountMenuBox");
 	this.$accountMenuToggle = $("#accountMenuToggle");
+	this.$headerPresentationName = $("#headerPresentationName");
+	this.$headerArrowUp = $("#headerArrowUp");
 	
 	
 	// Setup Display objects
@@ -95,7 +97,10 @@ function MainDisplay() {
 	this.$accountMenuToggle.on('mouseenter', $.proxy(this.mouseEnterAccountMenuIcon, this));
 	this.$accountMenuToggle.on('touchstart', $.proxy(this.touchStartAccountMenuIcon, this));
 	this.$accountMenuBox.on('mouseleave', $.proxy(this.mouseLeaveAccountMenuIcon, this));
+	this.$headerArrowUp.on("click", $.proxy(this.onArrowUp, this));
 	$(document).on('click, touchstart', $.proxy(this.clickWherever, this));
+
+	this.$headerArrowUp.hide();
 	
 	$("input").focus(function(event) {
 		window.scrollTo(0, 0);
@@ -114,16 +119,18 @@ MainDisplay.prototype.init = function() {
 	// Localize logo
 	if (Helpers.getUrlParameter('locale') == 'en') {
 		this.$body.addClass("localeEn");
-		this.$logo.find('img').attr('src', 'images/header-logoNumworxTeacher.png');
+		//this.$logo.find('img').attr('src', 'images/header-logoNumworxTeacher.png');
 	}
 }
 
 MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 	this.$panels.hide();
+	this.$headerArrowUp.hide();
 		
 	if (!this.$panel.is(":visible")) {
 		this.$panel.show();
-	} 
+	}
+
 	this.$subpanels.hide();
 	this.loginDisplay.hide();
 	this.setDefaultNavSize();
@@ -147,13 +154,20 @@ MainDisplay.prototype.setSchoolName = function (schoolName) {
 	this.$accountMenuSchoolName.html(schoolName);
 };
 MainDisplay.prototype.setUserRole = function (role) {
-	this.$body.removeClass("TEACHER"); this.$body.removeClass("SCHOOLADMIN"); this.$body.addClass(role);
+	this.$body.removeClass("ANONYMOUS");
+	this.$body.removeClass("TEACHER");
+	this.$body.removeClass("SCHOOLADMIN");
+	this.$body.removeClass("STUDENT");
+	this.$body.removeClass("SINGLESTUDENT");
+	this.$body.addClass(role);
 	role = app.getTranslator().translate( 'NUM_APP_' + role);
     this.$accountMenuUserRole.html(role);
 	document.title = "Numworx " + role;
+	this.$logo.find("span").html(role);
 };
 MainDisplay.prototype.setPresentationName = function (presentationName) {
 	this.$accountMenuPresentationName.html(presentationName);
+	this.$headerPresentationName.html(presentationName);
 };
 
 
@@ -248,7 +262,8 @@ MainDisplay.prototype.showSelectStudentResultsView = function() {
 }
 
 MainDisplay.prototype.showModulesView = function() {
-	this.initMainView(); 
+	this.initMainView();
+	this.setArrowUp(true);
 	this.modulesDisplay.show();
 }
 
@@ -262,6 +277,16 @@ MainDisplay.prototype.showOrganisationView = function() {
 	this.organisationDisplay.show();
 }
 
+MainDisplay.prototype.onArrowUp = function() {
+	app.getPresenterFactory().getMainPresenter().onArrowUp()
+}
+
+MainDisplay.prototype.setArrowUp = function(show) {
+	if (show)
+		this.$headerArrowUp.show();
+	else 
+		thos.$headerArrowUp.hide();
+}
 
 /*
  * DIALOG VIEW HELPERS
@@ -430,6 +455,10 @@ MainDisplay.prototype.clickLogo = function(event) {
 	if (view) this.setActiveView(view)
 }
 
+MainDisplay.prototype.clickArrowUp = function(event) {
+	event.preventDefault();
+	this.onArrowUp();
+}
 MainDisplay.prototype.localize = function() {
 	this.$panel.find("[data-translate]").each( Helpers.translate );
 }
