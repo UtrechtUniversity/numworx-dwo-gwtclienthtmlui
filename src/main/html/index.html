@@ -205,6 +205,7 @@
 	<script src="js/SchoolclassesDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/EditSchoolclassesDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/AddStudentToSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/StudentSchoolclassesDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/AddTeacherToSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/CopyOrMoveStudentToSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
 	
@@ -636,9 +637,98 @@
 		</section> 
 		<!-- end account display panel -->
 		
-		
-		
-		
+		<!-- 
+		-
+		- studentSchoolclassesPanel
+		-->
+		<section id='studentSchoolclassesPanel' class='subpanel' >
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
+							<use xlink:href="#klassen"></use>
+						</svg>
+                                                <h1><span >Klassen selecteren of toevoegen</span></h1>
+						<h2 class="sectionhead"><span >Klassen</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+                                            <h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
+						<div class="content">
+							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
+						</div>
+					</section>
+				</div>
+			</header>
+			<section>
+			<section>				
+				<div class="row">
+					<form name="updateSchoolclassView">
+						<div class="col-8">
+							<table class="dwo sortable headered">
+								<thead>
+									<tr>
+										<th class="col-4">
+											<span data-translate="NUM_TBL_SCHOOLCLASSOPTION">Klas</span>
+										</th>
+										
+										<th class="col-2 centered"><span data-translate="NUM_TBL_STARTWITHSCHOOLLOGIN">Opstarten</span></th>
+										<th class="col-2 centered"><span data-translate="NUM_TBL_REMOVESCHOOLCLASS">Verwijderen</span></th>
+									</tr>
+									
+									<tr class="sorting">
+										<th class="col-4">
+											<span class="sortButton asc default" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>
+										<th>&nbsp;</th>
+										<th>&nbsp;</th>
+									</tr>
+								</thead>
+								<tbody>	
+									
+									<!-- The row is detached and used as a template by the JS -->								
+									<tr>
+										<td class="col-4"><span id="updateSchoolclassViewClass" >Schoolnaam</span></td>
+										<td class="col-2 centered">
+											<div class="checkbox">
+												<input type="checkbox" name="active[]" id="updateSchoolclassViewActive" value="schoolid"><label class="icon" for="updateSchoolclassViewActive"></label>
+											</div>											
+										</td>
+										<td class="col-2 centered">
+											<div class="checkbox danger">
+												<input type="checkbox" name="remove[]" id="updateSchoolclassViewRemove" value="schoolid"><label class="icon" for="updateSchoolclassViewRemove"></label>
+											</div>											
+										</td>
+									</tr>
+																		
+								</tbody>
+							</table>
+						</div>
+						<div class="col-2">&nbsp;</div>
+						<div class="col-2">
+						    &nbsp; <!-- for IE -->
+							<input type="submit" class="primary right bottom" data-translate="NUM_BTN_Apply" value="Sla op" />
+						</div>
+					</form>
+				</div>
+			</section>
+			</section>
+		</section>
+		<!-- endo student schoolclasses -->
+				
 		<!-- 
 		-
 		- schoolclassesDisplayPanel

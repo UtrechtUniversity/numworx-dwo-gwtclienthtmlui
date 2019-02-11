@@ -33,8 +33,6 @@ function MainDisplay() {
 	window.jsSchoolClassesDisplay = this.schoolclassesDisplay;
 	this.editSchoolclassesDisplay = new EditSchoolclassesDisplay();
 	window.jsEditSchoolclassDisplay	= this.editSchoolclassesDisplay; 
-	// OLD this.studentsInSchoolclassDisplay = new StudentsInSchoolclassDisplay(); // TODO: remove?
-	// OLD window.JsStudentsInSchoolclassDisplay	= this.studentsInSchoolclassDisplay; // TODO: remove?
 	this.addStudentToSchoolclassDisplay = new AddStudentToSchoolclassDisplay();
 	window.jsAddStudentToSchoolclassDisplay	= this.addStudentToSchoolclassDisplay; 
 	this.copyOrMoveStudentToSchoolclassDisplay = new CopyOrMoveStudentToSchoolclassDisplay();
@@ -43,6 +41,9 @@ function MainDisplay() {
 	window.jsAddTeacherToSchoolclassDisplay	= this.addTeacherToSchoolclassDisplay;	
 	this.modulesOfSchoolclassDisplay = new ModulesOfSchoolclassDisplay();
 	window.jsModulesOfSchoolclassDisplay = this.modulesOfSchoolclassDisplay;
+	
+	this.studentSchoolclassesDisplay = new StudentSchoolclassesDisplay();
+	window.jsStudentSchoolclassDisplay = this.studentSchoolclassesDisplay;
 	
 	// PERSONS
 	this.personsDisplay = new PersonsDisplay();
@@ -275,6 +276,11 @@ MainDisplay.prototype.showImportPersonsView = function() {
 MainDisplay.prototype.showOrganisationView = function() {
 	this.initMainView();
 	this.organisationDisplay.show();
+}
+
+MainDisplay.prototype.showStudentSchoolclassView = function() {
+	this.initMainView();
+	this.studentSchoolclassesDisplay.show();
 }
 
 MainDisplay.prototype.onArrowUp = function() {
