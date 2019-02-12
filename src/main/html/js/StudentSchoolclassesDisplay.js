@@ -16,7 +16,8 @@ function StudentSchoolclassesDisplay() {
 
 		
 	// Bind handlers
-	
+	this.$updateSchoolclassViewForm.on('submit', $.proxy(this.submitSchoolclass,this));
+
 	
 	// Init
 	this.$panel.hide();
@@ -50,6 +51,7 @@ StudentSchoolclassesDisplay.prototype.clear = function () {
 }
 
 StudentSchoolclassesDisplay.prototype.init = function () {
+	app.mainDisplay.registerStretchables( [ this.$schoolclassTableBody ] );
 }
 
 StudentSchoolclassesDisplay.prototype.setHelp = function(url) {
@@ -78,6 +80,7 @@ StudentSchoolclassesDisplay.prototype.setSchoolClasses = function (json) {
 		});
 
 		$row.find("input[name='active[]']").on('change', $.proxy(this.changeActiveCheckbox,this));
+		$row.find("input[name='remove[]']").on('change', $.proxy(this.changeRemoveCheckbox,this));
 		this.$schoolclassTableBody.append($row);
 		
 		if (schoolclasses[id].tag == true) {
@@ -88,12 +91,14 @@ StudentSchoolclassesDisplay.prototype.setSchoolClasses = function (json) {
 	}
 	
 	this.$schoolclassTableHead.find(".sortButton.default").trigger('click');
+	this.updateSchoolclassViewFormSubmitToggle();
+
 }
 
 //Helpers
 StudentSchoolclassesDisplay.prototype.updateSchoolclassViewFormStateChanged = function () {
 	for (i = 0; i < this.updateSchoolclassViewForm.elements.length; i++) {
-		if (this.updateSchoolclassViewForm.elements[i].name == "active[]" && this.updateSchoolclassViewForm.elements[i].checked && !this.updateSchoolLoginsViewForm.elements[i].disabled) return true;
+		if (this.updateSchoolclassViewForm.elements[i].name == "active[]" && this.updateSchoolclassViewForm.elements[i].checked && !this.updateSchoolclassViewForm.elements[i].disabled) return true;
 		if (this.updateSchoolclassViewForm.elements[i].name == "remove[]" && this.updateSchoolclassViewForm.elements[i].checked) return true;
 	}
 	return false;
@@ -103,11 +108,25 @@ StudentSchoolclassesDisplay.prototype.updateSchoolclassViewFormSubmitToggle = fu
 	if (this.updateSchoolclassViewFormStateChanged()) this.$updateSchoolclassViewForm.find(':submit').prop('disabled','');
 	else this.$updateSchoolclassViewForm.find(':submit').prop('disabled','disabled');
 }
+
 StudentSchoolclassesDisplay.prototype.uncheckSchoolclassViewFormCheckboxes = function() {
-	for (i = 0; i < this.updateSchoolLoginsViewForm.elements.length; i++) {
+	for (i = 0; i < this.updateSchoolclassViewForm.elements.length; i++) {
 		if ( (this.updateSchoolclassViewForm.elements[i].name == "active[]" || this.updateSchoolclassViewForm.elements[i].name == "remove[]")
 			&& !this.updateSchoolclassViewForm.elements[i].disabled) this.updateSchoolclassViewForm.elements[i].checked = "";
 	}
+}
+
+StudentSchoolclassesDisplay.prototype.changeRemoveCheckbox = function(event) {
+	if (event.target.checked) {
+		// Set others unchecked
+		this.uncheckSchoolclassViewFormCheckboxes();
+		
+		// Set current checked
+		event.target.checked = "checked";
+	} else {
+		event.target.checked = "";
+	}
+	this.updateSchoolclassViewFormSubmitToggle();
 }
 
 /*
@@ -119,6 +138,30 @@ StudentSchoolclassesDisplay.prototype.uncheckSchoolclassViewFormCheckboxes = fun
  * EVENT HANDLERS - Edit Schoolclass
  */
 
+StudentSchoolclassesDisplay.prototype.saveSchoolclass = function(event) {
+	var value = "";
+	for (i = 0; i < this.updateSchoolclassViewForm.elements.length; i++) {
+		if (this.updateSchoolclassViewForm.elements[i].name == "active[]" && this.updateSchoolclassViewForm.elements[i].checked && !this.updateSchoolclassViewForm.elements[i].disabled) value = this.updateSchoolclassViewForm.elements[i].value;
+	}
+	console.log("set active: "+value);
+	if (value != "") app.getPresenterFactory().getStudentSchoolclassPresenter().switchSchoolclass( value );
+	
+	for (i = 0; i < this.updateSchoolclassViewForm.elements.length; i++) {
+		if (this.updateSchoolclassViewForm.elements[i].name == "remove[]" && this.updateSchoolclassViewForm.elements[i].checked) {
+			app.getPresenterFactory().getStudentSchoolclassPresenter().removeASchoolclass(this.updateSchoolclassViewForm.elements[i].value);
+		}
+	}
+	
+	
+}
+
+
+
+
+StudentSchoolclassesDisplay.prototype.submitSchoolclass = function(event) {
+	event.preventDefault();		
+	this.saveSchoolclass(event);
+}
 
 
 StudentSchoolclassesDisplay.prototype.changeActiveCheckbox = function(event) {
