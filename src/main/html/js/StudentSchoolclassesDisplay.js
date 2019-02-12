@@ -1,6 +1,7 @@
 function StudentSchoolclassesDisplay() {	
 	// Forms 
 	this.updateSchoolclassViewForm = document.forms["updateSchoolclassView"];
+	this.addSchoolclassForm = document.forms['addStudentSchoolclass'];
 
 	// Buttons
 	
@@ -13,12 +14,19 @@ function StudentSchoolclassesDisplay() {
 	this.$schoolclassTableBody = $(this.updateSchoolclassViewForm).find("tbody");
 	this.$schoolclassTableHead = $(this.updateSchoolclassViewForm).find("thead");
 	this.$updateSchoolclassViewForm = $(this.updateSchoolclassViewForm);
+	this.$addSchoolclassForm = $(this.addSchoolclassForm);
+	this.$registerkey = this.$addSchoolclassForm.find('')
 
-		
+	this.schoolClassSelect = this.addSchoolclassForm.elements["schoolClass"];
+	this.$schoolClassSelect = $(this.schoolClassSelect);
+	this.$schoolClassSelectOption = this.$schoolClassSelect.find("option").detach();
+	
 	// Bind handlers
 	this.$updateSchoolclassViewForm.on('submit', $.proxy(this.submitSchoolclass,this));
-
+	this.$addSchoolclassForm.on('submit', $.proxy(this.addSchoolclass, this));
 	
+	this.$schoolclassTableHead.find(".sortButton").click(Helpers.clickSortButton);
+
 	// Init
 	this.$panel.hide();
 }
@@ -48,6 +56,7 @@ StudentSchoolclassesDisplay.prototype.setLoadingTableMessage = function() {
  */
 
 StudentSchoolclassesDisplay.prototype.clear = function () {
+	this.addSchoolclassForm.elements["registerkey"].value = "";
 }
 
 StudentSchoolclassesDisplay.prototype.init = function () {
@@ -94,6 +103,27 @@ StudentSchoolclassesDisplay.prototype.setSchoolClasses = function (json) {
 	this.updateSchoolclassViewFormSubmitToggle();
 
 }
+
+/**
+ * Extra: showSchoolClasses. Voor de filtering.
+ */
+StudentSchoolclassesDisplay.prototype.showSchoolClasses = function(json) {
+	var $option;
+	this.schoolClasses = json;
+	console.log(json);
+	this.$schoolClassSelect.html("");
+	
+	$option = this.$schoolClassSelectOption.clone();		
+	$option.val( "" ).removeAttr("id").html( "" );
+	this.$schoolClassSelect.append($option);
+	
+	for (var id in this.schoolClasses) { 
+		$option = this.$schoolClassSelectOption.clone();		
+		$option.val( id ).removeAttr("id").html( this.schoolClasses[id].schoolClass.schoolClassName );
+		this.$schoolClassSelect.append($option);
+	}
+}
+
 
 //Helpers
 StudentSchoolclassesDisplay.prototype.updateSchoolclassViewFormStateChanged = function () {
@@ -151,11 +181,7 @@ StudentSchoolclassesDisplay.prototype.saveSchoolclass = function(event) {
 			app.getPresenterFactory().getStudentSchoolclassPresenter().removeASchoolclass(this.updateSchoolclassViewForm.elements[i].value);
 		}
 	}
-	
-	
 }
-
-
 
 
 StudentSchoolclassesDisplay.prototype.submitSchoolclass = function(event) {
@@ -163,6 +189,14 @@ StudentSchoolclassesDisplay.prototype.submitSchoolclass = function(event) {
 	this.saveSchoolclass(event);
 }
 
+StudentSchoolclassesDisplay.prototype.addSchoolclass = function(event) {
+	event.preventDefault();
+	var key = this.addSchoolclassForm.elements['registerkey'].value
+	var id =  this.addSchoolclassForm.elements['schoolClass'].value
+
+	if (id != '' )
+		app.getPresenterFactory().getStudentSchoolclassPresenter().addSchoolclass(id, key);
+}
 
 StudentSchoolclassesDisplay.prototype.changeActiveCheckbox = function(event) {
 	if (event.target.checked) {
