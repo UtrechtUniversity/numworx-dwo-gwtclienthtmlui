@@ -57,9 +57,10 @@
 .SINGLESTUDENT .no-single,
 .SINGLESTUDENT .teacher-only,
 .SINGLESTUDENT .schooladmin-only,
-.SINGLESTUDENT .no-student
+.SINGLESTUDENT .no-student,
+.ANONYMOUS #accountMenuBox a#accountMenuManageItem
  { display: none; }
-
+#loginDisplayPanelMessageBox iframe { width: 240px; }
 </style>
 
 
@@ -323,7 +324,7 @@
 	<section id="loginDisplayPanel" class="panel">
 		<div class="container">
 			<div id="loginDisplayPanelMessageBox">
-				<div class="block primary">	
+				<div class="block">	
 					<div class="content">
 						msg
 					</div>
@@ -336,6 +337,8 @@
 						<label for="password">&nbsp;<input type="password" name="password" data-translate="NUM_LBL_PASSWORD" placeholder="Wachtwoord" /></label>
 						<input type="submit" class="right" name="submit" value="Aanmelden" data-translate="NUM_BTN_LOGIN" /> <!-- data-translate="NUM_Button_Ok"  -->
 						<span id="loginDisplayPanelWarningBox"></span>
+						<div style='float:left;font-size:13px' data-translate='NUM_LBL_LOGINGUEST'>U kunt ook inloggen als gast. Uw werk wordt dan NIET opgeslagen</div>
+						<button class='right' name='guestlogin' data-translate='NUM_BTN_LOGINGUEST' type='button' >LOGIN ALS GAST</button>
 					</form>
 				</div>
 			
@@ -388,7 +391,7 @@
 			<div id="accountMenuBox">
 				<span id="accountMenuSchoolName">Voorbeeld van Naam</span>
 				<span id="accountMenuUserRole">Docent</span><span id="accountMenuPresentationName">Voorbeeldschool</span>
-                                <a href="#ACCOUNT"><span data-translate="NUM_MNU_MANAGE_ACCOUNT">Account beheren</span></a>
+                                <a href="#ACCOUNT" id='accountMenuManageItem'><span data-translate="NUM_MNU_MANAGE_ACCOUNT">Account beheren</span></a>
                                 <a href="#LOGOUT"><span data-translate="NUM_MNU_LOGOUT">Uitloggen</span></a>
 			</div>
 		</header>
