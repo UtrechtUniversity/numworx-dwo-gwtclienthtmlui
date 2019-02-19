@@ -93,8 +93,10 @@ OrganisationDisplay.prototype.filterPersonsList = function () {
             result = result && Helpers.searchCompare(el.get(0).children.item(1).innerText, personsFilterForm.elements["givenName"].value);
             result = result && Helpers.searchCompare(el.get(0).children.item(2).innerText, personsFilterForm.elements["insertion"].value);
             result = result && Helpers.searchCompare(el.get(0).children.item(3).innerText, personsFilterForm.elements["userName"].value);					
-			if (schoolClasses && personsFilterForm.elements["schoolClass"].value !== "") {
+			if (schoolClasses && personsFilterForm.elements["schoolClass"].value !== "" && schoolClasses.length > 0) {
 				result = result && schoolClasses.indexOf(personsFilterForm.elements["schoolClass"].value) != -1;
+			} else if (personsFilterForm.elements["schoolClass"].value == "NONE") {
+				result = result && (!schoolClasses || schoolClasses.length == 0)
 			}
 			
             return result;
@@ -266,6 +268,9 @@ OrganisationDisplay.prototype.showSchoolClasses = function(json) {
 		$option.val( id ).removeAttr("id").html( this.schoolClasses[id].schoolClass.schoolClassName );
 		this.$schoolClassSelect.append($option);
 	}
+	$option = this.$schoolClassSelectOption.clone();
+	$option.val("NONE").removeAttr("id").html("zonder klas"); // translate
+	this.$schoolClassSelect.append($option);
 }
 /*
  * API of OrganisationPresenter
