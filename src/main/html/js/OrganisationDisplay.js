@@ -269,7 +269,8 @@ OrganisationDisplay.prototype.showSchoolClasses = function(json) {
 		this.$schoolClassSelect.append($option);
 	}
 	$option = this.$schoolClassSelectOption.clone();
-	$option.val("NONE").removeAttr("id").html("zonder klas"); // translate
+	var noclass = app.getTranslator().translate( "NUM_LBL_ORGANISATION_NOCLASS" )
+	$option.val("NONE").removeAttr("id").html(noclass); // translate
 	this.$schoolClassSelect.append($option);
 }
 /*
