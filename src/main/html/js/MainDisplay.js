@@ -18,7 +18,8 @@ function MainDisplay() {
 	this.$accountMenuToggle = $("#accountMenuToggle");
 	this.$headerPresentationName = $("#headerPresentationName");
 	this.$headerArrowUp = $("#headerArrowUp");
-	
+	this.searchBox = document.forms['searchBox'];
+	this.$searchBox = $(this.searchBox)
 	
 	// Setup Display objects
 	this.loginDisplay = new LoginDisplay();
@@ -33,8 +34,6 @@ function MainDisplay() {
 	window.jsSchoolClassesDisplay = this.schoolclassesDisplay;
 	this.editSchoolclassesDisplay = new EditSchoolclassesDisplay();
 	window.jsEditSchoolclassDisplay	= this.editSchoolclassesDisplay; 
-	// OLD this.studentsInSchoolclassDisplay = new StudentsInSchoolclassDisplay(); // TODO: remove?
-	// OLD window.JsStudentsInSchoolclassDisplay	= this.studentsInSchoolclassDisplay; // TODO: remove?
 	this.addStudentToSchoolclassDisplay = new AddStudentToSchoolclassDisplay();
 	window.jsAddStudentToSchoolclassDisplay	= this.addStudentToSchoolclassDisplay; 
 	this.copyOrMoveStudentToSchoolclassDisplay = new CopyOrMoveStudentToSchoolclassDisplay();
@@ -43,6 +42,9 @@ function MainDisplay() {
 	window.jsAddTeacherToSchoolclassDisplay	= this.addTeacherToSchoolclassDisplay;	
 	this.modulesOfSchoolclassDisplay = new ModulesOfSchoolclassDisplay();
 	window.jsModulesOfSchoolclassDisplay = this.modulesOfSchoolclassDisplay;
+	
+	this.studentSchoolclassesDisplay = new StudentSchoolclassesDisplay();
+	window.jsStudentSchoolclassDisplay = this.studentSchoolclassesDisplay;
 	
 	// PERSONS
 	this.personsDisplay = new PersonsDisplay();
@@ -99,8 +101,9 @@ function MainDisplay() {
 	this.$accountMenuBox.on('mouseleave', $.proxy(this.mouseLeaveAccountMenuIcon, this));
 	this.$headerArrowUp.on("click", $.proxy(this.onArrowUp, this));
 	$(document).on('click, touchstart', $.proxy(this.clickWherever, this));
-
+	this.$searchBox.on('submit' , $.proxy(this.search, this))
 	this.$headerArrowUp.hide();
+	this.$searchBox.hide();
 	
 	$("input").focus(function(event) {
 		window.scrollTo(0, 0);
@@ -126,6 +129,7 @@ MainDisplay.prototype.init = function() {
 MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 	this.$panels.hide();
 	this.$headerArrowUp.hide();
+	this.$searchBox.hide();
 		
 	if (!this.$panel.is(":visible")) {
 		this.$panel.show();
@@ -139,7 +143,8 @@ MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 }
 
 MainDisplay.prototype.setActiveView = function(view) {
-	if (view == "LOGOUT") app.getPresenterFactory().getMainPresenter().logout();
+	if (view == "SEARCH") app.getPresenterFactory().getMainPresenter().search(this.getSearchInput());
+	else if (view == "LOGOUT") app.getPresenterFactory().getMainPresenter().logout();
 	else app.getPresenterFactory().getMainPresenter().selectView(view);
 }
 
@@ -170,6 +175,9 @@ MainDisplay.prototype.setPresentationName = function (presentationName) {
 	this.$headerPresentationName.html(presentationName);
 };
 
+MainDisplay.prototype.getSearchInput = function() {
+	return this.searchBox.elements["searchInput"].value;
+}
 
 /*
  * VIEW FUNCTIONS
@@ -264,6 +272,7 @@ MainDisplay.prototype.showSelectStudentResultsView = function() {
 MainDisplay.prototype.showModulesView = function() {
 	this.initMainView();
 	this.setArrowUp(true);
+	this.setSearchBox(true); // optional, not for activities.
 	this.modulesDisplay.show();
 }
 
@@ -277,6 +286,11 @@ MainDisplay.prototype.showOrganisationView = function() {
 	this.organisationDisplay.show();
 }
 
+MainDisplay.prototype.showStudentSchoolclassView = function() {
+	this.initMainView();
+	this.studentSchoolclassesDisplay.show();
+}
+
 MainDisplay.prototype.onArrowUp = function() {
 	app.getPresenterFactory().getMainPresenter().onArrowUp()
 }
@@ -285,8 +299,16 @@ MainDisplay.prototype.setArrowUp = function(show) {
 	if (show)
 		this.$headerArrowUp.show();
 	else 
-		thos.$headerArrowUp.hide();
+		this.$headerArrowUp.hide();
 }
+MainDisplay.prototype.setSearchBox = function(show) {
+	if (show)
+		this.$searchBox.show();
+	else 
+		this.$searchBox.hide();
+}
+
+
 
 /*
  * DIALOG VIEW HELPERS
@@ -413,6 +435,12 @@ MainDisplay.prototype.resizeStrechables = function() {
 /*
  * EVENT HANDLERS
  */
+
+MainDisplay.prototype.search = function(event) {
+	event.preventDefault();
+	var view = 'SEARCH';
+	this.setActiveView(view)
+}
 
 MainDisplay.prototype.clickMenuItem = function(event) {
 	event.preventDefault();

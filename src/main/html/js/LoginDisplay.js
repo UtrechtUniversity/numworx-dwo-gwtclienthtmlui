@@ -14,6 +14,9 @@ function LoginDisplay() {
 
 	// Bind handlers
 	this.$loginForm.on('submit', $.proxy(this.submitLoginForm,this));
+	var loginGuestBtn = this.loginForm.elements["guestlogin"];
+	
+	$(loginGuestBtn).on('click', $.proxy(this.submitLoginGuest, this));
 	
 	// Init
 	this.$warningBox.hide();
@@ -80,7 +83,9 @@ LoginDisplay.prototype.hideMsgBox = function(msg) {
 LoginDisplay.prototype.loginAttempt = function(username, password) {
 	app.getPresenterFactory().getLoginPresenter().loginClicked(username, password, false);
 }
-
+LoginDisplay.prototype.loginGuest = function() {
+	app.getPresenterFactory().getLoginPresenter().loginGuest();
+}
 /*
  * EVENT HANDLERS
  */
@@ -100,4 +105,9 @@ LoginDisplay.prototype.submitLoginForm = function(event) {
 	this.loginAttempt(username, password);	
 };
 
+LoginDisplay.prototype.submitLoginGuest = function(event) {
+	event.preventDefault();
+	this.disable();
+	this.loginGuest();
+}
 

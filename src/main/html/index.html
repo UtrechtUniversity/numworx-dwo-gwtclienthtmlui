@@ -57,9 +57,10 @@
 .SINGLESTUDENT .no-single,
 .SINGLESTUDENT .teacher-only,
 .SINGLESTUDENT .schooladmin-only,
-.SINGLESTUDENT .no-student
+.SINGLESTUDENT .no-student,
+.ANONYMOUS #accountMenuBox a#accountMenuManageItem
  { display: none; }
-
+#loginDisplayPanelMessageBox iframe { width: 240px; }
 </style>
 
 
@@ -205,6 +206,7 @@
 	<script src="js/SchoolclassesDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/EditSchoolclassesDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/AddStudentToSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/StudentSchoolclassesDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/AddTeacherToSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/CopyOrMoveStudentToSchoolclassDisplay.js" type="text/javascript" charset="utf-8"></script>
 	
@@ -313,6 +315,15 @@
            <g id="close" transform="translate(1.000000, 1.000000)">
                <path d="M32.1523818,31.7801183 L29.3356182,28.9398817 L45.3880972,12.7536319 L48.2282361,15.5702986 L32.1523818,31.7801183 Z M32.1523818,31.7801183 L16.0999028,47.9663681 L13.2597639,45.1497014 L29.3356182,28.9398817 L32.1523818,31.7801183 Z M30.0339653,32.484285 L30.0339653,31.0759517 L15.384,45.848 L16.7982014,45.8421319 L15.3781319,44.4337986 L15.384,45.848 L30.0456529,31.0641667 L28.6255834,31.0641667 L30.0339653,32.484285 Z M1.792,5.144 L1.792,56.344 C1.792,56.5013876 1.79299029,56.7786678 1.79596528,57.135667 C1.80092247,57.7305296 1.80984263,58.3252073 1.82368765,58.8790078 C1.83961909,59.5162654 1.86108926,60.0559677 1.88834246,60.464 L60.3638775,60.464 C60.4263094,59.6600192 60.464,58.3220644 60.464,56.344 L60.464,5.144 C60.464,4.98661239 60.4630097,4.70933225 60.4600347,4.35233304 C60.4550775,3.75747038 60.4461574,3.1627927 60.4323124,2.60899219 C60.4163809,1.9717346 60.3949107,1.43203233 60.3676575,1.024 L1.8921225,1.024 C1.8296906,1.82798079 1.792,3.16593564 1.792,5.144 Z M1.9608868,0.407057841 C1.96263854,0.401735235 1.96428041,0.396500815 1.96582629,0.391347886 C1.96525883,0.393239392 1.96462756,0.395621386 1.96393643,0.398494194 L1.9608868,0.407057841 Z M1.048,0.024 L1.048,0.524 L1.048,0.024 Z M1.048,0.024 L1.048,-0.976 L61.208,-0.976 C61.573426,-0.976 61.8423712,-0.805241163 62.0216729,-0.573884165 C62.1002398,-0.472507428 62.1500705,-0.37447983 62.1893917,-0.269623442 C62.2291507,-0.163599412 62.2553103,-0.0553528202 62.2775305,0.0716196682 C62.3079678,0.245547005 62.3322024,0.469251915 62.3531993,0.749210052 C62.3877006,1.20922776 62.4133069,1.8237782 62.4316876,2.55900781 C62.4458426,3.1252073 62.4549225,3.73052962 62.4599653,4.33566696 C62.4629903,4.69866775 62.464,4.98138761 62.464,5.144 L62.464,56.344 C62.464,58.6144461 62.4150285,60.0835904 62.3310372,60.9235037 C62.2098683,62.1351929 62.1112262,62.464 61.208,62.464 L1.048,62.464 C0.682573977,62.464 0.413628809,62.2932412 0.234327135,62.0618842 C0.155760164,61.9605074 0.105929468,61.8624798 0.0666083224,61.7576234 C0.0268493114,61.6515994 0.00068971832,61.5433528 -0.0215304672,61.4163803 C-0.051967751,61.242453 -0.0762024496,61.0187481 -0.0971993099,60.7387899 C-0.131700638,60.2787722 -0.157306906,59.6642218 -0.175687646,58.9289922 C-0.189842634,58.3627927 -0.198922468,57.7574704 -0.20396528,57.152333 C-0.206990286,56.7893322 -0.208,56.5066124 -0.208,56.344 L-0.208,5.144 C-0.208,2.87355385 -0.159028526,1.40440964 -0.0750371902,0.564496281 C0.0461317319,-0.64719294 0.14477385,-0.976 1.048,0.024 Z M32.1523818,28.9398817 L48.2282361,45.1497014 L45.3880972,47.9663681 L29.3356182,31.7801183 L32.1523818,28.9398817 Z M29.3356182,31.7801183 L13.2597639,15.5702986 L16.0999028,12.7536319 L32.1523818,28.9398817 L29.3356182,31.7801183 Z" id="Combined-Shape"></path>
            </g>
+
+		   <g id="search"> <!-- viewBox="0 0 127.3 110.4", height="22px" width="28px" -->
+				<path fill="#FFFFFF" d="M101.7,96.7c-2.9,3.1-6.6,4.3-8.3,2.7L62.9,70.6c-1.7-1.6-0.7-5.4,2.2-8.5l0,0c2.9-3.1,6.6-4.3,8.3-2.7
+					l30.5,28.8C105.6,89.8,104.6,93.6,101.7,96.7L101.7,96.7z"/>
+				<g>
+					<path fill="none" stroke="#FFFFFF" stroke-width="12" stroke-miterlimit="10" d="M46.4,68c-14.1,0-25.7-11.5-25.7-25.7
+						c0-14.1,11.5-25.7,25.7-25.7s25.7,11.5,25.7,25.7C72.1,56.5,60.6,68,46.4,68z"/>
+				</g>
+		   </g>
 	    </defs>
 	  </svg>
 	  
@@ -322,7 +333,7 @@
 	<section id="loginDisplayPanel" class="panel">
 		<div class="container">
 			<div id="loginDisplayPanelMessageBox">
-				<div class="block primary">	
+				<div class="block">	
 					<div class="content">
 						msg
 					</div>
@@ -335,6 +346,8 @@
 						<label for="password">&nbsp;<input type="password" name="password" data-translate="NUM_LBL_PASSWORD" placeholder="Wachtwoord" /></label>
 						<input type="submit" class="right" name="submit" value="Aanmelden" data-translate="NUM_BTN_LOGIN" /> <!-- data-translate="NUM_Button_Ok"  -->
 						<span id="loginDisplayPanelWarningBox"></span>
+						<div style='float:left;font-size:13px' data-translate='NUM_LBL_LOGINGUEST'>U kunt ook inloggen als gast. Uw werk wordt dan NIET opgeslagen</div>
+						<button class='right' name='guestlogin' data-translate='NUM_BTN_LOGINGUEST' type='button' >LOGIN ALS GAST</button>
 					</form>
 				</div>
 			
@@ -362,6 +375,40 @@
 "
 			
 			>Docent</span></a>
+
+			<form id='searchBox' name='searchBox' action='#SEARCH' style='
+			float:left;		
+			'
+			>	
+				<input id='searchInput' style='
+					background-color:black;
+					border-radius:3px;
+					width: 400px; height: 22px;
+					color: #e4f2fb;
+					margin-top: 16px;
+					font-family: Ubuntu
+				'
+				data-translate='NUM_INP_SEARCH'
+				placeholder="Zoek toets of lesstof"			
+				/>
+				<button style='
+					display:inline-block;
+					background-color: #1b75bb;
+					text-align: center;
+					vertical-align: bottom;
+					width: 40px;
+					border-radius: 3px;
+					cursor: pointer;
+					padding: 0px;
+					border: 0px;
+				'>
+					<svg viewBox="0 0 127.3 110.4" height="22px" width="28px" class="icon">
+						<use xlink:href="#search"></use>
+					</svg>
+				</button>
+
+			</form>
+			
 			<a href="javascript: void(0);" id="accountMenuToggle">
 				<svg viewBox="0 0 64 64" class="icon">
 		  		  <use xlink:href="#account"></use>
@@ -387,7 +434,7 @@
 			<div id="accountMenuBox">
 				<span id="accountMenuSchoolName">Voorbeeld van Naam</span>
 				<span id="accountMenuUserRole">Docent</span><span id="accountMenuPresentationName">Voorbeeldschool</span>
-                                <a href="#ACCOUNT"><span data-translate="NUM_MNU_MANAGE_ACCOUNT">Account beheren</span></a>
+                                <a href="#ACCOUNT" id='accountMenuManageItem'><span data-translate="NUM_MNU_MANAGE_ACCOUNT">Account beheren</span></a>
                                 <a href="#LOGOUT"><span data-translate="NUM_MNU_LOGOUT">Uitloggen</span></a>
 			</div>
 		</header>
@@ -636,9 +683,123 @@
 		</section> 
 		<!-- end account display panel -->
 		
-		
-		
-		
+		<!-- 
+		-
+		- studentSchoolclassesPanel
+		-->
+		<section id='studentSchoolclassesPanel' class='subpanel' >
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
+							<use xlink:href="#klassen"></use>
+						</svg>
+                                                <h1><span >Klassen selecteren of toevoegen</span></h1>
+						<h2 class="sectionhead"><span >Klassen</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+                                            <h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
+						<div class="content">
+							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
+						</div>
+					</section>
+				</div>
+			</header>
+			<section>				
+				<div class="row">
+					<form name="updateSchoolclassView">
+						<div class="col-8">
+							<table class="dwo sortable headered">
+								<thead>
+									<tr>
+										<th class="col-4">
+											<span data-translate="NUM_TBL_SCHOOLCLASSOPTION">Klas</span>
+										</th>
+										
+										<th class="col-2 centered"><span data-translate="NUM_TBL_STARTWITHSCHOOLLOGIN">Opstarten</span></th>
+										<th class="col-2 centered"><span data-translate="NUM_TBL_REMOVESCHOOLCLASS">Verwijderen</span></th>
+									</tr>
+									
+									<tr class="sorting">
+										<th class="col-4">
+											<span class="sortButton asc default" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>
+										<th>&nbsp;</th>
+										<th>&nbsp;</th>
+									</tr>
+								</thead>
+								<tbody>	
+									
+									<!-- The row is detached and used as a template by the JS -->								
+									<tr>
+										<td class="col-4"><span id="updateSchoolclassViewClass" >Schoolnaam</span></td>
+										<td class="col-2 centered">
+											<div class="checkbox">
+												<input type="checkbox" name="active[]" id="updateSchoolclassViewActive" value="schoolid"><label class="icon" for="updateSchoolclassViewActive"></label>
+											</div>											
+										</td>
+										<td class="col-2 centered">
+											<div class="checkbox danger">
+												<input type="checkbox" name="remove[]" id="updateSchoolclassViewRemove" value="schoolid"><label class="icon" for="updateSchoolclassViewRemove"></label>
+											</div>											
+										</td>
+									</tr>
+																		
+								</tbody>
+							</table>
+						</div>
+						<div class="col-2">&nbsp;</div>
+						<div class="col-2">
+						    &nbsp; <!-- for IE -->
+							<input type="submit" class="primary right bottom" data-translate="NUM_BTN_Apply" value="Sla op" />
+						</div>
+					</form>
+				</div>
+			</section>
+			<section>
+				<div class="row">
+					<div class="col-12">
+						<h2 class="sectionhead"><span >Nieuwe klas toevoegen</span></h2>						
+					</div>
+				</div>
+				<div class='row'>
+					<form name='addStudentSchoolclass' >
+						<fieldset>
+							<label class="col-4 input">
+								<span >Naam klas</span>
+								<select name="schoolClass">
+									<option value=""></option>
+								</select>
+							</label>
+							<label for="studentSchoolclassKey" class="col-2 input">
+								<span >Klassleutel</span>
+								<input id="studentSchoolclassKey" name="registerkey" type="text" value="" />
+							</label>
+							<div class="col-4">&nbsp;</div>
+							<div class="col-2">
+								<input type="submit" name="submit" class="primary right down"  value="Toevoegen" />
+							</div>				
+						</fieldset>				
+					</form>
+				</div>
+			</section>
+		</section>
+		<!-- endo student schoolclasses -->
+				
 		<!-- 
 		-
 		- schoolclassesDisplayPanel
