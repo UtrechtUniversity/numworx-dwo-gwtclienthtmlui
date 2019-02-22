@@ -117,7 +117,7 @@ function MainDisplay() {
 
 MainDisplay.prototype.init = function() {
 	// Localize title
-	document.title = "Numworx " + app.getTranslator().translate( 'NUM_APP_TEACHER' );
+	document.title = "Numworx";
 	
 	// Localize logo
 	if (Helpers.getUrlParameter('locale') == 'en') {
