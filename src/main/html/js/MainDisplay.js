@@ -20,6 +20,7 @@ function MainDisplay() {
 	this.$headerArrowUp = $("#headerArrowUp");
 	this.searchBox = document.forms['searchBox'];
 	this.$searchBox = $(this.searchBox)
+	this.$trails = jQuery("#headertrails")
 	
 	// Setup Display objects
 	this.loginDisplay = new LoginDisplay();
@@ -104,6 +105,7 @@ function MainDisplay() {
 	this.$searchBox.on('submit' , $.proxy(this.search, this))
 	this.$headerArrowUp.hide();
 	this.$searchBox.hide();
+	this.$trails.hide();
 	
 	$("input").focus(function(event) {
 		window.scrollTo(0, 0);
@@ -130,6 +132,7 @@ MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 	this.$panels.hide();
 	this.$headerArrowUp.hide();
 	this.$searchBox.hide();
+	this.$trails.hide();
 		
 	if (!this.$panel.is(":visible")) {
 		this.$panel.show();
@@ -178,6 +181,29 @@ MainDisplay.prototype.setPresentationName = function (presentationName) {
 MainDisplay.prototype.getSearchInput = function() {
 	return this.searchBox.elements["searchInput"].value;
 }
+
+MainDisplay.prototype.setTrails = function(row) {
+	if (!row) {
+		this.$trails.hide();
+		this.$searchBox.show();
+	} else {
+		this.$trails.show();
+		this.$searchBox.hide();
+		this.$trails.html("")
+		for(var i = 0; i < row.length; i++) {
+			var item = row[i];
+			var title = item.title;
+			var command = item.command;
+			var $a = $("<a href=#'" + command + "'>" + title + "</a>");
+			$a.on("click", $.proxy(this.clickMenuItem, this));
+			this.$trails.append($a);
+			this.$trails.append(" &gt; ");
+		}
+	}
+	
+}
+
+
 
 /*
  * VIEW FUNCTIONS
@@ -302,6 +328,7 @@ MainDisplay.prototype.setArrowUp = function(show) {
 		this.$headerArrowUp.hide();
 }
 MainDisplay.prototype.setSearchBox = function(show) {
+	this.$trails.hide()
 	if (show)
 		this.$searchBox.show();
 	else 
