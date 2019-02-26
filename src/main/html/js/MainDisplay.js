@@ -194,7 +194,7 @@ MainDisplay.prototype.setTrails = function(row) {
 			var item = row[i];
 			var title = item.title;
 			var command = item.command;
-			var $a = $("<a href=#'" + command + "'>" + title + "</a>");
+			var $a = $("<a href='#" + command + "'>" + title + "</a>");
 			$a.on("click", $.proxy(this.clickMenuItem, this));
 			this.$trails.append($a);
 			this.$trails.append(" &gt; ");
