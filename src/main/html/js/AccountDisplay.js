@@ -26,6 +26,8 @@ function AccountDisplay() {
 	this.$updateSchoolLoginsViewForm = $(this.updateSchoolLoginsViewForm);
 	this.$addSchoolLoginForm = $(this.addSchoolLoginForm);
 	
+	this.$removebtn = $("#accountRemove")
+	
 	// Bind handlers
 	this.$updateUserForm.on('submit', $.proxy(this.submitUserForm,this));
 	this.$updateSchoolLoginsViewForm.on('submit', $.proxy(this.submitSchoolLogins,this));
@@ -33,7 +35,8 @@ function AccountDisplay() {
 	$(this.updateUserForm.elements["currentPassword"]).on('keypress', $.proxy(this.changeCurrentPasswordInput,this));
 	this.$addSchoolLoginForm.find("input:radio").on('change', $.proxy(this.addSchoolLoginFormToggle,this));
 	this.$schoolLoginsTableHead.find(".sortButton").click(Helpers.clickSortButton);
-        
+    this.$removebtn.on('click', $.proxy(this.removeCurrentUser, this))
+	
 	// Init
 	this.$panel.hide();
 	this.addSchoolLoginFormToggle();
@@ -216,6 +219,11 @@ AccountDisplay.prototype.updateUserFormToggle = function(value) {
 	else this.$updateUserForm.find(':submit').prop('disabled','disabled');
 }
 
+AccountDisplay.prototype.removeCurrentUser = function(event) {
+	event.preventDefault();
+	var password = this.updateUserForm.elements["currentPassword"].value
+	app.getPresenterFactory().getAccountPresenter().removeCurrentUser(password);
+}
 
 /*
  * EVENT HANDLERS - SCHOOL LOGINS
