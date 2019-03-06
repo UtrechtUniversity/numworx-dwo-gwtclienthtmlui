@@ -21,6 +21,7 @@ function OrganisationDisplay() {
 	// jQuery objects
 	this.$panel = jQuery("#organisationDisplayPanel");
 	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
+	this.$personsFormRemoveAll = $("#organisationPersonsRemoveAll")
 	
 	// Forms
 	this.$settingsForm = $(this.settingsForm);
@@ -45,6 +46,7 @@ function OrganisationDisplay() {
 	this.$selectRoleButton.on('change', $.proxy(this.changeSelectRoleButton,this));
 	this.$personsFilterForm.on('submit', $.proxy(this.submitPersonsFilterForm,this));
 	this.$personsForm.on('submit', $.proxy(this.submitPersonsForm,this));
+	this.$personsFormRemoveAll.on('click', $.proxy(this.clickSelectAllPersons, this));
 	
 	// Init
 	this.$panel.hide();
@@ -374,4 +376,40 @@ OrganisationDisplay.prototype.submitPersonsForm = function(event) {
 	this.deletePersons(persons, role);
 }
 
+OrganisationDisplay.prototype.clickSelectAllPersons = function(event) {
+	event.preventDefault();
+	if (typeof this.personsForm.elements["remove[]"] == 'undefined' ) return;
+	if (typeof this.personsForm.elements["remove[]"].length != 'undefined'  && this.personsForm.elements["remove[]"].length == 0) return;
+	
+	$el = $(event.target);
+	
+	// Check if select all is active, based on the last element
+	var selectAllActive = false;
+	if (typeof this.personsForm.elements["remove[]"].length == 'undefined' && this.personsForm.elements["remove[]"].checked) selectAllActive = true;
+	else if (typeof this.personsForm.elements["remove[]"].length != 'undefined'  && this.personsForm.elements["remove[]"][this.personsForm.elements["remove[]"].length-1].checked) selectAllActive = true;
+	
+	if (selectAllActive) {
+		if (typeof this.personsForm.elements["remove[]"].length == 'undefined') {
+			this.personsForm.elements["remove[]"].checked = false;
+		} else {
+			for (var i=0 ; i < this.personsForm.elements["remove[]"].length; i++) {
+				this.personsForm.elements["remove[]"][i].checked = false;
+			}
+		}
+		this.personsFormToggle(false);
+	} else {
+		if (typeof this.personsForm.elements["remove[]"].length == 'undefined') {
+			this.personsForm.elements["remove[]"].checked = true;
+			this.resultState.activeCourses.push(this.personsForm.elements["remove[]"].value);
+		} else {
+			for (var i=0 ; i < this.personsForm.elements["remove[]"].length; i++) {
+				if (!this.personsForm.elements["remove[]"][i].checked) {
+					this.personsForm.elements["remove[]"][i].checked = true;
+				}  
+			}
+		}
+		this.personsFormToggle(true);
+	}
+	
+}
 
