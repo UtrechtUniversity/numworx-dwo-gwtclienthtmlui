@@ -385,11 +385,16 @@ OrganisationDisplay.prototype.clickSelectAllPersons = function(event) {
 	
 	$el = $(event.target);
 	
-	// Check if select all is active, based on the last element
+	// Check if select all is active, based on the last visible element
 	var selectAllActive = false;
 	if (typeof this.personsForm.elements["remove[]"].length == 'undefined' && this.personsForm.elements["remove[]"].checked) selectAllActive = true;
-	else if (typeof this.personsForm.elements["remove[]"].length != 'undefined'  && this.personsForm.elements["remove[]"][this.personsForm.elements["remove[]"].length-1].checked) selectAllActive = true;
-	
+	else if (typeof this.personsForm.elements["remove[]"].length != 'undefined'  ) {
+		for (var i = 0; i < this.personsForm.elements["remove[]"].length; i++ ) {
+			if ( $(this.personsForm.elements["remove[]"][i]).is(':visible') ) {
+				selectAllActive = 	this.personsForm.elements["remove[]"][i].checked;
+			}
+		}
+	}
 	if (selectAllActive) {
 		if (typeof this.personsForm.elements["remove[]"].length == 'undefined') {
 			this.personsForm.elements["remove[]"].checked = false;
@@ -401,17 +406,21 @@ OrganisationDisplay.prototype.clickSelectAllPersons = function(event) {
 		this.personsFormToggle(false);
 	} else {
 		if (typeof this.personsForm.elements["remove[]"].length == 'undefined') {
-			this.personsForm.elements["remove[]"].checked = true;
-			this.resultState.activeCourses.push(this.personsForm.elements["remove[]"].value);
+			this.checkIfVisible(this.personsForm.elements["remove[]"], true);
 		} else {
 			for (var i=0 ; i < this.personsForm.elements["remove[]"].length; i++) {
 				if (!this.personsForm.elements["remove[]"][i].checked) {
-					this.personsForm.elements["remove[]"][i].checked = true;
+					this.checkIfVisible(this.personsForm.elements["remove[]"][i],true);
 				}  
 			}
 		}
-		this.personsFormToggle(true);
+		
 	}
-	
+	this.changePersonsRemoveCheckbox(event)
 }
 
+OrganisationDisplay.prototype.checkIfVisible = function(element, value) {
+	if ( $(element).is(':visible') ) {
+		element.checked = value;
+	}
+}
