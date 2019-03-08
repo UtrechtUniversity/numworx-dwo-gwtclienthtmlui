@@ -99,6 +99,8 @@ OrganisationDisplay.prototype.filterPersonsList = function () {
 				result = result && schoolClasses.indexOf(personsFilterForm.elements["schoolClass"].value) != -1;
 			} else if (personsFilterForm.elements["schoolClass"].value == "NONE") {
 				result = result && (!schoolClasses || schoolClasses.length == 0)
+			} else {
+				result = result && personsFilterForm.elements["schoolClass"].value == "";
 			}
 			
             return result;
