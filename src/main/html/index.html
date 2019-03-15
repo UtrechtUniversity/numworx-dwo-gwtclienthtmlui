@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=1024, initial-scale=1, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> <!-- no scalable needed for android devices -->
 	
 	
-    <title>Numworx Docent</title>
+    <title>Numworx</title>
 		
     <script>
     	var API_1484_11;
@@ -30,12 +30,12 @@
 		
 		
 	<!-- TODO: change reference -->
-        <script type="text/javascript" language="javascript" src="/gwtclient/gwtclient/gwtclient.nocache.js">
+        <script type="text/javascript" src="/gwtclient/gwtclient/gwtclient.nocache.js">
         </script>
-	<!-- <script type="text/javascript" language="javascript" src="https://teuniz.dwo.nl/gwtclient/gwtclient/gwtclient.nocache.js"></script> -->
+	<!-- <script type="text/javascript" src="https://teuniz.dwo.nl/gwtclient/gwtclient/gwtclient.nocache.js"></script> -->
 	
 	<!-- TODO: decide whether to add Google fonts locally (consider licence) -->
-	<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,400i,500,700" rel="stylesheet">
 	<!-- <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet"> -->
 	<!-- <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700" rel="stylesheet"> -->
 	
@@ -68,7 +68,7 @@
 	<link rel="stylesheet" href="third-party/material-datetime-picker/dist/material-datetime-picker.css" type="text/css" media="screen">
 	
 		
-	<script src="js/jquery-3.2.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="js/jquery-3.2.1.min.js" type="text/javascript" ></script>
 	
 	<!-- Helpers for interface stuff -->
 	<script src="js/helpers.js" type="text/javascript" charset="utf-8"></script>
@@ -408,7 +408,10 @@
 				</button>
 
 			</form>
-			
+			<div id='headertrails' 
+				style='float:left;margin-top:18px;font-size:13px;font-family:Ubuntu;color:#7297c7 !important;font-weight:500'
+				>
+			</div>
 			<a href="javascript: void(0);" id="accountMenuToggle">
 				<svg viewBox="0 0 64 64" class="icon">
 		  		  <use xlink:href="#account"></use>
@@ -498,7 +501,7 @@
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -526,7 +529,9 @@
 								<span data-translate="NUM_LBL_RPT_NEW_PASSWORD">herhaal ww</span>
 								<input id="updateUserNewPasswordRepeat" name="newPasswordAgain" type="password" value="" />
 							</label>
-							
+							<div class="col-6 no-single">
+								<input id="accountRemove" type="submit" class="danger right top" data-translate="NUM_BTN_Remove" value="Verwijder" />
+							</div>
 							<div class="clear"></div>
 							
 							<label for="updateUserGivenName" class="col-2 input">
@@ -1155,7 +1160,7 @@
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -1304,7 +1309,7 @@
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -1486,7 +1491,7 @@
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -1637,7 +1642,7 @@
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -3000,7 +3005,7 @@
 		-->
 		<section id="modulesDisplayPanel" class="subpanel iframepanel">
 			
-			<iframe src="helppage/helpindex_nl.html"></iframe>
+			<iframe src="helppage/helpindex_nl.html" allowfullscreen></iframe>
 			
 		</section>
 		<!-- end modulesDisplay -->
@@ -3024,7 +3029,7 @@
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -3160,8 +3165,9 @@
 										<!-- <th class="col-2">
 											<span data-translate="NUM_TBL_EMAIL">Emailadres</span>
 										</th>	 -->								
-										<th class="col-2">																										
-											<span data-translate="NUM_TBL_REMOVE">Verwijderen</span>
+										<th class="col-2 centered">																										
+											<span id=organisationPersonsRemoveAll class='selectAllButton'
+											data-translate="NUM_TBL_REMOVE">Verwijderen</span>
 										</th>
 
 									</tr>

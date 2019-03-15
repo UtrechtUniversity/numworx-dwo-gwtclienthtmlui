@@ -21,6 +21,7 @@ function OrganisationDisplay() {
 	// jQuery objects
 	this.$panel = jQuery("#organisationDisplayPanel");
 	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
+	this.$personsFormRemoveAll = $("#organisationPersonsRemoveAll")
 	
 	// Forms
 	this.$settingsForm = $(this.settingsForm);
@@ -45,6 +46,7 @@ function OrganisationDisplay() {
 	this.$selectRoleButton.on('change', $.proxy(this.changeSelectRoleButton,this));
 	this.$personsFilterForm.on('submit', $.proxy(this.submitPersonsFilterForm,this));
 	this.$personsForm.on('submit', $.proxy(this.submitPersonsForm,this));
+	this.$personsFormRemoveAll.on('click', $.proxy(this.clickSelectAllPersons, this));
 	
 	// Init
 	this.$panel.hide();
@@ -97,6 +99,8 @@ OrganisationDisplay.prototype.filterPersonsList = function () {
 				result = result && schoolClasses.indexOf(personsFilterForm.elements["schoolClass"].value) != -1;
 			} else if (personsFilterForm.elements["schoolClass"].value == "NONE") {
 				result = result && (!schoolClasses || schoolClasses.length == 0)
+			} else {
+				result = result && personsFilterForm.elements["schoolClass"].value == "";
 			}
 			
             return result;
@@ -374,4 +378,49 @@ OrganisationDisplay.prototype.submitPersonsForm = function(event) {
 	this.deletePersons(persons, role);
 }
 
+OrganisationDisplay.prototype.clickSelectAllPersons = function(event) {
+	event.preventDefault();
+	if (typeof this.personsForm.elements["remove[]"] == 'undefined' ) return;
+	if (typeof this.personsForm.elements["remove[]"].length != 'undefined'  && this.personsForm.elements["remove[]"].length == 0) return;
+	
+	$el = $(event.target);
+	
+	// Check if select all is active, based on the last visible element
+	var selectAllActive = false;
+	if (typeof this.personsForm.elements["remove[]"].length == 'undefined' && this.personsForm.elements["remove[]"].checked) selectAllActive = true;
+	else if (typeof this.personsForm.elements["remove[]"].length != 'undefined'  ) {
+		for (var i = 0; i < this.personsForm.elements["remove[]"].length; i++ ) {
+			if ( $(this.personsForm.elements["remove[]"][i]).is(':visible') ) {
+				selectAllActive = 	this.personsForm.elements["remove[]"][i].checked;
+			}
+		}
+	}
+	if (selectAllActive) {
+		if (typeof this.personsForm.elements["remove[]"].length == 'undefined') {
+			this.personsForm.elements["remove[]"].checked = false;
+		} else {
+			for (var i=0 ; i < this.personsForm.elements["remove[]"].length; i++) {
+				this.personsForm.elements["remove[]"][i].checked = false;
+			}
+		}
+		this.personsFormToggle(false);
+	} else {
+		if (typeof this.personsForm.elements["remove[]"].length == 'undefined') {
+			this.checkIfVisible(this.personsForm.elements["remove[]"], true);
+		} else {
+			for (var i=0 ; i < this.personsForm.elements["remove[]"].length; i++) {
+				if (!this.personsForm.elements["remove[]"][i].checked) {
+					this.checkIfVisible(this.personsForm.elements["remove[]"][i],true);
+				}  
+			}
+		}
+		
+	}
+	this.changePersonsRemoveCheckbox(event)
+}
 
+OrganisationDisplay.prototype.checkIfVisible = function(element, value) {
+	if ( $(element).is(':visible') ) {
+		element.checked = value;
+	}
+}
