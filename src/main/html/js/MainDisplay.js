@@ -203,7 +203,9 @@ MainDisplay.prototype.setTrails = function(row) {
 	
 }
 
-
+MainDisplay.prototype.selectView = function(view) {
+	this.$nav.find("ul").attr('class', view);
+}
 
 /*
  * VIEW FUNCTIONS

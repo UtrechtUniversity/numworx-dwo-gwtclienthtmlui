@@ -61,6 +61,21 @@
 .ANONYMOUS #accountMenuBox a#accountMenuManageItem
  { display: none; }
 #loginDisplayPanelMessageBox iframe { width: 240px; }
+
+#mainPanel nav ul.RESULTS li a[href="#RESULTS"] { color: #1b75bb !important;}
+#mainPanel nav ul.RESULTS li a[href="#RESULTS"] svg use { fill: #1b75bb !important; }
+
+#mainPanel nav ul.PERSONS li a[href="#PERSONS"] { color: #1b75bb !important;}
+#mainPanel nav ul.PERSONS li a[href="#PERSONS"] svg use { fill: #1b75bb !important; }
+
+#mainPanel nav ul.SCHOOLCLASSES li a[href="#SCHOOLCLASSES"] { color: #1b75bb !important;}
+#mainPanel nav ul.SCHOOLCLASSES li a[href="#SCHOOLCLASSES"] svg use { fill: #1b75bb !important; }
+
+#mainPanel nav ul.ORGANISATION li a[href="#ORGANISATION"] { color: #1b75bb !important;}
+#mainPanel nav ul.ORGANISATION li a[href="#ORGANISATION"] svg use { fill: #1b75bb !important; }
+
+#mainPanel nav ul.MODULES li a[href="#MODULES"] { color: #1b75bb !important;}
+#mainPanel nav ul.MODULES li a[href="#MODULES"] svg use { fill: #1b75bb !important; }
 </style>
 
 
@@ -443,7 +458,7 @@
 		</header>
 		
 		<nav>
-			<ul id="mainNav">
+			<ul id="mainNav" class='RESULTS'>
 				<li class='teacher-only'>
 					<a href="#RESULTS" ><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#resultaten"></use>
@@ -493,7 +508,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#personen"></use>
+<!-- 							<use xlink:href="#personen"></use> -->
 						</svg>
                                                 <h1><span  data-translate="NUM_PNL_ACCOUNT"> Account beheren</span></h1>
                                                 <h2 class="sectionhead"><span data-translate="NUM_SEC_ACCOUNT_CHANGE"><span  data-translate="NUM_SEC_ACCOUNT_CHANGE">Mijn persoonlijke gegevens veranderen</span></h2>					
@@ -697,7 +712,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#klassen"></use>
+<!-- 							<use xlink:href="#klassen"></use> -->
 						</svg>
                                                 <h1><span >Klassen selecteren of toevoegen</span></h1>
 						<h2 class="sectionhead"><span >Klassen</span></h2>					
@@ -815,7 +830,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#klassen"></use>
+<!-- 							<use xlink:href="#klassen"></use> -->
 						</svg>
                                                 <h1><span data-translate="NUM_PNL_CLASSES">Klassen bewerken of toevoegen</span></h1>
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_CLASSES_EDIT">Klassen bewerken</span></h2>					
@@ -940,7 +955,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#klassen"></use>
+<!-- 							<use xlink:href="#klassen"></use> -->
 						</svg>
                                                 <h1><span data-translate="NUM_PNL_CLASSES_EDIT">Klassen bewerken</span></h1>
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_CLASSES_EDIT">Klas bewerken</span></h2>					
@@ -1152,7 +1167,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#klassen"></use>
+<!-- 							<use xlink:href="#klassen"></use> -->
 						</svg>
 						<h1><span data-translate="NUM_PNL_CLASSES_EDIT">Klassen bewerken</span></h1>
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_AssignStudentToClass">Zoek een leerling om te plaatsen in klas</span></h2>					
@@ -1301,7 +1316,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#klassen"></use>
+<!-- 							<use xlink:href="#klassen"></use> -->
 						</svg>
 						 <h1><span data-translate="NUM_PNL_CLASSES_EDIT">Klassen bewerken</span></h1>
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_CLASSEDITSTUDENTS">Leerlingen overplaatsen</span></h2>					
@@ -1483,7 +1498,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#klassen"></use>
+<!-- 							<use xlink:href="#klassen"></use> -->
 						</svg>
 						 <h1><span data-translate="NUM_PNL_CLASSES_EDIT">Klassen bewerken</span></h1>
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_AssignTeacherToClass">Zoek een Docent om te koppelen aan klas [KLAS]</span></h2>					
@@ -1634,7 +1649,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#klassen"></use>
+<!-- 							<use xlink:href="#klassen"></use> -->
 						</svg>
 						 <h1><span data-translate="NUM_PNL_CLASSES_EDIT">Klassen bewerken</span></h1>
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_AssignModulesToClass">Module aan klas [KLAS] koppelen</span></h2>					
@@ -1815,7 +1830,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#resultaten"></use>
+<!-- 							<use xlink:href="#resultaten"></use> -->
 						</svg>
 						<h1><span data-translate="NUM_LBL_RESULTS_SEE">Resultaten bekijken</span></h1>
 						<!-- <h2 class="sectionhead"><span>Resultaten van een leerling</span></h2>					 -->
@@ -1967,7 +1982,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#resultaten"></use>
+<!-- 							<use xlink:href="#resultaten"></use> -->
 						</svg>
 						<h1><span data-translate="NUM_PNL_SELECTEDRESULTS" >Resultaten</span></h1>
 						<h2 class="sectionhead"><span id="selectedResultsSectionTitle" >Resultaten</span></h2>					<!-- data-translate="NUM_SEC_SELECTEDRESULTS" -->
@@ -2352,7 +2367,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#personen"></use>
+<!-- 							<use xlink:href="#personen"></use> -->
 						</svg>
                                                 <h1><span data-translate="NUM_PNL_PERSONS_MANAGE">Personen bewerken en toevoegen</span></h1>
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_PERSONS_MANAGE">Zoek een persoon om te bewerken</span></h2>					
@@ -2561,7 +2576,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#personen"></use>
+<!-- 							<use xlink:href="#personen"></use> -->
 						</svg>
                                                 <h1><span data-translate="NUM_PNL_PERSONS_EDIT">Personen bewerken</span></h1>
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_PERSONS_EDIT">Bewerk persoonsgegevens</span></h2>					
@@ -2705,7 +2720,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#personen"></use>
+<!-- 							<use xlink:href="#personen"></use> -->
 						</svg>
 						<h1>Personen Toevoegen</h1>
 						<h2 class="sectionhead"><span>Nieuwe persoon toevoegen</span></h2>					
@@ -2857,7 +2872,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#personen"></use>
+<!-- 							<use xlink:href="#personen"></use> -->
 						</svg>
                         <h1><span data-xtranslate="NUM_PNL_IMPORT_PERSONS">Personen importeren</span></h1>
 						<h2 class="sectionhead"><span data-xtranslate="NUM_SEC_IMPORT_PERSONS">Personen importeren vanuit bestand</span></h2>					
@@ -3021,7 +3036,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#personen"></use>
+<!-- 							<use xlink:href="#personen"></use> -->
 						</svg>
 						<h1><span data-translate="NUM_SEC_ORGANIZATION_MANAGE">Organisatie beheren</span></h1>
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_ORGANIZATION_SETTINGS_MANAGE">Instellingen van school beheren</span></h2>					
