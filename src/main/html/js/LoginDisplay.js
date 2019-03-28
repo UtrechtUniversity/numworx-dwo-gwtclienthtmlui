@@ -18,6 +18,8 @@ function LoginDisplay() {
 	
 	$(loginGuestBtn).on('click', $.proxy(this.submitLoginGuest, this));
 	
+	$("#loginLinks").find("a").on('click', $.proxy(this.clickHyperlink, this));
+	
 	// Init
 	this.$warningBox.hide();
 	this.$messageBox.hide();
@@ -48,6 +50,14 @@ LoginDisplay.prototype.enable = function() {
 	this.passwordField.value = "";
 	this.usernameField.disabled = false;
 	this.passwordField.disabled = false;
+}
+
+LoginDisplay.prototype.clickHyperlink = function(event) {
+	var view = event.currentTarget.hash.substr(1);
+	if (view) {
+		event.preventDefault(); // Only prevent default if navigation link
+		app.getPresenterFactory().getLoginPresenter().hyperlink(view);
+	}
 }
 
 /*
