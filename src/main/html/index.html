@@ -530,11 +530,11 @@
 			<!-- Change personal details -->
 			<section>				
 				<div class="row">
-					<form name="updateUser">
+					<form name="updateUser" autocomplete="off" >
 						<fieldset>
 							<label for="updateUserPassword" class="col-2 input">
 								<span data-translate="NUM_LBL_CUR_PASSWORD">huidig ww</span>
-								<input id="updateUserPassword" name="currentPassword" type="password" value="" />
+								<input id="updateUserPassword" name="currentPassword" type="password" autocomplete="new-password" />
 							</label>
 							<label for="updateUserNewPassword" class="col-2 input">
 								<span data-translate="NUM_LBL_NEW_PASSWORD">Nieuw ww</span>
@@ -555,7 +555,7 @@
 							</label>
 							<label for="updateUserInsertion" class="col-2 input">
 								<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
-								<input id="updateUserInsertion" name="insertion" type="text" value="" />
+								<input id="updateUserInsertion" name="insertion" type="text" autocomplete="off" value="" />
 							</label>
 							<label for="updateUserFamilyName" class="col-2 input">
 								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
