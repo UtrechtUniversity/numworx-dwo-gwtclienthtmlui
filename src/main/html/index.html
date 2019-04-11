@@ -61,6 +61,21 @@
 .ANONYMOUS #accountMenuBox a#accountMenuManageItem
  { display: none; }
 #loginDisplayPanelMessageBox iframe { width: 240px; }
+
+#mainPanel nav ul.RESULTS li a[href="#RESULTS"] { color: #1b75bb !important;}
+#mainPanel nav ul.RESULTS li a[href="#RESULTS"] svg use { fill: #1b75bb !important; }
+
+#mainPanel nav ul.PERSONS li a[href="#PERSONS"] { color: #1b75bb !important;}
+#mainPanel nav ul.PERSONS li a[href="#PERSONS"] svg use { fill: #1b75bb !important; }
+
+#mainPanel nav ul.SCHOOLCLASSES li a[href="#SCHOOLCLASSES"] { color: #1b75bb !important;}
+#mainPanel nav ul.SCHOOLCLASSES li a[href="#SCHOOLCLASSES"] svg use { fill: #1b75bb !important; }
+
+#mainPanel nav ul.ORGANISATION li a[href="#ORGANISATION"] { color: #1b75bb !important;}
+#mainPanel nav ul.ORGANISATION li a[href="#ORGANISATION"] svg use { fill: #1b75bb !important; }
+
+#mainPanel nav ul.MODULES li a[href="#MODULES"] { color: #1b75bb !important;}
+#mainPanel nav ul.MODULES li a[href="#MODULES"] svg use { fill: #1b75bb !important; }
 </style>
 
 
@@ -346,15 +361,15 @@
 						<label for="password">&nbsp;<input type="password" name="password" data-translate="NUM_LBL_PASSWORD" placeholder="Wachtwoord" /></label>
 						<input type="submit" class="right" name="submit" value="Aanmelden" data-translate="NUM_BTN_LOGIN" /> <!-- data-translate="NUM_Button_Ok"  -->
 						<span id="loginDisplayPanelWarningBox"></span>
-						<div style='float:left;font-size:13px' data-translate='NUM_LBL_LOGINGUEST'>U kunt ook inloggen als gast. Uw werk wordt dan NIET opgeslagen</div>
-						<button class='right' name='guestlogin' data-translate='NUM_BTN_LOGINGUEST' type='button' >LOGIN ALS GAST</button>
+						<div style='float:left;font-size:13px' ><span data-translate='NUM_LBL_LOGINGUEST'>U kunt ook inloggen als gast. Uw werk wordt dan NIET opgeslagen<span></span></div>
+						<button class='right' name='guestlogin'  type='button' ><span data-translate='NUM_BTN_LOGINGUEST'>LOGIN ALS GAST</span></button>
 					</form>
 				</div>
 			
 				<ul id="loginLinks">
-                                    <li><a href="/dwo/rest/public/user/requestNewPassword"><span  data-translate="NUM_LBL_Q_PASWORD_FORGOTTEN">Wachtwoord vergeten?</span></a></li>
-                                    <li><a href="/dwo/register/?locale=nl"><span data-translate="NUM_LBL_Q_NO_ACCOUNT">Nog geen account?</span></a></li>
-                                    <li><a href="http://www.numworx.nl"><span  data-translate="NUM_LBL_MORE_ON_NUMWORX">Meer informatie over Numworx</span></a></li>
+                                    <li><a href="/dwo/rest/public/user/requestNewPassword#FORGOT"><span  data-translate="NUM_LBL_Q_PASWORD_FORGOTTEN">Wachtwoord vergeten?</span></a></li>
+                                    <li><a href="/dwo/register/?locale=nl#REGISTER"><span data-translate="NUM_LBL_Q_NO_ACCOUNT">Nog geen account?</span></a></li>
+                                    <li><a href="https://www.numworx.nl"><span  data-translate="NUM_LBL_MORE_ON_NUMWORX">Meer informatie over Numworx</span></a></li>
 				</ul>
 			</div>
 		</div>
@@ -443,7 +458,7 @@
 		</header>
 		
 		<nav>
-			<ul id="mainNav">
+			<ul id="mainNav" class='RESULTS'>
 				<li class='teacher-only'>
 					<a href="#RESULTS" ><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#resultaten"></use>
@@ -455,7 +470,7 @@
 				    </svg><span class="name" data-translate="NUM_MNU_PEOPLE">Personen</span></a></li>
 				<li><a href="#SCHOOLCLASSES"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#klassen"></use>
-				    </svg><span class="name" data-translate="MUM_MNU_CLASSES">Klassen</span></a></li>
+				    </svg><span class="name" data-translate="NUM_MNU_CLASSES">Klassen</span></a></li>
 				<li><a href="#MODULES"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#modules"></use>
 				    </svg><span class="name" data-translate="NUM_MNU_MODULES">Modules</span></a></li>
@@ -493,7 +508,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#personen"></use>
+<!-- 							<use xlink:href="#personen"></use> -->
 						</svg>
                                                 <h1><span  data-translate="NUM_PNL_ACCOUNT"> Account beheren</span></h1>
                                                 <h2 class="sectionhead"><span data-translate="NUM_SEC_ACCOUNT_CHANGE"><span  data-translate="NUM_SEC_ACCOUNT_CHANGE">Mijn persoonlijke gegevens veranderen</span></h2>					
@@ -515,11 +530,11 @@
 			<!-- Change personal details -->
 			<section>				
 				<div class="row">
-					<form name="updateUser">
+					<form name="updateUser" autocomplete="off" >
 						<fieldset>
 							<label for="updateUserPassword" class="col-2 input">
 								<span data-translate="NUM_LBL_CUR_PASSWORD">huidig ww</span>
-								<input id="updateUserPassword" name="currentPassword" type="password" value="" />
+								<input id="updateUserPassword" name="currentPassword" type="password" autocomplete="new-password" />
 							</label>
 							<label for="updateUserNewPassword" class="col-2 input">
 								<span data-translate="NUM_LBL_NEW_PASSWORD">Nieuw ww</span>
@@ -540,7 +555,7 @@
 							</label>
 							<label for="updateUserInsertion" class="col-2 input">
 								<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
-								<input id="updateUserInsertion" name="insertion" type="text" value="" />
+								<input id="updateUserInsertion" name="insertion" type="text" autocomplete="off" value="" />
 							</label>
 							<label for="updateUserFamilyName" class="col-2 input">
 								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
@@ -648,7 +663,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<form name="addSchoolLogin">
+					<form name="addSchoolLogin" autocomplete="off">
 						<fieldset>
 							<div class="col-4 options">
                                                             <label><span data-translate="NUM_LBL_Q_WHICHROLE">Docent, Schooladmin of Leerling?</span></label>
@@ -669,11 +684,11 @@
 							
 							<label for="schoolLogin" class="col-2 input"><span data-translate="NUM_LBL_SCHOOLLOGIN">
                                                             school login</span>
-								<input id="schoolLogin" name="schoolLogin" type="text" value="" />
+								<input id="schoolLogin" autocomplete="off" name="schoolLogin" type="text" value="" />
 							</label>
 							<label for="schoolCode" class="col-2 input"><span data-translate="NUM_LBL_SCHOOLPASSWORD">
                                                                 Sleutelcode school</span>
-								<input id="schoolCode" name="schoolCode" type="password" value="" />
+								<input id="schoolCode" autocomplete="new-password" name="schoolCode" type="password" value="" />
 							</label>
 							
 							
@@ -697,7 +712,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#klassen"></use>
+<!-- 							<use xlink:href="#klassen"></use> -->
 						</svg>
                                                 <h1><span >Klassen selecteren of toevoegen</span></h1>
 						<h2 class="sectionhead"><span >Klassen</span></h2>					
@@ -815,7 +830,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#klassen"></use>
+<!-- 							<use xlink:href="#klassen"></use> -->
 						</svg>
                                                 <h1><span data-translate="NUM_PNL_CLASSES">Klassen bewerken of toevoegen</span></h1>
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_CLASSES_EDIT">Klassen bewerken</span></h2>					
@@ -940,7 +955,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#klassen"></use>
+<!-- 							<use xlink:href="#klassen"></use> -->
 						</svg>
                                                 <h1><span data-translate="NUM_PNL_CLASSES_EDIT">Klassen bewerken</span></h1>
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_CLASSES_EDIT">Klas bewerken</span></h2>					
@@ -1152,7 +1167,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#klassen"></use>
+<!-- 							<use xlink:href="#klassen"></use> -->
 						</svg>
 						<h1><span data-translate="NUM_PNL_CLASSES_EDIT">Klassen bewerken</span></h1>
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_AssignStudentToClass">Zoek een leerling om te plaatsen in klas</span></h2>					
@@ -1301,7 +1316,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#klassen"></use>
+<!-- 							<use xlink:href="#klassen"></use> -->
 						</svg>
 						 <h1><span data-translate="NUM_PNL_CLASSES_EDIT">Klassen bewerken</span></h1>
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_CLASSEDITSTUDENTS">Leerlingen overplaatsen</span></h2>					
@@ -1483,7 +1498,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#klassen"></use>
+<!-- 							<use xlink:href="#klassen"></use> -->
 						</svg>
 						 <h1><span data-translate="NUM_PNL_CLASSES_EDIT">Klassen bewerken</span></h1>
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_AssignTeacherToClass">Zoek een Docent om te koppelen aan klas [KLAS]</span></h2>					
@@ -1634,7 +1649,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#klassen"></use>
+<!-- 							<use xlink:href="#klassen"></use> -->
 						</svg>
 						 <h1><span data-translate="NUM_PNL_CLASSES_EDIT">Klassen bewerken</span></h1>
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_AssignModulesToClass">Module aan klas [KLAS] koppelen</span></h2>					
@@ -1815,7 +1830,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#resultaten"></use>
+<!-- 							<use xlink:href="#resultaten"></use> -->
 						</svg>
 						<h1><span data-translate="NUM_LBL_RESULTS_SEE">Resultaten bekijken</span></h1>
 						<!-- <h2 class="sectionhead"><span>Resultaten van een leerling</span></h2>					 -->
@@ -1967,7 +1982,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#resultaten"></use>
+<!-- 							<use xlink:href="#resultaten"></use> -->
 						</svg>
 						<h1><span data-translate="NUM_PNL_SELECTEDRESULTS" >Resultaten</span></h1>
 						<h2 class="sectionhead"><span id="selectedResultsSectionTitle" >Resultaten</span></h2>					<!-- data-translate="NUM_SEC_SELECTEDRESULTS" -->
@@ -2352,7 +2367,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#personen"></use>
+<!-- 							<use xlink:href="#personen"></use> -->
 						</svg>
                                                 <h1><span data-translate="NUM_PNL_PERSONS_MANAGE">Personen bewerken en toevoegen</span></h1>
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_PERSONS_MANAGE">Zoek een persoon om te bewerken</span></h2>					
@@ -2521,7 +2536,7 @@
 							<fieldset>
 								<label class="buttonLabel" for="button_1">
                                                                     <span class='teacher-only' data-translate="NUM_LBL_PERSONS_ADD">Een enkele nieuwe leerling opvoeren</span>
-                                                                    <span class='schooladmin-only' data-xtranslate="NUM_LBL_PERSONS_ADD_S">Voeg een nieuwe leerling of docent toe</span>
+                                                                    <span class='schooladmin-only' data-translate="NUM_LBL_PERSONS_ADD_S">Voeg een nieuwe leerling of docent toe</span>
 									<input type="submit" class="secondary right" data-translate="NUM_BTN_Add" value="Toevoegen" />
 								</label>
 							</fieldset>
@@ -2531,12 +2546,12 @@
 					
 					<div class="col-6">
 						<form name="personsImport" method="post" enctype="multipart/form-data"> <!-- form tag on the outside, for hiding -->
-						<h2 class="sectionhead"><span>Meerdere personen tegelijk toevoegen</span></h2>
+						<h2 class="sectionhead"><span data-translate="NUM_LBL_PERSONS_MORE" >Meerdere personen tegelijk toevoegen</span></h2>
 						
 							<fieldset>
-									<label class="buttonLabel">Importeer leerlingen of docenten vanuit een CSV bestand</label>
+									<label class="buttonLabel"><span data-translate="NUM_LBL_PERSONS_CSV" >Importeer leerlingen of docenten vanuit een CSV bestand</span></label>
 									<input id="zoekBestand" name="zoekBestand" type="file" accept=".csv" style="opacity:0"/>
-									<label class="pseudobutton secondary right" for="zoekBestand" >Zoek bestand</label>
+									<label class="pseudobutton secondary right" for="zoekBestand" ><span data-translate="NUM_LBL_PERSONS_FILE">Zoek bestand</span></label>
 							</fieldset>
 						</form>	
 					</div>
@@ -2561,7 +2576,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#personen"></use>
+<!-- 							<use xlink:href="#personen"></use> -->
 						</svg>
                                                 <h1><span data-translate="NUM_PNL_PERSONS_EDIT">Personen bewerken</span></h1>
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_PERSONS_EDIT">Bewerk persoonsgegevens</span></h2>					
@@ -2705,15 +2720,15 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#personen"></use>
+<!-- 							<use xlink:href="#personen"></use> -->
 						</svg>
-						<h1>Personen Toevoegen</h1>
-						<h2 class="sectionhead"><span>Nieuwe persoon toevoegen</span></h2>					
+						<h1><span data-translate="NUM_PNL_ADDPERSON">Personen Toevoegen</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_ADDPERSON">Nieuwe persoon toevoegen</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="https://teuniz.dwo.nl/gwtclient/helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -2768,7 +2783,7 @@
 									</div>
 								</div>		 -->					
 								<div class="row schooladmin-only" style='margin-top: 1em' > <!-- FIXME -->
-										<h3 class="col-12"><span>Toevoegen als student/docent?</span></h3>
+										<h3 class="col-12"><span data-translate='NUM_LBL_ADDPERSON_ROLE'>Toevoegen als student/docent?</span></h3>
 										<div class="col-12" style="height: 2em"> <!-- voor teunis, hoe moet dit netjes? -->
 											<div class="options">
 													<div class="option">
@@ -2792,7 +2807,7 @@
 				<section>
 					<div class="row">
 						<div class="col-12">
-							<h3>Kies klas(sen) voor deze persoon</h3>
+							<h3><span data-translate="NUM_LBL_ADDPERSON_CLASS">Kies klas(sen) voor deze persoon</h3>
 						</div>
 					</div>				
 					<div class="row">
@@ -2837,7 +2852,7 @@
 								<input type="radio" name="schoolclass" value="schoolid" class="hidden"><!-- empty value -->
 							</div>
 							<div class="col-6">
-								<input type="submit" class="primary right bottom" value="Voeg persoon toe" />
+								<input type="submit" class="primary right bottom" value="Voeg persoon toe" data-translate="NUM_BTN_ADDPERSON"/>
 							</div>
 					
 					</div>
@@ -2857,10 +2872,10 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#personen"></use>
+<!-- 							<use xlink:href="#personen"></use> -->
 						</svg>
-                        <h1><span data-xtranslate="NUM_PNL_IMPORT_PERSONS">Personen importeren</span></h1>
-						<h2 class="sectionhead"><span data-xtranslate="NUM_SEC_IMPORT_PERSONS">Personen importeren vanuit bestand</span></h2>					
+                        <h1><span data-translate="NUM_PNL_IMPORT_PERSONS">Personen importeren</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_IMPORT_PERSONS">Personen importeren vanuit bestand</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
@@ -2879,7 +2894,7 @@
 			<section>
 				<div class='row'>
 					<div class='col-12'>
-						<h3><span>De volgende personen zijn in uw bestand gevonden</span></h3>
+						<h3><span data-translate="NUM_LBL_IMPORT_PERSONS">De volgende personen zijn in uw bestand gevonden</span></h3>
 						<table class="dwo headered" id='importPersonsTable'>
 							<thead>
 								<tr>
@@ -2917,7 +2932,7 @@
 					</div>
 				</div>
 				<div class="row schooladmin-only" >
-						<h3 class="col-12"><span>Importeren als student/docent?</span></h3>
+						<h3 class="col-12"><span data-translate="NUM_LBL_IMPORT_PERSONS_ROLE">Importeren als student/docent?</span></h3>
 						<div class="col-12" style="height: 2em"> <!-- voor teunis, hoe moet dit netjes? -->
 							<div class="options">
 									<div class="option">
@@ -2932,7 +2947,7 @@
 						</div>
 				</div>
 				<div class="row" id='importPersonsSchoolClassesTitle'>
-						<h3 class="col-12"><span>Kies een klas om personen in te importeren</span></h3>
+						<h3 class="col-12"><span data-translate="NUM_LBL_IMPORT_PERSONS_CLASS">Kies een klas om personen in te importeren</span></h3>
 				</div>
 				<div class="row">						
 						<div class="col-6" >	
@@ -2989,7 +3004,7 @@
 							<input type="radio" name="schoolclass" value="schoolid" class="hidden"><!-- empty value -->
 						</div>
 						<div class="col-6">
-							<input class="primary right bottom" type="submit" value="importeer" >
+							<input class="primary right bottom" type="submit" data-translate="NUM_BTN_IMPORT_PERSONS" value="importeer">
 						</div>					
 					</div>
 				</div>
@@ -3021,7 +3036,7 @@
 				<div class="container">
 					<div class="content">
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
-							<use xlink:href="#personen"></use>
+<!-- 							<use xlink:href="#personen"></use> -->
 						</svg>
 						<h1><span data-translate="NUM_SEC_ORGANIZATION_MANAGE">Organisatie beheren</span></h1>
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_ORGANIZATION_SETTINGS_MANAGE">Instellingen van school beheren</span></h2>					

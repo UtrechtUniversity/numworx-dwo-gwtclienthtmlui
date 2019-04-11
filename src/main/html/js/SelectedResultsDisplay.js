@@ -158,7 +158,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 			$rowCell = this.$selectedResultsRowCell.clone();
 			$rowCell.html("");
 			
-			if (matrix[i][j].label != "") {
+			if (matrix[i][j].label !== "") {
 				
 				// Label
 				$value = $("<a class=\"resultIndicator\" title=\""+matrix[i][j].label+"\">" + matrix[i][j].label +"</a>");
@@ -367,7 +367,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 					score = sortedModuleChildren[n].children[scoId].sumScore; 
 					time = sortedModuleChildren[n].children[scoId].totalTime; 
 
-					if ( (score == 0 && time == "0s") ||  sortedModuleChildren[n].children[scoId].completion_status == "not-attempted") {
+					if ( (score == 0 && time == "0s") ||  sortedModuleChildren[n].children[scoId].completion_status == "not attempted") {
 						score = null;
 						time = null;
 					}
@@ -459,11 +459,18 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 				
 				for (var n = 0; n < sortedStudentScoChildren.length; n++) {
 					matrix[i][j] = {};
-					matrix[i][j].label = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ? "+"+sortedStudentScoChildren[n].bonus : "") +" / " + sortedStudentScoChildren[n].maxScore;
-					matrix[i][j].score = (sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ? sortedStudentScoChildren[n].bonus : 0) ) / sortedStudentScoChildren[n].maxScore * 100;
-					matrix[i][j].sortValue = matrix[i][j].value = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ?sortedStudentScoChildren[n].bonus : 0);
-					matrix[i][j].callback = this.clickPageResultIndicator;
-					matrix[i][j].params = { scoId: this.resultState.activeActivity, studentId: studentId, pageSequence: sortedStudentScoChildren[n].sequence };
+					if ( sortedStudentScoChildren[n].maxScore == null ) {
+						matrix[i][j].label = "";
+						matrix[i][j].score = 0;
+						matrix[i][j].sortValue = -1;
+					} else {
+						matrix[i][j].label = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ? "+"+sortedStudentScoChildren[n].bonus : "") +" / " + sortedStudentScoChildren[n].maxScore;
+						matrix[i][j].score = (sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ? sortedStudentScoChildren[n].bonus : 0) ) / sortedStudentScoChildren[n].maxScore * 100;
+						matrix[i][j].sortValue = matrix[i][j].value = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ?sortedStudentScoChildren[n].bonus : 0);
+						matrix[i][j].callback = this.clickPageResultIndicator;
+						matrix[i][j].params = { scoId: this.resultState.activeActivity, studentId: studentId, pageSequence: sortedStudentScoChildren[n].sequence };
+					}
+					
 					j++;
 				}	
 			}			
@@ -512,8 +519,10 @@ SelectedResultsDisplay.prototype.computeModuleScoreForStudent = function(module,
 					scoreSet = true;
 					total += parseInt(module.children[id].children[scoId].sumScore); // Sum of scores
 					
-					if ( ! ( ( parseInt(module.children[id].children[scoId].sumScore) == 0 && parseInt(module.children[id].children[scoId].totalTime) == "0s") 
-								||  module.children[id].children[scoId].completion_status == "not-attempted" ) ) {
+					if ( ! ( 
+								( (module.children[id].children[scoId].sumScore) == 0 && (module.children[id].children[scoId].totalTime) == "0s") 
+								||  module.children[id].children[scoId].completion_status == "not attempted" 
+						   ) ) {
 								allZero = false;
 					}
 				}	
