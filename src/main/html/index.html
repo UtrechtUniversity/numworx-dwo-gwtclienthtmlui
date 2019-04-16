@@ -51,6 +51,7 @@
 <style type="text/css">
 .TEACHER .schooladmin-only,
 .SCHOOLADMIN .teacher-only,
+.SCHOOLADMIN .no-schooladmin,
 .STUDENT .teacher-only,
 .STUDENT .schooladmin-only,
 .STUDENT .no-student,
@@ -237,8 +238,10 @@
 	<script src="js/StudentScoResultDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/SelectStudentResultsDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/LogResultsDisplay.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/StudentResultsDisplay.js" type="text/javascript" charset="utf-8"></script>
 	
 	<script src="js/ModulesDisplay.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/EditorDisplay.js" type="text/javascript" charset="utf-8"></script>
 	
 	<script src="js/OrganisationDisplay.js" type="text/javascript" charset="utf-8"></script>
 	
@@ -459,7 +462,7 @@
 		
 		<nav>
 			<ul id="mainNav" class='RESULTS'>
-				<li class='teacher-only'>
+				<li class='no-schooladmin'>
 					<a href="#RESULTS" ><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#resultaten"></use>
 				    </svg><span class="name" data-translate="NUM_MNU_RESULTS">Resultaten</span>
@@ -3296,7 +3299,80 @@
 			
 		</section>
 		<!-- end organisationDisplay -->
+
+		<!-- studentResultsDisplay -->
+		<section id='studentResultsDisplayPanel' class='subpanel student-only'>
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
+<!-- 							<use xlink:href="#resultaten"></use> -->
+						</svg>
+						 <h1><span data-translate="NUM_LBL_RESULTS_SEE">Resultaten bekijken</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_LBL_RESULTS_OF_STUDENT">Resultaten van een student</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
+						<div class="content">
+							<iframe src=""></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
+						</div>
+					</section>
+				</div>
+			</header>
+			<section>
+				<div class='row'>
+					<div class='col-12' id='studentResultsWidget'>
+						<!-- WIDGET CONTAINER -->					
+					</div>
+				</div>
+			</section>
+		</section>
+		<!-- end studentResultsDisplay -->
 		
+		<!-- editorDisplay -->
+		<section id='editorDisplay' class='subpanel no-student'>
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
+<!-- 							<use xlink:href="#modules"></use> -->
+						</svg>
+						<h1><span data-translate="NUM_LBL_MODULES_EDIT">Modules</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_LBL_MODULES_EDIT_MODULE">Module wijzigen</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
+						<div class="content">
+							<iframe src=""></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
+						</div>
+					</section>
+				</div>
+			</header>
+			<section>
+				<div class='row'>
+					<div class='col-12' id='studentResultsWidget'>
+						<iframe id='editorFrame' src='about:blank'>
+							<!-- Editor container -->
+						</iframe>				
+					</div>
+				</div>
+			</section>
+			
+		
+		
+		
+		</section>
+		<!-- end editorDisplay  -->
 		
 		<!-- 
 		-

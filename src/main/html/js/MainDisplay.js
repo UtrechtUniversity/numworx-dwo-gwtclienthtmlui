@@ -69,9 +69,14 @@ function MainDisplay() {
 	this.logResultsDisplay = new LogResultsDisplay();
 	window.jsLogResultsDisplay = this.logResultsDisplay;
 	
+	this.studentResultsDisplay = new StudentResultsDisplay();
+	window.jsStudentResultsDisplay = this.studentResultsDisplay;
+	
 	// MODULES
 	this.modulesDisplay = new ModulesDisplay();
 	window.jsModulesDisplay = this.modulesDisplay;
+	this.editorDisplay = new EditorDisplay();
+	window.jsEditorDisplay = this.editorDisplay;
 	
 	// ORGANISATION
 	this.organisationDisplay = new OrganisationDisplay();
@@ -277,6 +282,11 @@ MainDisplay.prototype.showResultsView = function() {
 	this.resultsDisplay.show();
 }
 
+MainDisplay.prototype.showStudentResultsView = function() {
+	this.initMainView();
+	this.studentResultsDisplay.show();
+}
+
 MainDisplay.prototype.showSelectedResultsView = function() {
 	this.initMainView(); 
 	this.selectedResultsDisplay.show();
@@ -302,6 +312,11 @@ MainDisplay.prototype.showModulesView = function() {
 	this.setArrowUp(true);
 	this.setSearchBox(true); // optional, not for activities.
 	this.modulesDisplay.show();
+}
+
+MainDisplay.prototype.showEditorView = function() {
+	this.initMainView();
+	this.editorDisplay.show();
 }
 
 MainDisplay.prototype.showImportPersonsView = function() {
