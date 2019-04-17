@@ -178,6 +178,12 @@ MainDisplay.prototype.setUserRole = function (role) {
 	document.title = "Numworx " + role;
 	this.$logo.find("span").html(role);
 };
+
+MainDisplay.prototype.setPremium = function (set) {
+	if (set) this.$body.addClass("premium");
+	else this.$body.removeClass("premium");
+}
+
 MainDisplay.prototype.setPresentationName = function (presentationName) {
 	this.$accountMenuPresentationName.html(presentationName);
 	this.$headerPresentationName.html(presentationName);

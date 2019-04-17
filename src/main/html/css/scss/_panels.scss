@@ -548,6 +548,15 @@ body {
 			float: left;
 			padding: $gutter / 2 * 1px $siteMargin * 1px;
 		}
+		#mainrole {
+		    font-size: 22px;
+		    font-family: Ubuntu;
+		    text-transform: uppercase;
+		    vertical-align: super;
+		    padding-left: 10px;
+		    color: $primaryLight;
+		}
+		
 		#accountMenuToggle {
 			float: right;
 			margin-right: $siteMargin * 1px;
