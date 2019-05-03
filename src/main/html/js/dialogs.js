@@ -122,10 +122,12 @@ function AlertDialogWithConfirmCancelDisplay() {
 }
 AlertDialogWithConfirmCancelDisplay.prototype.clear = function() {}
 AlertDialogWithConfirmCancelDisplay.prototype.init = function() {}
-AlertDialogWithConfirmCancelDisplay.prototype.showDialog = function(text) {	
+AlertDialogWithConfirmCancelDisplay.prototype.showDialog = function(text, ok, cancel) {	
 	if(this.active == false) window.app.mainDisplay.openDialogView(this);
 	this.$dialog.show();
 	this.$message.html(text);
+	this.$confirmButton.val(ok);
+	this.$cancelButton.val(cancel);
 	this.$confirmButton.focus();
 	this.active = true;	
 	
