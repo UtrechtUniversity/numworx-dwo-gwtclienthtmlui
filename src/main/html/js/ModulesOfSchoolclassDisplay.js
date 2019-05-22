@@ -205,6 +205,12 @@ ModulesOfSchoolclassDisplay.prototype.init = function () {
 	this.settingsFormAllFieldToggle(false);
 	this.searchFormToggle();
 	this.collapseTree();
+
+	if (this.hasToets() ) {
+		$("#modulesOfSchoolclassDisplayCourseType").show();
+	} else {
+		$("#modulesOfSchoolclassDisplayCourseType").hide();
+	}
 }
 
 ModulesOfSchoolclassDisplay.prototype.clear = function () {
