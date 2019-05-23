@@ -1825,7 +1825,7 @@
 								
 							</div>
 							<div class="clear"></div>
-							<div class="row">
+							<div class="row" id='modulesOfSchoolclassDisplayCourseType'>
 								<div class="col-2 options">
 									<label><span data-translate="NUM_CLASSMODULES_CourseType">Toets?</span></label>
 									<div class="option">
@@ -2774,7 +2774,7 @@
 			</header>
 			
 			<!-- Change personal details -->
-			<form name="addPerson">
+			<form name="addPerson" autocomplete="off">
 				<section>				
 					<div class="row">
 					
@@ -2802,7 +2802,7 @@
 								</label>
 								<label for="addPersonPassword" class="col-2 input">
 									<span data-translate="NUM_TBL_PASSWORD">Wachtwoord</span>
-									<input id="addPersonPassword" name="password" type="password" value="" />
+									<input id="addPersonPassword" name="password" type="password" value="" autocomplete="new-password" />
 								</label>
 							
 								<!-- <div class="col-2 options">
@@ -3054,7 +3054,7 @@
 		-->
 		<section id="modulesDisplayPanel" class="subpanel iframepanel">
 			
-			<iframe src="helppage/helpindex_nl.html" allowfullscreen></iframe>
+			<iframe src="" allowfullscreen name='player'></iframe>
 			
 		</section>
 		<!-- end modulesDisplay -->
