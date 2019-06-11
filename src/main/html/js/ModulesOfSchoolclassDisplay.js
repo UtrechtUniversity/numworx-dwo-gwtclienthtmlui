@@ -201,6 +201,7 @@ ModulesOfSchoolclassDisplay.prototype.init = function () {
 		
 	//Helpers.stretchHeight( [this.$treeWrapper, this.$selectTableBody] );
 	this.dateTimePicker  = new MaterialDatetimePicker({});
+	this.nodes = [];
 	
 	this.settingsFormAllFieldToggle(false);
 	this.searchFormToggle();
