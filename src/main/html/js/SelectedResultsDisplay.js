@@ -564,6 +564,7 @@ SelectedResultsDisplay.prototype.changeFiltering = function() {
 SelectedResultsDisplay.prototype.modulesStudents = function() {
 	var matrix = this.buildMatrixModulesStudentsForClass();
 	this.$bars.hide();
+	this.$barModulesStudentsBacklink.off('click');
 	this.$barModulesStudentsBacklink.click($.proxy(this.clickBackToResults, this));
 	this.$barModulesStudents.show();
 	this.plotMatrix(matrix);
@@ -577,8 +578,14 @@ SelectedResultsDisplay.prototype.activitiesStudent = function(params) {
 	this.$bars.hide();
 	this.$barActivitiesStudent.show();
 	//this.$barActivitiesStudentBacklink.html("Terug naar <b>Alle geselecteerde modules</b>");
+	this.$barActivitiesStudentBacklink.off('click');
 	this.$barActivitiesStudentBacklink.click($.proxy(this.clickBackToModulesStudents, this));
 	this.plotMatrix(matrix);
+}
+
+SelectedResultsDisplay.prototype.backToActivitiesStudents = function(params) {
+	app.getPresenterFactory().getSelectedResultsPresenter().abandonPages();
+	this.activitiesStudents(params);
 }
 
 SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
@@ -592,6 +599,7 @@ SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
 	this.$bars.hide();
 	this.$barActivitiesStudents.show();
 	//this.$barActivitiesStudentsBacklink.html("Terug naar <b>Alle geselecteerde modules</b>");
+	this.$barActivitiesStudentsBacklink.off('click');
 	this.$barActivitiesStudentsBacklink.click($.proxy(this.clickBackToModulesStudents, this));
 	
 	// Sealed checkbox
@@ -621,7 +629,8 @@ SelectedResultsDisplay.prototype.pagesStudents = function(params) {
 	var params = {};
 	params.module = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[ this.resultState.activeModule ];
 	params.moduleId = this.resultState.activeModule;
-	this.$barPagesStudentsBacklink.click($.proxy(this.activitiesStudents, this, params));
+	this.$barPagesStudentsBacklink.off('click');
+	this.$barPagesStudentsBacklink.click($.proxy(this.backToActivitiesStudents, this, params));
 	
 	// Sealed checkbox
 	this.$sealSingleActivityCheckbox.parent().removeClass("thirdState");
