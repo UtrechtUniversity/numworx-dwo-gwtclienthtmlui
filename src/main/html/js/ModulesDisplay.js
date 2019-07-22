@@ -36,7 +36,7 @@ ModulesDisplay.prototype.openUrl = function (url) {
 }
 
 ModulesDisplay.prototype.setMainNavVisible = function(b) {
-	console.log("teunis implementeert setMainNavVisible " + b);
+	//console.log("teunis implementeert setMainNavVisible " + b);
 	if (b) app.mainDisplay.showNav();
 	else app.mainDisplay.hideNav();
 }
