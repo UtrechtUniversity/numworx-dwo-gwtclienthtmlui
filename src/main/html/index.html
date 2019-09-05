@@ -87,6 +87,21 @@
 #mainPanel nav ul.MODULES li a[href="#MODULES"] { color: #1b75bb !important;}
 #mainPanel nav ul.MODULES li a[href="#MODULES"] svg use { fill: #1b75bb !important; }
 
+.score-treeItem {
+	font-size: 13px;
+}
+.gwt-TreeItem-selected .score-treeItem {
+	background-color: #d0d0d080;
+}
+
+.gwt-Tree table {
+	border-spacing: 2px;
+	border-collapse: initial;
+	width: 100%;
+}
+.gwt-Tree table tr td:first-child {
+	width: 18px;
+}
 
 .score-template {
 	display: inline-block;
@@ -96,6 +111,17 @@
 	width: 25em;
 	border: solid 1px black;
 	position: relative;
+}
+.score-perc {
+	float: right;
+	display: inline-block;
+	width: 2em;
+}
+.score-treeItem .score-template {
+	width: 6em;
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+	float: right;
 }
 .score-template .score-incorrect {
 	background-color: red;
@@ -114,7 +140,14 @@
 	position: absolute;
 }
 
-
+.score-frame {
+	width: 100%;
+	background-color: gray;
+}
+.score-html {
+	min-height: 100%;
+	background-color: white;
+}
 
 
 </style>
@@ -748,8 +781,8 @@
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
 <!-- 							<use xlink:href="#klassen"></use> -->
 						</svg>
-                                                <h1><span >Klassen selecteren of toevoegen</span></h1>
-						<h2 class="sectionhead"><span >Klassen</span></h2>					
+                                                <h1><span data-translate="NUM_PNL_STUDENTCLASSES">Klassen selecteren of toevoegen</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_STUDENTCLASSES">Klassen</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
                                             <h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
@@ -827,25 +860,25 @@
 			<section>
 				<div class="row">
 					<div class="col-12">
-						<h2 class="sectionhead"><span >Nieuwe klas toevoegen</span></h2>						
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_ADDSCHOOLCLASS">Nieuwe klas toevoegen</span></h2>						
 					</div>
 				</div>
 				<div class='row'>
 					<form name='addStudentSchoolclass' >
 						<fieldset>
 							<label class="col-4 input">
-								<span >Naam klas</span>
+								<span data-translate='NUM_TBL_CLASSES_CLASSNAME'>Naam klas</span>
 								<select name="schoolClass">
 									<option value=""></option>
 								</select>
 							</label>
 							<label for="studentSchoolclassKey" class="col-2 input">
-								<span >Klassleutel</span>
+								<span data-translate='NUM_LBL_CLASSES_ACCESSKEY'>Klassleutel</span>
 								<input id="studentSchoolclassKey" name="registerkey" type="text" value="" />
 							</label>
 							<div class="col-4">&nbsp;</div>
 							<div class="col-2">
-								<input type="submit" name="submit" class="primary right down"  value="Toevoegen" />
+								<input type="submit" name="submit" data-translate='NUM_BTN_ADDSCHOOLCLASS' class="primary right down"  value="Toevoegen" />
 							</div>				
 						</fieldset>				
 					</form>
