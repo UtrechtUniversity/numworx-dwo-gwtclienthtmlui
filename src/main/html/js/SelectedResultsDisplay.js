@@ -252,7 +252,7 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 		matrix[i][0] = {};
 		matrix[i][0].label = matrix[i][0].value = students[studentId].givenName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].familyName;
 		matrix[i][0].sortValue = students[studentId].familyName + " " + students[studentId].givenName + (students[studentId].insertion ? " "+students[studentId].insertion : "") ;
-		
+		matrix[i][0].userName = students[studentId].userName;
 		j = 1;
 		for (var amId in activeModules) {
 			matrix[i][j] = {};
@@ -354,7 +354,8 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 		matrix[i][0] = {};
 		matrix[i][0].label = matrix[i][0].value = students[studentId].givenName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].familyName;
 		matrix[i][0].sortValue = students[studentId].familyName + " " + students[studentId].givenName + (students[studentId].insertion ? " "+students[studentId].insertion : "") ;
-		
+		matrix[i][0].userName = students[studentId].userName;
+
 		j = 1;
 
 		for (var n = 0; n < sortedModuleChildren.length; n++) {
@@ -449,6 +450,7 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 		matrix[i][0] = {};
 		matrix[i][0].label = matrix[i][0].value = students[studentId].givenName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].familyName;
 		matrix[i][0].sortValue = students[studentId].familyName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].givenName;//
+		matrix[i][0].userName = students[studentId].userName;
 		j = 1;
 		
 		for (var studenScoId in activity.children) {
@@ -463,6 +465,7 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 						matrix[i][j].label = "";
 						matrix[i][j].score = 0;
 						matrix[i][j].sortValue = -1;
+						marrix[i][j].value = "";
 					} else {
 						matrix[i][j].label = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ? "+"+sortedStudentScoChildren[n].bonus : "") +" / " + sortedStudentScoChildren[n].maxScore;
 						matrix[i][j].score = (sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ? sortedStudentScoChildren[n].bonus : 0) ) / sortedStudentScoChildren[n].maxScore * 100;
@@ -877,13 +880,17 @@ SelectedResultsDisplay.prototype.submitActivitiesStudentsClearResultsForm = func
 }
 
 
-SelectedResultsDisplay.prototype.buildMatrix = function(matrix) {
+SelectedResultsDisplay.prototype.buildMatrix = function(matrix, extra) {
 	var result = "";
 	var SEP = "\t";
 	var LINE = "\n";
 	
 	for( var i = 0; i < matrix.length; i++ ) {
 		var row = matrix[i];
+		if (extra) {
+			if (i > 0) result += row[0].userName;
+			result += SEP;
+		}
 		for (var j = 0; j < row.length; j++ )  {
 			if(j > 0) 
 				result = result += SEP;
@@ -901,7 +908,7 @@ SelectedResultsDisplay.prototype.buildMatrix = function(matrix) {
 SelectedResultsDisplay.prototype.modulesStudentsDownload = function(trigger) {
 	console.log("ModulesStudentsDownload trigger");
 	var matrix = this.buildMatrixModulesStudentsForClass();
-	return this.buildMatrix(matrix);
+	return this.buildMatrix(matrix,true);
 }
 
 SelectedResultsDisplay.prototype.initModulesStudentsDownload = function(node) {
@@ -915,7 +922,7 @@ SelectedResultsDisplay.prototype.activitiesStudentsDownload = function(trigger) 
 	console.log("ActivitiesStudentsDownload trigger");
 	var module = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[ this.resultState.activeModule ]
 	var matrix = this.buildMatrixActivitiesStudentsInModule(module);
-	return this.buildMatrix(matrix);
+	return this.buildMatrix(matrix,true);
 }
 
 SelectedResultsDisplay.prototype.initActivitiesStudentsDownload = function(node) {
@@ -930,7 +937,7 @@ SelectedResultsDisplay.prototype.pagesStudentsDownload = function(trigger) {
 	var module = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[ this.resultState.activeModule ]
 	var activity = module.children[ this.resultState.activeActivity ];
 	var matrix = this.buildMatrixPagesActivityStudentsInModule(activity);
-	return this.buildMatrix(matrix);
+	return this.buildMatrix(matrix, true);
 }
 
 SelectedResultsDisplay.prototype.initPagesStudentsDownload = function(node) {
