@@ -118,6 +118,7 @@ ModulesOfSchoolclassDisplay.prototype.updateTable = function() {
 	for (var id in modules) { 
 		el = modules[id];
 		if (el.active == true) {
+			el.row = 
 			this.addRowToTable(el, id, i, false, false); // select the added element with id === this.selectedNodeId in the 4th parameter)
 		}
 		i++;
@@ -406,17 +407,33 @@ ModulesOfSchoolclassDisplay.prototype.toggleTreeCheckbox = function(event) {
 
 		if ( this.nodes[this.selectedNodeId].classCourse &&  this.nodes[this.selectedNodeId].classCourse.viewState == "invisible" ) {
 			// If this course has been selected before, attach
+			var id = this.selectedNodeId;
+			this.nodes[id].row = 
+			this.addRowToTable(this.nodes[id], id, 0, false, false);
 			this.attachItem( this.selectedNodeId );			
 		} else {
-			// If not selected before, edit setting before attach
-			this.$tree.find(".temporary input").prop('checked','');			
-			$(event.target).parent().addClass("temporary");
-			this.temporaryAddModule( this.selectedNodeId );
+			
+//			// If not selected before, edit setting before attach
+//			this.$tree.find(".temporary input").prop('checked','');			
+//			$(event.target).parent().addClass("temporary");
+//			this.temporaryAddModule( this.selectedNodeId );
+// fresh normal class course
+			this.nodes[this.selectedNodeId].classCourse = {
+					"courseType" : "normal"
+			};
+			var id = this.selectedNodeId;
+			this.nodes[id].row =
+			this.addRowToTable(this.nodes[id], id, 0, false, true);
+			this.attachItem( this.selectedNodeId);
 		}	
 				
 	} else {
 		// If the item is selected, then disable settingsform and detach
 		this.settingsFormAllFieldToggle(false);		
+		this.selectedNodeId = event.target.value;
+		if (!this.nodes.hasOwnProperty( this.selectedNodeId )) return;
+		this.nodes[this.selectedNodeId].row.remove();
+		this.nodes[this.selectedNodeId].classCourse.viewState = "invisible"; // keep it.for now.
 		this.detachItem(event.target.value);			
 	} 
 }
