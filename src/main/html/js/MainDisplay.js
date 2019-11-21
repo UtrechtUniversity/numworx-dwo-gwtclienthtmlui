@@ -553,6 +553,5 @@ MainDisplay.prototype.localize = function() {
 }
 	
 MainDisplay.prototype.onIdle = function() {
-	alert("ON IDLE..." );
 	app.getPresenterFactory().getMainPresenter().onIdle();
 }
