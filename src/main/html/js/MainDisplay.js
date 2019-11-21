@@ -218,6 +218,18 @@ MainDisplay.prototype.selectView = function(view) {
 	this.$nav.find("ul").attr('class', view);
 }
 
+MainDisplay.prototype.setIdleTimeout = function(millis) {
+    this.unsetIdleTimeout();
+	this.$body.idle( {
+		onIdle: $.proxy(this.onIdle, this),
+		idle: millis
+	});
+}
+MainDisplay.prototype.unsetIdleTimeout = function() {
+	this.$body.trigger("idle:stop");
+}
+
+
 /*
  * VIEW FUNCTIONS
  * Maps to java implementation
@@ -526,7 +538,6 @@ MainDisplay.prototype.clickWherever = function(event) {
 	}
 }
 
-
 MainDisplay.prototype.clickLogo = function(event) {
 	event.preventDefault();
 	var view = event.currentTarget.hash.substr(1);
@@ -541,3 +552,7 @@ MainDisplay.prototype.localize = function() {
 	this.$panel.find("[data-translate]").each( Helpers.translate );
 }
 	
+MainDisplay.prototype.onIdle = function() {
+	alert("ON IDLE..." );
+	app.getPresenterFactory().getMainPresenter().onIdle();
+}
