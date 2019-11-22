@@ -132,7 +132,7 @@ ModulesOfSchoolclassDisplay.prototype.addRowToTable = function(el, id, i, select
 		$row = this.$selectRow.clone();
 		$row.prop('tabindex', i);
 		$row.find("#modulesOfSchoolclassDisplaySelectId").val( id ).removeAttr("id");
-		$row.find("#modulesOfSchoolclassDisplaySelectName").html( el.course.name ).removeAttr("id");
+		$row.find("#modulesOfSchoolclassDisplaySelectName").html( Helpers.htmlEscape(el.course.name) ).removeAttr("id");
 	
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;

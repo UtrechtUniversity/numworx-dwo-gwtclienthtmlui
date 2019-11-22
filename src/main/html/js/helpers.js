@@ -313,5 +313,27 @@ Helpers.getUrlParameter = function(sParam) {
     }
 }
 
+Helpers.htmlEscape = function(str) {
+   if(!str) {
+	   return str
+   }
+   return str
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/\//g, '&#x2F;');
+}
 
+Helpers.htmlUnescape = function(str) {
+	if(!str) return str
+    return str
+    	.replace(/&#x2F;/g, "/")
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&');
+}
 

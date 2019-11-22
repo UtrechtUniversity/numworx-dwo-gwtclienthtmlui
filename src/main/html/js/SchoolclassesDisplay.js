@@ -90,7 +90,7 @@ SchoolclassesDisplay.prototype.updateView = function(json) {
 		$row = this.$chooseSchoolclassRow.clone();
 		$row.prop('tabindex', i);
 		$row.find("#chooseSchoolclassId").val( id ).removeAttr("id");
-		$row.find("#chooseSchoolclassName").html( el ).attr('data-sortvalue', el).removeAttr("id");
+		$row.find("#chooseSchoolclassName").html( Helpers.htmlEscape(el) ).attr('data-sortvalue', el).removeAttr("id");
 
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;

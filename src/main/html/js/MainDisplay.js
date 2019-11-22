@@ -185,6 +185,7 @@ MainDisplay.prototype.setPremium = function (set) {
 }
 
 MainDisplay.prototype.setPresentationName = function (presentationName) {
+	presentationName = Helpers.htmlEscape(presentationName)
 	this.$accountMenuPresentationName.html(presentationName);
 	this.$headerPresentationName.html(presentationName);
 };
@@ -203,8 +204,8 @@ MainDisplay.prototype.setTrails = function(row) {
 		this.$trails.html("")
 		for(var i = 0; i < row.length; i++) {
 			var item = row[i];
-			var title = item.title;
-			var command = item.command;
+			var title = Helpers.htmlEscape(item.title);
+			var command = Helpers.htmlEscape(item.command);
 			var $a = $("<a href='#" + command + "'>" + title + "</a>");
 			$a.on("click", $.proxy(this.clickMenuItem, this));
 			this.$trails.append($a);

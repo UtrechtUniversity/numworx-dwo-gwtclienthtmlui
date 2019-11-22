@@ -197,7 +197,7 @@ EditSchoolclassesDisplay.prototype.showStudents = function(json) {
 		studentName = students[id].givenName + (students[id].insertion ? " "+students[id].insertion : "") + " " + students[id].familyName;
 		studentSortName = students[id].familyName + " " + students[id].givenName + (students[id].insertion ? " "+students[id].insertion : "");
 		$row = this.$changeStudentsRow.clone();
-		$row.find("#chooseStudentName").html( studentName ).attr('data-sortvalue', studentSortName).removeAttr("id");
+		$row.find("#chooseStudentName").html( Helpers.htmlEscape(studentName) ).attr('data-sortvalue', studentSortName).removeAttr("id");
 		this.$changeStudentsTableBody.append($row);
 		i++;
 	}
@@ -223,7 +223,7 @@ EditSchoolclassesDisplay.prototype.showTeachers = function(json) {
 		teacherSortName = teachers[id].familyName + " " + teachers[id].givenName + (teachers[id].insertion ? " "+teachers[id].insertion : "");
 		
 		$row = this.$changeTeachersRow.clone();
-		$row.find("#chooseTeacherName").html( teacherName ).attr('data-sortvalue', teacherSortName).removeAttr("id");
+		$row.find("#chooseTeacherName").html( Helpers.htmlEscape(teacherName) ).attr('data-sortvalue', teacherSortName).removeAttr("id");
 		this.$changeTeachersTableBody.append($row);
 		i++;
 	}
@@ -248,7 +248,7 @@ EditSchoolclassesDisplay.prototype.showShowModels = function(json) { // TODO: ch
 		//console.log(modules[id]);
 		moduleName = modules[id].name;
 		$row = this.$changeModulesRow.clone();
-		$row.find("#chooseModuleName").html( moduleName ).attr('data-sortvalue', moduleName).removeAttr("id");
+		$row.find("#chooseModuleName").html( Helpers.htmlEscape(moduleName) ).attr('data-sortvalue', moduleName).removeAttr("id");
 		this.$changeModulesTableBody.append($row);
 		i++;
 	}	
