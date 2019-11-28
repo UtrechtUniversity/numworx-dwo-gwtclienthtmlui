@@ -83,7 +83,7 @@ AddPersonDisplay.prototype.showSchoolClasses = function(json) {
 		el = schoolclasses[id].schoolClass;
 		$row = this.$addPersonSchoolclassesRow.clone();
 		$row.prop('tabindex', i);
-		$row.find("#addPersonSchoolclassName").html( Helpers.htmlEscale(el.schoolClassName) ).attr('data-sortvalue', el.schoolClassName).removeAttr("id");
+		$row.find("#addPersonSchoolclassName").html( Helpers.htmlEscape(el.schoolClassName) ).attr('data-sortvalue', el.schoolClassName).removeAttr("id");
 	
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			
