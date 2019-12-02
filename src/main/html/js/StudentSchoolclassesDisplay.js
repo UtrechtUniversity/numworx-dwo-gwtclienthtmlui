@@ -77,7 +77,7 @@ StudentSchoolclassesDisplay.prototype.setSchoolClasses = function (json) {
 		el = schoolclasses[id].schoolClass;
 		$row = this.$schoolclassRow.clone();
 		$row.prop('tabindex', i);
-		$row.find("#updateSchoolclassViewClass").html( el.schoolClassName ).attr('data-sortvalue', el.schoolClassName).removeAttr("id");
+		$row.find("#updateSchoolclassViewClass").html( Helpers.htmlEscape(el.schoolClassName) ).attr('data-sortvalue', el.schoolClassName).removeAttr("id");
 		
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;
@@ -119,7 +119,7 @@ StudentSchoolclassesDisplay.prototype.showSchoolClasses = function(json) {
 	
 	for (var id in this.schoolClasses) { 
 		$option = this.$schoolClassSelectOption.clone();		
-		$option.val( id ).removeAttr("id").html( this.schoolClasses[id].schoolClass.schoolClassName );
+		$option.val( id ).removeAttr("id").html( Helpers.htmlEscape(this.schoolClasses[id].schoolClass.schoolClassName) );
 		this.$schoolClassSelect.append($option);
 	}
 }

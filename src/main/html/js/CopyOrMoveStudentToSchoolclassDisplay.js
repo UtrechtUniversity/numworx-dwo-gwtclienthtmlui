@@ -105,7 +105,7 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.showStudents = function(json, $t
 		studentSortName = students[id].familyName + " " + students[id].givenName + (students[id].insertion ? " "+students[id].insertion : "");
 		
 		$row = $templateRow.clone();
-		$row.find(nameId).html( studentName ).attr('data-sortvalue', studentSortName).removeAttr("id");
+		$row.find(nameId).html( Helpers.htmlEscape(studentName) ).attr('data-sortvalue', studentSortName).removeAttr("id");
 		
 		
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
@@ -212,7 +212,7 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.setClassList = function(schoolcl
 		$row = this.$classesRow.clone();
 		$row.prop('tabindex', i);
 		$row.find("#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelectId").val( id ).removeAttr("id");
-		$row.find("#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelectClassName").html( el.schoolClassName ).attr('data-sortvalue', el.schoolClassName).removeAttr("id");
+		$row.find("#updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelectClassName").html( Helpers.htmlEscape(el.schoolClassName) ).attr('data-sortvalue', el.schoolClassName).removeAttr("id");
 
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;
@@ -261,11 +261,12 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.clickClassesRow = function(event
 	
 	Helpers.selectTableRow(event);
 	
-	for (var i = 0; i < this.classesForm.elements["schoolclass"].length; i++) 
-		if (this.classesForm.elements["schoolclass"][i].checked) break;
-	
-	this.setClass(this.classesForm.elements["schoolclass"][i].value); // bypass submit
-	
+//	for (var i = 0; i < this.classesForm.elements["schoolclass"].length; i++) 
+//		if (this.classesForm.elements["schoolclass"][i].checked) break;
+//	
+//	this.setClass(this.classesForm.elements["schoolclass"][i].value); // bypass submit
+	var value = $(event.target).closest("tr").find("input").get(0).value;
+	this.setClass(value);
 	this.classAFormToggle();
 	this.classBFormToggle();
 }

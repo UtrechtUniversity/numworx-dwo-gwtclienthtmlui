@@ -293,7 +293,7 @@ form {
 	}
 	
 	// Styles for modules that have been activated once before, no impact on JS, only different unchecked style
-	&.previouslyChecked label.icon, &.thirdState label.icon {
+	&.previouslyChecked label.icon, &.thirdState label.icon, &.pC label.icon {
 		background-color: $shade22;
 		
 		border: $borderThickness $shade22 solid;

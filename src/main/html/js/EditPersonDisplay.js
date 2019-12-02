@@ -180,7 +180,7 @@ EditPersonDisplay.prototype.setSchoolClasses = function (json) {
 		el = schoolclasses[id].schoolClass;
 		$row = this.$editPersonSchoolclassesRow.clone();
 		$row.prop('tabindex', i);
-		$row.find("#editPersonSchoolclassName").html( el.schoolClassName ).attr('data-sortvalue', el.schoolClassName).removeAttr("id");
+		$row.find("#editPersonSchoolclassName").html( Helpers.htmlEscape(el.schoolClassName) ).attr('data-sortvalue', el.schoolClassName).removeAttr("id");
 		
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;

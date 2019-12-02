@@ -176,7 +176,7 @@ ImportPersonsDisplay.prototype.showSchoolClasses = function(json) {
 		el = schoolclasses[id].schoolClass;
 		$row = this.$schoolclassesRow.clone();
 		$row.prop('tabindex', i);
-		$row.find("#importPersonsSchoolclassName").html( el.schoolClassName ).attr('data-sortvalue', el.schoolClassName).removeAttr("id");
+		$row.find("#importPersonsSchoolclassName").html( Helpers.htmlEscape(el.schoolClassName) ).attr('data-sortvalue', el.schoolClassName).removeAttr("id");
 	
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			

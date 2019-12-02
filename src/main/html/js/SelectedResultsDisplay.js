@@ -97,9 +97,9 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 		$value = null;
 	
 	// set title above table 
-	if (matrix[0][0].resultsTitle) this.$selectedResultsTitle.find(".text").html(matrix[0][0].resultsTitle); 
+	if (matrix[0][0].resultsTitle) this.$selectedResultsTitle.find(".text").html(Helpers.htmlEscape(matrix[0][0].resultsTitle)); 
 	else this.$selectedResultsTitle.find(".text").html("");
-	if (matrix[0][0].resultsTitlePrefix) this.$selectedResultsTitle.find(".prefix").html(matrix[0][0].resultsTitlePrefix); 
+	if (matrix[0][0].resultsTitlePrefix) this.$selectedResultsTitle.find(".prefix").html(Helpers.htmlEscape(matrix[0][0].resultsTitlePrefix)); 
 	else this.$selectedResultsTitle.find(".prefix").html("");
 	
 	
@@ -110,7 +110,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 	for (var i = 1; i < matrix[0].length; i++) {
 				// Header names
 		$headerName = this.$selectedResultsColumnHeaderName.clone();
-		$value = $("<span>" + matrix[0][i].label + "</span>");
+		$value = $("<span>" + Helpers.htmlEscape(matrix[0][i].label) + "</span>");
 		$headerName.html("").append($value);		
 		if (matrix[0][i].callback) {
 			$value.on('click', $.proxy(matrix[0][i].callback, this, matrix[0][i].params));
@@ -131,7 +131,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 	$theadRow3.append('<th class="fill">&nbsp;</th>');	
 	$theadRow2.append('<th class="fill">&nbsp;</th>');	
 	
-	$table.find(".tableTitle").html(matrix[0][0].label);
+	$table.find(".tableTitle").html(Helpers.htmlEscape(matrix[0][0].label));
 	
 	// BUILD BODY
 	$tbody.html("");

@@ -140,10 +140,10 @@ PersonsDisplay.prototype.showPersons = function(json) {
 	for (var id in persons) { 
 		$row = this.$personsRow.clone();		
 		$row.find("#personsTableId").val( id ).removeAttr("id");
-		$row.find("#personsTableUserName").html( persons[id].userName ).attr('data-sortvalue', persons[id].userName).removeAttr("id");
-		$row.find("#personsTableGivenName").html( persons[id].givenName ).attr('data-sortvalue', persons[id].givenName).removeAttr("id");
-		$row.find("#personsTableInsertion").html( persons[id].insertion ).attr('data-sortvalue', persons[id].insertion).removeAttr("id");
-		$row.find("#personsTableFamilyName").html( persons[id].familyName ).attr('data-sortvalue', persons[id].familyName).removeAttr("id");
+		$row.find("#personsTableUserName").html( Helpers.htmlEscape(persons[id].userName )).attr('data-sortvalue', persons[id].userName).removeAttr("id");
+		$row.find("#personsTableGivenName").html( Helpers.htmlEscape(persons[id].givenName )).attr('data-sortvalue', persons[id].givenName).removeAttr("id");
+		$row.find("#personsTableInsertion").html( Helpers.htmlEscape(persons[id].insertion )).attr('data-sortvalue', persons[id].insertion).removeAttr("id");
+		$row.find("#personsTableFamilyName").html( Helpers.htmlEscape(persons[id].familyName )).attr('data-sortvalue', persons[id].familyName).removeAttr("id");
 		
 		
 		if (persons[id].singleSchool) $row.find("#personsTableEditDetails").addClass("active");

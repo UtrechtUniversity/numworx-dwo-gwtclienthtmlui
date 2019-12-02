@@ -78,8 +78,8 @@ StudentScoResultDisplay.prototype.init = function (state) {
 	activeStudent = this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeStudent];		
 	
 	
-	this.$nameHeader.html(activeStudent.givenName + " " + (activeStudent.insertion ? activeStudent.insertion+" ":"")  + activeStudent.familyName);
-	this.$activityHeader.html(activeActivity.label);
+	this.$nameHeader.html(Helpers.htmlEscape(activeStudent.givenName + " " + (activeStudent.insertion ? activeStudent.insertion+" ":"")  + activeStudent.familyName));
+	this.$activityHeader.html(Helpers.htmlEscape(activeActivity.label));
 	
 	this.studentScoResultActionsForm.elements["seal"][1].checked = true;
 	for (scoContextId in activeActivity.children) {

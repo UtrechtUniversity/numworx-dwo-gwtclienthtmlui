@@ -67,7 +67,7 @@ ResultsDisplay.prototype.setChooseClassTable = function() {
 	
 	for (var id in this.resultState.resultsTree.children) {
 		$row = this.$chooseClassRow.clone();
-		$row.find("#chooseClassAndModulesClassname").html( this.resultState.resultsTree.children[id].label ).attr('data-sortvalue', this.resultState.resultsTree.children[id].label).removeAttr("id");
+		$row.find("#chooseClassAndModulesClassname").html( Helpers.htmlEscape(this.resultState.resultsTree.children[id].label) ).attr('data-sortvalue', this.resultState.resultsTree.children[id].label).removeAttr("id");
 		
 		$row.find("input[type='checkbox'],input[type='radio']").each( function(index, el) {
 			el.value = id;
@@ -125,7 +125,7 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 		
 		$row = this.$chooseModulesRow.clone();
 	
-		$row.find("#chooseClassAndModulesModuleName").html( course.label ).attr('data-sortvalue', course.label).removeAttr("id");
+		$row.find("#chooseClassAndModulesModuleName").html( Helpers.htmlEscape(course.label) ).attr('data-sortvalue', course.label).removeAttr("id");
 	
 		$row.find("input[type='checkbox'],input[type='radio']").each( function(index, el) {
 			el.value = sortedSchoolClassChildren[n].id;

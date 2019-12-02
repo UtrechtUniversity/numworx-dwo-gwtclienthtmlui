@@ -152,10 +152,10 @@ AddStudentToSchoolclassDisplay.prototype.showStudents = function(json) {
 	for (var id in students) { // TODO: probably change to array
 		$row = this.$addStudentRow.clone();		
 		$row.find("#addStudentAddId").val( id ).removeAttr("id");
-		$row.find("#addStudentAddUsername").html( students[id].userName ).attr('data-sortvalue',  students[id].userName).removeAttr("id");
-		$row.find("#addStudentAddGivenName").html( students[id].givenName ).attr('data-sortvalue',  students[id].givenName).removeAttr("id");
-		$row.find("#addStudentAddInsertion").html( students[id].insertion ).attr('data-sortvalue',  students[id].insertion).removeAttr("id");
-		$row.find("#addStudentAddFamilyName").html( students[id].familyName ).attr('data-sortvalue',  students[id].familyName).removeAttr("id");
+		$row.find("#addStudentAddUsername").html( Helpers.htmlEscape(students[id].userName) ).attr('data-sortvalue',  students[id].userName).removeAttr("id");
+		$row.find("#addStudentAddGivenName").html( Helpers.htmlEscape(students[id].givenName) ).attr('data-sortvalue',  students[id].givenName).removeAttr("id");
+		$row.find("#addStudentAddInsertion").html( Helpers.htmlEscape(students[id].insertion) ).attr('data-sortvalue',  students[id].insertion).removeAttr("id");
+		$row.find("#addStudentAddFamilyName").html( Helpers.htmlEscape(students[id].familyName) ).attr('data-sortvalue',  students[id].familyName).removeAttr("id");
 				 
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;
