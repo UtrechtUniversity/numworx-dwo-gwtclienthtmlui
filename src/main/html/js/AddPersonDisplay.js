@@ -139,8 +139,11 @@ AddPersonDisplay.prototype.addPerson = function() {
 		this.addPersonForm.elements['password'].value
 	);	
 	else if (role.value == 'D' && this.role === "SCHOOLADMIN")
+	{   var sc = this.addPersonForm.elements['schoolclass']
+		var value = "schoolid"
+		if (sc.length) value = sc[i].value;
 		app.getPresenterFactory().getAddStudentPresenter().submitTeacher( 
-				this.addPersonForm.elements['schoolclass'][i].value,
+				value,
 				this.addPersonForm.elements['userName'].value,
 				this.addPersonForm.elements['givenName'].value,
 				this.addPersonForm.elements['insertion'].value,
@@ -148,6 +151,7 @@ AddPersonDisplay.prototype.addPerson = function() {
 				this.addPersonForm.elements['email'].value,
 				this.addPersonForm.elements['password'].value
 			);	
+	}
 }
 
 
