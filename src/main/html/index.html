@@ -437,10 +437,12 @@
 			</div>
 			<div id="loginBox">
 				<div class="block primary">			
-					<form id="formLogin" name="login" action="javascript: void(0);" method="POST">
+					<form id="formLogin" name="login" action="javascript: void(0);">
+<!--SAMLSTART-->
 						<label for="username">&nbsp;<input type="text" name="username" data-translate="NUM_LBL_USERNAME" placeholder="Gebruikersnaam" /></label>
 						<label for="password">&nbsp;<input type="password" name="password" data-translate="NUM_LBL_PASSWORD" placeholder="Wachtwoord" /></label>
-						<input type="submit" class="right" name="submit" value="Aanmelden" data-translate="NUM_BTN_LOGIN" /> <!-- data-translate="NUM_Button_Ok"  -->
+						<input type="submit" class="right" name="submit" value="Aanmelden" data-translate="NUM_BTN_LOGIN" /> data-translate="NUM_Button_Ok" 
+<!--SAMLEND-->
 						<span id="loginDisplayPanelWarningBox"></span>
 						<div style='float:left;font-size:13px' ><span data-translate='NUM_LBL_LOGINGUEST'>U kunt ook inloggen als gast. Uw werk wordt dan NIET opgeslagen<span></span></div>
 						<button class='right' name='guestlogin'  type='button' ><span data-translate='NUM_BTN_LOGINGUEST'>LOGIN ALS GAST</span></button>
@@ -448,8 +450,10 @@
 				</div>
 			
 				<ul id="loginLinks">
+<!--SAMLSTART-->
                          <li><a href="/dwo/rest/public/user/requestNewPassword#FORGOT"><span  data-translate="NUM_LBL_Q_PASWORD_FORGOTTEN">Wachtwoord vergeten?</span></a></li>
                          <li><a href="/dwo/register/?locale=nl#REGISTER"><span data-translate="NUM_LBL_Q_NO_ACCOUNT">Nog geen account?</span></a></li>
+<!--SAMLEND-->
                          <li><a href="https://www.numworx.nl" target="_top"><span  data-translate="NUM_LBL_MORE_ON_NUMWORX">Meer informatie over Numworx</span></a></li>
 				</ul>
 			</div>
@@ -604,6 +608,7 @@
 				<div class="row">
 					<form name="updateUser" autocomplete="off" >
 						<fieldset>
+<!--SAMLSTART-->
 							<label for="updateUserPassword" class="col-2 input">
 								<span data-translate="NUM_LBL_CUR_PASSWORD">huidig ww</span>
 								<input id="updateUserPassword" name="currentPassword" type="password" autocomplete="new-password" />
@@ -620,7 +625,7 @@
 								<input id="accountRemove" type="submit" class="danger right top" data-translate="NUM_BTN_Remove" value="Verwijder" />
 							</div>
 							<div class="clear"></div>
-							
+<!--SAMLEND-->							
 							<label for="updateUserGivenName" class="col-2 input">
                                                             <span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 								<input id="updateUserGivenName" name="givenName" type="text" value="" />
@@ -637,10 +642,11 @@
 								<span data-translate="NUM_TBL_EMAIL">Email</span>
 								<input id="updateUserEmail" name="email" type="text" value="" />
 							</label>							
-							
+<!--SAMLSTART-->							
 							<div class="col-4">
 								<input type="submit" class="primary right bottom" data-translate="NUM_BTN_Save" value="Sla op" />
 							</div>
+<!--SAMLEND-->
 						</fieldset>						
 					</form>					
 				</div>
@@ -760,7 +766,7 @@
 							</label>
 							<label for="schoolCode" class="col-2 input"><span data-translate="NUM_LBL_SCHOOLPASSWORD">
                                                                 Sleutelcode school</span>
-								<input id="schoolCode" autocomplete="new-password" name="schoolCode" type="password" value="" />
+								<input id="schoolCode" autocomplete="off" name="schoolCode" type="password" value="" />
 							</label>
 							
 							

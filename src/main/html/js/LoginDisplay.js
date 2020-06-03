@@ -6,9 +6,13 @@ function LoginDisplay() {
 	// Setup properties
 	this.$panel = jQuery("#loginDisplayPanel");
 	this.$loginForm = $(this.loginForm);
+	if (this.loginForm.elements["password"]) {
 	this.usernameField = this.loginForm.elements["username"];
 	this.passwordField = this.loginForm.elements["password"];
-	
+	} else {
+	 this.usernameField = {};
+	 this.passwordField = {};
+	}
 	this.$warningBox = $("#loginDisplayPanelWarningBox");
 	this.$messageBox = $("#loginDisplayPanelMessageBox");
 
