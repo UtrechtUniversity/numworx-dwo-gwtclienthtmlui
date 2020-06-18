@@ -71,10 +71,13 @@ AccountDisplay.prototype.clear = function () {
 	this.updateUserForm.elements["familyName"].value = "";
 	this.updateUserForm.elements["givenName"].value = "";
 	this.updateUserForm.elements["insertion"].value = "";
-	this.updateUserForm.elements["currentPassword"].value = "";
-	this.updateUserForm.elements["newPassword"].value = "";
-	this.updateUserForm.elements["newPasswordAgain"].value = "";
-	
+	if (this.updateUserForm.elements["currentPassword"])  {
+		this.updateUserForm.elements["currentPassword"].value = "";
+		this.updateUserForm.elements["newPassword"].value = "";
+		this.updateUserForm.elements["newPasswordAgain"].value = "";
+	} else {
+	 	console.log("under saml");
+	}
 	this.resetSorting();
 	
 	this.clearAddSchoolLogin();
