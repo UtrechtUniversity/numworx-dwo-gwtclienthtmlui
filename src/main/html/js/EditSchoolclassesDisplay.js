@@ -154,12 +154,12 @@ EditSchoolclassesDisplay.prototype.showSchoolClass = function(json) {
 		this.editSchoolclassForm.elements["useClasskey"][0].checked = true; //yes
 		this.editSchoolclassForm.elements["useClasskey"][0].dataset.original = 1;
 		this.editSchoolclassForm.elements["useClasskey"][1].checked = false;
-		this.editSchoolclassForm.elements["useClasskey"][0].dataset.original = 0;
+		this.editSchoolclassForm.elements["useClasskey"][1].dataset.original = 0;
 	} else {
 		this.editSchoolclassForm.elements["useClasskey"][0].checked = false;
 		this.editSchoolclassForm.elements["useClasskey"][0].dataset.original = 0;
 		this.editSchoolclassForm.elements["useClasskey"][1].checked = true;
-		this.editSchoolclassForm.elements["useClasskey"][0].dataset.original = 1;
+		this.editSchoolclassForm.elements["useClasskey"][1].dataset.original = 1;
 	} 
 	
 	if (schoolclass.iconizer == true) {
