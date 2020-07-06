@@ -192,10 +192,10 @@ OrganisationDisplay.prototype.showPersons = function(data, role) {
 	for (var id in persons) { 		
 		$row = this.$personsTableRow.clone();		
 		//$row.find("#organisationPersonsTableId").val( id ).removeAttr("id");
-		$row.find("#organisationPersonsTableUserName").html( persons[id].user.userName ).attr('data-sortvalue', persons[id].user.userName).removeAttr("id");
-		$row.find("#organisationPersonsTableGivenName").html( persons[id].user.givenName ).attr('data-sortvalue', persons[id].user.givenName).removeAttr("id");
-		$row.find("#organisationPersonsTableInsertion").html( persons[id].user.insertion ).attr('data-sortvalue', persons[id].user.insertion).removeAttr("id");
-		$row.find("#organisationPersonsTableFamilyName").html( persons[id].user.familyName ).attr('data-sortvalue', persons[id].user.familyName).removeAttr("id");		
+		$row.find("#organisationPersonsTableUserName").html( Helpers.htmlEscape(persons[id].user.userName )).attr('data-sortvalue', persons[id].user.userName).removeAttr("id");
+		$row.find("#organisationPersonsTableGivenName").html( Helpers.htmlEscape(persons[id].user.givenName )).attr('data-sortvalue', persons[id].user.givenName).removeAttr("id");
+		$row.find("#organisationPersonsTableInsertion").html( Helpers.htmlEscape(persons[id].user.insertion )).attr('data-sortvalue', persons[id].user.insertion).removeAttr("id");
+		$row.find("#organisationPersonsTableFamilyName").html( Helpers.htmlEscape(persons[id].user.familyName )).attr('data-sortvalue', persons[id].user.familyName).removeAttr("id");		
 
 		if (persons[id].memberOf.length > 0) {
 			schoolClassName = "";
@@ -204,7 +204,7 @@ OrganisationDisplay.prototype.showPersons = function(data, role) {
 			}
 			schoolClassName = schoolClassName.substr(0, schoolClassName.length - 2);
 
-			$row.find("#organisationPersonsTableSchoolClass").attr( "data-ids", JSON.stringify(persons[id].memberOf) ).html( schoolClassName ).attr('data-sortvalue', schoolClassName).attr("title", schoolClassName).removeAttr("id");
+			$row.find("#organisationPersonsTableSchoolClass").attr( "data-ids", JSON.stringify(persons[id].memberOf) ).html( Helpers.htmlEscape(schoolClassName) ).attr('data-sortvalue', schoolClassName).attr("title", schoolClassName).removeAttr("id");
 		} else {
 			$row.find("#organisationPersonsTableSchoolClass").attr( "data-ids", JSON.stringify(persons[id].memberOf) ).html( "" ).attr('data-sortvalue', "").removeAttr("id");
 		}
@@ -269,7 +269,7 @@ OrganisationDisplay.prototype.showSchoolClasses = function(json) {
 	
 	for (var id in this.schoolClasses) { 
 		$option = this.$schoolClassSelectOption.clone();		
-		$option.val( id ).removeAttr("id").html( this.schoolClasses[id].schoolClass.schoolClassName );
+		$option.val( id ).removeAttr("id").html( Helpers.htmlEscape(this.schoolClasses[id].schoolClass.schoolClassName) );
 		this.$schoolClassSelect.append($option);
 	}
 	$option = this.$schoolClassSelectOption.clone();
