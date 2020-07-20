@@ -154,12 +154,12 @@ EditSchoolclassesDisplay.prototype.showSchoolClass = function(json) {
 		this.editSchoolclassForm.elements["useClasskey"][0].checked = true; //yes
 		this.editSchoolclassForm.elements["useClasskey"][0].dataset.original = 1;
 		this.editSchoolclassForm.elements["useClasskey"][1].checked = false;
-		this.editSchoolclassForm.elements["useClasskey"][0].dataset.original = 0;
+		this.editSchoolclassForm.elements["useClasskey"][1].dataset.original = 0;
 	} else {
 		this.editSchoolclassForm.elements["useClasskey"][0].checked = false;
 		this.editSchoolclassForm.elements["useClasskey"][0].dataset.original = 0;
 		this.editSchoolclassForm.elements["useClasskey"][1].checked = true;
-		this.editSchoolclassForm.elements["useClasskey"][0].dataset.original = 1;
+		this.editSchoolclassForm.elements["useClasskey"][1].dataset.original = 1;
 	} 
 	
 	if (schoolclass.iconizer == true) {
@@ -353,12 +353,32 @@ EditSchoolclassesDisplay.prototype.editSchoolclassFormToggle = function() {
 }
 
 EditSchoolclassesDisplay.prototype.requiredFieldsEditSchoolclassForm = function() {
-	return this.editSchoolclassForm.elements["classname"].value != ""
-			&& ( this.editSchoolclassForm.elements["useClasskey"][0].checked ? this.editSchoolclassForm.elements["classkey"].value  != "" : true)
-			&& (   this.editSchoolclassForm.elements["classname"].value != this.editSchoolclassForm.elements["classname"].dataset.original
-		 		   || this.editSchoolclassForm.elements["classkey"].value != this.editSchoolclassForm.elements["classkey"].dataset.original
-	 		       || (this.editSchoolclassForm.elements["useClasstree"][0].checked ? !this.editSchoolclassForm.elements["useClasstree"][0].dataset.original : this.editSchoolclassForm.elements["useClasstree"][0].dataset.original)
-				   || (this.editSchoolclassForm.elements["useClasskey"][0].checked ? !this.editSchoolclassForm.elements["useClasskey"][0].dataset.original : this.editSchoolclassForm.elements["useClasskey"][0].dataset.original) );
+	var classNameNotEmpty = this.editSchoolclassForm.elements["classname"].value != ""
+//	console.log("classname " + classNameNotEmpty);
+	var classKeyNotEmpty = ( this.editSchoolclassForm.elements["useClasskey"][0].checked ? this.editSchoolclassForm.elements["classkey"].value  != "" : true);
+//	console.log("classkey = " + classKeyNotEmpty);
+	var classNameChanged = this.editSchoolclassForm.elements["classname"].value != this.editSchoolclassForm.elements["classname"].dataset.original;
+//	console.log("classNameChanged = " + classNameChanged);
+	var classKeyChanged = this.editSchoolclassForm.elements["classkey"].value != this.editSchoolclassForm.elements["classkey"].dataset.original;
+//	console.log("classKeyChanged = " + classKeyChanged);
+	var useTreeChanged = (this.editSchoolclassForm.elements["useClasstree"][0].checked ? "1"==this.editSchoolclassForm.elements["useClasstree"][1].dataset.original : "1"==this.editSchoolclassForm.elements["useClasstree"][0].dataset.original);
+//	console.log("useTreeChanged " + useTreeChanged);
+	var useKeyChanged = (this.editSchoolclassForm.elements["useClasskey"][0].checked ? "1"==this.editSchoolclassForm.elements["useClasskey"][1].dataset.original : "1"==this.editSchoolclassForm.elements["useClasskey"][0].dataset.original)
+//	console.log("useKeyChanged = " + useKeyChanged);
+
+//	var keyChecked = this.editSchoolclassForm.elements["useClasskey"][0].checked;
+//	var keyon = "1"==this.editSchoolclassForm.elements["useClasskey"][1].dataset.original
+//	var keyoff = "1"==this.editSchoolclassForm.elements["useClasskey"][0].dataset.original;
+//
+//	var treeChecked = this.editSchoolclassForm.elements["useClasstree"][0].checked;
+//	var treeon = "1"==this.editSchoolclassForm.elements["useClasstree"][1].dataset.original;
+//	var treeoff = "1"==this.editSchoolclassForm.elements["useClasstree"][0].dataset.original
+
+	return classNameNotEmpty && classKeyNotEmpty
+			&& (      classNameChanged
+		 		   || classKeyChanged
+	 		       || useTreeChanged
+				   || useKeyChanged );
 }
 
 EditSchoolclassesDisplay.prototype.classKeyToggle = function(value) {

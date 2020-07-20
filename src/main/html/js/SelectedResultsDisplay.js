@@ -2,6 +2,7 @@ function SelectedResultsDisplay() {
 	this.resultState = null;
 	this.prevLeft = 0; // Scroll state
 	this.scrollTimer = null; //scroll Timer
+	this.showpages = false; // start normalmode.
 	
 	// Form
 	// disabled this.sealModuleActivitiesForm = document.forms["sealModuleActivities"];
@@ -144,7 +145,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 		$tableRowHeader = this.$selectedResultsRowHeader.clone();
 		$tableRowHeader.html("");
 		
-		$value = $("<span title=\""+matrix[i][0].label+"\">" + matrix[i][0].label + "</span>");
+		$value = $("<span title=\""+Helpers.htmlEscape(matrix[i][0].label)+"\">" + Helpers.htmlEscape(matrix[i][0].label) + "</span>");
 		if (matrix[i][0].sortValue) $value.attr("data-sortvalue", matrix[i][0].sortValue );		
 		else $value.attr("data-sortvalue", matrix[i][0].sortValue );		
 		
@@ -467,8 +468,8 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 						matrix[i][j].sortValue = -1;
 						matrix[i][j].value = "";
 					} else {
-						matrix[i][j].label = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ? "+"+sortedStudentScoChildren[n].bonus : "") +" / " + sortedStudentScoChildren[n].maxScore;
-						matrix[i][j].score = (sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ? sortedStudentScoChildren[n].bonus : 0) ) / sortedStudentScoChildren[n].maxScore * 100;
+						matrix[i][j].label = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus != 0 ? (sortedStudentScoChildren[n].bonus>0?"+":"")+sortedStudentScoChildren[n].bonus : "") +" / " + sortedStudentScoChildren[n].maxScore;
+						matrix[i][j].score = (sortedStudentScoChildren[n].sumScore + (sortedStudentScoChildren[n].bonus) ) / sortedStudentScoChildren[n].maxScore * 100;
 						matrix[i][j].sortValue = matrix[i][j].value = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ?sortedStudentScoChildren[n].bonus : 0);
 						matrix[i][j].callback = this.clickPageResultIndicator;
 						matrix[i][j].params = { scoId: this.resultState.activeActivity, studentId: studentId, pageSequence: sortedStudentScoChildren[n].sequence };
@@ -570,6 +571,7 @@ SelectedResultsDisplay.prototype.modulesStudents = function() {
 	this.$barModulesStudentsBacklink.off('click');
 	this.$barModulesStudentsBacklink.click($.proxy(this.clickBackToResults, this));
 	this.$barModulesStudents.show();
+	this.showpages = false;
 	this.plotMatrix(matrix);
 	//this.filterIndicatorModulesStudents();
 }
@@ -583,6 +585,7 @@ SelectedResultsDisplay.prototype.activitiesStudent = function(params) {
 	//this.$barActivitiesStudentBacklink.html("Terug naar <b>Alle geselecteerde modules</b>");
 	this.$barActivitiesStudentBacklink.off('click');
 	this.$barActivitiesStudentBacklink.click($.proxy(this.clickBackToModulesStudents, this));
+	this.showpages = false;
 	this.plotMatrix(matrix);
 }
 
@@ -590,6 +593,21 @@ SelectedResultsDisplay.prototype.backToActivitiesStudents = function(params) {
 	app.getPresenterFactory().getSelectedResultsPresenter().abandonPages();
 	this.activitiesStudents(params);
 }
+
+SelectedResultsDisplay.prototype.backtoCurrentActivitiesStudents = function() {
+	if (this.showpages) {
+		app.getPresenterFactory().getSelectedResultsPresenter().abandonPages();
+		this.getPages(this.resultState.activeActivity)
+		return;
+	}
+	// Build backlink
+	var params = {};
+	params.module = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[ this.resultState.activeModule ];
+	params.moduleId = this.resultState.activeModule;
+	this.backToActivitiesStudents(params);
+}
+
+
 
 SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
 	//console.log(params);
@@ -613,7 +631,7 @@ SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
 	// disabled 	this.$sealCheckbox.parent().attr("checked", "checked");
 	// disabled 	this.$sealCheckbox.attr("disabled", "disabled");
 	// disabled }
-	
+	this.showpages = false;
 	this.plotMatrix(matrix);
 	//this.filterIndicatorActivitiesStudentsInModule();
 }
@@ -644,7 +662,7 @@ SelectedResultsDisplay.prototype.pagesStudents = function(params) {
 		this.$sealSingleActivityCheckbox.attr("checked", "checked");
 		this.$sealSingleActivityCheckbox.attr("disabled", "disabled");
 	}
-	
+	this.showpages = true;
 	this.plotMatrix(matrix);
 }
 

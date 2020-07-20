@@ -142,6 +142,7 @@ EditPersonDisplay.prototype.setUser = function (role,json) {
 	}
 	if (this.role == "STUDENT") { 
 		this.disableAndHideInputFieldsRegularStudent();	
+		this.hideSubmitButton();
 	}
 }
 
