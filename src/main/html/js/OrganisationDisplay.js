@@ -83,6 +83,7 @@ OrganisationDisplay.prototype.filterPersonsList = function () {
 			$result = this.$personsTableBody.find("tr");
 	} else {	
         var $result;
+  		this.$personsTableBody.find(".empty").remove();
         var rows = this.$personsTableBody.find("tr");
 
         $result = rows.filter(function() {
@@ -112,7 +113,7 @@ OrganisationDisplay.prototype.filterPersonsList = function () {
 	this.$personsTableBody.find("tr").hide();
 	if ($result.length > 0) {
 		$result.show();
-		this.$personsTableBody.find(".empty").hide();
+		this.$personsTableBody.find(".empty").remove();
 	} else {
 		if ( this.$personsTableBody.find(".empty").length > 0 ) this.$personsTableBody.find(".empty").show();
 		else this.$personsTableBody.append('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
@@ -248,9 +249,12 @@ OrganisationDisplay.prototype.initChooseClass = function(bool) {
  * initialise the edit modules radio buttons.
  * @param bool ja/nee
  */
-OrganisationDisplay.prototype.initEditModules = function(bool) {
+OrganisationDisplay.prototype.initEditModules = function(bool, xs, premium) {
 	this.editModulesButton[0].checked = bool;
-	this.editModulesButton[1].checked = !bool;
+	this.editModulesButton[1].checked = !bool && !xs;
+	this.editModulesButton[2].checked = xs;
+	var p = $("#editModulesPremium");
+	if (premium) p.show(); else p.hide();
 	return;
 }
 
@@ -293,8 +297,8 @@ OrganisationDisplay.prototype.setChooseClass = function(bool) {
  * a true/false voor: "docenten kunnen zelf modules aanpassen".
  * upcall naar presenter
  */
-OrganisationDisplay.prototype.setEditModules = function(bool) {
-	app.getPresenterFactory().getOrganisationPresenter().setEditModules(bool);
+OrganisationDisplay.prototype.setEditModules = function(bool, xs) {
+	app.getPresenterFactory().getOrganisationPresenter().setEditModules(bool, xs);
 }
 
 /**
@@ -332,7 +336,8 @@ OrganisationDisplay.prototype.changeChooseClassButton = function(event) {
 OrganisationDisplay.prototype.changeEditModulesButton = function(event) {
 	event.preventDefault();	
 	var value = this.editModulesButton.value == 'Y' ? true : false;
-	this.setEditModules(value);
+	var xs    = this.editModulesButton.value == 'M' ? true : false;
+	this.setEditModules(value, xs);
 }
 
 OrganisationDisplay.prototype.changeSelectRoleButton = function(event) {
