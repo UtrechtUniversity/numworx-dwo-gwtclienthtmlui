@@ -1,6 +1,6 @@
 var hashChange = function(event) {	
 					$("section").hide();
-					$(""+window.location.hash).show();
+					$(""+window.location.hash).attr("style", "display:block");
 				};
 
 $(document).ready(function(){ 
