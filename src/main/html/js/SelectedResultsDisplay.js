@@ -398,7 +398,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 // Below is not in use anymore
 SelectedResultsDisplay.prototype.getSealStateActivitiesStudentsInModule = function(module) {
 	var students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children;
-	var sealed = 0, unsealed = 0, state = 0;
+	var sealed = 0, unsealed = 0;
 	for (var studentId in students) {
 		for (var actId in module.children) {
 			for (var scoId in module.children[actId].children) { // Loop over activities
@@ -463,10 +463,12 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 				for (var n = 0; n < sortedStudentScoChildren.length; n++) {
 					matrix[i][j] = {};
 					if ( sortedStudentScoChildren[n].maxScore == null ) {
-						matrix[i][j].label = "";
+						matrix[i][j].label = "- / -";
 						matrix[i][j].score = 0;
 						matrix[i][j].sortValue = -1;
-						matrix[i][j].value = "";
+						matrix[i][j].value = 0;
+						matrix[i][j].callback = this.clickPageResultIndicator;
+						matrix[i][j].params = { scoId: this.resultState.activeActivity, studentId: studentId, pageSequence: sortedStudentScoChildren[n].sequence };
 					} else {
 						matrix[i][j].label = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus != 0 ? (sortedStudentScoChildren[n].bonus>0?"+":"")+sortedStudentScoChildren[n].bonus : "") +" / " + sortedStudentScoChildren[n].maxScore;
 						matrix[i][j].score = (sortedStudentScoChildren[n].sumScore + (sortedStudentScoChildren[n].bonus) ) / sortedStudentScoChildren[n].maxScore * 100;
@@ -495,16 +497,18 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 
 SelectedResultsDisplay.prototype.getSealStateSingleActivity = function(activity) {
 	var students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children;
-	var sealed = 0, unsealed = 0, state = 0;
+	var sealed = 0, unsealed = 0;
 	for (var studentId in students) {
+		var notfound = true
 		for (var studenScoId in activity.children) { // Loop over activities
 			if (activity.children[studenScoId]["user-id"] == studentId) { 
 				console.log(activity.children[studenScoId].completionStatus);
+				notfound = false;
 				if (activity.children[studenScoId].completionStatus == "completed") sealed++;
 				else unsealed++;				
 			}
-		}	
-		
+		}
+		if (notfound) unsealed++;
 	}
 	
 	if (sealed == 0) return 0; // none sealed
@@ -655,11 +659,12 @@ SelectedResultsDisplay.prototype.pagesStudents = function(params) {
 	
 	// Sealed checkbox
 	this.$sealSingleActivityCheckbox.parent().removeClass("thirdState");
-	this.$sealSingleActivityCheckbox.removeAttr("checked");
+	this.$sealSingleActivityCheckbox.prop('checked', false);
+	
 	this.$sealSingleActivityCheckbox.removeAttr("disabled");
 	if (sealState == 1) this.$sealSingleActivityCheckbox.parent().addClass("thirdState");
 	else if (sealState == 2) {
-		this.$sealSingleActivityCheckbox.attr("checked", "checked");
+		this.$sealSingleActivityCheckbox.prop("checked", true);
 		this.$sealSingleActivityCheckbox.attr("disabled", "disabled");
 	}
 	this.showpages = true;
