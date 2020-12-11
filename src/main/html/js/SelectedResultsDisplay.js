@@ -148,6 +148,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 		$value = $("<span title=\""+Helpers.htmlEscape(matrix[i][0].label)+"\">" + Helpers.htmlEscape(matrix[i][0].label) + "</span>");
 		if (matrix[i][0].sortValue) $value.attr("data-sortvalue", matrix[i][0].sortValue );		
 		else $value.attr("data-sortvalue", matrix[i][0].sortValue );		
+		if (matrix[i][0].userName)  $value.attr("data-username", matrix[i][0].userName);
 		
 		$tableRowHeader.append($value);
 		$row.append($tableRowHeader);
@@ -712,6 +713,18 @@ SelectedResultsDisplay.prototype.setEmtpyTableMessage = function () {
 	this.$selectedResultsTable.find("tbody").html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
 }
 
+SelectedResultsDisplay.prototype.studentOrder = function() {
+	var result = [];
+	var $table = this.$selectResultsTableWrap.find('table');
+	var $tbody = $table.find('tbody');
+	var tr = $tbody.find('tr');
+	
+	for(var i = tr.length; i--; result.unshift(tr[i].children[0].children[0].dataset['username']));
+	
+	return result;
+}
+
+
 /*
  * RETURN FUNCTIONS
  * Use java callbacks
@@ -719,7 +732,9 @@ SelectedResultsDisplay.prototype.setEmtpyTableMessage = function () {
 
 SelectedResultsDisplay.prototype.showStudentResults = function(scoId, studentId) {
 	this.resultState.activeActivity = scoId;
-	this.resultState.activeStudent = studentId;
+	this.resultState.activeStudent = studentId;	
+	this.resultState.studentOrder = this.studentOrder();
+	
 	app.getPresenterFactory().getSelectedResultsPresenter().showStudentResults(this.resultState, scoId, studentId, this.resultState.activeSchoolClass);
 }
 SelectedResultsDisplay.prototype.showStudentResultsPage = function(scoId, studentId, page) {
