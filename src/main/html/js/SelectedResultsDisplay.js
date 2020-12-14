@@ -107,6 +107,15 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 	// set extra table class
 	if (matrix[0][0].tableClass) $table.addClass(matrix[0][0].tableClass);
 	
+	if (this.showpages) {
+		var dummy = $("<th></th>");
+		$theadRow2.append(dummy.clone());
+		$theadRow3.append(dummy)
+	}
+	
+	
+	
+	
 	// BUILD HEADER
 	for (var i = 1; i < matrix[0].length; i++) {
 				// Header names
@@ -152,6 +161,14 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 		
 		$tableRowHeader.append($value);
 		$row.append($tableRowHeader);
+		
+		if (this.showpages) {
+			$rowCell = this.$selectedResultsRowCell.clone();
+			$rowCell.html("");
+			if (matrix[i][0].seal) $rowCell.html("<i class='fa fa-lock'></i>")
+			$row.append($rowCell);
+		}
+		
 		
 		// row rest of the columns
 		for (var j = 1; j < matrix[i].length; j++) {
@@ -458,6 +475,7 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 		for (var studenScoId in activity.children) {
 			if (activity.children[studenScoId]["user-id"] == studentId) { // Select student
 				j = 1;
+				matrix[i][0].seal = activity.children[studenScoId].completionStatus == "completed"
 				
 				sortedStudentScoChildren = Helpers.getIndexedSortedArray(activity.children[studenScoId].children);
 				
