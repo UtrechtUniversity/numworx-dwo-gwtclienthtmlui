@@ -51,16 +51,16 @@ StudentScoResultDisplay.prototype.localize = function() {
 }
 
 StudentScoResultDisplay.prototype.showHideNextAndPrevious = function() { 
-	var previous = null;
 	
 	this.$previousButton.show();
 	this.$nextButton.show()
 	
-	for (var studentId in this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children) {
-		if (studentId == this.resultState.activeStudent && previous == null) { this.$previousButton.hide(); }		
-		previous = studentId;
-	}	
-	if (previous == this.resultState.activeStudent) this.$nextButton.hide();
+	var first = this.resultState.studentOrder[0]
+	var last  = this.resultState.studentOrder[this.resultState.studentOrder.length-1]
+	var name = this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children[this.resultState.activeStudent].userName
+	if (first == name) this.$previousButton.hide();
+	if (last == name) this.$nextButton.hide();
+	
 }
 
 
@@ -150,11 +150,18 @@ StudentScoResultDisplay.prototype.log = function () {
 }
 
 StudentScoResultDisplay.prototype.showNextStudent = function () {
-	var previous = null;
+
+	var children = this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children;
+	var name = children[this.resultState.activeStudent].userName
+	for( var id=0; id<this.resultState.studentOrder.length; id++) {
+		if (name == this.resultState.studentOrder[id]) {
+			name = this.resultState.studentOrder[id+1]
+			break;
+		}
+	}
 	
-	for (var studentId in this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children) {
-		if (previous == this.resultState.activeStudent) break;
-		previous = studentId;
+	for (var studentId in children) {
+		if (children[studentId].userName == name) break;
 	}
 	this.resultState.activeStudent = studentId;
 	
@@ -162,11 +169,17 @@ StudentScoResultDisplay.prototype.showNextStudent = function () {
 }
 
 StudentScoResultDisplay.prototype.showPreviousStudent = function () {
-	var previous = null;
+	var children = this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children;
+	var name = children[this.resultState.activeStudent].userName
+	for( var id=1; id<this.resultState.studentOrder.length; id++) {
+		if (name == this.resultState.studentOrder[id]) {
+			name = this.resultState.studentOrder[id-1]
+			break;
+		}
+	}
 	
-	for (var studentId in this.resultState.studentsTree.children[this.resultState.activeSchoolClass].children) {
-		if (studentId == this.resultState.activeStudent) { studentId = previous; break; }
-		previous = studentId;
+	for (var studentId in children) {
+		if (children[studentId].userName == name) break;
 	}
 	this.resultState.activeStudent = studentId;
 	
