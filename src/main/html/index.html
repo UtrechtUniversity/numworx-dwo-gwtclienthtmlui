@@ -89,8 +89,9 @@
 
 #headertrails a { color: #7297c7; }
 
-.score-treeItem {
+.score-treeItem, .score-modelItem {
 	font-size: 13px;
+	height: 1.2em;
 }
 .gwt-TreeItem-selected .score-treeItem {
 	background-color: #d0d0d080;
@@ -111,7 +112,6 @@
 	margin-left: 1em;
 	margin-right: 1em;
 	width: 10em;
-	border: solid 1px black;
 	position: relative;
 }
 .score-perc {
@@ -125,6 +125,20 @@
 	margin-right: 0.5em;
 	float: right;
 }
+.score-modelItem .score-template {
+	width: 190px;
+	margin-left: 5px;
+	margin-right: 5px;
+	height: 20px;
+}
+
+
+.score-treeItem .score-title {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
 .score-template .score-incorrect {
 	background-color: red;
 	right: 50%;
@@ -150,8 +164,12 @@
 .score-html {
 	min-height: 100%;
 	background-color: white;
+	margin: 0.3em;
 }
 
+.graph-Button {
+	font-size: 20px;
+}
 
 </style>
 
@@ -318,6 +336,7 @@
 	<script src="js/SelectStudentResultsDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/LogResultsDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/StudentResultsDisplay.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/StudentResultsGraphDisplay.js" type="text/javascript" charset="utf-8"></script>
 	
 	<script src="js/ModulesDisplay.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/EditorDisplay.js" type="text/javascript" charset="utf-8"></script>
@@ -2396,7 +2415,7 @@
 			<footer>
 					<div class="row">
 						<form name="studentScoResultActions">				
-							<div class="col-9 options">
+							<div class="col-8 options">
 								<label><span data-translate="NUM_LBL_STUDENTSCO_SEAL">Verzegelen voor deze leerling?</span></label>
 								<div class="option">
 									<input type="radio" name="seal" id="studentScoResultSealYes" value="1">
@@ -3414,6 +3433,36 @@
 			</section>
 		</section>
 		<!-- end studentResultsDisplay -->
+		<!-- 
+		-
+		- studentResultsGraphDisplay (lightbox)
+		-
+		-->
+		<section id="studentResultsGraphDisplayPanel" class="lightbox student-only">
+			<header>
+				<span id="studentResultsGraphDomain" class="strong">Leerdomein</span>
+				<span id="studentResultsGraphCloseButton" class="closeButton">
+					<svg viewBox="0 0 64 64" class="icon">
+						<use xlink:href="#close"></use>
+				    </svg>
+				</span>
+			</header>
+			<section id='studentResultsGraph'>
+			</section>
+		</section>
+		<!-- end studentResultsGraphDisplay (lightbox) -->
+
+
+
+
+
+
+
+
+
+
+
+
 		
 		<!-- editorDisplay -->
 		<section id='editorDisplay' class='subpanel no-student'>

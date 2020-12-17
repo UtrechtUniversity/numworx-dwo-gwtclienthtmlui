@@ -107,6 +107,15 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 	// set extra table class
 	if (matrix[0][0].tableClass) $table.addClass(matrix[0][0].tableClass);
 	
+	if (this.showpages) {
+		var dummy = $("<th></th>");
+		$theadRow2.append(dummy.clone());
+		$theadRow3.append(dummy)
+	}
+	
+	
+	
+	
 	// BUILD HEADER
 	for (var i = 1; i < matrix[0].length; i++) {
 				// Header names
@@ -148,9 +157,18 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 		$value = $("<span title=\""+Helpers.htmlEscape(matrix[i][0].label)+"\">" + Helpers.htmlEscape(matrix[i][0].label) + "</span>");
 		if (matrix[i][0].sortValue) $value.attr("data-sortvalue", matrix[i][0].sortValue );		
 		else $value.attr("data-sortvalue", matrix[i][0].sortValue );		
+		if (matrix[i][0].userName)  $value.attr("data-username", matrix[i][0].userName);
 		
 		$tableRowHeader.append($value);
 		$row.append($tableRowHeader);
+		
+		if (this.showpages) {
+			$rowCell = this.$selectedResultsRowCell.clone();
+			$rowCell.html("");
+			if (matrix[i][0].seal) $rowCell.html("<i class='fa fa-lock'></i>")
+			$row.append($rowCell);
+		}
+		
 		
 		// row rest of the columns
 		for (var j = 1; j < matrix[i].length; j++) {
@@ -398,7 +416,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 // Below is not in use anymore
 SelectedResultsDisplay.prototype.getSealStateActivitiesStudentsInModule = function(module) {
 	var students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children;
-	var sealed = 0, unsealed = 0, state = 0;
+	var sealed = 0, unsealed = 0;
 	for (var studentId in students) {
 		for (var actId in module.children) {
 			for (var scoId in module.children[actId].children) { // Loop over activities
@@ -457,19 +475,24 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 		for (var studenScoId in activity.children) {
 			if (activity.children[studenScoId]["user-id"] == studentId) { // Select student
 				j = 1;
+				matrix[i][0].seal = activity.children[studenScoId].completionStatus == "completed"
 				
 				sortedStudentScoChildren = Helpers.getIndexedSortedArray(activity.children[studenScoId].children);
 				
 				for (var n = 0; n < sortedStudentScoChildren.length; n++) {
 					matrix[i][j] = {};
 					if ( sortedStudentScoChildren[n].maxScore == null ) {
-						matrix[i][j].label = "";
-						matrix[i][j].score = 0;
+						matrix[i][j].label = "&nbsp;";
+						matrix[i][j].score = -1;
 						matrix[i][j].sortValue = -1;
-						matrix[i][j].value = "";
+						matrix[i][j].value = 0;
+						matrix[i][j].callback = this.clickPageResultIndicator;
+						matrix[i][j].params = { scoId: this.resultState.activeActivity, studentId: studentId, pageSequence: sortedStudentScoChildren[n].sequence };
 					} else {
 						matrix[i][j].label = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus != 0 ? (sortedStudentScoChildren[n].bonus>0?"+":"")+sortedStudentScoChildren[n].bonus : "") +" / " + sortedStudentScoChildren[n].maxScore;
 						matrix[i][j].score = (sortedStudentScoChildren[n].sumScore + (sortedStudentScoChildren[n].bonus) ) / sortedStudentScoChildren[n].maxScore * 100;
+						if (!matrix[i][j].score) 
+							matrix[i][j].score = -1;
 						matrix[i][j].sortValue = matrix[i][j].value = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ?sortedStudentScoChildren[n].bonus : 0);
 						matrix[i][j].callback = this.clickPageResultIndicator;
 						matrix[i][j].params = { scoId: this.resultState.activeActivity, studentId: studentId, pageSequence: sortedStudentScoChildren[n].sequence };
@@ -495,16 +518,18 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 
 SelectedResultsDisplay.prototype.getSealStateSingleActivity = function(activity) {
 	var students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children;
-	var sealed = 0, unsealed = 0, state = 0;
+	var sealed = 0, unsealed = 0;
 	for (var studentId in students) {
+		var notfound = true
 		for (var studenScoId in activity.children) { // Loop over activities
 			if (activity.children[studenScoId]["user-id"] == studentId) { 
 				console.log(activity.children[studenScoId].completionStatus);
+				notfound = false;
 				if (activity.children[studenScoId].completionStatus == "completed") sealed++;
 				else unsealed++;				
 			}
-		}	
-		
+		}
+		if (notfound) unsealed++;
 	}
 	
 	if (sealed == 0) return 0; // none sealed
@@ -655,11 +680,12 @@ SelectedResultsDisplay.prototype.pagesStudents = function(params) {
 	
 	// Sealed checkbox
 	this.$sealSingleActivityCheckbox.parent().removeClass("thirdState");
-	this.$sealSingleActivityCheckbox.removeAttr("checked");
+	this.$sealSingleActivityCheckbox.prop('checked', false);
+	
 	this.$sealSingleActivityCheckbox.removeAttr("disabled");
 	if (sealState == 1) this.$sealSingleActivityCheckbox.parent().addClass("thirdState");
 	else if (sealState == 2) {
-		this.$sealSingleActivityCheckbox.attr("checked", "checked");
+		this.$sealSingleActivityCheckbox.prop("checked", true);
 		this.$sealSingleActivityCheckbox.attr("disabled", "disabled");
 	}
 	this.showpages = true;
@@ -705,6 +731,18 @@ SelectedResultsDisplay.prototype.setEmtpyTableMessage = function () {
 	this.$selectedResultsTable.find("tbody").html('<tr class="empty"><td>'+app.getTranslator().translate( 'NUM_TBL_EMPTYTABLE' )+'</td></tr>');	
 }
 
+SelectedResultsDisplay.prototype.studentOrder = function() {
+	var result = [];
+	var $table = this.$selectResultsTableWrap.find('table');
+	var $tbody = $table.find('tbody');
+	var tr = $tbody.find('tr');
+	
+	for(var i = tr.length; i--; result.unshift(tr[i].children[0].children[0].dataset['username']));
+	
+	return result;
+}
+
+
 /*
  * RETURN FUNCTIONS
  * Use java callbacks
@@ -712,7 +750,9 @@ SelectedResultsDisplay.prototype.setEmtpyTableMessage = function () {
 
 SelectedResultsDisplay.prototype.showStudentResults = function(scoId, studentId) {
 	this.resultState.activeActivity = scoId;
-	this.resultState.activeStudent = studentId;
+	this.resultState.activeStudent = studentId;	
+	this.resultState.studentOrder = this.studentOrder();
+	
 	app.getPresenterFactory().getSelectedResultsPresenter().showStudentResults(this.resultState, scoId, studentId, this.resultState.activeSchoolClass);
 }
 SelectedResultsDisplay.prototype.showStudentResultsPage = function(scoId, studentId, page) {

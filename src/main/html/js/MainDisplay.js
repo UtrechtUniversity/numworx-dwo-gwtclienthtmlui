@@ -71,6 +71,9 @@ function MainDisplay() {
 	
 	this.studentResultsDisplay = new StudentResultsDisplay();
 	window.jsStudentResultsDisplay = this.studentResultsDisplay;
+	this.studentResultsGraphDisplay = new StudentResultsGraphDisplay();
+	window.jsStudentResultsGraphDisplay = this.studentResultsGraphDisplay;
+
 	
 	// MODULES
 	this.modulesDisplay = new ModulesDisplay();
@@ -305,6 +308,12 @@ MainDisplay.prototype.showStudentResultsView = function() {
 	this.initMainView();
 	this.studentResultsDisplay.show();
 }
+MainDisplay.prototype.showStudentResultsGraphView = function() {
+	this.initMainView();
+	this.studentResultsGraphDisplay.show();
+}
+
+
 
 MainDisplay.prototype.showSelectedResultsView = function() {
 	this.initMainView(); 
