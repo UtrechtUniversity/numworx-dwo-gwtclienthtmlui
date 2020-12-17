@@ -758,6 +758,7 @@ SelectedResultsDisplay.prototype.showStudentResults = function(scoId, studentId)
 SelectedResultsDisplay.prototype.showStudentResultsPage = function(scoId, studentId, page) {
 	this.resultState.activeActivity = scoId;
 	this.resultState.activeStudent = studentId;
+	this.resultState.studentOrder = this.studentOrder();
 	app.getPresenterFactory().getSelectedResultsPresenter().showStudentResultsPage(this.resultState, scoId, studentId, this.resultState.activeSchoolClass, page);
 }
 
