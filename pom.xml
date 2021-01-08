@@ -78,6 +78,22 @@
                 <configuration>
                     <warSourceDirectory>src/main/html</warSourceDirectory>
                     <failOnMissingWebXml>false</failOnMissingWebXml>           
+                <webResources>
+                    <resource>
+                        <directory>${basedir}/src/main/html</directory>
+                        <filtering>true</filtering>
+                        <includes>
+                            <include>index.html</include>
+                        </includes>
+                    </resource>
+                    <resource>
+                        <directory>${basedir}/src/main/html</directory>
+                        <filtering>false</filtering>
+                        <excludes>
+                            <exclude>index.html</exclude>
+                        </excludes>
+                    </resource>
+                </webResources>
                 </configuration>
             </plugin>
         </plugins>
@@ -117,4 +133,8 @@
     		</plugins></build>
     	</profile>
     </profiles>
+    <properties>
+		<maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
+    	<tstamp>${maven.build.timestamp}</tstamp>
+    </properties>
 </project>
