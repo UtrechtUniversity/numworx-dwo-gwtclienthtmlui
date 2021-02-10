@@ -267,6 +267,8 @@ Helpers.translate = function(index, value) {
 	} else if ( $el.get(0).tagName == "INPUT") {
 		if ($el.attr('placeholder')) $el.attr( 'placeholder', translation );
 		else $el.val( translation );
+	} else if ($el.get(0).tagName == "LI") {
+		if ($el.attr('title')) $el.attr('title', translation);
 	}
 }
 
