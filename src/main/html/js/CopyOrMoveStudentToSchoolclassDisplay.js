@@ -366,9 +366,13 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.submitOrClickABFormOrButton = fu
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.getClassList = function(form) {
 	var list = [];
+	if ( typeof form.elements["students[]"].length == "undefined" ) {
+		list.push(form.elements["students[]"].value);
+	} else {
 	for (i = 0; i < form.elements["students[]"].length; i++) {
 		if (form.elements["students[]"][i].checked) list.push(form.elements["students[]"][i].value);
 	}	
+	}
 	return list;
 }
 
