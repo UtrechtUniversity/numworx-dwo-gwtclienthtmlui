@@ -406,6 +406,7 @@
 	<script src="js/EditorDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	
 	<script src="js/OrganisationDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
+	<script src="js/TeacherStudentModelDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	
 	<script src="js/WelcomeDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	<script src="js/dialogs.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
@@ -3503,6 +3504,114 @@
 		</section>
 		<!-- end organisationDisplay -->
 
+
+
+		<!-- 
+		-
+		- teacherStudentModelDisplay
+		-
+		-->
+		<section id="teacherStudentModelDisplayPanel" class="subpanel">
+			
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
+<!-- 							<use xlink:href="#kennis"></use> -->
+						</svg>
+						<h1><span >Leerdoelen</span></h1>
+						<h2 class="sectionhead"><span >bekijk leerdomein</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
+						<div class="content">
+							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
+						</div>
+					</section>
+				</div>
+			</header>
+			
+			<section>
+			
+				<div class="row" id='teacherStudentModelBody' >
+					<div class='col-6'>
+					    <form name='teacherStudentModelSelect'>
+					     <div class='col-6'>
+					    	 <label class='col-4 input'>
+					    		<select name='modelselect'>
+					    			<option value="SLO">SLO leerdoelen Onderbouw</option>
+					    		</select>
+					    	 </label>
+					    	<label>
+					    		<input type='submit' class='primary right' value='graph' >
+					    	</label>
+					    </div>
+					    <div class='col-6'>
+					    <h3><span>title van tree</span></h3>
+						</div>	
+						<div class='treeWrapper' id='teacherStudentModelTreeWrapper' >
+							<ul class='tree' id='teacherStudentModelTree'>
+								<li><a>Model 1</a>
+								</li>
+							</ul>
+						
+						</div>
+						<label>
+							<input type='submit' class='secondary right down' value='Filter' >						</label>
+					 </form>
+					</div>
+					<div class='col-6'>
+						<div id='teacherStudentModelDescription'>
+							Hok met beschrijving
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class='col-6'>
+						<h2 class='sectionhead'><span>Bekijk kennisoverzicht klas</span></h2>
+						<form name='studentmodelKlas'>
+<!-- 							<label class='buttonlabel'> -->
+<!-- 								<span>Kies een klas en bekijk het kennisoverzicht</span> -->
+<!-- 							</label> -->
+							<label class="col-4 input">
+								<span data-translate="NUM_TBL_CLASSES_CLASSNAME">Naam klas</span>
+								<select name="schoolClass"><option value=""></option></select>
+							</label>
+							<div class="col-2">
+								<input type="submit" name="submit"  class="primary right down" value="Bekijk klas">
+							</div>
+						</form>
+					</div>
+					<div class='col-6'>
+						<h2 class='sectionhead'><span>Filtering voor leerlingen van klas</span></h2>
+						<form name='studentmodelFilter'>
+							<label class="buttonLabel">
+                                    <span>Kies een filter om per klas leerdoelen zichtbaar te maken</span>
+									<input type="submit" class="secondary right" value="Kies filter">
+								</label>
+						</form>
+					</div>
+				</div>
+				
+				<div class="row">					
+				</div>
+				
+				<div class="row">
+				</div>
+				
+				
+			</section>
+			
+		</section>
+		<!-- end teacherStudentModelDisplay -->
+
+
 		<!-- studentResultsDisplay -->
 		<section id='studentResultsDisplayPanel' class='subpanel student-only'>
 			<header>
@@ -3541,7 +3650,7 @@
 		- studentResultsGraphDisplay (lightbox)
 		-
 		-->
-		<section id="studentResultsGraphDisplayPanel" class="lightbox student-only">
+		<section id="studentResultsGraphDisplayPanel" class="lightbox">
 			<header>
 				<span id="studentResultsGraphDomain" class="strong">Leerdomein</span>
 				<span id="studentResultsGraphCloseButton" class="closeButton">
