@@ -17,7 +17,7 @@
  	this.$studentModelSelect = $(this.studentModelSelect)
  	this.$studentModelSelectOption = this.$studentModelSelect.find("option").detach();
  
- 	this.$studentModelSelect.on('change', $.proxy(
+ 	this.$studentModelSelect.on('change', $.proxy(this.onModelChange, this));
  
  	// Init
 	this.$panel.hide();
