@@ -90,4 +90,5 @@ TeacherStudentModelDisplay.prototype.showTree = function(json) {
 TeacherStudentModelDisplay.prototype.onModelChange = function(ev) {
 	ev.preventDefault();
 	var id =  this.studentModelSelect.value;
-	app.getPresenterFactory().getStudentModelPresenter().selectModel(id);
+	app.getPresenterFactory().getStudentModelPresenter().selectModel(id);	
+}
