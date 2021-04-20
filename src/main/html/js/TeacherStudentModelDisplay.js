@@ -14,10 +14,15 @@
  
  	this.studentModelForm = document.forms['teacherStudentModelSelect']
  	this.studentModelSelect = this.studentModelForm.elements['modelselect']
+ 	this.$studentModelGraph  = $(this.studentModelForm.elements['graph'])
+ 	this.$studentModelFilter = $(this.studentModelForm.elements['filter'])
  	this.$studentModelSelect = $(this.studentModelSelect)
  	this.$studentModelSelectOption = this.$studentModelSelect.find("option").detach();
  
  	this.$studentModelSelect.on('change', $.proxy(this.onModelChange, this));
+ 	this.$studentModelGraph.on('click', $.proxy(this.onGraph, this));
+ 	this.$studentModelFilter.on('click', $.proxy(this.onFilter, this));
+ 	
  
  	// Init
 	this.$panel.hide();
@@ -84,6 +89,15 @@ TeacherStudentModelDisplay.prototype.showTree = function(json) {
 
 }
 
+TeacherStudentModelDisplay.prototype.getTreeId = function() {
+	return "teacherStudentModelTreeWrapper"
+}
+TeacherStudentModelDisplay.prototype.getDescriptionId = function() {
+	return "teacherStudentModelDescription"
+}
+
+
+
 
 //Events
 
@@ -92,3 +106,14 @@ TeacherStudentModelDisplay.prototype.onModelChange = function(ev) {
 	var id =  this.studentModelSelect.value;
 	app.getPresenterFactory().getStudentModelPresenter().selectModel(id);	
 }
+
+TeacherStudentModelDisplay.prototype.onGraph = function(ev) {
+	ev.preventDefault();
+	app.getPresenterFactory().getStudentModelPresenter().onGraph();	
+}
+
+TeacherStudentModelDisplay.prototype.onFilter = function(ev) {
+	ev.preventDefault();
+	app.getPresenterFactory().getStudentModelPresenter().onFilter();	
+}
+
