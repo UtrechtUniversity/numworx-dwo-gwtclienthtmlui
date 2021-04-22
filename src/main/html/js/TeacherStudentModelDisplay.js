@@ -7,7 +7,7 @@
  	this.$treeWrapper = $("#teacherStudentModelTreeWrapper")
  	this.$description = $("#teacherStudentModelDescription")
  
- 	this.schoolclassForm = document.forms['studentmodelKlas'];
+ 	this.schoolclassForm = document.forms['teacherStudentmodelKlas'];
  	this.schoolClassSelect = this.schoolclassForm.elements["schoolClass"];
 	this.$schoolClassSelect = $(this.schoolClassSelect);
 	this.$schoolClassSelectOption = this.$schoolClassSelect.find("option").detach();
@@ -18,21 +18,29 @@
  	this.$studentModelFilter = $(this.studentModelForm.elements['filter'])
  	this.$studentModelSelect = $(this.studentModelSelect)
  	this.$studentModelSelectOption = this.$studentModelSelect.find("option").detach();
+ 	
+ 	this.studentModelKlasFilter = document.forms['teacherStudentmodelFilter']
+ 	this.$studentModelKlas = $(this.schoolclassForm.elements['submit'])
+ 	this.$studentModelKlasFilter = $(this.studentModelKlasFilter.elements['submit'])
+ 	
  
  	this.$studentModelSelect.on('change', $.proxy(this.onModelChange, this));
  	this.$studentModelGraph.on('click', $.proxy(this.onGraph, this));
  	this.$studentModelFilter.on('click', $.proxy(this.onFilter, this));
- 	
+ 	this.$studentModelKlas.on('click', $.proxy(this.onKlas, this));
+ 	this.$studentModelKlasFilter.on('click', $.proxy(this.onKlasFilter, this));
+	
+	this.$studentModelTitle = $("#teacherStudentmodelTitle")
  
  	// Init
 	this.$panel.hide();
  }
  
  TeacherStudentModelDisplay.prototype.show = function() {
- 	app.mainDisplay.registerStretchables( [ this.$treeWrapper, this.$description ] );
+ 	app.mainDisplay.registerStretchables( [ this.$treeWrapper ] );
     this.localize();
 	this.$panel.show();
- 	Helpers.stretchHeight([ this.$treeWrapper, this.$description ])
+ 	Helpers.stretchHeight([ this.$treeWrapper ])
 }
 
 
@@ -96,7 +104,9 @@ TeacherStudentModelDisplay.prototype.getDescriptionId = function() {
 	return "teacherStudentModelDescription"
 }
 
-
+TeacherStudentModelDisplay.prototype.setTitle = function(string) {
+	this.$studentModelTitle.html( Helpers.htmlEscape(string))
+}
 
 
 //Events
@@ -114,6 +124,18 @@ TeacherStudentModelDisplay.prototype.onGraph = function(ev) {
 
 TeacherStudentModelDisplay.prototype.onFilter = function(ev) {
 	ev.preventDefault();
-	app.getPresenterFactory().getStudentModelPresenter().onFilter();	
+	app.getPresenterFactory().getStudentModelPresenter().onFilter();
 }
+
+TeacherStudentModelDisplay.prototype.onKlas = function(ev) {
+	ev.preventDefault();
+	var id = this.schoolClassSelect.value;
+	app.getPresenterFactory().getStudentModelPresenter().onSchoolClass(id);
+}
+TeacherStudentModelDisplay.prototype.onKlasFilter = function(ev) {
+	ev.preventDefault();
+	var id = this.schoolClassSelect.value;
+	app.getPresenterFactory().getStudentModelPresenter().onSchoolClassFilter(id);
+}
+
 

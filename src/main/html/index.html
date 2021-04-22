@@ -3538,7 +3538,7 @@
 			
 			<section>
 			
-				<div class="row" id='teacherStudentModelBody' >
+				<div class="row col-12" id='teacherStudentModelBody' >
 					<div class='col-6'>
 					    <form name='teacherStudentModelSelect'>
 					     <div class='col-6'>
@@ -3552,22 +3552,22 @@
 					    	</label>
 					    </div>
 					    <div class='col-6'>
-					    <h3><span>title van tree</span></h3>
+					    <h3><span id='teacherStudentmodelTitle'>Alle leerdoelen</span></h3>
 						</div>	
 						<div class='treeWrapper' id='teacherStudentModelTreeWrapper' >
-							<ul class='tree' id='teacherStudentModelTree'>
-								<li><a>Model 1</a>
-								</li>
-							</ul>
+<!-- 							<ul class='tree' id='teacherStudentModelTree'> -->
+<!-- 								<li><a>Model 1</a> -->
+<!-- 								</li> -->
+<!-- 							</ul> -->
 						
 						</div>
 						<label>
 							<input name='filter' type='submit' class='secondary right down' value='Filter' >						</label>
 					 </form>
 					</div>
-					<div class='col-6'>
-						<div id='teacherStudentModelDescription'>
-							Hok met beschrijving
+					<div class='col-6' style='position:absolute;top:0px;bottom:0px;right:0px;'>
+						<div id='teacherStudentModelDescription' class='treeWrapper' style='height:100%;max-height:100%'>
+<!-- 							Hok met beschrijving -->
 						</div>
 					</div>
 				</div>
@@ -3575,7 +3575,7 @@
 				<div class="row">
 					<div class='col-6'>
 						<h2 class='sectionhead'><span>Bekijk kennisoverzicht klas</span></h2>
-						<form name='studentmodelKlas'>
+						<form name='teacherStudentmodelKlas'>
 <!-- 							<label class='buttonlabel'> -->
 <!-- 								<span>Kies een klas en bekijk het kennisoverzicht</span> -->
 <!-- 							</label> -->
@@ -3590,7 +3590,7 @@
 					</div>
 					<div class='col-6'>
 						<h2 class='sectionhead'><span>Filtering voor leerlingen van klas</span></h2>
-						<form name='studentmodelFilter'>
+						<form name='teacherStudentmodelFilter'>
 							<label class="buttonLabel">
                                     <span>Kies een filter om per klas leerdoelen zichtbaar te maken</span>
 									<input name='submit' type="submit" class="secondary right" value="Kies filter">
