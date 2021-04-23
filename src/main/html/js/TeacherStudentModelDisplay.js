@@ -108,6 +108,10 @@ TeacherStudentModelDisplay.prototype.setTitle = function(string) {
 	this.$studentModelTitle.html( Helpers.htmlEscape(string))
 }
 
+TeacherStudentModelDisplay.prototype.setModelSelect = function(id) {
+	this.studentModelSelect.value = id;
+}
+
 
 //Events
 
