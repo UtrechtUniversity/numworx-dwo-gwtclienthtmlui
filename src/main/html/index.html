@@ -407,6 +407,7 @@
 	
 	<script src="js/OrganisationDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	<script src="js/TeacherStudentModelDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
+	<script src="js/TeacherSMClassResultsDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	
 	<script src="js/WelcomeDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	<script src="js/dialogs.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
@@ -3520,7 +3521,7 @@
 <!-- 							<use xlink:href="#kennis"></use> -->
 						</svg>
 						<h1><span >Leerdoelen</span></h1>
-						<h2 class="sectionhead"><span >bekijk leerdomein</span></h2>					
+						<h2 class="sectionhead"><span >Bekijk leerdomein</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
@@ -3584,7 +3585,7 @@
 								<select name="schoolClass"><option value=""></option></select>
 							</label>
 							<div class="col-2">
-								<input type="submit" name="submit"  class="primary right down" value="Bekijk klas" disabled='disabled'>
+								<input type="submit" name="submit"  class="primary right down" value="Bekijk klas" >
 							</div>
 						</form>
 					</div>
@@ -3610,6 +3611,89 @@
 			
 		</section>
 		<!-- end teacherStudentModelDisplay -->
+
+		<!-- teacherSMClassResultsDisplayPanel -->
+		<section id='teacherSMClassResultsDisplayPanel' class='subpanel' >
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
+<!-- 							<use xlink:href="#kennis"></use> -->
+						</svg>
+						<h1><span >Leerdoelen</span></h1>
+						<h2 class="sectionhead"><span >Bekijk kennisoverzicht klas</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
+						<div class="content">
+							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
+						</div>
+					</section>
+				</div>
+			</header>
+			<section>
+				<div class='row'>
+					<div class='col-6' >
+					 <form name='teacherSMClassResultsTree'>
+					  	<h3><span id='teacherSMClassResultsTitle'>Alle leerdoelen</span></h3>	
+					    <div class='treeWrapper' id='teacherSMClassResultsTreeWrapper' >
+							<ul class='tree' id='teacherStudentModelTree'>
+								<li><a>Model 1</a>
+								</li>
+							</ul>					
+						</div>
+						<label>
+							<input name='filter' type='submit' class='secondary right down' value='Filter' disabled='disabled'>
+						</label>
+					 </form>
+						
+					</div>
+					<div class='col-6' >
+					  <form name='teacherSMClassResultsKlas'>
+					    <label class='col-4 input'>
+								<select name="schoolClass"><option value="">klas 1A</option></select>
+						</label>
+						<div class='col-6' id='teacherSMClassResultsWrapper'>
+						  <table class='dwo hoverable selectable sortable headered'>
+						   <thead>
+						  		<tr>
+						  			<th class='col-3'><span>naam</span></th>
+						  			<th>score</th>
+						  		</tr>
+						  		<tr class='sorting'>
+						  			<th class='col-3'><span>VA</span></th>
+						  			<th class='col-3'><span>VA</span></th>
+						  		</tr>
+						   </thead>
+						   <tbody>
+						  	<tr><td class='col-3'><span>jansen</span></td><td class='col-3'><span>100%</span></td></tr>
+						  	<tr><td class='col-3'>jansen</td><td class='col-3'><span>0%</span><span>____________________</span><span>0%</span></span></td></tr>
+						  	<tr><td class='col-3'>jansen</td><td class='col-3'>100%</td></tr>
+						  	<tr><td class='col-3'>jansen</td><td class='col-3'>100%</td></tr>
+						   </tbody>
+						  </table>
+						</div>
+						<div class='col-6'>
+							<table class='kg'>
+								<tbody>
+									<td class='col-3'><span>Klasgemiddelde</span></td>
+									<td class='col-3'><span>3%</span><span>RRRGGG_____________</span><span>4%</span>
+									</td>
+								</tbody>
+							</table>
+						</div>
+					  </form>					
+					</div>
+				
+				</div>
+			</section>
+		</section>
+		<!-- end teacherSMClassResultsDisplayPanel -->
 
 
 		<!-- studentResultsDisplay -->

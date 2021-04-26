@@ -88,6 +88,8 @@ function MainDisplay() {
 	// STUDENTMODEL
 	this.teacherStudentModelDisplay = new TeacherStudentModelDisplay();
 	window.jsTeacherStudentModelDisplay = this.teacherStudentModelDisplay;
+	this.teacherSMClassResultsDisplay = new TeacherSMClassResultsDisplay();
+	window.jsTeacherSMClassResultsDisplay = this.teacherSMClassResultsDisplay;
 	
 	// Dialog Displays
 	this.msgDialogDisplay = new MsgDialogDisplay();
@@ -368,6 +370,11 @@ MainDisplay.prototype.showStudentSchoolclassView = function() {
 MainDisplay.prototype.showTeacherStudentModelView = function() {
 	this.initMainView();
 	this.teacherStudentModelDisplay.show();
+}
+
+MainDisplay.prototype.showTeacherSMClassResultsView = function() {
+	this.initMainView();
+	this.teacherSMClassResultsView.show();
 }
 
 
