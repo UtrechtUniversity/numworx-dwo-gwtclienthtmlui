@@ -110,6 +110,17 @@ TeacherStudentModelDisplay.prototype.setTitle = function(string) {
 
 TeacherStudentModelDisplay.prototype.setModelSelect = function(id) {
 	this.studentModelSelect.value = id;
+	this.studentModelGraphToggle(id != '');
+}
+
+// helpers
+TeacherStudentModelDisplay.prototype.studentModelGraphToggle = function(value) {
+	if (value) this.$studentModelGraph.prop('disabled','');
+	else this.$studentModelGraph.prop('disabled','disabled');       
+
+	if (value) this.$studentModelFilter.prop('disabled','');
+	else this.$studentModelFilter.prop('disabled','disabled');       
+
 }
 
 
@@ -118,6 +129,7 @@ TeacherStudentModelDisplay.prototype.setModelSelect = function(id) {
 TeacherStudentModelDisplay.prototype.onModelChange = function(ev) {
 	ev.preventDefault();
 	var id =  this.studentModelSelect.value;
+	this.studentModelGraphToggle(id != '');
 	app.getPresenterFactory().getStudentModelPresenter().selectModel(id);	
 }
 
