@@ -374,7 +374,7 @@ MainDisplay.prototype.showTeacherStudentModelView = function() {
 
 MainDisplay.prototype.showTeacherSMClassResultsView = function() {
 	this.initMainView();
-	this.teacherSMClassResultsView.show();
+	this.teacherSMClassResultsDisplay.show();
 }
 
 

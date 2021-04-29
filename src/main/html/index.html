@@ -3642,50 +3642,80 @@
 					 <form name='teacherSMClassResultsTree'>
 					  	<h3><span id='teacherSMClassResultsTitle'>Alle leerdoelen</span></h3>	
 					    <div class='treeWrapper' id='teacherSMClassResultsTreeWrapper' >
-							<ul class='tree' id='teacherStudentModelTree'>
-								<li><a>Model 1</a>
-								</li>
-							</ul>					
 						</div>
 						<label>
-							<input name='filter' type='submit' class='secondary right down' value='Filter' disabled='disabled'>
+							<input name='filter' type='submit' class='secondary right down' value='Filter'>
 						</label>
 					 </form>
 						
 					</div>
 					<div class='col-6' >
 					  <form name='teacherSMClassResultsKlas'>
-					    <label class='col-4 input'>
+					    <label class='input'>
 								<select name="schoolClass"><option value="">klas 1A</option></select>
 						</label>
-						<div class='col-6' id='teacherSMClassResultsWrapper'>
+						<div id='teacherSMClassResultsWrapper'>
 						  <table class='dwo hoverable selectable sortable headered'>
 						   <thead>
 						  		<tr>
 						  			<th class='col-3'><span>naam</span></th>
 						  			<th>score</th>
 						  		</tr>
-						  		<tr class='sorting'>
-						  			<th class='col-3'><span>VA</span></th>
-						  			<th class='col-3'><span>VA</span></th>
-						  		</tr>
+								<tr class="sorting">
+									<th class="col-3">
+										
+										<span class="sortButton asc default" data-order="asc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowUp"></use>
+											</svg>
+										</span>
+										<span class="sortButton desc" data-order="desc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowDown"></use>
+											</svg>
+										</span>
+										
+									</th>
+									<th class="col-3">
+										
+										<span class="sortButton asc" data-order="asc" data-type="int">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowUp"></use>
+											</svg>
+										</span>
+										<span class="sortButton desc" data-order="desc" data-type="int">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowDown"></use>
+											</svg>
+										</span>
+										
+									</th>
+								</tr>
 						   </thead>
 						   <tbody>
-						  	<tr><td class='col-3'><span>jansen</span></td><td class='col-3'><span>100%</span></td></tr>
-						  	<tr><td class='col-3'>jansen</td><td class='col-3'><span>0%</span><span>____________________</span><span>0%</span></span></td></tr>
-						  	<tr><td class='col-3'>jansen</td><td class='col-3'>100%</td></tr>
-						  	<tr><td class='col-3'>jansen</td><td class='col-3'>100%</td></tr>
+								<tr tabindex="1">
+									
+									<td class="col-3"><span id="teacherSMClassResultsTableName">Michel Bakker</span>
+										<input type="radio" id="teacherSMClassResultsTableId" name="id" class="hidden" value="bakker34">										
+									</td>
+									<td class="col-3"><span id="teacherSMClassResultsTableScore">56%</span></td>										
+									</td>							
+								</tr>
 						   </tbody>
 						  </table>
 						</div>
-						<div class='col-6'>
-							<table class='kg'>
+						<div>
+							<table class='dwo kg'>
 								<tbody>
 									<td class='col-3'><span>Klasgemiddelde</span></td>
 									<td class='col-3'><span>3%</span><span>RRRGGG_____________</span><span>4%</span>
 									</td>
 								</tbody>
 							</table>
+						</div>
+						<div>
+							<input type="radio" name="id" class="hidden" value=""> <!-- empty option -->										
+							<input type="submit" class="primary right" value="Bekijk student" />
 						</div>
 					  </form>					
 					</div>
