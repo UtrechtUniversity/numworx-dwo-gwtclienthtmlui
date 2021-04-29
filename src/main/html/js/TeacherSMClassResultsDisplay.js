@@ -3,6 +3,7 @@
  */
  function TeacherSMClassResultsDisplay() {
   	this.$panel = $("#teacherSMClassResultsDisplayPanel")
+ 	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
  
    	this.schoolclassForm = document.forms['teacherSMClassResultsKlas'];
    	this.$schoolclassForm = $(this.schoolclassForm);
@@ -23,13 +24,19 @@
  	
  	this.$schoolclassForm.on('submit', $.proxy(this.submitPersonsForm, this));
  	this.$personsTableHead.find(".sortButton").click(Helpers.clickSortButton);
- 
+    this.$personsMean = $("#teacherSMClassResultsMean")
+ 	this.$schoolClassSelect.on('change', $.proxy(this.onClassChange, this));
  
   }
   
  TeacherSMClassResultsDisplay.prototype.show = function() {
   	this.$panel.show();
  }
+ 
+ TeacherSMClassResultsDisplay.prototype.setHelp = function(url) {
+	if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
+}
+ 
   
  TeacherSMClassResultsDisplay.prototype.init = function() {
  	app.mainDisplay.registerStretchables( [ this.$personsTableBody ] );
@@ -69,7 +76,7 @@
  		else red = Math.round(s.redScore * 100 / s.redCount) + "%";
  		if (s.greenCount == 0) green = "0%"
  		else green = Math.round(s.greenScore * 100 / s.greenCount) + "%"
- 		return red + " " + green;
+ 		return red + " ▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯ " + green;
  	}
  	return ""
  }
@@ -86,6 +93,7 @@
 	if ($.isEmptyObject(persons)) {
 		$row = this.$personsRow.clone();
 		this.$personsTableBody.html('<tr colspan="4" class="empty"><td>Geen studenten gevonden.</td></tr>');
+		this.$personsMean.html("")
 		return;
 	}
 	
@@ -104,15 +112,12 @@
 		this.$personsTableBody.append($row);
 		i++;
 	}
-
-	this.personsEditFormToggle(false);	
-		
+	this.$personsMean.html( this.getWidget(klas));
+	this.personsEditFormToggle(false);			
 	this.$classResultsWrapper.find(".sortButton.default").trigger('click');
  }
  
- 
- 
- 
+
  
 TeacherSMClassResultsDisplay.prototype.onFilter = function(ev) {
 	ev.preventDefault();
@@ -143,5 +148,10 @@ TeacherSMClassResultsDisplay.prototype.personsEditFormToggle = function(value) {
 	
 	this.onPerson(this.schoolclassForm.elements["id"][i].value);
 }
- 
+
+TeacherSMClassResultsDisplay.prototype.onClassChange = function(ev) {
+	ev.preventDefault();
+	var id =  this.schoolClassSelect.value;
+	app.getPresenterFactory().getSMClassResultsPresenter().onChange(id);	
+ }
  
