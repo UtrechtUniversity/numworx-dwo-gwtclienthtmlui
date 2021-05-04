@@ -72,11 +72,9 @@
  TeacherSMClassResultsDisplay.prototype.getWidget = function(s) {
  	if (s.totalCount > 0) {
  		var red, green;
- 		if (s.redCount == 0) red = "0%"
- 		else red = Math.round(s.redScore * 100 / s.redCount) + "%";
- 		if (s.greenCount == 0) green = "0%"
- 		else green = Math.round(s.greenScore * 100 / s.greenCount) + "%"
- 		return red + " ▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯ " + green;
+ 		red = s.redPerc + "%"
+ 		green = s.greenPerc + "%"		
+ 		return "<span class='score-red'>" + red + "</span>" + s.widget + "<span class='score-green'>" +green +"</span>";
  	}
  	return ""
  }
@@ -102,7 +100,7 @@
 		$row = this.$personsRow.clone();		
 		$row.find("#teacherSMClassResultsTableId").val( id ).removeAttr("id");
 		$row.find("#teacherSMClassResultsTableName").html( Helpers.htmlEscape(persons[id].id )).attr('data-sortvalue', persons[id].id).removeAttr("id");
-		$row.find("#teacherSMClassResultsTableScore").html( this.getWidget(persons[id] )).attr('data-sortvalue', persons[id].totalCount).removeAttr("id");
+		$row.find("#teacherSMClassResultsTableScore").html( this.getWidget(persons[id] )).attr('data-sortvalue', persons[id].greenPerc - persons[id].redPerc).removeAttr("id");
 						 
 		$row.find("input[type='checkbox'],input[type='radio']").each( function() {
 			this.value = id;
