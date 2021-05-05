@@ -119,8 +119,10 @@ TeacherStudentModelDisplay.prototype.studentModelGraphToggle = function(value) {
 	else this.$studentModelGraph.prop('disabled','disabled');       
 
 	if (value) this.$studentModelFilter.prop('disabled','');
-	else this.$studentModelFilter.prop('disabled','disabled');       
-
+	else this.$studentModelFilter.prop('disabled','disabled');
+	
+	if (value) this.$studentModelKlasFilter.prop('disabled', '');
+	else this.$studentModelKlasFilter.prop('disabled', 'disabled'); 
 }
 
 

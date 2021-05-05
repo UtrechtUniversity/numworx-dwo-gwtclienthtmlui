@@ -51,6 +51,7 @@
 <style type="text/css">
 .TEACHER .schooladmin-only,
 .TEACHER .premium-teacher,
+.TEACHER .no-teacher,
 .SCHOOLADMIN .teacher-only,
 .SCHOOLADMIN .no-schooladmin,
 .STUDENT .teacher-only,
@@ -414,6 +415,7 @@
 	<script src="js/OrganisationDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	<script src="js/TeacherStudentModelDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	<script src="js/TeacherSMClassResultsDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
+	<script src="js/TeacherClassFilterDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	
 	<script src="js/WelcomeDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	<script src="js/dialogs.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
@@ -662,10 +664,19 @@
 				    </a>
 				</li>
 				<li id='kennisNav'
-					class='no-schooladmin premium-teacher premium-student' data-translate="NUM_MNU_KNOWLEDGE" title="Kennis" >
+					class='no-schooladmin no-teacher premium-student' data-translate="NUM_MNU_KNOWLEDGE" title="Kennis" >
 					<a href="#KNOWLEDGE"><svg viewbox="0 0 64 64" class="icon">
 					  <use xlink:href="#knowledge"></use>
-					</svg><span class="name" date-translate="NUM_MNU_KNOWLEDGE">Kennis</span>
+					</svg>
+					<span class="name" date-translate="NUM_MNU_KNOWLEDGE">Kennis</span>
+					</a>
+				</li>
+				<li id='leerdoelenNav'
+					class='no-schooladmin premium-teacher no-student' data-translate="NUM_MNU_STUDENTMODEL" title="Leerdoelen" >
+					<a href="#KNOWLEDGE"><svg viewbox="0 0 64 64" class="icon">
+					  <use xlink:href="#knowledge"></use>
+					</svg>
+					<span class="name" date-translate="NUM_MNU_STUDENTMODEL">Leerdoelen</span>
 					</a>
 				</li>
 				<li class='no-student' data-translate="NUM_MNU_PEOPLE" title="Personen">
@@ -3731,6 +3742,39 @@
 		</section>
 		<!-- end teacherSMClassResultsDisplayPanel -->
 
+		<!-- teacherKlasFilterDisplayPanel -->
+		<section id='teacherKlasFilterDisplayPanel' class='subpanel' >
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
+<!-- 							<use xlink:href="#kennis"></use> -->
+						</svg>
+						<h1><span data-translate="NUM_MNU_STUDENTMODEL">Leerdoelen</span></h1>
+						<h2 class="sectionhead"><span >Filters per klas</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
+						<div class="content">
+							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
+						</div>
+					</section>
+				</div>
+			</header>
+			<section>
+				<div class='row'>
+					<div class='col-12' id='teacherKlasFilterWrapper'>
+						
+					</div>
+				</div>
+			</section>
+		</section>
+		<!-- end teacherSMClassResultsDisplayPanel -->
 
 		<!-- studentResultsDisplay -->
 		<section id='studentResultsDisplayPanel' class='subpanel student-only'>

@@ -90,6 +90,8 @@ function MainDisplay() {
 	window.jsTeacherStudentModelDisplay = this.teacherStudentModelDisplay;
 	this.teacherSMClassResultsDisplay = new TeacherSMClassResultsDisplay();
 	window.jsTeacherSMClassResultsDisplay = this.teacherSMClassResultsDisplay;
+	this.teacherClassFilterDisplay = new TeacherClassFilterDisplay;
+	window.jsTeacherClassFilterDisplay = this.teacherClassFilterDisplay;
 	
 	// Dialog Displays
 	this.msgDialogDisplay = new MsgDialogDisplay();
@@ -377,6 +379,10 @@ MainDisplay.prototype.showTeacherSMClassResultsView = function() {
 	this.teacherSMClassResultsDisplay.show();
 }
 
+MainDisplay.prototype.showTeacherClassFilterView = function() {
+	this.initMainView();
+	this.teacherClassFilterDisplay.show();
+}
 
 MainDisplay.prototype.onArrowUp = function() {
 	app.getPresenterFactory().getMainPresenter().onArrowUp()
