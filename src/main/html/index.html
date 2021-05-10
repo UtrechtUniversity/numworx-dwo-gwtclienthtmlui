@@ -95,7 +95,7 @@
 
 #headertrails a { color: #7297c7; }
 
-.score-treeItem, .score-modelItem {
+.score-treeItem, .score-modelItem, .model-item {
 	font-size: 13px;
 	height: 1.2em;
 }
@@ -228,8 +228,6 @@
 }
 
 
-
-
 .graph-Button {
 	font-size: 20px;
 }
@@ -240,6 +238,14 @@
 }
 .hidden-node {
 	display: none;
+}
+
+.description-title {
+	font-family: 'Ubuntu';
+	font-size: 120%;
+	font-weight: 700;
+	padding: 10px;
+	color: #1b75bb;
 }
 
 #teacherKlasFilterWrapper td.hidden-node {
@@ -3579,7 +3585,7 @@
 					    <div class='col-6'>
 					    <h3><span id='teacherStudentmodelTitle'>Alle leerdoelen</span></h3>
 						</div>	
-						<div class='treeWrapper' id='teacherStudentModelTreeWrapper' >
+						<div class='treexWrapper' id='teacherStudentModelTreeWrapper' >
 <!-- 							<ul class='tree' id='teacherStudentModelTree'> -->
 <!-- 								<li><a>Model 1</a> -->
 <!-- 								</li> -->
@@ -3661,11 +3667,11 @@
 				</div>
 			</header>
 			<section>
-				<div class='row'>
+				<div class='row' >
 					<div class='col-6' >
 					 <form name='teacherSMClassResultsTree'>
 					  	<h3><span id='teacherSMClassResultsTitle'>Alle leerdoelen</span></h3>	
-					    <div class='treeWrapper' id='teacherSMClassResultsTreeWrapper' >
+					    <div class='treexWrapper' id='teacherSMClassResultsTreeWrapper' >
 						</div>
 						<label>
 							<input name='filter' type='submit' class='secondary right down' value='Filter'>
@@ -3823,6 +3829,7 @@
 		-->
 		<section id="studentResultsGraphDisplayPanel" class="lightbox">
 			<header>
+				<span id="studentResultsGraphUser" ></span>
 				<span id="studentResultsGraphDomain" class="strong">Leerdomein</span>
 				<span id="studentResultsGraphCloseButton" class="closeButton">
 					<svg viewBox="0 0 64 64" class="icon">

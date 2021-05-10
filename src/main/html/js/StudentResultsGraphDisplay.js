@@ -7,6 +7,7 @@ function StudentResultsGraphDisplay() {
  	this.$panel = jQuery("#studentResultsGraphDisplayPanel");
  	this.$widget = $( "#"+ this.getId() );
  	this.$title  = $("#studentResultsGraphDomain");
+ 	this.$user   = $("#studentResultsGraphUser");
  	this.$panel.hide();
 	this.$closeButton = $("#studentResultsGraphCloseButton");	
 	this.$closeButton.on('click', $.proxy(this.clickCloseButton, this));
@@ -19,6 +20,7 @@ StudentResultsGraphDisplay.prototype.getId = function() {
 StudentResultsGraphDisplay.prototype.init = function (state) {
 	this.resultState = state;
 	this.$title.html(Helpers.htmlEscape(state.title));
+	this.$user.html(Helpers.htmlEscape(state.user||""));
 }
 
 StudentResultsGraphDisplay.prototype.clear = function () {

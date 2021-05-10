@@ -11,13 +11,13 @@
 	this.$schoolClassSelect = $(this.schoolClassSelect);
 	this.$schoolClassSelectOption = this.$schoolClassSelect.find("option").detach();
  
- 
+    this.$title = $("#teacherSMClassResultsTitle");
   	this.studentModelForm = document.forms['teacherSMClassResultsTree']
  	this.$studentModelFilter = $(this.studentModelForm.elements['filter'])
   	this.$studentModelFilter.on('click', $.proxy(this.onFilter, this));
  
  	this.$classResultsWrapper = $("#teacherSMClassResultsWrapper");
- 	
+ 	this.$classTreeWrapper =    $("#teacherSMClassResultsTreeWrapper");
  	this.$personsRow = this.$classResultsWrapper.find("tbody tr").detach();
 	this.$personsTableBody = this.$classResultsWrapper.find("tbody");
 	this.$personsTableHead = this.$classResultsWrapper.find("thead");
@@ -39,7 +39,7 @@
  
   
  TeacherSMClassResultsDisplay.prototype.init = function() {
- 	app.mainDisplay.registerStretchables( [ this.$personsTableBody ] );
+ 	app.mainDisplay.registerStretchables( [ this.$classTreeWrapper ] );
  }
  TeacherSMClassResultsDisplay.prototype.clear = function() {}
  
@@ -47,7 +47,9 @@
  	return "teacherSMClassResultsTreeWrapper";
  }
  
- TeacherSMClassResultsDisplay.prototype.setTitle = function(title) {}
+ TeacherSMClassResultsDisplay.prototype.setTitle = function(title) {
+ 	this.$title.html(Helpers.htmlEscape(title));
+ }
  
  TeacherSMClassResultsDisplay.prototype.showSchoolclasses = function(json) {
  	var $option;
