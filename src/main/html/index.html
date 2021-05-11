@@ -255,6 +255,18 @@
 #teacherKlasFilterWrapper table thead th {
 	border-bottom-width: 0px !important;
 }
+
+table.dwo.kg tbody {
+	min-height: initial;
+}
+div#teacherStudentModelTreeWrapper {
+	background: initial;
+	border: initial;
+}
+
+div.filter-dialog .popupContent {
+	background: #d2e5f5;
+}
 </style>
 
 
@@ -3585,7 +3597,7 @@
 					    <div class='col-6'>
 					    <h3><span id='teacherStudentmodelTitle'>Alle leerdoelen</span></h3>
 						</div>	
-						<div class='treexWrapper' id='teacherStudentModelTreeWrapper' >
+						<div class='treeWrapper' id='teacherStudentModelTreeWrapper' >
 <!-- 							<ul class='tree' id='teacherStudentModelTree'> -->
 <!-- 								<li><a>Model 1</a> -->
 <!-- 								</li> -->
@@ -3667,7 +3679,7 @@
 				</div>
 			</header>
 			<section>
-				<div class='row' >
+				<div class='row col-12' >
 					<div class='col-6' >
 					 <form name='teacherSMClassResultsTree'>
 					  	<h3><span id='teacherSMClassResultsTitle'>Alle leerdoelen</span></h3>	
@@ -3679,7 +3691,7 @@
 					 </form>
 						
 					</div>
-					<div class='col-6' >
+					<div class='col-6' style='position:absolute;top:0px;bottom:0px;right:0px;' >
 					  <form name='teacherSMClassResultsKlas'>
 					    <label class='input'>
 								<select name="schoolClass"><option value="">klas 1A</option></select>
@@ -3729,17 +3741,16 @@
 										<input type="radio" id="teacherSMClassResultsTableId" name="id" class="hidden" value="bakker34">										
 									</td>
 									<td class="col-3"><span id="teacherSMClassResultsTableScore">56%</span></td>										
-									</td>							
 								</tr>
 						   </tbody>
 						  </table>
 						</div>
 						<div>
 							<table class='dwo kg'>
-								<tbody>
+								<tbody><tr>
 									<td class='col-3'><span>Klasgemiddelde</span></td>
 									<td class='col-3'><span id='teacherSMClassResultsMean'>3%</span>
-									</td>
+									</td></tr>
 								</tbody>
 							</table>
 						</div>

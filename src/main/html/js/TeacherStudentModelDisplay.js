@@ -25,6 +25,7 @@
  	
  
  	this.$studentModelSelect.on('change', $.proxy(this.onModelChange, this));
+ 	this.$schoolClassSelect.on('change', $.proxy(this.onClassChange, this));
  	this.$studentModelGraph.on('click', $.proxy(this.onGraph, this));
  	this.$studentModelFilter.on('click', $.proxy(this.onFilter, this));
  	this.$studentModelKlas.on('click', $.proxy(this.onKlas, this));
@@ -49,7 +50,9 @@ TeacherStudentModelDisplay.prototype.localize = function() {
 }
 
 TeacherStudentModelDisplay.prototype.init = function () {
-	console.log("init!");
+	this.studentModelGraphToggle(false);
+	this.studentModelClassToggle(false);
+	this.$studentModelTitle.html('')
 }
 
 TeacherStudentModelDisplay.prototype.clear = function () {	
@@ -63,7 +66,6 @@ TeacherStudentModelDisplay.prototype.setHelp = function(url) {
 TeacherStudentModelDisplay.prototype.showSchoolClasses = function(json) {
 	var $option;
 	this.schoolClasses = json;
-	console.log(json);
 	this.$schoolClassSelect.html("");
 	
 	$option = this.$schoolClassSelectOption.clone();		
@@ -80,10 +82,9 @@ TeacherStudentModelDisplay.prototype.showSchoolClasses = function(json) {
 TeacherStudentModelDisplay.prototype.showModels = function(json) {
 	var $option;
 	this.titles = json;
-	console.log(json);
 	this.$studentModelSelect.html("");
 	$option = this.$schoolClassSelectOption.clone();		
-	$option.val( "" ).removeAttr("id").html( "" );
+	$option.val( "" ).removeAttr("id").html( "Kies eerst een model" );
 	this.$studentModelSelect.append($option);
 	
 	for (var id in this.titles) { 
@@ -125,11 +126,23 @@ TeacherStudentModelDisplay.prototype.studentModelGraphToggle = function(value) {
 	else this.$studentModelKlasFilter.prop('disabled', 'disabled'); 
 }
 
+TeacherStudentModelDisplay.prototype.studentModelClassToggle = function(value) {
+	if (value) this.$studentModelKlas.prop('disabled','');
+	else this.$studentModelKlas.prop('disabled', 'disabled');
+}
+
 
 //Events
 
-TeacherStudentModelDisplay.prototype.onModelChange = function(ev) {
+TeacherStudentModelDisplay.prototype.onClassChange = function(ev) {
 	ev.preventDefault();
+	var id = this.schoolClassSelect.value;
+	var id2 = this.studentModelSelect.value;
+	this.studentModelClassToggle(id != '' && id2 != '');
+}
+
+TeacherStudentModelDisplay.prototype.onModelChange = function(ev) {
+	this.onClassChange(ev)
 	var id =  this.studentModelSelect.value;
 	this.studentModelGraphToggle(id != '');
 	app.getPresenterFactory().getStudentModelPresenter().selectModel(id);	
@@ -150,6 +163,7 @@ TeacherStudentModelDisplay.prototype.onKlas = function(ev) {
 	var id = this.schoolClassSelect.value;
 	app.getPresenterFactory().getStudentModelPresenter().onSchoolClass(id);
 }
+
 TeacherStudentModelDisplay.prototype.onKlasFilter = function(ev) {
 	ev.preventDefault();
 	var id = this.schoolClassSelect.value;

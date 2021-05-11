@@ -55,12 +55,11 @@
  	var $option;
  	var current;
 	this.schoolClasses = json;
-	console.log(json);
 	this.$schoolClassSelect.html("");
 	
 	$option = this.$schoolClassSelectOption.clone();		
 	$option.val( "" ).removeAttr("id").html( "" );
-	this.$schoolClassSelect.append($option);
+/*	this.$schoolClassSelect.append($option); */
 	
 	for (var id in this.schoolClasses) { 
 		$option = this.$schoolClassSelectOption.clone();		
