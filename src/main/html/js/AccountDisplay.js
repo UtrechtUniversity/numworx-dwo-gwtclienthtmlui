@@ -32,7 +32,7 @@ function AccountDisplay() {
 	this.$updateUserForm.on('submit', $.proxy(this.submitUserForm,this));
 	this.$updateSchoolLoginsViewForm.on('submit', $.proxy(this.submitSchoolLogins,this));
 	this.$addSchoolLoginForm.on('submit', $.proxy(this.submitSchoolLoginsViewForm,this));
-	$(this.updateUserForm.elements["currentPassword"]).on('keypress', $.proxy(this.changeCurrentPasswordInput,this));
+	$(this.updateUserForm.elements["currentPassword"]).on('keypress input change', $.proxy(this.changeCurrentPasswordInput,this));
 	this.$addSchoolLoginForm.find("input:radio").on('change', $.proxy(this.addSchoolLoginFormToggle,this));
 	this.$schoolLoginsTableHead.find(".sortButton").click(Helpers.clickSortButton);
     this.$removebtn.on('click', $.proxy(this.removeCurrentUser, this))
