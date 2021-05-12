@@ -50,6 +50,8 @@
 <!-- opnemen in styles.scss -->
 <style type="text/css">
 .TEACHER .schooladmin-only,
+.TEACHER .premium-teacher,
+.TEACHER .no-teacher,
 .SCHOOLADMIN .teacher-only,
 .SCHOOLADMIN .no-schooladmin,
 .STUDENT .teacher-only,
@@ -65,7 +67,8 @@
  { display: none; }
  
 .STUDENT.premium li.premium-student,
-.SINGLESTUDENT.premium li.premium-student
+.SINGLESTUDENT.premium li.premium-student,
+.TEACHER.premium li.premium-teacher
  {
 	display: list-item; /* undo none effect */
  } 
@@ -92,7 +95,7 @@
 
 #headertrails a { color: #7297c7; }
 
-.score-treeItem, .score-modelItem {
+.score-treeItem, .score-modelItem, .model-item {
 	font-size: 13px;
 	height: 1.2em;
 }
@@ -163,7 +166,6 @@
 	height: 100%;
 }
 
-
 .score-html {
 	min-height: 100%;
 	background-color: white;
@@ -173,6 +175,13 @@
 .score-frame-Graph, .score-html-Graph {
 	width: 436px;
 	height: 400px;
+}
+
+.score-red {
+	color: red;
+}
+.score-green {
+	color: green;
 }
 
 .gwt-DialogBox.gwt-DialogBox-Node .dialogMiddleRight,
@@ -219,8 +228,6 @@
 }
 
 
-
-
 .graph-Button {
 	font-size: 20px;
 }
@@ -233,6 +240,33 @@
 	display: none;
 }
 
+.description-title {
+	font-family: 'Ubuntu';
+	font-size: 120%;
+	font-weight: 700;
+	padding: 10px;
+	color: #1b75bb;
+}
+
+#teacherKlasFilterWrapper td.hidden-node {
+	display: table-cell;
+	visibility: hidden;
+}
+#teacherKlasFilterWrapper table thead th {
+	border-bottom-width: 0px !important;
+}
+
+table.dwo.kg tbody {
+	min-height: initial;
+}
+div#teacherStudentModelTreeWrapper {
+	background: initial;
+	border: initial;
+}
+
+div.filter-dialog .popupContent {
+	background: #d2e5f5;
+}
 </style>
 
 
@@ -404,6 +438,9 @@
 	<script src="js/EditorDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	
 	<script src="js/OrganisationDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
+	<script src="js/TeacherStudentModelDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
+	<script src="js/TeacherSMClassResultsDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
+	<script src="js/TeacherClassFilterDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	
 	<script src="js/WelcomeDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	<script src="js/dialogs.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
@@ -651,11 +688,20 @@
 				    </svg><span class="name" data-translate="NUM_MNU_RESULTS">Resultaten</span>
 				    </a>
 				</li>
-				<li id='kennisNav' style='display:none'
-					class='no-schooladmin premium-student' data-translate="NUM_MNU_KNOWLEDGE" title="Kennis" >
+				<li id='kennisNav'
+					class='no-schooladmin no-teacher premium-student' data-translate="NUM_MNU_KNOWLEDGE" title="Kennis" >
 					<a href="#KNOWLEDGE"><svg viewbox="0 0 64 64" class="icon">
 					  <use xlink:href="#knowledge"></use>
-					</svg><span class="name" date-translate="NUM_MNU_KNOWLEDGE">Kennis</span>
+					</svg>
+					<span class="name" date-translate="NUM_MNU_KNOWLEDGE">Kennis</span>
+					</a>
+				</li>
+				<li id='leerdoelenNav'
+					class='no-schooladmin premium-teacher no-student' data-translate="NUM_MNU_STUDENTMODEL" title="Leerdoelen" >
+					<a href="#KNOWLEDGE"><svg viewbox="0 0 64 64" class="icon">
+					  <use xlink:href="#knowledge"></use>
+					</svg>
+					<span class="name" date-translate="NUM_MNU_STUDENTMODEL">Leerdoelen</span>
 					</a>
 				</li>
 				<li class='no-student' data-translate="NUM_MNU_PEOPLE" title="Personen">
@@ -3501,6 +3547,259 @@
 		</section>
 		<!-- end organisationDisplay -->
 
+
+
+		<!-- 
+		-
+		- teacherStudentModelDisplay
+		-
+		-->
+		<section id="teacherStudentModelDisplayPanel" class="subpanel">
+			
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
+<!-- 							<use xlink:href="#kennis"></use> -->
+						</svg>
+						<h1><span >Leerdoelen</span></h1>
+						<h2 class="sectionhead"><span >Bekijk leerdomein</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
+						<div class="content">
+							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
+						</div>
+					</section>
+				</div>
+			</header>
+			
+			<section>
+			
+				<div class="row col-12" id='teacherStudentModelBody' >
+					<div class='col-6'>
+					    <form name='teacherStudentModelSelect'>
+					     <div class='col-6'>
+					    	 <label class='col-4 input'>
+					    		<select name='modelselect'>
+					    			<option value="SLO">SLO leerdoelen Onderbouw</option>
+					    		</select>
+					    	 </label>
+					    	<label>
+					    		<input name='graph' type='submit' class='primary right' value='graph' disabled='disabled'>
+					    	</label>
+					    </div>
+					    <div class='col-6'>
+					    <h3><span id='teacherStudentmodelTitle'>Alle leerdoelen</span></h3>
+						</div>	
+						<div class='treeWrapper' id='teacherStudentModelTreeWrapper' >
+<!-- 							<ul class='tree' id='teacherStudentModelTree'> -->
+<!-- 								<li><a>Model 1</a> -->
+<!-- 								</li> -->
+<!-- 							</ul> -->
+						
+						</div>
+						<label>
+							<input name='filter' type='submit' class='secondary right down' value='Filter' disabled='disabled'>						</label>
+					 </form>
+					</div>
+					<div class='col-6' style='position:absolute;top:0px;bottom:0px;right:0px;'>
+						<div id='teacherStudentModelDescription' class='treeWrapper' style='height:100%;max-height:100%'>
+<!-- 							Hok met beschrijving -->
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class='col-6'>
+						<h2 class='sectionhead'><span>Bekijk kennisoverzicht klas</span></h2>
+						<form name='teacherStudentmodelKlas'>
+<!-- 							<label class='buttonlabel'> -->
+<!-- 								<span>Kies een klas en bekijk het kennisoverzicht</span> -->
+<!-- 							</label> -->
+							<label class="col-4 input">
+								<span data-translate="NUM_TBL_CLASSES_CLASSNAME">Naam klas</span>
+								<select name="schoolClass"><option value=""></option></select>
+							</label>
+							<div class="col-2">
+								<input type="submit" name="submit"  class="primary right down" value="Bekijk klas" >
+							</div>
+						</form>
+					</div>
+					<div class='col-6'>
+						<h2 class='sectionhead'><span>Filtering voor leerlingen van klas</span></h2>
+						<form name='teacherStudentmodelFilter'>
+							<label class="buttonLabel">
+                                    <span>Kies een filter om per klas leerdoelen zichtbaar te maken</span>
+									<input name='submit' type="submit" class="secondary right" value="Kies filter" disabled='disabled'>
+								</label>
+						</form>
+					</div>
+				</div>
+				
+				<div class="row">					
+				</div>
+				
+				<div class="row">
+				</div>
+				
+				
+			</section>
+			
+		</section>
+		<!-- end teacherStudentModelDisplay -->
+
+		<!-- teacherSMClassResultsDisplayPanel -->
+		<section id='teacherSMClassResultsDisplayPanel' class='subpanel' >
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
+<!-- 							<use xlink:href="#kennis"></use> -->
+						</svg>
+						<h1><span >Leerdoelen</span></h1>
+						<h2 class="sectionhead"><span >Bekijk kennisoverzicht klas</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
+						<div class="content">
+							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
+						</div>
+					</section>
+				</div>
+			</header>
+			<section>
+				<div class='row col-12' >
+					<div class='col-6' >
+					 <form name='teacherSMClassResultsTree'>
+					  	<h3><span id='teacherSMClassResultsTitle'>Alle leerdoelen</span></h3>	
+					    <div class='treexWrapper' id='teacherSMClassResultsTreeWrapper' >
+						</div>
+						<label>
+							<input name='filter' type='submit' class='secondary right down' value='Filter'>
+						</label>
+					 </form>
+						
+					</div>
+					<div class='col-6' style='position:absolute;top:0px;bottom:0px;right:0px;' >
+					  <form name='teacherSMClassResultsKlas'>
+					    <label class='input'>
+								<select name="schoolClass"><option value="">klas 1A</option></select>
+						</label>
+						<div id='teacherSMClassResultsWrapper'>
+						  <table class='dwo hoverable selectable sortable headered'>
+						   <thead>
+						  		<tr>
+						  			<th class='col-3'><span>naam</span></th>
+						  			<th>score</th>
+						  		</tr>
+								<tr class="sorting">
+									<th class="col-3">
+										
+										<span class="sortButton asc default" data-order="asc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowUp"></use>
+											</svg>
+										</span>
+										<span class="sortButton desc" data-order="desc" data-type="string">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowDown"></use>
+											</svg>
+										</span>
+										
+									</th>
+									<th class="col-3">
+										
+										<span class="sortButton asc" data-order="asc" data-type="int">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowUp"></use>
+											</svg>
+										</span>
+										<span class="sortButton desc" data-order="desc" data-type="int">
+											<svg viewBox="0 0 74 74" class="icon">
+												  <use xlink:href="#arrowDown"></use>
+											</svg>
+										</span>
+										
+									</th>
+								</tr>
+						   </thead>
+						   <tbody>
+								<tr tabindex="1">
+									
+									<td class="col-3"><span id="teacherSMClassResultsTableName">Michel Bakker</span>
+										<input type="radio" id="teacherSMClassResultsTableId" name="id" class="hidden" value="bakker34">										
+									</td>
+									<td class="col-3"><span id="teacherSMClassResultsTableScore">56%</span></td>										
+								</tr>
+						   </tbody>
+						  </table>
+						</div>
+						<div>
+							<table class='dwo kg'>
+								<tbody><tr>
+									<td class='col-3'><span>Klasgemiddelde</span></td>
+									<td class='col-3'><span id='teacherSMClassResultsMean'>3%</span>
+									</td></tr>
+								</tbody>
+							</table>
+						</div>
+						<div>
+							<input type="radio" name="id" class="hidden" value=""> <!-- empty option -->										
+							<input type="submit" class="primary right" value="Bekijk student" />
+						</div>
+					  </form>					
+					</div>
+				
+				</div>
+			</section>
+		</section>
+		<!-- end teacherSMClassResultsDisplayPanel -->
+
+		<!-- teacherKlasFilterDisplayPanel -->
+		<section id='teacherKlasFilterDisplayPanel' class='subpanel' >
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
+<!-- 							<use xlink:href="#kennis"></use> -->
+						</svg>
+						<h1><span data-translate="NUM_MNU_STUDENTMODEL">Leerdoelen</span></h1>
+						<h2 class="sectionhead"><span >Filters per klas</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
+						<div class="content">
+							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
+						</div>
+					</section>
+				</div>
+			</header>
+			<section>
+				<div class='row'>
+					<div class='col-9' id='teacherKlasFilterWrapper'>
+						
+					</div>
+				</div>
+			</section>
+		</section>
+		<!-- end teacherSMClassResultsDisplayPanel -->
+
 		<!-- studentResultsDisplay -->
 		<section id='studentResultsDisplayPanel' class='subpanel student-only'>
 			<header>
@@ -3539,8 +3838,9 @@
 		- studentResultsGraphDisplay (lightbox)
 		-
 		-->
-		<section id="studentResultsGraphDisplayPanel" class="lightbox student-only">
+		<section id="studentResultsGraphDisplayPanel" class="lightbox">
 			<header>
+				<span id="studentResultsGraphUser" ></span>
 				<span id="studentResultsGraphDomain" class="strong">Leerdomein</span>
 				<span id="studentResultsGraphCloseButton" class="closeButton">
 					<svg viewBox="0 0 64 64" class="icon">
@@ -3548,7 +3848,7 @@
 				    </svg>
 				</span>
 			</header>
-			<section id='studentResultsGraph'>
+			<section id='studentResultsGraph' style='bottom:20px;'>
 			</section>
 		</section>
 		<!-- end studentResultsGraphDisplay (lightbox) -->

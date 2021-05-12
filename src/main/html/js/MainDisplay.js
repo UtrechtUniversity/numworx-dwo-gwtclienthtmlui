@@ -85,7 +85,14 @@ function MainDisplay() {
 	this.organisationDisplay = new OrganisationDisplay();
 	window.jsOrganisationDisplay = this.organisationDisplay;
 	
-		
+	// STUDENTMODEL
+	this.teacherStudentModelDisplay = new TeacherStudentModelDisplay();
+	window.jsTeacherStudentModelDisplay = this.teacherStudentModelDisplay;
+	this.teacherSMClassResultsDisplay = new TeacherSMClassResultsDisplay();
+	window.jsTeacherSMClassResultsDisplay = this.teacherSMClassResultsDisplay;
+	this.teacherClassFilterDisplay = new TeacherClassFilterDisplay;
+	window.jsTeacherClassFilterDisplay = this.teacherClassFilterDisplay;
+	
 	// Dialog Displays
 	this.msgDialogDisplay = new MsgDialogDisplay();
 	window.jsMsgDialogDisplay = this.msgDialogDisplay;
@@ -360,6 +367,21 @@ MainDisplay.prototype.showOrganisationView = function() {
 MainDisplay.prototype.showStudentSchoolclassView = function() {
 	this.initMainView();
 	this.studentSchoolclassesDisplay.show();
+}
+
+MainDisplay.prototype.showTeacherStudentModelView = function() {
+	this.initMainView();
+	this.teacherStudentModelDisplay.show();
+}
+
+MainDisplay.prototype.showTeacherSMClassResultsView = function() {
+	this.initMainView();
+	this.teacherSMClassResultsDisplay.show();
+}
+
+MainDisplay.prototype.showTeacherClassFilterView = function() {
+	this.initMainView();
+	this.teacherClassFilterDisplay.show();
 }
 
 MainDisplay.prototype.onArrowUp = function() {
