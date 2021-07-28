@@ -18,6 +18,7 @@
  	this.$studentModelFilter = $(this.studentModelForm.elements['filter'])
  	this.studentModelMethod = (this.studentModelForm.elements['method'])
  	this.$studentModelMethod = $(this.studentModelMethod)
+ 	this.$studentModelMethodLabel = $("#teacherStudentModelMethod")
  	this.$studentModelSelect = $(this.studentModelSelect)
  	this.$studentModelSelectOption = this.$studentModelSelect.find("option").detach();
  	
@@ -110,6 +111,9 @@ TeacherStudentModelDisplay.prototype.getDescriptionId = function() {
 
 TeacherStudentModelDisplay.prototype.setTitle = function(string) {
 	this.$studentModelTitle.html( Helpers.htmlEscape(string))
+}
+TeacherStudentModelDisplay.prototype.setMethodLabel = function(string) {
+	this.$studentModelMethodLabel.html( Helpers.htmlEscape(string))
 }
 
 TeacherStudentModelDisplay.prototype.setModelSelect = function(id) {
