@@ -2,6 +2,7 @@ function MainDisplay() {
 	this.activeDialogs = [];
 	this.activeLightboxes = [];
 	this.stretchables = [];
+	this.resizecallback = {};
 
 	// Bind DOM elements with jQuery
 	this.$body = $("body");
@@ -491,6 +492,7 @@ MainDisplay.prototype.resizeWindow = function(event) {
 	Helpers.resizeHelpSection();
 	this.closeHelp();
 	this.resizeStrechables();
+	this.resizeCallbacks();
 		
 }
 MainDisplay.prototype.registerStretchables = function( elements ) {
@@ -503,6 +505,21 @@ MainDisplay.prototype.registerStretchables = function( elements ) {
 	}
 	this.resizeStrechables();
 }
+
+MainDisplay.prototype.registerCallback = function (key,  f ) {
+	this.resizecallback[key] = f;
+}
+
+MainDisplay.prototype.resizeCallbacks = function() {
+	for( var key in this.resizecallback) {
+	 if ( this.resizecallback.hasOwnProperty(key)) {
+	 	var f = this.resizecallback[key];
+	 	f();
+	 }
+	}
+}
+
+
 MainDisplay.prototype.resizeStrechables = function() {
 	if (this.stretchables.length < 1) return; 
 	

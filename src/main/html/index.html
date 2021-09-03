@@ -246,6 +246,10 @@
 	font-weight: 700;
 	padding: 10px;
 	color: #1b75bb;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	overflow-x: clip;
+	white-space: nowrap;
 }
 
 #teacherKlasFilterWrapper td.hidden-node {
@@ -3605,7 +3609,12 @@ div.filter-dialog .popupContent {
 						
 						</div>
 						<label>
-							<input name='filter' type='submit' class='secondary right down' value='Filter' disabled='disabled'>						</label>
+							<input name='method' type='checkbox' value='true'><span id='teacherStudentModelMethod'>Methode</span>
+						</label>
+						
+						<label>
+							<input name='filter' type='submit' class='secondary right down' value='Filter' disabled='disabled'>
+						</label>
 					 </form>
 					</div>
 					<div class='col-6' style='position:absolute;top:0px;bottom:0px;right:0px;'>

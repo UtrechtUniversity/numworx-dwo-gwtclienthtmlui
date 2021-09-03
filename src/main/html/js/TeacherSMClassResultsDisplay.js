@@ -26,6 +26,7 @@
  	this.$personsTableHead.find(".sortButton").click(Helpers.clickSortButton);
     this.$personsMean = $("#teacherSMClassResultsMean")
  	this.$schoolClassSelect.on('change', $.proxy(this.onClassChange, this));
+ 	
  
   }
   
@@ -40,6 +41,7 @@
   
  TeacherSMClassResultsDisplay.prototype.init = function() {
  	app.mainDisplay.registerStretchables( [ this.$classTreeWrapper ] );
+ 	app.mainDisplay.registerCallback( this.getTreeId(), $.proxy(this.onResize, this));
  }
  TeacherSMClassResultsDisplay.prototype.clear = function() {}
  
@@ -114,6 +116,7 @@
 	this.$personsMean.html( this.getWidget(klas));
 	this.personsEditFormToggle(false);			
 	this.$classResultsWrapper.find(".sortButton.default").trigger('click');
+	this.onResize();
  }
  
 
@@ -152,5 +155,11 @@ TeacherSMClassResultsDisplay.prototype.onClassChange = function(ev) {
 	ev.preventDefault();
 	var id =  this.schoolClassSelect.value;
 	app.getPresenterFactory().getSMClassResultsPresenter().onChange(id);	
+ }
+ 
+TeacherSMClassResultsDisplay.prototype.onResize = function() {
+ 	var height = this.$classTreeWrapper.outerHeight();
+ 	var $tbody = this.$classResultsWrapper.find('tbody')
+ 	$tbody.height( (height - 100) + "px" )
  }
  

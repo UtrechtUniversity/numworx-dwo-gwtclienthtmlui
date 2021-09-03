@@ -16,6 +16,9 @@
  	this.studentModelSelect = this.studentModelForm.elements['modelselect']
  	this.$studentModelGraph  = $(this.studentModelForm.elements['graph'])
  	this.$studentModelFilter = $(this.studentModelForm.elements['filter'])
+ 	this.studentModelMethod = (this.studentModelForm.elements['method'])
+ 	this.$studentModelMethod = $(this.studentModelMethod)
+ 	this.$studentModelMethodLabel = $("#teacherStudentModelMethod")
  	this.$studentModelSelect = $(this.studentModelSelect)
  	this.$studentModelSelectOption = this.$studentModelSelect.find("option").detach();
  	
@@ -30,6 +33,7 @@
  	this.$studentModelFilter.on('click', $.proxy(this.onFilter, this));
  	this.$studentModelKlas.on('click', $.proxy(this.onKlas, this));
  	this.$studentModelKlasFilter.on('click', $.proxy(this.onKlasFilter, this));
+ 	this.$studentModelMethod.on('change', $.proxy(this.onMethodChange, this));
 	
 	this.$studentModelTitle = $("#teacherStudentmodelTitle")
  
@@ -108,6 +112,9 @@ TeacherStudentModelDisplay.prototype.getDescriptionId = function() {
 TeacherStudentModelDisplay.prototype.setTitle = function(string) {
 	this.$studentModelTitle.html( Helpers.htmlEscape(string))
 }
+TeacherStudentModelDisplay.prototype.setMethodLabel = function(string) {
+	this.$studentModelMethodLabel.html( Helpers.htmlEscape(string))
+}
 
 TeacherStudentModelDisplay.prototype.setModelSelect = function(id) {
 	this.studentModelSelect.value = id;
@@ -156,6 +163,17 @@ TeacherStudentModelDisplay.prototype.onGraph = function(ev) {
 TeacherStudentModelDisplay.prototype.onFilter = function(ev) {
 	ev.preventDefault();
 	app.getPresenterFactory().getStudentModelPresenter().onFilter();
+}
+
+TeacherStudentModelDisplay.prototype.isMethod = function() {
+	var value = this.studentModelMethod.checked
+	return value;
+}
+
+TeacherStudentModelDisplay.prototype.onMethodChange = function(ev) {
+	ev.preventDefault();
+	var value = this.isMethod()
+	app.getPresenterFactory().getStudentModelPresenter().onMethod(value);
 }
 
 TeacherStudentModelDisplay.prototype.onKlas = function(ev) {
