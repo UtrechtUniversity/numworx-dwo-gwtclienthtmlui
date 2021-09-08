@@ -244,10 +244,16 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 
 SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function() {
 	var matrix = [], i = 1, j = 1;
-	students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children; 
-	modules = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children;
-	activeModules = this.resultState.activeCourses;
-	
+	var students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children; 
+	var modules = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children;
+	var activeModules = this.resultState.activeCourses;
+	if (activeModules.length > 1) {
+		var unsorted = {};
+		for (var amId in activeModules) unsorted[activeModules[amId]] = modules[activeModules[amId]];
+		var sorted = Helpers.getIndexedSortedArray(unsorted);
+		activeModules = [];
+		for (var s in sorted) activeModules.push(sorted[s].id);
+	}
 	matrix[0] = [];
 	matrix[0][0] = {};
 	matrix[0][0].label = matrix[0][0].value = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_Modules");
