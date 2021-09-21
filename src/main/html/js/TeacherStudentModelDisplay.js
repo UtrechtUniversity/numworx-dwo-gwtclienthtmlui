@@ -21,6 +21,8 @@
  	this.$studentModelMethodLabel = $("#teacherStudentModelMethod")
  	this.$studentModelSelect = $(this.studentModelSelect)
  	this.$studentModelSelectOption = this.$studentModelSelect.find("option").detach();
+	this.methodsSelect = this.studentModelForm.elements['activeMethod']
+    this.$methodsSelect = $(this.methodsSelect)
  	
  	this.studentModelKlasFilter = document.forms['teacherStudentmodelFilter']
  	this.$studentModelKlas = $(this.schoolclassForm.elements['submit'])
@@ -83,6 +85,19 @@ TeacherStudentModelDisplay.prototype.showSchoolClasses = function(json) {
 	}
 }
 
+TeacherStudentModelDisplay.prototype.showMethods = function(json) {
+	var $option;
+	this.methods = json;
+	this.$methodsSelect.html("");
+	for (var id in this.methods) {
+		$option = this.$schoolClassSelectOption.clone();		
+		$option.val( id ).removeAttr("id").html( Helpers.htmlEscape(this.methods[id]) );
+		this.$methodsSelect.append($option);
+	}
+}
+
+
+
 TeacherStudentModelDisplay.prototype.showModels = function(json) {
 	var $option;
 	this.titles = json;
@@ -113,12 +128,17 @@ TeacherStudentModelDisplay.prototype.setTitle = function(string) {
 	this.$studentModelTitle.html( Helpers.htmlEscape(string))
 }
 TeacherStudentModelDisplay.prototype.setMethodLabel = function(string) {
-	this.$studentModelMethodLabel.html( Helpers.htmlEscape(string))
+//	this.$studentModelMethodLabel.html( Helpers.htmlEscape(string))
 }
 
 TeacherStudentModelDisplay.prototype.setModelSelect = function(id) {
 	this.studentModelSelect.value = id;
 	this.studentModelGraphToggle(id != '');
+}
+
+TeacherStudentModelDisplay.prototype.setActiveMethod = function(id) {
+	this.methodsSelect.value = id;
+	
 }
 
 // helpers
