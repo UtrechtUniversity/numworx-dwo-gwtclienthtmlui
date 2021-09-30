@@ -96,7 +96,7 @@ ResultsDisplay.prototype.setChooseClassTable = function() {
 }
 
 ResultsDisplay.prototype.setChooseModulesTable = function() {	
-	var i = 0, course;
+	var i = 0, course, sortedSchoolClassChildren;
 	
 	this.$chooseModulesTableBody.html("");
 	
@@ -123,7 +123,7 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 			continue; 
 		}
 		
-		$row = this.$chooseModulesRow.clone();
+		var $row = this.$chooseModulesRow.clone();
 	
 		$row.find("#chooseClassAndModulesModuleName").html( Helpers.htmlEscape(course.label) ).attr('data-sortvalue', course.label).removeAttr("id");
 	

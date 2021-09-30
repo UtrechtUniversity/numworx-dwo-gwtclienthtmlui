@@ -21,6 +21,8 @@
  	this.$studentModelMethodLabel = $("#teacherStudentModelMethod")
  	this.$studentModelSelect = $(this.studentModelSelect)
  	this.$studentModelSelectOption = this.$studentModelSelect.find("option").detach();
+	this.methodsSelect = this.studentModelForm.elements['activeMethod']
+    this.$methodsSelect = $(this.methodsSelect)
  	
  	this.studentModelKlasFilter = document.forms['teacherStudentmodelFilter']
  	this.$studentModelKlas = $(this.schoolclassForm.elements['submit'])
@@ -29,6 +31,7 @@
  
  	this.$studentModelSelect.on('change', $.proxy(this.onModelChange, this));
  	this.$schoolClassSelect.on('change', $.proxy(this.onClassChange, this));
+ 	this.$methodsSelect.on('change', $.proxy(this.onMethodsSelectChange, this));
  	this.$studentModelGraph.on('click', $.proxy(this.onGraph, this));
  	this.$studentModelFilter.on('click', $.proxy(this.onFilter, this));
  	this.$studentModelKlas.on('click', $.proxy(this.onKlas, this));
@@ -83,6 +86,19 @@ TeacherStudentModelDisplay.prototype.showSchoolClasses = function(json) {
 	}
 }
 
+TeacherStudentModelDisplay.prototype.showMethods = function(json) {
+	var $option;
+	this.methods = json;
+	this.$methodsSelect.html("");
+	for (var id in this.methods) {
+		$option = this.$schoolClassSelectOption.clone();		
+		$option.val( id ).removeAttr("id").html( Helpers.htmlEscape(this.methods[id]) );
+		this.$methodsSelect.append($option);
+	}
+}
+
+
+
 TeacherStudentModelDisplay.prototype.showModels = function(json) {
 	var $option;
 	this.titles = json;
@@ -113,12 +129,17 @@ TeacherStudentModelDisplay.prototype.setTitle = function(string) {
 	this.$studentModelTitle.html( Helpers.htmlEscape(string))
 }
 TeacherStudentModelDisplay.prototype.setMethodLabel = function(string) {
-	this.$studentModelMethodLabel.html( Helpers.htmlEscape(string))
+//	this.$studentModelMethodLabel.html( Helpers.htmlEscape(string))
 }
 
 TeacherStudentModelDisplay.prototype.setModelSelect = function(id) {
 	this.studentModelSelect.value = id;
 	this.studentModelGraphToggle(id != '');
+}
+
+TeacherStudentModelDisplay.prototype.setActiveMethod = function(id) {
+	this.methodsSelect.value = id;
+	
 }
 
 // helpers
@@ -174,6 +195,12 @@ TeacherStudentModelDisplay.prototype.onMethodChange = function(ev) {
 	ev.preventDefault();
 	var value = this.isMethod()
 	app.getPresenterFactory().getStudentModelPresenter().onMethod(value);
+}
+
+TeacherStudentModelDisplay.prototype.onMethodsSelectChange = function(ev) {
+	ev.preventDefault();
+	var id = this.methodsSelect.value;
+	app.getPresenterFactory().getStudentModelPresenter().onMethodsSelect(id);
 }
 
 TeacherStudentModelDisplay.prototype.onKlas = function(ev) {
