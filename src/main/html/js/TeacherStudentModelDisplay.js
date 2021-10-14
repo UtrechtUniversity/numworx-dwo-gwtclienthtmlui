@@ -31,6 +31,7 @@
  
  	this.$studentModelSelect.on('change', $.proxy(this.onModelChange, this));
  	this.$schoolClassSelect.on('change', $.proxy(this.onClassChange, this));
+ 	this.$methodsSelect.on('change', $.proxy(this.onMethodsSelectChange, this));
  	this.$studentModelGraph.on('click', $.proxy(this.onGraph, this));
  	this.$studentModelFilter.on('click', $.proxy(this.onFilter, this));
  	this.$studentModelKlas.on('click', $.proxy(this.onKlas, this));
@@ -194,6 +195,12 @@ TeacherStudentModelDisplay.prototype.onMethodChange = function(ev) {
 	ev.preventDefault();
 	var value = this.isMethod()
 	app.getPresenterFactory().getStudentModelPresenter().onMethod(value);
+}
+
+TeacherStudentModelDisplay.prototype.onMethodsSelectChange = function(ev) {
+	ev.preventDefault();
+	var id = this.methodsSelect.value;
+	app.getPresenterFactory().getStudentModelPresenter().onMethodsSelect(id);
 }
 
 TeacherStudentModelDisplay.prototype.onKlas = function(ev) {
