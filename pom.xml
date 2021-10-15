@@ -136,5 +136,7 @@
     <properties>
 		<maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
     	<tstamp>${maven.build.timestamp}</tstamp>
+    	<maven.compiler.target>1.8</maven.compiler.target>
+    	<maven.compiler.source>1.8</maven.compiler.source>
     </properties>
 </project>
