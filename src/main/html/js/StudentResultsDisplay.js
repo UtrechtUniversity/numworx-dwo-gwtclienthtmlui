@@ -14,7 +14,7 @@ StudentResultsDisplay.prototype.getId = function() {
 }
  
 StudentResultsDisplay.prototype.init = function () {
-	// do nothing
+    this.localize();
 }
 
 StudentResultsDisplay.prototype.clear = function () {
@@ -24,7 +24,6 @@ StudentResultsDisplay.prototype.clear = function () {
 
 StudentResultsDisplay.prototype.show = function() {
 	app.mainDisplay.registerStretchables( [ this.$widget ] );
-    this.localize();
 	this.$panel.show();
 	Helpers.stretchHeight([ this.$widget ]);
 }
@@ -39,3 +38,8 @@ StudentResultsDisplay.prototype.localize = function() {
 StudentResultsDisplay.prototype.setHelp = function(url) {
 	if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
 }
+
+StudentResultsDisplay.prototype.setTitle = function(title) {
+	$('#studentResultsDisplayTitle').text(title)
+}
+
