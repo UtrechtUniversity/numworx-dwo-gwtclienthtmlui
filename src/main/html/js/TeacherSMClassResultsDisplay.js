@@ -14,6 +14,9 @@
     this.$title = $("#teacherSMClassResultsTitle");
   	this.studentModelForm = document.forms['teacherSMClassResultsTree']
  	this.$studentModelFilter = $(this.studentModelForm.elements['filter'])
+ 	this.$method = $("#teacherSMClassResultMethod");
+ 	this.methodCheck = this.studentModelForm.elements['method'];
+ 	this.$methodCheck = $(this.methodCheck)
   	this.$studentModelFilter.on('click', $.proxy(this.onFilter, this));
  
  	this.$classResultsWrapper = $("#teacherSMClassResultsWrapper");
@@ -26,8 +29,7 @@
  	this.$personsTableHead.find(".sortButton").click(Helpers.clickSortButton);
     this.$personsMean = $("#teacherSMClassResultsMean")
  	this.$schoolClassSelect.on('change', $.proxy(this.onClassChange, this));
- 	
- 
+ 	this.$methodCheck.on('change', $.proxy(this.onMethodChange, this));
   }
   
  TeacherSMClassResultsDisplay.prototype.show = function() {
@@ -52,6 +54,11 @@
  TeacherSMClassResultsDisplay.prototype.setTitle = function(title) {
  	this.$title.html(Helpers.htmlEscape(title));
  }
+ 
+  TeacherSMClassResultsDisplay.prototype.setMethodLabel = function(label) {
+  	this.$method.html(Helpers.htmlEscape(label));
+  }
+ 
  
  TeacherSMClassResultsDisplay.prototype.showSchoolclasses = function(json) {
  	var $option;
@@ -156,6 +163,13 @@ TeacherSMClassResultsDisplay.prototype.onClassChange = function(ev) {
 	var id =  this.schoolClassSelect.value;
 	app.getPresenterFactory().getSMClassResultsPresenter().onChange(id);	
  }
+ 
+ TeacherSMClassResultsDisplay.prototype.onMethodChange = function(ev) {
+	ev.preventDefault();
+	var check =  this.methodCheck.checked;
+	app.getPresenterFactory().getSMClassResultsPresenter().onMethod(check);	
+ }
+ 
  
 TeacherSMClassResultsDisplay.prototype.onResize = function() {
  	var height = this.$classTreeWrapper.outerHeight();
