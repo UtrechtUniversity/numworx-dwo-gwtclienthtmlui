@@ -164,6 +164,11 @@ TeacherSMClassResultsDisplay.prototype.onClassChange = function(ev) {
 	app.getPresenterFactory().getSMClassResultsPresenter().onChange(id);	
  }
  
+TeacherSMClassResultsDisplay.prototype.isMethod = function() {
+	var check =  this.methodCheck.checked;
+	return check;
+}
+
  TeacherSMClassResultsDisplay.prototype.onMethodChange = function(ev) {
 	ev.preventDefault();
 	var check =  this.methodCheck.checked;
