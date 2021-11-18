@@ -263,7 +263,8 @@
 table.dwo.kg tbody {
 	min-height: initial;
 }
-div#teacherStudentModelTreeWrapper {
+
+div#teacherStudentModelTreeWrapper, div#teacherSMClassResultsTreeWrapper {
 	background: initial;
 	border: initial;
 }
@@ -3600,11 +3601,6 @@ div.filter-dialog .popupContent {
 					    <h3><span id='teacherStudentmodelTitle'>Alle leerdoelen</span></h3>
 						</div>	
 						<div class='treeWrapper' id='teacherStudentModelTreeWrapper' >
-<!-- 							<ul class='tree' id='teacherStudentModelTree'> -->
-<!-- 								<li><a>Model 1</a> -->
-<!-- 								</li> -->
-<!-- 							</ul> -->
-						
 						</div>
 						<label>
 							<input name='method' type='checkbox' value='true'><span id='teacherStudentModelMethod'>Methode-indeling</span>
@@ -3695,11 +3691,17 @@ div.filter-dialog .popupContent {
 					<div class='col-6' >
 					 <form name='teacherSMClassResultsTree'>
 					  	<h3><span id='teacherSMClassResultsTitle'>Alle leerdoelen</span></h3>	
-					    <div class='treexWrapper' id='teacherSMClassResultsTreeWrapper' >
+					    <div class='treeWrapper' id='teacherSMClassResultsTreeWrapper' >
 						</div>
-						<label>
-							<input name='filter' type='submit' class='secondary right down' value='Filter'>
-						</label>
+						<div class="col-4 down">
+							<label style="float: right;">
+							<input name="method" type="checkbox"><span id='teacherSMClassResultMethod'>Methode-indeling</span></label>
+						</div>
+						<div class="col-2">
+							<label>
+								<input name='filter' type='submit' class='secondary right down' value='Filter'>
+							</label>
+						</div>
 					 </form>
 						
 					</div>
