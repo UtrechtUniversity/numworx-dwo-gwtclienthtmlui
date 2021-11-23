@@ -116,6 +116,8 @@ Helpers.setResultIndicatorColor = function ($el) {
 		$el.addClass('result2'); return
 	}  else if (score <= 100) {
 		$el.addClass('result1'); return
+	}  else if (score > 100) {
+		$el.addClass('result1'); return // Illegal, komt voor
 	}
 }
 
