@@ -548,6 +548,7 @@ table.dwo.results {
 				&.result2 {	border-color: $scoreIndicator2;	}
 				&.result3 {	border-color: $scoreIndicator3;	}
 				&.result4 {	border-color: $scoreIndicator4;	}
+				&.result5 { background-color: $scoreIndicator5; border-color: $scoreIndicator5; color: $white; }
 			}						
 		}
 		tr:hover td.studentName.overflown:after {
