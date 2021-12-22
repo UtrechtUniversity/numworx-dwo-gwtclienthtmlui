@@ -497,11 +497,19 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 					} else {
 						matrix[i][j].label = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus != 0 ? (sortedStudentScoChildren[n].bonus>0?"+":"")+sortedStudentScoChildren[n].bonus : "") +" / " + sortedStudentScoChildren[n].maxScore;
 						matrix[i][j].score = (sortedStudentScoChildren[n].sumScore + (sortedStudentScoChildren[n].bonus) ) / sortedStudentScoChildren[n].maxScore * 100;
-						if (!matrix[i][j].score) 
-							matrix[i][j].score = -1;
+//						if (!matrix[i][j].score) 
+//							matrix[i][j].score = -1;
 						matrix[i][j].sortValue = matrix[i][j].value = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ?sortedStudentScoChildren[n].bonus : 0);
 						matrix[i][j].callback = this.clickPageResultIndicator;
 						matrix[i][j].params = { scoId: this.resultState.activeActivity, studentId: studentId, pageSequence: sortedStudentScoChildren[n].sequence };
+
+						if (sortedStudentScoChildren[n].sumScore == -1) {
+							matrix[i][j].label = "Kijk na"
+							matrix[i][j].score = -2
+						}
+					
+					
+					
 					}
 					
 					j++;
@@ -579,6 +587,8 @@ SelectedResultsDisplay.prototype.showFilteredIndicators = function() {
 	for (var i = 0; i < this.resultState.activeIndicators.length; i++) {
 		this.$selectResultsTableWrap.find(".result"+this.resultState.activeIndicators[i]).show();
 	}
+	this.$selectResultsTableWrap.find(".result5").show();
+
 }
 SelectedResultsDisplay.prototype.setActiveFilters = function() {
 	this.$allFilterIndicators.removeClass("active");
@@ -672,7 +682,7 @@ SelectedResultsDisplay.prototype.pagesStudents = function(params) {
 	var matrix = this.buildMatrixPagesActivityStudentsInModule(activity);
 	
 	var sealState = this.getSealStateSingleActivity(activity);
-	console.log(sealState);
+	//console.log(sealState);
 	
 	this.$bars.hide();
 	this.$barPagesStudents.show();
