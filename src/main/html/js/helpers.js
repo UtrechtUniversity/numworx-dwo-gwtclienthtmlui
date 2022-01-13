@@ -107,8 +107,11 @@ Helpers.setResultIndicatorColor = function ($el) {
 	//    }
 	
 	var score = parseInt($el.data("score"));
-	
-	if (score < 10) {
+	if (score == -2) {
+		$el.addClass('result5'); return
+	} else if (score < 0) { 
+		$el.addClass('resultnone'); return 
+	} else if (score < 10) {
 		$el.addClass('result4'); return
 	} else if (score < 50) {
 		$el.addClass('result3'); return
