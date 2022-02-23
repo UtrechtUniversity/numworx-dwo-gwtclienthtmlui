@@ -3602,9 +3602,14 @@ div.filter-dialog .popupContent {
 						</div>	
 						<div class='treeWrapper' id='teacherStudentModelTreeWrapper' >
 						</div>
-						<label>
-							<input name='method' type='checkbox' value='true'><span id='teacherStudentModelMethod'>Methode-indeling</span>
-						</label>
+						<div>
+							<label for="teacherStudentModelMethodBox" style='padding-right:10px;'>
+								<span id='teacherStudentModelMethod'>Methode-indeling</span>
+							</label>
+							<div class="checkbox" style='zoom:0.8'>
+								<input type="checkbox" name="method" id="teacherStudentModelMethodBox" value="true"><label class="icon" for="teacherStudentModelMethodBox"></label>
+							</div>											
+						</div>
 						<div class='col-6'>
 						   <label class='col-4 input'>
 						    <span>Actieve methode</span>
@@ -3694,8 +3699,10 @@ div.filter-dialog .popupContent {
 					    <div class='treeWrapper' id='teacherSMClassResultsTreeWrapper' >
 						</div>
 						<div class="col-4 down">
-							<label style="float: right;">
-							<input name="method" type="checkbox"><span id='teacherSMClassResultMethod'>Methode-indeling</span></label>
+							<div style="float: right;">
+							<div style='zoom:0.8' class='checkbox'><input id='teacherSMClassResultMethodBox' name="method" type="checkbox"><label class='icon' for='teacherSMClassResultMethodBox'></label></div>
+							<label for='teacherSMClassResultMethodBox' >&nbsp;<span id='teacherSMClassResultMethod'>Methode-indeling</span></label>
+							</div>
 						</div>
 						<div class="col-2">
 							<label>
