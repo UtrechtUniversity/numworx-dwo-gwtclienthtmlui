@@ -30,6 +30,9 @@
     this.$personsMean = $("#teacherSMClassResultsMean")
  	this.$schoolClassSelect.on('change', $.proxy(this.onClassChange, this));
  	this.$methodCheck.on('change', $.proxy(this.onMethodChange, this));
+ 	
+ 	this.$back = $("#teacherSMClassResultsBacklink");
+	this.$back.on('click', $.proxy(this.backToSM, this));
   }
   
  TeacherSMClassResultsDisplay.prototype.show = function() {
@@ -181,4 +184,9 @@ TeacherSMClassResultsDisplay.prototype.onResize = function() {
  	var $tbody = this.$classResultsWrapper.find('tbody')
  	$tbody.height( (height - 100) + "px" )
  }
+
+TeacherSMClassResultsDisplay.prototype.backToSM = function(event) {
+	event.preventDefault()
+	app.getPresenterFactory().getSMClassResultsPresenter().back();
+}
  

@@ -5,7 +5,16 @@
 function TeacherClassFilterDisplay() {
  	this.$panel = jQuery("#teacherKlasFilterDisplayPanel");
  	this.$widget = $( "#"+ this.getId() );
+ 	this.$back   = $( "#klasFilterBacklink");
 	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
+	//this.$back.off('click');
+	this.$back.on('click', $.proxy(this.backToSM, this));
+//	var proxy = $.proxy(this.backToSM, this);
+//	this.$back.click( function(ev) { 
+//		console.log("EV " + ev); 
+//		proxy(ev);
+//	});
+	
  	this.$panel.hide();
 }
  
@@ -19,6 +28,11 @@ TeacherClassFilterDisplay.prototype.init = function () {
 
 TeacherClassFilterDisplay.prototype.clear = function () {
 	this.$widget.html("");
+}
+
+TeacherClassFilterDisplay.prototype.backToSM = function (event) {
+	event.preventDefault();
+	app.getPresenterFactory().getTeacherClassFilterPresenter().back()
 }
 
 
