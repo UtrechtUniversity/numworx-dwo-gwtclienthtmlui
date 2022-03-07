@@ -89,12 +89,14 @@ TeacherStudentModelDisplay.prototype.showSchoolClasses = function(json) {
 TeacherStudentModelDisplay.prototype.showMethods = function(json) {
 	var $option;
 	this.methods = json;
+	var oldvalue = this.methodsSelect.value
 	this.$methodsSelect.html("");
 	for (var id in this.methods) {
 		$option = this.$schoolClassSelectOption.clone();		
 		$option.val( id ).removeAttr("id").html( Helpers.htmlEscape(this.methods[id]) );
 		this.$methodsSelect.append($option);
 	}
+	this.setActiveMethod(oldvalue)
 }
 
 
