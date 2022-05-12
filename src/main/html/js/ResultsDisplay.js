@@ -81,9 +81,11 @@ ResultsDisplay.prototype.setChooseClassTable = function() {
 			var ms = this.resultState.moduleState + 1
 			if ( (ms & 1) == 1)  $row.find("input[name='closed[]']").prop('checked', 'checked');
 			if ( (ms & 2) == 2)  $row.find("input[name='open[]']").prop('checked', 'checked');
+			if ( (ms & 4) == 4)  $row.find("input[name='remedie[]']").prop('checked', 'checked');
 		}
 		
 		$row.find("input[name='open[]']").on('click', $.proxy(this.changeCheckboxOpenClosed,this));
+		$row.find("input[name='remedie[]']").on('click', $.proxy(this.changeCheckboxOpenClosed,this));
 		$row.find("input[name='closed[]']").on('click', $.proxy(this.changeCheckboxOpenClosed,this));
 		
 		this.$chooseClassTableBody.append($row);
@@ -221,7 +223,7 @@ ResultsDisplay.prototype.showSelectedResults = function() {
  */
 
 ResultsDisplay.prototype.changeCheckboxOpenClosed = function(event) {
-	var openModules = false, closedModules = false;
+	var openModules = false, closedModules = false, remedieModules = false;
 
 	
 	
@@ -234,6 +236,10 @@ ResultsDisplay.prototype.changeCheckboxOpenClosed = function(event) {
 	else if ( (ms & ~2) != 0 && (ms&2)==2 && event.target.name == "open[]" && this.resultState.activeSchoolClass == event.target.value) {
 		this.chooseClassModuleForm.elements["open[]"][this.chooseClassModuleForm.elements["open[]"].length-1].checked = true;
 		this.resultState.moduleState = ms -2 - 1;
+	}
+	else if ( (ms & ~4) != 0 && (ms&4)==4 && event.target.name == "remedie[]" && this.resultState.activeSchoolClass == event.target.value) {
+		this.chooseClassModuleForm.elements["remedie[]"][this.chooseClassModuleForm.elements["remedie[]"].length-1].checked = true;
+		this.resultState.moduleState = ms -4 - 1;
 	}
 	
 	if (event.target.checked) {
@@ -257,9 +263,18 @@ ResultsDisplay.prototype.changeCheckboxOpenClosed = function(event) {
 					openModules = true;
 				}
 			}
+
+			for (i = 0; i < this.chooseClassModuleForm.elements["remedie[]"].length; i++) {
+				if (this.chooseClassModuleForm.elements["remedie[]"][i].checked) {				
+					remedieModules = true;
+				}
+			}
+			
+			
 			var ms = 0;
 			if (closedModules) ms += 1;
 			if (openModules)   ms += 2;
+			if (remedieModules) ms += 4;
 			this.resultState.moduleState = ms-1; // open = 1, closed = 0, both = 2
 			
 		
@@ -269,7 +284,7 @@ ResultsDisplay.prototype.changeCheckboxOpenClosed = function(event) {
 }
 ResultsDisplay.prototype.uncheckCheckboxOpenClosedExcept = function(id) {
 	for (i = 0; i < this.chooseClassModuleForm.elements.length; i++) {
-		if ( (this.chooseClassModuleForm.elements[i].name == "open[]" || this.chooseClassModuleForm.elements[i].name == "closed[]")
+		if ( (this.chooseClassModuleForm.elements[i].name == "open[]" || this.chooseClassModuleForm.elements[i].name == "closed[]" || this.chooseClassModuleForm.elements[i].name == "remedie[]")
 			&& !this.chooseClassModuleForm.elements[i].disabled && this.chooseClassModuleForm.elements[i].value != id) this.chooseClassModuleForm.elements[i].checked = "";
 	}
 }
