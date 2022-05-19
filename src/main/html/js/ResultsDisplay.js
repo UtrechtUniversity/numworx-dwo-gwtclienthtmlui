@@ -2,7 +2,6 @@ function ResultsDisplay() {
 	this.resultState = {};
 	this.resultState.resultsTree = null;
 	this.resultState.studentsTree = null;
-	this.resultState.showOnlyClosedModules = false;
 	this.resultState.activeSchoolClass = null;
 	this.resultState.activeCourses = [];
 	
@@ -79,11 +78,14 @@ ResultsDisplay.prototype.setChooseClassTable = function() {
 		});
 		
 		if (id == this.resultState.activeSchoolClass) {
-			if (this.resultState.moduleState == 0 || this.resultState.moduleState == 2) $row.find("input[name='closed[]']").prop('checked', 'checked');
-			if (this.resultState.moduleState == 1 || this.resultState.moduleState == 2) $row.find("input[name='open[]']").prop('checked', 'checked');
+			var ms = this.resultState.moduleState + 1
+			if ( (ms & 1) == 1)  $row.find("input[name='closed[]']").prop('checked', 'checked');
+			if ( (ms & 2) == 2)  $row.find("input[name='open[]']").prop('checked', 'checked');
+			if ( (ms & 4) == 4)  $row.find("input[name='remedie[]']").prop('checked', 'checked');
 		}
 		
 		$row.find("input[name='open[]']").on('click', $.proxy(this.changeCheckboxOpenClosed,this));
+		$row.find("input[name='remedie[]']").on('click', $.proxy(this.changeCheckboxOpenClosed,this));
 		$row.find("input[name='closed[]']").on('click', $.proxy(this.changeCheckboxOpenClosed,this));
 		
 		this.$chooseClassTableBody.append($row);
@@ -109,15 +111,13 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 	
 	for (var n = 0; n < sortedSchoolClassChildren.length; n++) {
 
-	//for (var id in this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children) { // loop over modules
-		//course = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[id];
 		course = sortedSchoolClassChildren[n];
+		var ms = this.resultState.moduleState + 1; // invisibile = 1 , normal = 2, remedy = 4
 		
-		//if (this.resultState.showOnlyClosedModules == true && course.viewState != "invisible") continue;
-		//if (this.resultState.showOnlyClosedModules == false && course.viewState != "studentsAndTeachers") continue;
-		
-		if ( (this.resultState.moduleState == 1 && course.viewState == "invisible")
-	         || (this.resultState.moduleState == 0 && course.viewState == "studentsAndTeachers") ) {
+		if ( (   (ms & 1) == 0 && course.viewState == "invisible")
+	         || ( (ms & 2) == 0 && course.viewState == "studentsAndTeachers")
+	         || ( (ms & 4) == 0 && course.viewState == "students")
+	          ) {
 			// remove from list if previously selected
 			if (typeof this.resultState.activeCourses != "undefined" && this.resultState.activeCourses.indexOf(sortedSchoolClassChildren[n].id) != -1) this.resultState.activeCourses.splice(this.resultState.activeCourses.indexOf(sortedSchoolClassChildren[n].id), 1);
 			continue; 
@@ -223,19 +223,23 @@ ResultsDisplay.prototype.showSelectedResults = function() {
  */
 
 ResultsDisplay.prototype.changeCheckboxOpenClosed = function(event) {
-	var openModules = false, closedModules = false;
+	var openModules = false, closedModules = false, remedieModules = false;
 
 	
 	
 	this.chooseClassModuleFormToggle();
-	
-	if ( this.resultState.moduleState == 2 && event.target.name == "closed[]" && this.resultState.activeSchoolClass == event.target.value) {
+	var ms = this.resultState.moduleState + 1
+	if ( (ms & ~1) != 0 && (ms&1)==1 && event.target.name == "closed[]" && this.resultState.activeSchoolClass == event.target.value) {
 		this.chooseClassModuleForm.elements["closed[]"][this.chooseClassModuleForm.elements["closed[]"].length-1].checked = true;
-		this.resultState.moduleState = 1;
+		this.resultState.moduleState = ms -1 - 1 ;
 	}
-	else if ( this.resultState.moduleState == 2 && event.target.name == "open[]" && this.resultState.activeSchoolClass == event.target.value) {
+	else if ( (ms & ~2) != 0 && (ms&2)==2 && event.target.name == "open[]" && this.resultState.activeSchoolClass == event.target.value) {
 		this.chooseClassModuleForm.elements["open[]"][this.chooseClassModuleForm.elements["open[]"].length-1].checked = true;
-		this.resultState.moduleState = 0;
+		this.resultState.moduleState = ms -2 - 1;
+	}
+	else if ( (ms & ~4) != 0 && (ms&4)==4 && event.target.name == "remedie[]" && this.resultState.activeSchoolClass == event.target.value) {
+		this.chooseClassModuleForm.elements["remedie[]"][this.chooseClassModuleForm.elements["remedie[]"].length-1].checked = true;
+		this.resultState.moduleState = ms -4 - 1;
 	}
 	
 	if (event.target.checked) {
@@ -259,20 +263,28 @@ ResultsDisplay.prototype.changeCheckboxOpenClosed = function(event) {
 					openModules = true;
 				}
 			}
+
+			for (i = 0; i < this.chooseClassModuleForm.elements["remedie[]"].length; i++) {
+				if (this.chooseClassModuleForm.elements["remedie[]"][i].checked) {				
+					remedieModules = true;
+				}
+			}
 			
-			this.resultState.moduleState = openModules &&  closedModules ? 2 : closedModules ? 0 : 1; // open = 1, closed = 0, both = 2
+			
+			var ms = 0;
+			if (closedModules) ms += 1;
+			if (openModules)   ms += 2;
+			if (remedieModules) ms += 4;
+			this.resultState.moduleState = ms-1; // open = 1, closed = 0, both = 2
 			
 		
-	} //else {
-		//this.resultState.activeSchoolClass = null;
-		//}		
-	
-	//this.setChooseModulesTable();	
+	} 
+
 	app.getPresenterFactory().getResultsPresenter().setChooseModulesTable( this.resultState.activeSchoolClass);
 }
 ResultsDisplay.prototype.uncheckCheckboxOpenClosedExcept = function(id) {
 	for (i = 0; i < this.chooseClassModuleForm.elements.length; i++) {
-		if ( (this.chooseClassModuleForm.elements[i].name == "open[]" || this.chooseClassModuleForm.elements[i].name == "closed[]")
+		if ( (this.chooseClassModuleForm.elements[i].name == "open[]" || this.chooseClassModuleForm.elements[i].name == "closed[]" || this.chooseClassModuleForm.elements[i].name == "remedie[]")
 			&& !this.chooseClassModuleForm.elements[i].disabled && this.chooseClassModuleForm.elements[i].value != id) this.chooseClassModuleForm.elements[i].checked = "";
 	}
 }

@@ -295,7 +295,7 @@ ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, dept
 		if (this.nodes[id].open == true) liClass += " open"; //open
 
 		if (tree[id].data.classCourse != null) {
-			if (tree[id].data.classCourse.viewState === "invisible") {
+			if (tree[id].data.classCourse.viewState === "invisible" || tree[id].data.classCourse.viewState === "students") {
 				checkboxClass += " pC"; //previouslyChecked
 				this.nodes[id].active = false;
 			 } else {
@@ -404,6 +404,9 @@ ModulesOfSchoolclassDisplay.prototype.toggleTreeCheckbox = function(event) {
 		this.selectedNodeId = event.target.value;
 		
 		if (!this.nodes.hasOwnProperty( this.selectedNodeId )) return;
+		if ( this.nodes[this.selectedNodeId].classCourse &&  this.nodes[this.selectedNodeId].classCourse.viewState == "students" ) {
+			return;
+		}
 
 		if ( this.nodes[this.selectedNodeId].classCourse &&  this.nodes[this.selectedNodeId].classCourse.viewState == "invisible" ) {
 			// If this course has been selected before, attach
