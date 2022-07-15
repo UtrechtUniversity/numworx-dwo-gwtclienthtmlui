@@ -454,7 +454,7 @@ div.filter-dialog .popupContent {
 	<script src="js/TeacherStudentModelDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	<script src="js/TeacherSMClassResultsDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	<script src="js/TeacherClassFilterDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
-	
+	<script src="js/ChatboxDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	<script src="js/WelcomeDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	<script src="js/dialogs.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	
@@ -3305,10 +3305,37 @@ div.filter-dialog .popupContent {
 		<!-- end modulesDisplay -->
 
 		<!-- chatboxDisplay -->
-		<section id="chatboxDisplayPanel" class="subpanel iframepanel">
-		
-			<iframe src="about:blank" name="chatbox">
-			</iframe>
+		<section id="chatboxDisplayPanel" class="subpanel">
+			<header>				
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
+<!-- 							<use xlink:href="#chatbox"></use> -->
+						</svg>
+                        <h1><span data-translate="NUM_PNL_CHATBOX">Gesprekken voeren</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_CHATBOX">Met de klas en de docenten</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<div class="content">
+							<iframe src="helppage/helpindex_nl.html#importPersons"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
+						</div>
+					</section>
+				</div>
+			</header>
+			<section>
+				<div class='row'>
+					<div class='col-12 iframepanel'>					
+						<iframe src="chatbox.jsp" id="chatboxframe">
+						</iframe>
+					</div>
+				</div>
+			</section>
 		</section>
 
 		<!-- 
