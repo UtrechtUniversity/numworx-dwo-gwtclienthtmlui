@@ -9,16 +9,22 @@
  
  ChatboxDisplay.prototype.show = function() {
  	this.$panel.show();
+ 	Helpers.stretchIframeHeight( this.$iframe );
  }
  
  ChatboxDisplay.prototype.init = function() {
+ 	app.mainDisplay.registerStretchables( [ this.$iframe ] );
  }
  
  ChatboxDisplay.prototype.clear = function() {
  	this.openUrl('about:blank')
  }
  
- ChatboxDisplay.prototype.openUrl = function (url) {
+ChatboxDisplay.prototype.openUrl = function (url) {
 	this.$iframe.attr('src', url );
 }
- 
+
+ChatboxDisplay.prototype.setLogin = function(user, password) {
+	window.user = user;
+	window.password = password;
+}
