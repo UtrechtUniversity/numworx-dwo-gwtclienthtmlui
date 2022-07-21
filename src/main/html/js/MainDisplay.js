@@ -94,6 +94,10 @@ function MainDisplay() {
 	this.teacherClassFilterDisplay = new TeacherClassFilterDisplay;
 	window.jsTeacherClassFilterDisplay = this.teacherClassFilterDisplay;
 	
+	// CHATBOX
+	this.chatboxDisplay = new ChatboxDisplay();
+	window.jsChatboxDisplay = this.chatboxDisplay;
+	
 	// Dialog Displays
 	this.msgDialogDisplay = new MsgDialogDisplay();
 	window.jsMsgDialogDisplay = this.msgDialogDisplay;
@@ -383,6 +387,11 @@ MainDisplay.prototype.showTeacherSMClassResultsView = function() {
 MainDisplay.prototype.showTeacherClassFilterView = function() {
 	this.initMainView();
 	this.teacherClassFilterDisplay.show();
+}
+
+MainDisplay.prototype.showChatboxView = function() {
+	this.initMainView()
+	this.chatboxDisplay.show()
 }
 
 MainDisplay.prototype.onArrowUp = function() {

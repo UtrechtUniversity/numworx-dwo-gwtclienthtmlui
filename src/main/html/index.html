@@ -99,6 +99,10 @@
 #mainPanel nav ul.MODULES li a[href="#MODULES"] { color: #1b75bb !important;}
 #mainPanel nav ul.MODULES li a[href="#MODULES"] svg use { fill: #1b75bb !important; }
 
+#mainPanel nav ul.CHATBOX li a[href="#CHATBOX"] { color: #1b75bb !important;}
+#mainPanel nav ul.CHATBOX li a[href="#CHATBOX"] svg use { fill: #1b75bb !important; }
+
+
 #headertrails a { color: #7297c7; }
 
 .score-treeItem, .score-modelItem, .model-item {
@@ -450,7 +454,7 @@ div.filter-dialog .popupContent {
 	<script src="js/TeacherStudentModelDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	<script src="js/TeacherSMClassResultsDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	<script src="js/TeacherClassFilterDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
-	
+	<script src="js/ChatboxDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	<script src="js/WelcomeDisplay.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	<script src="js/dialogs.js?v=${tstamp}" type="text/javascript" charset="utf-8"></script>
 	
@@ -575,6 +579,10 @@ div.filter-dialog .popupContent {
 					<path fill="none" stroke="#FFFFFF" stroke-width="12" stroke-miterlimit="10" d="M46.4,68c-14.1,0-25.7-11.5-25.7-25.7
 						c0-14.1,11.5-25.7,25.7-25.7s25.7,11.5,25.7,25.7C72.1,56.5,60.6,68,46.4,68z"/>
 				</g>
+		   </g>
+		   <g id="chatbox"> <!-- viewBox="-1 -1 26 26", height="26px" width="26px" -->
+			<path
+			     d="M 2 0.1484375 C 0.89200111 0.1484375 0 1.0404386 0 2.1484375 L 0 23.833984 C 0 24.941983 0.89200111 25.833984 2 25.833984 L 23.998047 25.833984 C 25.106046 25.833984 25.998047 24.941983 25.998047 23.833984 L 25.998047 2.1484375 C 25.998047 1.0404386 25.106046 0.1484375 23.998047 0.1484375 L 2 0.1484375 z M 3 2 L 16 2 C 16.283333 2 16.521557 2.0957762 16.712891 2.2871094 C 16.90489 2.4791092 17 2.7166669 17 3 L 17 12 C 17 12.283333 16.90489 12.521557 16.712891 12.712891 C 16.521557 12.90489 16.283333 13 16 13 L 6 13 L 2.8496094 16.150391 C 2.6996095 16.30039 2.5211665 16.337052 2.3125 16.261719 C 2.1045002 16.187052 2 16.034114 2 15.800781 L 2 3 C 2 2.7166669 2.0951096 2.4791092 2.2871094 2.2871094 C 2.4784425 2.0957762 2.716667 2 3 2 z M 19 6 L 21 6 C 21.283333 6 21.521557 6.0957762 21.712891 6.2871094 C 21.90489 6.4791092 22 6.7166669 22 7 L 22 20.800781 C 22 21.034114 21.8955 21.187052 21.6875 21.261719 C 21.478834 21.337052 21.30039 21.30039 21.150391 21.150391 L 18 18 L 7 18 C 6.7166669 18 6.4791092 17.90489 6.2871094 17.712891 C 6.0957762 17.521557 6 17.283333 6 17 L 6 15 L 19 15 L 19 6 z " />		   
 		   </g>
 	    </defs>
 	  </svg>
@@ -729,6 +737,15 @@ div.filter-dialog .popupContent {
 				 	<a href="#ORGANISATION"><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#organisatie"></use>
 				    </svg><span class="name" data-translate="NUM_MNU_ORGANIZATION">Organisatie</span></a></li>
+				 <li id='chatboxNav' 
+				     style='display:none'
+				 	 class='no-schooladmin premium-teacher premium-student' title="Chat">
+				 	<a href="#CHATBOX">
+				 		<svg viewbox='-1 -1 26 26' class="icon">
+				 			<use xlink:href="#chatbox"></use>
+				 		</svg>
+						<span class="name" date-translate="NUM_MNU_CHATBOX">Chat</span>
+				 	</a>
 			</ul>
 		</nav>
 		
@@ -3287,6 +3304,40 @@ div.filter-dialog .popupContent {
 			
 		</section>
 		<!-- end modulesDisplay -->
+
+		<!-- chatboxDisplay -->
+		<section id="chatboxDisplayPanel" class="subpanel">
+			<header>				
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
+<!-- 							<use xlink:href="#chatbox"></use> -->
+						</svg>
+                        <h1><span data-translate="NUM_PNL_CHATBOX">Gesprekken voeren</span></h1>
+						<h2 class="sectionhead"><span data-translate="NUM_SEC_CHATBOX">Met de klas en de docenten</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
+						<div class="content">
+							<iframe src="helppage/helpindex_nl.html#importPersons"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
+						</div>
+					</section>
+				</div>
+			</header>
+			<section>
+				<div class='row'>
+					<div class='col-12 iframepanel'>					
+						<iframe src="about:blank" id="chatboxframe" style='width:100%;height:100%'>
+						</iframe>
+					</div>
+				</div>
+			</section>
+		</section>
 
 		<!-- 
 		-
