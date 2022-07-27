@@ -22,6 +22,12 @@
 			color: $white;
 }
 
+.profile-loginTitle {
+	position: absolute;
+	top: 50px;
+	left: 60px;
+}
+
 .profile-loginLogo {
 	background: transparent url(../images/login-containerBackground.jpg) no-repeat top left; // TODO: replace by def image
 	height: 220px;
