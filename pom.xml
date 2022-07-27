@@ -28,9 +28,9 @@
        					</resource>
      				</resources>
      				<relativeOutputDirectory>../..</relativeOutputDirectory>
-     				<sassOptions>
-     					<style>:compressed</style>
-     				</sassOptions>
+<!--      				<sassOptions> -->
+<!--      					<style>:compressed</style> -->
+<!--      				</sassOptions> -->
         		</configuration>
         		<executions>
         			<execution>

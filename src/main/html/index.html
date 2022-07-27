@@ -588,8 +588,10 @@ div.filter-dialog .popupContent {
     <!-- OPTIONAL: include this if you want history support -->
      <!-- <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe> -->
   
-	<section id="loginDisplayPanel" class="panel" style='display:none'>
+	<section id="loginDisplayPanel" class="panel profile-login" style='display:none'>
 		<div class="container">
+		    <div class='profile-loginLogo' ></div>
+		    <div class='profile-loginTitle'></div>
 			<div id="loginDisplayPanelMessageBox">
 				<div class="block">	
 					<div class="content">
@@ -597,8 +599,8 @@ div.filter-dialog .popupContent {
 					</div>
 				</div>		
 			</div>
-			<div id="loginBox">
-				<div class="block primary">			
+			<div id="loginBox" >
+				<div class="block primary profile-loginPanel">			
 					<form id="formLogin" name="login" action="javascript: void(0);">
 <!--SAMLSTART-->
 						<label for="username">&nbsp;<input type="text" name="username" data-translate="NUM_LBL_USERNAME" placeholder="Gebruikersnaam" /></label>
@@ -611,7 +613,7 @@ div.filter-dialog .popupContent {
 					</form>
 				</div>
 			
-				<ul id="loginLinks">
+				<ul id="loginLinks" class="profile-loginLinks">
 <!--SAMLSTART-->
                          <li><a href="/dwo/rest/public/user/requestNewPassword#FORGOT"><span  data-translate="NUM_LBL_Q_PASWORD_FORGOTTEN">Wachtwoord vergeten?</span></a></li>
                          <li><a href="/dwo/register/?locale=nl#REGISTER"><span data-translate="NUM_LBL_Q_NO_ACCOUNT">Nog geen account?</span></a></li>
@@ -626,7 +628,7 @@ div.filter-dialog .popupContent {
 	<main id="mainPanel" class="panel">
 		
 		<header class='profile-header'>
-			<a href="#WELCOME" id="logo"><img src="images/logo-Numworx-grijs.svg"><span class='profile-headerLabel' id='mainrole'
+			<a href="#WELCOME" id="logo" class='profile-headerLogo' ><img src="images/logo-Numworx-grijs.svg"><span class='profile-headerLabel' id='mainrole'
 			>Docent</span></a>
 
 			<form id='searchBox' name='searchBox' action='#SEARCH' style='
