@@ -413,13 +413,12 @@ body {
 
 #loginDisplayPanel {
 	@include align-items(center);
-	background-color: $shade122;
 	@include flex;	
 	@include justify-content(center);	
 	min-height: 100%;
 	
 	.container {
-		background: transparent url(../images/login-containerBackground.jpg) no-repeat top left; // TODO: replace by def image
+		background: transparent;
 		background-size: contain;
 		max-width: 100%;		
 		position: relative;
@@ -452,7 +451,6 @@ body {
 		width: 310 / 580 * 100%;
 		
 		.block.primary {
-			background-color: $primaryDark;
 			@include border-radius($defaultRadius);
 			padding: $gutter * 1px;
 		}
@@ -469,12 +467,7 @@ body {
 			}
 			
 			input[type="text"], input[type="password"] {
-				background: $primary;
-				color: $white;				
 				font-size: 1.5em;				
-				@include placeholder {
-					color: $white;
-				}
 			}
 			input[type="submit"] {
 				margin-top: $gutter * 1px;
@@ -496,7 +489,6 @@ body {
 		}
 		
 		a {
-			color: $white;
 			text-decoration: none;
 		}
 		
@@ -573,8 +565,6 @@ body {
 				height: 26px; //TODO var
 				margin-right: 0;
 				width: 26px; //TODO var
-				
-				use { fill: $shade22; }
 			}
 			
 		}

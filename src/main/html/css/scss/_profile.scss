@@ -1,0 +1,41 @@
+/*
+ * profile specific styling
+ */
+
+.profile-login {
+	background-color: $shade122;
+}
+
+.profile-loginPanel {
+	background-color: $primaryDark;
+	
+	input { 
+		background: $primary;
+		color: $white;				
+		@include placeholder {
+			color: $white;
+		}
+	}
+}
+
+.profile-loginLinks a {
+			color: $white;
+}
+
+.profile-loginTitle {
+	position: absolute;
+	top: 50px;
+	left: 60px;
+}
+
+.profile-loginLogo {
+	background: transparent url(../images/login-containerBackground.jpg) no-repeat top left; // TODO: replace by def image
+	height: 220px;
+    position: absolute;
+    top: 0px;
+    width: 600px;    
+}
+
+.profile-headerIcon svg {
+	fill: $shade22;
+}
