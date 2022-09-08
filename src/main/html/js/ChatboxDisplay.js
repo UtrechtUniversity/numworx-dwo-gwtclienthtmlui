@@ -24,7 +24,6 @@ ChatboxDisplay.prototype.openUrl = function (url) {
 	this.$iframe.attr('src', url );
 }
 
-ChatboxDisplay.prototype.setLogin = function(user, password) {
-	window.user = user;
-	window.password = password;
+ChatboxDisplay.prototype.setLogin = function(user) {
+	window.chatUser = user;
 }
