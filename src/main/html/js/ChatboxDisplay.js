@@ -8,12 +8,12 @@
  }
  
  ChatboxDisplay.prototype.show = function() {
+ 	app.mainDisplay.registerStretchables( [ this.$iframe ] );
+ 	this.$iframe.ready(function() { $(window).trigger('resize'); });
  	this.$panel.show();
- 	Helpers.stretchIframeHeight( this.$iframe );
  }
  
  ChatboxDisplay.prototype.init = function() {
- 	app.mainDisplay.registerStretchables( [ this.$iframe ] );
  }
  
  ChatboxDisplay.prototype.clear = function() {
