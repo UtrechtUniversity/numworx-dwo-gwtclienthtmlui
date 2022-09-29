@@ -149,6 +149,10 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 	this.chooseClassModuleFormToggle();
 }
 
+ResultsDisplay.prototype.setRemedialView = function(set) {
+	if (set) this.$panel.addClass("test");
+}
+
 
 /*
  * VIEW FUNCTIONS

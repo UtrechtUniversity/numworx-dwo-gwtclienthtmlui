@@ -480,6 +480,13 @@ MainDisplay.prototype.isNavVisible = function() {
 	return this.$panel.hasClass("hiddenNav") ? false : true; 
 }
 
+MainDisplay.prototype.hideChat = function() {
+	this.$body.addClass("hiddenChat");
+}
+MainDisplay.prototype.showChat = function() {
+	this.$body.removeClass("hiddenChat");
+}
+
 
 /*
  * OTHER HELPERS
