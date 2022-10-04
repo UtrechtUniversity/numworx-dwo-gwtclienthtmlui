@@ -704,7 +704,9 @@ body {
 						.icon {
 							use { fill: $primary; }
 						}
-						
+						span.icon {
+							background-color: $primary;
+						}
 					}
 					
 					@media #{$mediaQueryDesktop} {
@@ -739,6 +741,13 @@ body {
 						width: 26px; //TODO var
 						
 						use { fill: $shade22; }
+					}
+					span.icon {
+						background-color: $shade22;
+						text-align:center;
+						.fa-inverse {
+							color: $shade21
+						}
 					}
 				}
 			}

@@ -85,8 +85,12 @@
  
 #loginDisplayPanelMessageBox iframe { width: 240px; }
 
-#mainPanel nav ul.RESULTS li a[href="#RESULTS"] { color: #1b75bb !important;}
-#mainPanel nav ul.RESULTS li a[href="#RESULTS"] svg use { fill: #1b75bb !important; }
+#mainPanel nav ul.WELCOME li a[href="#WELCOME"] { color: #1b75bb;}
+#mainPanel nav ul.WELCOME li a[href="#WELCOME"] span.icon { background-color: #1b75bb; }
+
+
+#mainPanel nav ul.RESULTS li a[href="#RESULTS"] { color: #1b75bb;}
+#mainPanel nav ul.RESULTS li a[href="#RESULTS"] svg use { fill: #1b75bb; }
 
 #mainPanel nav ul.KNOWLEDGE li a[href="#KNOWLEDGE"] { color: #1b75bb !important;}
 #mainPanel nav ul.KNOWLEDGE li a[href="#KNOWLEDGE"] svg use { fill: #1b75bb !important; }
@@ -288,6 +292,9 @@ div.filter-dialog .popupContent {
 }
 
 .hiddenChat #chatboxNav {
+	display: none;
+}
+.profile-welcome {
 	display: none;
 }
 </style>
@@ -708,6 +715,14 @@ div.filter-dialog .popupContent {
 		
 		<nav>
 			<ul id="mainNav" class='RESULTS'>
+				<li data-translate="NUM_MNU_WELCOME" title="Welkom" class='profile-welcome'>
+				    <a href="#WELCOME" > 
+				    <span class='icon' >
+  							<i class="fa fa-home fa-lg fa-inverse" style='vertical-align:-40%'></i>
+				    </span>
+				    <span class='name' data-translate="NUM_MNU_WELCOME">Welkom</span>
+				    </a>
+				</li>
 				<li class='no-schooladmin no-student' data-translate="NUM_MNU_RESULTS" title="Resultaten" >
 					<a href="#RESULTS" ><svg viewBox="0 0 64 64" class="icon">
 			  		  <use xlink:href="#resultaten"></use>
