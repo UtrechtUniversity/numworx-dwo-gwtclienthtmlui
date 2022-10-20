@@ -92,6 +92,7 @@ LoginDisplay.prototype.hideMsgBox = function() {
 
 LoginDisplay.prototype.hideGuest = function() {
 	this.$loginGuestBtn.hide();
+	this.$loginGuestBtn.prev().hide(); // de "u kunt inloggen als gast" tekst
 }
 /*
  * RETURN FUNCTIONS
