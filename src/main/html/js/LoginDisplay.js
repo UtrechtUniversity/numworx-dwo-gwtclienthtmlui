@@ -19,8 +19,8 @@ function LoginDisplay() {
 	// Bind handlers
 	this.$loginForm.on('submit', $.proxy(this.submitLoginForm,this));
 	var loginGuestBtn = this.loginForm.elements["guestlogin"];
-	
-	$(loginGuestBtn).on('click', $.proxy(this.submitLoginGuest, this));
+	this.$loginGuestBtn = $(loginGuestBtn);
+	this.$loginGuestBtn.on('click', $.proxy(this.submitLoginGuest, this));
 	
 	$("#loginLinks").find("a").on('click', $.proxy(this.clickHyperlink, this));
 	
@@ -86,10 +86,14 @@ LoginDisplay.prototype.showWarning = function(msg) {
 	this.$warningBox.show();
 	this.enable();
 }
-LoginDisplay.prototype.hideMsgBox = function(msg) {
+LoginDisplay.prototype.hideMsgBox = function() {
 	this.$messageBox.hide();
 }
 
+LoginDisplay.prototype.hideGuest = function() {
+	this.$loginGuestBtn.hide();
+	this.$loginGuestBtn.prev().hide(); // de "u kunt inloggen als gast" tekst
+}
 /*
  * RETURN FUNCTIONS
  */
