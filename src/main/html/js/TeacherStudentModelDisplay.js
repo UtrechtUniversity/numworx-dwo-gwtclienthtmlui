@@ -105,8 +105,9 @@ TeacherStudentModelDisplay.prototype.showModels = function(json) {
 	var $option;
 	this.titles = json;
 	this.$studentModelSelect.html("");
-	$option = this.$schoolClassSelectOption.clone();		
-	$option.val( "" ).removeAttr("id").html( "Kies eerst een model" );
+	$option = this.$schoolClassSelectOption.clone();
+	var str = app.getTranslator().translate("NUM_LBL_KNOWLEDGE_MODEL")	
+	$option.val( "" ).removeAttr("id").html( str );
 	this.$studentModelSelect.append($option);
 	
 	for (var id in this.titles) { 
