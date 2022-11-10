@@ -746,7 +746,7 @@ div.filter-dialog .popupContent {
 					<a href="#KNOWLEDGE"><svg viewbox="0 0 64 64" class="icon">
 					  <use xlink:href="#knowledge"></use>
 					</svg>
-					<span class="name" date-translate="NUM_MNU_STUDENTMODEL">Leerdoelen</span>
+					<span class="name" data-translate="NUM_MNU_STUDENTMODEL">Leerdoelen</span>
 					</a>
 				</li>
 				<li class='no-student' data-translate="NUM_MNU_PEOPLE" title="Personen">
@@ -2323,7 +2323,7 @@ div.filter-dialog .popupContent {
 								<thead>
 									<tr>
 										<th class="tableTitle">[colum type name]</th>
-										<th>&nbsp;</th>
+										<th style='box-sizing: border-box;'>&nbsp;</th>
 									</tr>
 									<tr class="headers">
 										<th>&nbsp;</th>
@@ -3188,7 +3188,7 @@ div.filter-dialog .popupContent {
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html#importPersons"></iframe>
+							<iframe src="helppage/helpindex_nl.html"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -3347,7 +3347,7 @@ div.filter-dialog .popupContent {
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html#importPersons"></iframe>
+							<iframe src="helppage/helpindex_nl.html"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -3658,8 +3658,8 @@ div.filter-dialog .popupContent {
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
 <!-- 							<use xlink:href="#kennis"></use> -->
 						</svg>
-						<h1><span >Leerdoelen</span></h1>
-						<h2 class="sectionhead"><span >Bekijk leerdomein</span></h2>					
+						<h1><span data-translate='NUM_LBL_KNOWLEDGE_GOALS'>Leerdoelen</span></h1>
+						<h2 class="sectionhead"><span data-translate='NUM_LBL_KNOWLEDGE_SHOW'>Bekijk leerdomein</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
@@ -3697,7 +3697,7 @@ div.filter-dialog .popupContent {
 						</div>
 						<div>
 							<label for="teacherStudentModelMethodBox" style='padding-right:10px;'>
-								<span id='teacherStudentModelMethod'>Methode-indeling</span>
+								<span id='teacherStudentModelMethod' data-translate='NUM_LBL_METHOD'>Methode-indeling</span>
 							</label>
 							<div class="checkbox" style='zoom:0.8'>
 								<input type="checkbox" name="method" id="teacherStudentModelMethodBox" value="true"><label class="icon" for="teacherStudentModelMethodBox"></label>
@@ -3705,11 +3705,11 @@ div.filter-dialog .popupContent {
 						</div>
 						<div class='col-6'>
 						   <label class='col-4 input'>
-						    <span>Actieve methode</span>
+						    <span data-translate='NUM_LBL_METHOD_ACTIVE'>Actieve methode</span>
 							<select name="activeMethod"><option value="">Geen methode</option></select>
 						   </label>						  	
 						   <div class="col-2">
-								<input name='filter' type='submit' class='secondary right down' value='Filter' disabled='disabled'>
+								<input name='filter' type='submit' class='secondary right down' data-translate="NUM_BTN_Filter" value='Filter' disabled='disabled'>
 						   </div>
 						</div>
 					 </form>
@@ -3723,7 +3723,7 @@ div.filter-dialog .popupContent {
 				
 				<div class="row">
 					<div class='col-6'>
-						<h2 class='sectionhead'><span>Bekijk kennisoverzicht klas</span></h2>
+						<h2 class='sectionhead'><span data-translate='NUM_LBL_KNOWLEDGE_CLASS'>Bekijk kennisoverzicht klas</span></h2>
 						<form name='teacherStudentmodelKlas'>
 <!-- 							<label class='buttonlabel'> -->
 <!-- 								<span>Kies een klas en bekijk het kennisoverzicht</span> -->
@@ -3733,16 +3733,16 @@ div.filter-dialog .popupContent {
 								<select name="schoolClass"><option value=""></option></select>
 							</label>
 							<div class="col-2">
-								<input type="submit" name="submit"  class="primary right down" value="Bekijk klas" >
+								<input type="submit" name="submit"  class="primary right down" data-translate='NUM_BTN_KNOWLEDGE_CLASS' value="Bekijk klas" >
 							</div>
 						</form>
 					</div>
 					<div class='col-6'>
-						<h2 class='sectionhead'><span>Filtering voor leerlingen van klas</span></h2>
+						<h2 class='sectionhead'><span data-translate='NUM_LBL_FILTER_CLASS'>Filtering voor studenten van klas</span></h2>
 						<form name='teacherStudentmodelFilter'>
 							<label class="buttonLabel">
-                                    <span>Kies een filter om per klas leerdoelen zichtbaar te maken</span>
-									<input name='submit' type="submit" class="secondary right" value="Kies filter" disabled='disabled'>
+                                    <span data-translate='NUM_SEC_FILTER_CLASS'>Kies een filter om per klas leerdoelen zichtbaar te maken</span>
+									<input name='submit' type="submit" class="secondary right" data-translate='NUM_BTN_FILTER_CHOOSE' value="Kies filter" disabled='disabled'>
 								</label>
 						</form>
 					</div>
@@ -3768,7 +3768,7 @@ div.filter-dialog .popupContent {
 						<svg viewBox="0 0 64 64" class="icon pageIcon">
 <!-- 							<use xlink:href="#kennis"></use> -->
 						</svg>
-						<h1><span >Leerdoelen</span></h1>
+						<h1><span data-translate='NUM_LBL_KNOWLEDGE_GOALS'>Leerdoelen</span></h1>
 						<h2 class="sectionhead"><span >Bekijk kennisoverzicht klas</span></h2>					
 					</div>
 					<section id="help" class="col-2 help">
@@ -3799,7 +3799,7 @@ div.filter-dialog .popupContent {
 						</div>
 						<div class="col-2">
 							<label>
-								<input name='filter' type='submit' class='secondary right down' value='Filter'>
+								<input name='filter' type='submit' class='secondary right down' data-translate="NUM_BTN_Filter" value='Filter'>
 							</label>
 						</div>
 						<div class='col-6'>
@@ -3822,8 +3822,8 @@ div.filter-dialog .popupContent {
 						  <table class='dwo hoverable selectable sortable headered'>
 						   <thead>
 						  		<tr>
-						  			<th class='col-3'><span>naam</span></th>
-						  			<th>score</th>
+						  			<th class='col-3'><span data-translate="NUM_TBL_STUDENTS">naam</span></th>
+						  			<th><span data-translate="NUM_TBL_SCORE">score</span></th>
 						  		</tr>
 								<tr class="sorting">
 									<th class="col-3">
@@ -3870,7 +3870,7 @@ div.filter-dialog .popupContent {
 						<div>
 							<table class='dwo kg'>
 								<tbody><tr>
-									<td class='col-3'><span>Klasgemiddelde</span></td>
+									<td class='col-3'><span data-translate='NUM_TBL_SCORE_MEAN'>Klasgemiddelde</span></td>
 									<td class='col-3'><span id='teacherSMClassResultsMean'>3%</span>
 									</td></tr>
 								</tbody>
@@ -3878,7 +3878,7 @@ div.filter-dialog .popupContent {
 						</div>
 						<div>
 							<input type="radio" name="id" class="hidden" value=""> <!-- empty option -->										
-							<input type="submit" class="primary right" value="Bekijk student" />
+							<input type="submit" class="primary right" data-translate='NUM_BTN_STUDENT_SCORE' value="Bekijk student" />
 						</div>
 					  </form>					
 					</div>
