@@ -301,6 +301,17 @@ div.filter-dialog .popupContent {
 .filter-title {
 	background-color: #1B75BB;
 }
+
+#chatboxNav .seen {
+	stroke: green;
+	fill: green;
+	display: none;
+}
+
+#chatboxNav.unseen .seen {
+	display: unset;
+}
+
 </style>
 
 
@@ -770,6 +781,12 @@ div.filter-dialog .popupContent {
 				 	<a href="#CHATBOX">
 				 		<svg viewbox='-1 -1 26 26' class="icon">
 				 			<use xlink:href="#chatbox"></use>
+				 			<g class='seen'>
+				 				<line x1="3" x2="12" y1="5" y2="5"></line>
+				 				<line x1="3" x2="16" y1="7" y2="7"></line>
+				 				<line x1="3" x2="14" y1="9" y2="9"></line>
+				 				<circle r="5" cx="20" cy="5" />
+				 			</g>
 				 		</svg>
 						<span class="name" data-translate="NUM_MNU_CHATBOX">Berichten</span>
 				 	</a>

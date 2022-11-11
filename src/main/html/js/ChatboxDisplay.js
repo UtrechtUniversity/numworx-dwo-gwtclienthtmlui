@@ -4,6 +4,7 @@
  function ChatboxDisplay() {
  	this.$panel = $("#chatboxDisplayPanel")
  	this.$iframe = this.$panel.find("#chatboxframe");
+ 	this.$nav = $('#chatboxNav');
 	this.$helpContentIFrame = this.$panel.find(".help iframe").first();
  	this.$panel.hide()
  }
@@ -31,4 +32,9 @@ ChatboxDisplay.prototype.setLogin = function(user) {
 
 ChatboxDisplay.prototype.setHelp = function(url) {
 	if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
+}
+
+ChatboxDisplay.prototype.setUnseen = function (b) {
+	if (b) this.$nav.addClass('unseen')
+	else this.$nav.removeClass('unseen');
 }
