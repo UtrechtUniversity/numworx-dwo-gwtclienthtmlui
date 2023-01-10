@@ -1,0 +1,264 @@
+.TEACHER .schooladmin-only,
+.TEACHER .premium-teacher,
+.TEACHER .no-teacher,
+.SCHOOLADMIN .teacher-only,
+.SCHOOLADMIN .no-schooladmin,
+.STUDENT .teacher-only,
+.STUDENT .schooladmin-only,
+.STUDENT .no-student,
+.STUDENT .premium-student,
+.SINGLESTUDENT .no-single,
+.SINGLESTUDENT .teacher-only,
+.SINGLESTUDENT .schooladmin-only,
+.SINGLESTUDENT .no-student,
+.SINGLESTUDENT .premium-student,
+.ANONYMOUS #accountMenuBox a#accountMenuManageItem
+ { display: none; }
+ 
+.STUDENT.premium li.premium-student,
+.SINGLESTUDENT.premium li.premium-student,
+.TEACHER.premium li.premium-teacher
+ {
+	display: list-item; /* undo none effect */
+ }
+ 
+ .TEACHER.premium th.premium-teacher,
+ .TEACHER.premium td.premium-teacher {
+ 	display: none;
+ }
+ .TEACHER.premium .test th.premium-teacher,
+ .TEACHER.premium .test td.premium-teacher {
+ 	display: table-cell;
+ }
+
+
+ 
+#loginDisplayPanelMessageBox iframe { width: 240px; }
+
+#mainPanel nav ul.WELCOME li a[href="#WELCOME"] { color: $primary;}
+#mainPanel nav ul.WELCOME li a[href="#WELCOME"] span.icon { background-color: $primary; }
+
+
+#mainPanel nav ul.RESULTS li a[href="#RESULTS"] { color: $primary;}
+#mainPanel nav ul.RESULTS li a[href="#RESULTS"] svg use { fill: $primary; }
+
+#mainPanel nav ul.KNOWLEDGE li a[href="#KNOWLEDGE"] { color: $primary !important;}
+#mainPanel nav ul.KNOWLEDGE li a[href="#KNOWLEDGE"] svg use { fill: $primary !important; }
+
+#mainPanel nav ul.PERSONS li a[href="#PERSONS"] { color: $primary !important;}
+#mainPanel nav ul.PERSONS li a[href="#PERSONS"] svg use { fill: $primary !important; }
+
+#mainPanel nav ul.SCHOOLCLASSES li a[href="#SCHOOLCLASSES"] { color: $primary !important;}
+#mainPanel nav ul.SCHOOLCLASSES li a[href="#SCHOOLCLASSES"] svg use { fill: $primary !important; }
+
+#mainPanel nav ul.ORGANISATION li a[href="#ORGANISATION"] { color: $primary !important;}
+#mainPanel nav ul.ORGANISATION li a[href="#ORGANISATION"] svg use { fill: $primary !important; }
+
+#mainPanel nav ul.MODULES li a[href="#MODULES"] { color: $primary !important;}
+#mainPanel nav ul.MODULES li a[href="#MODULES"] svg use { fill: $primary !important; }
+
+#mainPanel nav ul.CHATBOX li a[href="#CHATBOX"] { color: $primary !important;}
+#mainPanel nav ul.CHATBOX li a[href="#CHATBOX"] svg use { fill: $primary !important; }
+
+#headertrails { float:left; margin-top:18px; font-size:13px; font-family:Ubuntu; color:$primaryLight; font-weight:500; }
+#headertrails a { color: $primaryLight; }
+
+.score-treeItem, .score-modelItem, .model-item {
+	font-size: 13px;
+	height: 1.2em;
+}
+.gwt-TreeItem-selected .score-treeItem {
+	background-color: #d0d0d080;
+}
+
+.gwt-Tree table {
+	border-spacing: 2px;
+	border-collapse: initial;
+	width: 100%;
+}
+.gwt-Tree table tr td:first-child {
+	width: 18px;
+}
+
+.score-template {
+	display: inline-block;
+	margin-left: 1em;
+	margin-right: 1em;
+	width: 10em;
+	position: relative;
+}
+.score-perc {
+	float: right;
+	display: inline-block;
+	width: 2em;
+}
+.score-treeItem .score-template {
+	width: 105px;
+	margin-left: 0em;
+	margin-right: 0em;
+}
+.score-modelItem .score-template {
+	width: 210px;
+	margin-left: 0px;
+	margin-right: 0px;
+	height: 20px;
+}
+
+
+.score-treeItem .score-title {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.score-template .score-incorrect {
+	background-color: red;
+	right: 50%;
+	height: 1em;
+	width: 1%;
+	display: inline-block;
+	position: absolute;
+}
+.score-template .score-correct {
+	background-color: green;
+	left: 50%;
+	height: 1em;
+	width: 1%;
+	display: inline-block;
+	position: absolute;
+}
+
+.score-frame {
+	width: 100%;
+	background-color: gray;
+	height: 100%;
+}
+
+.score-html {
+	min-height: 100%;
+	background-color: white;
+	margin: 0.3em;
+}
+
+.score-frame-Graph, .score-html-Graph {
+	width: 436px;
+	height: 400px;
+}
+
+.score-red {
+	color: red;
+}
+.score-green {
+	color: green;
+}
+
+.gwt-DialogBox.gwt-DialogBox-Node .dialogMiddleRight,
+.gwt-DialogBox.gwt-DialogBox-Node .dialogMiddleLeft,
+.gwt-DialogBox.gwt-DialogBox-Node .dialogBottomCenter,
+.gwt-DialogBox.gwt-DialogBox-Node .dialogBottomLeft,
+.gwt-DialogBox.gwt-DialogBox-Node .dialogBottomRight,
+.gwt-DialogBox.gwt-DialogBox-Node .dialogTopLeft,
+.gwt-DialogBox.gwt-DialogBox-Node .dialogTopRight,
+.gwt-DialogBox.gwt-DialogBox-Node .dialogTopCenter
+{ 
+	background-image: none;
+	background-color: $primary;
+}
+
+.gwt-DialogBox.gwt-DialogBox-Node .dialogTopCenter .Caption {
+	background-color: transparent;
+	color: white;
+	margin-left: 1em;
+	font-family: 'Ubuntu';
+}
+
+.gwt-DialogBox.gwt-DialogBox-Node .dialogTopCenter .Caption::after {
+	content: "⨉";
+	font-family: 'Ubuntu';
+	font-size: 100%;
+	float: right;
+	color: white;
+	margin-right: 1em;
+}
+
+
+
+.gwt-DialogBox.gwt-DialogBox-Node .dialogBottomLeftInner,
+.gwt-DialogBox.gwt-DialogBox-Node .dialogBottomRightInner
+{
+	width: 2px;
+	height: 2px;
+}
+.gwt-DialogBox.gwt-DialogBox-Node .dialogTopLeftInner,
+.gwt-DialogBox.gwt-DialogBox-Node .dialogTopRightInner
+{
+	width: 2px;
+}
+
+
+.graph-Button {
+	font-size: 20px;
+}
+.graph-ListBox {
+	border: none;
+	background-color: inherit;
+	color: white;
+}
+.hidden-node {
+	display: none;
+}
+
+.description-title {
+	font-family: 'Ubuntu';
+	font-size: 120%;
+	font-weight: 700;
+	padding: 10px;
+	color: $primary;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	overflow-x: clip;
+	white-space: nowrap;
+}
+
+#teacherKlasFilterWrapper td.hidden-node {
+	display: table-cell;
+	visibility: hidden;
+}
+#teacherKlasFilterWrapper table thead th {
+	border-bottom-width: 0px !important;
+}
+
+table.dwo.kg tbody {
+	min-height: initial;
+}
+
+div#teacherStudentModelTreeWrapper, div#teacherSMClassResultsTreeWrapper {
+	background: initial;
+	border: initial;
+}
+
+div.filter-dialog .popupContent {
+	background: #d2e5f5;
+}
+
+.hiddenChat #chatboxNav {
+	display: none;
+}
+.profile-welcome {
+	display: none;
+}
+
+.filter-title {
+	background-color: #1B75BB;
+}
+
+#chatboxNav .seen {
+	stroke: green;
+	fill: green;
+	display: none;
+}
+
+#chatboxNav.unseen .seen {
+	display: unset;
+}
+
