@@ -506,8 +506,10 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 						if (sortedStudentScoChildren[n].sumScore == -1) {
 							matrix[i][j].label = "Kijk na"
 							matrix[i][j].score = -2
+						} else if (sortedStudentScoChildren[n].maxScore == 0) {
+							matrix[i][j].label = "Info"
+							matrix[i][j].score = -3;
 						}
-					
 					
 					
 					}
