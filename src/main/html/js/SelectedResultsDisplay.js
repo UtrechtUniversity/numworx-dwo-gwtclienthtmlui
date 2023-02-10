@@ -507,7 +507,7 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 							matrix[i][j].label = "Kijk na"
 							matrix[i][j].score = -2
 						} else if (sortedStudentScoChildren[n].maxScore == 0) {
-							matrix[i][j].label = "Info"
+							matrix[i][j].label = "i"
 							matrix[i][j].score = -3;
 						}
 					
@@ -588,8 +588,11 @@ SelectedResultsDisplay.prototype.showFilteredIndicators = function() {
 	this.$selectResultsTableWrap.find(".resultIndicator").hide();
 	for (var i = 0; i < this.resultState.activeIndicators.length; i++) {
 		this.$selectResultsTableWrap.find(".result"+this.resultState.activeIndicators[i]).show();
+		if (this.resultState.activeIndicators[i] == 1) {
+			this.$selectResultsTableWrap.find(".resulti").show();		// "i" state
+		}
 	}
-	this.$selectResultsTableWrap.find(".result5").show();
+	this.$selectResultsTableWrap.find(".result5").show(); // kijk na 
 
 }
 SelectedResultsDisplay.prototype.setActiveFilters = function() {
