@@ -352,7 +352,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentInModule = function
 SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = function(module) {
 	var matrix = [], i = 1, j = 1;
 	var students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children;
-	
+	var score, time
 	matrix[0] = [];
 	matrix[0][0] = {};
 	matrix[0][0].label = matrix[0][0].value = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_Activiteiten");
@@ -405,6 +405,12 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 				matrix[i][j].score = matrix[i][j].value = score;
 				matrix[i][j].sortValue = score;
 				matrix[i][j].callback = this.clickResultIndicator;
+				if (sortedModuleChildren[n].children[scoId].maxScore == 0) {
+					matrix[i][j].score = -3; // info
+					matrix[i][j].label = time;
+				}
+			
+			
 			} else {
 				matrix[i][j].label = matrix[i][j].value = "";
 			}
@@ -506,8 +512,10 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 						if (sortedStudentScoChildren[n].sumScore == -1) {
 							matrix[i][j].label = "Kijk na"
 							matrix[i][j].score = -2
+						} else if (sortedStudentScoChildren[n].maxScore == 0) {
+							matrix[i][j].label = "ℹ"
+							matrix[i][j].score = -3;
 						}
-					
 					
 					
 					}
@@ -586,8 +594,11 @@ SelectedResultsDisplay.prototype.showFilteredIndicators = function() {
 	this.$selectResultsTableWrap.find(".resultIndicator").hide();
 	for (var i = 0; i < this.resultState.activeIndicators.length; i++) {
 		this.$selectResultsTableWrap.find(".result"+this.resultState.activeIndicators[i]).show();
+		if (this.resultState.activeIndicators[i] == 1) {
+			this.$selectResultsTableWrap.find(".resulti").show();		// "i" state
+		}
 	}
-	this.$selectResultsTableWrap.find(".result5").show();
+	this.$selectResultsTableWrap.find(".result5").show(); // kijk na 
 
 }
 SelectedResultsDisplay.prototype.setActiveFilters = function() {

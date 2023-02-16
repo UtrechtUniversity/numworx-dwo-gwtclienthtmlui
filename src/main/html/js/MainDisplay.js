@@ -163,6 +163,7 @@ MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 	this.setDefaultNavSize();
 	this.removeHoverableOnTouchDevices();
     this.localize();
+    this.chatboxDisplay.setVisible(false);
 }
 
 MainDisplay.prototype.setActiveView = function(view) {

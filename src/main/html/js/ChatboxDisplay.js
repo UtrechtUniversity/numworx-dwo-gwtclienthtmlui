@@ -13,6 +13,7 @@
  	app.mainDisplay.registerStretchables( [ this.$iframe ] );
  	this.$iframe.ready(function() { $(window).trigger('resize'); });
  	this.$panel.show();
+ 	this.setVisible(true);
  }
  
  ChatboxDisplay.prototype.init = function() {
@@ -37,4 +38,18 @@ ChatboxDisplay.prototype.setHelp = function(url) {
 ChatboxDisplay.prototype.setUnseen = function (b) {
 	if (b) this.$nav.addClass('unseen')
 	else this.$nav.removeClass('unseen');
+}
+
+ChatboxDisplay.prototype.setChatVisible = function (o) {
+	this.$chat = o;
+}
+
+ChatboxDisplay.prototype.setVisible = function(b) {
+	if (this.$chat) {
+		if (b) {
+			this.$chat.shown();
+		} else {
+			this.$chat.hidden();
+		}
+	}
 }
