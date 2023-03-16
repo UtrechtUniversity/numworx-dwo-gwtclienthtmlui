@@ -135,6 +135,8 @@ function MainDisplay() {
 		
 	// Trigger window resize for initial help sizing
 	$(window).trigger('resize');
+	
+	this.entree(); // patch a.href with=entree
 }
 
 MainDisplay.prototype.init = function() {
@@ -620,4 +622,23 @@ MainDisplay.prototype.localize = function() {
 	
 MainDisplay.prototype.onIdle = function() {
 	app.getPresenterFactory().getMainPresenter().onIdle();
+}
+
+MainDisplay.prototype.entree = function() {
+    var h = ""
+	var top = window.top.location.href;
+	var entree = $("#withentree");
+	var query = top.indexOf("?");
+	var hash = top.indexOf("#", query+1);
+	if (hash >= 0) {
+		h = top.substring(hash);
+		top = top.substring(0, hash);
+	}
+	if (query >= 0) {
+		top = top + "&with=entree";
+	} else {
+		top = top + "?with=entree";
+	}
+	top = top + h;
+	entree.attr("href", top);	
 }
