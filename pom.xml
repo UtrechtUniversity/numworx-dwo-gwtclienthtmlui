@@ -128,7 +128,7 @@
                 	<flowInitContext>
              			<developBranchName>teuniz</developBranchName>       	
                 	</flowInitContext>                	
-			<pullMaster>true</pullMaster>
+					<pullMaster>true</pullMaster>
             	</configuration>
         	</plugin>
     		</plugins></build>
