@@ -204,6 +204,9 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 				if (matrix[i][j].sortValue) $value.attr("data-sortvalue", matrix[i][j].sortValue );
 				else if (matrix[i][j].score) $value.attr("data-sortvalue", matrix[i][j].score );
 				else $value.attr("data-sortvalue", "-1" );
+				if (matrix[i][j].callback) {
+					$value.on('click', $.proxy(matrix[i][j].callback, this, matrix[i][j].params));
+				}
 				$rowCell.append($value);
 			}
 			
@@ -413,6 +416,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 			
 			} else {
 				matrix[i][j].label = matrix[i][j].value = "";
+				matrix[i][j].callback = this.clickResultIndicator;				
 			}
 						
 			matrix[i][j].params = { scoId: sortedModuleChildren[n].id, studentId: studentId };

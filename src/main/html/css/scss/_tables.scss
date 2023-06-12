@@ -526,6 +526,11 @@ table.dwo.results {
 				}
 			}	
 			
+			a {
+				cursor: pointer;
+				display: block;
+				width: 100%;
+			}
 			a.resultIndicator {
 				background-color: $shade21;
 				border-bottom: $borderThicknessResult $primary solid;
