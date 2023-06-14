@@ -533,6 +533,8 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 			for (var j = 1; j < maxPages; j++) {
 				matrix[i][j] = {};
 				matrix[i][j].label = matrix[i][j].value = "";
+				matrix[i][j].callback = this.clickPageResultIndicator;
+				matrix[i][j].params = { scoId: this.resultState.activeActivity, studentId: studentId, pageSequence: (j-1) };
 			}
 		}		
 				
