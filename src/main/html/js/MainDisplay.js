@@ -627,7 +627,8 @@ MainDisplay.prototype.onIdle = function() {
 MainDisplay.prototype.entree = function() {
     var h = ""
 	var top = window.top.location.href;
-	var entree = $("#withentree");
+	var entree = $("#withidphint");
+	var hint = entree.attr("href");
 	var query = top.indexOf("?");
 	var hash = top.indexOf("#", query+1);
 	if (hash >= 0) {
@@ -635,9 +636,11 @@ MainDisplay.prototype.entree = function() {
 		top = top.substring(0, hash);
 	}
 	if (query >= 0) {
-		top = top + "&with=entree";
+	  if (top.indexOf(hint.substring(1))<0) {
+			top = top + "&" + hint.substring(1);
+	  }
 	} else {
-		top = top + "?with=entree";
+		top = top + hint;
 	}
 	top = top + h;
 	entree.attr("href", top);	
