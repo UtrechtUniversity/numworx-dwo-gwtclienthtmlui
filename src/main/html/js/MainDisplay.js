@@ -625,10 +625,11 @@ MainDisplay.prototype.onIdle = function() {
 }
 
 MainDisplay.prototype.entree = function() {
-    var h = ""
-	var top = window.top.location.href;
 	var entree = $("#withidphint");
 	var hint = entree.attr("href");
+	if (!hint) return;
+    var h = ""
+	var top = window.top.location.href;
 	var query = top.indexOf("?");
 	var hash = top.indexOf("#", query+1);
 	if (hash >= 0) {
