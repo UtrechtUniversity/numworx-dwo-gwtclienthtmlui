@@ -603,6 +603,9 @@ SelectedResultsDisplay.prototype.showFilteredIndicators = function() {
 		if (this.resultState.activeIndicators[i] == 1) {
 			this.$selectResultsTableWrap.find(".resulti").show();		// "i" state
 		}
+		if (this.resultState.activeIndicators[i] == 4) {
+			this.$selectResultsTableWrap.find(".resultnone").show();	// "none" state
+		}
 	}
 	this.$selectResultsTableWrap.find(".result5").show(); // kijk na 
 
