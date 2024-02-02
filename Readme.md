@@ -26,7 +26,8 @@ docker build -t docker-local-ebs-dev-proxy .
 run the image from src/main
 
 cd ..
-docker run -v `../html:/usr/local/apache2/htdocs/local -p 127.0.0.1:8888:80 -dit --name local-ebs-dev-proxy docker-local-ebs-dev-proxy
+docker run -v $PWD/html:/usr/local/apache2/htdocs/local -p 127.0.0.1:8888:80 -dit --name local-ebs-dev-proxy docker-local-ebs-dev-proxy
+open http://localhost:8888/local/
 
 stop the image by listing the containers with
 
