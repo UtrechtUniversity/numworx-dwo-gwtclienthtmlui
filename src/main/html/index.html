@@ -49,6 +49,9 @@
 	<!--PROFILE_CSS-->
 <!-- opnemen in styles.scss -->
 <style type="text/css">
+body.modules-only.TEACHER.premium .test .modules-only {
+	display: none;
+}
 </style>
 
 
@@ -1932,8 +1935,8 @@
 								<thead>
 									<tr>
 										<th class="col-3"></th>
-										<th class="col-1 centered"><span data-translate="NUM_TBL_RESULTS_OPEN">Open</span></th>
-										<th class="col-1 centered"><span data-translate="NUM_TBL_RESULTS_CLOSED" >Gesloten</span></th>
+										<th class="col-1 centered modules-only"><span data-translate="NUM_TBL_RESULTS_OPEN">Open</span></th>
+										<th class="col-1 centered modules-only"><span data-translate="NUM_TBL_RESULTS_CLOSED" >Gesloten</span></th>
 										<th class="col-1 centered premium-teacher"><span data-translate="NUM_TBL_RESULTS_REMEDIE" >Remedie</span></th>
 									</tr>
 									<tr class="sorting">
@@ -1949,8 +1952,8 @@
 												</svg>
 											</span>
 										</th>
-										<th class="col-1"></th>
-										<th class="col-1"></th>
+										<th class="col-1 modules-only"></th>
+										<th class="col-1 modules-only"></th>
 										<th class="col-1 premium-teacher"></th>
 									</tr>
 								</thead>
@@ -1960,12 +1963,12 @@
 									<tr>
 										<td class="col-3"><span id="chooseClassAndModulesClassname">Klasnaam</span></td>
 
-										<td class="col-1 centered">
+										<td class="col-1 centered modules-only">
 											<div class="checkbox">
 												<input type="radio" name="open[]" id="chooseClassAndModulesOpen" value="schoolclassID"><label class="icon" for="chooseClassAndModulesOpen"></label>
 											</div>											
 										</td>
-										<td class="col-1 centered">
+										<td class="col-1 centered modules-only">
 											<div class="checkbox">
 												<input type="radio" name="closed[]" id="chooseClassAndModulesClassClosed" value="schoolclassID"><label class="icon" for="chooseClassAndModulesClassClosed"></label>
 											</div>											
