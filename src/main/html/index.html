@@ -54,14 +54,11 @@ body.modules-only.TEACHER.premium .test .modules-only {
 }
 
 a[href='#KNOWLEDGE'] {
-	position: relative;
 	fill: #eff1f3;
 }
 
 a[href='#KNOWLEDGE'] .background-icon {
 	position: absolute;
-	left: -33px;
-	top: auto;
 	width: 26px;
 }
 </style>
@@ -502,27 +499,30 @@ a[href='#KNOWLEDGE'] .background-icon {
 				</li>
 				<li id='kennisNav'
 					class='no-schooladmin no-teacher premium-student' data-translate="NUM_MNU_KNOWLEDGE" title="Kennis" >
+					<div style="position:relative" >
 					<a href="#KNOWLEDGE">
-					<svg viewbox='0 0 64 64' class='icon'>
-						<use xlink:href='#rect' />
-					</svg>
-					<svg viewbox="0 0 64 64" class="background-icon">
-					  <use xlink:href="#knowledge"></use>
-					</svg>
+							<svg viewbox='0 0 64 64' class='icon'>
+								<use xlink:href='#rect' />
+							</svg>
+							<svg viewbox="0 0 64 64" class="background-icon" style="left:0px">
+					  			<use xlink:href="#knowledge"></use>
+							</svg>
 					<span class="name" date-translate="NUM_MNU_KNOWLEDGE">Kennis</span>
 					</a>
+					</div>
 				</li>
-				<li id='leerdoelenNav'
+				<li id='leerdoelenNav' style="position:relative"
 					class='no-schooladmin premium-teacher no-student' data-translate="NUM_MNU_STUDENTMODEL" title="Leerdoelen" >
+					<div style="position:relative" >
 					<a href="#KNOWLEDGE">
-					<svg viewbox='0 0 64 64' class='icon'>
-						<use xlink:href='#rect' />
-					</svg>				
-					<svg viewbox="0 0 64 64" class="background-icon">
-					  <use xlink:href="#knowledge"></use>
-					</svg>
+							<svg viewbox='0 0 64 64' class='icon'>
+								<use xlink:href='#rect' />
+							</svg>				
+							<svg viewbox="0 0 64 64" class="background-icon" style="left:0px">
+					  			<use xlink:href="#knowledge"></use>
+							</svg>
 					<span class="name" data-translate="NUM_MNU_STUDENTMODEL">Leerdoelen</span>
-					</a>
+					</a></div>
 				</li>
 				<li class='no-student' data-translate="NUM_MNU_PEOPLE" title="Personen">
 					<a href="#PERSONS"><svg viewBox="0 0 64 64" class="icon">

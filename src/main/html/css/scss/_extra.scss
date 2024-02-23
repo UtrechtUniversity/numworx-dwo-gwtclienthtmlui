@@ -43,7 +43,7 @@
 #mainPanel nav ul.RESULTS li a[href="#RESULTS"] svg use { fill: $primary; }
 
 #mainPanel nav ul.KNOWLEDGE li a[href="#KNOWLEDGE"] { color: $primary !important;}
-#mainPanel nav ul.KNOWLEDGE li a[href="#KNOWLEDGE"] svg use { fill: $primary !important; }
+#mainPanel nav ul.KNOWLEDGE li a[href="#KNOWLEDGE"] svg.icon use { fill: $primary !important; }
 #mainPanel nav ul.KNOWLEDGE li a[href="#KNOWLEDGE"] svg.background-icon use { fill: $shade20 !important; }
 
 
