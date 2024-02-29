@@ -5,3 +5,5 @@
 /.settings/
 /.classpath
 .sass-cache/
+src/main/html/css/*.css.map
+src/main/html/css/*.css

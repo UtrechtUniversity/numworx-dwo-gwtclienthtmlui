@@ -202,6 +202,11 @@ MainDisplay.prototype.setPremium = function (set) {
 	else this.$body.removeClass("premium");
 }
 
+MainDisplay.prototype.setModulesOnly = function (set) {
+	if (set) this.$body.addClass("modules-only");
+	else this.$body.removeClass("modules-only");
+}
+
 MainDisplay.prototype.setPresentationName = function (presentationName) {
 	presentationName = Helpers.htmlEscape(presentationName)
 	this.$accountMenuPresentationName.html(presentationName);
