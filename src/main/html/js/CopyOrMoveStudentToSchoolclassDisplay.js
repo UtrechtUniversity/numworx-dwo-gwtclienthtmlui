@@ -151,6 +151,7 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.init = function () {
 	this.classBSet = false;
 	app.mainDisplay.registerStretchables( [ this.$classATableBody, this.$classBTableBody, this.$classesTableBody ] );
 	this.resetSorting();
+	document.body.scrollTop = 0;
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setHelp = function(url) {
 		if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );

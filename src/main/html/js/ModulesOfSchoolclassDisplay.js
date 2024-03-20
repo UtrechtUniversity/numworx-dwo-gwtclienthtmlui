@@ -213,6 +213,7 @@ ModulesOfSchoolclassDisplay.prototype.init = function () {
 	} else {
 		$("#modulesOfSchoolclassDisplayCourseType").hide();
 	}
+	document.body.scrollTop = 0;
 }
 
 ModulesOfSchoolclassDisplay.prototype.clear = function () {

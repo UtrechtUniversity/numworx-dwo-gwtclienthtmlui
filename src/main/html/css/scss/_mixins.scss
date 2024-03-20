@@ -21,9 +21,6 @@ Helpers for tedious (crossbrowser) work.
 	-o-transition: $value;
 	transition: $value;
 }
-
-
-
 @mixin box-shadow($hor, $ver, $blur, $spread, $color) {
 	-webkit-box-shadow: $hor $ver $blur $spread $color;
 	-moz-box-shadow: $hor $ver $blur $spread $color;
@@ -48,6 +45,25 @@ Helpers for tedious (crossbrowser) work.
 	border-bottom-left-radius: $bl;
 }
 
+/*
+ * Media queries
+ */
+
+@mixin size-sm {
+	@media (min-width: #{$sizeSm}px) { @content; }
+}
+@mixin size-md {
+	@media (min-width: #{$sizeMd}px) { @content; }
+}
+@mixin size-lg {
+	@media (min-width: #{$sizeLg}px) { @content; }
+}
+@mixin size-xl {
+	@media (min-width: #{$sizeXl}px) { @content; }
+}
+@mixin size-2xl {
+	@media (min-width: #{$size2xl}px) { @content; }
+}
 
 /* 
  * BEHAVIOR
@@ -114,7 +130,3 @@ Helpers for tedious (crossbrowser) work.
   &::-moz-placeholder          { @content }
   &:-ms-input-placeholder      { @content }  
 }
-
-
-
-

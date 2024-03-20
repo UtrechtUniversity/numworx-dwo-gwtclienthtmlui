@@ -27,7 +27,7 @@ EditorDisplay.prototype.localize = function() {
  */
 
 EditorDisplay.prototype.init = function () {
-	// do nothing
+	document.body.scrollTop = 0;
 }
 EditorDisplay.prototype.clear = function () {
 	this.$iframe.attr('src', '' );

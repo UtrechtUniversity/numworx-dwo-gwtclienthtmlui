@@ -11,6 +11,7 @@ function MainDisplay() {
 	this.$subpanels = this.$panel.find(".subpanel");	
 	this.$logo = this.$panel.find("#logo");
 	this.$nav = this.$panel.find("nav");
+	this.$menuToggle = $("#menuToggle");
 
 	this.$accountMenuSchoolName = jQuery("#accountMenuSchoolName");
 	this.$accountMenuUserRole = jQuery("#accountMenuUserRole");
@@ -116,6 +117,9 @@ function MainDisplay() {
 	$(".help .closeButton").click(Helpers.toggleHelpSection);
 	this.$logo.on('click', $.proxy(this.clickLogo, this));
 	this.$nav.find('a').on('click', $.proxy(this.clickMenuItem, this));
+	this.$menuToggle.on('mouseenter', $.proxy(this.mouseEnterMenuIcon, this));
+	this.$menuToggle.on('touchstart', $.proxy(this.touchStartMenuIcon, this));
+	
 	this.$accountMenuBox.find('a').on('click', $.proxy(this.clickAccountMenuItem, this));
 	this.$accountMenuToggle.on('mouseenter', $.proxy(this.mouseEnterAccountMenuIcon, this));
 	this.$accountMenuToggle.on('touchstart', $.proxy(this.touchStartAccountMenuIcon, this));
@@ -171,7 +175,7 @@ MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 MainDisplay.prototype.setActiveView = function(view) {
 	if (view == "SEARCH") app.getPresenterFactory().getMainPresenter().search(this.getSearchInput());
 	else if (view == "LOGOUT") app.getPresenterFactory().getMainPresenter().logout();
-	else app.getPresenterFactory().getMainPresenter().selectView(view);
+	else app.getPresenterFactory().getMainPresenter().selectView(view);	
 }
 
 
@@ -528,6 +532,7 @@ MainDisplay.prototype.registerStretchables = function( elements ) {
 		}
 	}
 	this.resizeStrechables();
+	this.addClassToStretchables();
 }
 
 MainDisplay.prototype.registerCallback = function (key,  f ) {
@@ -566,6 +571,12 @@ MainDisplay.prototype.resizeStrechables = function() {
 	return;
 }
 
+MainDisplay.prototype.addClassToStretchables = function() {
+	for(i=0; i<this.stretchables.length; i++) {
+		this.stretchables[i].addClass('stretchable');
+	}
+}
+
 
 /*
  * EVENT HANDLERS
@@ -576,9 +587,17 @@ MainDisplay.prototype.search = function(event) {
 	var view = 'SEARCH';
 	this.setActiveView(view)
 }
-
+MainDisplay.prototype.mouseEnterMenuIcon = function(event) {
+	this.$nav.addClass('open');
+	this.$accountMenuBox.hide();
+}
+MainDisplay.prototype.touchStartMenuIcon = function(event) {
+	if (this.$nav.hasClass("open")) this.$nav.removeClass("open");
+	else this.$nav.addClass("open");
+}
 MainDisplay.prototype.clickMenuItem = function(event) {
 	event.preventDefault();
+	this.$nav.removeClass("open");
 	var view = event.currentTarget.hash.substr(1);
 	if (view) this.setActiveView(view);
 }
@@ -595,7 +614,10 @@ MainDisplay.prototype.mouseEnterAccountMenuIcon = function(event) {
 }
 MainDisplay.prototype.touchStartAccountMenuIcon = function(event) {
 	if (this.$accountMenuBox.is(":visible")) this.$accountMenuBox.hide();
-	else this.$accountMenuBox.show();
+	else {
+		this.$nav.removeClass("open");
+		this.$accountMenuBox.show();
+	} 
 }
 MainDisplay.prototype.mouseLeaveAccountMenuIcon = function(event) {
 	this.$accountMenuBox.hide();

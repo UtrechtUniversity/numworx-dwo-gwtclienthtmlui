@@ -33,6 +33,7 @@ SelectStudentResultsDisplay.prototype.clear = function () {
 
 SelectStudentResultsDisplay.prototype.init = function (context) {
 	this.$iframe.attr('src', '' );
+	document.body.scrollTop = 0;
 }
 
 SelectStudentResultsDisplay.prototype.setHelp = function(url) {

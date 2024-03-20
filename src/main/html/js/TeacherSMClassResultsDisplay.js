@@ -47,6 +47,7 @@
  TeacherSMClassResultsDisplay.prototype.init = function() {
  	app.mainDisplay.registerStretchables( [ this.$classTreeWrapper ] );
  	app.mainDisplay.registerCallback( this.getTreeId(), $.proxy(this.onResize, this));
+	document.body.scrollTop = 0;
  }
  TeacherSMClassResultsDisplay.prototype.clear = function() {}
  

@@ -101,6 +101,7 @@ AddTeacherToSchoolclassDisplay.prototype.init = function () {
 	app.mainDisplay.registerStretchables( [ this.$addTeacherTableBody ] );
 	this.resetSorting();
 	this.addTeacherAddFormToggle(false);
+	document.body.scrollTop = 0;
 }
 
 AddTeacherToSchoolclassDisplay.prototype.clear = function () {

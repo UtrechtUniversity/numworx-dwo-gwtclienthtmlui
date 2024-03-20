@@ -188,7 +188,7 @@ PersonsDisplay.prototype.searchPersons = function() {
 PersonsDisplay.prototype.editPerson = function(id) {
 	this.stateRole = this.personsSearchForm.elements["role"][0].checked ? "S" : "T";
 	if (this.stateRole == "S") app.getPresenterFactory().getPersonsPresenter().editStudent(id);
-	if (this.stateRole == "T") app.getPresenterFactory().getPersonsPresenter().editTeacher(id);
+	if (this.stateRole == "T") app.getPresenterFactory().getPersonsPresenter().editTeacher(id);	
 }
 
 

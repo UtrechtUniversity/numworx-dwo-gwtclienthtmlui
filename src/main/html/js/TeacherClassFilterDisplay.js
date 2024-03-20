@@ -23,7 +23,7 @@ TeacherClassFilterDisplay.prototype.getId = function() {
 }
  
 TeacherClassFilterDisplay.prototype.init = function () {
-	// do nothing
+	document.body.scrollTop = 0;
 }
 
 TeacherClassFilterDisplay.prototype.clear = function () {

@@ -53,12 +53,15 @@ input[type="submit"], input[type="button"], button, .pseudobutton {
 	}
 	&.single { margin-left: 100%; }
 	&.down { margin-top: 22 / 12 * 1em;}
+
 	&.bottom.right, &.bottom.left {
-		bottom: 0;
 		float: none;
 		position: absolute;
-		right: 0;
-		
+		right: $gutter/2 * 1px;
+
+		@include size-lg {
+			bottom: $gutter * 1px;
+		}	
 		
 		//margin-right: ($gutter / 2) / ($siteWidth) * 100%;
 		//max-width: ((2/12 * $siteWidth) - ($gutter)) / $siteWidth * 100%;
@@ -162,7 +165,7 @@ form {
 
 .options {
 	min-height: 3em;
-	float: left;
+	//float: left;
 		
 	&.down { margin-top: 22 / 12 * 1em;}
 			

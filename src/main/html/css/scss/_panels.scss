@@ -21,7 +21,7 @@ including header, navigation, account menu
 html { 
 	height: 100%; 
 	overflow-y: hidden;
-//	overflow-x: hidden;
+	overflow-x: hidden;
 	width: 100%; 
 }
 body { 
@@ -57,24 +57,6 @@ body {
 	}
 }
 
-//#overlay {
-//	background: $transBlack;
-//	bottom: 0;
-//	content: " ";
-//	display: none;
-//	height: 100%;
-//	left: 0;
-//	position: fixed;
-//	top: 0;
-//	right: 0;
-//	width: 100%;
-//	z-index: 300;
-//
-//	.overlay & {
-//		display: block;
-//	}
-//}
-
 .panel {
 	background-color: $white;
 	display: none;	
@@ -87,54 +69,38 @@ body {
  */
 
 .subpanel {
-	margin: 0px 0px 0px auto;
-	margin-right: $navWidth * -1px;
-	
-//	min-height: 100%;
-//	height: 100%;
-	//overflow-y: hidden;	//scroll
-	//overflow-x: hidden;
+	margin: 0px 0px 0px 0px;
+	//margin-right: $navWidth * -1px;
 	overflow: hidden;
 	padding-top: ($headerHeight + $subpanelHeaderHeight) * 1px;
 	width: 99.9%; // TODO bug Safari
 	//width: 100%;
 	position: static;
-	
-	
-	@media #{$mediaQueryDesktop} {
+
+	@include size-md {
+		margin-left: ($navWidth) * 1px;
+		width: calc( 100% - #{ $navWidth + $gutter }px);
+	}
 		
-		margin-right: $navWidthExpanded * -1px;
-		
-		//.collapsedNav & { // Expand
-//			margin-right: $navWidthExpanded * -1px!important;
-//		}
-//		position: relative;
+	@include size-xl {	
+		margin-left: $navWidthExpanded * 1px;
+		width: calc( 100% - #{ $navWidthExpanded + $gutter }px);
 	}
 	.hiddenNav & {
 		margin-right: 0;
 	}
-	.expandedNav & {
-		margin-right: $navWidthExpanded * -1px;
-	}
-//	.collapsedNav & {
-//		margin: 0px 0px 0px auto;
-//		margin-right: $navWidth * -1px;
-//	}
+	@include size-md {
+		.expandedNav & {
+			margin-left: $navWidthExpanded * 1px;
+			width: calc( 100% - #{ $navWidthExpanded + $gutter }px);
+		}
+	}	
 	.libraryPage & {
 		margin-right: $navWidthLibraryPage * -1px;
 		padding-top: ($headerHeight) * 1px;
 	}
 	
 	&.iframepanel {
-		//bottom: 0;
-		//left: $navWidth * 1px;
-		//margin: 0;
-		//overflow-y: hidden;	
-		//padding: 0;
-		//position: absolute;
-		//right: 0;
-		//top: ($headerHeight) * 1px;;
-		//width: auto;
 		padding-top: ($headerHeight) * 1px;;
 		
 		@media #{$mediaQueryDesktop} {
@@ -145,13 +111,20 @@ body {
 			left: 0;
 		}
 		
-		iframe {						
+		iframe {	
+			height: 200%;					
 			margin: 0 0 0 auto;
-			//margin-top: ($headerHeight) * 1px;;
-			width: 100%;
+			width: 200%;
+			transform: scale(0.5);
+			transform-origin: top left;
+
+			@include size-md {
+				height: 100%;
+				width: 100%;
+				transform: scale(1);
+			}
 		}
-	}
-	
+	}	
 	
 	header {
 		background-color: $white; 
@@ -181,7 +154,7 @@ body {
 			}
 		}
 		
-		@media #{$mediaQueryDesktop} {
+		@include size-xl {
 			margin-right: 0;
 			left: $navWidthExpanded * 1px;
 			position: fixed; // for IE 11
@@ -195,14 +168,11 @@ body {
 		}
 		
 		.container {
-			//max-width: ($siteWidthTablet - $navWidth) * 1px;
 			width: 100%;
 			
-			@media #{$mediaQueryDesktop} {
-				max-width: ($siteWidthDesktop - $navWidthExpanded) * 1px;
-			}
-			
-			
+			//@media #{$mediaQueryDesktop} {
+			//	max-width: ($siteWidthDesktop - $navWidthExpanded) * 1px;
+			//}
 		}
 		
 		#accountMenuToggle, .pageIcon {
@@ -222,27 +192,50 @@ body {
 			}
 		}
 		
+		
 		div.content {
 			bottom: 0;
-			margin-left: ($navWidth + $gutter) * 1px;	
+			margin-left: $gutter/2 * 1px;	
 			position: absolute;
-			width: 100%;			
+			width: calc(100% - #{$gutter}px);
 			
-			@media #{$mediaQueryDesktop} {	
-				margin-left: ($gutter) * 1px;			
+			@include size-md {
+				margin-left: ($navWidth + $gutter) * 1px;	
+			}			
+			@include size-lg {
+				margin-left: ($navWidth + $gutter) * 1px;			
+			}
+			@include size-xl {
+				margin-left: $gutter * 1px;
 			}
 		}
 		
 		section#help { 
-			margin-top: -18px;
 			padding-top: 0;		
+			bottom: 0;
+			//margin: 0;
+			margin-bottom: 0!important;
+			padding-bottom: 0;
 			position: fixed;
-			right: $siteMargin * 1px;
-			top: ($headerHeight + $subpanelHeaderHeight) * 1px;
-			z-index: 500;
+			right: 0;			
+			z-index: 500;		
+
+			@include size-md {	
+				bottom: auto;	
+				margin-top: -18px;		
+				right: $siteMargin * 1px;
+				top: ($headerHeight + $subpanelHeaderHeight) * 1px;
+				width: auto;
+			}
+			@include size-lg {
+				width: 100%;
+			}
 			
 			&.active {
-				height: 75%;
+				margin-top: -18px;		
+				position: fixed;
+				height: 75%;			
+				top: ($headerHeight + $subpanelHeaderHeight) * 1px;
 			}
 			
 			h2.helpheader {
@@ -254,26 +247,41 @@ body {
 				width: ($colWidth - $gutter) * 1px;				
 				z-index: 400;
 				
-				@media #{$mediaQueryDesktop} {
+				@include size-lg {
 					float: none;
-					margin-left: ($gutter + 1) * -1px;		
+					//margin-left: ($gutter + 1) * -1px;		
 					width: auto;
+				}
+			}
+			&.active h2.helpheader {
+				display: none;
+			}
+			@include size-md {
+				&.active h2.helpheader {
+					display: block;
 				}
 			}
 			
 			.content {
 				background-color: $shade11;
 				bottom: 25%;
+				@include border-box;
 				@include box-shadow(3px,3px,10px,0px,$shadow);
 				display: block;				
-				left: 100%;
+				left: 36px;
 				margin-left: 0;
 				padding: 2em $gutter * 1px;
 				right: 36px;
 				top: 19px;
 				visibility: hidden;
-				width: (3 * $colWidth / 2 + $gutter * 0.5 - $gutter) * 1px;
+				width: auto;
 				z-index: 500;
+
+				@include size-md {
+					left: 100%;
+					right: 36px;
+					width: (3 * $colWidth / 2 + $gutter * 0.5 - $gutter) * 1px;
+				}
 			
 				iframe {
 					height: 100%;
@@ -304,7 +312,7 @@ body {
 				}				
 			}
 			
-			@media #{$mediaQueryDesktop} {	
+			@include size-lg {	
 				.content {				
 					border-left: 1px $shade11 solid;
 					@include box-shadow(0px,0px,0px,0px,$shadow);
@@ -312,6 +320,7 @@ body {
 					left: 100%;
 					right: 0;
 					visibility: hidden;
+					width: 100%;
 					
 					iframe {
 						width: 100%;
@@ -320,14 +329,38 @@ body {
 					
 					.closeButton {
 						display: none;
-					}
-				
+					}				
 				
 					@media #{$mediaQueryDesktopWide} {
 						bottom: auto;
 						min-height: 50%;
 					}				
 				}
+
+				&.col-2, &.col-2 .content { max-width: (2 * $colWidth / 2 + $gutter * 0 + $gutter * 2) * 1px; }
+				&.col-3, &.col-3 .content  { max-width: (3 * $colWidth / 2 + $gutter * 0.5 + $gutter * 2) * 1px; }
+				&.col-4, &.col-4 .content  { max-width: (4 * $colWidth / 2 + $gutter * 1 + $gutter * 2) * 1px; }
+				&.col-5, &.col-5 .content  { max-width: (5 * $colWidth / 2 + $gutter * 1.5 + $gutter * 2) * 1px; }
+				&.col-6, &.col-6 .content  { max-width: (6 * $colWidth / 2 + $gutter * 2 + $gutter * 2) * 1px; }
+				&.col-7, &.col-7 .content  { max-width: (7 * $colWidth / 2 + $gutter * 2.5 + $gutter * 2) * 1px; }
+				&.col-8, &.col-8 .content  { max-width: (8 * $colWidth / 2 + $gutter * 3 + $gutter * 2) * 1px; }
+				&.col-9, &.col-9 .content  { max-width: (9 * $colWidth / 2 + $gutter * 3.5 + $gutter * 2) * 1px; }
+				&.col-10, &.col-10 .content  { max-width: (10 * $colWidth / 2 + $gutter * 4 + $gutter * 2) * 1px; }
+				&.col-11, &.col-11 .content  { max-width: (11 * $colWidth / 2 + $gutter * 4.5 + $gutter * 2) * 1px; }
+				&.col-12, &.col-12 .content  { max-width: (12 * $colWidth / 2 + $gutter * 5 + $gutter * 2) * 1px; }
+
+				/*&.col-2  { width: (2 * $colWidth / 2 - $gutter) * 1px; }		
+				&.col-3  { width: (3 * $colWidth / 2 + $gutter * 0.5 - $gutter) * 1px; }		
+				&.col-4  { width: (4 * $colWidth / 2 + $gutter * 1.0 - $gutter) * 1px; }		
+				&.col-5  { width: (5 * $colWidth / 2 + $gutter * 1.5 - $gutter) * 1px; }		
+				&.col-6  { width: (6 * $colWidth / 2 + $gutter * 2.0 - $gutter) * 1px; }		
+				&.col-7  { width: (7 * $colWidth / 2 + $gutter * 2.5 - $gutter) * 1px; }		
+				&.col-8  { width: (8 * $colWidth / 2 + $gutter * 3.0 - $gutter) * 1px; }		
+				&.col-9  { width: (9 * $colWidth / 2 + $gutter * 3.5 - $gutter) * 1px; }		
+				&.col-10  { width: (10 * $colWidth / 2 + $gutter * 4.0 - $gutter) * 1px; }		
+				&.col-11  { width: (11 * $colWidth / 2 + $gutter * 4.5 - $gutter) * 1px; }		
+				&.col-12  { width: (12 * $colWidth / 2 + $gutter * 5.0 - $gutter) * 1px; }	
+				
 				&.col-2 .content { width: (2 * $colWidth / 2 - $gutter) * 1px; }		
 				&.col-3 .content { width: (3 * $colWidth / 2 + $gutter * 0.5 - $gutter) * 1px; }		
 				&.col-4 .content { width: (4 * $colWidth / 2 + $gutter * 1.0 - $gutter) * 1px; }		
@@ -338,7 +371,7 @@ body {
 				&.col-9 .content { width: (9 * $colWidth / 2 + $gutter * 3.5 - $gutter) * 1px; }		
 				&.col-10 .content { width: (10 * $colWidth / 2 + $gutter * 4.0 - $gutter) * 1px; }		
 				&.col-11 .content { width: (11 * $colWidth / 2 + $gutter * 4.5 - $gutter) * 1px; }		
-				&.col-12 .content { width: (12 * $colWidth / 2 + $gutter * 5.0 - $gutter) * 1px; }	
+				&.col-12 .content { width: (12 * $colWidth / 2 + $gutter * 5.0 - $gutter) * 1px; }	*/
 				
 				&.active {	
 					right: 0;
@@ -359,8 +392,12 @@ body {
 				}
 				.content {
 					visibility: visible;
-					left: auto;
+					//left: auto;
 					height: inherit;
+
+					@include size-md {
+						left: auto;
+					}
 					
 					@media #{$mediaQueryDesktop} {
 						border-left-color: $primary;
@@ -378,8 +415,13 @@ body {
 			padding-top: $gutter * 1px;
 		}
 		position: relative;
+		width: 100%;
+
+		@include size-md {
+			//width: calc( 100% - #{$navWidth}px );
+		}
 				
-		@media #{$mediaQueryDesktop} {
+		@include size-lg {
 			max-width: 6 * ($colWidth + $gutter) * 1px;
 		}
 		
@@ -422,18 +464,19 @@ body {
 		background-size: contain;
 		max-width: 100%;		
 		position: relative;
-		width: 580px;
-		
-	}
-	
-	
+		width: 580px;	
+	}	
 	
 	#loginDisplayPanelMessageBox {
 		display: none;
-		left: 0;
-		position: absolute;
-		top: 175px;
-		width: 240 / 580 * 100%;
+		width: 100%;
+
+		@include size-md {
+			left: 0;
+			position: absolute;
+			top: 175px;
+			width: 240 / 580 * 100%;	
+		}
 		
 		.block.primary {
 			background-color: $primaryDark;
@@ -444,11 +487,17 @@ body {
 	}
 	
 	#loginBox {
+		@include border-box;
 		color: $primaryLight;
-		left: 270 / 580 * 100%;
-		margin-top: 175px;
+		padding: 0 $gutter * 1px;
 		position: relative;
-		width: 310 / 580 * 100%;
+		width: 100%;
+
+		@include size-md {
+			left: 270 / 580 * 100%;
+			margin-top: 175px;
+			width: 310 / 580 * 100%;
+		}
 		
 		.block.primary {
 			@include border-radius($defaultRadius);
@@ -514,12 +563,9 @@ body {
 
 #mainPanel {
 	background-color: $shade20;
-//	height: 100%;
 	min-height: 100%;
-//	overflow: hidden;
 	position: relative;
 	width: 100%;
-//	min-width: $siteWidthTablet * 1px;
 	
 	> header {
 		background-color: $primaryDark;		
@@ -529,32 +575,88 @@ body {
 		padding: 0;
 		position: fixed;
 		right: 0;
+		text-align: left;
 		top: 0;
 		width: 100%;
 		z-index: 700;
+
 		
 		.helpOpen & {
 			z-index: 200;
 		}
 		
 		#logo {
-			display: block;
-			float: left;
+			//display: block;
+			//float: left;
+			display: inline-block;
 			padding: $gutter / 2 * 1px $siteMargin * 1px;
 		}
 		#mainrole {
+			display: none;
 		    font-size: 22px;
 		    font-family: Ubuntu;
 		    text-transform: uppercase;
 		    vertical-align: super;
 		    padding-left: 10px;
 		    color: $primaryLight;
+
+			@include size-md {
+				display: inline;
+			}
 		}
-		
-		#accountMenuToggle {
-			float: right;
+
+		#menuToggle {			
+			position: absolute;
+			right: 0;
+			top: 0;
 			margin-right: $siteMargin * 1px;
 			margin-top: 11px;
+
+			@include size-md {
+				display: none;
+			}
+
+			.icon {
+				display: block;
+				float: left;
+				
+				border-radius: 2px;
+				float: left;
+				height: 26px; //TODO var
+				margin-right: 0;
+				width: 26px; //TODO var
+
+				use { fill: $shade22; }
+			}			
+		}
+		
+
+		#headerPresentationName {
+			display: none;
+			@include size-md {
+				color: #7297c7;
+				display: block;
+				font-size: 13px;
+				font-family: Ubuntu;
+				font-weight: bold;
+				margin-right: 10px;
+				margin-top: 18px;
+				position: absolute;
+				right: 60px;
+				top: 0;
+			}
+		}		
+		#accountMenuToggle {
+			/*float: right;*/
+			position: absolute;
+			right: 40px;
+			top: 0;
+			margin-right: $siteMargin * 1px;
+			margin-top: 11px;
+
+			@include size-md {
+				right: 0;
+			}
 
 			.icon {
 				display: block;
@@ -570,15 +672,28 @@ body {
 		}
 		#accountMenuBox {
 			background-color: $primary;
-			border: 1px $black solid;
+			border-bottom: 1px $black solid;
+			box-shadow: inset 0 10px 12px -10px $shadow;
+			@include border-box;
 			color: $white;
 			display: none;
-			min-width: $siteWidth / 12 * 2 * 1px; // TODO make flexible
+			left: 0;
 			padding: 10px;
 			position: absolute;
-			right: $siteMargin * 1px;
+			right: 0;
 			text-align: right;
-			top: $headerHeight - 11 * 1px;
+			top: $headerHeight * 1px;
+			width: 100%;
+
+			@include size-md {
+				border: 1px $black solid;
+				@include box-shadow(0px,0px,10px,0px,$shadow);
+				left: auto;
+				min-width: $siteWidth / 12 * 2 * 1px; // TODO make flexible
+				right: $siteMargin * 1px;
+				top: $headerHeight - 11 * 1px;
+				width: auto;
+			}
 			
 			a {
 				clear: both;
@@ -591,7 +706,7 @@ body {
 				&:first-of-type { margin-top: 1em; }
 			}
 
-			@include box-shadow(0px,0px,10px,0px,$shadow);
+			
 			
 			#accountMenuPresentationName, #accountMenuSchoolName, #accountMenuUserRole {
 				color: $shade22;
@@ -613,20 +728,34 @@ body {
 		}
 	}
 	
-	nav {
-		
+	nav {	
+		background-color: $shade20;	
 		bottom: 0;
 		color: $shade22;
+		display: none;
 		//height: 100%;
 		left: 0;
 		position: fixed;
-		top: ($headerHeight + $subpanelHeaderHeight) * 1px;
-		width: $navWidth * 1px;
-		z-index: 100;
+		top: ($headerHeight) * 1px;
+		/*width: $navWidth * 1px;*/
+		width: 100%;
+		z-index: 650;
+
+		&.open {
+			display: block;
+		}
+
+		@include size-md {
+			display: block!important;
+			top: ($headerHeight + $subpanelHeaderHeight) * 1px;
+			width: #{ $navWidth }px; //+ $gutter
+			z-index: 200;
+		}
 		
-		@media #{$mediaQueryDesktop} {
+		@include size-xl {
 			background-color: $shade21;
 			@include box-shadow(3px,0px,10px,0px,$shadow);
+			display: block;
 			top: ($headerHeight) * 1px;
 			width: $navWidthExpanded * 1px;
 			z-index: 200;
@@ -634,9 +763,7 @@ body {
 			//.collapsedNav & {
 //				width: $navWidthExpanded * 1px;
 //			}
-		}
-		
-		
+		}	
 		
 		.libraryPage & {
 			@include box-shadow(3px,0px,10px,0px,$shadow);
@@ -719,10 +846,11 @@ body {
 					}
 					
 					.name {
-						display: none;
 						line-height: 26px; // TODO var
-						
-						@media #{$mediaQueryDesktop} {
+						@include size-md {
+							display: none;
+						}
+						@include size-xl {
 							display: block;
 						}
 						
@@ -779,20 +907,21 @@ body {
 			}
 		}
 	}	
-	
-	&.expandedNav {
-		nav {
-			background-color: $shade21;
-			@include box-shadow(3px,0px,10px,0px,$shadow);
-			top: ($headerHeight) * 1px;
-			width: $navWidthExpanded * 1px;			
-			z-index: 200;
-			
-			ul {
-				margin-top: ($gutter + $subpanelHeaderHeight) * 1px;
-			
-				li a .name {
-					display: block;
+	@include size-md {
+		&.expandedNav {
+			nav {
+				background-color: $shade21;
+				@include box-shadow(3px,0px,10px,0px,$shadow);
+				top: ($headerHeight) * 1px;
+				width: $navWidthExpanded * 1px;			
+				z-index: 200;
+				
+				ul {
+					margin-top: ($gutter + $subpanelHeaderHeight) * 1px;
+				
+					li a .name {
+						display: block;
+					}
 				}
 			}
 		}
@@ -800,6 +929,13 @@ body {
 	&.hiddenNav {
 		nav {
 			display: none;
+		}
+	}
+
+	.stretchable {
+		min-height: 40vh;
+		@include size-md {
+			min-height: auto;
 		}
 	}
 }

@@ -24,11 +24,34 @@ columns and rows
  * ROWS
  */
 
-.row {
-	position: relative;
-	//width: 100%;
+.row {	
+	@include border-box;
 	float: left;
-	margin-bottom: $rowMarginBottom;
+	font-size: 0;
+	//margin-bottom: $rowMarginBottom;
+	max-width: (12 * $colWidth / 2 + $gutter * 8) * 1px;
+	//margin-left: #{ $gutter / 2 }px;	
+	//margin-right: #{ $gutter / 2 }px;	
+	position: relative;
+	width: 100%;//calc(100% + #{$gutter * 2}px);
+
+	@include size-md {
+		margin-left: #{ $gutter / 2 }px;	
+		margin-right: #{ $gutter / 2 }px;
+		//width: calc(100% + #{$gutter * 2}px);	
+		width: 100%;
+	}
+
+	> [class*="col-"]  {
+		font-size: 16px;
+
+		&.input {
+			font-size: 12px;
+		}
+	}
+	table {
+		font-size: 16px;
+	}
 	
 	&:after {
 	    content: "";
@@ -42,11 +65,15 @@ columns and rows
 	}
 }
 .row .row {
+	font-size: 0;
 	margin-bottom: 0;
+	> * {
+		font-size: 16px;
+	}
 }
 .wide .row {
 	margin-right: ($navWidth + $siteMargin) * 1px;
-	@media #{$mediaQueryDesktop} {
+	@include size-xl {
 		margin-right: ($navWidthExpanded + $siteMargin) * 1px;
 	}
 }
@@ -61,8 +88,20 @@ columns and rows
  */
 
 [class*="col-"] {
-	float: left;
-	padding: 0 0 0 $gutter * 1px;	
+	//float: left;
+	@include border-box;
+	display: inline-block;
+	padding: 0;
+	margin-bottom: $rowMarginBottom;
+	margin-left: #{ $gutter / 2 }px;	
+	margin-right: #{ $gutter / 2 }px;	
+	//position: relative;
+	vertical-align: top;
+	width: calc(100% - #{$gutter}px);
+
+	/*@include size-xl {
+		margin-bottom: 0;
+	}*/
 	
 	&:after {
 	    content: "";
@@ -72,29 +111,83 @@ columns and rows
 	}
 	
 	&.down { margin-top: 22 / 12 * 1em;}
+	&.text-right {
+		text-align: right;
+	}
 }
-[class*="col-"] [class*="col-"] {
+[class*="col-"] > .row {
+	margin-left: #{ $gutter * -1/2 }px;
+	margin-right: #{ $gutter * -1/2 }px;
+	width: calc(100% + #{$gutter}px);
+	//width: 200%;
+}
+
+
+/*[class*="col-"] [class*="col-"] {
 	padding-left: 0;
 }
 [class*="col-"] [class*="col-"] + [class*="col-"] {
 	padding-left: $gutter * 1px;
-}
+}*/
 
-.col-1  { width: (1 * $colWidth / 2 - $gutter * 0.5) * 1px; }
-.col-2  { width: 2 * $colWidth / 2 * 1px; }
-.col-3  { width: (3 * $colWidth / 2 + $gutter * 0.5) * 1px; }
-.col-4  { width: (4 * $colWidth / 2 + $gutter *  1) * 1px; }
-.col-5  { width: (5 * $colWidth / 2 + $gutter *  1.5) * 1px; }
-.col-6  { width: (6 * $colWidth / 2 + $gutter *  2) * 1px; }
-.col-7  { width: (7 * $colWidth / 2 + $gutter *  2.5) * 1px; }
-.col-8  { width: (8 * $colWidth / 2 + $gutter *  3) * 1px; }
-.col-9  { width: (9 * $colWidth / 2 + $gutter *  3.5) * 1px; }
-.col-10  { width: (10 * $colWidth / 2 + $gutter *  4) * 1px; }
-.col-11  { width: (11 * $colWidth / 2 + $gutter *  4.5) * 1px; }
-.col-12  { width: (12 * $colWidth / 2 + $gutter *  5) * 1px; }
+
+.col-1  { max-width: (1 * $colWidth / 2 - $gutter * 0.5) * 1px; }
+.col-2  { max-width: (2 * $colWidth / 2 + $gutter * 0) * 1px; }
+.col-3  { max-width: (3 * $colWidth / 2 + $gutter * 0.5) * 1px; }
+.col-4  { max-width: (4 * $colWidth / 2 + $gutter * 1) * 1px; }
+.col-5  { max-width: (5 * $colWidth / 2 + $gutter * 1.5) * 1px; }
+.col-6  { max-width: (6 * $colWidth / 2 + $gutter * 2) * 1px; }
+.col-7  { max-width: (7 * $colWidth / 2 + $gutter * 2.5) * 1px; }
+.col-8  { max-width: (8 * $colWidth / 2 + $gutter * 3) * 1px; }
+.col-9  { max-width: (9 * $colWidth / 2 + $gutter * 3.5) * 1px; }
+.col-10  { max-width: (10 * $colWidth / 2 + $gutter * 4) * 1px; }
+.col-11  { max-width: (11 * $colWidth / 2 + $gutter * 4.5) * 1px; }
+.col-12  { max-width: (12 * $colWidth / 2 + $gutter * 5) * 1px; }
+
+/*.col-1  { max-width: (1 * $colWidth / 2 - $gutter * 0.5) * 1px; }
+.col-2  { max-width: (2 * $colWidth / 2 + $gutter * 8/12) * 1px; }
+.col-3  { max-width: (3 * $colWidth / 2 + $gutter * 1) * 1px; }
+.col-4  { max-width: (4 * $colWidth / 2 + $gutter * 1.5) * 1px; }
+.col-5  { max-width: (5 * $colWidth / 2 + $gutter * 2) * 1px; }
+.col-6  { max-width: (6 * $colWidth / 2 + $gutter * 2.5) * 1px; }
+.col-7  { max-width: (7 * $colWidth / 2 + $gutter * 3) * 1px; }
+.col-8  { max-width: (8 * $colWidth / 2 + $gutter * 3.5) * 1px; }
+.col-9  { max-width: (9 * $colWidth / 2 + $gutter * 4) * 1px; }
+.col-10  { max-width: (10 * $colWidth / 2 + $gutter * 4.5) * 1px; }
+.col-11  { max-width: (11 * $colWidth / 2 + $gutter * 5) * 1px; }
+.col-12  { max-width: (12 * $colWidth / 2 + $gutter * 5.5) * 1px; }*/
+
+/*.col-1  { max-width: (1 * $colWidth / 2 - $gutter * 0.5) * 1px; }
+.col-2  { max-width: 2 * $colWidth / 2 * 1px; }
+.col-3  { max-width: (3 * $colWidth / 2 + $gutter * 0.5) * 1px; }
+.col-4  { max-width: (4 * $colWidth / 2 + $gutter *  1) * 1px; }
+.col-5  { max-width: (5 * $colWidth / 2 + $gutter *  1.5) * 1px; }
+.col-6  { max-width: (6 * $colWidth / 2 + $gutter *  2) * 1px; }
+.col-7  { max-width: (7 * $colWidth / 2 + $gutter *  2.5) * 1px; }
+.col-8  { max-width: (8 * $colWidth / 2 + $gutter *  3) * 1px; }
+.col-9  { max-width: (9 * $colWidth / 2 + $gutter *  3.5) * 1px; }
+.col-10  { max-width: (10 * $colWidth / 2 + $gutter *  4) * 1px; }
+.col-11  { max-width: (11 * $colWidth / 2 + $gutter *  4.5) * 1px; }
+.col-12  { max-width: (12 * $colWidth / 2 + $gutter *  5) * 1px; }*/
 
 
 table.dwo tr td, table.dwo tr th, input { // aparte style, want ze hebben een $gutter padding
+	&[class*="col-"] {
+		margin-bottom: 0;
+	}
+	&.col-1  { width: (1 * $colWidth / 2 - $gutter * 0.5 - $gutter) * 1px; }
+	&.col-2  { width: (2 * $colWidth / 2 + $gutter * 0) * 1px; }
+	&.col-3  { width: (3 * $colWidth / 2 + $gutter * 0.5 - $gutter) * 1px; }
+	&.col-4  { width: (4 * $colWidth / 2 + $gutter * 1 - $gutter) * 1px; }
+	&.col-5  { width: (5 * $colWidth / 2 + $gutter * 1.5 - $gutter) * 1px; }
+	&.col-6  { width: (6 * $colWidth / 2 + $gutter * 2 - $gutter) * 1px; }
+	&.col-7  { width: (7 * $colWidth / 2 + $gutter * 2.5 - $gutter) * 1px; }
+	&.col-8  { width: (8 * $colWidth / 2 + $gutter * 3 - $gutter) * 1px; }
+	&.col-9  { width: (9 * $colWidth / 2 + $gutter * 3.5 - $gutter) * 1px; }
+	&.col-10  { width: (10 * $colWidth / 2 + $gutter * 4 - $gutter) * 1px; }
+	&.col-11  { width: (11 * $colWidth / 2 + $gutter * 4.5 - $gutter) * 1px; }
+	&.col-12  { width: (12 * $colWidth / 2 + $gutter * 5 - $gutter) * 1px; }
+/*
 	&.col-1  { width: (1 * $colWidth / 2 - $gutter * 0.5 - $gutter) * 1px; }
 	&.col-2  { width: (2 * $colWidth / 2 - $gutter * 0.5) * 1px; }
 	&.col-3  { width: (3 * $colWidth / 2 + $gutter * 0.5 - $gutter) * 1px; }
@@ -107,7 +200,7 @@ table.dwo tr td, table.dwo tr th, input { // aparte style, want ze hebben een $g
 	&.col-10  { width: (10 * $colWidth / 2 + $gutter *  4 - $gutter) * 1px; }
 	&.col-11  { width: (11 * $colWidth / 2 + $gutter *  4.5 - $gutter) * 1px; }
 	&.col-12  { width: (12 * $colWidth / 2 + $gutter *  5 - $gutter) * 1px; }
-	
+	*/
 	
 //	&.col-1  { max-width: (1 * $colWidth / 2 - $gutter * 0.5 - $gutter) * 1px; }
 //	&.col-2  { max-width: (2 * $colWidth / 2 - $gutter) * 1px; }

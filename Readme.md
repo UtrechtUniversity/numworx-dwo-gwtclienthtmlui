@@ -125,3 +125,18 @@ Terzijde
 maven package 
 
 bouwt de css mbv een maven scss plugin
+
+TESTEN OP MOBIEL (Mac)
+
+Get list of hardware interfaces:
+
+networksetup -listallhardwareports
+
+Find your IP on your local network:
+
+ipconfig getifaddr [interface-name]
+interface-name is for example 'en0'
+
+Visit the IP on your phone, example:
+
+192.168.1.158:8888/local/

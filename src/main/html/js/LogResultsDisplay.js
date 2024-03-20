@@ -34,7 +34,7 @@ LogResultsDisplay.prototype.init = function (state) {
 	var activeActivity = activeSchoolClass.children[this.resultState.activeModule].children[this.resultState.activeActivity];
 	this.$activityHeader.html(activeActivity.label);
 	this.$activitySchoolclass.html(activeSchoolClass.label);
-
+	document.body.scrollTop = 0;
 }
 
 /*

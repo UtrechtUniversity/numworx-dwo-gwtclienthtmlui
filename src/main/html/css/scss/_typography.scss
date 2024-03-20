@@ -204,7 +204,9 @@ input[type="submit"], input[type="button"], button, .pseudobutton {
 	letter-spacing: .3px;
 	line-height: 14px;
 	font-size: 12px;
-
+	&[class*="col-"]  {
+		font-size: 16px;
+	}
 }
 input[type="text"], input[type="password"], select {
 	font-family: 'Ubuntu', sans-serif;
@@ -241,6 +243,10 @@ label {
 	&.input {
 		text-transform: uppercase;
 		font-weight: normal;
+	}
+
+	&[class*="col-"]  {
+		font-size: 12px;
 	}
 }
 

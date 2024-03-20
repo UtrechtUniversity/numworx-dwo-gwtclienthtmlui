@@ -53,3 +53,16 @@ Bij CopyOrMoveStudentToSchoolclassDisplay wordt init EN clear niet aangeroepen.
 
 Bij results wordt 'init' niet aangeroepen.
 Bij persons wordt 'init' niet aangeroepen.
+
+
+# RESPONSIVE
+- iframe op loginpagina
+- library
+lightboxes dialogs
+- Leerdoelen: suggestie andere indeling
+
+
+
+Gefinetuned zijn:
+Resultaten
+

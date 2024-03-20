@@ -45,7 +45,7 @@
  }
  
  TeacherStudentModelDisplay.prototype.show = function() {
- 	app.mainDisplay.registerStretchables( [ this.$treeWrapper ] );
+ 	app.mainDisplay.registerStretchables( [ this.$treeWrapper, this.$description ] );
     this.localize();
 	this.$panel.show();
  	Helpers.stretchHeight([ this.$treeWrapper ])
@@ -59,7 +59,8 @@ TeacherStudentModelDisplay.prototype.localize = function() {
 TeacherStudentModelDisplay.prototype.init = function () {
 	this.studentModelGraphToggle(false);
 	this.studentModelClassToggle(false);
-	this.$studentModelTitle.html('')
+	this.$studentModelTitle.html('');
+	document.body.scrollTop = 0;
 }
 
 TeacherStudentModelDisplay.prototype.clear = function () {	

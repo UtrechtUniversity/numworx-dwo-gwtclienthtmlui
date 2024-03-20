@@ -15,9 +15,11 @@ Tree, its wrapper and icons
 	@include border-box;
 	@include border-radius($defaultRadius);
 	max-height: 80%;
+	min-height: 200px;
 	overflow-x: hidden;
 	overflow-y: auto;
-	padding: 0px $gutter * 1px;
+	//padding: 0px $gutter * 1px;
+	padding: $gutter/2 * 1px;
 	
 	-ms-overflow-style: -ms-autohiding-scrollbar;
 }

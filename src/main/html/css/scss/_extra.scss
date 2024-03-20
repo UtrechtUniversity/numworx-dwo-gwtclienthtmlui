@@ -33,7 +33,7 @@
 
 
  
-#loginDisplayPanelMessageBox iframe { width: 240px; }
+#loginDisplayPanelMessageBox iframe { width: 100%; }
 
 #mainPanel nav ul.WELCOME li a[href="#WELCOME"] { color: $primary;}
 #mainPanel nav ul.WELCOME li a[href="#WELCOME"] span.icon { background-color: $primary; }
@@ -235,8 +235,8 @@ table.dwo.kg tbody {
 }
 
 div#teacherStudentModelTreeWrapper, div#teacherSMClassResultsTreeWrapper {
-	background: initial;
-	border: initial;
+	//background: initial;
+	//border: initial;
 }
 
 div.filter-dialog .popupContent {

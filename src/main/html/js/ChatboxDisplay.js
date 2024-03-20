@@ -17,6 +17,7 @@
  }
  
  ChatboxDisplay.prototype.init = function() {
+	document.body.scrollTop = 0;
  }
  
  ChatboxDisplay.prototype.clear = function() {

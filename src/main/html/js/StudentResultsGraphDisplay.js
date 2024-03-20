@@ -21,6 +21,7 @@ StudentResultsGraphDisplay.prototype.init = function (state) {
 	this.resultState = state;
 	this.$title.html(Helpers.htmlEscape(state.title));
 	this.$user.html(Helpers.htmlEscape(state.user||""));
+	document.body.scrollTop = 0;
 }
 
 StudentResultsGraphDisplay.prototype.clear = function () {

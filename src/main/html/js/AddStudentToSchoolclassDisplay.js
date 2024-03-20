@@ -103,6 +103,7 @@ AddStudentToSchoolclassDisplay.prototype.init = function () {
 	app.mainDisplay.registerStretchables( [ this.$addStudentTableBody ] );
 	this.resetSorting();
 	this.addStudentAddFormToggle(false);
+	document.body.scrollTop = 0;
 }
 
 AddStudentToSchoolclassDisplay.prototype.clear = function () {

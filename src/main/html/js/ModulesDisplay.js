@@ -8,11 +8,10 @@ function ModulesDisplay() {
 }
 
 ModulesDisplay.prototype.show = function() {
-	app.mainDisplay.registerStretchables( [ this.$iframe ] );
+	app.mainDisplay.registerStretchables( [ this.$panel ] );
 	this.$iframe.ready(function() { $(window).trigger('resize'); });
         this.localize();
 	this.$panel.show();
-	
 	//$(window).on('resize', $.proxy(Helpers.resizeHelpSection, this));
 }
 
@@ -26,7 +25,7 @@ ModulesDisplay.prototype.localize = function() {
  */
 
 ModulesDisplay.prototype.init = function () {
-	// do nothing
+	document.body.scrollTop = 0;
 }
 ModulesDisplay.prototype.clear = function () {
 	this.$iframe.attr('src', '' );

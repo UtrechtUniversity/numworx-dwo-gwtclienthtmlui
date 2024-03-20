@@ -53,6 +53,7 @@ AddPersonDisplay.prototype.init = function (role) {
 	app.mainDisplay.registerStretchables( [ this.$addPersonSchoolclassesTableBody ] );
 	this.resetSorting();
 	this.role = role;
+	document.body.scrollTop = 0;
 }
 
 AddPersonDisplay.prototype.clear = function () {

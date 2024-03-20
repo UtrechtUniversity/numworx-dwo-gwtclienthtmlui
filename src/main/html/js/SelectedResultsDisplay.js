@@ -743,6 +743,7 @@ SelectedResultsDisplay.prototype.init = function(resultState) {
 		
 	schoolClassName = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].label;
 	this.$sectionTitle.html( app.getTranslator().translate("NUM_SEC_SELECTEDRESULTS")+" "+schoolClassName );
+	document.body.scrollTop = 0;
 }
 
 SelectedResultsDisplay.prototype.setHelp = function(url) {

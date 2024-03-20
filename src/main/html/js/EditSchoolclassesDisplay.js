@@ -138,6 +138,7 @@ EditSchoolclassesDisplay.prototype.init = function () {
 	this.resetSorting();
 	this.classKeyToggle();
 	this.editSchoolclassFormToggle();
+	document.body.scrollTop = 0;
 }
 
 EditSchoolclassesDisplay.prototype.setHelp = function(url) {
