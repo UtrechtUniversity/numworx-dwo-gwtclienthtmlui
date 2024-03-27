@@ -77,14 +77,21 @@ body {
 	//width: 100%;
 	position: static;
 
+	.ANONYMOUS & {
+		margin-left: 0;
+		width: 100%;
+	}
+
 	@include size-md {
 		margin-left: ($navWidth) * 1px;
-		width: calc( 100% - #{ $navWidth + $gutter }px);
+		//width: calc( 100% - #{ $navWidth + $gutter }px);
+		width: calc( 100% - #{ $navWidth }px);
 	}
 		
 	@include size-xl {	
 		margin-left: $navWidthExpanded * 1px;
-		width: calc( 100% - #{ $navWidthExpanded + $gutter }px);
+		//width: calc( 100% - #{ $navWidthExpanded + $gutter }px);
+		width: calc( 100% - #{ $navWidthExpanded }px);
 	}
 	.hiddenNav & {
 		margin-right: 0;
@@ -92,7 +99,8 @@ body {
 	@include size-md {
 		.expandedNav & {
 			margin-left: $navWidthExpanded * 1px;
-			width: calc( 100% - #{ $navWidthExpanded + $gutter }px);
+			//width: calc( 100% - #{ $navWidthExpanded + $gutter }px);
+			width: calc( 100% - #{ $navWidthExpanded }px);
 		}
 	}	
 	.libraryPage & {
@@ -103,7 +111,7 @@ body {
 	&.iframepanel {
 		padding-top: ($headerHeight) * 1px;;
 		
-		@media #{$mediaQueryDesktop} {
+		@media size-xl {
 			left: $navWidthExpanded * 1px;
 		}
 		
@@ -112,10 +120,10 @@ body {
 		}
 		
 		iframe {	
-			height: 200%;					
+			height: 250%;					
 			margin: 0 0 0 auto;
-			width: 200%;
-			transform: scale(0.5);
+			width: 250%;
+			transform: scale(0.4);
 			transform-origin: top left;
 
 			@include size-md {
@@ -200,10 +208,11 @@ body {
 			width: calc(100% - #{$gutter}px);
 			
 			@include size-md {
-				margin-left: ($navWidth + $gutter) * 1px;	
+				//margin-left: ($navWidth + $gutter) * 1px;	
+				margin-left: ($navWidth) * 1px;	
 			}			
 			@include size-lg {
-				margin-left: ($navWidth + $gutter) * 1px;			
+				//margin-left: ($navWidth + $gutter) * 1px;			
 			}
 			@include size-xl {
 				margin-left: $gutter * 1px;
@@ -575,7 +584,7 @@ body {
 		padding: 0;
 		position: fixed;
 		right: 0;
-		text-align: left;
+		text-align: right;
 		top: 0;
 		width: 100%;
 		z-index: 700;
@@ -589,7 +598,9 @@ body {
 			//display: block;
 			//float: left;
 			display: inline-block;
+			left: 0;
 			padding: $gutter / 2 * 1px $siteMargin * 1px;
+			position: absolute;
 		}
 		#mainrole {
 			display: none;
@@ -601,16 +612,39 @@ body {
 		    color: $primaryLight;
 
 			@include size-md {
-				display: inline;
+				display: inline-block;
 			}
 		}
 
-		#menuToggle {			
-			position: absolute;
-			right: 0;
-			top: 0;
+		#headertrails { 
+			color: $primaryLight; 
+			display: none!important;
+			font-size: 13px;
+				font-family: Ubuntu;
+			font-weight: bold; 
+			line-height: $headerHeight * 1px;
+			height: $headerHeight * 1px;
+			margin-left: 158px;
 			margin-right: $siteMargin * 1px;
-			margin-top: 11px;
+			vertical-align: top;
+			white-space: nowrap;
+			@include size-lg {
+				display: inline-block!important;
+			}
+		}
+		#headertrails a { 
+			color: $primaryLight; 
+		}
+
+		#menuToggle {			
+			/*position: absolute;
+			right: 0;
+			top: 0;*/
+			display: inline-block;
+			margin-right: $siteMargin * 1px;
+			height: $headerHeight * 1px;
+			vertical-align: middle;
+
 
 			@include size-md {
 				display: none;
@@ -618,41 +652,58 @@ body {
 
 			.icon {
 				display: block;
-				float: left;
-				
 				border-radius: 2px;
-				float: left;
 				height: 26px; //TODO var
 				margin-right: 0;
+				margin-top: 12px;
 				width: 26px; //TODO var
 
 				use { fill: $shade22; }
 			}			
 		}
+
+		.profile-headerIcon {
+			color: $shade22;
+			display: inline-block;
+			height: $headerHeight * 1px;
+			/*position: absolute;*/
+			top: 0;
+			margin-right: $siteMargin * 1px;
+			vertical-align: middle;
+			.fa {
+				margin-top: 9px;	
+			}
+		}
 		
 
 		#headerPresentationName {
 			display: none;
+			.ANONYMOUS & {
+				display: none!important;
+			}
 			@include size-md {
 				color: #7297c7;
-				display: block;
+				display: inline-block;
 				font-size: 13px;
 				font-family: Ubuntu;
 				font-weight: bold;
-				margin-right: 10px;
+				margin-right: $gutter * 1px;
 				margin-top: 18px;
-				position: absolute;
+				/*position: absolute;*/
 				right: 60px;
 				top: 0;
 			}
 		}		
 		#accountMenuToggle {
 			/*float: right;*/
-			position: absolute;
+			/*position: absolute;
 			right: 40px;
-			top: 0;
+			top: 0;*/
+			display: inline-block;
 			margin-right: $siteMargin * 1px;
-			margin-top: 11px;
+			//margin-top: 12px;
+			height: $headerHeight * 1px;
+			vertical-align: middle;
 
 			@include size-md {
 				right: 0;
@@ -660,12 +711,13 @@ body {
 
 			.icon {
 				display: block;
-				float: left;
+				//float: left;
 				
 				border-radius: 2px;
-				float: left;
+				//float: left;
 				height: 26px; //TODO var
 				margin-right: 0;
+				margin-top: 12px;
 				width: 26px; //TODO var
 			}
 			
@@ -740,6 +792,10 @@ body {
 		/*width: $navWidth * 1px;*/
 		width: 100%;
 		z-index: 650;
+
+		.ANONYMOUS & {
+			display: none!important;
+		}
 
 		&.open {
 			display: block;
@@ -928,13 +984,18 @@ body {
 	}	
 	&.hiddenNav {
 		nav {
-			display: none;
+			//display: none;
+		}
+		@include size-md {
+			nav {
+				display: none;
+			}
 		}
 	}
 
 	.stretchable {
 		min-height: 40vh;
-		@include size-md {
+		@include size-lg {
 			min-height: auto;
 		}
 	}
@@ -949,16 +1010,19 @@ body {
 
 section.dialog {
 	background: $shade11;
+	@include border-box;
 	display: none;
-	height: $dialogHeight * 1px;	
+	//height: $dialogHeight * 1px;	
 	left: 50%;
-	margin-left: 3 * ($colWidth + $gutter) * -.5px;
-	margin-top: $dialogHeight / 2 * -1px;
+	//margin-left: 3 * ($colWidth + $gutter) * -.5px;
+	//margin-top: $dialogHeight / 2 * -1px;
+	max-width: 90%;
 	padding: 0 $gutter * 1px;
 	position: fixed;
 	top: 50%;
 	width: 3 * ($colWidth + $gutter) * 1px;
 	z-index: 9999;
+	transform: translate(-50%, -50%);
 	@include box-shadow(3px,3px,10px,0px,$shadow);
 	
 	header {
@@ -968,9 +1032,19 @@ section.dialog {
 		top: 0;
 	}
 	section {
-		height: 125px;		
+		//height: 125px;	
+		height: $dialogHeight * 1px;		
 		margin-top: 15px;
 		position: relative;
+
+		input[type="submit"], input[type="button"], button, .pseudobutton {
+			&.bottom.right, &.bottom.left {
+				bottom: $gutter * 1px;
+				float: none;
+				position: absolute;
+				right: $gutter/2 * 1px;
+			}
+		}
 	}
 	#progressBar {
 		background-color: $shade22;
@@ -1096,8 +1170,8 @@ section.lightbox {
 	background-size: contain;
 	padding-top: 0;
 	section {
-		
 		padding-top: ($headerHeight + $subpanelHeaderHeight) * 1px;
+		padding-right: $gutter * 1px;
 	}
 	
 	a {

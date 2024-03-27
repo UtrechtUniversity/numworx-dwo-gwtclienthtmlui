@@ -52,7 +52,7 @@ input[type="submit"], input[type="button"], button, .pseudobutton {
 		clear: both;
 	}
 	&.single { margin-left: 100%; }
-	&.down { margin-top: 22 / 12 * 1em;}
+	&.down { margin-top: 23 / 12 * 1em;}
 
 	&.bottom.right, &.bottom.left {
 		float: none;
@@ -184,12 +184,13 @@ form {
 	}
 	
 	.option {
-		float: left;
-		display: block;
+		//float: left;
+		//display: block;
+		display: inline-block;
 		position: relative;
 		//padding-left: 60px;
 		width: 45px;
-		margin-bottom: 12px;
+		//margin-bottom: 12px;
 		cursor: pointer;
 	
 		@include user-select(none);
@@ -209,10 +210,11 @@ form {
 			@include border-box;
 			color: $white;
 			cursor: pointer;
-			
+			display: inline-block;
+			float: none;
 			left: 0;
 			padding: 6px 0px;
-			position: absolute;
+			//position: absolute;
 			text-align: center;
 			text-transform: uppercase;
 			@include transition(all 300ms ease);

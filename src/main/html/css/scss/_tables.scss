@@ -50,6 +50,7 @@ table.dwo { //:not(.c-datepicker__days)
 				padding: $gutter / 2 * 1px $gutter / 2 * 1px!important;
 				width: ($colWidth - $gutter) * 1px;
 				float: none!important; // for if it has a col-class
+				//white-space: nowrap;
 				
 				&:first-child { 
 					//padding-left: 0!important;
@@ -244,7 +245,8 @@ table.dwo.results {
 	overflow-y: visible;
 	min-width: 100vw;
 	@include size-2xl {
-		min-width: auto;
+		//min-width: auto;
+		min-width: 100%;
 	}
 	
 	//.size-2 & {	width: ($colWidth + $gutter + (0.5 * ($colWidth + $gutter))) * 1px; }
@@ -272,13 +274,14 @@ table.dwo.results {
 		//width: (1 / 12 * $siteWidth - 20) * 1px;
 		//display: table-cell!important;
 		text-align: center;
-		width: (($colWidth / 2) - $gutter) * 1px;
+		min-width: (($colWidth) - $gutter) * 1px;
 		@include user-select-none();
 		
 		&:first-child {
 			position: relative;
 			text-align: left;
-			width: ($colWidth - $gutter) * 1px;
+			width: ($colWidth + $gutter) * 1px;
+			//width: ($colWidth) * 1px;
 						
 			span:not(.sortButton) { 
 				background-color: $white;
@@ -377,8 +380,8 @@ table.dwo.results {
 					display: table-cell;
 					position: relative;
 					//padding: $gutter / 2 * 1px $gutter / 2 * 1px!important;
-					padding: $gutter / 2 * 1px 0!important;
-					width: (($colWidth / 2) - $gutter) * 1px;
+					//padding: $gutter / 2 * 1px 0!important;
+					min-width: (($colWidth) - $gutter) * 1px;
 					
 					span {
 						background-color: $shade11;
@@ -399,7 +402,8 @@ table.dwo.results {
 						@include transition(background-color 200ms ease);
 						transition-property: background-color, color;
 						//width: (($colWidth - $gutter) / 2 - 10) * 1px;
-						width: (($colWidth / 2) - $gutter)  * 1px;
+						width: (($colWidth) - $gutter)  * 1px;
+						white-space: break-spaces;
 						z-index: 9;
 						
 						.overflow & {
@@ -529,7 +533,8 @@ table.dwo.results {
 //				overflow-y: hidden;
 				position: relative;
 				white-space: nowrap;
-				width: (($colWidth) - $gutter) * 1px;
+				//width: (($colWidth) - $gutter) * 1px;
+				min-width: ($colWidth) * 1px;
 				z-index: 9;
 				
 				span {
@@ -594,9 +599,11 @@ table.dwo.results {
 	}
 	
 	tbody tr td.fill, thead tr th.fill {
-		//display: table-cell;
-		display: none;
-		width: 25px;
+		display: table-cell;
+		//display: none;
+		//width: 25px;
+		//width: auto;
+		width: 100%;
 		//.size-2 & {	display: table-cell; width: (4.5 * ($colWidth + $gutter)) * 1px; }
 //		.size-3 & {	display: table-cell; width: (4 * ($colWidth + $gutter)) * 1px; }
 //		.size-4 & {	display: table-cell; width: (3.5 * ($colWidth + $gutter)) * 1px; }

@@ -419,11 +419,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 	<main id="mainPanel" class="panel">
 		
 		<header class='profile-header'>
-			<a class='profile-menuIcon' href="javascript: void(0);" id="menuToggle">
-				<svg viewBox="0 0 64 64" class="icon">
-		  		  <use xlink:href="#menu"></use>
-			    </svg>
-			</a>
+			
 
 			<a href="#WELCOME" id="logo" class='profile-headerLogo' ><img src="images/logo-Numworx-grijs.svg"><span class='profile-headerLabel' id='mainrole'
 			>Docent</span></a>
@@ -462,17 +458,16 @@ a[href='#KNOWLEDGE'] .background-icon {
 			</form>
 			<div id='headertrails' class='profile-headerLabel'>
 			</div>
+			<a  class='profile-headerIcon'
+				href='javascript:void(0);' 
+				id='headerArrowUp' >
+				<i class="fa fa-2x fa-arrow-up" style=""></i>
+			</a>
+			<span class='profile-headerLabel' id='headerPresentationName'>Voorbeeld</span>
 			<a class='profile-headerIcon' href="javascript: void(0);" id="accountMenuToggle">
 				<svg viewBox="0 0 64 64" class="icon">
 		  		  <use xlink:href="#account"></use>
 			    </svg>
-			</a>
-			<span class='profile-headerLabel' id='headerPresentationName'>Voorbeeld</span>
-			<a  class='profile-headerIcon'
-				style='color:#798291; position: fixed; bottom: 18px; right: 18px;'
-				href='javascript:void(0);' 
-				id='headerArrowUp' >
-				<i class="fa fa-2x fa-arrow-up" style=""></i>
 			</a>
 			
 			<div id="accountMenuBox">
@@ -481,6 +476,11 @@ a[href='#KNOWLEDGE'] .background-icon {
                                 <a href="#ACCOUNT" id='accountMenuManageItem'><span data-translate="NUM_MNU_MANAGE_ACCOUNT">Account beheren</span></a>
                                 <a href="#LOGOUT"><span data-translate="NUM_MNU_LOGOUT">Uitloggen</span></a>
 			</div>
+			<a class='profile-menuIcon' href="javascript: void(0);" id="menuToggle">
+				<svg viewBox="0 0 64 64" class="icon">
+		  		  <use xlink:href="#menu"></use>
+			    </svg>
+			</a>
 		</header>
 		
 		<nav>
@@ -596,7 +596,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -625,10 +625,6 @@ a[href='#KNOWLEDGE'] .background-icon {
 								<span data-translate="NUM_LBL_RPT_NEW_PASSWORD">herhaal ww</span>
 								<input id="updateUserNewPasswordRepeat" name="newPasswordAgain" type="password" value="" />
 							</label>
-							<div class="col-6 no-single">
-								<input id="accountRemove" type="submit" class="danger right top" data-translate="NUM_BTN_Remove" value="Verwijder" />
-							</div>
-							<div class="clear"></div>
 <!--SAMLEND-->							
 							<label for="updateUserGivenName" class="col-2 input">
                                                             <span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
@@ -647,8 +643,11 @@ a[href='#KNOWLEDGE'] .background-icon {
 								<input id="updateUserEmail" name="email" type="text" value="" />
 							</label>							
 <!--SAMLSTART-->							
-							<div class="col-4">
-								<input type="submit" class="primary right bottom" data-translate="NUM_BTN_Save" value="Sla op" />
+							<div class="col-2 no-single">
+								<input id="accountRemove" type="submit" class="danger down" data-translate="NUM_BTN_Remove" value="Verwijder" />
+							</div>
+							<div class="col-2">
+								<input type="submit" class="primary down" data-translate="NUM_BTN_Save" value="Sla op" />
 							</div>
 <!--SAMLEND-->
 						</fieldset>						
@@ -666,68 +665,70 @@ a[href='#KNOWLEDGE'] .background-icon {
 				<div class="row">
 					<form name="updateSchoolLoginsView">
 						<div class="col-10">
-							<table class="dwo sortable headered">
-								<thead>
-									<tr>
-										<th class="col-4">
-											<span data-translate="NUM_TBL_SCHOOLLOGINOPTION">School</span>
-										</th>
-										<th class="col-2">
-											<span data-translate="NUM_TBL_ROLE">Rol</span>											
-										</th>
-										<th class="col-2 centered"><span data-translate="NUM_TBL_STARTWITHSCHOOLLOGIN">Hiermee opstarten</span></th>
-										<th class="col-2 centered"><span data-translate="NUM_TBL_REMOVESCHOOLLOGIN">Login verwijderen</span></th>
-									</tr>
-									
-									<tr class="sorting">
-										<th class="col-4">
-											<span class="sortButton asc default" data-order="asc" data-type="string">
-												<svg viewBox="0 0 74 74" class="icon">
-													  <use xlink:href="#arrowUp"></use>
-												</svg>
-											</span>
-											<span class="sortButton desc" data-order="desc" data-type="string">
-												<svg viewBox="0 0 74 74" class="icon">
-													  <use xlink:href="#arrowDown"></use>
-												</svg>
-											</span>
-										</th>
-										<th class="col-2">
-											<span class="sortButton asc" data-order="asc" data-type="string">
-												<svg viewBox="0 0 74 74" class="icon">
-													  <use xlink:href="#arrowUp"></use>
-												</svg>
-											</span>
-											<span class="sortButton desc" data-order="desc" data-type="string">
-												<svg viewBox="0 0 74 74" class="icon">
-													  <use xlink:href="#arrowDown"></use>
-												</svg>
-											</span>
-										</th>
-										<th>&nbsp;</th>
-										<th>&nbsp;</th>
-									</tr>
-								</thead>
-								<tbody>	
-									
-									<!-- The row is detached and used as a template by the JS -->								
-									<tr>
-										<td class="col-4"><span id="updateSchoolLoginsViewSchool" >Schoolnaam</span></td>
-										<td class="col-2"><span id="updateSchoolLoginsViewRole">ROL</span></td>
-										<td class="col-2 centered">
-											<div class="checkbox">
-												<input type="checkbox" name="active[]" id="updateSchoolLoginsViewActive" value="schoolid"><label class="icon" for="updateSchoolLoginsViewActive"></label>
-											</div>											
-										</td>
-										<td class="col-2 centered">
-											<div class="checkbox danger">
-												<input type="checkbox" name="remove[]" id="updateSchoolLoginsViewRemove" value="schoolid"><label class="icon" for="updateSchoolLoginsViewRemove"></label>
-											</div>											
-										</td>
-									</tr>
-																		
-								</tbody>
-							</table>
+							<div class="tablewrap overflow">
+								<table class="dwo sortable headered">
+									<thead>
+										<tr>
+											<th class="col-4">
+												<span data-translate="NUM_TBL_SCHOOLLOGINOPTION">School</span>
+											</th>
+											<th class="col-2">
+												<span data-translate="NUM_TBL_ROLE">Rol</span>											
+											</th>
+											<th class="col-2 centered"><span data-translate="NUM_TBL_STARTWITHSCHOOLLOGIN">Hiermee opstarten</span></th>
+											<th class="col-2 centered"><span data-translate="NUM_TBL_REMOVESCHOOLLOGIN">Login verwijderen</span></th>
+										</tr>
+										
+										<tr class="sorting">
+											<th class="col-4">
+												<span class="sortButton asc default" data-order="asc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowUp"></use>
+													</svg>
+												</span>
+												<span class="sortButton desc" data-order="desc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowDown"></use>
+													</svg>
+												</span>
+											</th>
+											<th class="col-2">
+												<span class="sortButton asc" data-order="asc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowUp"></use>
+													</svg>
+												</span>
+												<span class="sortButton desc" data-order="desc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowDown"></use>
+													</svg>
+												</span>
+											</th>
+											<th class="col-2">&nbsp;</th>
+											<th class="col-2">&nbsp;</th>
+										</tr>
+									</thead>
+									<tbody>	
+										
+										<!-- The row is detached and used as a template by the JS -->								
+										<tr>
+											<td class="col-4"><span id="updateSchoolLoginsViewSchool" >Schoolnaam</span></td>
+											<td class="col-2"><span id="updateSchoolLoginsViewRole">ROL</span></td>
+											<td class="col-2 centered">
+												<div class="checkbox">
+													<input type="checkbox" name="active[]" id="updateSchoolLoginsViewActive" value="schoolid"><label class="icon" for="updateSchoolLoginsViewActive"></label>
+												</div>											
+											</td>
+											<td class="col-2 centered">
+												<div class="checkbox danger">
+													<input type="checkbox" name="remove[]" id="updateSchoolLoginsViewRemove" value="schoolid"><label class="icon" for="updateSchoolLoginsViewRemove"></label>
+												</div>											
+											</td>
+										</tr>
+																			
+									</tbody>
+								</table>
+							</div>
 						</div>
 						<div class="col-2">
 						    &nbsp; <!-- for IE -->
@@ -747,7 +748,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 				<div class="row">
 					<form name="addSchoolLogin" autocomplete="off">
 						<fieldset>
-							<div class="col-4 options">
+							<div class="col-2 options">
                                                             <label><span data-translate="NUM_LBL_Q_WHICHROLE">Docent, Schooladmin of Leerling?</span></label>
 								<div class="option">
 							    	<input type="radio" name="role" id="roleD" value="TEACHER">
@@ -774,8 +775,8 @@ a[href='#KNOWLEDGE'] .background-icon {
 							</label>
 							
 							
-							<div class="col-4">
-								<input type="submit" class="primary right bottom" data-translate="NUM_BTN_Add" value="Voeg toe" />
+							<div class="col-2">
+								<input type="submit" class="primary down" data-translate="NUM_BTN_Add" value="Voeg toe" />
 							</div>							
 						</fieldset>						
 					</form>
@@ -802,7 +803,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<section id="help" class="col-2 help">
                                             <h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -920,7 +921,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<section id="help" class="col-2 help">
                                             <h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -1046,7 +1047,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -1264,7 +1265,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -1413,7 +1414,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -1595,7 +1596,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -1746,7 +1747,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -1928,7 +1929,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -2095,7 +2096,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -2480,7 +2481,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -2691,7 +2692,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -2833,7 +2834,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -2987,7 +2988,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -3146,7 +3147,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader" data-translate="NUM_MNU_HELP">Numworx Help</h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -3185,7 +3186,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -3463,7 +3464,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -3509,7 +3510,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 							<div class='treeWrapper profile-borderBox' id='teacherStudentModelTreeWrapper'>
 							</div>
 						</div>
-						<div class='col-6' style="position: relative;">
+						<div class='col-6'>
 							<h3><span id='teacherStudentmodelDescriptionTitle'>Uitleg</span></h3>						
 							<div id='teacherStudentModelDescription' class='treeWrapper profile-borderBox'>
 	<!-- 							Hok met beschrijving -->
@@ -3576,7 +3577,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
@@ -3704,7 +3705,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
 						<div class="content">
-							<iframe src="helppage/helpindex_nl.html"></iframe>
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>

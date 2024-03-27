@@ -117,13 +117,13 @@ function MainDisplay() {
 	$(".help .closeButton").click(Helpers.toggleHelpSection);
 	this.$logo.on('click', $.proxy(this.clickLogo, this));
 	this.$nav.find('a').on('click', $.proxy(this.clickMenuItem, this));
-	this.$menuToggle.on('mouseenter', $.proxy(this.mouseEnterMenuIcon, this));
-	this.$menuToggle.on('touchstart', $.proxy(this.touchStartMenuIcon, this));
+	//this.$menuToggle.on('mouseenter', $.proxy(this.mouseEnterMenuIcon, this));
+	this.$menuToggle.on('click', $.proxy(this.touchStartMenuIcon, this));
 	
 	this.$accountMenuBox.find('a').on('click', $.proxy(this.clickAccountMenuItem, this));
-	this.$accountMenuToggle.on('mouseenter', $.proxy(this.mouseEnterAccountMenuIcon, this));
-	this.$accountMenuToggle.on('touchstart', $.proxy(this.touchStartAccountMenuIcon, this));
-	this.$accountMenuBox.on('mouseleave', $.proxy(this.mouseLeaveAccountMenuIcon, this));
+	//this.$accountMenuToggle.on('mouseenter', $.proxy(this.mouseEnterAccountMenuIcon, this));
+	this.$accountMenuToggle.on('click', $.proxy(this.touchStartAccountMenuIcon, this));
+	//this.$accountMenuBox.on('mouseleave', $.proxy(this.mouseLeaveAccountMenuIcon, this));
 	this.$headerArrowUp.on("click", $.proxy(this.onArrowUp, this));
 	$(document).on('click, touchstart', $.proxy(this.clickWherever, this));
 	this.$searchBox.on('submit' , $.proxy(this.search, this))
@@ -531,8 +531,8 @@ MainDisplay.prototype.registerStretchables = function( elements ) {
 			this.stretchables.push( elements[i] );
 		}
 	}
-	this.resizeStrechables();
 	this.addClassToStretchables();
+	this.resizeStrechables();	
 }
 
 MainDisplay.prototype.registerCallback = function (key,  f ) {
@@ -553,6 +553,11 @@ MainDisplay.prototype.resizeStrechables = function() {
 	if (this.stretchables.length < 1) return; 
 	
 	bodyHeight = $(document.body).outerHeight();
+
+	// First set height to 0, to be able to calculate the free space
+	for(i=0; i<this.stretchables.length; i++) {
+		this.stretchables[i].height("0px");
+	}
 		
 	for(i=0; i<this.stretchables.length; i++) {
 		subpanel = this.stretchables[i].closest('.subpanel');
@@ -592,8 +597,13 @@ MainDisplay.prototype.mouseEnterMenuIcon = function(event) {
 	this.$accountMenuBox.hide();
 }
 MainDisplay.prototype.touchStartMenuIcon = function(event) {
-	if (this.$nav.hasClass("open")) this.$nav.removeClass("open");
-	else this.$nav.addClass("open");
+	event.preventDefault();
+	if (this.$nav.hasClass("open")) {
+		this.$nav.removeClass("open");
+	} else {
+		this.$nav.addClass("open");
+		this.$accountMenuBox.hide();
+	} 
 }
 MainDisplay.prototype.clickMenuItem = function(event) {
 	event.preventDefault();
