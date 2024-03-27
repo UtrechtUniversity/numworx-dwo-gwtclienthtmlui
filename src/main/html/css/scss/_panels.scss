@@ -1017,7 +1017,7 @@ section.dialog {
 	//margin-left: 3 * ($colWidth + $gutter) * -.5px;
 	//margin-top: $dialogHeight / 2 * -1px;
 	max-width: 90%;
-	padding: 0 $gutter * 1px;
+	padding: 0 $gutter * 1px $gutter * 1px $gutter * 1px;
 	position: fixed;
 	top: 50%;
 	width: 3 * ($colWidth + $gutter) * 1px;
@@ -1033,13 +1033,14 @@ section.dialog {
 	}
 	section {
 		//height: 125px;	
-		height: $dialogHeight * 1px;		
+		min-height: $dialogHeight * 1px;		
 		margin-top: 15px;
+		padding-bottom: 39px;
 		position: relative;
 
 		input[type="submit"], input[type="button"], button, .pseudobutton {
 			&.bottom.right, &.bottom.left {
-				bottom: $gutter * 1px;
+				bottom: 0;//$gutter * 1px;
 				float: none;
 				position: absolute;
 				right: $gutter/2 * 1px;
