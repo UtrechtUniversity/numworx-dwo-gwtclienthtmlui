@@ -26,6 +26,8 @@ table.dwo { //:not(.c-datepicker__days)
 //	overflow-y: hidden;
 	text-align: left;
 	min-width: 100%;
+
+	height: 100%;//flex
 	
 	thead tr, tbody tr {
 	    display:table;
@@ -109,6 +111,7 @@ table.dwo { //:not(.c-datepicker__days)
 	    @include border-box;
 		@include border-radius($defaultRadius);
 		background: $white;
+		height: 100%;//flex
 		min-height: 6em;
 		max-width: 100%;
 		//position: absolute;
@@ -248,6 +251,8 @@ table.dwo.results {
 		//min-width: auto;
 		min-width: 100%;
 	}
+
+	
 	
 	//.size-2 & {	width: ($colWidth + $gutter + (0.5 * ($colWidth + $gutter))) * 1px; }
 //	.size-3 & {	width: ($colWidth + $gutter + (1 * ($colWidth + $gutter))) * 1px; }
@@ -521,6 +526,7 @@ table.dwo.results {
 		@include border-radius(0px, 0px, 4px, 4px);
 		border-top-style: none;
 		//max-height: 500px;	
+		
 		
 		tr {
 			height: 26px;

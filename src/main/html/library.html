@@ -189,6 +189,132 @@
 				    </svg><span class="name">Organisatie</span></a></li>
 			</ul>
 		</nav>
+
+		<!-- 
+		-
+		- teacherStudentModelDisplay
+		-
+		-->
+		<section id="teacherStudentModelDisplayPanel" class="subpanel">
+			
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
+<!-- 							<use xlink:href="#kennis"></use> -->
+						</svg>
+						<h1><span data-translate='NUM_LBL_KNOWLEDGE_GOALS'>Leerdoelen</span></h1>
+						<h2 class="sectionhead"><span data-translate='NUM_LBL_KNOWLEDGE_SHOW'>Bekijk leerdomein</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
+						<div class="content">
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
+						</div>
+					</section>
+				</div>
+			</header>
+			
+			<section>
+				<form name='teacherStudentModelSelect' class="row grow">													
+					<div class="row grow" id="teacherStudentModelBody">						
+						<div class="col-6 row grow">
+							
+	
+							<div class='col-6'>
+								<label class='input'>
+									Model
+									<select name='modelselect'>
+										<option value="SLO">SLO leerdoelen Onderbouw</option>
+									</select>
+								</label>					    	
+							</div>
+							<label class='col-6 input'>
+								<span data-translate='NUM_LBL_METHOD_ACTIVE'>Actieve methode</span>
+								<select name="activeMethod"><option value="">Geen methode</option></select>
+							</label>
+
+							<div class="row">
+								<label class="col-4" for="teacherStudentModelMethodBox">
+									<h3 id='teacherStudentModelMethod' data-translate='NUM_LBL_METHOD'>Methode-indeling</h3>
+									<div class="checkbox">
+										<input type="checkbox" name="method" id="teacherStudentModelMethodBox" value="true">
+										<label class="icon" for="teacherStudentModelMethodBox"></label>
+									</div>
+								</label>
+								
+								<div class="col-2">
+									<input name='filter' type='submit' class='secondary  down' data-translate="NUM_BTN_Filter" value='Filter' disabled='disabled'>
+								</div>
+							</div>
+
+							<div class="col-6 grow">
+								<h3><span id='teacherStudentmodelTitled'>Alle leerdoelen</span></h3>						
+								<div class='treeWrapper profile-borderBox' id='teacherStudentModelTreeWrapper'>
+								</div>
+							</div>
+
+							<div class="col-6">
+								<input name='graph' type='submit' class='primary right' value='graph' disabled='disabled' data-translate='NUM_BTN_GRAPH'>
+							</div>	
+						</div>
+							
+						
+						<div class='col-6'>
+							<h3><span id='teacherStudentmodelDescriptionTitle'>Uitleg</span></h3>						
+							<div id='teacherStudentModelDescription' class='treeWrapper profile-borderBox'>
+	<!-- 							Hok met beschrijving -->
+							</div>
+						</div>
+						
+					</div>
+				</form>
+
+				<div class="row">
+					<form name='teacherStudentmodelKlas'>
+						<div class="col-6 row">						
+							<h2 class='sectionhead'>
+								<span data-translate='NUM_LBL_KNOWLEDGE_CLASS'>Bekijk kennisoverzicht klas</span>
+							</h2>
+							<div class="row">
+								<label class="col-4 input">
+									<span data-translate="NUM_TBL_CLASSES_CLASSNAME">Naam klas</span>
+									<select name="schoolClass"><option value=""></option></select>
+								</label>
+								<div class="col-2">
+									<input type="submit" name="submit"  class="primary right down" data-translate='NUM_BTN_KNOWLEDGE_CLASS' value="Bekijk klas" >
+								</div>			
+							</div>			
+						</div>
+					</form>
+					<div class='col-6'>
+						<h2 class='sectionhead'><span data-translate='NUM_LBL_FILTER_CLASS'>Filtering voor studenten van klas</span></h2>
+						<form name='teacherStudentmodelFilter'>
+							<label class="buttonLabel">
+                                    <span data-translate='NUM_SEC_FILTER_CLASS'>Kies een filter om per klas leerdoelen zichtbaar te maken</span>
+									<input name='submit' type="submit" class="secondary right" data-translate='NUM_BTN_FILTER_CHOOSE' value="Kies filter" disabled='disabled'>
+								</label>
+						</form>
+					</div>
+				</div>
+				
+				<div class="row">					
+				</div>
+				
+				<div class="row">
+				</div>
+				
+				
+			</section>
+			
+		</section>
+		<!-- end teacherStudentModelDisplay -->
+
 				
 		<section id="modulesDisplayPanel" class="subpanel iframepanel">
 			
@@ -1420,7 +1546,8 @@
 					</div>
 			</footer>
 		</section>
-		
+
+				
 	</main>
 
   </body>

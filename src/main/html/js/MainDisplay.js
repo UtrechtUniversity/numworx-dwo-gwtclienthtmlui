@@ -524,6 +524,7 @@ MainDisplay.prototype.resizeWindow = function(event) {
 		
 }
 MainDisplay.prototype.registerStretchables = function( elements ) {
+	return; // turn off for now
 	if (elements.length < 1) return;
 	
 	for (i=0; i<elements.length; i++) {
@@ -558,7 +559,8 @@ MainDisplay.prototype.resizeStrechables = function() {
 	for(i=0; i<this.stretchables.length; i++) {
 		this.stretchables[i].height("0px");
 	}
-		
+	
+	newHeight = Array();
 	for(i=0; i<this.stretchables.length; i++) {
 		subpanel = this.stretchables[i].closest('.subpanel');
 		
@@ -569,9 +571,15 @@ MainDisplay.prototype.resizeStrechables = function() {
 		}
 		freeSpace = bodyHeight - subpanelHeight;
 				
-		newHeight = this.stretchables[i].height() + freeSpace;
-		this.stretchables[i].height(newHeight+"px");
+		//newHeight = this.stretchables[i].height() + freeSpace;
+		newHeight[i] = this.stretchables[i].height() + freeSpace;
+		//this.stretchables[i].height(newHeight+"px");
 	}
+
+	for(i=0; i<this.stretchables.length; i++) {
+		this.stretchables[i].height(newHeight[i]+"px");
+	}
+
 	this.$subpanels.removeData('originalHeight');
 	return;
 }

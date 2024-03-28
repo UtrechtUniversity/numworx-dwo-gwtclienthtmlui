@@ -69,11 +69,15 @@ body {
  */
 
 .subpanel {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
 	margin: 0px 0px 0px 0px;
 	//margin-right: $navWidth * -1px;
 	overflow: hidden;
 	padding-top: ($headerHeight + $subpanelHeaderHeight) * 1px;
 	width: 99.9%; // TODO bug Safari
+	min-height: calc(100vh - #{$headerHeight + $subpanelHeaderHeight}px);
 	//width: 100%;
 	position: static;
 
@@ -138,6 +142,7 @@ body {
 		background-color: $white; 
 		border-bottom: 1px $primary solid;
 		color: $primary;
+		flex-grow: 0;
 		min-height: $subpanelHeaderHeight * 1px;
 		left: 0;
 		top: $headerHeight * 1px;						
@@ -418,6 +423,9 @@ body {
 	}
 	
 	section {
+		display: flex;
+		flex-direction: column;
+		
 		max-width: ($siteWidthTablet - $navWidth - $siteMargin) * 1px;
 		padding-top: $panelSectionPaddingTop;
 		.libraryPage & {
@@ -425,6 +433,10 @@ body {
 		}
 		position: relative;
 		width: 100%;
+
+		&.grow {
+			flex-grow: 1;
+		}
 
 		@include size-md {
 			//width: calc( 100% - #{$navWidth}px );

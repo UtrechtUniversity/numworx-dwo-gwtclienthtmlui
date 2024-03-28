@@ -124,6 +124,11 @@ h2 {
 			text-indent: 10px;
 			width: 100%;
 		}
+		[class*="col-"].row & {
+			font-size: 13px;
+			margin-left: $gutter/2 * 1px;
+			width: calc( 100% - #{$gutter * 1px});
+		}
 	}
 	
 	&.helpheader {

@@ -201,7 +201,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 	
 	
 	<!-- Seperate script for each view, could be combined and minified in future -->
-	<script src="js/MainDisplay.js?v=4${tstamp}" type="text/javascript" charset="utf-8"></script>
+	<script src="js/MainDisplay.js?v=5${tstamp}" type="text/javascript" charset="utf-8"></script>
 	<script src="js/LoginDisplay.js?v=4${tstamp}" type="text/javascript" charset="utf-8"></script>	
 	<script src="js/AccountDisplay.js?v=4${tstamp}" type="text/javascript" charset="utf-8"></script>
 	<script src="js/SchoolclassesDisplay.js?v=4${tstamp}" type="text/javascript" charset="utf-8"></script>
@@ -612,44 +612,45 @@ a[href='#KNOWLEDGE'] .background-icon {
 				<div class="row">
 					<form name="updateUser" autocomplete="off" >
 						<fieldset>
-<!--SAMLSTART-->
-							<label for="updateUserPassword" class="col-2 input">
-								<span data-translate="NUM_LBL_CUR_PASSWORD">huidig ww</span>
-								<input id="updateUserPassword" name="currentPassword" type="password" autocomplete="new-password" />
-							</label>
-							<label for="updateUserNewPassword" class="col-2 input">
-								<span data-translate="NUM_LBL_NEW_PASSWORD">Nieuw ww</span>
-								<input id="updateUserNewPassword" name="newPassword" type="password" value="" />
-							</label>
-							<label for="updateUserNewPasswordRepeat" class="col-2 input textoverflow">
-								<span data-translate="NUM_LBL_RPT_NEW_PASSWORD">herhaal ww</span>
-								<input id="updateUserNewPasswordRepeat" name="newPasswordAgain" type="password" value="" />
-							</label>
-<!--SAMLEND-->							
-							<label for="updateUserGivenName" class="col-2 input">
-                                                            <span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
-								<input id="updateUserGivenName" name="givenName" type="text" value="" />
-							</label>
-							<label for="updateUserInsertion" class="col-2 input">
-								<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
-								<input id="updateUserInsertion" name="insertion" type="text" autocomplete="off" value="" />
-							</label>
-							<label for="updateUserFamilyName" class="col-2 input">
-								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
-								<input id="updateUserFamilyName" name="familyName" type="text" value="" />
-							</label>
-							<label for="updateUserEmail" class="col-2 input">
-								<span data-translate="NUM_TBL_EMAIL">Email</span>
-								<input id="updateUserEmail" name="email" type="text" value="" />
-							</label>							
-<!--SAMLSTART-->							
-							<div class="col-2 no-single">
-								<input id="accountRemove" type="submit" class="danger down" data-translate="NUM_BTN_Remove" value="Verwijder" />
+			<!--SAMLSTART--><div class="row">
+								<label for="updateUserPassword" class="col-2 input">
+									<span data-translate="NUM_LBL_CUR_PASSWORD">huidig ww</span>
+									<input id="updateUserPassword" name="currentPassword" type="password" autocomplete="new-password" />
+								</label>
+								<label for="updateUserNewPassword" class="col-2 input">
+									<span data-translate="NUM_LBL_NEW_PASSWORD">Nieuw ww</span>
+									<input id="updateUserNewPassword" name="newPassword" type="password" value="" />
+								</label>
+								<label for="updateUserNewPasswordRepeat" class="col-2 input textoverflow">
+									<span data-translate="NUM_LBL_RPT_NEW_PASSWORD">herhaal ww</span>
+									<input id="updateUserNewPasswordRepeat" name="newPasswordAgain" type="password" value="" />
+								</label>
+	<!--SAMLEND-->							
+								<label for="updateUserGivenName" class="col-2 input">
+																<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
+									<input id="updateUserGivenName" name="givenName" type="text" value="" />
+								</label>
+								<label for="updateUserInsertion" class="col-2 input">
+									<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
+									<input id="updateUserInsertion" name="insertion" type="text" autocomplete="off" value="" />
+								</label>
+								<label for="updateUserFamilyName" class="col-2 input">
+									<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+									<input id="updateUserFamilyName" name="familyName" type="text" value="" />
+								</label>
+								<label for="updateUserEmail" class="col-2 input">
+									<span data-translate="NUM_TBL_EMAIL">Email</span>
+									<input id="updateUserEmail" name="email" type="text" value="" />
+								</label>							
+	<!--SAMLSTART-->							
+								<div class="col-2 no-single grow">
+									<input id="accountRemove" type="submit" class="danger down right" data-translate="NUM_BTN_Remove" value="Verwijder" />
+								</div>
+								<div class="col-2">
+									<input type="submit" class="primary down" data-translate="NUM_BTN_Save" value="Sla op" />
+								</div>
 							</div>
-							<div class="col-2">
-								<input type="submit" class="primary down" data-translate="NUM_BTN_Save" value="Sla op" />
-							</div>
-<!--SAMLEND-->
+							<!--SAMLEND-->
 						</fieldset>						
 					</form>					
 				</div>
@@ -3475,62 +3476,68 @@ a[href='#KNOWLEDGE'] .background-icon {
 				</div>
 			</header>
 			
-			<section>
-				<form name='teacherStudentModelSelect'>													
-					<div class="row" id="teacherStudentModelBody">						
-						<div class='col-4'>
-							<label class='input'>
-								Model
-								<select name='modelselect'>
-									<option value="SLO">SLO leerdoelen Onderbouw</option>
-								</select>
-							</label>					    	
-						</div>
-						<label class='col-4 input'>
-							<span data-translate='NUM_LBL_METHOD_ACTIVE'>Actieve methode</span>
-							<select name="activeMethod"><option value="">Geen methode</option></select>
-						</label>
+			<section class="grow">
+				<form name='teacherStudentModelSelect' class="row grow">													
+					<div class="row grow" id="teacherStudentModelBody">						
 						
-						<label class="col-2" for="teacherStudentModelMethodBox">
-							<h3 id='teacherStudentModelMethod' data-translate='NUM_LBL_METHOD'>Methode-indeling</h3>
-							<div class="checkbox">
-								<input type="checkbox" name="method" id="teacherStudentModelMethodBox" value="true">
-								<label class="icon" for="teacherStudentModelMethodBox"></label>
-							</div>
-						</label>
+						<div class="col-6 row">							
 
-						<div class="col-2">
-							<input name='filter' type='submit' class='secondary right down' data-translate="NUM_BTN_Filter" value='Filter' disabled='disabled'>
+							<div class='col-6'>
+								<label class='input'>
+									Model
+									<select name='modelselect'>
+										<option value="SLO">SLO leerdoelen Onderbouw</option>
+									</select>
+								</label>					    	
+							</div>
+							<label class='col-6 input'>
+								<span data-translate='NUM_LBL_METHOD_ACTIVE'>Actieve methode</span>
+								<select name="activeMethod"><option value="">Geen methode</option></select>
+							</label>
+
+							<div class="row">
+
+							<label class="col-4" for="teacherStudentModelMethodBox">
+								<h3 id='teacherStudentModelMethod' data-translate='NUM_LBL_METHOD'>Methode-indeling</h3>
+								<div class="checkbox">
+									<input type="checkbox" name="method" id="teacherStudentModelMethodBox" value="true">
+									<label class="icon" for="teacherStudentModelMethodBox"></label>
+								</div>
+							</label>
+							
+							<div class="col-2">
+								<input name='filter' type='submit' class='secondary  down' data-translate="NUM_BTN_Filter" value='Filter' disabled='disabled'>
+							</div>
+
 						</div>
 						
-					</div>
-					<div class="row">
-						<div class='col-6'>
-							<h3><span id='teacherStudentmodelTitled'>Alle leerdoelen</span></h3>						
-							<div class='treeWrapper profile-borderBox' id='teacherStudentModelTreeWrapper'>
+							<div class="col-6 grow">
+								<h3><span id='teacherStudentmodelTitled'>Alle leerdoelen</span></h3>						
+								<div class='treeWrapper profile-borderBox' id='teacherStudentModelTreeWrapper'>
+								</div>
 							</div>
+
+							<div class="col-6">
+								<input name='graph' type='submit' class='primary right' value='graph' disabled='disabled' data-translate='NUM_BTN_GRAPH'>
+							</div>	
 						</div>
+							
+						
 						<div class='col-6'>
 							<h3><span id='teacherStudentmodelDescriptionTitle'>Uitleg</span></h3>						
-							<div id='teacherStudentModelDescription' class='treeWrapper profile-borderBox'>
+							<div id='teacherStudentModelDescription' class='treeWrapper profile-borderBox' style="position: relative;">
 	<!-- 							Hok met beschrijving -->
 							</div>
 						</div>
+						
 					</div>
-					<div class="row">
-						<div class="col-2">
-							<input name='graph' type='submit' class='primary right down' value='graph' disabled='disabled' data-translate='NUM_BTN_GRAPH'>
-						</div>					
-					</div>						
 				</form>
 
 				<div class="row">
-					<div class='col-6'>
-						<h2 class='sectionhead'><span data-translate='NUM_LBL_KNOWLEDGE_CLASS'>Bekijk kennisoverzicht klas</span></h2>
-						<form name='teacherStudentmodelKlas'>
-<!-- 							<label class='buttonlabel'> -->
-<!-- 								<span>Kies een klas en bekijk het kennisoverzicht</span> -->
-<!-- 							</label> -->
+					
+					<div class='col-6 row'>
+						<form name='teacherStudentmodelKlas' class="row">
+							<h2 class='sectionhead'><span data-translate='NUM_LBL_KNOWLEDGE_CLASS'>Bekijk kennisoverzicht klas</span></h2>
 							<label class="col-4 input">
 								<span data-translate="NUM_TBL_CLASSES_CLASSNAME">Naam klas</span>
 								<select name="schoolClass"><option value=""></option></select>
@@ -3540,6 +3547,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 							</div>
 						</form>
 					</div>
+					
 					<div class='col-6'>
 						<h2 class='sectionhead'><span data-translate='NUM_LBL_FILTER_CLASS'>Filtering voor studenten van klas</span></h2>
 						<form name='teacherStudentmodelFilter'>
@@ -3550,13 +3558,6 @@ a[href='#KNOWLEDGE'] .background-icon {
 						</form>
 					</div>
 				</div>
-				
-				<div class="row">					
-				</div>
-				
-				<div class="row">
-				</div>
-				
 				
 			</section>
 			
