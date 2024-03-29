@@ -165,6 +165,8 @@ form {
 
 .options {
 	min-height: 3em;
+	flex-direction: row!important;
+	flex-wrap: wrap;
 	//float: left;
 		
 	&.down { margin-top: 22 / 12 * 1em;}

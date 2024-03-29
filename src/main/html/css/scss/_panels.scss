@@ -427,7 +427,9 @@ body {
 		flex-direction: column;
 		
 		max-width: ($siteWidthTablet - $navWidth - $siteMargin) * 1px;
-		padding-top: $panelSectionPaddingTop;
+		&:first-of-type {
+			padding-top: $panelSectionPaddingTop;
+		}
 		.libraryPage & {
 			padding-top: $gutter * 1px;
 		}
@@ -584,9 +586,14 @@ body {
 
 #mainPanel {
 	background-color: $shade20;
+	display: none;
 	min-height: 100%;
 	position: relative;
 	width: 100%;
+
+	&.active {
+		display: flex;
+	}
 	
 	> header {
 		background-color: $primaryDark;		

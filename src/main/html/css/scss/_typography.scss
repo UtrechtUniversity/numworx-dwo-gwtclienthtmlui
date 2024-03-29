@@ -148,7 +148,8 @@ h3 {
 	color: $primary;
 	margin-bottom: $elementMarginBottom;
 	font-weight: 700;
-	font-size: 13 / 16 * 1em;
+	//font-size: 13 / 16 * 1em;
+	font-size: 12px;
 	line-height: 18 / 13 * 1em;
 	
 	.dialog & {

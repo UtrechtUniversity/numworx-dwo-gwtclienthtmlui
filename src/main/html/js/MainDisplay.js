@@ -161,7 +161,8 @@ MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 	this.$trails.hide();
 		
 	if (!this.$panel.is(":visible")) {
-		this.$panel.show();
+		//this.$panel.show();
+		this.$panel.addClass("active");
 	}
 
 	this.$subpanels.hide();
@@ -264,7 +265,8 @@ MainDisplay.prototype.unsetIdleTimeout = function() {
  */
 
 MainDisplay.prototype.showLoginView = function() {
-	this.$panel.hide();
+	//this.$panel.hide();
+	this.$panel.removeClass("active");
 	this.loginDisplay.show();
 }
 
@@ -272,7 +274,8 @@ MainDisplay.prototype.showWelcomeView = function() {
 	this.initMainView();
 	this.setExpandedNavSize();
 	this.welcomeDisplay.show();
-	this.$panel.show();
+	//this.$panel.show();
+	this.$panel.addClass("active");
 }
 
 MainDisplay.prototype.showAccountView = function(vars) {

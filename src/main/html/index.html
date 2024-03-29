@@ -568,9 +568,9 @@ a[href='#KNOWLEDGE'] .background-icon {
 		-->
 		<section id="welcomeDisplayPanel" class="subpanel">			
 			<section>	
-				<div class="row">
+				<div class="row grow">
 					<div class="col-9"> <!-- no 12 cols width available because of wide navigation -->
-						<div id="welcomeText"></div>
+						<div id="welcomeText" class="grow"></div>
 					</div>
 			</section>
 		</section>
@@ -934,40 +934,41 @@ a[href='#KNOWLEDGE'] .background-icon {
 			</header>
 			
 			<!-- Edit class -->
-			<section>				
-				<div class="row">
-					<form name="chooseSchoolclass">							
+			<section class="grow">				
+				<div class="row grow">
+					<form name="chooseSchoolclass" class="row grow">							
 						<div class="col-8">
-                            <h3><span data-translate="NUM_LBL_CLASSES_SELECTTOEDIT">Kies een klas om te bewerken</span></h3>
-							<div class="tablewrapper overflow">
-								<table class="dwo hoverable selectable sortable">
-									<thead>
-										<tr class="sorting">
-											<th>
-												<span class="sortButton asc default" data-order="asc" data-type="string">
-													<svg viewBox="0 0 74 74" class="icon">
-														<use xlink:href="#arrowUp"></use>
-													</svg>
-												</span>
-												<span class="sortButton desc" data-order="desc" data-type="string">
-													<svg viewBox="0 0 74 74" class="icon">
-														<use xlink:href="#arrowDown"></use>
-													</svg>
-												</span>
-											</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><span id="chooseSchoolclassName">Schoolclass name</span>
-												<input type="radio" name="schoolclass" id="chooseSchoolclassId" class="hidden" value="schoolclassId">											
-											</td>
-										</tr>
-									</tbody>
-								</table>
+							<div class="column grow">
+								<h3><span data-translate="NUM_LBL_CLASSES_SELECTTOEDIT">Kies een klas om te bewerken</span></h3>
+								<div class="tablewrapper overflow grow">
+									<table class="dwo hoverable selectable sortable">
+										<thead>
+											<tr class="sorting">
+												<th>
+													<span class="sortButton asc default" data-order="asc" data-type="string">
+														<svg viewBox="0 0 74 74" class="icon">
+															<use xlink:href="#arrowUp"></use>
+														</svg>
+													</span>
+													<span class="sortButton desc" data-order="desc" data-type="string">
+														<svg viewBox="0 0 74 74" class="icon">
+															<use xlink:href="#arrowDown"></use>
+														</svg>
+													</span>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><span id="chooseSchoolclassName">Schoolclass name</span>
+													<input type="radio" name="schoolclass" id="chooseSchoolclassId" class="hidden" value="schoolclassId">											
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<input type="radio" name="schoolclass" class="hidden" value="schoolclassId">											
 							</div>
-							<input type="radio" name="schoolclass" class="hidden" value="schoolclassId">											
-						
 						</div>
 						<div class="col-4">
 							&nbsp; <!-- for IE -->
@@ -1112,18 +1113,18 @@ a[href='#KNOWLEDGE'] .background-icon {
 			</section>
 			
 			<!-- add persons -->
-			<section>
+			<section class="grow"">
 				<div class="row">
 					<div class="col-12">
                                             <h3><span data-translate="NUM_LBL_ClassAssignments">Gekoppelde gegevens van deze klas</span></h3>
 					</div>					
 				</div>
 				
-				<div class="row">
+				<div class="row grow">
 					<div class="col-4">
-						<form name="changeStudents">
-							<fieldset>
-								<div class="tablewrapper overflow">
+						<form name="changeStudents" class="column grow">
+							<fieldset class="column grow">
+								<div class="tablewrap overflow grow">
 									<table class="dwo sortable disabled headered">
 										<thead>
 											<tr>
@@ -1153,18 +1154,19 @@ a[href='#KNOWLEDGE'] .background-icon {
 										</tbody>
 									</table>
 								</div>
-												
-								<input type="button" name="show" class="primary left" data-translate="NUM_BTN_RefreshList" value="Ververs lijst" />
-								<input type="button" name="connect" class="primary right" data-translate="NUM_BTN_AddStudents" value="Toewijzen" />
-								<input type="button" name="copyOrMove" class="primary right" data-translate="NUM_BTN_MOVECOPY" value="Overplaatsen" />	
+								<div class="row">
+									<div class="col-4"><input type="button" name="show" class="primary left" data-translate="NUM_BTN_RefreshList" value="Ververs lijst" /></div>
+									<div class="col-2"><input type="button" name="connect" class="primary right" data-translate="NUM_BTN_AddStudents" value="Toewijzen" /></div>
+									<div class="col-2"><input type="button" name="copyOrMove" class="primary right" data-translate="NUM_BTN_MOVECOPY" value="Overplaatsen" /></div>	
+								</div>
 							</fieldset>
 						</form>					
 					</div>
 					
 					<div class="col-4">
-						<form name="changeTeachers">
-							<fieldset>
-								<div class="tablewrapper overflow">
+						<form name="changeTeachers" class="column grow">
+							<fieldset class="column grow">
+								<div class="tablewrap overflow grow">
 									<table class="dwo sortable disabled headered">
 										<thead>
 											<tr>
@@ -1194,17 +1196,18 @@ a[href='#KNOWLEDGE'] .background-icon {
 										</tbody>
 									</table>
 								</div>
-												
-								<input type="submit" name="show" class="primary left"  data-translate="NUM_BTN_RefreshList" value="Ververs lijst" />
-								<input type="submit" name="connect" class="primary right" data-translate="NUM_BTN_AddTeachers" value="Toewijzen" />
+								<div class="row">
+									<div class="col-4"><input type="submit" name="show" class="primary left"  data-translate="NUM_BTN_RefreshList" value="Ververs lijst" /></div>
+									<div class="col-2"><input type="submit" name="connect" class="primary right" data-translate="NUM_BTN_AddTeachers" value="Toewijzen" /></div>
+								</div>	
 							</fieldset>
 						</form>
 					</div>
 					
 					<div class="col-4 teacher-only">
-						<form name="changeModules">
-							<fieldset>
-								<div class="tablewrapper overflow">
+						<form name="changeModules" class="column grow">
+							<fieldset class="column grow">
+								<div class="tablewrap overflow grow">
 									<table class="dwo sortable disabled headered">
 										<thead>
 											<tr>
@@ -1234,9 +1237,10 @@ a[href='#KNOWLEDGE'] .background-icon {
 										</tbody>
 									</table>
 								</div>
-												
-								<input type="submit" name="show" class="primary left" data-translate="NUM_BTN_RefreshList" value="Ververs modules" />
-								<input type="submit" name="connect" class="primary right" data-translate="NUM_BTN_AssignModules" value="Toewijzigen" />
+								<div class="row">
+									<div class="col-4"><input type="submit" name="show" class="primary left" data-translate="NUM_BTN_RefreshList" value="Ververs modules" /></div>
+									<div class="col-2"><input type="submit" name="connect" class="primary right" data-translate="NUM_BTN_AssignModules" value="Toewijzigen" /></div>
+								</div>
 							</fieldset>
 						</form>							
 					</div>					
@@ -1277,7 +1281,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 				</div>
 			</header>
 			
-			<section>
+			<section class="grow">
 				<div class="row">
 					<form name="addStudentSearch">
 						<fieldset>
@@ -1308,81 +1312,82 @@ a[href='#KNOWLEDGE'] .background-icon {
 					</form>
 				</div>
 				
-				<div class="row">
+				<div class="row grow">
 					<div class="col-12">
 						<h3><span data-translate="NUM_TBL_STUDENTS">Leerlingen</span></h2>
-						<form name="addStudentAdd">
-							
-						<table class="dwo hoverable selectable sortable headered">
-							<thead>
-								<tr>
-									<th class="col-3">
-										<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
-									</th>
-									<th class="col-3">
-										<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
-									</th>
-									<th class="col-3">
-										<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
-									</th>									
-									<th class="col-3">
-										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
-									</th>
-								</tr>
-								<tr class="sorting">
-									<th class="col-3">
-										<span class="sortButton asc default" data-order="asc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowUp"></use>
-											</svg>
-										</span>
-										<span class="sortButton desc" data-order="desc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowDown"></use>
-											</svg>
-										</span>
-									</th>
-									<th class="col-3">
-										<span class="sortButton asc" data-order="asc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowUp"></use>
-											</svg>
-										</span>
-										<span class="sortButton desc" data-order="desc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowDown"></use>
-											</svg>
-										</span>
-									</th>
-									<th class="col-3"></th>									
-									<th class="col-3">
-										<span class="sortButton asc" data-order="asc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowUp"></use>
-											</svg>
-										</span>
-										<span class="sortButton desc" data-order="desc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowDown"></use>
-											</svg>
-										</span>
-									</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr tabindex="1">
-									<td class="col-3">
+						<form name="addStudentAdd" class="column grow">
+						<div class="tablewrap overflow grow">
+							<table class="dwo hoverable selectable sortable headered">
+								<thead>
+									<tr>
+										<th class="col-3">
+											<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+										</th>
+										<th class="col-3">
+											<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
+										</th>
+										<th class="col-3">
+											<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
+										</th>									
+										<th class="col-3">
+											<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+										</th>
+									</tr>
+									<tr class="sorting">
+										<th class="col-3">
+											<span class="sortButton asc default" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													<use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													<use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>
+										<th class="col-3">
+											<span class="sortButton asc" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													<use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													<use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>
+										<th class="col-3"></th>									
+										<th class="col-3">
+											<span class="sortButton asc" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													<use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													<use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr tabindex="1">
+										<td class="col-3">
+											
+											<span id="addStudentAddFamilyName"></span>
+											<input type="radio" id="addStudentAddId" name="id" class="hidden" value="bakker34">
+										</td>
+										<td class="col-3"><span id="addStudentAddGivenName"></span></td>
+										<td class="col-3"><span id="addStudentAddInsertion"></span></td>									
+										<td class="col-3"><span id="addStudentAddUsername"></span></td>
 										
-										<span id="addStudentAddFamilyName"></span>
-										<input type="radio" id="addStudentAddId" name="id" class="hidden" value="bakker34">
-									</td>
-									<td class="col-3"><span id="addStudentAddGivenName"></span></td>
-									<td class="col-3"><span id="addStudentAddInsertion"></span></td>									
-									<td class="col-3"><span id="addStudentAddUsername"></span></td>
-									
-								</tr>
-							</tbody>
-						</table>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 						
 							<input type="radio" name="id" class="hidden" value="">	<!-- empty option -->
 							<input type="submit" class="primary right"  data-translate="NUM_BTN_Connect" value="plaats leerling" />
@@ -1608,7 +1613,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 				</div>
 			</header>
 			
-			<section>
+			<section class="grow">
 				<div class="row">
 					<form name="addTeacherSearch">
 						<fieldset>
@@ -1639,84 +1644,85 @@ a[href='#KNOWLEDGE'] .background-icon {
 					</form>
 				</div>
 				
-				<div class="row">
+				<div class="row grow">
 					<div class="col-12">
 						<h3><span data-translate="NUM_TBL_TEACHERS">Docenten</span></h2>
-						<form name="addTeacherAdd">
-							
-						<table class="dwo hoverable selectable sortable headered">
-							<thead>
-								<tr>
-									<th class="col-3">
-										<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
-									</th>
-									<th class="col-3">
-										<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
-									</th>
-									<th class="col-3">
-										<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
-									</th>									
-									<th class="col-3">
-										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
-									</th>
-								</tr>
-								
-								<tr class="sorting">
-									<th class="col-3">
-										<span class="sortButton asc default" data-order="asc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowUp"></use>
-											</svg>
-										</span>
-										<span class="sortButton desc" data-order="desc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowDown"></use>
-											</svg>
-										</span>
-									</th>
-									<th class="col-3">
-										<span class="sortButton asc" data-order="asc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowUp"></use>
-											</svg>
-										</span>
-										<span class="sortButton desc" data-order="desc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowDown"></use>
-											</svg>
-										</span>
-									</th>
-									<th class="col-3"></th>
-									
-									<th class="col-3">
-										<span class="sortButton asc" data-order="asc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowUp"></use>
-											</svg>
-										</span>
-										<span class="sortButton desc" data-order="desc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowDown"></use>
-											</svg>
-										</span>
-									</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr tabindex="1">
-									<td class="col-2">
-										<span id="addTeacherAddFamilyName">Bakker</span>
-										<input type="radio" id="addTeacherAddId" name="id" class="hidden" value="bakker34">										
-									</td>
-									<td class="col-2"><span id="addTeacherAddGivenName">Michel</span></td>
-									<td class="col-2"><span id="addTeacherAddInsertion">van</span></td>
-									
-									<td class="col-2"><span id="addTeacherAddUserName">Bakker34</span>
+						<form name="addTeacherAdd" class="column grow">
+							<div class="tablewrap overflow grow">
+								<table class="dwo hoverable selectable sortable headered">
+									<thead>
+										<tr>
+											<th class="col-3">
+												<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+											</th>
+											<th class="col-3">
+												<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
+											</th>
+											<th class="col-3">
+												<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
+											</th>									
+											<th class="col-3">
+												<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+											</th>
+										</tr>
 										
-									</td>
-								</tr>
-							</tbody>
-						</table>
+										<tr class="sorting">
+											<th class="col-3">
+												<span class="sortButton asc default" data-order="asc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowUp"></use>
+													</svg>
+												</span>
+												<span class="sortButton desc" data-order="desc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowDown"></use>
+													</svg>
+												</span>
+											</th>
+											<th class="col-3">
+												<span class="sortButton asc" data-order="asc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowUp"></use>
+													</svg>
+												</span>
+												<span class="sortButton desc" data-order="desc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowDown"></use>
+													</svg>
+												</span>
+											</th>
+											<th class="col-3"></th>
+											
+											<th class="col-3">
+												<span class="sortButton asc" data-order="asc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowUp"></use>
+													</svg>
+												</span>
+												<span class="sortButton desc" data-order="desc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowDown"></use>
+													</svg>
+												</span>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr tabindex="1">
+											<td class="col-2">
+												<span id="addTeacherAddFamilyName">Bakker</span>
+												<input type="radio" id="addTeacherAddId" name="id" class="hidden" value="bakker34">										
+											</td>
+											<td class="col-2"><span id="addTeacherAddGivenName">Michel</span></td>
+											<td class="col-2"><span id="addTeacherAddInsertion">van</span></td>
+											
+											<td class="col-2"><span id="addTeacherAddUserName">Bakker34</span>
+												
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 						
 							<input type="radio" name="id" class="hidden" value="">	<!-- empty option -->
 							<input type="submit" class="primary right" data-translate="NUM_BTN_Connect" value="koppel docent" />
@@ -1759,8 +1765,8 @@ a[href='#KNOWLEDGE'] .background-icon {
 				</div>
 			</header>
 			
-			<section>
-				<div class="row">
+			<section class="grow">
+				<div class="row grow">
 					<div class="col-6">
                                             <h3><span data-translate="NUM_LBL_AssignModulesToClass">Selecteer de gewenste modules om toe te kennen</span></h3>
 					
@@ -1797,7 +1803,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 						</li> 
 							-->					
 					
-						<div id="modulesOfSchoolclassDisplayTreeWrapper" class="treeWrapper profile-borderBox">
+						<div id="modulesOfSchoolclassDisplayTreeWrapper" class="treeWrapper profile-borderBox grow">
 							<!-- <ul id="modulesOfSchoolclassDisplayTree" class="tree">
 							</ul>	 -->	
 						</div>					
@@ -1806,8 +1812,8 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<div class="col-6">
                         <h3><span data-translate="NUM_LBL_ModulesVisibleForClass">Toe te kennen voor klas [KLAS], zichtbaar voor leerling</span></h3>
 					
-						<form name="modulesOfSchoolclassDisplaySelect">
-							<table class="dwo hoverable selectable">
+						<form name="modulesOfSchoolclassDisplaySelect" class="column grow">
+							<table class="dwo hoverable selectable grow">
 								<tbody>
 									<tr tabindex="1">
 										<td>
@@ -1881,7 +1887,6 @@ a[href='#KNOWLEDGE'] .background-icon {
 								</label>
 								
 							</div>
-							<div class="clear"></div>
 							<div class="row" id='modulesOfSchoolclassDisplayCourseType'>
 								<div class="col-2 options">
 									<label><span data-translate="NUM_CLASSMODULES_CourseType">Toets?</span></label>
@@ -1899,8 +1904,11 @@ a[href='#KNOWLEDGE'] .background-icon {
 									<input id="password" name="accessKey" type="text" value="" />
 								</label>
 							</div>
-					
-							<input type="submit" class="right secondary down" data-translate="NUM_BTN_Save" value="Sla op" />
+							<div class="row">
+								<div class="col-2 grow">
+									<input type="submit" class="right secondary down right" data-translate="NUM_BTN_Save" value="Sla op" />
+								</div>
+							</div>
 						</form>
 					</div>
 				</div>
@@ -1941,7 +1949,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 				</div>
 			</header>
 			
-			<section>
+			<section class="grow">
 				<!-- <div class="row">
 					<div class="col-6">
 						<form>
@@ -1961,108 +1969,110 @@ a[href='#KNOWLEDGE'] .background-icon {
 					</div>
 				</div> -->
 				
-				<div class="row">
-					<form name="chooseClassAndModules">
-						<div class="col-6">
-							<h3><span data-translate="NUM_LBL_RESULTS_SELECT">Selecteer klas en soort(en) modules</span></h3>
-							<div class="tablewrap overflow">
-								<table id="resultsDisplayChooseClass" class="dwo sortable headered">
-									<thead>
-										<tr>
-											<th class="col-3"></th>
-											<th class="col-1 centered modules-only"><span data-translate="NUM_TBL_RESULTS_OPEN">Open</span></th>
-											<th class="col-1 centered modules-only"><span data-translate="NUM_TBL_RESULTS_CLOSED" >Gesloten</span></th>
-											<th class="col-1 centered premium-teacher"><span data-translate="NUM_TBL_RESULTS_REMEDIE" >Remedie</span></th>
-										</tr>
-										<tr class="sorting">
-											<th class="col-3">
-												<span class="sortButton asc default" data-order="asc" data-type="string">
-													<svg viewBox="0 0 74 74" class="icon">
-														<use xlink:href="#arrowUp"></use>
-													</svg>
-												</span>
-												<span class="sortButton desc" data-order="desc" data-type="string">
-													<svg viewBox="0 0 74 74" class="icon">
-														<use xlink:href="#arrowDown"></use>
-													</svg>
-												</span>
-											</th>
-											<th class="col-1 modules-only"></th>
-											<th class="col-1 modules-only"></th>
-											<th class="col-1 premium-teacher"></th>
-										</tr>
-									</thead>
-									<tbody>	
-								
-										<!-- The row is detached and used as a template by the JS -->								
-										<tr>
-											<td class="col-3"><span id="chooseClassAndModulesClassname">Klasnaam</span></td>
+				<div class="row grow">
+					<form name="chooseClassAndModules" class="column grow">
+						<div class="row grow">
+							<div class="col-6">
+								<h3><span data-translate="NUM_LBL_RESULTS_SELECT">Selecteer klas en soort(en) modules</span></h3>
+								<div class="tablewrap overflow grow">
+									<table id="resultsDisplayChooseClass" class="dwo sortable headered">
+										<thead>
+											<tr>
+												<th class="col-3"></th>
+												<th class="col-1 centered modules-only"><span data-translate="NUM_TBL_RESULTS_OPEN">Open</span></th>
+												<th class="col-1 centered modules-only"><span data-translate="NUM_TBL_RESULTS_CLOSED" >Gesloten</span></th>
+												<th class="col-1 centered premium-teacher"><span data-translate="NUM_TBL_RESULTS_REMEDIE" >Remedie</span></th>
+											</tr>
+											<tr class="sorting">
+												<th class="col-3">
+													<span class="sortButton asc default" data-order="asc" data-type="string">
+														<svg viewBox="0 0 74 74" class="icon">
+															<use xlink:href="#arrowUp"></use>
+														</svg>
+													</span>
+													<span class="sortButton desc" data-order="desc" data-type="string">
+														<svg viewBox="0 0 74 74" class="icon">
+															<use xlink:href="#arrowDown"></use>
+														</svg>
+													</span>
+												</th>
+												<th class="col-1 modules-only"></th>
+												<th class="col-1 modules-only"></th>
+												<th class="col-1 premium-teacher"></th>
+											</tr>
+										</thead>
+										<tbody>	
+									
+											<!-- The row is detached and used as a template by the JS -->								
+											<tr>
+												<td class="col-3"><span id="chooseClassAndModulesClassname">Klasnaam</span></td>
 
-											<td class="col-1 centered modules-only">
-												<div class="checkbox">
-													<input type="radio" name="open[]" id="chooseClassAndModulesOpen" value="schoolclassID"><label class="icon" for="chooseClassAndModulesOpen"></label>
-												</div>											
-											</td>
-											<td class="col-1 centered modules-only">
-												<div class="checkbox">
-													<input type="radio" name="closed[]" id="chooseClassAndModulesClassClosed" value="schoolclassID"><label class="icon" for="chooseClassAndModulesClassClosed"></label>
-												</div>											
-											</td>
-											<td class="col-1 centered premium-teacher">
-												<div class="checkbox">
-													<input type="radio" name="remedie[]" id="chooseClassAndModulesClassRemedie" value="schoolclassID"><label class="icon" for="chooseClassAndModulesClassRemedie"></label>
-												</div>											
-											</td>
-										</tr>
-																	
-									</tbody>
-								</table>
+												<td class="col-1 centered modules-only">
+													<div class="checkbox">
+														<input type="radio" name="open[]" id="chooseClassAndModulesOpen" value="schoolclassID"><label class="icon" for="chooseClassAndModulesOpen"></label>
+													</div>											
+												</td>
+												<td class="col-1 centered modules-only">
+													<div class="checkbox">
+														<input type="radio" name="closed[]" id="chooseClassAndModulesClassClosed" value="schoolclassID"><label class="icon" for="chooseClassAndModulesClassClosed"></label>
+													</div>											
+												</td>
+												<td class="col-1 centered premium-teacher">
+													<div class="checkbox">
+														<input type="radio" name="remedie[]" id="chooseClassAndModulesClassRemedie" value="schoolclassID"><label class="icon" for="chooseClassAndModulesClassRemedie"></label>
+													</div>											
+												</td>
+											</tr>
+																		
+										</tbody>
+									</table>
+								</div>
+								<input type="radio" name="open[]" value="" class="hidden">
+								<input type="radio" name="closed[]" value="" class="hidden">
+								<input type="radio" name="remedie[]" value="" class="hidden">
 							</div>
-							<input type="radio" name="open[]" value="" class="hidden">
-							<input type="radio" name="closed[]" value="" class="hidden">
-							<input type="radio" name="remedie[]" value="" class="hidden">
-						</div>
-					
-						<div class="col-6">
-							<h3><span data-translate="NUM_LBL_RESULTS_SELECT_MODULES">Selecteer module(s) om resultaten van de klas te zien</span></h3>
-							<div class="tablewrap overflow">
-								<table id="resultsDisplayChooseModules" class="dwo sortable headered">
-									<thead>
-										<tr>
-											<th class="col-4">&nbsp;</th>
-											<th class="col-2 centered"><span id="resultsDisplayChooseModulesSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT_ALL">Selecteer</span></span></th>
-										</tr>
-										<tr class="sorting">
-											<th class="col-4">
-												<span class="sortButton asc default" data-order="asc" data-type="string">
-													<svg viewBox="0 0 74 74" class="icon">
-														<use xlink:href="#arrowUp"></use>
-													</svg>
-												</span>
-												<span class="sortButton desc" data-order="desc" data-type="string">
-													<svg viewBox="0 0 74 74" class="icon">
-														<use xlink:href="#arrowDown"></use>
-													</svg>
-												</span>
-											</th>
-											<th class="col-2">&nbsp;</th>
-										</tr>
-									</thead>
-									<tbody>	
-								
-										<!-- The row is detached and used as a template by the JS -->								
-										<tr>
-											<td class="col-4"><span id="chooseClassAndModulesModuleName">Module name</span></td>
+						
+							<div class="col-6">
+								<h3><span data-translate="NUM_LBL_RESULTS_SELECT_MODULES">Selecteer module(s) om resultaten van de klas te zien</span></h3>
+								<div class="tablewrap overflow grow">
+									<table id="resultsDisplayChooseModules" class="dwo sortable headered">
+										<thead>
+											<tr>
+												<th class="col-4">&nbsp;</th>
+												<th class="col-2 centered"><span id="resultsDisplayChooseModulesSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT_ALL">Selecteer</span></span></th>
+											</tr>
+											<tr class="sorting">
+												<th class="col-4">
+													<span class="sortButton asc default" data-order="asc" data-type="string">
+														<svg viewBox="0 0 74 74" class="icon">
+															<use xlink:href="#arrowUp"></use>
+														</svg>
+													</span>
+													<span class="sortButton desc" data-order="desc" data-type="string">
+														<svg viewBox="0 0 74 74" class="icon">
+															<use xlink:href="#arrowDown"></use>
+														</svg>
+													</span>
+												</th>
+												<th class="col-2">&nbsp;</th>
+											</tr>
+										</thead>
+										<tbody>	
+									
+											<!-- The row is detached and used as a template by the JS -->								
+											<tr>
+												<td class="col-4"><span id="chooseClassAndModulesModuleName">Module name</span></td>
 
-											<td class="col-2 centered">
-												<div class="checkbox">
-													<input type="checkbox" name="select[]" id="chooseClassAndModulesModuleSelect" value="moduleID"><label class="icon" for="chooseClassAndModulesModuleSelect"></label>
-												</div>											
-											</td>
-										</tr>
-																	
-									</tbody>
-								</table>	
+												<td class="col-2 centered">
+													<div class="checkbox">
+														<input type="checkbox" name="select[]" id="chooseClassAndModulesModuleSelect" value="moduleID"><label class="icon" for="chooseClassAndModulesModuleSelect"></label>
+													</div>											
+												</td>
+											</tr>
+																		
+										</tbody>
+									</table>	
+								</div>
 							</div>
 						</div>
 						<div class="row">
@@ -2108,7 +2118,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 				</div>
 			</header>
 			
-			<section>
+			<section class="grow">
 				
 				<div class="row">
 					<div class="col-12">
@@ -2116,9 +2126,9 @@ a[href='#KNOWLEDGE'] .background-icon {
 					</div>
 				</div>
 				
-				<div class="row">
+				<div class="row grow">
 					<div class="col-12">
-						<div class="tablewrap overflow-always" id="selectedResultsTableWrap">
+						<div class="tablewrap overflow-always grow" id="selectedResultsTableWrap">
 							<table id="selectedResultsTable" class="dwo hoverable results">
 								<thead>
 									<tr>
@@ -2493,7 +2503,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 				</div>
 			</header>
 			
-			<section>
+			<section class="grow">
 				<div class="row">
 					<form name="personsSearch">
 						<fieldset>
@@ -2535,11 +2545,11 @@ a[href='#KNOWLEDGE'] .background-icon {
 					</form>
 				</div>
 				
-				<div class="row">
+				<div class="row grow">
 					<div class="col-12">
                         <h3><span data-translate="NUM_LBL_PERSONS_FOUND">Gevonden personen</span></h2>
-						<form name="personsEdit">
-							<div class="tablewrap overflow">
+						<form name="personsEdit" class="column grow">
+							<div class="tablewrap overflow grow">
 								<table class="dwo hoverable selectable sortable headered">
 									<thead>
 										<tr>
@@ -2757,16 +2767,16 @@ a[href='#KNOWLEDGE'] .background-icon {
 			</section>
 			
 			<!-- schoolclasses -->
-			<section>
+			<section class="grow">
 				<div class="row">
 					<div class="col-12">
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_PERSONS_EDITCLASSES">Bewerk koppeling aan klas(sen)</span></h2>
 					</div>
 				</div>				
-				<div class="row">
-					<form name="editPersonSchoolclasses">
+				<div class="row grow">
+					<form name="editPersonSchoolclasses" class="column grow">
 						<div class="col-6">
-							<div class="tablewrap overflow">
+							<div class="tablewrap overflow grow">
 								<table class="dwo sortable">
 									<thead>
 										<tr>
@@ -2847,7 +2857,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 			</header>
 			
 			<!-- Change personal details -->
-			<form name="addPerson" autocomplete="off">
+			<form name="addPerson" autocomplete="off" class="column grow">
 				<section>				
 					<div class="row">
 					
@@ -2911,16 +2921,16 @@ a[href='#KNOWLEDGE'] .background-icon {
 				</section>
 			
 				<!-- schoolclasses -->
-				<section>
+				<section class="grow">
 					<div class="row">
 						<div class="col-12">
 							<h3><span data-translate="NUM_LBL_ADDPERSON_CLASS">Kies klas(sen) voor deze persoon</h3>
 						</div>
 					</div>				
-					<div class="row">
+					<div class="row grow">
 						<!-- <form name="addPersonSchoolclasses"> -->
 							<div class="col-6">
-								<div class="tablewrap overflow">
+								<div class="tablewrap overflow grow">
 									<table class="dwo sortable">
 										<thead>
 											<tr>
@@ -3198,7 +3208,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 				</div>
 			</header>
 			
-			<section>
+			<section class="grow">
 			
 				<div class="row">
 					<form name="organisationSettings">
@@ -3301,135 +3311,136 @@ a[href='#KNOWLEDGE'] .background-icon {
 					</form>					
 				</div>
 				
-				<div class="row">
+				<div class="row grow">
 					<div class="col-12">
                         <h3><span data-translate="NUM_LBL_PERSONS_FOUND">Gevonden personen</span></h2>
 						<form name="organisationPersons">
-							
-							<table class="dwo hoverable sortable headered">
-								<thead>
-									<tr>
-										<th class="col-2">
-											<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
-										</th>
-										<th class="col-2">
-											<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
-										</th>
-										<th class="col-2">
-											<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
-										</th>									
-										<th class="col-2">																										
-											<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
-										</th>
-										<th class="col-2">																										
-											<span data-translate="NUM_TBL_SCHOOLCLASS">Klas</span>
-										</th>
-										<!-- <th class="col-2">
-											<span data-translate="NUM_TBL_EMAIL">Emailadres</span>
-										</th>	 -->								
-										<th class="col-2 centered">																										
-											<span id=organisationPersonsRemoveAll class='selectAllButton'
-											data-translate="NUM_TBL_REMOVE">Verwijderen</span>
-										</th>
+							<div class="tablewrap overflow grow">
+								<table class="dwo hoverable sortable headered">
+									<thead>
+										<tr>
+											<th class="col-2">
+												<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+											</th>
+											<th class="col-2">
+												<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
+											</th>
+											<th class="col-2">
+												<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
+											</th>									
+											<th class="col-2">																										
+												<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+											</th>
+											<th class="col-2">																										
+												<span data-translate="NUM_TBL_SCHOOLCLASS">Klas</span>
+											</th>
+											<!-- <th class="col-2">
+												<span data-translate="NUM_TBL_EMAIL">Emailadres</span>
+											</th>	 -->								
+											<th class="col-2 centered">																										
+												<span id=organisationPersonsRemoveAll class='selectAllButton'
+												data-translate="NUM_TBL_REMOVE">Verwijderen</span>
+											</th>
 
-									</tr>
-								
-									<tr class="sorting">
-										<th class="col-2">
-										
-											<span class="sortButton asc default" data-order="asc" data-type="string">
-												<svg viewBox="0 0 74 74" class="icon">
-													  <use xlink:href="#arrowUp"></use>
-												</svg>
-											</span>
-											<span class="sortButton desc" data-order="desc" data-type="string">
-												<svg viewBox="0 0 74 74" class="icon">
-													  <use xlink:href="#arrowDown"></use>
-												</svg>
-											</span>
-										
-										</th>
-										<th class="col-2">
-										
-											<span class="sortButton asc" data-order="asc" data-type="string">
-												<svg viewBox="0 0 74 74" class="icon">
-													  <use xlink:href="#arrowUp"></use>
-												</svg>
-											</span>
-											<span class="sortButton desc" data-order="desc" data-type="string">
-												<svg viewBox="0 0 74 74" class="icon">
-													  <use xlink:href="#arrowDown"></use>
-												</svg>
-											</span>
-										
-										</th>
-										<th class="col-2">
-										
-										</th>
+										</tr>
 									
-										<th class="col-2">										
-											<span class="sortButton asc" data-order="asc" data-type="string">
-												<svg viewBox="0 0 74 74" class="icon">
-													  <use xlink:href="#arrowUp"></use>
-												</svg>
-											</span>
-											<span class="sortButton desc" data-order="desc" data-type="string">
-												<svg viewBox="0 0 74 74" class="icon">
-													  <use xlink:href="#arrowDown"></use>
-												</svg>
-											</span>									
-										</th>
-									
-										<th class="col-2">										
-											<span class="sortButton asc" data-order="asc" data-type="string">
-												<svg viewBox="0 0 74 74" class="icon">
-													  <use xlink:href="#arrowUp"></use>
-												</svg>
-											</span>
-											<span class="sortButton desc" data-order="desc" data-type="string">
-												<svg viewBox="0 0 74 74" class="icon">
-													  <use xlink:href="#arrowDown"></use>
-												</svg>
-											</span>									
-										</th>
-									
-										<!-- <th class="col-2">
-											<span class="sortButton asc" data-order="asc" data-type="string">
-												<svg viewBox="0 0 74 74" class="icon">
-													  <use xlink:href="#arrowUp"></use>
-												</svg>
-											</span>
-											<span class="sortButton desc" data-order="desc" data-type="string">
-												<svg viewBox="0 0 74 74" class="icon">
-													  <use xlink:href="#arrowDown"></use>
-												</svg>
-											</span>
-										</th> -->
-										<th class="col-2">
-											&nbsp;
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr tabindex="1">
-										<td class="col-2"><span id="organisationPersonsTableFamilyName">Bakker</span>
-											<!-- <input type="radio" id="organisationPersonsTableId" name="id" class="hidden" value="bakker34">										 -->
-										</td>
-										<td class="col-2"><span id="organisationPersonsTableGivenName">Michel</span></td>
-										<td class="col-2"><span id="organisationPersonsTableInsertion">van</span></td>		
-										<td class="col-2"><span id="organisationPersonsTableUserName">Bakker34</span></td>							
-										<td class="col-2 shortened"><span id="organisationPersonsTableSchoolClass">atheneum 3-1</span>
-										<!-- <input type="hidden" id="organisationPersonsTableSchoolclassId" name="organisationPersonsTableSchoolclassId" class="hidden" value=""> -->
-										</td>							
-										<!-- <td class="col-2"><span id="organisationPersonsTableEmail">Bakker34</span></td>	 -->
-										<td class="col-2 centered">
-											<div class="checkbox danger">
-												<input type="checkbox" name="remove[]" id="organisationPersonsRemove" value="bakker34"><label class="icon" for="organisationPersonsRemove"></label>
-											</div>											
-										</td>						
-									</tr>
-								</tbody>
-							</table>
+										<tr class="sorting">
+											<th class="col-2">
+											
+												<span class="sortButton asc default" data-order="asc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowUp"></use>
+													</svg>
+												</span>
+												<span class="sortButton desc" data-order="desc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowDown"></use>
+													</svg>
+												</span>
+											
+											</th>
+											<th class="col-2">
+											
+												<span class="sortButton asc" data-order="asc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowUp"></use>
+													</svg>
+												</span>
+												<span class="sortButton desc" data-order="desc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowDown"></use>
+													</svg>
+												</span>
+											
+											</th>
+											<th class="col-2">
+											
+											</th>
+										
+											<th class="col-2">										
+												<span class="sortButton asc" data-order="asc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowUp"></use>
+													</svg>
+												</span>
+												<span class="sortButton desc" data-order="desc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowDown"></use>
+													</svg>
+												</span>									
+											</th>
+										
+											<th class="col-2">										
+												<span class="sortButton asc" data-order="asc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowUp"></use>
+													</svg>
+												</span>
+												<span class="sortButton desc" data-order="desc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowDown"></use>
+													</svg>
+												</span>									
+											</th>
+										
+											<!-- <th class="col-2">
+												<span class="sortButton asc" data-order="asc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowUp"></use>
+													</svg>
+												</span>
+												<span class="sortButton desc" data-order="desc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowDown"></use>
+													</svg>
+												</span>
+											</th> -->
+											<th class="col-2">
+												&nbsp;
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr tabindex="1">
+											<td class="col-2"><span id="organisationPersonsTableFamilyName">Bakker</span>
+												<!-- <input type="radio" id="organisationPersonsTableId" name="id" class="hidden" value="bakker34">										 -->
+											</td>
+											<td class="col-2"><span id="organisationPersonsTableGivenName">Michel</span></td>
+											<td class="col-2"><span id="organisationPersonsTableInsertion">van</span></td>		
+											<td class="col-2"><span id="organisationPersonsTableUserName">Bakker34</span></td>							
+											<td class="col-2 shortened"><span id="organisationPersonsTableSchoolClass">atheneum 3-1</span>
+											<!-- <input type="hidden" id="organisationPersonsTableSchoolclassId" name="organisationPersonsTableSchoolclassId" class="hidden" value=""> -->
+											</td>							
+											<!-- <td class="col-2"><span id="organisationPersonsTableEmail">Bakker34</span></td>	 -->
+											<td class="col-2 centered">
+												<div class="checkbox danger">
+													<input type="checkbox" name="remove[]" id="organisationPersonsRemove" value="bakker34"><label class="icon" for="organisationPersonsRemove"></label>
+												</div>											
+											</td>						
+										</tr>
+									</tbody>
+								</table>
+							</div>
 						
 							<input type="radio" name="id" class="hidden" value=""> <!-- empty option -->
 							<input type="radio" name="remove" class="hidden" value=""> <!-- empty option -->										
@@ -3496,20 +3507,17 @@ a[href='#KNOWLEDGE'] .background-icon {
 							</label>
 
 							<div class="row">
-
-							<label class="col-4" for="teacherStudentModelMethodBox">
-								<h3 id='teacherStudentModelMethod' data-translate='NUM_LBL_METHOD'>Methode-indeling</h3>
-								<div class="checkbox">
-									<input type="checkbox" name="method" id="teacherStudentModelMethodBox" value="true">
-									<label class="icon" for="teacherStudentModelMethodBox"></label>
+								<label class="col-4" for="teacherStudentModelMethodBox">
+									<h3 id='teacherStudentModelMethod' data-translate='NUM_LBL_METHOD'>Methode-indeling</h3>
+									<div class="checkbox">
+										<input type="checkbox" name="method" id="teacherStudentModelMethodBox" value="true">
+										<label class="icon" for="teacherStudentModelMethodBox"></label>
+									</div>
+								</label>								
+								<div class="col-2">
+									<input name='filter' type='submit' class='secondary  down' data-translate="NUM_BTN_Filter" value='Filter' disabled='disabled'>
 								</div>
-							</label>
-							
-							<div class="col-2">
-								<input name='filter' type='submit' class='secondary  down' data-translate="NUM_BTN_Filter" value='Filter' disabled='disabled'>
 							</div>
-
-						</div>
 						
 							<div class="col-6 grow">
 								<h3><span id='teacherStudentmodelTitled'>Alle leerdoelen</span></h3>						

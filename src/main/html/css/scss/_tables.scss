@@ -21,13 +21,14 @@ table.dwo { //:not(.c-datepicker__days)
 	//float: left;
 	//height: 100px; max-height: 100px;
 	position: relative;
-	margin-bottom: $elementMarginBottom;
+	
 	//margin-left: -2px;
 //	overflow-y: hidden;
 	text-align: left;
 	min-width: 100%;
 
-	height: 100%;//flex
+	//height: 100%;//flex
+	height: calc( 100% - 4px);
 	
 	thead tr, tbody tr {
 	    display:table;
@@ -111,7 +112,8 @@ table.dwo { //:not(.c-datepicker__days)
 	    @include border-box;
 		@include border-radius($defaultRadius);
 		background: $white;
-		height: 100%;//flex
+		//height: 100%;//flex
+		height: calc( 100% - #{ 21 }px);
 		min-height: 6em;
 		max-width: 100%;
 		//position: absolute;
@@ -154,7 +156,7 @@ table.dwo { //:not(.c-datepicker__days)
 		}
 	}
 	
-	&.hoverable tr:hover td { // &.hoverable tr:focus td,  { //&.hoverable tr:hover td span {
+	&.hoverable tr:hover { //td// &.hoverable tr:focus td,  { //&.hoverable tr:hover td span {
 		background-color: $shade12;
 		color: $white;
 		
@@ -182,9 +184,11 @@ table.dwo { //:not(.c-datepicker__days)
 		input[type="checkbox"].hidden, input[type="radio"].hidden { position: absolute; opacity: 0;}
 	}
 	
-	&.sortable {		
+	&.sortable {	
+		height: calc( 100% - 14px);	
 		&.headered {
 			margin-top: (12 + 9 + 9) * 1px;	
+			height: calc( 100% - #{ 58 }px);
 		}
 		
 		thead {
@@ -243,7 +247,8 @@ table.dwo { //:not(.c-datepicker__days)
 table.dwo.results {
 	//margin-right: 1 / 12 * $siteWidth * 1px;
 	//max-height: 500px; 
-	height: auto;
+	//height: auto;
+	height: calc( 100% - 58px);
 	//overflow-x: scroll;
 	overflow-y: visible;
 	min-width: 100vw;
@@ -522,9 +527,10 @@ table.dwo.results {
 	
 	tbody {
 		//max-width: 100%;
-		overflow: visible;
+		overflow: scroll;
 		@include border-radius(0px, 0px, 4px, 4px);
 		border-top-style: none;
+		height: calc( 100% - 58px);
 		//max-height: 500px;	
 		
 		
@@ -643,6 +649,7 @@ table.dwo.results {
 
 .tablewrap {
 	width: 100%;
+	margin-bottom: $elementMarginBottom;
 	//padding-top: 3em;
 
 	table.dwo.results {
