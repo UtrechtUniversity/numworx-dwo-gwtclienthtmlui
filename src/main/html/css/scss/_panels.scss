@@ -124,11 +124,14 @@ body {
 		}
 		
 		iframe {	
-			height: 250%;					
+			//height: 250%;					
 			margin: 0 0 0 auto;
-			width: 250%;
-			transform: scale(0.4);
-			transform-origin: top left;
+			//width: 250%;
+			//transform: scale(0.4);
+			//transform-origin: top left;
+			height: 100%;
+			width: 100%;
+
 
 			@include size-md {
 				height: 100%;
@@ -255,15 +258,20 @@ body {
 			h2.helpheader {
 				border-bottom: 1px $primary solid;
 				border-left: 1px $shade11 solid;
+				bottom: 0;
 				cursor: pointer;
-				float: right;
+				//float: right;
 				//margin-left: ($gutter + 1) * -1px;		
+				position: absolute;
+				right: 0;
 				width: ($colWidth - $gutter) * 1px;				
 				z-index: 400;
 				
 				@include size-lg {
+					bottom: auto;
 					float: none;
-					//margin-left: ($gutter + 1) * -1px;		
+					//margin-left: ($gutter + 1) * -1px;	
+					position: relative;	
 					width: auto;
 				}
 			}

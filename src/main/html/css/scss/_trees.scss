@@ -24,6 +24,13 @@ Tree, its wrapper and icons
 	width: 100%;
 	
 	-ms-overflow-style: -ms-autohiding-scrollbar;
+
+	&.full {
+		min-height: calc( 100vh - #{$headerHeight + $subpanelHeaderHeight + 6*$gutter}px );
+		@include size-lg {
+			min-height: 0;
+		}
+	}
 }
 
 ul.tree {

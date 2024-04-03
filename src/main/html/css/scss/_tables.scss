@@ -118,7 +118,7 @@ table.dwo { //:not(.c-datepicker__days)
 		max-width: 100%;
 		//position: absolute;
 //		max-height: 200px;
-		overflow-y: scroll;
+		overflow-y: auto; //scroll
 		top: 2em;
 		display: block;
 		
@@ -185,7 +185,7 @@ table.dwo { //:not(.c-datepicker__days)
 	}
 	
 	&.sortable {	
-		height: calc( 100% - 14px);	
+		height: calc( 100% - 24px);	//14
 		&.headered {
 			margin-top: (12 + 9 + 9) * 1px;	
 			height: calc( 100% - #{ 58 }px);
@@ -200,10 +200,13 @@ table.dwo { //:not(.c-datepicker__days)
 			tr:nth-child(1) {
 				//margin-top: (12 + 9 + 9) * -1px;				
 				//transform: translateY((12 + 9 + 9) * -1px);
+				//margin-top: -5px;
+				font-size: 0;
 				line-height: 0;
 				th {
 					display: inline-block;
-					margin-top: (12 + 9 + 9) * -1px;				
+					margin-top: (12 + 9 + 9) * -1px;	
+					font-size: 13px;			
 				}
 			}
 			
@@ -527,7 +530,7 @@ table.dwo.results {
 	
 	tbody {
 		//max-width: 100%;
-		overflow: scroll;
+		//overflow: scroll;
 		@include border-radius(0px, 0px, 4px, 4px);
 		border-top-style: none;
 		height: calc( 100% - 58px);
@@ -650,7 +653,14 @@ table.dwo.results {
 .tablewrap {
 	width: 100%;
 	margin-bottom: $elementMarginBottom;
+	min-height: 40vh; 
+	@include size-lg {
+		min-height: none;
+	}
 	//padding-top: 3em;
+	/*&:last-of-type { 
+		margin-bottom: 0; 
+	}*/
 
 	table.dwo.results {
 		margin-top: 3em;

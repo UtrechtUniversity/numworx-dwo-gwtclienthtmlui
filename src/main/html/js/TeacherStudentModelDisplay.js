@@ -191,7 +191,7 @@ TeacherStudentModelDisplay.prototype.onFilter = function(ev) {
 }
 
 TeacherStudentModelDisplay.prototype.isMethod = function() {
-	var value = this.studentModelMethod.checked
+	var value = this.studentModelMethod.value == "true";
 	return value;
 }
 
