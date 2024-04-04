@@ -218,10 +218,14 @@ ModulesOfSchoolclassDisplay.prototype.init = function () {
 
 	if (this.hasToets() ) {
 		$("#modulesOfSchoolclassDisplayCourseType").show();
-		if( this.hasKiosk()) { $("#modulesOfSchoolclassDisplaySF").show() } else { $("#modulesOfSchoolclassDisplaySF").hide()}
+		if( this.hasKiosk()) {
+		 $("#modulesOfSchoolclassDisplaySY").show() 
+		 } else {
+		  $("#modulesOfSchoolclassDisplaySY").hide()
+		 }
 	} else {
 		$("#modulesOfSchoolclassDisplayCourseType").hide();
-		$("#modulesOfSchoolclassDisplaySF").hide()
+		$("#modulesOfSchoolclassDisplaySY").hide()
 	}
 }
 
