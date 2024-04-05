@@ -239,12 +239,14 @@ body {
 
 			@include size-md {	
 				bottom: auto;	
-				margin-top: -18px;		
+				//margin-top: -18px;		
+				margin-top: 1px;
 				right: $siteMargin * 1px;
 				top: ($headerHeight + $subpanelHeaderHeight) * 1px;
 				width: auto;
 			}
-			@include size-lg {
+			@include size-xl {
+				margin-top: -18px;
 				width: 100%;
 			}
 			
@@ -267,7 +269,7 @@ body {
 				width: ($colWidth - $gutter) * 1px;				
 				z-index: 400;
 				
-				@include size-lg {
+				@include size-xl {
 					bottom: auto;
 					float: none;
 					//margin-left: ($gutter + 1) * -1px;	
@@ -280,6 +282,7 @@ body {
 			}
 			@include size-md {
 				&.active h2.helpheader {
+					bottom: auto;
 					display: block;
 				}
 			}
@@ -334,7 +337,7 @@ body {
 				}				
 			}
 			
-			@include size-lg {	
+			@include size-xl {	
 				.content {				
 					border-left: 1px $shade11 solid;
 					@include box-shadow(0px,0px,0px,0px,$shadow);
@@ -406,7 +409,7 @@ body {
 					border-left-color: $primary;
 					color: $white;
 					
-					@media #{$mediaQueryDesktop} {
+					@include size-lg {
 						background-color: $shade12;
 						border-left-color: $primary;
 						right: 0;
@@ -421,7 +424,7 @@ body {
 						left: auto;
 					}
 					
-					@media #{$mediaQueryDesktop} {
+					@include size-xl {
 						border-left-color: $primary;
 						right: 0;
 					}
@@ -1232,11 +1235,11 @@ section.lightbox {
 	}
 }
 
-#modulesOfSchoolclassDisplay {
+/*#modulesOfSchoolclassDisplay {
 	tbody, #modulesOfSchoolclassDisplayTreeWrapper {
 		height: 500px;
 	}
-}
+}*/
 
 
 .c-scrim {

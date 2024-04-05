@@ -27,8 +27,8 @@ table.dwo { //:not(.c-datepicker__days)
 	text-align: left;
 	min-width: 100%;
 
-	//height: 100%;//flex
-	height: calc( 100% - 4px);
+	height: 100%;//flex
+	//height: calc( 100% - 4px);
 	
 	thead tr, tbody tr {
 	    display:table;
@@ -113,7 +113,8 @@ table.dwo { //:not(.c-datepicker__days)
 		@include border-radius($defaultRadius);
 		background: $white;
 		//height: 100%;//flex
-		height: calc( 100% - #{ 21 }px);
+		height: 100%;
+		
 		min-height: 6em;
 		max-width: 100%;
 		//position: absolute;
@@ -154,6 +155,10 @@ table.dwo { //:not(.c-datepicker__days)
 			}
 			
 		}
+	}
+
+	&.sortable tbody {
+		height: calc( 100% - #{ 21 }px);
 	}
 	
 	&.hoverable tr:hover { //td// &.hoverable tr:focus td,  { //&.hoverable tr:hover td span {
@@ -206,7 +211,8 @@ table.dwo { //:not(.c-datepicker__days)
 				th {
 					display: inline-block;
 					margin-top: (12 + 9 + 9) * -1px;	
-					font-size: 13px;			
+					font-size: 12px;			
+					text-indent: -4px;
 				}
 			}
 			

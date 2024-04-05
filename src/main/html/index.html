@@ -1436,7 +1436,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 				</div>
 			</header>
 			
-			<section>
+			<section class="grow">
 				<div class="row">
 					<div class="col-4">
                                             <h3><span data-translate="NUM_LBL_CLASSEDITSTUDENTS_STUDENTSLEFTCLASS">Leerlingen gekozen klas</span></h3>
@@ -1451,131 +1451,137 @@ a[href='#KNOWLEDGE'] .background-icon {
 					</div>
 				</div>
 				
-				<div class="row">
+				<div class="row grow">
 					<div class="col-4">
-						<form name="copyOrMoveStudentToSchoolclassClassA">
-							<table class="dwo sortable headered">
-								<thead>
-									<tr>
-										<th class="col-2">
-											&nbsp;
-										</th>										
-										<th class="col-1 centered"><span id="copyOrMoveStudentToSchoolclassClassASelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT_ALL">Selecteer</span></span></th>
-									</tr>
-									<tr class="sorting">
-										<th class="col-2">
-											<span class="sortButton asc default" data-order="asc" data-type="string">
-												<svg viewBox="0 0 74 74" class="icon">
-													  <use xlink:href="#arrowUp"></use>
-												</svg>
-											</span>
-											<span class="sortButton desc" data-order="desc" data-type="string">
-												<svg viewBox="0 0 74 74" class="icon">
-													  <use xlink:href="#arrowDown"></use>
-												</svg>
-											</span>
-										</th>										
-										<th>&nbsp;</th>
-									</tr>
-								</thead>
-								<tbody>	
-								
-									<!-- The row is detached and used as a template by the JS -->								
-									<tr>
-										<td class="col-2"><span id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentName">Student naam</span></td>
-										<td class="col-1 centered">
-											<div class="checkbox">
-												<input type="checkbox" name="students[]" id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentSelect" value=""><label class="icon" for="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentSelect"></label>
-											</div>											
-										</td>										
-									</tr>
-																	
-								</tbody>
-							</table>
+						<form name="copyOrMoveStudentToSchoolclassClassA" class="column grow">
+							<div class="tablewrap overflow grow">
+								<table class="dwo sortable headered">
+									<thead>
+										<tr>
+											<th class="col-2">
+												&nbsp;
+											</th>										
+											<th class="col-1 centered"><span id="copyOrMoveStudentToSchoolclassClassASelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT_ALL">Selecteer</span></span></th>
+										</tr>
+										<tr class="sorting">
+											<th class="col-2">
+												<span class="sortButton asc default" data-order="asc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowUp"></use>
+													</svg>
+												</span>
+												<span class="sortButton desc" data-order="desc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowDown"></use>
+													</svg>
+												</span>
+											</th>										
+											<th>&nbsp;</th>
+										</tr>
+									</thead>
+									<tbody>	
+									
+										<!-- The row is detached and used as a template by the JS -->								
+										<tr>
+											<td class="col-2"><span id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentName">Student naam</span></td>
+											<td class="col-1 centered">
+												<div class="checkbox">
+													<input type="checkbox" name="students[]" id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentSelect" value=""><label class="icon" for="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassAStudentSelect"></label>
+												</div>											
+											</td>										
+										</tr>
+																		
+									</tbody>
+								</table>
+							</div>
 						
 							<input type="button" name="move" class="primary right clearbtn" data-translate="NUM_BTN_MoveLeft" value="Verplaats &#x25b6;" />
 							<input type="submit" name="copy" class="primary right clearbtn" data-translate="NUM_BTN_CopyLeft" value="Kopieer &#x25b6;" />							
 						</form>	
 					</div>
 					<div class="col-4">
-						<form name="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelect">
-							<table class="dwo hoverable selectable sortable headered">
-								<thead>
-									<tr>
-										<th>
-											&nbsp;
-										</th>
-									</tr>
-									<tr class="sorting">
-										<th>
-											<span class="sortButton asc default" data-order="asc" data-type="string">
-												<svg viewBox="0 0 74 74" class="icon">
-													  <use xlink:href="#arrowUp"></use>
-												</svg>
-											</span>
-											<span class="sortButton desc" data-order="desc" data-type="string">
-												<svg viewBox="0 0 74 74" class="icon">
-													  <use xlink:href="#arrowDown"></use>
-												</svg>
-											</span>
-										</th>
-									</tr>
-								</thead>
-								<tbody>	
-								
-									<!-- The row is detached and used as a template by the JS -->								
-									<tr>
-										<td class="col-2"><span id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelectClassName">Naam klas</span>
-											<input type="radio" name="schoolclass" id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelectId" class="hidden" value="schoolclassId">											
-										</td>										
-									</tr>
-																	
-								</tbody>
-							</table>
+						<form name="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelect" class="column grow">
+							<div class="tablewrap overflow grow">
+								<table class="dwo hoverable selectable sortable headered">
+									<thead>
+										<tr>
+											<th>
+												&nbsp;
+											</th>
+										</tr>
+										<tr class="sorting">
+											<th>
+												<span class="sortButton asc default" data-order="asc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowUp"></use>
+													</svg>
+												</span>
+												<span class="sortButton desc" data-order="desc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowDown"></use>
+													</svg>
+												</span>
+											</th>
+										</tr>
+									</thead>
+									<tbody>	
+									
+										<!-- The row is detached and used as a template by the JS -->								
+										<tr>
+											<td class="col-2"><span id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelectClassName">Naam klas</span>
+												<input type="radio" name="schoolclass" id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBSelectId" class="hidden" value="schoolclassId">											
+											</td>										
+										</tr>
+																		
+									</tbody>
+								</table>
+							</div>
 						
 							<!-- Bypassed <input type="submit" name="choose" class="primary center" data-translate="NUM_BTN_CLASSEDITSTUDENTS_SELECT2NDCLASS" value="Kies tweede klas" />						 -->
 						</form>	
 					</div>
 					<div class="col-4">
-						<form name="copyOrMoveStudentToSchoolclassClassB">
-							<table class="dwo sortable headered">
-								<thead>
-									<tr>
-										<th class="col-2">
-											&nbsp;										
-										</th>										
-										<th class="col-1 centered"><span id="copyOrMoveStudentToSchoolclassClassBSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT_ALL">Selecteer</span></span></th>
-									</tr>
-									<tr class="sorting">
-										<th class="col-2">
-											<span class="sortButton asc default" data-order="asc" data-type="string">
-												<svg viewBox="0 0 74 74" class="icon">
-													  <use xlink:href="#arrowUp"></use>
-												</svg>
-											</span>
-											<span class="sortButton desc" data-order="desc" data-type="string">
-												<svg viewBox="0 0 74 74" class="icon">
-													  <use xlink:href="#arrowDown"></use>
-												</svg>
-											</span>											
-										</th>										
-										<th>&nbsp;</th>
-									</tr>
-								</thead>
-								<tbody>	
-								
-									<!-- The row is detached and used as a template by the JS -->								
-									<tr>
-										<td class="col-2"><span id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentName">Leerling naam</span></td>
-										<td class="col-1 centered">
-											<div class="checkbox">
-												<input type="checkbox" name="students[]" id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentSelect" value=""><label class="icon" for="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentSelect"></label>
-											</div>											
-										</td>										
-									</tr>
-																	
-								</tbody>
-							</table>
+						<form name="copyOrMoveStudentToSchoolclassClassB" class="column grow">
+							<div class="tablewrap overflow grow">
+								<table class="dwo sortable headered">
+									<thead>
+										<tr>
+											<th class="col-2">
+												&nbsp;										
+											</th>										
+											<th class="col-1 centered"><span id="copyOrMoveStudentToSchoolclassClassBSelectAll" class="selectAllButton"><span data-translate="NUM_TBL_SELECT_ALL">Selecteer</span></span></th>
+										</tr>
+										<tr class="sorting">
+											<th class="col-2">
+												<span class="sortButton asc default" data-order="asc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowUp"></use>
+													</svg>
+												</span>
+												<span class="sortButton desc" data-order="desc" data-type="string">
+													<svg viewBox="0 0 74 74" class="icon">
+														<use xlink:href="#arrowDown"></use>
+													</svg>
+												</span>											
+											</th>										
+											<th>&nbsp;</th>
+										</tr>
+									</thead>
+									<tbody>	
+									
+										<!-- The row is detached and used as a template by the JS -->								
+										<tr>
+											<td class="col-2"><span id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentName">Leerling naam</span></td>
+											<td class="col-1 centered">
+												<div class="checkbox">
+													<input type="checkbox" name="students[]" id="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentSelect" value=""><label class="icon" for="updateSchoolLoginscopyOrMoveStudentToSchoolclassClassBStudentSelect"></label>
+												</div>											
+											</td>										
+										</tr>
+																		
+									</tbody>
+								</table>
+							</div>
 						
 							<input type="button" name="move" class="primary left clearbtn" data-translate="NUM_BTN_MoveRight" value="&#x25c0; Verplaats" />
 							<input type="submit" name="copy" class="primary left clearbtn" data-translate="NUM_BTN_CopyRight" value="&#x25c0; Kopieer" />							
@@ -1818,16 +1824,18 @@ a[href='#KNOWLEDGE'] .background-icon {
                         <h3><span data-translate="NUM_LBL_ModulesVisibleForClass">Toe te kennen voor klas [KLAS], zichtbaar voor leerling</span></h3>
 					
 						<form name="modulesOfSchoolclassDisplaySelect" class="column grow">
-							<table class="dwo hoverable selectable grow">
-								<tbody>
-									<tr tabindex="1">
-										<td>
-											<input type="radio" id="modulesOfSchoolclassDisplaySelectId" name="module" class="hidden" value="">
-											<span id="modulesOfSchoolclassDisplaySelectName">Naam module</span>
-										</td>
-									</tr>
-								</tbody>
-							</table>
+							<div class="tablewrap overflow grow">
+								<table class="dwo hoverable selectable grow">
+									<tbody>
+										<tr tabindex="1">
+											<td>
+												<input type="radio" id="modulesOfSchoolclassDisplaySelectId" name="module" class="hidden" value="">
+												<span id="modulesOfSchoolclassDisplaySelectName">Naam module</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 							<input type="radio" name="module" class="hidden" value=""> <!-- empty value -->
 						</form>
 					
@@ -2437,8 +2445,9 @@ a[href='#KNOWLEDGE'] .background-icon {
 				<iframe src=""></iframe>
 			</section>
 			<footer>
+				<form name="studentScoResultActions">				
 					<div class="row">
-						<form name="studentScoResultActions">				
+						
 							<div class="col-8 options">
 								<label><span data-translate="NUM_LBL_STUDENTSCO_SEAL">Verzegelen voor deze leerling?</span></label>
 								<div class="option">
@@ -2455,7 +2464,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 								Aantal pogingen
 								<input id="studentScoResultAttempts" name="attempts" type="text" value="" disabled="disabled" />
 							</label> -->
-						</form>
+						
 					
 						<div class="col-3">
 							<p data-translate="NUM_LBL_STUDENTSCO_OTHER">Andere leerling</p>
@@ -2472,6 +2481,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 						</div>						
 						
 					</div>
+				</form>
 			</footer>
 		</section>
 		<!-- end studentScoResultDisplay (lightbox) -->

@@ -339,16 +339,13 @@ MainDisplay.prototype.showStudentResultsGraphView = function() {
 	this.initMainView();
 	this.studentResultsGraphDisplay.show();
 }
-
-
-
 MainDisplay.prototype.showSelectedResultsView = function() {
 	this.initMainView(); 
 	this.selectedResultsDisplay.show();
 }
 
 MainDisplay.prototype.showStudentScoResultView = function() {
-	this.initMainView(); 
+	//this.initMainView(); 
 	this.studentScoResultDisplay.show();
 }
 
