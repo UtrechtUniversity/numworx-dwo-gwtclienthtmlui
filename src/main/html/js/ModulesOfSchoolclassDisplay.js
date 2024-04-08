@@ -27,11 +27,13 @@ function ModulesOfSchoolclassDisplay() {
 	this.$settingsFormFrom = $(this.settingsForm.elements["modulesOfSchoolclassDisplayValidityFrom"]);
 	this.$settingsFormTo = $(this.settingsForm.elements["modulesOfSchoolclassDisplayValidityTo"]);
 	this.$settingsFormLocked = $(this.settingsForm.elements["locked[]"]);
+	this.$settingsUIButton = $(this.settingsForm.elements["extra"]);
 	
 	this.$reloadButton = $(this.searchForm.elements["reload"]);
 	
 	// Bind handlers
-	this.$settingsForm.on('submit', $.proxy(this.submitSettings,this));	
+	this.$settingsForm.on('submit', $.proxy(this.submitSettings,this));
+	this.$settingsUIButton.on('click', $.proxy(this.openSettingsUI, this));
 	this.$searchForm.on('submit', $.proxy(this.submitSearch,this));	
 	this.$reloadButton.on('click', $.proxy(this.clickReload,this));
 	this.$settingsFormFrom.on('click', $.proxy(this.clickDateField, this));
@@ -391,6 +393,27 @@ ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
 																				this.settingsForm.elements["accessKey"].value);
 }
 
+ModulesOfSchoolclassDisplay.prototype.openSettings = function() {
+
+	var typeString = this.settingsForm.elements["modulesOfSchoolclassDisplayTypeLocked"].checked ? "assesment" : "normal";
+	if (this.settingsForm.elements["modulesOfSchoolclassDisplayTypeSY"].checked)
+		typeString = "kiosk";
+	var from = this.settingsForm.elements["from"].value;
+	var to = this.settingsForm.elements["to"].value;
+			
+	app.getPresenterFactory().getModulesOfSchoolclassPresenter().openSettings(  this.selectedNodeId,
+																				typeString,
+																				from,
+																				to,
+																				this.settingsForm.elements["accessKey"].value);
+}
+
+	
+
+
+
+
+
 ModulesOfSchoolclassDisplay.prototype.addModule = function() {
 	var typeString = this.settingsForm.elements["modulesOfSchoolclassDisplayTypeLocked"].checked ? "assesment" : "normal";
 	if (this.settingsForm.elements["modulesOfSchoolclassDisplayTypeSY"].checked)
@@ -544,6 +567,14 @@ ModulesOfSchoolclassDisplay.prototype.submitSettings = function(event) {
 		this.setModuleSettings();
 	} else {
 		this.addModule();
+	}
+}
+
+ModulesOfSchoolclassDisplay.prototype.openSettingsUI = function(event) {
+	event.preventDefault();
+	if ( this.nodes[this.selectedNodeId].classCourse) { //&&  this.nodes[this.selectedNodeId].classCourse.viewState == "invisible" ) {
+		this.openSettings();
+	} else {
 	}
 }
 

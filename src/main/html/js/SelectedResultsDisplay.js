@@ -34,6 +34,7 @@ function SelectedResultsDisplay() {
 	this.$barPagesStudentsDownload = this.initPagesStudentsDownload("#barPagesStudentsDownload")
 	
 	this.$selectedResultsTitle = $("#selectedResultsTitle");
+	this.$selectedResultsDashboard = $("#selectedResultsDashboard");
 
 	this.$selectResultsTableWrap = $("#selectedResultsTableWrap");
 	
@@ -64,6 +65,7 @@ function SelectedResultsDisplay() {
 	this.$sealSingleActivityCheckbox.on('change', $.proxy(this.changeSealSingleActivityCheckbox, this));
 	this.$selectResultsTableWrap.on('scroll', $.proxy(this.scrollTableWrap, this));
 	this.$studentsLog.on('click', $.proxy(this.logResultsClick, this));
+	this.$selectedResultsDashboard.on('click', $.proxy(this.openDashboardUI, this));
 	
 	// Init
 	this.$panel.hide();
@@ -891,6 +893,9 @@ SelectedResultsDisplay.prototype.hoverColumnHeader = function(event) {
 	}	
 }
 
+SelectedResultsDisplay.prototype.openDashboard = function() {
+		app.getPresenterFactory().getSelectedResultsPresenter().openDashboard(this.resultState.activeModule, this.resultState.activeSchoolClass);
+}
 
 
 // Class / module
@@ -952,6 +957,11 @@ SelectedResultsDisplay.prototype.submitStartCompareClassForm = function(event) {
 	this.compareClass();
 }
 
+
+SelectedResultsDisplay.prototype.openDashboardUI = function(event) {
+	event.preventDefault();
+	this.openDashboard();
+}
 
 SelectedResultsDisplay.prototype.changeSealCheckbox = function(event) {
 	event.preventDefault();			
