@@ -69,6 +69,7 @@ function SelectedResultsDisplay() {
 	
 	// Init
 	this.$panel.hide();
+	this.setSchoolyearUI(false);
 }
 
 SelectedResultsDisplay.prototype.show = function() {
@@ -79,6 +80,14 @@ SelectedResultsDisplay.prototype.show = function() {
 	if (!app.getPresenterFactory().getSelectedResultsPresenter().hasLogResults()) this.$studentsLog.css('visibility', 'hidden');
 
 	this.$activitiesStudentsClearResultsForm.css('visibility','hidden'); // Not implemented?
+}
+
+SelectedResultsDisplay.prototype.setSchoolyearUI = function(on) {
+	if (on) {
+		this.$selectedResultsDashboard.show();
+	} else {
+		this.$selectedResultsDashboard.hide();
+	}
 }
 
 
