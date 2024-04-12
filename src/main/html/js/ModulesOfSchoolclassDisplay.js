@@ -33,7 +33,7 @@ function ModulesOfSchoolclassDisplay() {
 	this.$reloadButton = $(this.searchForm.elements["reload"]);
 	
 	// Bind handlers
-	this.$settingsForm.on('submit', $.proxy(this.submitSettings,this));
+	this.$settingsForm.on('submit', $.proxy(this.submitSettings,this));	
 	this.$settingsUIButton.on('click', $.proxy(this.openSettingsUI, this));
 	this.$dashboardUIButton.on('click', $.proxy(this.openDashboardUI, this));
 	this.$searchForm.on('submit', $.proxy(this.submitSearch,this));	
