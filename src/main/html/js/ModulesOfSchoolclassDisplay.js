@@ -27,11 +27,15 @@ function ModulesOfSchoolclassDisplay() {
 	this.$settingsFormFrom = $(this.settingsForm.elements["modulesOfSchoolclassDisplayValidityFrom"]);
 	this.$settingsFormTo = $(this.settingsForm.elements["modulesOfSchoolclassDisplayValidityTo"]);
 	this.$settingsFormLocked = $(this.settingsForm.elements["locked[]"]);
+	this.$settingsUIButton = $(this.settingsForm.elements["extra"]);
+	this.$dashboardUIButton = $(this.settingsForm.elements["dashboard"]);
 	
 	this.$reloadButton = $(this.searchForm.elements["reload"]);
 	
 	// Bind handlers
 	this.$settingsForm.on('submit', $.proxy(this.submitSettings,this));	
+	this.$settingsUIButton.on('click', $.proxy(this.openSettingsUI, this));
+	this.$dashboardUIButton.on('click', $.proxy(this.openDashboardUI, this));
 	this.$searchForm.on('submit', $.proxy(this.submitSearch,this));	
 	this.$reloadButton.on('click', $.proxy(this.clickReload,this));
 	this.$settingsFormFrom.on('click', $.proxy(this.clickDateField, this));
@@ -42,6 +46,7 @@ function ModulesOfSchoolclassDisplay() {
 	
 	// Init
 	this.$panel.hide();
+	this.setSchoolyearUI(false);
 }
 
 ModulesOfSchoolclassDisplay.prototype.show = function() {
@@ -49,6 +54,13 @@ ModulesOfSchoolclassDisplay.prototype.show = function() {
 	this.$panel.show();
 }
 
+ModulesOfSchoolclassDisplay.prototype.setSchoolyearUI = function(on) {
+	if (on) {
+		$("#schoolyearui").show();
+	} else {
+		$("#schoolyearui").hide();
+	}
+}
 
 ModulesOfSchoolclassDisplay.prototype.localize = function() {
 	this.$panel.find("[data-translate]").each( Helpers.translate );
@@ -164,15 +176,25 @@ ModulesOfSchoolclassDisplay.prototype.setSettings = function(id) {
 		this.settingsForm.elements["from"].value = this.nodes[id].classCourse.notBefore ? this.nodes[id].classCourse.notBefore : "";
 		this.settingsForm.elements["to"].value = this.nodes[id].classCourse.notAfter ? this.nodes[id].classCourse.notAfter : "";
 		
+		if (this.nodes[id].classCourse.courseType == "kiosk") {
+			this.settingsForm.elements["locked[]"][0].checked = "";
+			this.settingsForm.elements["locked[]"][1].checked = "";
+			this.settingsForm.elements["locked[]"][2].checked = "checked";	
+			this.setSchoolyearUI(true);		
+			this.accessKeyToggle(true);
+		} else {
+			this.setSchoolyearUI(false);
 		if (this.nodes[id].classCourse.courseType == "normal") {
 			this.settingsForm.elements["locked[]"][0].checked = "";
 			this.settingsForm.elements["locked[]"][1].checked = "checked";
+			this.settingsForm.elements["locked[]"][2].checked = "";			
 			this.accessKeyToggle(false);
 		} else  {
 			this.settingsForm.elements["locked[]"][0].checked = "checked";
 			this.settingsForm.elements["locked[]"][1].checked = "";
+			this.settingsForm.elements["locked[]"][2].checked = "";
 			this.accessKeyToggle(true);
-		}
+		}}
 	}
 }
 
@@ -210,8 +232,14 @@ ModulesOfSchoolclassDisplay.prototype.init = function () {
 
 	if (this.hasToets() ) {
 		$("#modulesOfSchoolclassDisplayCourseType").show();
+		if( this.hasKiosk()) {
+		 $("#modulesOfSchoolclassDisplaySY").show() 
+		 } else {
+		  $("#modulesOfSchoolclassDisplaySY").hide()
+		 }
 	} else {
 		$("#modulesOfSchoolclassDisplayCourseType").hide();
+		$("#modulesOfSchoolclassDisplaySY").hide()
 	}
 }
 
@@ -353,11 +381,20 @@ ModulesOfSchoolclassDisplay.prototype.hasToets = function() {
 	}
 }
 
+ModulesOfSchoolclassDisplay.prototype.hasKiosk = function() {
+	try {
+		return app.getPresenterFactory().getModulesOfSchoolclassPresenter().hasKiosk();
+	} catch (e) {
+		return false;
+	}
+}
+
 
 ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
 
 	var typeString = this.settingsForm.elements["modulesOfSchoolclassDisplayTypeLocked"].checked ? "assesment" : "normal";
-	
+	if (this.settingsForm.elements["modulesOfSchoolclassDisplayTypeSY"].checked)
+		typeString = "kiosk";
 	var from = this.settingsForm.elements["from"].value;
 	var to = this.settingsForm.elements["to"].value;
 			
@@ -368,8 +405,45 @@ ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
 																				this.settingsForm.elements["accessKey"].value);
 }
 
+ModulesOfSchoolclassDisplay.prototype.openSettings = function() {
+
+	var typeString = this.settingsForm.elements["modulesOfSchoolclassDisplayTypeLocked"].checked ? "assesment" : "normal";
+	if (this.settingsForm.elements["modulesOfSchoolclassDisplayTypeSY"].checked)
+		typeString = "kiosk";
+	var from = this.settingsForm.elements["from"].value;
+	var to = this.settingsForm.elements["to"].value;
+			
+	app.getPresenterFactory().getModulesOfSchoolclassPresenter().openSettings(  this.selectedNodeId,
+																				typeString,
+																				from,
+																				to,
+																				this.settingsForm.elements["accessKey"].value);
+}
+
+ModulesOfSchoolclassDisplay.prototype.openDashboard = function() {
+
+	var typeString = this.settingsForm.elements["modulesOfSchoolclassDisplayTypeLocked"].checked ? "assesment" : "normal";
+	if (this.settingsForm.elements["modulesOfSchoolclassDisplayTypeSY"].checked)
+		typeString = "kiosk";
+	var from = this.settingsForm.elements["from"].value;
+	var to = this.settingsForm.elements["to"].value;
+			
+	app.getPresenterFactory().getModulesOfSchoolclassPresenter().openDashboard(  this.selectedNodeId,
+																				typeString,
+																				from,
+																				to,
+																				this.settingsForm.elements["accessKey"].value);
+}
+	
+
+
+
+
+
 ModulesOfSchoolclassDisplay.prototype.addModule = function() {
 	var typeString = this.settingsForm.elements["modulesOfSchoolclassDisplayTypeLocked"].checked ? "assesment" : "normal";
+	if (this.settingsForm.elements["modulesOfSchoolclassDisplayTypeSY"].checked)
+		typeString = "kiosk";
 	
 	var from = this.settingsForm.elements["from"].value;
 	var to = this.settingsForm.elements["to"].value;
@@ -488,7 +562,11 @@ ModulesOfSchoolclassDisplay.prototype.settingsFormAllFieldToggle = function(valu
 		this.$settingsForm.find('input').prop('disabled','');
 	//	this.settingsForm.elements["from"].focus();
 		if (!this.hasToets())
+		{
 			this.settingsForm.elements["locked[]"][0].disabled = true;
+			this.settingsForm.elements["locked[]"][2].disabled = true;
+			this.setSchoolyearUI(false);
+		}
 	}
 	else {
 		this.settingsForm.elements["key"] = "";
@@ -498,7 +576,9 @@ ModulesOfSchoolclassDisplay.prototype.settingsFormAllFieldToggle = function(valu
 		this.settingsForm.elements["name"] = "";
 		this.settingsForm.elements["locked[]"][0].checked = "";
 		this.settingsForm.elements["locked[]"][1].checked = "checked";
+		this.settingsForm.elements["locked[]"][2].checked = "";
 		this.$settingsForm.find('input').prop('disabled','disabled');
+		this.setSchoolyearUI(false);
 	}
 }
 
@@ -517,6 +597,24 @@ ModulesOfSchoolclassDisplay.prototype.submitSettings = function(event) {
 	}
 }
 
+ModulesOfSchoolclassDisplay.prototype.openSettingsUI = function(event) {
+	event.preventDefault();
+	if ( this.nodes[this.selectedNodeId].classCourse) { //&&  this.nodes[this.selectedNodeId].classCourse.viewState == "invisible" ) {
+		this.openSettings();
+	} else {
+	}
+}
+
+ModulesOfSchoolclassDisplay.prototype.openDashboardUI = function(event) {
+	event.preventDefault();
+	if ( this.nodes[this.selectedNodeId].classCourse) { //&&  this.nodes[this.selectedNodeId].classCourse.viewState == "invisible" ) {
+		this.openDashboard();
+	} else {
+	}
+}
+
+
+
 ModulesOfSchoolclassDisplay.prototype.clickDateField = function(event) {
 	event.preventDefault();		
 	this.dateTimePicker.off('submit');
@@ -526,8 +624,10 @@ ModulesOfSchoolclassDisplay.prototype.clickDateField = function(event) {
 
 ModulesOfSchoolclassDisplay.prototype.clickLockedField = function(event) {
 	//event.preventDefault();	
-	if (this.settingsForm.elements["locked[]"][0].checked) this.accessKeyToggle(true);
-	else this.accessKeyToggle(false);	
+	if (this.settingsForm.elements["locked[]"][0].checked || this.settingsForm.elements["locked[]"][2].checked) 		
+		this.accessKeyToggle(true);
+	else this.accessKeyToggle(false);
+	this.setSchoolyearUI(this.settingsForm.elements["locked[]"][2].checked);
 }
 
 // ModulesOfSchoolclassDisplay.prototype.accessKeyToggle = function(value) {
@@ -554,11 +654,12 @@ ModulesOfSchoolclassDisplay.prototype.requiredFieldsSettingsForm = function() {
 	if (typeof this.selectForm.elements["module"] == "undefined") return false;
 
 	return this.selectForm.elements["module"].value != "" 
-			&& this.settingsForm.elements["locked[]"][0].checked ? this.settingsForm.elements["accessKey"].value  != "" : true;
+			&& (this.settingsForm.elements["locked[]"][0].checked || this.settingsForm.elements["locked[]"][2].checked) ? this.settingsForm.elements["accessKey"].value  != "" : true;
 }
 
 ModulesOfSchoolclassDisplay.prototype.accessKeyToggle = function(value) {
-	if (this.settingsForm.elements["locked[]"][0].checked) this.settingsForm.elements["accessKey"].disabled = false;
+	if (this.settingsForm.elements["locked[]"][0].checked || this.settingsForm.elements["locked[]"][2].checked) 
+		this.settingsForm.elements["accessKey"].disabled = false;
 	else this.settingsForm.elements["accessKey"].disabled = true;
 }
 
