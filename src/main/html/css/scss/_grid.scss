@@ -29,6 +29,20 @@ columns and rows
 	flex-grow: 1!important;
 	max-height: 100%;
 }
+.justify-end {
+	justify-content: flex-end;
+}
+.self-end {
+	align-self: flex-end;
+}
+.mb-row {
+	margin-bottom: $rowMarginBottom!important;
+}
+.mb-element {
+	margin-bottom: $elementMarginBottom!important;
+}
+
+
 
 /*
  * ROWS
@@ -42,12 +56,52 @@ columns and rows
 	flex-direction: row;
 	flex-wrap: wrap;
 	font-size: 0;
+	
 	//margin-bottom: $rowMarginBottom;
 	max-width: (12 * $colWidth / 2 + $gutter * 8) * 1px;
 	//margin-left: #{ $gutter / 2 }px;	
 	//margin-right: #{ $gutter / 2 }px;	
 	position: relative;
 	width: 100%;//calc(100% + #{$gutter * 2}px);
+
+	&.responsive-jumps, & [class*="col-"]:not(.row) .row.responsive-jumps {
+		@include size-1 {
+			//max-width: (1 * $colWidth / 2 + 1 * $gutter) * 1px;
+		}
+		@include size-2 {
+			max-width: (2 * $colWidth / 2 + 1 * $gutter) * 1px;
+		}
+		@include size-3 {
+			//max-width: (3 * $colWidth / 2 + 3 * $gutter) * 1px;
+		}
+		@include size-4 {
+			max-width: (4 * $colWidth / 2 + 2 * $gutter) * 1px;
+		}
+		@include size-5 {
+			//max-width: (5 * $colWidth / 2 + 5 * $gutter) * 1px;
+		}
+		@include size-6 {
+			max-width: (6 * $colWidth / 2 + 3 * $gutter) * 1px;
+		}
+		@include size-7 {
+			//max-width: (7 * $colWidth / 2 + 7 * $gutter) * 1px;
+		}
+		@include size-8 {
+			max-width: (8 * $colWidth / 2 + 4 * $gutter) * 1px;
+		}
+		@include size-9 {
+			//max-width: (9 * $colWidth / 2 + 9 * $gutter) * 1px;
+		}
+		@include size-10 {
+			max-width: (10 * $colWidth / 2 + 5 * $gutter) * 1px;
+		}
+		@include size-11 {
+			//max-width: (11 * $colWidth / 2 + 11 * $gutter) * 1px;
+		}
+		@include size-12 {
+			max-width: (12 * $colWidth / 2 + 6 * $gutter) * 1px;
+		}
+	}
 
 	@include size-md {
 		flex-direction: row;
@@ -76,12 +130,39 @@ columns and rows
 		&.input {
 			font-size: 12px;
 		}
+
+		
 	}
+	&.mobile-col > [class*="col-"] {
+		min-width: calc(100% - #{$gutter * 1}px)!important;
+		margin-bottom: 0;
+		
+		@include size-lg {
+			min-width: 0!important;
+		}
+	}
+	&.mobile-col {
+		flex-direction: column!important;
+		@include size-lg {
+			flex-direction: row!important;
+		}
+		&.grow {
+			justify-content: stretch;
+			@include size-lg {
+				justify-content: space-between;
+			}
+		}
+	}
+	
 	table {
 		font-size: 16px;
 	}
 	
 	&:last-of-type {
+		//margin-bottom: $rowMarginBottom;
+	}
+	
+	&.mb {
 		margin-bottom: $rowMarginBottom;
 	}
 
@@ -90,6 +171,9 @@ columns and rows
 		justify-content: space-between;
 		align-items: stretch;
  		align-content: stretch;
+		&.justify-start {
+			justify-content: flex-start;
+		}
 	}
 
 	& .row {
@@ -134,7 +218,9 @@ columns and rows
 	vertical-align: top;
 	width: calc(100% - #{$gutter}px);
 
-	
+	.mb {
+		margin-bottom: $elementMarginBottom;
+	}	
 
 	/*@include size-xl {
 		margin-bottom: 0;
@@ -144,8 +230,11 @@ columns and rows
 	    content: "";
 	    clear: both;
 		display: block;
+		
 		width: 100%;
 	}*/
+
+	
 	&.grow.right {
 		align-self: flex-end;
 	}
@@ -154,10 +243,11 @@ columns and rows
 		text-align: right;
 	}
 
-	&:not(.row) .row {
+	&:not(.row) .row {		
 		margin-left: $gutter/2 * -1px;
 		margin-right: $gutter/2 * -1px;
 		width: calc(100% + #{$gutter * 1}px);
+		max-width: calc(100% + #{$gutter * 1}px);
 	}
 
 }
@@ -283,18 +373,31 @@ table.dwo tr td, table.dwo tr th, input { // aparte style, want ze hebben een $g
 	&.col-11  { width: (11 * $colWidth / 2 + $gutter * 4.5 - $gutter) * 1px; }
 	&.col-12  { width: (12 * $colWidth / 2 + $gutter * 5 - $gutter) * 1px; }*/
 
-	&.col-1  { width: (1 * $colWidth / 2 - (1/12 * 4) - 9 ) * 1px; }
-	&.col-2  { width: (2 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
-	&.col-3  { width: (3 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
-	&.col-4  { width: (4 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
-	&.col-5  { width: (5 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
-	&.col-6  { width: (6 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
-	&.col-7  { width: (7 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
-	&.col-8  { width: (8 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
-	&.col-9  { width: (9 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
-	&.col-10  { width: (10 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
-	&.col-11  { width: (11 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
-	&.col-12  { width: (12 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
+	// &.col-1  { width: (1 * $colWidth / 2 - (1/12 * 4) - 9 ) * 1px; }
+	// &.col-2  { width: (2 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
+	// &.col-3  { width: (3 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
+	// &.col-4  { width: (4 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
+	// &.col-5  { width: (5 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
+	// &.col-6  { width: (6 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
+	// &.col-7  { width: (7 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
+	// &.col-8  { width: (8 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
+	// &.col-9  { width: (9 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
+	// &.col-10  { width: (10 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
+	// &.col-11  { width: (11 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
+	// &.col-12  { width: (12 * $colWidth / 2 - (1/12 * 4) - 9) * 1px; }
+
+	&.col-1  { width: (1 * $colWidth / 2 - (1/12 * 4) - $gutter / 2) * 1px; }
+	&.col-2  { width: (2 * $colWidth / 2 - (1/12 * 4) + 0.5 * $gutter - $gutter/2) * 1px; }
+	&.col-3  { width: (3 * $colWidth / 2 - (1/12 * 4) + 1 * $gutter - $gutter/2) * 1px; }
+	&.col-4  { width: (4 * $colWidth / 2 - (1/12 * 4) + 1.5 * $gutter - $gutter/2) * 1px; } /////
+	&.col-5  { width: (5 * $colWidth / 2 - (1/12 * 4) + 2 * $gutter - $gutter/2) * 1px; }
+	&.col-6  { width: (6 * $colWidth / 2 - (1/12 * 4) + 2.5 * $gutter - $gutter/2) * 1px; }
+	&.col-7  { width: (7 * $colWidth / 2 - (1/12 * 4) + 3 * $gutter - $gutter/2) * 1px; }
+	&.col-8  { width: (8 * $colWidth / 2 - (1/12 * 4) + 3.5 * $gutter - $gutter/2) * 1px; }
+	&.col-9  { width: (9 * $colWidth / 2 - (1/12 * 4) + 4 * $gutter - $gutter/2) * 1px; }
+	&.col-10  { width: (10 * $colWidth / 2 - (1/12 * 4) + 4.5 * $gutter - $gutter/2) * 1px; }
+	&.col-11  { width: (11 * $colWidth / 2 - (1/12 * 4) + 5 * $gutter - $gutter/2) * 1px; }
+	&.col-12  { width: (12 * $colWidth / 2 - (1/12 * 4) + 5.5 * $gutter - $gutter/2) * 1px; }
 /*
 	&.col-1  { width: (1 * $colWidth / 2 - $gutter * 0.5 - $gutter) * 1px; }
 	&.col-2  { width: (2 * $colWidth / 2 - $gutter * 0.5) * 1px; }

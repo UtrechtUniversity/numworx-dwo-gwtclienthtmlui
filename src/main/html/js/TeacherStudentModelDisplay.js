@@ -42,6 +42,7 @@
  
  	// Init
 	this.$panel.hide();
+	$('#teacherStudentModelMethodBoxF').prop('checked', true);
  }
  
  TeacherStudentModelDisplay.prototype.show = function() {

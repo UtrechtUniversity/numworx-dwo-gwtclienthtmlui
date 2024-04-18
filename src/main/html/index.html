@@ -612,70 +612,79 @@ a[href='#KNOWLEDGE'] .background-icon {
 			
 			<!-- Change personal details -->
 			<section>				
-				<div class="row">
-					<form name="updateUser" autocomplete="off" >
-						<fieldset>
-			<!--SAMLSTART--><div class="row">
-								<label for="updateUserPassword" class="col-2 input">
-									<span data-translate="NUM_LBL_CUR_PASSWORD">huidig ww</span>
-									<input id="updateUserPassword" name="currentPassword" type="password" autocomplete="new-password" />
-								</label>
-								<label for="updateUserNewPassword" class="col-2 input">
-									<span data-translate="NUM_LBL_NEW_PASSWORD">Nieuw ww</span>
-									<input id="updateUserNewPassword" name="newPassword" type="password" value="" />
-								</label>
-								<label for="updateUserNewPasswordRepeat" class="col-2 input textoverflow">
-									<span data-translate="NUM_LBL_RPT_NEW_PASSWORD">herhaal ww</span>
-									<input id="updateUserNewPasswordRepeat" name="newPasswordAgain" type="password" value="" />
-								</label>
-	<!--SAMLEND-->							
-								<label for="updateUserGivenName" class="col-2 input">
-																<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
-									<input id="updateUserGivenName" name="givenName" type="text" value="" />
-								</label>
-								<label for="updateUserInsertion" class="col-2 input">
-									<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
-									<input id="updateUserInsertion" name="insertion" type="text" autocomplete="off" value="" />
-								</label>
-								<label for="updateUserFamilyName" class="col-2 input">
-									<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
-									<input id="updateUserFamilyName" name="familyName" type="text" value="" />
-								</label>
-								<label for="updateUserEmail" class="col-2 input">
-									<span data-translate="NUM_TBL_EMAIL">Email</span>
-									<input id="updateUserEmail" name="email" type="text" value="" />
-								</label>							
-	<!--SAMLSTART-->							
-								<div class="col-2 no-single grow">
-									<input id="accountRemove" type="submit" class="danger down right" data-translate="NUM_BTN_Remove" value="Verwijder" />
+				<form name="updateUser" autocomplete="off" class="row">
+				<div class="row mobile-col mb">					
+						<!-- <fieldset> -->
+			<!--SAMLSTART-->
+								<div class="col-10">
+									<div class="row responsive-jumps">
+										<label for="updateUserPassword" class="col-2 input">
+											<span data-translate="NUM_LBL_CUR_PASSWORD">huidig ww</span>
+											<input id="updateUserPassword" name="currentPassword" type="password" autocomplete="new-password" />
+										</label>
+										<label for="updateUserNewPassword" class="col-2 input">
+											<span data-translate="NUM_LBL_NEW_PASSWORD">Nieuw ww</span>
+											<input id="updateUserNewPassword" name="newPassword" type="password" value="" />
+										</label>
+										<label for="updateUserNewPasswordRepeat" class="col-2 input textoverflow">
+											<span data-translate="NUM_LBL_RPT_NEW_PASSWORD">herhaal ww</span>
+											<input id="updateUserNewPasswordRepeat" name="newPasswordAgain" type="password" value="" />
+										</label>
+			<!--SAMLEND-->							
+										<label for="updateUserGivenName" class="col-2 input">
+																		<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
+											<input id="updateUserGivenName" name="givenName" type="text" value="" />
+										</label>
+										<label for="updateUserInsertion" class="col-2 input">
+											<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
+											<input id="updateUserInsertion" name="insertion" type="text" autocomplete="off" value="" />
+										</label>
+										<label for="updateUserFamilyName" class="col-2 input">
+											<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+											<input id="updateUserFamilyName" name="familyName" type="text" value="" />
+										</label>
+										<label for="updateUserEmail" class="col-2 input">
+											<span data-translate="NUM_TBL_EMAIL">Email</span>
+											<input id="updateUserEmail" name="email" type="text" value="" />
+										</label>	
+									</div>						
 								</div>
-								<div class="col-2">
-									<input type="submit" class="primary down" data-translate="NUM_BTN_Save" value="Sla op" />
+	<!--SAMLSTART-->			<div class="col-2">
+									<div class="row responsive-jumps">
+										<div class="col-2 no-single grow">
+											<input id="accountRemove" type="submit" class="danger down" data-translate="NUM_BTN_Remove" value="Verwijder" />
+										</div>
+										<div class="col-2">
+											<input type="submit" class="primary down" data-translate="NUM_BTN_Save" value="Sla op" />
+										</div>
+									</div>
 								</div>
-							</div>
+							
 							<!--SAMLEND-->
-						</fieldset>						
-					</form>					
+						<!-- </fieldset>						 -->
+					
 				</div>
+			</form>					
 			</section>
 			
 			<!-- Current login abilities -->
 			<section class="no-single grow">
-				<div class="row">
+				<div class="row responsive-jumps">
 					<div class="col-12">
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_ACCOUNT_SCHOOLLOGINS">Mijn loginmogelijkheden beheren</span></h2>
 					</div>
 				</div>				
-				<div class="row grow">
-					<form name="updateSchoolLoginsView" class="row grow">
+				<div class="row grow mb">
+					<form name="updateSchoolLoginsView" class="row grow mobile-col">
 						<div class="col-10">
 							<div class="tablewrap overflow grow">
 								<table class="dwo sortable headered">
 									<thead>
 										<tr>
-											<th class="col-4">
+											<th class="col-3">
 												<span data-translate="NUM_TBL_SCHOOLLOGINOPTION">School</span>
 											</th>
+											<th class="fill"></th>
 											<th class="col-2">
 												<span data-translate="NUM_TBL_ROLE">Rol</span>											
 											</th>
@@ -684,7 +693,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 										</tr>
 										
 										<tr class="sorting">
-											<th class="col-4">
+											<th class="col-3">
 												<span class="sortButton asc default" data-order="asc" data-type="string">
 													<svg viewBox="0 0 74 74" class="icon">
 														<use xlink:href="#arrowUp"></use>
@@ -696,6 +705,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 													</svg>
 												</span>
 											</th>
+											<th class="fill"></th>
 											<th class="col-2">
 												<span class="sortButton asc" data-order="asc" data-type="string">
 													<svg viewBox="0 0 74 74" class="icon">
@@ -716,7 +726,8 @@ a[href='#KNOWLEDGE'] .background-icon {
 										
 										<!-- The row is detached and used as a template by the JS -->								
 										<tr>
-											<td class="col-4"><span id="updateSchoolLoginsViewSchool" >Schoolnaam</span></td>
+											<td class="col-3"><span id="updateSchoolLoginsViewSchool" >Schoolnaam</span></td>
+											<td class="fill"></td>
 											<td class="col-2"><span id="updateSchoolLoginsViewRole">ROL</span></td>
 											<td class="col-2 centered">
 												<div class="checkbox">
@@ -734,9 +745,9 @@ a[href='#KNOWLEDGE'] .background-icon {
 								</table>
 							</div>
 						</div>
-						<div class="col-2">
+						<div class="col-2 self-end">
 						    &nbsp; <!-- for IE -->
-							<input type="submit" class="primary right bottom" data-translate="NUM_BTN_Apply" value="Sla op" />
+							<input type="submit" class="primary self-end" data-translate="NUM_BTN_Apply" value="Sla op" />
 						</div>
 					</form>
 				</div>
@@ -744,12 +755,12 @@ a[href='#KNOWLEDGE'] .background-icon {
 			
 			<!-- Add login ability -->
 			<section class="no-single">
-				<div class="row">
+				<div class="row responsive-jumps">
 					<div class="col-12">
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_ACCOUNT_SCHOOLLOGIN_ADD">Nieuwe loginmogelijkheid toevoegen<span></h2>						
 					</div>
 				</div>
-				<div class="row">
+				<div class="row responsive-jumps">
 					<form name="addSchoolLogin" autocomplete="off">
 						<fieldset>
 							<div class="col-2 options">
@@ -940,9 +951,9 @@ a[href='#KNOWLEDGE'] .background-icon {
 			
 			<!-- Edit class -->
 			<section class="grow">				
-				<div class="row grow">
-					<form name="chooseSchoolclass" class="row grow">							
-						<div class="col-8">
+				<form name="chooseSchoolclass" class="row grow">							
+					<div class="row mobile-col grow responsive-jumps mb">					
+						<div class="col-8 grow mb-element">
 							<!--<div class="column grow">-->
 								<h3><span data-translate="NUM_LBL_CLASSES_SELECTTOEDIT">Kies een klas om te bewerken</span></h3>
 								<div class="tablewrap overflow grow">
@@ -975,24 +986,25 @@ a[href='#KNOWLEDGE'] .background-icon {
 								<input type="radio" name="schoolclass" class="hidden" value="schoolclassId">											
 							<!--</div>-->
 						</div>
-						<div class="col-4">
-							&nbsp; <!-- for IE -->
-							<input type="submit" class="primary bottom right" data-translate="NUM_BTN_Edit" value="Bewerken" />
+						<div class="col-4 self-end">
+							<input type="submit" class="primary self-end" data-translate="NUM_BTN_Edit" value="Bewerken" />
 						</div>
-					</form>
-				</div>								
+					
+					</div>								
+				</form>
 			</section>
 			
 			<!-- Add class -->
 			<section>
-				<div class="row">
+				<div class="row responsive-jumps">
 					<div class="col-12">
-						<h2 class="sectionhead"><span data-translate="NUM_SEC_CLASSES_ADD">Klas toevoegen</span></h2>						
+						<h2 class="sectionhead mb"><span data-translate="NUM_SEC_CLASSES_ADD">Klas toevoegen</span></h2>						
 					</div>
 				</div>
-				<div class="row">
-					<form name="addSchoolclass">
-						<fieldset>
+				<form name="addSchoolclass">
+					<fieldset>
+						<div class="row responsive-jumps">
+					
 							<label for="classname" class="col-2 input">
                                                             <span data-translate="NUM_TBL_CLASSES_CLASSNAME"> Naam klas</span>
 								<input id="classname" name="classname" type="text" value="" />
@@ -1023,12 +1035,13 @@ a[href='#KNOWLEDGE'] .background-icon {
 								<span data-translate="NUM_TBL_CLASSES_ACCESSKEY">Klassleutel</span>
 								<input id="classkey" name="classkey" type="text" value="" />
 							</label>
-							<div class="col-4">
-								<input type="submit" class="primary right bottom" data-translate="NUM_BTN_Add" value="Voeg klas toe" />
+							<div class="col-4 grow">
+								<input type="submit" class="primary down self-end" data-translate="NUM_BTN_Add" value="Voeg klas toe" />
 							</div>							
-						</fieldset>						
-					</form>
-				</div>
+						
+						</div>
+					</fieldset>						
+				</form>
 			</section>	
 			
 		</section> 
@@ -1072,45 +1085,54 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<!-- <input name="id" type="hidden" value="" /> -->
 					
 					<fieldset>
-						<div class="row">						
-							<label for="classname" class="col-2 input">
-								<span data-translate="NUM_TBL_CLASSES_CLASSNAME"> Naam klas</span>
-								<input id="classnameEdit" name="classname" type="text" value="" >
-							</label>
-							
-							<div class="col-2 options">
-								<label><span data-translate="NUM_LBL_CLASSES_ACCESSKEY">Klassleutel?</span></label>
-								<div class="option">
-							    	<input type="radio" name="useClasskey" id="useClasskeyYesEdit" value="1">
-									<label for="useClasskeyYesEdit"><span data-translate="NUM_LBL_YES">Ja</span></label>
+						<div class="row mobile-col mb">	
+							<div class="col-8">
+								<div class="row responsive-jumps">						
+									<label for="classname" class="col-2 input">
+										<span data-translate="NUM_TBL_CLASSES_CLASSNAME"> Naam klas</span>
+										<input id="classnameEdit" name="classname" type="text" value="" >
+									</label>
+									
+									<div class="col-2 options">
+										<label><span data-translate="NUM_LBL_CLASSES_ACCESSKEY">Klassleutel?</span></label>
+										<div class="option">
+											<input type="radio" name="useClasskey" id="useClasskeyYesEdit" value="1">
+											<label for="useClasskeyYesEdit"><span data-translate="NUM_LBL_YES">Ja</span></label>
+										</div>
+										<div class="option">
+											<input type="radio" name="useClasskey" id="useClasskeyNoEdit" value="0">
+											<label for="useClasskeyNoEdit"><span data-translate="NUM_LBL_NO">Nee</span></label>
+										</div> 
+									</div>
+									<label for="classkey" class="col-2 input">
+															<span data-translate="NUM_TBL_CLASSES_ACCESSKEY">Klassleutel</span>
+																		<input id="classkeyEdit" name="classkey" type="text" data-translate="NUM_LBL_CLASSES_CLASSNAME" value="" />
+									</label>
+								
+									<div class="col-2 options">
+										<label><span data-translate="NUM_LBL_CLASSES_TREESTRUCT">Boomstructuur?</span></label>
+										<div class="option">
+											<input type="radio" name="useClasstree" id="useClasstreeYesEdit" value="1">
+											<label for="useClasstreeYesEdit"><span data-translate="NUM_LBL_YES">Ja</span></label>
+										</div> 
+										<div class="option">
+											<input type="radio" name="useClasstree" id="useClasstreeNoEdit" value="0">
+											<label for="useClasstreeNoEdit"><span data-translate="NUM_LBL_NO">Nee</span></label>
+										</div>
+									</div>
+									
+									
 								</div>
-								<div class="option">
-									<input type="radio" name="useClasskey" id="useClasskeyNoEdit" value="0">
-									<label for="useClasskeyNoEdit"><span data-translate="NUM_LBL_NO">Nee</span></label>
-								</div> 
 							</div>
-							<label for="classkey" class="col-2 input">
-                                    				<span data-translate="NUM_TBL_CLASSES_ACCESSKEY">Klassleutel</span>
-                                                                <input id="classkeyEdit" name="classkey" type="text" data-translate="NUM_LBL_CLASSES_CLASSNAME" value="" />
-							</label>
-						
-							<div class="col-2 options">
-								<label><span data-translate="NUM_LBL_CLASSES_TREESTRUCT">Boomstructuur?</span></label>
-								<div class="option">
-									<input type="radio" name="useClasstree" id="useClasstreeYesEdit" value="1">
-									<label for="useClasstreeYesEdit"><span data-translate="NUM_LBL_YES">Ja</span></label>
-								</div> 
-								<div class="option">
-									<input type="radio" name="useClasstree" id="useClasstreeNoEdit" value="0">
-									<label for="useClasstreeNoEdit"><span data-translate="NUM_LBL_NO">Nee</span></label>
+							<div class="col-4">
+								<div class="row responsive-jumps">
+									<div class="col-2 grow">
+										<input type="button" name="delete" class="danger right down" data-translate="NUM_BTN_Remove"  value="Verwijder" />								
+									</div>
+									<div class="col-2">
+										<input type="submit" name="save" class="primary right down" data-translate="NUM_BTN_Save" value="Sla op" />
+									</div>
 								</div>
-							</div>
-							
-							<div class="col-2">
-								<input type="button" name="delete" class="danger right down" data-translate="NUM_BTN_Remove"  value="Verwijder" />								
-							</div>
-							<div class="col-2">
-								<input type="submit" name="save" class="primary right down" data-translate="NUM_BTN_Save" value="Sla op" />
 							</div>
 						</div>
 					</fieldset>	
@@ -1120,16 +1142,16 @@ a[href='#KNOWLEDGE'] .background-icon {
 			<!-- add persons -->
 			<section class="grow"">
 				<div class="row">
-					<div class="col-12">
+					<div class="col-12 mb-row">
                                             <h3><span data-translate="NUM_LBL_ClassAssignments">Gekoppelde gegevens van deze klas</span></h3>
 					</div>					
 				</div>
 				
-				<div class="row grow">
+				<div class="row grow responsive-jumps justify-start">
 					<div class="col-4">
 						<form name="changeStudents" class="column grow">
 							<fieldset class="column grow">
-								<div class="tablewrap overflow grow">
+								<div class="tablewrap overflow grow mb">
 									<table class="dwo sortable disabled headered">
 										<thead>
 											<tr>
@@ -1171,7 +1193,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<div class="col-4">
 						<form name="changeTeachers" class="column grow">
 							<fieldset class="column grow">
-								<div class="tablewrap overflow grow">
+								<div class="tablewrap overflow grow mb">
 									<table class="dwo sortable disabled headered">
 										<thead>
 											<tr>
@@ -1212,7 +1234,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<div class="col-4 teacher-only">
 						<form name="changeModules" class="column grow">
 							<fieldset class="column grow">
-								<div class="tablewrap overflow grow">
+								<div class="tablewrap overflow grow mb">
 									<table class="dwo sortable disabled headered">
 										<thead>
 											<tr>
@@ -1321,7 +1343,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<div class="col-12">
 						<h3><span data-translate="NUM_TBL_STUDENTS">Leerlingen</span></h2>
 						<form name="addStudentAdd" class="column grow">
-						<div class="tablewrap overflow grow">
+						<div class="tablewrap overflow grow mb-element">
 							<table class="dwo hoverable selectable sortable headered">
 								<thead>
 									<tr>
@@ -1395,7 +1417,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 						</div>
 						
 							<input type="radio" name="id" class="hidden" value="">	<!-- empty option -->
-							<input type="submit" class="primary right"  data-translate="NUM_BTN_Connect" value="plaats leerling" />
+							<input type="submit" class="primary self-end"  data-translate="NUM_BTN_Connect" value="plaats leerling" />
 						</form>
 					</div>
 				</div>
@@ -1659,7 +1681,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					<div class="col-12">
 						<h3><span data-translate="NUM_TBL_TEACHERS">Docenten</span></h2>
 						<form name="addTeacherAdd" class="column grow">
-							<div class="tablewrap overflow grow">
+							<div class="tablewrap overflow grow mb-element">
 								<table class="dwo hoverable selectable sortable headered">
 									<thead>
 										<tr>
@@ -1736,7 +1758,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 							</div>
 						
 							<input type="radio" name="id" class="hidden" value="">	<!-- empty option -->
-							<input type="submit" class="primary right" data-translate="NUM_BTN_Connect" value="koppel docent" />
+							<input type="submit" class="primary self-end" data-translate="NUM_BTN_Connect" value="koppel docent" />
 						</form>
 					</div>
 				</div>
@@ -1902,12 +1924,12 @@ a[href='#KNOWLEDGE'] .background-icon {
 
 <label id="schoolyearui" class="col-2 input" >
 	<span>kiosk mode</span>
-    <div class="row" style="margin-bottom: 0px;">
-		<div class="col-1" style="margin-bottom: 0px;">
-			<input type="submit" class="down secondary" name="extra" value="xtra" style="margin-top: 12px;">
+    <div class="row">
+		<div class="col-1">
+			<input type="submit" class="secondary" name="extra" value="xtra">
     	</div>
-    	<div class="col-1" style="margin-bottom: 0px;">   
-        	<input type="submit" class="down secondary" value="dashb." name="dashboard" style="margin-top: 12px;">
+    	<div class="col-1">   
+        	<input type="submit" class="secondary" value="dashb." name="dashboard">
     	</div>    
     </div>
 </label>							</div>
@@ -2106,7 +2128,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 						</div>
 						<div class="row">
 							<div class="col-12">
-								<input type="submit" class="primary right" data-translate="NUM_LBL_RESULTS_VIEW" value="Toon resultaten" />
+								<input type="submit" class="primary self-end" data-translate="NUM_LBL_RESULTS_VIEW" value="Toon resultaten" />
 							</div>							
 						</div>
 						
@@ -2535,9 +2557,11 @@ a[href='#KNOWLEDGE'] .background-icon {
 			</header>
 			
 			<section class="grow">
-				<div class="row">
-					<form name="personsSearch">
-						<fieldset>
+				<form name="personsSearch">
+					<fieldset>
+				<div class="row responsive-jumps mobile-col mb">
+					<div class="col-8">
+						<div class="row">
 							<label for="personsSearchFamilyName" class="col-2 input">
 								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
 								<input id="personsSearchFamilyName" name="familyName" type="text" value="" />
@@ -2555,8 +2579,12 @@ a[href='#KNOWLEDGE'] .background-icon {
 								<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
 								<input id="personsSearchUserName" name="userName" type="text" value="" />
 							</label>
-							
-							
+						</div>							
+
+					</div>
+					<div class="col-4">							
+						<div class="row">
+							<div class="grow"></div>
 							<div class="col-2 options">
                                                             <label><span data-translate="NUM_LBL_Q_WHICH2ROLES">rol</span></label>
 								<div class="option">
@@ -2572,35 +2600,40 @@ a[href='#KNOWLEDGE'] .background-icon {
 							<div class="col-2">
 								<input type="submit" class="primary down right" data-translate="NUM_BTN_Filter" value="Filter" />
 							</div>
-						</fieldset>
-					</form>
+						</div>
+					</div>
 				</div>
+			</fieldset>
+		</form>
 				
-				<div class="row grow">
+				<div class="row grow mb">
 					<div class="col-12">
                         <h3><span data-translate="NUM_LBL_PERSONS_FOUND">Gevonden personen</span></h2>
 						<form name="personsEdit" class="column grow">
-							<div class="tablewrap overflow grow">
+							<div class="tablewrap overflow grow mb">
 								<table class="dwo hoverable selectable sortable headered">
 									<thead>
 										<tr>
-											<th class="col-3">
+											<th class="col-4">
 												<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
 											</th>
+											
 											<th class="col-3">
 												<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 											</th>
-											<th class="col-3">
-												<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
-											</th>									
-											<th class="col-3">																										
+											
+											<th class="col-1">
+												<!-- <span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span> -->
+											</th>								
+											<th class="col-2">																										
 												<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
 											</th>
+											<th class="fill"></th>
 											<!-- <th class="col-3"><span data-translate="NUM_TBL_EDITOPTIONS">Bewerk opties</span></th> -->
 										</tr>
 										
 										<tr class="sorting">
-											<th class="col-3">
+											<th class="col-4">
 												
 												<span class="sortButton asc default" data-order="asc" data-type="string">
 													<svg viewBox="0 0 74 74" class="icon">
@@ -2614,6 +2647,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 												</span>
 												
 											</th>
+											
 											<th class="col-3">
 												
 												<span class="sortButton asc" data-order="asc" data-type="string">
@@ -2628,11 +2662,12 @@ a[href='#KNOWLEDGE'] .background-icon {
 												</span>
 												
 											</th>
-											<th class="col-3">
+											
+											<th class="col-1">
 												
 											</th>
 											
-											<th class="col-3">										
+											<th class="col-2">										
 												<span class="sortButton asc" data-order="asc" data-type="string">
 													<svg viewBox="0 0 74 74" class="icon">
 														<use xlink:href="#arrowUp"></use>
@@ -2644,19 +2679,24 @@ a[href='#KNOWLEDGE'] .background-icon {
 													</svg>
 												</span>									
 											</th>
+											<th class="fill"></th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr tabindex="1">
 											
-											<td class="col-3"><span id="personsTableFamilyName">Bakker</span>
+											<td class="col-4"><span id="personsTableFamilyName">Bakker</span>
 												<input type="radio" id="personsTableId" name="id" class="hidden" value="bakker34">										
 											</td>
+											
 											<td class="col-3"><span id="personsTableGivenName">Michel</span></td>
-											<td class="col-3"><span id="personsTableInsertion">van</span></td>		
-											<td class="col-3"><span id="personsTableUserName">Bakker34</span>
+											
+											<td class="col-1"><span id="personsTableInsertion">van</span></td>		
+											
+											<td class="col-2"><span id="personsTableUserName">Bakker34</span>
 												
 											</td>							
+											<td class="fill"></td>
 											
 											<!-- <td class="col-3">
 												<svg id="personsTableEditDetails" viewBox="0 0 64 64" class="icon editOptions">
@@ -2672,19 +2712,19 @@ a[href='#KNOWLEDGE'] .background-icon {
 							</div>
 						
 							<input type="radio" name="id" class="hidden" value=""> <!-- empty option -->										
-							<input type="submit" class="primary right" data-translate="NUM_BTN_PERSONS_EDIT" value="Bewerk persoon" />
+							<input type="submit" class="primary self-end" data-translate="NUM_BTN_PERSONS_EDIT" value="Bewerk persoon" />
 						</form>
 					</div>
 				</div>
 				
 				
-				<div class="row">					
+				<div class="row mobile-col responsive-jumps">					
 <!--SAMLSTART-->
 					<div class="col-6">
-						<h2 class="sectionhead"><span data-translate="NUM_SEC_PERSONS_ADD">Voeg een nieuwe leerling</span></h2>
+						<h2 class="sectionhead mb"><span data-translate="NUM_SEC_PERSONS_ADD">Voeg een nieuwe leerling</span></h2>
 						<form name="personsAdd">
 							<fieldset>
-								<label class="buttonLabel" for="button_1">
+								<label class="buttonLabel mb" for="button_1">
                                                                     <span class='teacher-only' data-translate="NUM_LBL_PERSONS_ADD">Een enkele nieuwe leerling opvoeren</span>
                                                                     <span class='schooladmin-only' data-translate="NUM_LBL_PERSONS_ADD_S">Voeg een nieuwe leerling of docent toe</span>
 									<input type="submit" class="secondary right" data-translate="NUM_BTN_Add" value="Toevoegen" />
@@ -2696,7 +2736,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					
 					<div class="col-6">
 						<form name="personsImport" method="post" enctype="multipart/form-data"> <!-- form tag on the outside, for hiding -->
-						<h2 class="sectionhead"><span data-translate="NUM_LBL_PERSONS_MORE" >Meerdere personen tegelijk toevoegen</span></h2>
+						<h2 class="sectionhead mb"><span data-translate="NUM_LBL_PERSONS_MORE" >Meerdere personen tegelijk toevoegen</span></h2>
 						
 							<fieldset>
 									<label class="buttonLabel"><span data-translate="NUM_LBL_PERSONS_CSV" >Importeer leerlingen of docenten vanuit een CSV bestand</span></label>
@@ -2746,60 +2786,63 @@ a[href='#KNOWLEDGE'] .background-icon {
 			</header>
 			
 			<!-- Change personal details -->
-			<section>				
-				<div class="row">
-					<form name="editPersonDetails">
-						<fieldset>						
-							
-							<label for="editPersonGivenName" class="col-2 input">
-								<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
-								<input id="editPersonGivenName" name="givenName" type="text" value="" />
-							</label>
-							<label for="editPersonInsertion" class="col-2 input">
-								<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
-								<input id="editPersonInsertion" name="insertion" type="text" value="" />
-							</label>
-							<label for="editPersonFamilyName" class="col-2 input">
-								<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
-								<input id="editPersonFamilyName" name="familyName" type="text" value="" />
-							</label>
-							<label for="editPersonEmail" class="col-2 input">
-								<span data-translate="NUM_TBL_EMAIL">Email adres</span>
-								<input id="editPersonEmail" name="email" type="text" value="" />
-							</label>
-							<label for="editPersonUserName" class="col-2 input">
-								<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
-								<input id="editPersonUserName" name="userName" type="text" value="" />
-							</label>
-							<label for="editPersonPassword" class="col-2 input">
-								<span data-translate="NUM_TBL_PASSWORD">Wachtwoord</span>
-								<input id="editPersonPassword" name="newPassword" type="password" value="" />
-							</label>
-														
-							<label for="editPersonRole" class="col-2 input">
-								<span data-translate="NUM_TBL_ROLE">rol</span>
-								<input 
-									style='text-transform: lowercase'
-									id="editPersonRole" name="role" type="text" value="" />
-							</label>
-							<!--<div class="col-6">
-								&nbsp;
-							</div>-->
+			<section>	
+				<form name="editPersonDetails">
+					<fieldset>	
+						<div class="row mobile-col mb">
+							<div class="col-10">
+								<div class="row responsive-jumps">
+									<label for="editPersonGivenName" class="col-2 input">
+										<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
+										<input id="editPersonGivenName" name="givenName" type="text" value="" />
+									</label>
+									<label for="editPersonInsertion" class="col-2 input">
+										<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
+										<input id="editPersonInsertion" name="insertion" type="text" value="" />
+									</label>
+									<label for="editPersonFamilyName" class="col-2 input">
+										<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+										<input id="editPersonFamilyName" name="familyName" type="text" value="" />
+									</label>
+									<label for="editPersonEmail" class="col-2 input">
+										<span data-translate="NUM_TBL_EMAIL">Email adres</span>
+										<input id="editPersonEmail" name="email" type="text" value="" />
+									</label>
+									<label for="editPersonUserName" class="col-2 input">
+										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+										<input id="editPersonUserName" name="userName" type="text" value="" />
+									</label>
+									<label for="editPersonPassword" class="col-2 input">
+										<span data-translate="NUM_TBL_PASSWORD">Wachtwoord</span>
+										<input id="editPersonPassword" name="newPassword" type="password" value="" />
+									</label>
+																
+									<label for="editPersonRole" class="col-2 input">
+										<span data-translate="NUM_TBL_ROLE">rol</span>
+										<input 
+											style='text-transform: lowercase'
+											id="editPersonRole" name="role" type="text" value="" />
+									</label>
+								</div>
+							</div>
 							<div class="col-2">
-								<input type="button" name="remove" class="danger down" data-translate="NUM_BTN_Remove" value="Verwijder" />
-							</div>	
-							<div class="col-8">
-								<input type="submit" name="submit" class="primary right down" data-translate="NUM_BTN_Save" value="Sla op" />
-							</div>						
-							
-						</fieldset>						
-					</form>					
-				</div>
+								<div class="row responsive-jumps">
+									<div class="col-2 grow">
+										<input type="button" name="remove" class="danger down" data-translate="NUM_BTN_Remove" value="Verwijder" />
+									</div>	
+									<div class="col-2 grow">
+										<input type="submit" name="submit" class="primary self-end down" data-translate="NUM_BTN_Save" value="Sla op" />
+									</div>	
+								</div>
+							</div>
+						</div>
+					</fieldset>						
+				</form>		
 			</section>
 			
 			<!-- schoolclasses -->
 			<section class="grow">
-				<div class="row">
+				<div class="row responsive-jumps">
 					<div class="col-12">
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_PERSONS_EDITCLASSES">Bewerk koppeling aan klas(sen)</span></h2>
 					</div>
@@ -2890,8 +2933,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 			<!-- Change personal details -->
 			<form name="addPerson" autocomplete="off" class="column grow">
 				<section>				
-					<div class="row">
-					
+					<div class="row responsive-jumps mb">					
 							<fieldset>
 														
 								<label for="addPersonGivenName" class="col-2 input">
@@ -2953,16 +2995,17 @@ a[href='#KNOWLEDGE'] .background-icon {
 			
 				<!-- schoolclasses -->
 				<section class="grow">
-					<div class="row">
+					<!-- <div class="row">
 						<div class="col-12">
 							<h3><span data-translate="NUM_LBL_ADDPERSON_CLASS">Kies klas(sen) voor deze persoon</h3>
 						</div>
-					</div>				
+					</div>				 -->
 					<div class="row grow">
 						<!-- <form name="addPersonSchoolclasses"> -->
 							<div class="col-6">
+								<h3><span data-translate="NUM_LBL_ADDPERSON_CLASS">Kies klas(sen) voor deze persoon</h3>
 								<div class="tablewrap overflow grow">
-									<table class="dwo sortable">
+									<table class="dwo sortable headered">
 										<thead>
 											<tr>
 												<th class="col-4">&nbsp;</th>
@@ -3040,45 +3083,47 @@ a[href='#KNOWLEDGE'] .background-icon {
 					</section>
 				</div>
 			</header>
-		    <form name='importPersonsForm' autocomplete="off">
-			<section>
-				<div class='row'>
-					<div class='col-12'>
+		    <form name='importPersonsForm' autocomplete="off" class="row grow">
+			<section class="grow">
+				<div class='row grow'>
+					<div class='col-12 grow'>
 						<h3><span data-translate="NUM_LBL_IMPORT_PERSONS">De volgende personen zijn in uw bestand gevonden</span></h3>
-						<table class="dwo headered" id='importPersonsTable'>
-							<thead>
-								<tr>
-									<th class="col-2">
-									<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
-									</th>
-									<th class="col-2">
-										<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
-									</th>									
-									<th class="col-2">
-										<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
-									</th>
-									<th class="col-2">
-										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
-									</th>
-									<th class="col-2">
-										<span data-translate="NUM_TBL_PASSWORD">WACHTWOORD</span>
-									</th>									
-									<th class="col-2">
-										<span data-translate="NUM_TBL_EMAIL">EMAILADRES</span>
-									</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td class="col-2"><input type='text' value='Arthur' id='importPersonsGivenName' name='givenName' ></td>
-									<td class="col-2"><input type='text' value='van der' id='importPersonsInsertion' name='insertion'></td>
-									<td class="col-2"><input type='text' value='Begijnen' id='importPersonsSurname' name='familyName'></td>
-									<td class="col-2"><input type='text' value='Bakker23' id='importPersonsUsername' name='userName' ></td>
-									<td class="col-2"><input type='text' value='geheim' id='importPersonsPassword' name='password'></td>
-									<td class="col-2"><input type='text' value='A.vdBegijnen@outlook.com' id='importPersonsMail' name='email'></td>
-								</tr>					
-							</tbody>
-						</table>
+						<div class="tablewrap overflow grow">
+							<table class="dwo headered" id='importPersonsTable'>
+								<thead>
+									<tr>
+										<th class="col-2">
+										<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
+										</th>
+										<th class="col-2">
+											<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
+										</th>									
+										<th class="col-2">
+											<span data-translate="NUM_TBL_FAMILYNAME">Achternaam</span>
+										</th>
+										<th class="col-2">
+											<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
+										</th>
+										<th class="col-2">
+											<span data-translate="NUM_TBL_PASSWORD">WACHTWOORD</span>
+										</th>									
+										<th class="col-2">
+											<span data-translate="NUM_TBL_EMAIL">EMAILADRES</span>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="col-2"><input type='text' value='Arthur' id='importPersonsGivenName' name='givenName' ></td>
+										<td class="col-2"><input type='text' value='van der' id='importPersonsInsertion' name='insertion'></td>
+										<td class="col-2"><input type='text' value='Begijnen' id='importPersonsSurname' name='familyName'></td>
+										<td class="col-2"><input type='text' value='Bakker23' id='importPersonsUsername' name='userName' ></td>
+										<td class="col-2"><input type='text' value='geheim' id='importPersonsPassword' name='password'></td>
+										<td class="col-2"><input type='text' value='A.vdBegijnen@outlook.com' id='importPersonsMail' name='email'></td>
+									</tr>					
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 				<div class="row schooladmin-only" >
@@ -3119,7 +3164,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 											<th class="col-2"></th>
 										</tr>
 									</thead>
-								<tbody style="height: 100px">
+								<tbody>
 																		<!-- The row is detached and used as a template by the JS -->								
 										<tr>
 											<td class="col-4"><span id="importPersonsSchoolclassName">Schoolnaam</span></td>
@@ -3241,8 +3286,8 @@ a[href='#KNOWLEDGE'] .background-icon {
 			
 			<section class="grow">
 			
-				<div class="row">
-					<form name="organisationSettings">
+				<div class="row responsive-jumps mb">
+					<form name="organisationSettings" class="row">
 						<div class="col-6"> 
 							<h3><span data-translate="NUM_SEC_ORGANISATION_CHOOSE_CLASS">Leerlingen kunnen zelf klas kiezen</span></h3>
 							<div class="options">
@@ -3276,13 +3321,13 @@ a[href='#KNOWLEDGE'] .background-icon {
 					</form>
 				</div>
 				
-				<div class="row">
+				<div class="row responsive-jumps">
 					<div class="col-12">
 						<h2 class="sectionhead"><span data-translate="NUM_SEC_ORGANISATION_MANAGE_ACCOUNTS">Accounts van school beheren</span></h2>						
 					</div>
 				</div>
 				
-				<div class="row">					
+				<div class="row responsive-jumps">					
 					<form name="organisationPersonsFilter">
 						<fieldset>
 							<label for="organisationPersonsFilterFamilyName" class="col-2 input">
@@ -3309,7 +3354,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 							<div class="clear"></div>
 							
 							<div class="col-4 down">
-								<h3 class="right"><span data-translate="NUM_SEC_ORGANISATION_ROLE">Student / Docent / Schooladmin?</span></h3>
+								<h3 class=""><span data-translate="NUM_SEC_ORGANISATION_ROLE">Student / Docent / Schooladmin?</span></h3>
 							</div>
 							
 							<div class="col-2">
@@ -3347,7 +3392,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 						<div class="col-12">
 							<h3><span data-translate="NUM_LBL_PERSONS_FOUND">Gevonden personen</span></h2>
 							
-								<div class="tablewrap overflow grow">
+								<div class="tablewrap overflow grow mb">
 									<table class="dwo hoverable sortable headered">
 										<thead>
 											<tr>
@@ -3357,8 +3402,8 @@ a[href='#KNOWLEDGE'] .background-icon {
 												<th class="col-2">
 													<span data-translate="NUM_TBL_GIVENNAME">Voornaam</span>
 												</th>
-												<th class="col-2">
-													<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
+												<th class="col-1">
+													<span data-translate="NUM_TBL_INSERTION"></span>
 												</th>									
 												<th class="col-2">																										
 													<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
@@ -3368,7 +3413,8 @@ a[href='#KNOWLEDGE'] .background-icon {
 												</th>
 												<!-- <th class="col-2">
 													<span data-translate="NUM_TBL_EMAIL">Emailadres</span>
-												</th>	 -->								
+												</th>	 -->	
+												<th class="fill"></th>							
 												<th class="col-2 centered">																										
 													<span id=organisationPersonsRemoveAll class='selectAllButton'
 													data-translate="NUM_TBL_REMOVE">Verwijderen</span>
@@ -3405,7 +3451,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 													</span>
 												
 												</th>
-												<th class="col-2">
+												<th class="col-1">
 												
 												</th>
 											
@@ -3447,6 +3493,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 														</svg>
 													</span>
 												</th> -->
+												<th class="fill"></th>
 												<th class="col-2">
 													&nbsp;
 												</th>
@@ -3458,12 +3505,13 @@ a[href='#KNOWLEDGE'] .background-icon {
 													<!-- <input type="radio" id="organisationPersonsTableId" name="id" class="hidden" value="bakker34">										 -->
 												</td>
 												<td class="col-2"><span id="organisationPersonsTableGivenName">Michel</span></td>
-												<td class="col-2"><span id="organisationPersonsTableInsertion">van</span></td>		
+												<td class="col-1"><span id="organisationPersonsTableInsertion">van</span></td>		
 												<td class="col-2"><span id="organisationPersonsTableUserName">Bakker34</span></td>							
 												<td class="col-2 shortened"><span id="organisationPersonsTableSchoolClass">atheneum 3-1</span>
 												<!-- <input type="hidden" id="organisationPersonsTableSchoolclassId" name="organisationPersonsTableSchoolclassId" class="hidden" value=""> -->
 												</td>							
 												<!-- <td class="col-2"><span id="organisationPersonsTableEmail">Bakker34</span></td>	 -->
+												<td class="fill"></td>
 												<td class="col-2 centered">
 													<div class="checkbox danger">
 														<input type="checkbox" name="remove[]" id="organisationPersonsRemove" value="bakker34"><label class="icon" for="organisationPersonsRemove"></label>
@@ -3476,7 +3524,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 							
 								<input type="radio" name="id" class="hidden" value=""> <!-- empty option -->
 								<input type="radio" name="remove" class="hidden" value=""> <!-- empty option -->										
-								<input type="submit" class="danger right" data-translate="NUM_BTN_ORGANISATION_REMOVE" value="Verwijder" />
+								<input type="submit" class="danger self-end" data-translate="NUM_BTN_ORGANISATION_REMOVE" value="Verwijder" />
 							</div>
 						</form>
 				</div>
@@ -3522,36 +3570,37 @@ a[href='#KNOWLEDGE'] .background-icon {
 			<section class="grow">
 				<form name='teacherStudentModelSelect' class="row grow">													
 					<div class="row grow" id="teacherStudentModelBody">						
-						
-						<div class="col-6 row">							
-
-							<div class='col-6'>
-								<label class='input'>
-									Model
-									<select name='modelselect'>
-										<option value="SLO">SLO leerdoelen Onderbouw</option>
-									</select>
-								</label>					    	
+						<div class="col-6 row">
+							<div class='row'>
+								<div class="col-4">
+									<label class='input'>
+										Model
+										<select name='modelselect'>
+											<option value="SLO">SLO leerdoelen Onderbouw</option>
+										</select>
+									</label>	
+								</div>
+								<div class="col-2">
+									<input name='graph' type='submit' class='primary down' value='graph' disabled='disabled' data-translate='NUM_BTN_GRAPH'>
+								</div>					    	
 							</div>
-							<label class='col-6 input'>
-								<span data-translate='NUM_LBL_METHOD_ACTIVE'>Actieve methode</span>
-								<select name="activeMethod"><option value="">Geen methode</option></select>
-							</label>
-
 							<div class="row">
-								
-									
-									<div class="col-4 options">
-										<label id='teacherStudentModelMethod'><span data-translate="NUM_LBL_METHOD">Methode-indeling</span></label>
-										<div class="option">
-											<input type="radio" name="method" id="teacherStudentModelMethodBox" value="true">
-											<label for="teacherStudentModelMethodBox"><span data-translate="NUM_LBL_YES">Ja</span></label>
-										</div>
-										<div class="option">
-											<input type="radio" name="method" id="teacherStudentModelMethodBoxF" value="">
-											<label for="teacherStudentModelMethodBoxF"><span data-translate="NUM_LBL_NO">Nee</span></label>
-										</div> 										
+								<label class='col-4 input'>
+									<span data-translate='NUM_LBL_METHOD_ACTIVE'>Actieve methode</span>
+									<select name="activeMethod"><option value="">Geen methode</option></select>
+								</label>
+							
+								<div class="col-2 options">
+									<label id='teacherStudentModelMethod'><span data-translate="NUM_LBL_METHOD">Methode-indeling</span></label>
+									<div class="option">
+										<input type="radio" name="method" id="teacherStudentModelMethodBox" value="true">
+										<label for="teacherStudentModelMethodBox"><span data-translate="NUM_LBL_YES">Ja</span></label>
 									</div>
+									<div class="option">
+										<input type="radio" name="method" id="teacherStudentModelMethodBoxF" value="">
+										<label for="teacherStudentModelMethodBoxF"><span data-translate="NUM_LBL_NO">Nee</span></label>
+									</div> 										
+								</div>
 								<!--<label class="col-4" for="teacherStudentModelMethodBox">
 									h3 id='teacherStudentModelMethod' data-translate='NUM_LBL_METHOD'>Methode-indeling</h3>
 									<div class="checkbox">
@@ -3559,8 +3608,10 @@ a[href='#KNOWLEDGE'] .background-icon {
 										<label class="icon" for="teacherStudentModelMethodBox"></label>
 									</div>
 								</label>-->
+							</div>
+							<div class="row">
 								<div class="col-2">
-									<input name='filter' type='submit' class='secondary  down' data-translate="NUM_BTN_Filter" value='Filter' disabled='disabled'>
+									<input name='filter' type='submit' class='secondary' data-translate="NUM_BTN_Filter" value='Filter' disabled='disabled'>
 								</div>
 							</div>
 						
@@ -3570,9 +3621,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 								</div>
 							</div>
 
-							<div class="col-6">
-								<input name='graph' type='submit' class='primary right' value='graph' disabled='disabled' data-translate='NUM_BTN_GRAPH'>
-							</div>	
+							
 						</div>
 							
 						
@@ -3590,7 +3639,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					
 					<div class='col-6 row'>
 						<form name='teacherStudentmodelKlas' class="row">
-							<h2 class='sectionhead'><span data-translate='NUM_LBL_KNOWLEDGE_CLASS'>Bekijk kennisoverzicht klas</span></h2>
+							<h2 class='sectionhead mb'><span data-translate='NUM_LBL_KNOWLEDGE_CLASS'>Bekijk kennisoverzicht klas</span></h2>
 							<label class="col-4 input">
 								<span data-translate="NUM_TBL_CLASSES_CLASSNAME">Naam klas</span>
 								<select name="schoolClass"><option value=""></option></select>
@@ -3602,7 +3651,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 					</div>
 					
 					<div class='col-6'>
-						<h2 class='sectionhead'><span data-translate='NUM_LBL_FILTER_CLASS'>Filtering voor studenten van klas</span></h2>
+						<h2 class='sectionhead mb'><span data-translate='NUM_LBL_FILTER_CLASS'>Filtering voor studenten van klas</span></h2>
 						<form name='teacherStudentmodelFilter'>
 							<label class="buttonLabel">
                                     <span data-translate='NUM_SEC_FILTER_CLASS'>Kies een filter om per klas leerdoelen zichtbaar te maken</span>
@@ -3641,105 +3690,140 @@ a[href='#KNOWLEDGE'] .background-icon {
 					</section>
 				</div>
 			</header>
-			<section>
-				<div class='row col-12' >
-					<div class='col-6' >
-					 <form name='teacherSMClassResultsTree'>
-					  	<h3><span id='teacherSMClassResultsTitle'>Alle leerdoelen</span></h3>	
-					    <div class='treeWrapper' id='teacherSMClassResultsTreeWrapper' >
-						</div>
-						<div class="col-4 down">
-							<div style="float: right;">
-							<div style='zoom:0.8' class='checkbox'><input id='teacherSMClassResultMethodBox' name="method" type="checkbox"><label class='icon' for='teacherSMClassResultMethodBox'></label></div>
-							<label for='teacherSMClassResultMethodBox' >&nbsp;<span id='teacherSMClassResultMethod'>Methode-indeling</span></label>
+			<section class="grow">
+				<div class="row grow">
+					<!-- <div class="col-6 row"> -->
+						<form name='teacherSMClassResultsTree' class="col-6 row grow">
+							<div class="row">
+								<!-- <div class="col-4">
+									<div style='zoom:0.8' class='checkbox'><input id='teacherSMClassResultMethodBox' name="method" type="checkbox"><label class='icon' for='teacherSMClassResultMethodBox'></label></div>
+									<label for='teacherSMClassResultMethodBox' >&nbsp;<span id='teacherSMClassResultMethod'>Methode-indeling</span></label>
+								</div> -->
+								<div class="col-4 options">
+									<label id='teacherStudentModelMethod'><span data-translate="NUM_LBL_METHOD">Methode-indeling</span>: <span id='teacherSMClassResultMethod'>Methode-indeling</span></label>
+									<div class="option">
+										<input type="radio" name="method" id="teacherSMClassResultMethodBox" value="true">
+										<label for="teacherSMClassResultMethodBox"><span data-translate="NUM_LBL_YES">Ja</span></label>
+									</div>
+									<div class="option">
+										<input type="radio" name="method" id="teacherSMClassResultMethodBoxF" value="">
+										<label for="teacherSMClassResultMethodBoxF"><span data-translate="NUM_LBL_NO">Nee</span></label>
+									</div> 										
+								</div>
+								<div class="col-2">
+									<label>
+										<input name='filter' type='submit' class='secondary right down' data-translate="NUM_BTN_Filter" value='Filter'>
+									</label>
+								</div>
 							</div>
-						</div>
-						<div class="col-2">
-							<label>
-								<input name='filter' type='submit' class='secondary right down' data-translate="NUM_BTN_Filter" value='Filter'>
-							</label>
-						</div>
-						<div class='col-6'>
-						 <p>
-							<a href="javascript:void(0);" class='backlink' id='teacherSMClassResultsBacklink'>
-							<svg viewBox="0 0 74 74" class="icon">
-									  <use xlink:href="#arrowLeft"></use>
-								</svg><span data-translate="NUM_LBL_BACKTOSM">Terug</a>
-						 </p>
-						</div>
-					 </form>
-						
+							
+							<div class='col-6 grow'>								
+								<h3><span id="teacherSMClassResultsTitle">Alle leerdoelen</span></h3>	
+								<div class="treeWrapper profile-borderBox" id='teacherSMClassResultsTreeWrapper'>
+									<!-- hok met tree -->
+								</div>								
+							</div>
+						</form>
+					<!-- </div> -->
+
+					<!-- <div class="col-6 row">						 -->
+						<form name="teacherSMClassResultsKlas" class="col-6 row">
+							<div class="row">
+								<div class="col-6">
+									<label class="input">
+										Klas
+										<select name="schoolClass">
+											<option value="">klas 1A</option>
+										</select>
+									</label>
+								</div>
+							</div>
+							
+							<div class="col-6 grow">
+								<div class="tablewrap overflow grow mb" id="teacherSMClassResultsWrapper">
+									<table class='dwo hoverable selectable sortable headered'>
+										<thead>
+											<tr>
+												<th class="col-3"><span data-translate="NUM_TBL_STUDENTS">naam</span></th>
+												<th class="col-3"><span data-translate="NUM_TBL_SCORE">score</span></th>
+											</tr>
+											<tr class="sorting">
+												<th class="col-3">													
+													<span class="sortButton asc default" data-order="asc" data-type="string">
+														<svg viewBox="0 0 74 74" class="icon">
+															<use xlink:href="#arrowUp"></use>
+														</svg>
+													</span>
+													<span class="sortButton desc" data-order="desc" data-type="string">
+														<svg viewBox="0 0 74 74" class="icon">
+															<use xlink:href="#arrowDown"></use>
+														</svg>
+													</span>													
+												</th>
+												<th class="col-3">													
+													<span class="sortButton asc" data-order="asc" data-type="int">
+														<svg viewBox="0 0 74 74" class="icon">
+															<use xlink:href="#arrowUp"></use>
+														</svg>
+													</span>
+													<span class="sortButton desc" data-order="desc" data-type="int">
+														<svg viewBox="0 0 74 74" class="icon">
+															<use xlink:href="#arrowDown"></use>
+														</svg>
+													</span>													
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr tabindex="1">									
+												<td class="col-3">
+													<span id="teacherSMClassResultsTableName">Michel Bakker</span>
+													<input type="radio" id="teacherSMClassResultsTableId" name="id" class="hidden" value="bakker34">										
+												</td>
+												<td class="col-3">
+													<span id="teacherSMClassResultsTableScore">56%</span>
+												</td>										
+											</tr>
+										</tbody>
+									</table>
+								</div>	
+							</div>
+							
+							<div class="row" >
+								<div class="col-6">
+									<table class='dwo kg' style="min-height: 105px; max-height: 210px;">
+										<tbody>
+											<tr>
+												<td class='col-3'>
+													<span data-translate='NUM_TBL_SCORE_MEAN'>Klasgemiddelde</span>
+												</td>
+												<td class='col-3'>
+													<span id='teacherSMClassResultsMean'>3%</span>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-6">
+									<input type="radio" name="id" class="hidden" value="" /> <!-- empty option -->										
+									<input type="submit" class="primary mb-element" data-translate='NUM_BTN_STUDENT_SCORE' value="Bekijk student" />
+								</div>
+							</div>
+						</form>					
+					<!-- </div> -->
+				</div>
+				<div class="row">
+					<div class='col-12'>
+						<p>
+						   <a href="javascript:void(0);" class='backlink' id='teacherSMClassResultsBacklink'>
+						   		<svg viewBox="0 0 74 74" class="icon">
+									 <use xlink:href="#arrowLeft"></use>
+							   </svg><span data-translate="NUM_LBL_BACKTOSM">Terug</span>
+							</a>
+						</p>
 					</div>
-					<div class='col-6' style='position:absolute;top:0px;bottom:0px;right:0px;' >
-					  <form name='teacherSMClassResultsKlas'>
-					    <label class='input'>
-								<select name="schoolClass"><option value="">klas 1A</option></select>
-						</label>
-						<div id='teacherSMClassResultsWrapper'>
-						  <table class='dwo hoverable selectable sortable headered'>
-						   <thead>
-						  		<tr>
-						  			<th class='col-3'><span data-translate="NUM_TBL_STUDENTS">naam</span></th>
-						  			<th><span data-translate="NUM_TBL_SCORE">score</span></th>
-						  		</tr>
-								<tr class="sorting">
-									<th class="col-3">
-										
-										<span class="sortButton asc default" data-order="asc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowUp"></use>
-											</svg>
-										</span>
-										<span class="sortButton desc" data-order="desc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowDown"></use>
-											</svg>
-										</span>
-										
-									</th>
-									<th class="col-3">
-										
-										<span class="sortButton asc" data-order="asc" data-type="int">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowUp"></use>
-											</svg>
-										</span>
-										<span class="sortButton desc" data-order="desc" data-type="int">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowDown"></use>
-											</svg>
-										</span>
-										
-									</th>
-								</tr>
-						   </thead>
-						   <tbody>
-								<tr tabindex="1">
-									
-									<td class="col-3"><span id="teacherSMClassResultsTableName">Michel Bakker</span>
-										<input type="radio" id="teacherSMClassResultsTableId" name="id" class="hidden" value="bakker34">										
-									</td>
-									<td class="col-3"><span id="teacherSMClassResultsTableScore">56%</span></td>										
-								</tr>
-						   </tbody>
-						  </table>
-						</div>
-						<div>
-							<table class='dwo kg'>
-								<tbody><tr>
-									<td class='col-3'><span data-translate='NUM_TBL_SCORE_MEAN'>Klasgemiddelde</span></td>
-									<td class='col-3'><span id='teacherSMClassResultsMean'>3%</span>
-									</td></tr>
-								</tbody>
-							</table>
-						</div>
-						<div>
-							<input type="radio" name="id" class="hidden" value=""> <!-- empty option -->										
-							<input type="submit" class="primary right" data-translate='NUM_BTN_STUDENT_SCORE' value="Bekijk student" />
-						</div>
-					  </form>					
-					</div>
-				
 				</div>
 			</section>
 		</section>

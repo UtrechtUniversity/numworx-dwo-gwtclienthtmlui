@@ -113,7 +113,9 @@ h2 {
 		font-weight: 700;
 		letter-spacing: 0.3px;
 		line-height: $gutter * 1px;
+		margin-bottom: 0;//$elementMarginBottom;
 		width: 100%;
+		
 		header & { border-bottom-style: none; }
 		
 		span {
@@ -217,7 +219,7 @@ input[type="submit"], input[type="button"], button, .pseudobutton {
 input[type="text"], input[type="password"], select {
 	font-family: 'Ubuntu', sans-serif;
 	font-size: 1em;
-	line-height: 1em;
+	line-height: 14px;//1em;
 	
 	:not(label) > & {
 		font-size: 12 / 16 * 1em;
@@ -243,12 +245,18 @@ label {
 
 	&.buttonLabel {
 		color: $primary;
+		display: flex;
+		flex-direction: column;
 		font-weight: bold;
 	}
 	
 	&.input {
 		text-transform: uppercase;
 		font-weight: normal;
+	}
+
+	input[type="submit"] {
+		align-self: flex-end;
 	}
 
 	&[class*="col-"]  {
@@ -301,11 +309,11 @@ table.results {
 		tr:first-child th {
 			color: $white;
 		}
-		tr.headers th span {
-			&.active {
+		tr.headers th {
+			span.active, &.expanded span {
 				color: $white;
 			}
-			a {
+			span a {
 				text-transform: uppercase;
 				color: $white;
 				text-decoration: none;

@@ -53,3 +53,50 @@
 
 
 **. Tableheaders resultatentabel: drie puntjes (ellipsis) voor multiline is niet mogelijk en vereist veel truucs om het voor sommige browsers te krijgen. Ook zijn er worden die te lang zijn voor de header, waarbij afbreken (zonders streepje) mogelijk is, maar dit geeft niet zo'n mooi resultaat. Je zult binnenkort zien dat ik voorlopig.
+
+
+##  APRIL 2024
+
+
+LOGIN
+v IFrame login eruit halen
+
+ACCOUNT
+v Verwijder en sla op bij elkaar rechts
+v twee kolommen?
+
+
+WELKOM
+-
+
+RESULTATEN
+v Knop rechts?
+v Smallere kolommen
+vervagen in header
+v kolommen breder bij klik en hover
+lengte balk als progressbar
+
+
+LEERDOELEN
+v tree, scrollen
+v Model + graaf
+v Methode + method eindeling
+v filter op eigen regel
+v Nee default aan
+
+Klas kiezen: nog stylen ==> Bekijk student
+
+KLASSEN
+v Bewerken knop op kleine schermen dichter eronder
+v Bewerken: bovenkant vergelijkbaar met account
+BIj doorkliks: knoppen dichter op tabel, tabellen minder breed
+
+Overplaatsen: parkeren
+Studenten gekozen tweede klas: wit/grijs
+
+PERSONEN
+v Tussenvoegsel smaller, zonder titel
+v Bewerk persoon naar rechts, en er tegenaan
+
+v Voeg persoon toe: hoef er niet tegenaan
+v Importeer scherm

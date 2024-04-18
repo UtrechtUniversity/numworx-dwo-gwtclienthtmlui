@@ -65,6 +65,47 @@ Helpers for tedious (crossbrowser) work.
 	@media (min-width: #{$size2xl}px) { @content; }
 }
 
+
+@mixin size-1 {
+	@media (min-width: #{(1 * $colWidth / 2) + (1/2 * $gutter) + 1 }px) { @content; };
+}
+@mixin size-2 {
+	@media (min-width: #{(2 * $colWidth / 2) + (2/2 * $gutter) + 1 }px) { @content; };
+}
+@mixin size-3 {
+	@media (min-width: #{(3 * $colWidth / 2) + (3/2 * $gutter) + 1 }px) { @content; };
+}
+@mixin size-4 {
+	@media (min-width: #{(4 * $colWidth / 2) + (4/2 * $gutter) + 1 }px) { @content; };
+}
+@mixin size-5 {
+	@media (min-width: #{(5 * $colWidth / 2) + (5/2 * $gutter) + 1 }px) { @content; };
+}
+@mixin size-6 {
+	@media (min-width: #{(6 * $colWidth / 2) + (6/2 * $gutter) + 1 }px) { @content; };
+}
+@mixin size-7 {
+	@media (min-width: #{(7 * $colWidth / 2) + (7/2 * $gutter) + 1 }px) { @content; };
+}
+@mixin size-8 {
+	@media (min-width: #{(8 * $colWidth / 2) + (8/2 * $gutter) + 1 }px) { @content; };
+}
+@mixin size-9 {
+	@media (min-width: #{(9 * $colWidth / 2) + (9/2 * $gutter) + $navWidth + 4 }px) { @content; };
+}
+@mixin size-10 {
+	@media (min-width: #{(10 * $colWidth / 2) + (10/2 * $gutter) + $navWidth + 4 }px) { @content; };
+}
+@mixin size-11 {
+	@media (min-width: #{(11 * $colWidth / 2) + (11/2 * $gutter) + $navWidth + 4 }px) { @content; };
+}
+@mixin size-12 {
+	@media (min-width: #{(12 * $colWidth / 2) + (12/2 * $gutter) + $navWidth + 4 }px) { @content; };
+}
+
+
+
+
 /* 
  * BEHAVIOR
  */

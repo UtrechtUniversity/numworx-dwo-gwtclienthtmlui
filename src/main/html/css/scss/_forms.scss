@@ -38,9 +38,9 @@ input[type="submit"], input[type="button"], button, .pseudobutton {
 	
 	&.right, &.left {
 		//clear: right;
-		float: right;
+		//float: right;
 		//margin-right: ($gutter / 2) / ($siteWidth) * 100%;
-		margin-bottom: $elementMarginBottom;
+		//margin-bottom: $elementMarginBottom;
 		//.col-4 & { margin-right: 0; }//($gutter / 2) / ($siteWidth * 4) * 100%; }
 		//.col-6 & { margin-right: ($gutter / 2) / ($siteWidth * 6) * 100%; }
 		//.col-12 & { margin-right: ($gutter / 2) / ($siteWidth * 12) * 100%; }
@@ -100,6 +100,7 @@ input[type="submit"], input[type="button"], button, .pseudobutton {
 }
 
 	label.pseudobutton {
+		float: right;
 		display: block;
 		margin-top: $elementMarginBottom; // in fact, this is the labels bottom margin		
 	}
@@ -216,6 +217,7 @@ form {
 			display: inline-block;
 			float: none;
 			left: 0;
+			margin-bottom: 0;
 			padding: 6px 0px;
 			//position: absolute;
 			text-align: center;

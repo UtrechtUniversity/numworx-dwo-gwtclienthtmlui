@@ -77,8 +77,9 @@ LoginDisplay.prototype.init = function() {
 
 
 LoginDisplay.prototype.showMessage = function(msg) {
-	this.$messageBox.find(".content").html(msg);
-	this.$messageBox.show();
+	// Disabled the message box, Teunis 202404012
+	//this.$messageBox.find(".content").html(msg);
+	//this.$messageBox.show();
 	this.enable();
 }
 LoginDisplay.prototype.showWarning = function(msg) {
