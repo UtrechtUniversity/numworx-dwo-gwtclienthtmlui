@@ -654,6 +654,8 @@ MainDisplay.prototype.clickWherever = function(event) {
 MainDisplay.prototype.clickLogo = function(event) {
 	event.preventDefault();
 	var view = event.currentTarget.hash.substr(1);
+	this.$accountMenuBox.hide();
+	this.$nav.removeClass("open");
 	if (view) this.setActiveView(view)
 }
 
