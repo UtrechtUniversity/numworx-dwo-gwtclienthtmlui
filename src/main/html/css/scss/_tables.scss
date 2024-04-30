@@ -33,7 +33,7 @@ table.dwo { //:not(.c-datepicker__days)
 	thead tr, tbody tr {
 	    display:table;
 	    min-width:100%;
-	    table-layout:fixed;
+	    //table-layout:fixed;
 	}
 	
 	thead {
@@ -49,7 +49,7 @@ table.dwo { //:not(.c-datepicker__days)
 			//max-width: 100%;
 			//&.headers th:first-child { padding-left: 0; }
 			position: relative;
-			z-index: 2;
+			//z-index: 2;
 			th { 
 //				overflow-x: hidden;
 				padding: $gutter / 2 * 1px $gutter / 2 * 1px!important;
@@ -134,18 +134,21 @@ table.dwo { //:not(.c-datepicker__days)
 			background: $white;
 			content: "";
 			position: absolute;
-			bottom: -8px;
+			bottom: 2px;
 			top: 0;
 			left: 0;
 			right: 0;
 			z-index: 1;
 		}
 		
-		//-ms-overflow-style: -ms-autohiding-scrollbar;
+		-ms-overflow-style: -ms-autohiding-scrollbar;
 		
 		tr {
 			border-bottom: 1px $line1 solid;
+			margin-left: 2px;
+			min-width: calc(100% - 4px);
 			position: relative;
+			width: calc(100% - 4px);
 			z-index:10;				
 			td {
 				line-height: 1.3em;
@@ -256,19 +259,36 @@ table.dwo { //:not(.c-datepicker__days)
 			}
 			
 			tr.sorting {
-				background-color: $shade11;				
+				//background-color: $shade11;				
 				margin-top: 0; // for when it is the first row
 				margin-bottom: 0; // for when it is the first row
 				//padding-top: 0; // for when it is the first row
 			    @include border-box;
+
+				position: relative;
+
+				&:after {
+					background-color: $shade11;
+					border-bottom: 1px $line1 solid;	
+					content: "";
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					left: 0px;
+					right: 0px;
+					z-index: 2;
+				}
 				
 				&:nth-child(1) {
 					//margin-top: (12 + 9 + 9) * -1px;
 				}
 				
-				th {
+				th {								
 					margin-top: 0;
 					text-align: left;
+					position: relative;
+					z-index: 9;
+					
 				}
 				
 				th:first-child {
@@ -348,7 +368,7 @@ table.dwo.results {
 		&:first-child {
 			position: relative;
 			text-align: left;
-			width: ($colWidth + $gutter) * 1px;
+			width: ($colWidth) * 1px; //+$gutter
 			//width: ($colWidth) * 1px;
 						
 			span:not(.sortButton) { 
@@ -362,6 +382,16 @@ table.dwo.results {
 				position: absolute; 
 				top: 0;
 				width: ($colWidth - $gutter) * 1px;
+
+				// &:before {
+				// 	background-color: $white;
+				// 	content: " ";
+				// 	position: absolute;
+				// 	left: 3px;
+				// 	top: 0;
+				// 	bottom: 0;
+				// 	right: 0;
+				// }
 				
 				.active & { border-right: 1px $line1 solid;}
 			}
@@ -388,13 +418,15 @@ table.dwo.results {
 //				left: 1%;
 				top: (16 + 4) * -1px;
 				width: 98%;
-				z-index: 2;
+				//z-index: 2;
 							
 				th {
 					background-color: $primaryLight;
-					padding: 2px $gutter/2 *1px;	
+					padding: 2px $gutter/2 *1px;
+					position: relative;	
 					text-indent: 10px;
-					width: 98%;				
+					width: 98%;			
+					z-index: 3;	
 				}
 				th:first-child {
 					background-color: $primaryLight;
@@ -430,14 +462,16 @@ table.dwo.results {
 			}
 			&:nth-child(2) { // multiple headers				
 				border-bottom: $borderThickness $line1 solid;
-				z-index: 2;
+				
+				//z-index: 2;
 
 				&:before {
+					border-bottom: 1px $line1 solid;
 					background-color: $shade11;
 					content: " ";
 					position: absolute;
 					top: 0;
-					bottom: 0;
+					bottom: -1px;
 					left: 0;
 					right: 0;
 					z-index: 2;
@@ -551,7 +585,15 @@ table.dwo.results {
 				}
 			}
 			&:nth-child(3) { //sorting
-				background-color: $shade11;
+				//background-color: $shade11;
+				border-bottom: 1px $line1 solid;
+				z-index: 9;
+
+				th {
+					background-color: $shade11;
+					position: relative;
+					z-index: 3;
+				}
 				
 				th:first-child {
 					background-color: $shade11;
@@ -566,8 +608,9 @@ table.dwo.results {
 	
 	&.alternativeHeader thead {
 		tr:nth-child(2), tr:nth-child(3) { 
-			background-color: $white;
+			//background-color: $white;
 			th {
+				
 				span { 
 					background-color: $white;
 					color: $primary;
@@ -585,8 +628,10 @@ table.dwo.results {
 			}
 		}
 		tr:nth-child(2) {
-			border-bottom: 1px $line1 solid;
-			
+			//border-bottom: 1px $line1 solid;
+			&:before {
+				display: none;
+			}
 			th:first-child {
 				//background-color: $white;
 				//height: auto;
@@ -594,6 +639,10 @@ table.dwo.results {
 		}
 		tr:nth-child(3) {
 			border-bottom: 1px $line1 solid;
+			border-top: 1px $line1 solid;
+			th {
+				background-color: $white;
+			}
 			th:first-child {
 				background-color: $white;
 
@@ -616,6 +665,7 @@ table.dwo.results {
 		}
 		
 		td {
+			width: ($colWidth/2 - $gutter) * 1px;
 			
 			&.studentName {
 				overflow-x: visible;
