@@ -48,6 +48,8 @@ table.dwo { //:not(.c-datepicker__days)
 		tr {
 			//max-width: 100%;
 			//&.headers th:first-child { padding-left: 0; }
+			position: relative;
+			z-index: 2;
 			th { 
 //				overflow-x: hidden;
 				padding: $gutter / 2 * 1px $gutter / 2 * 1px!important;
@@ -109,10 +111,10 @@ table.dwo { //:not(.c-datepicker__days)
 	
 	tbody {
 		//box-shadow: 0 0 0 3px $primary inset; // border doesn't work combined with radius
-		border: $borderThickness $primary solid;
+		/*border: $borderThickness $primary solid;
 	    @include border-box;
 		@include border-radius($defaultRadius);
-		background: $white;
+		background: $white;*/
 		//height: 100%;//flex
 		height: 100%;
 		
@@ -123,11 +125,28 @@ table.dwo { //:not(.c-datepicker__days)
 		overflow-y: auto; //scroll
 		top: 2em;
 		display: block;
+		//display: inherit;
+		min-width: 100%;
 		
-		-ms-overflow-style: -ms-autohiding-scrollbar;
+		&:before {
+			border: $borderThickness $primary solid;
+			@include border-radius($defaultRadius);
+			background: $white;
+			content: "";
+			position: absolute;
+			bottom: -8px;
+			top: 0;
+			left: 0;
+			right: 0;
+			z-index: 1;
+		}
+		
+		//-ms-overflow-style: -ms-autohiding-scrollbar;
 		
 		tr {
-			border-bottom: 1px $line1 solid;				
+			border-bottom: 1px $line1 solid;
+			position: relative;
+			z-index:10;				
 			td {
 				line-height: 1.3em;
 				//border-bottom: 1px $line1 solid;
@@ -169,6 +188,9 @@ table.dwo { //:not(.c-datepicker__days)
 	&.sortable tbody {
 		height: calc( 100% - #{ 21 }px);
 	}
+	&.sortable.headered tbody {
+		height: calc( 100% - #{ 27 }px);
+	}
 	
 	&.hoverable tr:hover { //td// &.hoverable tr:focus td,  { //&.hoverable tr:hover td span {
 		background-color: $shade12;
@@ -204,7 +226,7 @@ table.dwo { //:not(.c-datepicker__days)
 		height: calc( 100% - 12px);	//14, 24
 		&.headered {
 			margin-top: 24px;//(12 + 9 + 9) * 1px;	
-			height: calc( 100% - #{ 39 }px);
+			height: calc( 100% - #{ 32 }px);
 		}
 		
 		thead {
@@ -220,11 +242,12 @@ table.dwo { //:not(.c-datepicker__days)
 				font-size: 0;
 				line-height: 0;
 				margin-top: -27px;
-				margin-bottom: 9px;
+				//margin-bottom: 9px;
 				th {
 					//display: table-cell;
 					//margin-top: -12px; // (12 + 9 + 9) * -1px;	
-					font-size: 12px;			
+					font-size: 12px;
+					margin-bottom: 9px;			
 					
 				}
 				th:first-child {
@@ -360,12 +383,12 @@ table.dwo.results {
 //				//margin-right: $gutter / 2 * -1px!important;
 //			}
 			&:nth-child(1) { // bar with single row/col header
-				
 				color: $white;
 				position: absolute;
 //				left: 1%;
 				top: (16 + 4) * -1px;
 				width: 98%;
+				z-index: 2;
 							
 				th {
 					background-color: $primaryLight;
@@ -405,9 +428,20 @@ table.dwo.results {
 					}
 				}
 			}
-			&:nth-child(2) { // multiple headers
-				background-color: $shade11;
+			&:nth-child(2) { // multiple headers				
 				border-bottom: $borderThickness $line1 solid;
+				z-index: 2;
+
+				&:before {
+					background-color: $shade11;
+					content: " ";
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					z-index: 2;
+				}
 				
 				th:first-child {
 					//background-color: $shade11;
@@ -573,6 +607,7 @@ table.dwo.results {
 		@include border-radius(0px, 0px, 4px, 4px);
 		border-top-style: none;
 		height: calc( 100% - 58px);
+		
 		//max-height: 500px;	
 		
 		
@@ -749,6 +784,9 @@ table.dwo.results {
 			}
 			tr {
 				white-space: nowrap;
+			}
+			tbody {
+				overlow-x: hidden;
 			}
 		}
 	}
