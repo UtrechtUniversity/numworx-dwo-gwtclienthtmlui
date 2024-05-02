@@ -151,6 +151,8 @@ table.dwo { //:not(.c-datepicker__days)
 			width: calc(100% - 4px);
 			z-index:10;				
 			td {
+				border-left-width: 0!important;
+				border-right-width: 0!important;				
 				line-height: 1.3em;
 				//border-bottom: 1px $line1 solid;
 				//padding: 5px 10px;
