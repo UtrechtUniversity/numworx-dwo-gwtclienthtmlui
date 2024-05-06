@@ -169,6 +169,10 @@ body {
 				z-index: 400;
 			}
 		}
+
+		@include size-md {
+			left: $navWidth * 1px;
+		}
 		
 		@include size-xl {
 			margin-right: 0;
@@ -217,7 +221,8 @@ body {
 			
 			@include size-md {
 				//margin-left: ($navWidth + $gutter) * 1px;	
-				margin-left: ($navWidth) * 1px;	
+				//margin-left: ($navWidth) * 1px;	
+				margin-left: $gutter * 1px;
 			}			
 			@include size-lg {
 				//margin-left: ($navWidth + $gutter) * 1px;			
@@ -453,6 +458,7 @@ body {
 
 		@include size-md {
 			//width: calc( 100% - #{$navWidth}px );
+			margin-left: $gutter * 1px;
 		}
 				
 		@include size-lg {
@@ -596,7 +602,7 @@ body {
  */
 
 #mainPanel {
-	background-color: $shade20;
+	background-color: $shade20; //$shade20;
 	display: none;
 	min-height: 100%;
 	position: relative;
@@ -811,7 +817,7 @@ body {
 	}
 	
 	nav {	
-		background-color: $shade20;	
+		background-color: $shade21; //20	
 		bottom: 0;
 		color: $shade22;
 		display: none;
@@ -834,6 +840,7 @@ body {
 		@include size-md {
 			display: block!important;
 			top: ($headerHeight + $subpanelHeaderHeight) * 1px;
+			top: ($headerHeight) * 1px;
 			width: #{ $navWidth }px; //+ $gutter
 			z-index: 200;
 		}
@@ -877,12 +884,12 @@ body {
 		}
 		
 		ul {
-			margin-top: $gutter * 1px;
+			margin-top: $gutter * 2px;
 			margin-left: 14px; //$siteMargin * 1px;
 			
-			@media #{$mediaQueryDesktop} {
+			/*@include size-lg {
 				margin-top: ($gutter + $subpanelHeaderHeight) * 1px;
-			}
+			}*/
 			
 			.libraryPage & {
 				margin-top: 0;
