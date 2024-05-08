@@ -521,9 +521,10 @@ MainDisplay.prototype.resizeWindow = function(event) {
 	this.closeHelp();
 	this.resizeStrechables();
 	this.resizeCallbacks();
-		
+	this.resizeTbodies();
 }
 MainDisplay.prototype.registerStretchables = function( elements ) {
+	this.resizeTbodies();
 	return; // turn off for now
 	if (elements.length < 1) return;
 	
@@ -590,6 +591,29 @@ MainDisplay.prototype.addClassToStretchables = function() {
 	}
 }
 
+MainDisplay.prototype.resizeTbodies = function() {
+	$('section .grow > table tbody').css('height', '');
+	$('section:visible .grow > table tbody tr').css('display', 'none');
+	$('section:visible .grow > table tbody').each(function() {
+		var $table = $(this);
+		var $rows = $table.find('tr').detach();
+		// Clear tbody
+		$table.empty();
+		
+		// $table top offset relative to parent
+		var offset = $table.offset().top - $table.parent().offset().top;		
+		var height = $table.parent().outerHeight();
+		height = height - offset;
+		
+		// set height
+		$table.height(height);
+		// Add rows
+		$rows.each(function() {
+			$table.append($(this));
+		});
+	});
+	$('.grow > table tbody tr').css('display', 'table');
+}
 
 /*
  * EVENT HANDLERS
