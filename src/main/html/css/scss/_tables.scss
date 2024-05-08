@@ -609,6 +609,7 @@ table.dwo.results {
 				th {
 					background-color: $shade11;
 					position: relative;
+					width: (($colWidth/2) - $gutter)  * 1px;
 					z-index: 3;
 				}
 				
@@ -617,6 +618,7 @@ table.dwo.results {
 					text-indent: 10px;
 					@include transition(all 50ms ease-in-out);
 					min-width: $colWidth * 1px;
+					margin-left: 0;
 					//width: (($colWidth) - $gutter) * 1px;
 				}			
 			}			
