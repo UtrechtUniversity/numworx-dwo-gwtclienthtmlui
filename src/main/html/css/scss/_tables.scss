@@ -134,11 +134,25 @@ table.dwo { //:not(.c-datepicker__days)
 			background: $white;
 			content: "";
 			position: absolute;
-			bottom: 2px;
+			bottom: 0px;
 			top: 0;
 			left: 0;
 			right: 0;
 			z-index: 1;
+		}
+		&:after {
+			border-bottom: $borderThickness $primary solid;
+			border-left: $borderThickness $primary solid;
+			border-right: $borderThickness $primary solid;
+			@include border-radius($defaultRadius);
+			//background: $white;
+			content: "";
+			position: absolute;
+			bottom: 0px;
+			top: calc(100% - 4px);
+			left: 0;
+			right: 0;
+			z-index: 11;
 		}
 		
 		-ms-overflow-style: -ms-autohiding-scrollbar;
@@ -231,7 +245,7 @@ table.dwo { //:not(.c-datepicker__days)
 		height: calc( 100% - 12px);	//14, 24
 		&.headered {
 			margin-top: 24px;//(12 + 9 + 9) * 1px;	
-			height: calc( 100% - #{ 32 }px);
+			height: calc( 100% - #{ 24 }px); //32
 		}
 		
 		thead {
@@ -324,7 +338,7 @@ table.dwo.results {
 	//margin-right: 1 / 12 * $siteWidth * 1px;
 	//max-height: 500px; 
 	//height: auto;
-	height: calc( 100% - 58px);
+	height: calc( 100% - 48px); //58
 	//overflow-x: scroll;
 	overflow-y: visible;
 	min-width: 100vw;
@@ -798,7 +812,7 @@ table.dwo.results {
 	
 	&.overflow, &.overflow-always {
 		overflow-x: scroll;
-		overflow-y: auto;
+		overflow-y: hidden;
 		
 		-ms-overflow-style: -ms-autohiding-scrollbar;
 		
@@ -845,7 +859,7 @@ table.dwo.results {
 	@include size-lg {
 		&.overflow {
 			overflow-x: auto;
-			overflow-y: auto;
+			overflow-y: hidden;
 			&:after {
 				display: none;
 			}
