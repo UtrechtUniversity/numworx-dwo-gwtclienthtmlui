@@ -52,6 +52,7 @@ table.dwo { //:not(.c-datepicker__days)
 			//z-index: 2;
 			th { 
 //				overflow-x: hidden;
+				display: inline-block;
 				padding: $gutter / 2 * 1px $gutter / 2 * 1px!important;
 				width: ($colWidth - $gutter) * 1px;
 				float: none!important; // for if it has a col-class
@@ -208,7 +209,7 @@ table.dwo { //:not(.c-datepicker__days)
 		height: calc( 100% - #{ 21 }px);
 	}
 	&.sortable.headered tbody {
-		height: calc( 100% - #{ 27 }px);
+		height: calc( 100% - #{ 36 }px); //27
 	}
 	
 	&.hoverable tr:hover { //td// &.hoverable tr:focus td,  { //&.hoverable tr:hover td span {
