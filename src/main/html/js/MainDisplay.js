@@ -131,11 +131,11 @@ function MainDisplay() {
 	this.$searchBox.hide();
 	this.$trails.hide();
 	
-	$("input").focus(function(event) {
+	/*$("input").focus(function(event) {
 		window.scrollTo(0, 0);
 		document.body.scrollTop = 0;
 		event.preventDefault();
-	});
+	});*/
 		
 	// Trigger window resize for initial help sizing
 	$(window).trigger('resize');
