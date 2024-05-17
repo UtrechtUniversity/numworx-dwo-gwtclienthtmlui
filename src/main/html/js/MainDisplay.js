@@ -11,6 +11,7 @@ function MainDisplay() {
 	this.$subpanels = this.$panel.find(".subpanel");	
 	this.$logo = this.$panel.find("#logo");
 	this.$nav = this.$panel.find("nav");
+	this.$menuToggle = $("#menuToggle");
 
 	this.$accountMenuSchoolName = jQuery("#accountMenuSchoolName");
 	this.$accountMenuUserRole = jQuery("#accountMenuUserRole");
@@ -116,10 +117,13 @@ function MainDisplay() {
 	$(".help .closeButton").click(Helpers.toggleHelpSection);
 	this.$logo.on('click', $.proxy(this.clickLogo, this));
 	this.$nav.find('a').on('click', $.proxy(this.clickMenuItem, this));
+	//this.$menuToggle.on('mouseenter', $.proxy(this.mouseEnterMenuIcon, this));
+	this.$menuToggle.on('click', $.proxy(this.touchStartMenuIcon, this));
+	
 	this.$accountMenuBox.find('a').on('click', $.proxy(this.clickAccountMenuItem, this));
-	this.$accountMenuToggle.on('mouseenter', $.proxy(this.mouseEnterAccountMenuIcon, this));
-	this.$accountMenuToggle.on('touchstart', $.proxy(this.touchStartAccountMenuIcon, this));
-	this.$accountMenuBox.on('mouseleave', $.proxy(this.mouseLeaveAccountMenuIcon, this));
+	//this.$accountMenuToggle.on('mouseenter', $.proxy(this.mouseEnterAccountMenuIcon, this));
+	this.$accountMenuToggle.on('click', $.proxy(this.touchStartAccountMenuIcon, this));
+	//this.$accountMenuBox.on('mouseleave', $.proxy(this.mouseLeaveAccountMenuIcon, this));
 	this.$headerArrowUp.on("click", $.proxy(this.onArrowUp, this));
 	$(document).on('click, touchstart', $.proxy(this.clickWherever, this));
 	this.$searchBox.on('submit' , $.proxy(this.search, this))
@@ -127,11 +131,11 @@ function MainDisplay() {
 	this.$searchBox.hide();
 	this.$trails.hide();
 	
-	$("input").focus(function(event) {
+	/*$("input").focus(function(event) {
 		window.scrollTo(0, 0);
 		document.body.scrollTop = 0;
 		event.preventDefault();
-	});
+	});*/
 		
 	// Trigger window resize for initial help sizing
 	$(window).trigger('resize');
@@ -157,7 +161,8 @@ MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 	this.$trails.hide();
 		
 	if (!this.$panel.is(":visible")) {
-		this.$panel.show();
+		//this.$panel.show();
+		this.$panel.addClass("active");
 	}
 
 	this.$subpanels.hide();
@@ -171,7 +176,7 @@ MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 MainDisplay.prototype.setActiveView = function(view) {
 	if (view == "SEARCH") app.getPresenterFactory().getMainPresenter().search(this.getSearchInput());
 	else if (view == "LOGOUT") app.getPresenterFactory().getMainPresenter().logout();
-	else app.getPresenterFactory().getMainPresenter().selectView(view);
+	else app.getPresenterFactory().getMainPresenter().selectView(view);	
 }
 
 
@@ -260,7 +265,8 @@ MainDisplay.prototype.unsetIdleTimeout = function() {
  */
 
 MainDisplay.prototype.showLoginView = function() {
-	this.$panel.hide();
+	//this.$panel.hide();
+	this.$panel.removeClass("active");
 	this.loginDisplay.show();
 }
 
@@ -268,7 +274,8 @@ MainDisplay.prototype.showWelcomeView = function() {
 	this.initMainView();
 	this.setExpandedNavSize();
 	this.welcomeDisplay.show();
-	this.$panel.show();
+	//this.$panel.show();
+	this.$panel.addClass("active");
 }
 
 MainDisplay.prototype.showAccountView = function(vars) {
@@ -332,16 +339,13 @@ MainDisplay.prototype.showStudentResultsGraphView = function() {
 	this.initMainView();
 	this.studentResultsGraphDisplay.show();
 }
-
-
-
 MainDisplay.prototype.showSelectedResultsView = function() {
 	this.initMainView(); 
 	this.selectedResultsDisplay.show();
 }
 
 MainDisplay.prototype.showStudentScoResultView = function() {
-	this.initMainView(); 
+	//this.initMainView(); 
 	this.studentScoResultDisplay.show();
 }
 
@@ -517,9 +521,11 @@ MainDisplay.prototype.resizeWindow = function(event) {
 	this.closeHelp();
 	this.resizeStrechables();
 	this.resizeCallbacks();
-		
+	this.resizeTbodies();
 }
 MainDisplay.prototype.registerStretchables = function( elements ) {
+	this.resizeTbodies();
+	return; // turn off for now
 	if (elements.length < 1) return;
 	
 	for (i=0; i<elements.length; i++) {
@@ -527,7 +533,8 @@ MainDisplay.prototype.registerStretchables = function( elements ) {
 			this.stretchables.push( elements[i] );
 		}
 	}
-	this.resizeStrechables();
+	this.addClassToStretchables();
+	this.resizeStrechables();	
 }
 
 MainDisplay.prototype.registerCallback = function (key,  f ) {
@@ -548,7 +555,13 @@ MainDisplay.prototype.resizeStrechables = function() {
 	if (this.stretchables.length < 1) return; 
 	
 	bodyHeight = $(document.body).outerHeight();
-		
+
+	// First set height to 0, to be able to calculate the free space
+	for(i=0; i<this.stretchables.length; i++) {
+		this.stretchables[i].height("0px");
+	}
+	
+	newHeight = Array();
 	for(i=0; i<this.stretchables.length; i++) {
 		subpanel = this.stretchables[i].closest('.subpanel');
 		
@@ -559,13 +572,48 @@ MainDisplay.prototype.resizeStrechables = function() {
 		}
 		freeSpace = bodyHeight - subpanelHeight;
 				
-		newHeight = this.stretchables[i].height() + freeSpace;
-		this.stretchables[i].height(newHeight+"px");
+		//newHeight = this.stretchables[i].height() + freeSpace;
+		newHeight[i] = this.stretchables[i].height() + freeSpace;
+		//this.stretchables[i].height(newHeight+"px");
 	}
+
+	for(i=0; i<this.stretchables.length; i++) {
+		this.stretchables[i].height(newHeight[i]+"px");
+	}
+
 	this.$subpanels.removeData('originalHeight');
 	return;
 }
 
+MainDisplay.prototype.addClassToStretchables = function() {
+	for(i=0; i<this.stretchables.length; i++) {
+		this.stretchables[i].addClass('stretchable');
+	}
+}
+
+MainDisplay.prototype.resizeTbodies = function() {
+	$('section .grow > table tbody').css('height', '');
+	$('section:visible .grow > table tbody tr').css('display', 'none');
+	$('section:visible .grow > table tbody').each(function() {
+		var $table = $(this);
+		var $rows = $table.find('tr').detach();
+		// Clear tbody
+		$table.empty();
+		
+		// $table top offset relative to parent
+		var offset = $table.offset().top - $table.parent().offset().top;		
+		var height = $table.parent().outerHeight();
+		height = height - offset;
+		
+		// set height
+		$table.height(height);
+		// Add rows
+		$rows.each(function() {
+			$table.append($(this));
+		});
+	});
+	$('.grow > table tbody tr').css('display', 'table');
+}
 
 /*
  * EVENT HANDLERS
@@ -576,9 +624,22 @@ MainDisplay.prototype.search = function(event) {
 	var view = 'SEARCH';
 	this.setActiveView(view)
 }
-
+MainDisplay.prototype.mouseEnterMenuIcon = function(event) {
+	this.$nav.addClass('open');
+	this.$accountMenuBox.hide();
+}
+MainDisplay.prototype.touchStartMenuIcon = function(event) {
+	event.preventDefault();
+	if (this.$nav.hasClass("open")) {
+		this.$nav.removeClass("open");
+	} else {
+		this.$nav.addClass("open");
+		this.$accountMenuBox.hide();
+	} 
+}
 MainDisplay.prototype.clickMenuItem = function(event) {
 	event.preventDefault();
+	this.$nav.removeClass("open");
 	var view = event.currentTarget.hash.substr(1);
 	if (view) this.setActiveView(view);
 }
@@ -595,7 +656,10 @@ MainDisplay.prototype.mouseEnterAccountMenuIcon = function(event) {
 }
 MainDisplay.prototype.touchStartAccountMenuIcon = function(event) {
 	if (this.$accountMenuBox.is(":visible")) this.$accountMenuBox.hide();
-	else this.$accountMenuBox.show();
+	else {
+		this.$nav.removeClass("open");
+		this.$accountMenuBox.show();
+	} 
 }
 MainDisplay.prototype.mouseLeaveAccountMenuIcon = function(event) {
 	this.$accountMenuBox.hide();
@@ -614,6 +678,8 @@ MainDisplay.prototype.clickWherever = function(event) {
 MainDisplay.prototype.clickLogo = function(event) {
 	event.preventDefault();
 	var view = event.currentTarget.hash.substr(1);
+	this.$accountMenuBox.hide();
+	this.$nav.removeClass("open");
 	if (view) this.setActiveView(view)
 }
 

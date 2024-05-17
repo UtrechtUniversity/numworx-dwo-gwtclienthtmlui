@@ -38,9 +38,9 @@ input[type="submit"], input[type="button"], button, .pseudobutton {
 	
 	&.right, &.left {
 		//clear: right;
-		float: right;
+		//float: right;
 		//margin-right: ($gutter / 2) / ($siteWidth) * 100%;
-		margin-bottom: $elementMarginBottom;
+		//margin-bottom: $elementMarginBottom;
 		//.col-4 & { margin-right: 0; }//($gutter / 2) / ($siteWidth * 4) * 100%; }
 		//.col-6 & { margin-right: ($gutter / 2) / ($siteWidth * 6) * 100%; }
 		//.col-12 & { margin-right: ($gutter / 2) / ($siteWidth * 12) * 100%; }
@@ -52,13 +52,16 @@ input[type="submit"], input[type="button"], button, .pseudobutton {
 		clear: both;
 	}
 	&.single { margin-left: 100%; }
-	&.down { margin-top: 22 / 12 * 1em;}
+	&.down { margin-top: 23 / 12 * 1em;}
+
 	&.bottom.right, &.bottom.left {
-		bottom: 0;
 		float: none;
 		position: absolute;
-		right: 0;
-		
+		right: $gutter/2 * 1px;
+
+		@include size-lg {
+			bottom: $gutter * 1px + 10px;
+		}	
 		
 		//margin-right: ($gutter / 2) / ($siteWidth) * 100%;
 		//max-width: ((2/12 * $siteWidth) - ($gutter)) / $siteWidth * 100%;
@@ -97,6 +100,7 @@ input[type="submit"], input[type="button"], button, .pseudobutton {
 }
 
 	label.pseudobutton {
+		float: right;
 		display: block;
 		margin-top: $elementMarginBottom; // in fact, this is the labels bottom margin		
 	}
@@ -162,12 +166,15 @@ form {
 
 .options {
 	min-height: 3em;
-	float: left;
+	flex-direction: row!important;
+	flex-wrap: wrap;
+	//float: left;
 		
 	&.down { margin-top: 22 / 12 * 1em;}
 			
 	label {
 		float: left;
+		font-size: 12px;
 		margin-bottom: $elementMarginBottom;
 		width: 100%;
 	}
@@ -181,12 +188,13 @@ form {
 	}
 	
 	.option {
-		float: left;
-		display: block;
+		//float: left;
+		//display: block;
+		display: inline-block;
 		position: relative;
 		//padding-left: 60px;
 		width: 45px;
-		margin-bottom: 12px;
+		//margin-bottom: 12px;
 		cursor: pointer;
 	
 		@include user-select(none);
@@ -206,10 +214,12 @@ form {
 			@include border-box;
 			color: $white;
 			cursor: pointer;
-			
+			display: inline-block;
+			float: none;
 			left: 0;
+			margin-bottom: 0;
 			padding: 6px 0px;
-			position: absolute;
+			//position: absolute;
 			text-align: center;
 			text-transform: uppercase;
 			@include transition(all 300ms ease);

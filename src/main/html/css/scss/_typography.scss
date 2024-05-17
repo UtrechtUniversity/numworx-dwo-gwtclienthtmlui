@@ -113,7 +113,9 @@ h2 {
 		font-weight: 700;
 		letter-spacing: 0.3px;
 		line-height: $gutter * 1px;
+		margin-bottom: 0;//$elementMarginBottom;
 		width: 100%;
+		
 		header & { border-bottom-style: none; }
 		
 		span {
@@ -123,6 +125,11 @@ h2 {
 			max-width: (2 * ($colWidth + $gutter) + $colWidth) * 1px;
 			text-indent: 10px;
 			width: 100%;
+		}
+		[class*="col-"].row & {
+			font-size: 13px;
+			margin-left: $gutter/2 * 1px;
+			width: calc( 100% - #{$gutter * 1px});
 		}
 	}
 	
@@ -143,8 +150,9 @@ h3 {
 	color: $primary;
 	margin-bottom: $elementMarginBottom;
 	font-weight: 700;
-	font-size: 13 / 16 * 1em;
-	line-height: 18 / 13 * 1em;
+	//font-size: 13 / 16 * 1em;
+	font-size: 12px;
+	line-height: 14 / 13 * 1em;
 	
 	.dialog & {
 		font-size: 13 / 16 * 1em;
@@ -204,12 +212,14 @@ input[type="submit"], input[type="button"], button, .pseudobutton {
 	letter-spacing: .3px;
 	line-height: 14px;
 	font-size: 12px;
-
+	&[class*="col-"]  {
+		font-size: 16px;
+	}
 }
 input[type="text"], input[type="password"], select {
 	font-family: 'Ubuntu', sans-serif;
 	font-size: 1em;
-	line-height: 1em;
+	line-height: 14px;//1em;
 	
 	:not(label) > & {
 		font-size: 12 / 16 * 1em;
@@ -235,12 +245,22 @@ label {
 
 	&.buttonLabel {
 		color: $primary;
+		display: flex;
+		flex-direction: column;
 		font-weight: bold;
 	}
 	
 	&.input {
 		text-transform: uppercase;
 		font-weight: normal;
+	}
+
+	input[type="submit"] {
+		align-self: flex-end;
+	}
+
+	&[class*="col-"]  {
+		font-size: 12px;
 	}
 }
 
@@ -289,11 +309,11 @@ table.results {
 		tr:first-child th {
 			color: $white;
 		}
-		tr.headers th span {
-			&.active {
+		tr.headers th {
+			span.active, &.expanded span {
 				color: $white;
 			}
-			a {
+			span a {
 				text-transform: uppercase;
 				color: $white;
 				text-decoration: none;

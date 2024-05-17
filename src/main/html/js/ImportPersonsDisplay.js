@@ -36,6 +36,7 @@ ImportPersonsDisplay.prototype.clear = function () {
 
 ImportPersonsDisplay.prototype.init = function() {
 	app.mainDisplay.registerStretchables( [ this.$personsTableBody ] );
+	document.body.scrollTop = 0;
 }
 
 ImportPersonsDisplay.prototype.setEmptyPeopleTableMessage = function() {

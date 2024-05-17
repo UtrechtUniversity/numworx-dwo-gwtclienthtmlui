@@ -114,7 +114,7 @@ EditPersonDisplay.prototype.clear = function () {
 	this.resetSorting();
 }
 EditPersonDisplay.prototype.init = function () {
-	console.log("init!");
+	document.body.scrollTop = 0;	
 }
 EditPersonDisplay.prototype.setHelp = function(url) {
 		if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );

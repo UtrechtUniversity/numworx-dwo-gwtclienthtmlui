@@ -130,6 +130,7 @@ OrganisationDisplay.prototype.filterPersonsList = function () {
  */
 OrganisationDisplay.prototype.init = function() {
 	app.mainDisplay.registerStretchables( [ this.$personsTableBody ] );
+	document.body.scrollTop = 0;
 }
 
 /**

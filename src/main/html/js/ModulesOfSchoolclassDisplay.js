@@ -241,6 +241,7 @@ ModulesOfSchoolclassDisplay.prototype.init = function () {
 		$("#modulesOfSchoolclassDisplayCourseType").hide();
 		$("#modulesOfSchoolclassDisplaySY").hide()
 	}
+	document.body.scrollTop = 0;
 }
 
 ModulesOfSchoolclassDisplay.prototype.clear = function () {

@@ -15,6 +15,7 @@ StudentResultsDisplay.prototype.getId = function() {
  
 StudentResultsDisplay.prototype.init = function () {
     this.localize();
+	document.body.scrollTop = 0;
 }
 
 StudentResultsDisplay.prototype.clear = function () {

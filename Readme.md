@@ -125,3 +125,28 @@ Terzijde
 maven package 
 
 bouwt de css mbv een maven scss plugin
+
+TESTEN OP MOBIEL (Mac)
+
+Get list of hardware interfaces:
+
+networksetup -listallhardwareports
+
+Find your IP on your local network:
+
+ipconfig getifaddr [interface-name]
+interface-name is for example 'en0'
+
+Visit the IP on your phone, example:
+
+192.168.1.158:8888/local/
+
+
+ERROR (gebeurt soms op Mac bij builden/runnen via maven)
+
+[ERROR] Failed to execute goal io.fabric8:docker-maven-plugin:0.43.4:run (default-cli) on project DwoGwtClientHtmlUi: Execution default-cli of goal io.fabric8:docker-maven-plugin:0.43.4:run failed: No <dockerHost> given, no DOCKER_HOST environment variable, no read/writable '/var/run/docker.sock' or '//./pipe/docker_engine' and no external provider like Docker machine configured 
+
+Oplossing, in CLI:
+docker context list  
+echo $DOCKER_HOST                                                                                                                    
+export DOCKER_HOST=[path met asterix]

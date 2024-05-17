@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="gwt:property" content="locale=nl" >
 	
-	<meta name="viewport" content="width=1024"> <!-- 1342 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> <!-- 1024 / 1342 -->
 	
     <title>Library</title>	
    	
@@ -18,6 +18,9 @@
 	<!-- Helpers for interface stuff -->
 	<script src="js/helpers.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/libraryHelpers.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/MainDisplay.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/dialogs.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/MainApp.js" type="text/javascript" charset="utf-8"></script>
 	
   </head>
 
@@ -28,6 +31,10 @@
 	  -->
 	  <svg style="display: none">
 	    <defs>
+			<g id="menu">
+				<path d="M57.5,50 C61.0898509,50 64,52.9101491 64,56.5 C64,60.0898509 61.0898509,63 57.5,63 L6.5,63 C2.91014913,63 4.39629938e-16,60.0898509 0,56.5 C-4.39629938e-16,52.9101491 2.91014913,50 6.5,50 L57.5,50 Z M57.5,25 C61.0898509,25 64,27.9101491 64,31.5 C64,35.0898509 61.0898509,38 57.5,38 L6.5,38 C2.91014913,38 4.39629938e-16,35.0898509 0,31.5 C-4.39629938e-16,27.9101491 2.91014913,25 6.5,25 L57.5,25 Z M57.5,0 C61.0898509,-6.59444907e-16 64,2.91014913 64,6.5 C64,10.0898509 61.0898509,13 57.5,13 L6.5,13 C2.91014913,13 4.39629938e-16,10.0898509 0,6.5 C-4.39629938e-16,2.91014913 2.91014913,6.59444907e-16 6.5,0 L57.5,0 Z" id="Combined-Shape"></path>
+			</g>
+
 	        <g id="account">
 		   	 <path class="st0" d="M56.9,0H7.1C3.2,0,0,3.2,0,7.1v49.8C0,60.8,3.2,64,7.1,64h49.8c3.9,0,7.1-3.2,7.1-7.1V7.1C64,3.2,60.8,0,56.9,0
 		   	 	z M32.1,9.3c6,0,10.9,4.9,10.9,10.9c0,6-4.9,10.9-10.9,10.9c-6,0-10.9-4.9-10.9-10.9C21.2,14.1,26.1,9.3,32.1,9.3z M53.9,54.1H10.3
@@ -127,6 +134,11 @@
 	
 	<main id="mainPanel" class="panel">
 		<header>
+			<a class='profile-menuIcon' href="javascript: void(0);" id="menuToggle">
+				<svg viewBox="0 0 64 64" class="icon">
+		  		  <use xlink:href="#menu"></use>
+			    </svg>
+			</a>
 			<a href="#" id="logo"><img src="images/header-logoNumworxDocent.png"></a>
 			<a href="javascript: void(0);" id="accountMenuToggle">
 				<svg viewBox="0 0 64 64" class="icon">
@@ -177,10 +189,136 @@
 				    </svg><span class="name">Organisatie</span></a></li>
 			</ul>
 		</nav>
+
+		<!-- 
+		-
+		- teacherStudentModelDisplay
+		-
+		-->
+		<section id="teacherStudentModelDisplayPanel" class="subpanel">
+			
+			<header>
+				<div class="container">
+					<div class="content">
+						<svg viewBox="0 0 64 64" class="icon pageIcon">
+<!-- 							<use xlink:href="#kennis"></use> -->
+						</svg>
+						<h1><span data-translate='NUM_LBL_KNOWLEDGE_GOALS'>Leerdoelen</span></h1>
+						<h2 class="sectionhead"><span data-translate='NUM_LBL_KNOWLEDGE_SHOW'>Bekijk leerdomein</span></h2>					
+					</div>
+					<section id="help" class="col-2 help">
+						<h2 class="helpheader"><span data-translate="NUM_MNU_HELP">Numworx Help</span></h2>
+						<div class="content">
+							<iframe src="helppage/helpindex_nl.html" loading="lazy"></iframe>
+							<span class="closeButton">
+								<svg viewBox="0 0 64 64" class="icon">
+									<use xlink:href="#close"></use>
+							    </svg>
+							</span>
+						</div>
+					</section>
+				</div>
+			</header>
+			
+			<section>
+				<form name='teacherStudentModelSelect' class="row grow">													
+					<div class="row grow" id="teacherStudentModelBody">						
+						<div class="col-6 row grow">
+							
+	
+							<div class='col-6'>
+								<label class='input'>
+									Model
+									<select name='modelselect'>
+										<option value="SLO">SLO leerdoelen Onderbouw</option>
+									</select>
+								</label>					    	
+							</div>
+							<label class='col-6 input'>
+								<span data-translate='NUM_LBL_METHOD_ACTIVE'>Actieve methode</span>
+								<select name="activeMethod"><option value="">Geen methode</option></select>
+							</label>
+
+							<div class="row">
+								<label class="col-4" for="teacherStudentModelMethodBox">
+									<h3 id='teacherStudentModelMethod' data-translate='NUM_LBL_METHOD'>Methode-indeling</h3>
+									<div class="checkbox">
+										<input type="checkbox" name="method" id="teacherStudentModelMethodBox" value="true">
+										<label class="icon" for="teacherStudentModelMethodBox"></label>
+									</div>
+								</label>
+								
+								<div class="col-2">
+									<input name='filter' type='submit' class='secondary  down' data-translate="NUM_BTN_Filter" value='Filter' disabled='disabled'>
+								</div>
+							</div>
+
+							<div class="col-6 grow">
+								<h3><span id='teacherStudentmodelTitled'>Alle leerdoelen</span></h3>						
+								<div class='treeWrapper profile-borderBox' id='teacherStudentModelTreeWrapper'>
+								</div>
+							</div>
+
+							<div class="col-6">
+								<input name='graph' type='submit' class='primary right' value='graph' disabled='disabled' data-translate='NUM_BTN_GRAPH'>
+							</div>	
+						</div>
+							
+						
+						<div class='col-6'>
+							<h3><span id='teacherStudentmodelDescriptionTitle'>Uitleg</span></h3>						
+							<div id='teacherStudentModelDescription' class='treeWrapper profile-borderBox'>
+	<!-- 							Hok met beschrijving -->
+							</div>
+						</div>
+						
+					</div>
+				</form>
+
+				<div class="row">
+					<form name='teacherStudentmodelKlas'>
+						<div class="col-6 row">						
+							<h2 class='sectionhead'>
+								<span data-translate='NUM_LBL_KNOWLEDGE_CLASS'>Bekijk kennisoverzicht klas</span>
+							</h2>
+							<div class="row">
+								<label class="col-4 input">
+									<span data-translate="NUM_TBL_CLASSES_CLASSNAME">Naam klas</span>
+									<select name="schoolClass"><option value=""></option></select>
+								</label>
+								<div class="col-2">
+									<input type="submit" name="submit"  class="primary right down" data-translate='NUM_BTN_KNOWLEDGE_CLASS' value="Bekijk klas" >
+								</div>			
+							</div>			
+						</div>
+					</form>
+					<div class='col-6'>
+						<h2 class='sectionhead'><span data-translate='NUM_LBL_FILTER_CLASS'>Filtering voor studenten van klas</span></h2>
+						<form name='teacherStudentmodelFilter'>
+							<label class="buttonLabel">
+                                    <span data-translate='NUM_SEC_FILTER_CLASS'>Kies een filter om per klas leerdoelen zichtbaar te maken</span>
+									<input name='submit' type="submit" class="secondary right" data-translate='NUM_BTN_FILTER_CHOOSE' value="Kies filter" disabled='disabled'>
+								</label>
+						</form>
+					</div>
+				</div>
+				
+				<div class="row">					
+				</div>
+				
+				<div class="row">
+				</div>
+				
+				
+			</section>
+			
+		</section>
+		<!-- end teacherStudentModelDisplay -->
+
 				
 		<section id="modulesDisplayPanel" class="subpanel iframepanel">
 			
-			<iframe src="https://www.dwo.nl/leerling"></iframe>
+			<iframe src="https://www.dwo.nl"></iframe>
 			
 		</section>
 		
@@ -240,14 +378,12 @@
 					<section id="help" class="col-2 help">
 						<h2 class="helpheader">Numworx Help</h2>
 						<div class="content">
-							<iframe src="http://www.numworx.nl"></iframe>
+							<iframe src="helppage/helpindex_nl.html#results"></iframe>
 							<span class="closeButton">
 								<svg viewBox="0 0 64 64" class="icon">
 									<use xlink:href="#close"></use>
 							    </svg>
 							</span>
-							<!-- <h2>Help kop</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium gravida dignissim. Aliquam id metus quam. Aenean consequat arcu sit amet commodo porttitor.</p><p>Proin viverra, enim non feugiat ornare, purus urna dignissim ante, consectetur faucibus libero diam id ligula.</p> -->
 						</div>
 					</section>
 				</div>
@@ -259,108 +395,109 @@
 					<div class="col-12">
 						<h3>Gevonden personen</h2>
 						<form>
-							
-						<table class="dwo hoverable selectable sortable">
-							<thead>
-								<tr>
-									<th>									
-										<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>										
-									</th>
-									<th>Voornaam</th>
-									<th>Tussenvoegsel</th>
-									<th>Achternaam</th>
-									<th class="col-4">Emailadres</th>
-								</tr>
-								
-								<tr class="sorting">
-									<th>
-										<span class="sortButton asc" data-order="asc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowUp"></use>
-											</svg>
-										</span>
-										<span class="sortButton desc" data-order="desc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowDown"></use>
-											</svg>
-										</span>									
-									</th>
-									<th>
-										<span class="sortButton asc" data-order="asc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowUp"></use>
-											</svg>
-										</span>
-										<span class="sortButton desc" data-order="desc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowDown"></use>
-											</svg>
-										</span>									
-									</th>
-									<th>
-										<span class="sortButton asc" data-order="asc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowUp"></use>
-											</svg>
-										</span>
-										<span class="sortButton desc" data-order="desc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowDown"></use>
-											</svg>
-										</span>									
-									</th>
-									<th>
-										<span class="sortButton asc" data-order="asc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowUp"></use>
-											</svg>
-										</span>
-										<span class="sortButton desc" data-order="desc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowDown"></use>
-											</svg>
-										</span>									
-									</th>
-									<th class="col-4">
-										<span class="sortButton asc" data-order="asc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowUp"></use>
-											</svg>
-										</span>
-										<span class="sortButton desc" data-order="desc" data-type="string">
-											<svg viewBox="0 0 74 74" class="icon">
-												  <use xlink:href="#arrowDown"></use>
-											</svg>
-										</span>									
-									</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr tabindex="1">
-									<td>
-										<input type="radio" name="test" class="hidden" value="bakker34">
-										<span>Bakker34</span>
-									</td>
-									<td>Michel</td>
-									<td></td>
-									<td>Bakker</td>
-									<td class="col-4">michel@hotmail.com</td>
-								</tr>
-								<tr tabindex="2">
-									<td>
-										<input type="radio" name="test" class="hidden" value="bakker34">
-										Bakker34
-									</td>
-									<td>Michel</td>
-									<td></td>
-									<td>Bakker</td>
-									<td class="col-4">michel@hotmail.com</td>
-								</tr>
-								
-								
-								
-							</tbody>
-						</table>
+						<div class="tablewrap overflow">
+							<table class="dwo hoverable selectable sortable">
+								<thead>
+									<tr>
+										<th class="col-2">									
+											<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>										
+										</th>
+										<th class="col-2">Voornaam</th>
+										<th class="col-2">Tussenvoegsel</th>
+										<th class="col-2">Achternaam</th>
+										<th class="col-4">Emailadres</th>
+									</tr>
+									
+									<tr class="sorting">
+										<th class="col-2">
+											<span class="sortButton asc" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													<use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													<use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>									
+										</th>
+										<th class="col-2">
+											<span class="sortButton asc" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													<use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													<use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>									
+										</th>
+										<th class="col-2">
+											<span class="sortButton asc" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													<use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													<use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>									
+										</th>
+										<th class="col-2">
+											<span class="sortButton asc" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													<use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													<use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>									
+										</th>
+										<th class="col-4">
+											<span class="sortButton asc" data-order="asc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													<use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="string">
+												<svg viewBox="0 0 74 74" class="icon">
+													<use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>									
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr tabindex="1">
+										<td class="col-2">
+											<input type="radio" name="test" class="hidden" value="bakker34">
+											<span>Bakker34</span>
+										</td>
+										<td class="col-2">Michel</td>
+										<td class="col-2"></td>
+										<td class="col-2">Bakker</td>
+										<td class="col-4">michel@hotmail.com</td>
+									</tr>
+									<tr tabindex="2">
+										<td class="col-2">
+											<input type="radio" name="test" class="hidden" value="bakker34">
+											Bakker34
+										</td>
+										<td class="col-2">Michel</td>
+										<td class="col-2"></td>
+										<td class="col-2">Bakker</td>
+										<td class="col-4">michel@hotmail.com</td>
+									</tr>
+									
+									
+									
+								</tbody>
+							</table>
+							</div>
 						
 						
 							<input type="submit" class="primary right" value="Toon resultaten" />
@@ -569,9 +706,12 @@
 								Label
 								<input id="field_1" type="text" value="" />
 							</label>
+							<div class="col-4 text-right">
+								<input type="submit" class="secondary down" value="Button" />
+							</div>
 						</div>
 						
-						<input type="submit" class="bottom right secondary" value="Button" />
+						
 					</div>
 				</div>
 				
@@ -585,7 +725,7 @@
 				
 				<div class="row">
 					<div class="col-12">
-						<div class="tablewrap overflow">
+						<div class="tablewrap overflow-always">
 							<table class="dwo hoverable results">
 								<thead>
 									<tr>
@@ -605,6 +745,12 @@
 										<th><span>Module naam in drie regels</span></th>
 										<th><span>Module naam in drie regels</span></th>
 										<th><span>Module naam in drie regels</span></th>
+										<th><span>Module naam in drie regels</span></th>
+										<th><span>Module naam in drie regels</span></th>
+										<th><span>Module naam in drie regels</span></th>
+										<th><span>Module naam in drie regels</span></th>
+										<th><span>Module naam in drie regels</span></th>
+										<th class="fill">&nbsp;</th>
 									</tr>
 									<tr class="sorting">
 										<th>
@@ -753,11 +899,72 @@
 												</svg>
 											</span>
 										</th>
+										<th>
+											<span class="sortButton asc" data-order="asc" data-type="int" data-attr="score">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="int" data-attr="score">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>
+										<th>
+											<span class="sortButton asc" data-order="asc" data-type="int" data-attr="score">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="int" data-attr="score">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>
+										<th>
+											<span class="sortButton asc" data-order="asc" data-type="int" data-attr="score">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="int" data-attr="score">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>
+										<th>
+											<span class="sortButton asc" data-order="asc" data-type="int" data-attr="score">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="int" data-attr="score">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>
+										<th>
+											<span class="sortButton asc" data-order="asc" data-type="int" data-attr="score">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowUp"></use>
+												</svg>
+											</span>
+											<span class="sortButton desc" data-order="desc" data-type="int" data-attr="score">
+												<svg viewBox="0 0 74 74" class="icon">
+													  <use xlink:href="#arrowDown"></use>
+												</svg>
+											</span>
+										</th>
+										<th class="fill">&nbsp;</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td><span data-name="Klaasen, Klaas">Klaassen, Klaas</span></td>
+										<td class="studentName"><span data-name="Klaasen, Klaas">Klaassen, Klaas</span></td>
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="9">9%</a></td>
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="10">10%</a></td>
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="15">15%</a></td>
@@ -770,9 +977,15 @@
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="1">1%</a></td>
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="30">30%</a></td>
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td class="fill">&nbsp;</td>
 									</tr>
 									<tr>
-										<td><span data-name="Janssen, Jan">Janssen, Jan</span></td>
+										<td class="studentName"><span data-name="Janssen, Jan">Janssen, Jan</span></td>
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="7">7%</a></td>
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="30">30%</a></td>
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="15">15%</a></td>
@@ -785,9 +998,15 @@
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="1">1%</a></td>
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="20">20%</a></td>
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td class="fill">&nbsp;</td>
 									</tr>
 									<tr>
-										<td><span data-name="Derksen, Pieter">Derksen, Pieter</span></td>
+										<td class="studentName"><span data-name="Derksen, Pieter">Derksen, Pieter</span></td>
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="8">8%</a></td>
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="70">70%</a></td>
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="15">15%</a></td>
@@ -800,10 +1019,16 @@
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="1">1%</a></td>
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="30">30%</a></td>
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="30">30%</a></td>
+										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td class="fill">&nbsp;</td>
 									</tr>
 									
 									<tr>
-										<td><span data-name="Arendsen, Arend">Arendsen, Arend</span></td>
+										<td class="studentName"><span data-name="Arendsen, Arend">Arendsen, Arend</span></td>
 										<td></td>
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="10">10%</a></td>
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="25">25%</a></td>
@@ -816,6 +1041,12 @@
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="1">1%</a></td>
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="30">30%</a></td>
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="10">10%</a></td>
+										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td><a href="javascript:void(0);" class="resultIndicator" data-score="35">35%</a></td>
+										<td class="fill">&nbsp;</td>
 									</tr>
 																		
 									
@@ -843,7 +1074,7 @@
 				
 				<div class="row">
 					<div class="col-12">
-						<div class="tablewrap  size-2">
+						<div class="tablewrap overflow-always">
 							<table class="dwo hoverable results">
 								<thead>
 									<tr>
@@ -884,7 +1115,7 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td><span data-name="Klaasen, Klaas">Klaassen, Klaas</span></td>
+										<td class="studentName"><span data-name="Klaasen, Klaas">Klaassen, Klaas</span></td>
 										<td><a href="javascript:void(0);" class="resultIndicator" data-score="9">9%</a></td>
 										<td class="fill">&nbsp;</td>
 									</tr>
@@ -1315,7 +1546,8 @@
 					</div>
 			</footer>
 		</section>
-		
+
+				
 	</main>
 
   </body>

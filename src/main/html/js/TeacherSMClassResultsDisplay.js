@@ -33,6 +33,9 @@
  	
  	this.$back = $("#teacherSMClassResultsBacklink");
 	this.$back.on('click', $.proxy(this.backToSM, this));
+
+	// init
+	$('#teacherSMClassResultMethodBoxF').prop('checked', true);
   }
   
  TeacherSMClassResultsDisplay.prototype.show = function() {
@@ -47,6 +50,7 @@
  TeacherSMClassResultsDisplay.prototype.init = function() {
  	app.mainDisplay.registerStretchables( [ this.$classTreeWrapper ] );
  	app.mainDisplay.registerCallback( this.getTreeId(), $.proxy(this.onResize, this));
+	document.body.scrollTop = 0;
  }
  TeacherSMClassResultsDisplay.prototype.clear = function() {}
  
@@ -168,7 +172,7 @@ TeacherSMClassResultsDisplay.prototype.onClassChange = function(ev) {
  }
  
 TeacherSMClassResultsDisplay.prototype.isMethod = function() {
-	var check =  this.methodCheck.checked;
+	var check =  this.methodCheck.value == "true";
 	return check;
 }
 
@@ -180,6 +184,7 @@ TeacherSMClassResultsDisplay.prototype.isMethod = function() {
  
  
 TeacherSMClassResultsDisplay.prototype.onResize = function() {
+	return; // disable funcion
  	var height = this.$classTreeWrapper.outerHeight();
  	var $tbody = this.$classResultsWrapper.find('tbody')
  	$tbody.height( (height - 100) + "px" )

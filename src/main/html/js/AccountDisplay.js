@@ -63,6 +63,7 @@ AccountDisplay.prototype.resetSorting = function() {
 
 AccountDisplay.prototype.init = function (json) {
 	app.mainDisplay.registerStretchables( [ this.$schoolLoginsTableBody ] );
+	document.body.scrollTop = 0;
 	//Helpers.stretchHeight( [ this.$schoolLoginsTableBody ] )
 }
 

@@ -33,7 +33,7 @@
 
 
  
-#loginDisplayPanelMessageBox iframe { width: 240px; }
+#loginDisplayPanelMessageBox iframe { width: 100%; }
 
 #mainPanel nav ul.WELCOME li a[href="#WELCOME"] { color: $primary;}
 #mainPanel nav ul.WELCOME li a[href="#WELCOME"] span.icon { background-color: $primary; }
@@ -61,9 +61,6 @@
 
 #mainPanel nav ul.CHATBOX li a[href="#CHATBOX"] { color: $primary !important;}
 #mainPanel nav ul.CHATBOX li a[href="#CHATBOX"] svg use { fill: $primary !important; }
-
-#headertrails { float:left; margin-top:18px; font-size:13px; font-family:Ubuntu; color:$primaryLight; font-weight:500; }
-#headertrails a { color: $primaryLight; }
 
 .score-treeItem, .score-modelItem, .model-item {
 	font-size: 13px;
@@ -235,8 +232,8 @@ table.dwo.kg tbody {
 }
 
 div#teacherStudentModelTreeWrapper, div#teacherSMClassResultsTreeWrapper {
-	background: initial;
-	border: initial;
+	//background: initial;
+	//border: initial;
 }
 
 div.filter-dialog .popupContent {
@@ -246,9 +243,9 @@ div.filter-dialog .popupContent {
 .hiddenChat #chatboxNav {
 	display: none;
 }
-.profile-welcome {
+/*.profile-welcome {
 	display: none;
-}
+}*/
 
 .filter-title {
 	background-color: #1B75BB;

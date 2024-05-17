@@ -31,9 +31,12 @@
 .profile-loginLogo {
 	background: transparent url(../images/login-containerBackground.jpg) no-repeat top left; // TODO: replace by def image
 	height: 220px;
-    position: absolute;
-    top: 0px;
-    width: 600px;    
+    width: 600px;  
+	
+	@include size-md {
+		position: absolute;
+    	top: 0px;
+	}
 }
 
 .profile-headerIcon svg {

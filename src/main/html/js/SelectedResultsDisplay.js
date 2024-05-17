@@ -123,14 +123,16 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 		$value = $("<span>" + Helpers.htmlEscape(matrix[0][i].label) + "</span>");
 		$headerName.html("").append($value);		
 		if (matrix[0][i].callback) {
-			$value.on('click', $.proxy(matrix[0][i].callback, this, matrix[0][i].params));
+			// disabled in favor of new column clicking - Teuniz 20240417
+			//$value.on('click', $.proxy(matrix[0][i].callback, this, matrix[0][i].params));
 		}
 		if (matrix[0][i].linkLabel && matrix[0][i].linkCallback) {
 			$link = $('<a href="javascript:void(0);">'+matrix[0][i].linkLabel+'</a>');
 			$value.append($link);
 			$link.on('click', $.proxy(matrix[0][i].linkCallback, this, matrix[0][i].linkParams));
 		}
-		$value.hover($.proxy(this.hoverColumnHeader, this));		
+		$value.hover($.proxy(this.hoverColumnHeader, this));
+		$value.click($.proxy(this.clickColumnHeader, this));		
 		$theadRow2.append($headerName);
 		
 		// Sort buttons
@@ -570,12 +572,12 @@ SelectedResultsDisplay.prototype.computeModuleScoreForStudent = function(module,
 	var total = 0, totalCount = 0, scoreSet = false, allZero = true;
 
 	for (var id in module.children) { // Loop over modules
-		if (module.children[id].children) { 
+		if (module.children[id].children) { 			
 			for (var scoId in module.children[id].children) { // Loop over activities
 				if (module.children[id].children[scoId]["user-id"] == studentId) { // Select student
 					scoreSet = true;
 					total += parseInt(module.children[id].children[scoId].sumScore); // Sum of scores
-					
+										
 					if ( ! ( 
 								( (module.children[id].children[scoId].sumScore) == 0 && (module.children[id].children[scoId].totalTime) == "0s") 
 								||  module.children[id].children[scoId].completion_status == "not attempted" 
@@ -743,6 +745,7 @@ SelectedResultsDisplay.prototype.init = function(resultState) {
 		
 	schoolClassName = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].label;
 	this.$sectionTitle.html( app.getTranslator().translate("NUM_SEC_SELECTEDRESULTS")+" "+schoolClassName );
+	document.body.scrollTop = 0;
 }
 
 SelectedResultsDisplay.prototype.setHelp = function(url) {
@@ -891,7 +894,19 @@ SelectedResultsDisplay.prototype.hoverColumnHeader = function(event) {
 	}	
 }
 
-
+SelectedResultsDisplay.prototype.clickColumnHeader = function(event) {
+	var $target = $(event.target);
+	if ( $target.parent().hasClass('expanded') ) {
+		$target.closest('table').find('tr').find('td, th').removeClass('expanded');
+	} else {	
+		$target.closest('table').find('tr').find('td, th').removeClass('expanded');
+		var parentIndex = $target.parent().index();
+		$target.parent().addClass('expanded');
+		$target.closest('table').find('tr').each(function() {
+			$(this).find('td, th').eq(parentIndex).addClass('expanded');
+		});
+	}
+}
 
 // Class / module
 SelectedResultsDisplay.prototype.clickModuleResultIndicator = function(params, event) {

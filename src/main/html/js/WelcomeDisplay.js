@@ -19,6 +19,7 @@ WelcomeDisplay.prototype.localize = function() {
 
 WelcomeDisplay.prototype.init = function() {
 	app.mainDisplay.registerStretchables( [ this.$welcomeText  ] );
+	document.body.scrollTop = 0;
 }
 
 WelcomeDisplay.prototype.clear = function() {

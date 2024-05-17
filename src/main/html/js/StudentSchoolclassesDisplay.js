@@ -61,6 +61,7 @@ StudentSchoolclassesDisplay.prototype.clear = function () {
 
 StudentSchoolclassesDisplay.prototype.init = function () {
 	app.mainDisplay.registerStretchables( [ this.$schoolclassTableBody ] );
+	document.body.scrollTop = 0;
 }
 
 StudentSchoolclassesDisplay.prototype.setHelp = function(url) {

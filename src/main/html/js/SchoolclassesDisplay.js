@@ -47,7 +47,6 @@ SchoolclassesDisplay.prototype.resetSorting = function() {
 
 
 SchoolclassesDisplay.prototype.init = function () {
-	console.log("init!");
 	this.addSchoolclassForm.elements["classname"].value = "";
 	this.addSchoolclassForm.elements["classkey"].value = "";
 	this.addSchoolclassForm.elements["useClasstree"][0].checked = false;
@@ -60,6 +59,7 @@ SchoolclassesDisplay.prototype.init = function () {
 	this.changeInputFieldAddSchoolclassForm();
 	
 	this.resetSorting();
+	document.body.scrollTop = 0;
 }
 
 SchoolclassesDisplay.prototype.clear = function () {	

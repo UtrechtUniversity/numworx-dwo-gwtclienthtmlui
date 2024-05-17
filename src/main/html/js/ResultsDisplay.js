@@ -165,6 +165,7 @@ ResultsDisplay.prototype.init = function () {
 	this.resultState.activeCourses = [];
 	this.chooseClassModuleFormToggle();
 	this.$selectAllModules.removeClass("active");
+	document.body.scrollTop = 0;
 }
 
 ResultsDisplay.prototype.clear = function () {

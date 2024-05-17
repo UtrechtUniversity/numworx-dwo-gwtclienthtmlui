@@ -94,6 +94,7 @@ StudentScoResultDisplay.prototype.init = function (state) {
 	this.showHideNextAndPrevious();
 	
 	this.$iframe.attr('src', '' );
+	document.body.scrollTop = 0;
 }
 
 StudentScoResultDisplay.prototype.clear = function () {
