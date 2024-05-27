@@ -402,7 +402,8 @@ table.dwo.results {
 		@include user-select-none();
 
 		&.expanded {
-			min-width: (($colWidth) - $gutter) * 1px;
+			max-width: (($colWidth) + $gutter) * 1px; 
+			min-width: (($colWidth) + $gutter) * 1px; 
 		}
 		
 		&:first-child {
@@ -463,6 +464,8 @@ table.dwo.results {
 							
 				th {
 					background-color: $primaryLight;
+					max-width: none!important;
+					min-width: none!important;
 					padding: 2px $gutter/2 *1px;
 					position: relative;	
 					text-indent: 10px;
@@ -538,7 +541,8 @@ table.dwo.results {
 					min-width: (($colWidth/2) - $gutter) * 1px;
 
 					&.expanded {
-						min-width: (($colWidth) - $gutter) * 1px;
+						max-width: (($colWidth) + $gutter) * 1px; 
+						min-width: (($colWidth) + $gutter) * 1px; 
 					}
 					
 					span {
@@ -551,7 +555,7 @@ table.dwo.results {
 						height: 64px;
 						left: 50%;
 						line-height: 1.3em;
-						margin: -38px 0 0 0px;	// -54
+						margin: -38px 0 0 -26px;	// -54
 						overflow: hidden;
 						padding: 3px 5px;
 						position: absolute;
@@ -561,7 +565,7 @@ table.dwo.results {
 						@include transition(background-color 200ms ease);
 						transition-property: background-color, color;
 						//width: (($colWidth - $gutter) / 2 - 10) * 1px;
-						transform: translateX(-50%);
+						//transform: translateX(-50%);
 						width: (($colWidth/2) - $gutter)  * 1px;
 						white-space: break-spaces;
 						z-index: 9;
@@ -599,6 +603,7 @@ table.dwo.results {
 						background-color: $primary;
 						border: $borderThickness $primary solid;
 						@include box-shadow(3px,3px,10px,0px,$shadow);
+						max-width: ($colWidth + $gutter) * 1px; //- 20 - 10
 						width: ($colWidth + $gutter) * 1px; //- 20 - 10
 						z-index: 99;
 						
@@ -621,6 +626,9 @@ table.dwo.results {
 						&:after {
 							display: none;
 						}
+					}
+					&.expanded span {
+						margin-left: -78px;
 					}
 					
 				}
@@ -709,6 +717,7 @@ table.dwo.results {
 		}
 		
 		td {
+			max-width: ($colWidth/2 - $gutter) * 1px; // For overflow to work
 			width: ($colWidth/2 - $gutter) * 1px;
 			
 			&.studentName {
@@ -719,6 +728,7 @@ table.dwo.results {
 				position: relative;
 				white-space: nowrap;
 				//width: (($colWidth) - $gutter) * 1px;
+				max-width: none;
 				min-width: ($colWidth) * 1px;
 				z-index: 9;
 				
