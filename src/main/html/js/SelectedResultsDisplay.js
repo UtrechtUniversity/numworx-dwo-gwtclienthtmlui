@@ -286,7 +286,21 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 		j = 1;
 		for (var amId in activeModules) {
 			matrix[i][j] = {};
-			matrix[i][j].score = matrix[i][j].label = matrix[i][j].value = this.computeModuleScoreForStudent(modules[ activeModules[amId] ], studentId);
+	//		matrix[i][j].score = matrix[i][j].label = matrix[i][j].value = this.computeModuleScoreForStudent(modules[ activeModules[amId] ], studentId);
+	
+			let student = students[studentId];
+			let coursenode = student.children[activeModules[amId]];
+// nieuwe opzet hier. alle informatie aanwezig in "coursenode"
+			matrix[i][j].label = coursenode.short;
+			matrix[i][j].score = coursenode.scoCount == 0 ? "" : coursenode.sumScore / coursenode.scoCount; // NaN is ""
+			matrix[i][j].value = matrix[i][j].score
+			matrix[i][j].longlabel = coursenode.long;
+			matrix[i][j].fraction = coursenode.fraction;
+	
+	
+	
+	
+	
 			//matrix[i][j].callback = function() { this.activitiesStudent(modules[ activeModules[amId] ], studentId) };
 			//matrix[i][j].callback = $.proxy(this.activitiesStudent, this, modules[ activeModules[amId] ], studentId );
 			matrix[i][j].callback = this.clickModuleResultIndicator;
@@ -390,30 +404,52 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 
 		for (var n = 0; n < sortedModuleChildren.length; n++) {
 			matrix[i][j] = {};
-			score = null;
-			time = null;
-			
-			for (var scoId in sortedModuleChildren[n].children) { // Loop over activities
-				if (sortedModuleChildren[n].children[scoId]["user-id"] == studentId) { // Select student
-					score = sortedModuleChildren[n].children[scoId].sumScore; 
-					time = sortedModuleChildren[n].children[scoId].totalTime; 
-
-					if ( (score == 0 && time == "0s") ||  sortedModuleChildren[n].children[scoId].completion_status == "not attempted") {
-						score = null;
-						time = null;
-					}
-				}	
+			let student = students[studentId];
+			let coursenode = student.children[module.id];
+			let sconode    = coursenode.children[sortedModuleChildren[n].id];
+			var studentsconode = undefined
+			if (sconode.studentScoCount > 0) 
+				studentsconode = sconode.children[studentId];
+			if (typeof studentsconode != 'undefined' ) {
+				matrix[i][j].label = studentsconode.short;
+				score = matrix[i][j].score = matrix[i][j].value = studentsconode.sumScore;
+				matrix[i][j].sortValue = score;
+			    matrix[i][j].longlabel = studentsconode.long;
+			    matrix[i][j].fraction = studentsconode.fraction;
+			    time = studentsconode.totalTime;
+				if (sconode.maxScore == 0) {
+					matrix[i][j].score = -3; // info
+				}
+			} else {
+				score = null;
+			    time == null;
 			}
 			
+			
+//			score = null;
+//			time = null;
+//			
+//			for (var scoId in sortedModuleChildren[n].children) { // Loop over activities
+//				if (sortedModuleChildren[n].children[scoId]["user-id"] == studentId) { // Select student
+//					score = sortedModuleChildren[n].children[scoId].sumScore; 
+//					time = sortedModuleChildren[n].children[scoId].totalTime; 
+//
+//					if ( (score == 0 && time == "0s") ||  sortedModuleChildren[n].children[scoId].completion_status == "not attempted") {
+//						score = null;
+//						time = null;
+//					}
+//				}	
+//			}
+			
 			if (score != null || time != null) {
-				matrix[i][j].label = score + " in " + time;
+//				matrix[i][j].label = score + " in " + time;
 				matrix[i][j].score = matrix[i][j].value = score;
 				matrix[i][j].sortValue = score;
 				matrix[i][j].callback = this.clickResultIndicator;
-				if (sortedModuleChildren[n].children[scoId].maxScore == 0) {
-					matrix[i][j].score = -3; // info
-					matrix[i][j].label = time;
-				}
+//				if (sortedModuleChildren[n].children[scoId].maxScore == 0) {
+//					matrix[i][j].score = -3; // info
+//					matrix[i][j].label = time;
+//				}
 			
 			
 			} else {
