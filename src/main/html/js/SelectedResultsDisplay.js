@@ -519,12 +519,18 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 	maxPages = j;
 	
 	for (var studentId in students) {
+		let student = students[studentId]
 		matrix[i] = [];
 		matrix[i][0] = {};
-		matrix[i][0].label = matrix[i][0].value = students[studentId].givenName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].familyName;
-		matrix[i][0].sortValue = students[studentId].familyName + " " + (students[studentId].insertion ? students[studentId].insertion+" ":"")  + students[studentId].givenName;//
+		matrix[i][0].label = matrix[i][0].value = student.givenName + " " + (student.insertion ? student.insertion+" ":"")  + student.familyName;
+		matrix[i][0].sortValue = students[studentId].familyName + " " + (students[studentId].insertion ? student.insertion+" ":"")  + students[studentId].givenName;//
 		matrix[i][0].userName = students[studentId].userName;
 		j = 1;
+
+// als je de courseid weet, dan is de studentsco: student.children[courseid].children[scoid].children[studentid]
+// nu opzoeken in activity.children
+ 
+
 		
 		for (var studenScoId in activity.children) {
 			if (activity.children[studenScoId]["user-id"] == studentId) { // Select student
@@ -534,28 +540,33 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 				sortedStudentScoChildren = Helpers.getIndexedSortedArray(activity.children[studenScoId].children);
 				
 				for (var n = 0; n < sortedStudentScoChildren.length; n++) {
+				    let page = sortedStudentScoChildren[n];
 					matrix[i][j] = {};
-					if ( sortedStudentScoChildren[n].maxScore == null ) {
-						matrix[i][j].label = "&nbsp;";
+					matrix[i][j].label = page.short;
+					matrix[i][j].longlabel = page.long;
+					matrix[i][j].fraction  = page.fraction;
+					matrix[i][j].callback = this.clickPageResultIndicator;
+					matrix[i][j].params = { scoId: this.resultState.activeActivity, studentId: studentId, pageSequence: page.sequence };
+										
+					if ( page.maxScore == null ) {
+						//matrix[i][j].label = "&nbsp;";
 						matrix[i][j].score = -1;
 						matrix[i][j].sortValue = -1;
 						matrix[i][j].value = 0;
-						matrix[i][j].callback = this.clickPageResultIndicator;
-						matrix[i][j].params = { scoId: this.resultState.activeActivity, studentId: studentId, pageSequence: sortedStudentScoChildren[n].sequence };
 					} else {
-						matrix[i][j].label = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus != 0 ? (sortedStudentScoChildren[n].bonus>0?"+":"")+sortedStudentScoChildren[n].bonus : "") +" / " + sortedStudentScoChildren[n].maxScore;
+						//matrix[i][j].label = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus != 0 ? (sortedStudentScoChildren[n].bonus>0?"+":"")+sortedStudentScoChildren[n].bonus : "") +" / " + sortedStudentScoChildren[n].maxScore;
 						matrix[i][j].score = (sortedStudentScoChildren[n].sumScore + (sortedStudentScoChildren[n].bonus) ) / sortedStudentScoChildren[n].maxScore * 100;
 //						if (!matrix[i][j].score) 
 //							matrix[i][j].score = -1;
 						matrix[i][j].sortValue = matrix[i][j].value = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus > 0 ?sortedStudentScoChildren[n].bonus : 0);
-						matrix[i][j].callback = this.clickPageResultIndicator;
-						matrix[i][j].params = { scoId: this.resultState.activeActivity, studentId: studentId, pageSequence: sortedStudentScoChildren[n].sequence };
+//						matrix[i][j].callback = this.clickPageResultIndicator;
+//						matrix[i][j].params = { scoId: this.resultState.activeActivity, studentId: studentId, pageSequence: sortedStudentScoChildren[n].sequence };
 
 						if (sortedStudentScoChildren[n].sumScore == -1) {
-							matrix[i][j].label = "Kijk na"
+//							matrix[i][j].label = "Kijk na"
 							matrix[i][j].score = -2
 						} else if (sortedStudentScoChildren[n].maxScore == 0) {
-							matrix[i][j].label = "ℹ"
+//							matrix[i][j].label = "ℹ"
 							matrix[i][j].score = -3;
 						}
 					
@@ -702,7 +713,7 @@ SelectedResultsDisplay.prototype.backtoCurrentActivitiesStudents = function() {
 	// Build backlink
 	var params = {};
 	params.module = this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children[ this.resultState.activeModule ];
-	params.moduleId = this.resultState.activeModule;
+	params.module.id = params.moduleId = this.resultState.activeModule;
 	this.backToActivitiesStudents(params);
 }
 
@@ -710,7 +721,7 @@ SelectedResultsDisplay.prototype.backtoCurrentActivitiesStudents = function() {
 
 SelectedResultsDisplay.prototype.activitiesStudents = function(params) {
 	//console.log(params);
-	
+	params.module.id = params.moduleId;
 	var matrix = this.buildMatrixActivitiesStudentsInModule(params.module);
 	//var sealState = this.getSealStateActivitiesStudentsInModule(params.module);
 	
