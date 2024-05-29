@@ -186,6 +186,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 				
 				// Coloring
 				if (matrix[i][j].score) $value.attr("data-score", matrix[i][j].score );
+				if (matrix[i][j].score) $value.attr("data-fraction", Math.round( matrix[i][j].fraction * 100 ) );
 				else $value.attr("data-score", matrix[i][j].label );
 				Helpers.setResultIndicatorColor($value);
 				

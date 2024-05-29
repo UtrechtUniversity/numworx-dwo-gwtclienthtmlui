@@ -764,14 +764,42 @@ table.dwo.results {
 			}
 			a.resultIndicator {
 				background-color: $shade21;
-				border-bottom: $borderThicknessResult $primary solid;
+				//border-bottom: $borderThicknessResult $primary solid;
 				cursor: pointer;
 				display: block;	
 				margin-top: -3px;		
 				margin-bottom:-2px;
+				padding-bottom: $borderThicknessResult;					
+				position: relative;
 				width: 100%;
 				z-index:10;
-				
+
+				&:before {
+					background-color: $shade20;
+					bottom: 0;
+					content: "";
+					height: $borderThicknessResult;					
+					left: 0;
+					position: absolute;
+					width: 100%;
+					z-index: 30;
+				}
+
+				&:after {
+					bottom: 0;
+					content: "";
+					height: $borderThicknessResult;
+					left: 0;
+					position: absolute;
+					width: 0;
+					z-index: 40;
+				}
+				// make a loop 0 to 100 
+				@for $i from 1 through 100 {
+					&[data-fraction="#{$i}"]:after {
+						width: #{$i + '%'};
+					}
+				}				
 				
 				@include transition(all 200ms ease);
 				
@@ -786,6 +814,13 @@ table.dwo.results {
 				&.result4 {	border-color: $scoreIndicator4;	}
 				&.result5 { background-color: $scoreIndicator5; border-color: $scoreIndicator5; color: $white; }
 				&.resultnone { border-color: $shade22; }
+
+				&.result1:after {	background-color: $scoreIndicator1;	}
+				&.result2:after {	background-color: $scoreIndicator2;	}
+				&.result3:after {	background-color: $scoreIndicator3;	}
+				&.result4:after {	background-color: $scoreIndicator4;	}
+				&.result5:after { background-color: $scoreIndicator5; }
+				&.resultnone:after { background-color: $shade22; }
 			}						
 		}
 		tr:hover td.studentName.overflown:after {
