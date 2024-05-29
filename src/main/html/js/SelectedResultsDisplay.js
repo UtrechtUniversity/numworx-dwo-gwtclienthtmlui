@@ -423,7 +423,7 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 				}
 			} else {
 				score = null;
-			    time == null;
+			    time = null;
 			}
 			
 			
