@@ -261,3 +261,21 @@ div.filter-dialog .popupContent {
 	display: unset;
 }
 
+
+a.resultIndicator {
+	span.short {
+		display: inline; 
+	}
+	span.long {
+		display: none;
+	}
+}
+
+td.expanded a.resultIndicator {
+	span.short {
+		display: none; 
+	}
+	span.long {
+		display: inline;
+	}
+}

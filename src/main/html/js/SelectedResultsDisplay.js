@@ -155,7 +155,6 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 		// row first column
 		$tableRowHeader = this.$selectedResultsRowHeader.clone();
 		$tableRowHeader.html("");
-		
 		$value = $("<span title=\""+Helpers.htmlEscape(matrix[i][0].label)+"\">" + Helpers.htmlEscape(matrix[i][0].label) + "</span>");
 		if (matrix[i][0].sortValue) $value.attr("data-sortvalue", matrix[i][0].sortValue );		
 		else $value.attr("data-sortvalue", matrix[i][0].sortValue );		
@@ -180,9 +179,10 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 			$rowCell.html("");
 			
 			if (matrix[i][j].label !== "") {
-				
+// @Teunis:	 hier switchen tussen label en longlabel bij een td.expanded	
+				if (!matrix[i][j].longlabel) matrix[i][j].longlabel = matrix[i][j].label; 
 				// Label
-				$value = $("<a class=\"resultIndicator\" title=\""+matrix[i][j].label+"\">" + matrix[i][j].label +"</a>");
+				$value = $("<a class=\"resultIndicator\" title=\""+matrix[i][j].longlabel+"\"><span class='short'>" + matrix[i][j].label  + "</span><span class='long'>"+ matrix[i][j].longlabel + "</a>");
 				
 				// Coloring
 				if (matrix[i][j].score) $value.attr("data-score", matrix[i][j].score );
