@@ -570,7 +570,7 @@ table.dwo.results {
 						white-space: break-spaces;
 						z-index: 9;
 						
-						.overflow & {
+						/*.overflow & {
 							&:after {
 								bottom: 0;
 								content: "";
@@ -579,14 +579,14 @@ table.dwo.results {
 								right: 0;
 								top: 0;  
 	
-								/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#edeff1+0,edeff1+100&0+0,0+80,1+100 */
-								background: -moz-linear-gradient(left, $shade11RGBA0 0%, $shade11RGBA0 70%, $shade11RGBA1 100%); /* FF3.6-15 */
-								background: -webkit-linear-gradient(left, $shade11RGBA0 0%,$shade11RGBA0 70%,$shade11RGBA1 100%); /* Chrome10-25,Safari5.1-6 */
-								background: linear-gradient(to right, $shade11RGBA0 0%,$shade11RGBA0 70%,$shade11RGBA1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-								filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00edeff1', endColorstr='#{$shade11}',GradientType=1 ); /* IE6-9 */
+								// Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#edeff1+0,edeff1+100&0+0,0+80,1+100 
+								background: -moz-linear-gradient(left, $shade11RGBA0 0%, $shade11RGBA0 70%, $shade11RGBA1 100%);
+								background: -webkit-linear-gradient(left, $shade11RGBA0 0%,$shade11RGBA0 70%,$shade11RGBA1 100%);
+								background: linear-gradient(to right, $shade11RGBA0 0%,$shade11RGBA0 70%,$shade11RGBA1 100%); 
+								filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00edeff1', endColorstr='#{$shade11}',GradientType=1 );
 							}
 							
-						}	
+						}	*/
 						
 						a {
 							display: none;
