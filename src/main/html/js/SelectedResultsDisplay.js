@@ -185,8 +185,8 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 				$value = $("<a class=\"resultIndicator\" title=\""+matrix[i][j].longlabel+"\"><span class='short'>" + matrix[i][j].label  + "</span><span class='long'>"+ matrix[i][j].longlabel + "</a>");
 				
 				// Coloring
+				if (matrix[i][j].fraction) $value.attr("data-fraction", Math.round( matrix[i][j].fraction * 100 ) );
 				if (matrix[i][j].score) $value.attr("data-score", matrix[i][j].score );
-				if (matrix[i][j].score) $value.attr("data-fraction", Math.round( matrix[i][j].fraction * 100 ) );
 				else $value.attr("data-score", matrix[i][j].label );
 				Helpers.setResultIndicatorColor($value);
 				
