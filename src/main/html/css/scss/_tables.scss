@@ -814,6 +814,7 @@ table.dwo.results {
 				&.result4 {	border-color: $scoreIndicator4;	}
 				&.result5 { background-color: $scoreIndicator5; border-color: $scoreIndicator5; color: $white; }
 				&.resultnone { border-color: $shade22; }
+				&.resulti { border-color: $scoreIndicator5; }
 
 				&.result1:after {	background-color: $scoreIndicator1;	}
 				&.result2:after {	background-color: $scoreIndicator2;	}
@@ -821,6 +822,7 @@ table.dwo.results {
 				&.result4:after {	background-color: $scoreIndicator4;	}
 				&.result5:after { background-color: $scoreIndicator5; }
 				&.resultnone:after { background-color: $shade22; }
+				&.resulti:after { background-color: $scoreIndicator5; }
 			}						
 		}
 		tr:hover td.studentName.overflown:after {

@@ -447,10 +447,10 @@ SelectedResultsDisplay.prototype.buildMatrixActivitiesStudentsInModule = functio
 				matrix[i][j].score = matrix[i][j].value = score;
 				matrix[i][j].sortValue = score;
 				matrix[i][j].callback = this.clickResultIndicator;
-//				if (sortedModuleChildren[n].children[scoId].maxScore == 0) {
-//					matrix[i][j].score = -3; // info
+				if (studentsconode.maxScore == 0) {
+					matrix[i][j].score = -3; // info
 //					matrix[i][j].label = time;
-//				}
+				}
 			
 			
 			} else {
