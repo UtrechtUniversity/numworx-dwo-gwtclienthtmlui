@@ -295,9 +295,13 @@ SelectedResultsDisplay.prototype.buildMatrixModulesStudentsForClass = function()
 			matrix[i][j].label = coursenode.short;
 			matrix[i][j].score = coursenode.scoCount == 0 ? "" : coursenode.sumScore / coursenode.scoCount; // NaN is ""
 			matrix[i][j].value = matrix[i][j].score
+			matrix[i][j].sortValue = matrix[i][j].score
 			matrix[i][j].longlabel = coursenode.long;
 			matrix[i][j].fraction = coursenode.fraction;
-	
+
+			if (matrix[i][j].score && coursenode.fraction) {
+				matrix[i][j].score = matrix[i][j].score / coursenode.fraction;
+			}
 	
 	
 	
