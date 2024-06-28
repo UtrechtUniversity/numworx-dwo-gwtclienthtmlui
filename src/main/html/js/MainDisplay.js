@@ -171,6 +171,7 @@ MainDisplay.prototype.initMainView = function() { // TODO:	remember state
 	this.removeHoverableOnTouchDevices();
     this.localize();
     this.chatboxDisplay.setVisible(false);
+    this.$body.removeClass("collapsed");
 }
 
 MainDisplay.prototype.setActiveView = function(view) {
@@ -363,6 +364,7 @@ MainDisplay.prototype.showModulesView = function() {
 	this.initMainView();
 	this.setArrowUp(true);
 	this.setSearchBox(true); // optional, not for activities.
+	this.$body.addClass("collapsed");
 	this.modulesDisplay.show();
 }
 
