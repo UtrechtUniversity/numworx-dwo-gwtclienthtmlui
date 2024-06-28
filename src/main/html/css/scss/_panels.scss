@@ -92,10 +92,12 @@ body {
 		width: calc( 100% - #{ $navWidth }px);
 	}
 		
-	@include size-xl {	
+	@include size-xl {
+		body:not(.collapsed) & {
 		margin-left: $navWidthExpanded * 1px;
 		//width: calc( 100% - #{ $navWidthExpanded + $gutter }px);
 		width: calc( 100% - #{ $navWidthExpanded }px);
+		}
 	}
 	.hiddenNav & {
 		margin-right: 0;
@@ -175,13 +177,14 @@ body {
 		}
 		
 		@include size-xl {
+			body:not(.collapsed) & {
 			margin-right: 0;
 			left: $navWidthExpanded * 1px;
 			position: fixed; // for IE 11
 			right: 0;
 			width: auto;
 			z-index: 150;
-		}
+		}}
 		
 		.libraryPage & { 
 			display: none; // TODO: remove; demo purpose only
@@ -846,17 +849,19 @@ body {
 		}
 		
 		@include size-xl {
+			body:not(.collapsed) & {			
 			background-color: $shade21;
 			@include box-shadow(3px,0px,10px,0px,$shadow);
 			display: block;
 			top: ($headerHeight) * 1px;
 			width: $navWidthExpanded * 1px;
 			z-index: 200;
+			ul li a .name {
+				display: block;
+			}
 			
-			//.collapsedNav & {
-//				width: $navWidthExpanded * 1px;
-//			}
-		}	
+			}	
+		}
 		
 		.libraryPage & {
 			@include box-shadow(3px,0px,10px,0px,$shadow);
@@ -943,10 +948,10 @@ body {
 						@include size-md {
 							display: none;
 						}
-						@include size-xl {
-							display: block;
-						}
-						
+//						@include size-xl {
+//							display: block;
+//						}
+
 						.libraryPage & {
 							display: none;
 						}
