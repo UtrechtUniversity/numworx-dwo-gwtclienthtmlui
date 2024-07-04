@@ -124,6 +124,7 @@
             	<artifactId>jgitflow-maven-plugin</artifactId>
             	<version>1.0-m5.1</version>
             	<configuration>
+			<localOnly>true</localOnly>
                 	<!-- see goals wiki page for configuration options -->
                 	<flowInitContext>
              			<developBranchName>teuniz</developBranchName>       	
