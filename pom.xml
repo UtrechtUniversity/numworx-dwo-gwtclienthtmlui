@@ -8,7 +8,7 @@
 <!--     </parent> -->
     <groupId>nl.uu.fi.dwo.lms</groupId>
     <artifactId>DwoGwtClientHtmlUi</artifactId>
-    <version>2.5.30p1</version>
+    <version>2.5.30p2</version>
     <build>
         <plugins>
         	<plugin>
@@ -124,6 +124,7 @@
             	<artifactId>jgitflow-maven-plugin</artifactId>
             	<version>1.0-m5.1</version>
             	<configuration>
+			<localOnly>true</localOnly>
                 	<!-- see goals wiki page for configuration options -->
                 	<flowInitContext>
              			<developBranchName>teuniz</developBranchName>       	
