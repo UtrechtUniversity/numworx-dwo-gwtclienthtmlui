@@ -102,7 +102,9 @@ EditPersonDisplay.prototype.clear = function () {
 	this.editPersonDetailsForm.elements["familyName"].value = "";
 	this.editPersonDetailsForm.elements["givenName"].value = "";
 	this.editPersonDetailsForm.elements["insertion"].value = "";
-	this.editPersonDetailsForm.elements["role"].value = "";	
+	this.editPersonDetailsForm.elements["role"].value = "";
+	this.editPersonDetailsForm.elements["newPassword"].value = "";
+	this.editPersonDetailsForm.elements["email"].value="";
 	
 	this.role = "";
 	
@@ -163,7 +165,7 @@ EditPersonDisplay.prototype.setSingleSchoolStudent = function (json) {
 	this.editPersonDetailsForm.elements["givenName"].value = givenName;
 	this.editPersonDetailsForm.elements["insertion"].value = insertion;
 	this.editPersonDetailsForm.elements["email"].value = email;
-	this.editPersonDetailsForm.elements["newPassword"].value = password;
+	this.editPersonDetailsForm.elements["newPassword"].value = "";
 	var value = app.getTranslator().translate(this.role);
 	this.editPersonDetailsForm.elements["role"].value = value;
 	
@@ -229,7 +231,8 @@ EditPersonDisplay.prototype.removePersonFromSchoolClass = function(id) {
 EditPersonDisplay.prototype.updatePerson = function() {
 	if (this.role == "TEACHER") return;
 	
-	
+	var pw = this.editPersonDetailsForm.elements["newPassword"].value;
+	if (pw == "") pw = null;
 	
 	// TODO: save student
 	//g givenName, String insertion, String familyName, String email, String password
@@ -237,7 +240,8 @@ EditPersonDisplay.prototype.updatePerson = function() {
 																	this.editPersonDetailsForm.elements["insertion"].value,
 																	this.editPersonDetailsForm.elements["familyName"].value,
 																	this.editPersonDetailsForm.elements["email"].value,
-																	this.editPersonDetailsForm.elements["newPassword"].value);
+																	pw
+																	);
 }
 
 EditPersonDisplay.prototype.removePerson = function() {

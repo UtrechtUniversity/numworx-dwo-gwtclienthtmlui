@@ -19,6 +19,7 @@
         var hideGwtGui="true";
 		var modernstyle = true; /* voor javascript, dat we modernstyle doen */
         // SAML hook, called when saml login active
+        const needLogout = false;
         function logout() {
     		if (window != window.parent)
     		{
@@ -2571,8 +2572,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 							<label for="personsSearchInsertion" class="col-2 input">
 								<span data-translate="NUM_TBL_INSERTION">Tussenvoegsel</span>
 								<input id="personsSearchInsertion" name="insertion" type="text" value="" />
-							</label>
-							
+							</label>							
 							<label for="personsSearchUserName" class="col-2 input">
 								<span data-translate="NUM_TBL_USERNAME">Gebruikersnaam</span>
 								<input id="personsSearchUserName" name="userName" type="text" value="" />
@@ -2632,7 +2632,6 @@ a[href='#KNOWLEDGE'] .background-icon {
 										
 										<tr class="sorting">
 											<th class="col-4">
-												
 												<span class="sortButton asc default" data-order="asc" data-type="string">
 													<svg viewBox="0 0 74 74" class="icon">
 														<use xlink:href="#arrowUp"></use>
@@ -2642,12 +2641,9 @@ a[href='#KNOWLEDGE'] .background-icon {
 													<svg viewBox="0 0 74 74" class="icon">
 														<use xlink:href="#arrowDown"></use>
 													</svg>
-												</span>
-												
+												</span>												
 											</th>
-											
 											<th class="col-3">
-												
 												<span class="sortButton asc" data-order="asc" data-type="string">
 													<svg viewBox="0 0 74 74" class="icon">
 														<use xlink:href="#arrowUp"></use>
@@ -2657,15 +2653,11 @@ a[href='#KNOWLEDGE'] .background-icon {
 													<svg viewBox="0 0 74 74" class="icon">
 														<use xlink:href="#arrowDown"></use>
 													</svg>
-												</span>
-												
+												</span>												
 											</th>
-											
 											<th class="col-1">
-												
 											</th>
-											
-											<th class="col-2">										
+											<th class="col-2">
 												<span class="sortButton asc" data-order="asc" data-type="string">
 													<svg viewBox="0 0 74 74" class="icon">
 														<use xlink:href="#arrowUp"></use>
@@ -2812,7 +2804,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 									</label>
 									<label for="editPersonPassword" class="col-2 input">
 										<span data-translate="NUM_TBL_PASSWORD">Wachtwoord</span>
-										<input id="editPersonPassword" name="newPassword" type="password" value="" />
+										<input id="editPersonPassword" name="newPassword" type="password" value="" autocomplete="new-password"/>
 									</label>
 																
 									<label for="editPersonRole" class="col-2 input">
@@ -3147,7 +3139,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 							<table class="dwo sortable"  id='importPersonsSchoolClassesTable'>
 									<thead>
 										<tr class="sorting">
-											<th  class="col-4">&nbsp;
+											<th  class="col-4">
 												<span class="sortButton asc default" data-order="asc" data-type="string">
 													<svg viewBox="0 0 74 74" class="icon">
 														  <use xlink:href="#arrowUp"></use>
@@ -3163,35 +3155,15 @@ a[href='#KNOWLEDGE'] .background-icon {
 										</tr>
 									</thead>
 								<tbody>
-																		<!-- The row is detached and used as a template by the JS -->								
-										<tr>
-											<td class="col-4"><span id="importPersonsSchoolclassName">Schoolnaam</span></td>
-											<td class="col-2">
-												<div class="checkbox">
-													<input type="radio" name="schoolclass" id="importPersonsSchoolclassActive" value="schoolid"><label class="icon" for="importPersonsSchoolclassActive"></label>
-												</div>
-											</td>
-										</tr>
-								
-								
-									<tr><td class="col-4">Atheneum 6</td><td class="col-2">
-										<div class="checkbox">
-											<input type="radio" name="schoolclass" id="importPersonsSchoolclassActive1" value="MYSQL;PersistentSchoolClass;00000000000000010045"><label class="icon" for="importPersonsSchoolclassActive1"></label>
-										</div>
-									</td></tr>
-									<tr><td class="col-4">Atheneum 5</td><td class="col-2">
-										<div class="checkbox">
-											<input type="radio" name="schoolclass" id="importPersonsSchoolclassActive2" value="MYSQL;PersistentSchoolClass;00000000000000020045"><label class="icon" for="importPersonsSchoolclassActive2"></label>
-										</div>
-									</td></tr>
-									<tr><td>Atheneum 4</td></tr>
-									<tr><td>Atheneum 3</td></tr>
-									<tr><td>Atheneum 2</td></tr>
-									<tr><td>Havo 5</td></tr>
-									<tr><td>Havo 4</td></tr>
-									<tr><td>Havo 3</td></tr>
-									<tr><td>Havo 2</td></tr>
-									<tr><td>Brugklas</td></tr>
+									<!-- The row is detached and used as a template by the JS -->								
+									<tr>
+										<td class="col-4"><span id="importPersonsSchoolclassName">Schoolnaam</span></td>
+										<td class="col-2">
+											<div class="checkbox">
+												<input type="radio" name="schoolclass" id="importPersonsSchoolclassActive" value="schoolid"><label class="icon" for="importPersonsSchoolclassActive"></label>
+											</div>
+										</td>
+									</tr>
 								</tbody>						
 							</table>
 							<input type="radio" name="schoolclass" value="schoolid" class="hidden"><!-- empty value -->
