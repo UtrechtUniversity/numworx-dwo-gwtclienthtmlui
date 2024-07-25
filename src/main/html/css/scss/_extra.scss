@@ -83,7 +83,7 @@
 	display: inline-block;
 	margin-left: 1em;
 	margin-right: 1em;
-	width: 10em;
+	width: 9.4em;
 	position: relative;
 }
 .score-perc {
@@ -146,9 +146,15 @@
 
 .score-red {
 	color: red;
+	width: initial !important;
 }
 .score-green {
 	color: green;
+	width: initial !important;
+}
+
+.filter-dialog {
+	z-index: 500;
 }
 
 .gwt-DialogBox.gwt-DialogBox-Node .dialogMiddleRight,
