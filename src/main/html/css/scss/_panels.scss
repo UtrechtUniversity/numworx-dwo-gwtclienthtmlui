@@ -657,7 +657,7 @@ body {
 
 		#headertrails { 
 			color: $primaryLight; 
-			display: none!important;
+			display: none;
 			font-size: 13px;
 				font-family: Ubuntu;
 			font-weight: bold; 
@@ -668,7 +668,7 @@ body {
 			vertical-align: top;
 			white-space: nowrap;
 			@include size-lg {
-				display: inline-block!important;
+				display: inline-block;
 			}
 		}
 		#headertrails a { 
