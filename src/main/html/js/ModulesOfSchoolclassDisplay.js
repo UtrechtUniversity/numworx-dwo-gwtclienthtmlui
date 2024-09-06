@@ -178,21 +178,21 @@ ModulesOfSchoolclassDisplay.prototype.setSettings = function(id) {
 		
 		if (this.nodes[id].classCourse.courseType == "kiosk") {
 			this.settingsForm.elements["locked[]"][0].checked = "";
-			this.settingsForm.elements["locked[]"][1].checked = "";
-			this.settingsForm.elements["locked[]"][2].checked = "checked";	
+			this.settingsForm.elements["locked[]"][2].checked = "";
+			this.settingsForm.elements["locked[]"][1].checked = "checked";	
 			this.setSchoolyearUI(true);		
 			this.accessKeyToggle(true);
 		} else {
 			this.setSchoolyearUI(false);
 		if (this.nodes[id].classCourse.courseType == "normal") {
 			this.settingsForm.elements["locked[]"][0].checked = "";
-			this.settingsForm.elements["locked[]"][1].checked = "checked";
-			this.settingsForm.elements["locked[]"][2].checked = "";			
+			this.settingsForm.elements["locked[]"][2].checked = "checked";
+			this.settingsForm.elements["locked[]"][1].checked = "";			
 			this.accessKeyToggle(false);
 		} else  {
 			this.settingsForm.elements["locked[]"][0].checked = "checked";
-			this.settingsForm.elements["locked[]"][1].checked = "";
 			this.settingsForm.elements["locked[]"][2].checked = "";
+			this.settingsForm.elements["locked[]"][1].checked = "";
 			this.accessKeyToggle(true);
 		}}
 	}
@@ -233,9 +233,11 @@ ModulesOfSchoolclassDisplay.prototype.init = function () {
 	if (this.hasToets() ) {
 		$("#modulesOfSchoolclassDisplayCourseType").show();
 		if( this.hasKiosk()) {
-		 $("#modulesOfSchoolclassDisplaySY").show() 
+		 $("#modulesOfSchoolclassDisplaySY").show()
+		 $("#modulesOfSchoolclassDisplaySEB").hide()
 		 } else {
 		  $("#modulesOfSchoolclassDisplaySY").hide()
+		  $("#modulesOfSchoolclassDisplaySEB").show()
 		 }
 	} else {
 		$("#modulesOfSchoolclassDisplayCourseType").hide();
@@ -565,7 +567,7 @@ ModulesOfSchoolclassDisplay.prototype.settingsFormAllFieldToggle = function(valu
 		if (!this.hasToets())
 		{
 			this.settingsForm.elements["locked[]"][0].disabled = true;
-			this.settingsForm.elements["locked[]"][2].disabled = true;
+			this.settingsForm.elements["locked[]"][1].disabled = true;
 			this.setSchoolyearUI(false);
 		}
 	}
@@ -576,8 +578,8 @@ ModulesOfSchoolclassDisplay.prototype.settingsFormAllFieldToggle = function(valu
 		this.settingsForm.elements["to"].value = "";
 		this.settingsForm.elements["name"] = "";
 		this.settingsForm.elements["locked[]"][0].checked = "";
-		this.settingsForm.elements["locked[]"][1].checked = "checked";
-		this.settingsForm.elements["locked[]"][2].checked = "";
+		this.settingsForm.elements["locked[]"][2].checked = "checked";
+		this.settingsForm.elements["locked[]"][1].checked = "";
 		this.$settingsForm.find('input').prop('disabled','disabled');
 		this.setSchoolyearUI(false);
 	}
@@ -625,10 +627,10 @@ ModulesOfSchoolclassDisplay.prototype.clickDateField = function(event) {
 
 ModulesOfSchoolclassDisplay.prototype.clickLockedField = function(event) {
 	//event.preventDefault();	
-	if (this.settingsForm.elements["locked[]"][0].checked || this.settingsForm.elements["locked[]"][2].checked) 		
+	if (this.settingsForm.elements["locked[]"][0].checked || this.settingsForm.elements["locked[]"][1].checked) 		
 		this.accessKeyToggle(true);
 	else this.accessKeyToggle(false);
-	this.setSchoolyearUI(this.settingsForm.elements["locked[]"][2].checked);
+	this.setSchoolyearUI(this.settingsForm.elements["locked[]"][1].checked);
 }
 
 // ModulesOfSchoolclassDisplay.prototype.accessKeyToggle = function(value) {
@@ -655,11 +657,11 @@ ModulesOfSchoolclassDisplay.prototype.requiredFieldsSettingsForm = function() {
 	if (typeof this.selectForm.elements["module"] == "undefined") return false;
 
 	return this.selectForm.elements["module"].value != "" 
-			&& (this.settingsForm.elements["locked[]"][0].checked || this.settingsForm.elements["locked[]"][2].checked) ? this.settingsForm.elements["accessKey"].value  != "" : true;
+			&& (this.settingsForm.elements["locked[]"][0].checked || this.settingsForm.elements["locked[]"][1].checked) ? this.settingsForm.elements["accessKey"].value  != "" : true;
 }
 
 ModulesOfSchoolclassDisplay.prototype.accessKeyToggle = function(value) {
-	if (this.settingsForm.elements["locked[]"][0].checked || this.settingsForm.elements["locked[]"][2].checked) 
+	if (this.settingsForm.elements["locked[]"][0].checked || this.settingsForm.elements["locked[]"][1].checked) 
 		this.settingsForm.elements["accessKey"].disabled = false;
 	else this.settingsForm.elements["accessKey"].disabled = true;
 }

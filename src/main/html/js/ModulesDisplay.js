@@ -28,10 +28,14 @@ ModulesDisplay.prototype.init = function () {
 	document.body.scrollTop = 0;
 }
 ModulesDisplay.prototype.clear = function () {
+    this.$iframe.remove()
 	this.$iframe.attr('src', '' );
+	this.$panel.append(this.$iframe)
 }
 ModulesDisplay.prototype.openUrl = function (url) {
+    this.$iframe.remove()
 	this.$iframe.attr('src', url );
+	this.$panel.append(this.$iframe)
 }
 
 ModulesDisplay.prototype.setMainNavVisible = function(b) {
