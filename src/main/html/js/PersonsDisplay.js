@@ -120,8 +120,8 @@ PersonsDisplay.prototype.clear = function () {
 	this.changePersonsSearchRole();
 }
 
-PersonsDisplay.prototype.setHelp = function(url) { 
-		if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
+PersonsDisplay.prototype.setHelp = function(url) {
+		Helpers.setIframeSrc(this.$helpContentIFrame, url)
 }
 
 PersonsDisplay.prototype.showPersons = function(json) {  

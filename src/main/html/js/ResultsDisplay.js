@@ -185,7 +185,7 @@ ResultsDisplay.prototype.clear = function () {
 }
 
 ResultsDisplay.prototype.setHelp = function(url) {
-		if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
+		Helpers.setIframeSrc(this.$helpContentIFrame, url);
 }
 
 ResultsDisplay.prototype.setResultTree = function (resultTree, studentsTree) {

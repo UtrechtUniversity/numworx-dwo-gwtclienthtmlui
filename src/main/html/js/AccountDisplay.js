@@ -85,7 +85,7 @@ AccountDisplay.prototype.clear = function () {
 }
 
 AccountDisplay.prototype.setHelp = function(url) {
-		if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
+		Helpers.setIframeSrc(this.$helpContentIFrame, url)
 }
 
 AccountDisplay.prototype.updateUserView = function(json) {

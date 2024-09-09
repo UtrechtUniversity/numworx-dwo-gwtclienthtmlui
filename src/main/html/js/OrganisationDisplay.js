@@ -153,7 +153,7 @@ OrganisationDisplay.prototype.clear = function() {
  * setHelp shows help url
  */
 OrganisationDisplay.prototype.setHelp = function(url) {
-	if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
+		Helpers.setIframeSrc(this.$helpContentIFrame, url)
 }
 
 /**

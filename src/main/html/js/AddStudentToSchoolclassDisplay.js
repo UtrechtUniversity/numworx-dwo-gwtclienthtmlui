@@ -134,7 +134,7 @@ AddStudentToSchoolclassDisplay.prototype.setSchoolClass = function(schoolClass) 
 }
 
 AddStudentToSchoolclassDisplay.prototype.setHelp = function(url) {
-	if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
+		Helpers.setIframeSrc(this.$helpContentIFrame, url)
 }
 
 AddStudentToSchoolclassDisplay.prototype.showStudents = function(json) {	

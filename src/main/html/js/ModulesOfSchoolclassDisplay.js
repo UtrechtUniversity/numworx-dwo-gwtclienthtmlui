@@ -256,7 +256,7 @@ ModulesOfSchoolclassDisplay.prototype.clear = function () {
 }
 
 ModulesOfSchoolclassDisplay.prototype.setHelp = function(url) {
-		if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
+		Helpers.setIframeSrc(this.$helpContentIFrame, url)
 }
 
 ModulesOfSchoolclassDisplay.prototype.setEmptyTableMessageModules = function () {

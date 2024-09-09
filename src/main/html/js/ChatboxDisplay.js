@@ -33,7 +33,7 @@ ChatboxDisplay.prototype.setLogin = function(user) {
 }
 
 ChatboxDisplay.prototype.setHelp = function(url) {
-	if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
+		Helpers.setIframeSrc(this.$helpContentIFrame, url)
 }
 
 ChatboxDisplay.prototype.setUnseen = function (b) {

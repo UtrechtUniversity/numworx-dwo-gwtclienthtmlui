@@ -348,3 +348,13 @@ Helpers.htmlUnescape = function(str) {
         .replace(/&amp;/g, '&');
 }
 
+
+// Zet Help iframe zonder de history te beinvloeden.
+Helpers.setIframeSrc = function( $iframe, src ) {
+	if ($iframe.attr('src') != src) {
+		var $parent = $iframe.parent();
+		$iframe.remove();
+		$iframe.attr('src', src );
+		$parent.prepend($iframe) // $iframe was het eerste element van z'n parent.
+	}
+}
