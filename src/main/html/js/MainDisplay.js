@@ -228,7 +228,7 @@ MainDisplay.prototype.setTrails = function(row) {
 		this.$trails.hide();
 		this.$searchBox.show();
 	} else {
-		this.$trails.show();
+		this.$trails.attr("style", ""); // werkt ook goed bij safari
 		this.$searchBox.hide();
 		this.$trails.html("")
 		for(var i = 0; i < row.length; i++) {
