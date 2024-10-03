@@ -65,7 +65,7 @@ StudentSchoolclassesDisplay.prototype.init = function () {
 }
 
 StudentSchoolclassesDisplay.prototype.setHelp = function(url) {
-		if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
+		Helpers.setIframeSrc(this.$helpContentIFrame, url)
 }
 
 StudentSchoolclassesDisplay.prototype.setSchoolClasses = function (json) {

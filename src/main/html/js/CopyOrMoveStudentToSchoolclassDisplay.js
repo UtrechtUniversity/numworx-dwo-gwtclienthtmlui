@@ -154,7 +154,7 @@ CopyOrMoveStudentToSchoolclassDisplay.prototype.init = function () {
 	document.body.scrollTop = 0;
 }
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setHelp = function(url) {
-		if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
+		Helpers.setIframeSrc(this.$helpContentIFrame, url)
 }
 
 CopyOrMoveStudentToSchoolclassDisplay.prototype.setSchoolClassA = function(schoolclass) {

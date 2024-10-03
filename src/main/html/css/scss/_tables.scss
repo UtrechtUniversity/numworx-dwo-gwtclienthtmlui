@@ -478,7 +478,7 @@ table.dwo.results {
 					position: absolute;
 					@include transition(all 50ms ease-in-out);
 					width: (($colWidth) - $gutter - $gutter) * 1px;
-					z-index: 8;
+					z-index: 10;
 					
 					.active & {
 //						padding-right: $gutter * 1px;
@@ -730,7 +730,7 @@ table.dwo.results {
 				//width: (($colWidth) - $gutter) * 1px;
 				max-width: none;
 				min-width: ($colWidth) * 1px;
-				z-index: 9;
+				z-index: 11;
 				
 				span {
 					height: 26px;

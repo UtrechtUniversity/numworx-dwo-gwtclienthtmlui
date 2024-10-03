@@ -37,7 +37,7 @@ StudentResultsDisplay.prototype.localize = function() {
  * setHelp shows help url
  */
 StudentResultsDisplay.prototype.setHelp = function(url) {
-	if (this.$helpContentIFrame.attr('src') != url) this.$helpContentIFrame.attr('src', url );
+		Helpers.setIframeSrc(this.$helpContentIFrame, url)
 }
 
 StudentResultsDisplay.prototype.setTitle = function(title) {
