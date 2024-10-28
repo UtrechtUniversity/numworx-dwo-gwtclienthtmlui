@@ -40,7 +40,7 @@ StudentScoResultDisplay.prototype.show = function() {
 	Helpers.stretchIframeHeight( this.$iframe ); // TODO: Action on Resizing
 	
 	// Temporary hides - TODO: implement
-	this.$printButton.hide();
+	//this.$printButton.hide();
 	this.$downloadButton.hide();
 	this.$logButton.hide();
 }
@@ -139,7 +139,7 @@ StudentScoResultDisplay.prototype.seal = function (state) {
 }
 
 StudentScoResultDisplay.prototype.print = function () {
-	app.getPresenterFactory().getStudentScoResultPresenter().print(this.resultState); 
+	return app.getPresenterFactory().getStudentScoResultPresenter().print(this.resultState); 
 }
 
 StudentScoResultDisplay.prototype.download = function () {
@@ -209,7 +209,11 @@ StudentScoResultDisplay.prototype.changeSealButton = function(event) {
 
 StudentScoResultDisplay.prototype.clickPrintButton = function(event) {
 	event.preventDefault();
-	this.print();
+	var url = this.print()
+	if (url) {
+		var win = window.open(url, '_blank');
+		if (win) win.focus() // switch
+	}
 }
 
 StudentScoResultDisplay.prototype.clickDownloadButton = function(event) {
