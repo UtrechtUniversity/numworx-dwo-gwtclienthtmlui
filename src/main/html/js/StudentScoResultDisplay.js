@@ -211,7 +211,7 @@ StudentScoResultDisplay.prototype.clickPrintButton = function(event) {
 	event.preventDefault();
 	var url = this.print()
 	if (url) {
-		var win = window.open(url, '_blank');
+		var win = window.open(url, 'PrintPlayer');
 		if (win) win.focus() // switch
 	}
 }
