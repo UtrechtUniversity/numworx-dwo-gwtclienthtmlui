@@ -125,7 +125,7 @@ function MainDisplay() {
 	this.$accountMenuToggle.on('click', $.proxy(this.touchStartAccountMenuIcon, this));
 	//this.$accountMenuBox.on('mouseleave', $.proxy(this.mouseLeaveAccountMenuIcon, this));
 	this.$headerArrowUp.on("click", $.proxy(this.onArrowUp, this));
-	$(document).on('click, touchstart', $.proxy(this.clickWherever, this));
+	$(document).on('click touchstart', $.proxy(this.clickWherever, this));
 	this.$searchBox.on('submit' , $.proxy(this.search, this))
 	this.$headerArrowUp.hide();
 	this.$searchBox.hide();

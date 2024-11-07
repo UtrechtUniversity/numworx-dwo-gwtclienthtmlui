@@ -129,11 +129,12 @@ table.dwo { //:not(.c-datepicker__days)
 		display: block;
 		//display: inherit;
 		min-width: 100%;
+		background: $white;
 		
 		&:before {
 			border: $borderThickness $primary solid;
 			@include border-radius($defaultRadius);
-			background: $white;
+			background: transparent;
 			content: "";
 			position: absolute;
 			bottom: 0px;
