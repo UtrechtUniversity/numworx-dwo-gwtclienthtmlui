@@ -47,6 +47,8 @@ function OrganisationDisplay() {
 	this.$personsFilterForm.on('submit', $.proxy(this.submitPersonsFilterForm,this));
 	this.$personsForm.on('submit', $.proxy(this.submitPersonsForm,this));
 	this.$personsFormRemoveAll.on('click', $.proxy(this.clickSelectAllPersons, this));
+
+	this.$personsTableHead.find(".sortButton").click(Helpers.clickSortButton);
 	
 	// Init
 	this.$panel.hide();
