@@ -353,6 +353,13 @@ OrganisationDisplay.prototype.changeSelectRoleButton = function(event) {
 OrganisationDisplay.prototype.submitPersonsFilterForm = function(event) {
 	event.preventDefault();	
 	this.filterPersonsList();
+	app.getPresenterFactory().getOrganisationPresenter().filterPersonsList(
+		this.personsFilterForm.elements["userName"].value,
+		this.personsFilterForm.elements["givenName"].value,
+		this.personsFilterForm.elements["insertion"].value,
+		this.personsFilterForm.elements["familyName"].value,
+		this.personsFilterForm.elements["schoolClass"].value
+	);
 }
 
 
