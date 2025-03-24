@@ -702,6 +702,7 @@ MainDisplay.prototype.entree = function() {
 	var hint = entree.attr("href");
 	if (!hint) return;
     var h = ""
+try {
 	var top = window.top.location.href;
 	var query = top.indexOf("?");
 	var hash = top.indexOf("#", query+1);
@@ -717,5 +718,6 @@ MainDisplay.prototype.entree = function() {
 		top = top + hint;
 	}
 	top = top + h;
-	entree.attr("href", top);	
+	entree.attr("href", top);
+} catch(oops) { } 	
 }
