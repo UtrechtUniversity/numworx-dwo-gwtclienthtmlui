@@ -49,6 +49,7 @@ function OrganisationDisplay() {
 	this.$personsFormRemoveAll.on('click', $.proxy(this.clickSelectAllPersons, this));
 
 	this.$personsTableHead.find(".sortButton").click(Helpers.clickSortButton);
+	this.$personsTableHead.find(".sortButton").click(OrganisationDisplay.clickSortButton);
 	
 	// Init
 	this.$panel.hide();
@@ -147,8 +148,10 @@ OrganisationDisplay.prototype.clear = function() {
 	this.personsFilterForm.elements["role"][0].checked = "checked";
 	//this.selectRole("STUDENT"); not needed
 	
-	this.resetSorting();	
+	this.resetSorting();
+	OrganisationDisplay.skipUp = true;	
 	this.$personsForm.find(".sortButton.default").trigger('click');
+	OrganisationDisplay.skipUp = false;
 }
 
 /**
@@ -234,8 +237,9 @@ OrganisationDisplay.prototype.showPersons = function(data, role) {
 	this.$personsForm.find("input[type='checkbox'],input[type='radio']").on('change', $.proxy(this.changePersonsRemoveCheckbox,this));
 	
 	this.filterPersonsList();
-	
-	this.$personsForm.find(".sortButton.default").trigger('click');
+	OrganisationDisplay.skipUp = true;
+	this.$personsForm.find(".sortButton.active").trigger('click');
+	OrganisationDisplay.skipUp = false;
 }
 
 /**
@@ -313,6 +317,19 @@ OrganisationDisplay.prototype.setEditModules = function(bool, xs) {
 OrganisationDisplay.prototype.selectRole = function(role) {
 	app.getPresenterFactory().getOrganisationPresenter().selectRole(role);
 }
+
+OrganisationDisplay.clickSortButton = function() {
+    if (OrganisationDisplay.skipUp) return;
+	var $this = $(this)
+	var order = $this.data("order")
+	var type = $this.data("type");
+	var sortValue = $this.data("sortvalue")
+	
+	app.getPresenterFactory().getOrganisationPresenter().clickSortButton(sortValue, order, type);
+	
+}
+
+
 
 
 /**
