@@ -203,15 +203,19 @@ Helpers.tableSorterMergeSortMerge = function(left, right, index, attr, type, asc
     var indexRight = 0;
 	var val1 = 0;
 	var val2 = 0;
+	var devval = 0;
+	if (type == "string") devval = "";
+
+
 
     while (indexLeft < left.length && indexRight < right.length) {
 		
-		if (left[indexLeft].children[index].children[0] && left[indexLeft].children[index].children[0].dataset) val1 = left[indexLeft].children[index].children[0].dataset[attr]; 
-		if (right[indexRight].children[index].children[0] && right[indexRight].children[index].children[0].dataset) val2 = right[indexRight].children[index].children[0].dataset[attr];
+		if (left[indexLeft].children[index].children[0] && left[indexLeft].children[index].children[0].dataset) val1 = left[indexLeft].children[index].children[0].dataset[attr]; else val1 = devval;
+		if (right[indexRight].children[index].children[0] && right[indexRight].children[index].children[0].dataset) val2 = right[indexRight].children[index].children[0].dataset[attr]; else val2 = devval;
 		
-		if (val1 != 0 && val2 != 0 && type == "string") { // string sort
+		if (type == "string") { // string sort
 			
-			if ( (!asc && val2.localeCompare(val1) < 0) || (asc && val2.localeCompare(val1) > 0) ) { 
+			if ( (!asc && val2.localeCompare(val1) <= 0) || (asc && val2.localeCompare(val1) >= 0) ) { 
 		        result.push(left[indexLeft])
 		        indexLeft++
 			} else {
@@ -224,7 +228,7 @@ Helpers.tableSorterMergeSortMerge = function(left, right, index, attr, type, asc
 			val1 = parseInt(val1);
 			val2 = parseInt(val2);
 			
-			if ( (!asc && val2 < val1) || (asc && val2 > val1) ) { 	
+			if ( (!asc && val2 <= val1) || (asc && val2 >= val1) ) { 	
 			    result.push(left[indexLeft])
 			    indexLeft++				
 			} else {
