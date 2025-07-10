@@ -108,7 +108,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 	if (matrix[0][0].tableClass) $table.addClass(matrix[0][0].tableClass);
 	
 	if (this.showpages) {
-		var dummy = $("<th></th>");
+		var dummy = $("<th><span class='lock'>&nbsp;</span></th>");
 		$theadRow2.append(dummy.clone());
 		$theadRow3.append(dummy)
 	}
