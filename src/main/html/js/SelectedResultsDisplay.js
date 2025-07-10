@@ -109,7 +109,7 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 	
 	if (this.showpages) {
 		var dummy = $("<th><span class='lock'>&nbsp;</span></th>");
-		$theadRow2.append(dummy.clone());
+		$theadRow2.append($("<th></th>"));
 		$theadRow3.append(dummy)
 	}
 	
