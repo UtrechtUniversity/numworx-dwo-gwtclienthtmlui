@@ -204,7 +204,20 @@ ModulesOfSchoolclassDisplay.prototype.setSettings = function(id) {
 			this.settingsForm.elements["student[]"][0].checked = "";
 			this.settingsForm.elements["student[]"][1].checked = "checked";
 		}		
-			
+		if (!state || state == "studentsAndTeachers" || state == "teachers" ) {
+			this.settingsForm.elements["teacher[]"][0].checked = "checked"; // ALTIJD
+			this.settingsForm.elements["teacher[]"][1].checked = "";
+			this.settingsForm.elements["teacher[]"][2].checked = "";
+		} else if (state == "students" || state == "studentsOrTeachers" ) {
+			this.settingsForm.elements["teacher[]"][1].checked = "checked"; // RESULTS
+			this.settingsForm.elements["teacher[]"][0].checked = "";
+			this.settingsForm.elements["teacher[]"][2].checked = "";
+		} else {
+			this.settingsForm.elements["teacher[]"][2].checked = "checked"; // NOOIT
+			this.settingsForm.elements["teacher[]"][0].checked = "";
+			this.settingsForm.elements["teacher[]"][1].checked = "";
+		}
+				
 	}
 }
 
@@ -336,7 +349,7 @@ ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, dept
 		if (this.nodes[id].open == true) liClass += " open"; //open
 
 		if (tree[id].data.classCourse != null) {
-			if (tree[id].data.classCourse.viewState === "invisible" || tree[id].data.classCourse.viewState === "students") {
+			if (tree[id].data.classCourse.viewState === "invisible") {
 				checkboxClass += " pC"; //previouslyChecked
 				this.nodes[id].active = false;
 			 } else {
@@ -406,6 +419,18 @@ ModulesOfSchoolclassDisplay.prototype.isZichtbaar = function() {
 	return this.settingsForm.elements["modulesOfSchoolclassDisplayStudentYes"].checked;
 }
 
+ModulesOfSchoolclassDisplay.prototype.getState = function() {
+	if (this.settingsForm.elements["teacher[]"][0].checked ) return 65; // "A"; // een char word een int, niet een string
+	if (this.settingsForm.elements["teacher[]"][1].checked ) return 82; // "R";
+	if (this.settingsForm.elements["teacher[]"][2].checked ) return 78; // "N";
+	return 65; // "A"; // de default
+}
+
+
+
+
+
+
 ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
 
 	var typeString = this.settingsForm.elements["modulesOfSchoolclassDisplayTypeLocked"].checked ? "assesment" : "normal";
@@ -415,7 +440,7 @@ ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
 	var to = this.settingsForm.elements["to"].value;
 	
 	var student = this.isZichtbaar();
-	var teacher = 'A';
+	var teacher = this.getState();
 			
 	app.getPresenterFactory().getModulesOfSchoolclassPresenter().setModuleSettings(  this.selectedNodeId,
 																				typeString,
@@ -434,7 +459,7 @@ ModulesOfSchoolclassDisplay.prototype.openSettings = function() {
 	var from = this.settingsForm.elements["from"].value;
 	var to = this.settingsForm.elements["to"].value;
 	var student = this.isZichtbaar();
-	var teacher = 'A';
+	var teacher = this.getState();
 			
 	app.getPresenterFactory().getModulesOfSchoolclassPresenter().openSettings(  this.selectedNodeId,
 																				typeString,
@@ -452,7 +477,7 @@ ModulesOfSchoolclassDisplay.prototype.openDashboard = function() {
 	var from = this.settingsForm.elements["from"].value;
 	var to = this.settingsForm.elements["to"].value;
 	var student = this.isZichtbaar();
-	var teacher = 'A';
+	var teacher = this.getState();
 			
 	app.getPresenterFactory().getModulesOfSchoolclassPresenter().openDashboard(  this.selectedNodeId,
 																				typeString,
@@ -475,7 +500,7 @@ ModulesOfSchoolclassDisplay.prototype.addModule = function() {
 	var from = this.settingsForm.elements["from"].value;
 	var to = this.settingsForm.elements["to"].value;
 	var student = this.isZichtbaar();
-	var teacher = 'A';
+	var teacher = this.getState();
 	
 		
 	app.getPresenterFactory().getModulesOfSchoolclassPresenter().addModule(  	this.selectedNodeId,
@@ -509,9 +534,9 @@ ModulesOfSchoolclassDisplay.prototype.toggleTreeCheckbox = function(event) {
 		this.selectedNodeId = event.target.value;
 		
 		if (!this.nodes.hasOwnProperty( this.selectedNodeId )) return;
-		if ( this.nodes[this.selectedNodeId].classCourse &&  this.nodes[this.selectedNodeId].classCourse.viewState == "students" ) {
-			return;
-		}
+//		if ( this.nodes[this.selectedNodeId].classCourse &&  this.nodes[this.selectedNodeId].classCourse.viewState == "students" ) {
+//			return;
+//		}
 
 		if ( this.nodes[this.selectedNodeId].classCourse &&  this.nodes[this.selectedNodeId].classCourse.viewState == "invisible" ) {
 			// If this course has been selected before, attach
