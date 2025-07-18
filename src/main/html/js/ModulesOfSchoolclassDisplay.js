@@ -195,6 +195,29 @@ ModulesOfSchoolclassDisplay.prototype.setSettings = function(id) {
 			this.settingsForm.elements["locked[]"][1].checked = "";
 			this.accessKeyToggle(true);
 		}}
+		
+		var state = this.nodes[id].classCourse.viewState;
+		if (!state || state == "studentsAndTeachers" || state == "onlyStudents" || state == "studentsOrTeachers") {
+			this.settingsForm.elements["student[]"][0].checked = "checked";
+			this.settingsForm.elements["student[]"][1].checked = "";
+		} else {
+			this.settingsForm.elements["student[]"][0].checked = "";
+			this.settingsForm.elements["student[]"][1].checked = "checked";
+		}		
+		if (!state || state == "studentsAndTeachers" || state == "teachers" ) {
+			this.settingsForm.elements["teacher[]"][0].checked = "checked"; // ALTIJD
+			this.settingsForm.elements["teacher[]"][1].checked = "";
+			this.settingsForm.elements["teacher[]"][2].checked = "";
+		} else if (state == "students" || state == "studentsOrTeachers" ) {
+			this.settingsForm.elements["teacher[]"][1].checked = "checked"; // RESULTS
+			this.settingsForm.elements["teacher[]"][0].checked = "";
+			this.settingsForm.elements["teacher[]"][2].checked = "";
+		} else {
+			this.settingsForm.elements["teacher[]"][2].checked = "checked"; // NOOIT
+			this.settingsForm.elements["teacher[]"][0].checked = "";
+			this.settingsForm.elements["teacher[]"][1].checked = "";
+		}
+				
 	}
 }
 
@@ -326,7 +349,7 @@ ModulesOfSchoolclassDisplay.prototype.recursiveTreeBuilder = function(tree, dept
 		if (this.nodes[id].open == true) liClass += " open"; //open
 
 		if (tree[id].data.classCourse != null) {
-			if (tree[id].data.classCourse.viewState === "invisible" || tree[id].data.classCourse.viewState === "students") {
+			if (tree[id].data.classCourse.viewState === "invisible") {
 				checkboxClass += " pC"; //previouslyChecked
 				this.nodes[id].active = false;
 			 } else {
@@ -392,6 +415,21 @@ ModulesOfSchoolclassDisplay.prototype.hasKiosk = function() {
 	}
 }
 
+ModulesOfSchoolclassDisplay.prototype.isZichtbaar = function() {
+	return this.settingsForm.elements["modulesOfSchoolclassDisplayStudentYes"].checked;
+}
+
+ModulesOfSchoolclassDisplay.prototype.getState = function() {
+	if (this.settingsForm.elements["teacher[]"][0].checked ) return 65; // "A"; // een char word een int, niet een string
+	if (this.settingsForm.elements["teacher[]"][1].checked ) return 82; // "R";
+	if (this.settingsForm.elements["teacher[]"][2].checked ) return 78; // "N";
+	return 65; // "A"; // de default
+}
+
+
+
+
+
 
 ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
 
@@ -400,12 +438,17 @@ ModulesOfSchoolclassDisplay.prototype.setModuleSettings = function() {
 		typeString = "kiosk";
 	var from = this.settingsForm.elements["from"].value;
 	var to = this.settingsForm.elements["to"].value;
+	
+	var student = this.isZichtbaar();
+	var teacher = this.getState();
 			
 	app.getPresenterFactory().getModulesOfSchoolclassPresenter().setModuleSettings(  this.selectedNodeId,
 																				typeString,
 																				from,
 																				to,
-																				this.settingsForm.elements["accessKey"].value);
+																				this.settingsForm.elements["accessKey"].value, 
+																				teacher,
+																				student);
 }
 
 ModulesOfSchoolclassDisplay.prototype.openSettings = function() {
@@ -415,12 +458,15 @@ ModulesOfSchoolclassDisplay.prototype.openSettings = function() {
 		typeString = "kiosk";
 	var from = this.settingsForm.elements["from"].value;
 	var to = this.settingsForm.elements["to"].value;
+	var student = this.isZichtbaar();
+	var teacher = this.getState();
 			
 	app.getPresenterFactory().getModulesOfSchoolclassPresenter().openSettings(  this.selectedNodeId,
 																				typeString,
 																				from,
 																				to,
-																				this.settingsForm.elements["accessKey"].value);
+																				this.settingsForm.elements["accessKey"].value,
+																				teacher, student);
 }
 
 ModulesOfSchoolclassDisplay.prototype.openDashboard = function() {
@@ -430,12 +476,15 @@ ModulesOfSchoolclassDisplay.prototype.openDashboard = function() {
 		typeString = "kiosk";
 	var from = this.settingsForm.elements["from"].value;
 	var to = this.settingsForm.elements["to"].value;
+	var student = this.isZichtbaar();
+	var teacher = this.getState();
 			
 	app.getPresenterFactory().getModulesOfSchoolclassPresenter().openDashboard(  this.selectedNodeId,
 																				typeString,
 																				from,
 																				to,
-																				this.settingsForm.elements["accessKey"].value);
+																				this.settingsForm.elements["accessKey"].value, 
+																				teacher, student);
 }
 	
 
@@ -450,12 +499,16 @@ ModulesOfSchoolclassDisplay.prototype.addModule = function() {
 	
 	var from = this.settingsForm.elements["from"].value;
 	var to = this.settingsForm.elements["to"].value;
+	var student = this.isZichtbaar();
+	var teacher = this.getState();
+	
 		
 	app.getPresenterFactory().getModulesOfSchoolclassPresenter().addModule(  	this.selectedNodeId,
 																				typeString,
 																				from,
 																				to,
-																				this.settingsForm.elements["accessKey"].value);
+																				this.settingsForm.elements["accessKey"].value,
+																				teacher, student);
 		
 	this.$temporaryRow = null;
 	this.settingsFormAllFieldToggle(false);
@@ -481,9 +534,9 @@ ModulesOfSchoolclassDisplay.prototype.toggleTreeCheckbox = function(event) {
 		this.selectedNodeId = event.target.value;
 		
 		if (!this.nodes.hasOwnProperty( this.selectedNodeId )) return;
-		if ( this.nodes[this.selectedNodeId].classCourse &&  this.nodes[this.selectedNodeId].classCourse.viewState == "students" ) {
-			return;
-		}
+//		if ( this.nodes[this.selectedNodeId].classCourse &&  this.nodes[this.selectedNodeId].classCourse.viewState == "students" ) {
+//			return;
+//		}
 
 		if ( this.nodes[this.selectedNodeId].classCourse &&  this.nodes[this.selectedNodeId].classCourse.viewState == "invisible" ) {
 			// If this course has been selected before, attach
@@ -499,7 +552,8 @@ ModulesOfSchoolclassDisplay.prototype.toggleTreeCheckbox = function(event) {
 //			this.temporaryAddModule( this.selectedNodeId );
 // fresh normal class course
 			this.nodes[this.selectedNodeId].classCourse = {
-					"courseType" : "normal"
+					"courseType" : "normal",
+					"viewState" : "studentsAndTeachers"
 			};
 			var id = this.selectedNodeId;
 			this.nodes[id].row =
@@ -580,6 +634,12 @@ ModulesOfSchoolclassDisplay.prototype.settingsFormAllFieldToggle = function(valu
 		this.settingsForm.elements["locked[]"][0].checked = "";
 		this.settingsForm.elements["locked[]"][2].checked = "checked";
 		this.settingsForm.elements["locked[]"][1].checked = "";
+		this.settingsForm.elements["student[]"][1].checked = "";
+		this.settingsForm.elements["student[]"][0].checked = "checked";
+		this.settingsForm.elements["teacher[]"][2].checked = "";
+		this.settingsForm.elements["teacher[]"][1].checked = "";
+		this.settingsForm.elements["teacher[]"][0].checked = "checked";
+		
 		this.$settingsForm.find('input').prop('disabled','disabled');
 		this.setSchoolyearUI(false);
 	}

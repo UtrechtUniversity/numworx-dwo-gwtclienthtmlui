@@ -1922,7 +1922,18 @@ a[href='#KNOWLEDGE'] .background-icon {
 						
 						<form name="modulesOfSchoolclassDisplaySettings">
 							<div class="row">
-							
+								<div class="col-2 options">
+									<label><span>Zichtbaar in modules</span></label>
+									<div class="option">
+										<input type="radio" name="student[]" id="modulesOfSchoolclassDisplayStudentYes" value="1">
+										<label for="modulesOfSchoolclassDisplayStudentYes"><span>Ja</span></label>
+									</div>
+									<div class="option">
+										<input type="radio" name="student[]" value="0" id="modulesOfSchoolclassDisplayStudentNo">
+										<label for="modulesOfSchoolclassDisplayStudentNo"><span>Nee</span></label>
+									</div>
+									
+								</div>
 								<input name="key" type="hidden" value="" />
 								<label for="modulesOfSchoolclassDisplayValidityFrom" class="col-2 input textoverflow">
 									<span data-translate="NUM_CLASSMODULES_AccessPeriod">Geldigsheidsduur (van - tot)</span>
@@ -1935,17 +1946,7 @@ a[href='#KNOWLEDGE'] .background-icon {
 								</label>
 								
 
-<label id="schoolyearui" class="col-2 input" >
-	<span>kiosk mode</span>
-    <div class="row">
-		<div class="col-1">
-			<input type="submit" class="secondary" name="extra" value="xtra">
-    	</div>
-    	<div class="col-1">   
-        	<input type="submit" class="secondary" value="dashb." name="dashboard">
-    	</div>    
-    </div>
-</label>							</div>
+							</div>
 
 							<div class="row" id='modulesOfSchoolclassDisplayCourseType'>
 								<div class="col-2 options">
@@ -1967,10 +1968,50 @@ a[href='#KNOWLEDGE'] .background-icon {
                                                                     <span data-translate="NUM_TBL_PASSWORD"> Wachtwoord</span>
 									<input id="password" name="accessKey" type="text" value="" />
 								</label>
-								<div class="col-2 grow">
-									<input type="submit" class="right secondary down right" data-translate="NUM_BTN_Save" value="Sla op" />
+								<label id="schoolyearui" class="col-2 input" >
+									<span>kiosk mode</span>
+								    <div class="row">
+										<div class="col-1">
+											<input type="submit" class="secondary" name="extra" value="xtra">
+								    	</div>
+								    	<div class="col-1">   
+								        	<input type="submit" class="secondary" value="dashb." name="dashboard">
+								    	</div>    
+								    </div>
+								</label>
+								</div>							
+								<div class="row" >
+									<div class="col-4 options" >
+										<label class="input"><span>Zichtbaar in resultatenoverzicht</span></label>
+											<div class="option" >
+												<input type="radio" name="teacher[]" value="A">
+												<label ><span>A</span></label>
+											</div> 
+											<div class="option" >
+												<input type="radio" name="teacher[]" value="R">
+												<label ><span>R</span></label>
+											</div>
+											<div class="option">
+												<input type="radio" name="teacher[]" value="N">
+												<label ><span >N</span></label>
+											</div>
+										<h3 class="col-2"
+										   style="
+											margin-left: 23px;
+    										margin-right: 0px;
+    										font-size: 80%;
+    										margin-top:-8px;
+    										font-weight: normal;
+										   ">
+											<span>A: Altijd</span><br>
+											<span>R: bij Resultaten</span><br>
+											<span>N: Nooit</span>
+										</h3>
+									</div>
+									<div class="col-2 grow">
+										<input type="submit" class="right secondary down right" data-translate="NUM_BTN_Save" value="Sla op" />
+									</div>
 								</div>
-							</div>							
 						</form>
 					</div>
 				</div>

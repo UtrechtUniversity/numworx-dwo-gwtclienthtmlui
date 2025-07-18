@@ -75,6 +75,11 @@ table.dwo { //:not(.c-datepicker__days)
 				&.centered {
 					text-align: center;
 				}
+				.lock {
+					display: inline-block;
+					width: 13px; height: 13px;					
+				}
+				
 				
 				.sortButton {
 					cursor: pointer;
@@ -346,6 +351,10 @@ table.dwo { //:not(.c-datepicker__days)
 	
 	&.disabled tbody {
 		background-color: $shade20;
+	}
+	
+	&.grow {
+		background-color: $white;
 	}
 
 	tbody tr td.fill, thead tr th.fill {

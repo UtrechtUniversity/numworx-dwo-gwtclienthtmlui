@@ -24,7 +24,7 @@ function ResultsDisplay() {
 	
 	this.$selectAllModules = $("#resultsDisplayChooseModulesSelectAll");
 	
-			
+	this.REMEDIE =  4;	
 	// Bind handlers
 	this.$chooseClassModuleForm.on('submit', $.proxy(this.submitChooseClassModuleForm,this));
 	this.$chooseClassTableHead.find(".sortButton").click(Helpers.clickSortButton);
@@ -109,14 +109,19 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 	
 	sortedSchoolClassChildren = Helpers.getIndexedSortedArray(this.resultState.resultsTree.children[ this.resultState.activeSchoolClass ].children);
 	
+	
+	
 	for (var n = 0; n < sortedSchoolClassChildren.length; n++) {
 
 		course = sortedSchoolClassChildren[n];
 		var ms = this.resultState.moduleState + 1; // invisibile = 1 , normal = 2, remedy = 4
-		
+// kolom normal: studentsAndTeachers, teachers
+// kolom remedie: students,	studentsOrTeachers
+// kolom gesloten: invisible
+// pasop: bij 2 kolommen, dan zit "remedie" bij "normal"
 		if ( (   (ms & 1) == 0 && course.viewState == "invisible")
-	         || ( (ms & 2) == 0 && course.viewState == "studentsAndTeachers")
-	         || ( (ms & 4) == 0 && course.viewState == "students")
+	         || ( (ms & 2) == 0 && (course.viewState == "studentsAndTeachers"|| course.viewState == "teachers"))
+	         || ( (ms & this.REMEDIE) == 0 && (course.viewState == "students" || course.viewState == "studentsOrTeachers"))
 	          ) {
 			// remove from list if previously selected
 			if (typeof this.resultState.activeCourses != "undefined" && this.resultState.activeCourses.indexOf(sortedSchoolClassChildren[n].id) != -1) this.resultState.activeCourses.splice(this.resultState.activeCourses.indexOf(sortedSchoolClassChildren[n].id), 1);
@@ -150,6 +155,7 @@ ResultsDisplay.prototype.setChooseModulesTable = function() {
 }
 
 ResultsDisplay.prototype.setRemedialView = function(set) {
+	this.REMEDIE = set ? 4 : 2;
 	if (set) this.$panel.addClass("test");
 }
 
