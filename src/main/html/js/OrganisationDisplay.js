@@ -203,6 +203,7 @@ OrganisationDisplay.prototype.showPersons = function(data, role) {
 		$row.find("#organisationPersonsTableGivenName").html( Helpers.htmlEscape(persons[id].user.givenName )).attr('data-sortvalue', persons[id].user.givenName).removeAttr("id");
 		$row.find("#organisationPersonsTableInsertion").html( Helpers.htmlEscape(persons[id].user.insertion )).attr('data-sortvalue', persons[id].user.insertion).removeAttr("id");
 		$row.find("#organisationPersonsTableFamilyName").html( Helpers.htmlEscape(persons[id].user.familyName )).attr('data-sortvalue', persons[id].user.familyName).removeAttr("id");		
+		$row.find("#organisationPersonsTableExtra").html( Helpers.htmlEscape(persons[id].extra )).attr('data-sortvalue', persons[id].extra).removeAttr("id");		
 
 		if (persons[id].memberOf.length > 0) {
 			schoolClassName = "";
