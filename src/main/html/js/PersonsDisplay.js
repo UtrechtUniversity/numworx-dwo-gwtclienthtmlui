@@ -28,6 +28,7 @@ function PersonsDisplay() {
 	//this.$personsImportForm.on('submit', $.proxy(this.submitPersonsImportForm, this));
 	this.$zoekBestand.on('change', $.proxy(this.submitPersonsImportForm, this));
 	this.$personsTableHead.find(".sortButton").click(Helpers.clickSortButton);
+    this.$personsTableHead.find(".sortButton").click(PersonsDisplay.clickSortButton);
 	
 	// Init
 	this.$panel.hide();
@@ -113,11 +114,14 @@ PersonsDisplay.prototype.clear = function () {
 	this.personsSearchForm.elements["givenName"].value = "";
 	this.personsSearchForm.elements["insertion"].value = "";
 	this.personsSearchForm.elements["familyName"].value = "";
+	PersonsDisplay.skipUp = true;
 	
 	this.resetSorting();	
 	this.personsSearchFormToggle(false);	
 	this.personsEditFormToggle(false);
 	this.changePersonsSearchRole();
+	PersonsDisplay.skipUp = false;
+	
 }
 
 PersonsDisplay.prototype.setHelp = function(url) {
@@ -235,6 +239,17 @@ PersonsDisplay.prototype.changePersonsSearchRole = function(event) {
 PersonsDisplay.prototype.personsSearchFormToggle = function(value) {
 	if (value) this.$personsSearchForm.find(':submit').prop('disabled','');
 	else this.$personsSearchForm.find(':submit').prop('disabled','disabled');       
+}
+
+PersonsDisplay.clickSortButton = function() {
+    if (PersonsDisplay.skipUp) return;
+	var $this = $(this)
+	var order = $this.data("order")
+	var type = $this.data("type");
+	var sortValue = $this.data("sortvalue")
+	
+	app.getPresenterFactory().getPersonsPresenter().clickSortButton(sortValue, order, type);
+	
 }
 
 /*
