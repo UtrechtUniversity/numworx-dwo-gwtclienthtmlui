@@ -124,6 +124,17 @@ PersonsDisplay.prototype.setHelp = function(url) {
 		Helpers.setIframeSrc(this.$helpContentIFrame, url)
 }
 
+PersonsDisplay.prototype.filterPersons = function() {
+	app.getPresenterFactory().getPersonsPresenter().filterPersons(
+		this.personsSearchForm.elements["userName"].value,
+		this.personsSearchForm.elements["givenName"].value,
+		this.personsSearchForm.elements["insertion"].value,
+		this.personsSearchForm.elements["familyName"].value
+	);
+
+}
+
+
 PersonsDisplay.prototype.showPersons = function(json) {  
 	var persons = json, personName;
 		
@@ -208,14 +219,16 @@ PersonsDisplay.prototype.importPersons = function(file) {
  */
 
 PersonsDisplay.prototype.submitPersonsSearchForm = function(event) {
-	event.preventDefault();	
+	event.preventDefault();
+	this.filterPersons();	
 	this.searchPersons();
 }
 
 PersonsDisplay.prototype.changePersonsSearchRole = function(event) {
 	if (this.personsSearchForm.elements["role"].value != "") this.personsSearchFormToggle(true);
 	else this.personsSearchFormToggle(false);        
-        this.searchPersons();        
+    this.filterPersons();
+    this.searchPersons();        
 }
 
 // helpers
