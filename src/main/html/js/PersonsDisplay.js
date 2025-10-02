@@ -120,6 +120,8 @@ PersonsDisplay.prototype.clear = function () {
 	this.personsSearchFormToggle(false);	
 	this.personsEditFormToggle(false);
 	this.changePersonsSearchRole();
+	this.$personsEditForm.find(".sortButton.default").trigger('click');
+	
 	PersonsDisplay.skipUp = false;
 	
 }
@@ -147,7 +149,7 @@ PersonsDisplay.prototype.showPersons = function(json) {
 	// No Results
 	if ($.isEmptyObject(persons)) {
 		$row = this.$personsRow.clone();
-		this.$personsTableBody.html('<tr colspan="4" class="empty"><td>Geen studenten gevonden.</td></tr>');
+		this.$personsTableBody.html('<tr colspan="4" class="empty"><td><span data-translate="NUM_TBL_EMPTYTABLE">Geen studenten gevonden.</span></td></tr>');
 		return;
 	}
 	
@@ -178,7 +180,11 @@ PersonsDisplay.prototype.showPersons = function(json) {
 	
 	this.filterPersonsList();	
 	
-	this.$personsEditForm.find(".sortButton.default").trigger('click');
+	PersonsDisplay.skipUp = true;	
+	this.$personsEditForm.find(".sortButton.active").trigger('click');
+	PersonsDisplay.skipUp = false;
+	
+	//this.$personsEditForm.find(".sortButton.default").trigger('click');
 }
 
 PersonsDisplay.prototype.setEmptyTableMessage = function(json) {
