@@ -166,7 +166,10 @@ SelectedResultsDisplay.prototype.plotMatrix = function (matrix) {
 		if (this.showpages) {
 			$rowCell = this.$selectedResultsRowCell.clone();
 			$rowCell.html("");
-			if (matrix[i][0].seal) $rowCell.html("<i class='fa fa-lock'></i>")
+			if (matrix[i][0].seal) {
+				$rowCell.html("<i class='fa fa-lock'></i>")
+				$rowCell.prop("title", matrix[i][0].sealLabel)
+			}
 			$row.append($rowCell);
 		}
 		
@@ -541,7 +544,7 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 			if (activity.children[studenScoId]["user-id"] == studentId) { // Select student
 				j = 1;
 				matrix[i][0].seal = activity.children[studenScoId].completionStatus == "completed"
-				
+				matrix[i][0].sealLabel = activity.children[studenScoId].completionTime||"undefined";
 				sortedStudentScoChildren = Helpers.getIndexedSortedArray(activity.children[studenScoId].children);
 				
 				for (var n = 0; n < sortedStudentScoChildren.length; n++) {
