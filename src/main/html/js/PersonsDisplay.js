@@ -28,6 +28,7 @@ function PersonsDisplay() {
 	//this.$personsImportForm.on('submit', $.proxy(this.submitPersonsImportForm, this));
 	this.$zoekBestand.on('change', $.proxy(this.submitPersonsImportForm, this));
 	this.$personsTableHead.find(".sortButton").click(Helpers.clickSortButton);
+    this.$personsTableHead.find(".sortButton").click(PersonsDisplay.clickSortButton);
 	
 	// Init
 	this.$panel.hide();
@@ -113,16 +114,32 @@ PersonsDisplay.prototype.clear = function () {
 	this.personsSearchForm.elements["givenName"].value = "";
 	this.personsSearchForm.elements["insertion"].value = "";
 	this.personsSearchForm.elements["familyName"].value = "";
+	PersonsDisplay.skipUp = true;
 	
 	this.resetSorting();	
 	this.personsSearchFormToggle(false);	
 	this.personsEditFormToggle(false);
 	this.changePersonsSearchRole();
+	this.$personsEditForm.find(".sortButton.default").trigger('click');
+	
+	PersonsDisplay.skipUp = false;
+	
 }
 
 PersonsDisplay.prototype.setHelp = function(url) {
 		Helpers.setIframeSrc(this.$helpContentIFrame, url)
 }
+
+PersonsDisplay.prototype.filterPersons = function() {
+	app.getPresenterFactory().getPersonsPresenter().filterPersons(
+		this.personsSearchForm.elements["userName"].value,
+		this.personsSearchForm.elements["givenName"].value,
+		this.personsSearchForm.elements["insertion"].value,
+		this.personsSearchForm.elements["familyName"].value
+	);
+
+}
+
 
 PersonsDisplay.prototype.showPersons = function(json) {  
 	var persons = json, personName;
@@ -132,7 +149,7 @@ PersonsDisplay.prototype.showPersons = function(json) {
 	// No Results
 	if ($.isEmptyObject(persons)) {
 		$row = this.$personsRow.clone();
-		this.$personsTableBody.html('<tr colspan="4" class="empty"><td>Geen studenten gevonden.</td></tr>');
+		this.$personsTableBody.html('<tr colspan="4" class="empty"><td><span data-translate="NUM_TBL_EMPTYTABLE">Geen studenten gevonden.</span></td></tr>');
 		return;
 	}
 	
@@ -163,7 +180,11 @@ PersonsDisplay.prototype.showPersons = function(json) {
 	
 	this.filterPersonsList();	
 	
-	this.$personsEditForm.find(".sortButton.default").trigger('click');
+	PersonsDisplay.skipUp = true;	
+	this.$personsEditForm.find(".sortButton.active").trigger('click');
+	PersonsDisplay.skipUp = false;
+	
+	//this.$personsEditForm.find(".sortButton.default").trigger('click');
 }
 
 PersonsDisplay.prototype.setEmptyTableMessage = function(json) {
@@ -208,20 +229,33 @@ PersonsDisplay.prototype.importPersons = function(file) {
  */
 
 PersonsDisplay.prototype.submitPersonsSearchForm = function(event) {
-	event.preventDefault();	
+	event.preventDefault();
+	this.filterPersons();	
 	this.searchPersons();
 }
 
 PersonsDisplay.prototype.changePersonsSearchRole = function(event) {
 	if (this.personsSearchForm.elements["role"].value != "") this.personsSearchFormToggle(true);
 	else this.personsSearchFormToggle(false);        
-        this.searchPersons();        
+    this.filterPersons();
+    this.searchPersons();        
 }
 
 // helpers
 PersonsDisplay.prototype.personsSearchFormToggle = function(value) {
 	if (value) this.$personsSearchForm.find(':submit').prop('disabled','');
 	else this.$personsSearchForm.find(':submit').prop('disabled','disabled');       
+}
+
+PersonsDisplay.clickSortButton = function() {
+    if (PersonsDisplay.skipUp) return;
+	var $this = $(this)
+	var order = $this.data("order")
+	var type = $this.data("type");
+	var sortValue = $this.data("sortvalue")
+	
+	app.getPresenterFactory().getPersonsPresenter().clickSortButton(sortValue, order, type);
+	
 }
 
 /*

@@ -596,9 +596,15 @@ ModulesOfSchoolclassDisplay.prototype.clickSelectRow = function(event) {
 	// Remove other temporary row, if available	
 	//this.$tree.find(".temporary input").prop('checked','');
 	//	this.removeTemporaryRow();
-	
-	for (var i = 0; i < this.selectForm.elements["module"].length; i++) 
+	var length = this.selectForm.elements["module"].length;
+	for (var i = 0; i < length; i++) 
 		if (this.selectForm.elements["module"][i].checked) break;		
+	if (i >= length)
+	 return;
+			
+	if (typeof this.selectForm.elements["module"][i].value === 'undefined' ) {
+		this.selectForm.elements["module"][i].value = "";
+	}
 			
 	if (this.selectForm.elements["module"][i].value != "") {		
 		// Go in edit settings mode
