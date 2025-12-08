@@ -573,6 +573,7 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 						if (sortedStudentScoChildren[n].sumScore == -1) {
 //							matrix[i][j].label = "Kijk na"
 							matrix[i][j].score = -2
+							matrix[i][j].value = 0; // was -1, maar wat als er al punten verdeeld zijn???
 						} else if (sortedStudentScoChildren[n].maxScore == 0) {
 //							matrix[i][j].label = "ℹ"
 							matrix[i][j].score = -3;
@@ -1059,7 +1060,12 @@ SelectedResultsDisplay.prototype.buildMatrix = function(matrix, extra) {
 		for (var j = 0; j < row.length; j++ )  {
 			if(j > 0) 
 				result = result += SEP;
-			result +=  row[j].value
+			var value = row[j].value
+// special case: "Kijk na", "info", "", normal case 0...n
+			if (value && value < 0) {
+				value = 0 // no value yet
+			}
+			result += value
 		}
 		result = result + LINE;
 	}
