@@ -3003,20 +3003,9 @@ a[href='#KNOWLEDGE'] .background-icon {
 									<input id="addPersonPassword" name="password" type="password" value="" autocomplete="new-password" />
 								</label>
 							
-								<!-- <div class="col-2 options">
-									<label>Leerling / Docent?</label>
-									<div class="option">
-										<input type="radio" name="role" id="addPersonL" value="L">
-										<label for="addPersonL">L</label>
-									</div>
-									<div class="option">
-										<input type="radio" name="role" id="addPersonD" value="D">
-										<label for="addPersonD">D</label>
-									</div>
-								</div>		 -->					
-								<div class="row schooladmin-only" style='margin-top: 1em' > <!-- FIXME -->
-										<h3 class="col-12"><span data-translate='NUM_LBL_ADDPERSON_ROLE'>Toevoegen als student/docent?</span></h3>
-										<div class="col-12" style="height: 2em"> <!-- voor teunis, hoe moet dit netjes? -->
+								<div class="row schooladmin-only col-6" style='margin-top: 1em' > <!-- FIXME -->
+										<h3 class="col-6"><span data-translate='NUM_LBL_ADDPERSON_ROLE'>Toevoegen als student/docent?</span></h3>
+										<div class="col-6" style="height: 2em"> <!-- voor teunis, hoe moet dit netjes? -->
 											<div class="options">
 													<div class="option">
 														<input type="radio" name="role" id="addPersonL" value="L" checked="checked">
@@ -3029,7 +3018,22 @@ a[href='#KNOWLEDGE'] .background-icon {
 											</div>
 										</div>
 								</div>
-							
+								<div class="row col-6" style='margin-top: 1em' > <!-- FIXME -->
+										<h3 class="col-6"><span data-translate='NUM_LBL_ADDPERSON_INVITE'>Uitnodigen per e-mail?</span></h3>
+										<div class="col-6" style="height: 2em"> <!-- voor teunis, hoe moet dit netjes? -->
+											<div class="options">
+												<div class="option">
+													<input type="radio" name="invitation" id="useInviteYes" value="1">
+				                                    <label for="useInviteYes"><span data-translate="NUM_LBL_YES">Ja</span></label>
+												</div> 
+												<div class="option">
+													<input type="radio" name="invitation" id="useInviteNo" value="0" checked="checked">
+													<label for="useInviteNo"><span data-translate="NUM_LBL_NO">Nee</span></label>
+												</div>
+											</div>
+										</div>
+								</div>
+
 							</fieldset>						
 						<!-- </form>					 -->
 					</div>
@@ -3087,20 +3091,6 @@ a[href='#KNOWLEDGE'] .background-icon {
 								<input type="radio" name="schoolclass" value="schoolid" class="hidden"><!-- empty value -->
 							</div>
 							<div class="col-6">
-<!--
-Stuur uitnodiging ja/nee	
--->
-								<div class="col-2 options">
-									<label><span data-translate="NUM_LBL_INVITATION">Uitnodiging</span></label>
-									<div class="option">
-										<input type="radio" name="invitation" id="useInviteYes" value="1">
-	                                                                        <label for="useInviteYes"><span data-translate="NUM_LBL_YES">Ja</span></label>
-									</div> 
-									<div class="option">
-										<input type="radio" name="invitation" id="useInviteNo" value="0" checked="checked">
-										<label for="useInviteNo"><span data-translate="NUM_LBL_NO">Nee</span></label>
-									</div>
-								</div>
 								<input type="submit" class="primary right bottom" value="Voeg persoon toe" data-translate="NUM_BTN_ADDPERSON"/>
 							</div>
 					
@@ -3182,9 +3172,10 @@ Stuur uitnodiging ja/nee
 						</div>
 					</div>
 				</div>
-				<div class="row schooladmin-only" >
-						<h3 class="col-12"><span data-translate="NUM_LBL_IMPORT_PERSONS_ROLE">Importeren als student/docent?</span></h3>
-						<div class="col-12" style="height: 2em"> <!-- voor teunis, hoe moet dit netjes? -->
+				<fieldset>
+				<div class="row col-6 schooladmin-only" >
+						<h3 class="col-6"><span data-translate="NUM_LBL_IMPORT_PERSONS_ROLE">Importeren als student/docent?</span></h3>
+						<div class="col-6" style="height: 2em"> <!-- voor teunis, hoe moet dit netjes? -->
 							<div class="options">
 									<div class="option">
 										<input type="radio" name="role" id="importPersonsL" value="L" checked="checked">
@@ -3197,6 +3188,23 @@ Stuur uitnodiging ja/nee
 							</div>
 						</div>
 				</div>
+				<div class="row col-6" style='margin-top: 1em' > <!-- FIXME -->
+						<h3 class="col-6"><span data-translate='NUM_LBL_ADDPERSON_INVITE'>Uitnodigen per e-mail?</span></h3>
+						<div class="col-6" style="height: 2em"> <!-- voor teunis, hoe moet dit netjes? -->
+							<div class="options">
+								<div class="option">
+									<input type="radio" name="invitation" id="useImpInviteYes" value="1">
+				                    <label for="useImpInviteYes"><span data-translate="NUM_LBL_YES">Ja</span></label>
+								</div> 
+								<div class="option">
+									<input type="radio" name="invitation" id="useImpInviteNo" value="0" checked="checked">
+									<label for="useImpInviteNo"><span data-translate="NUM_LBL_NO">Nee</span></label>
+								</div>
+							</div>
+						</div>
+				</div>
+				</fieldset>
+
 				<div class="row" id='importPersonsSchoolClassesTitle'>
 						<h3 class="col-12"><span data-translate="NUM_LBL_IMPORT_PERSONS_CLASS">Kies een klas om personen in te importeren</span></h3>
 				</div>
