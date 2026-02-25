@@ -128,6 +128,7 @@ AddPersonDisplay.prototype.addPerson = function() {
 	{	role = this.addPersonForm.elements["role"][j]
 		if (role.checked) break;
 	}
+	var email = this.addPersonForm.elements["invitation"][0].checked
 
 	if (role.value === 'L' || this.role === "TEACHER")	
 	app.getPresenterFactory().getAddStudentPresenter().submitSingleSchoolStudent( 
@@ -137,7 +138,8 @@ AddPersonDisplay.prototype.addPerson = function() {
 		this.addPersonForm.elements['insertion'].value,
 		this.addPersonForm.elements['familyName'].value,
 		this.addPersonForm.elements['email'].value,
-		this.addPersonForm.elements['password'].value
+		this.addPersonForm.elements['password'].value,
+		email
 	);	
 	else if (role.value == 'D' && this.role === "SCHOOLADMIN")
 	{   var sc = this.addPersonForm.elements['schoolclass']
@@ -150,7 +152,8 @@ AddPersonDisplay.prototype.addPerson = function() {
 				this.addPersonForm.elements['insertion'].value,
 				this.addPersonForm.elements['familyName'].value,
 				this.addPersonForm.elements['email'].value,
-				this.addPersonForm.elements['password'].value
+				this.addPersonForm.elements['password'].value,
+				email
 			);	
 	}
 }

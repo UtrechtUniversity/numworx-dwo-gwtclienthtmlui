@@ -221,16 +221,17 @@ ImportPersonsDisplay.prototype.importPersons = function() {
 	{	role = this.form.elements["role"][i]
 		if (role.checked) break;
 	}
-	
+	var email;
+	email = this.form.elements["invitation"][0].checked;
 	console.log("voor ImportPersonsPresenter")
 	console.log(JSON.stringify(persons))
 	console.log(JSON.stringify(schoolclass.value))
 	console.log(JSON.stringify(role.value))
 
 	if (role.value === 'L')
-		app.getPresenterFactory().getImportPersonsPresenter().submitImportStudents(persons, schoolclass.value);
+		app.getPresenterFactory().getImportPersonsPresenter().submitImportStudents(persons, schoolclass.value, email);
 	else if (role.value == 'D')
-		app.getPresenterFactory().getImportPersonsPresenter().submitImportTeachers(persons, null);
+		app.getPresenterFactory().getImportPersonsPresenter().submitImportTeachers(persons, null, email);
 }
 
 /// Events
