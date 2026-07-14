@@ -496,6 +496,8 @@ SelectedResultsDisplay.prototype.getSealStateActivitiesStudentsInModule = functi
 }
 
 SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = function(activity) {
+    var storage = window.localStorage.getItem("showPages/" + this.resultState.activeActivity)
+    var cesuur = storage || 50; // als percentage.
 	var matrix = [], i = 1, j = 1, maxPages = 0;
 	var students = this.resultState.studentsTree.children[ this.resultState.activeSchoolClass ].children;
 	var sortedStudentScoChildren = null;
@@ -508,7 +510,18 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 	matrix[0][0].resultsTitle = activity.label;
 	matrix[0][0].resultsTitlePrefix = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_Activity");
 	
-	
+	matrix[0][1] = {}
+	matrix[0][1].value = matrix[0][1].label = "Cijfer";
+	matrix[0][1].tableClass = "alternativeHeader";
+	j = 2;
+	matrix[0][i].linkLabel = cesuur + "%";
+	matrix[0][i].linkParams = { "activity" : activity, "cesuur": cesuur };
+	matrix[0][i].linkCallback = function(param) {
+		cesuur = window.prompt("Cesuur? (" + param.cesuur  + "%)", param.cesuur);
+		if (cesuur === null) return;
+		window.localStorage.setItem("showPages/" + this.resultState.activeActivity, cesuur);
+		this.pagesStudents();
+	} 
 	
 	for (var studenScoId in activity.children) {
 		
@@ -547,6 +560,14 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 				matrix[i][0].sealLabel = activity.children[studenScoId].completionTime||"undefined";
 				sortedStudentScoChildren = Helpers.getIndexedSortedArray(activity.children[studenScoId].children);
 				
+				matrix[i][1] = { }
+				matrix[i][1].label = "";
+				matrix[i][1].longlabel = "";
+				matrix[i][1].value = 0;
+				matrix[i][1].fraction = 0
+				matrix[i][1].maxScore = 0;
+				j = 2;
+				
 				for (var n = 0; n < sortedStudentScoChildren.length; n++) {
 				    let page = sortedStudentScoChildren[n];
 					matrix[i][j] = {};
@@ -556,11 +577,12 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 					matrix[i][j].callback = this.clickPageResultIndicator;
 					matrix[i][j].params = { scoId: this.resultState.activeActivity, studentId: studentId, pageSequence: page.sequence };
 										
-					if ( page.maxScore == null ) {
+					if ( page.maxScore == null || page.short == "&nbsp;"|| page.fraction == 0) {
 						//matrix[i][j].label = "&nbsp;";
 						matrix[i][j].score = -1;
 						matrix[i][j].sortValue = -1;
 						matrix[i][j].value = 0;
+						if (page.maxScore) matrix[i][1].maxScore += page.maxScore;
 					} else {
 						//matrix[i][j].label = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus != 0 ? (sortedStudentScoChildren[n].bonus>0?"+":"")+sortedStudentScoChildren[n].bonus : "") +" / " + sortedStudentScoChildren[n].maxScore;
 						matrix[i][j].score = (sortedStudentScoChildren[n].sumScore + (sortedStudentScoChildren[n].bonus) ) / sortedStudentScoChildren[n].maxScore * 100;
@@ -569,16 +591,20 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 						matrix[i][j].sortValue = matrix[i][j].value = sortedStudentScoChildren[n].sumScore + ( sortedStudentScoChildren[n].bonus ); // Wim: geen idee waarom er max(0,bonus) stond
 //						matrix[i][j].callback = this.clickPageResultIndicator;
 //						matrix[i][j].params = { scoId: this.resultState.activeActivity, studentId: studentId, pageSequence: sortedStudentScoChildren[n].sequence };
-
+						matrix[i][1].fraction ++;
 						if (sortedStudentScoChildren[n].sumScore == -1) {
 //							matrix[i][j].label = "Kijk na"
 							matrix[i][j].score = -2
 							matrix[i][j].value = 0; // was -1, maar wat als er al punten verdeeld zijn???
-						} else if (sortedStudentScoChildren[n].maxScore == 0) {
+							matrix[i][1].maxScore += page.maxScore;
+							
+						} else if (page.maxScore == 0) {
 //							matrix[i][j].label = "ℹ"
 							matrix[i][j].score = -3;
+						} else {
+						    matrix[i][1].value += matrix[i][j].value;
+						    matrix[i][1].maxScore += page.maxScore;
 						}
-					
 					
 					}
 					
@@ -587,14 +613,32 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 			}			
 		}
 		
-		if (j == 1) { // apparantly no pages
-			for (var j = 1; j < maxPages; j++) {
+		if (j == 2) { // apparantly no pages
+			for (var j = 0; j < maxPages; j++) {
 				matrix[i][j] = {};
 				matrix[i][j].label = matrix[i][j].value = "";
-				matrix[i][j].callback = this.clickPageResultIndicator;
+				if (j)
+					matrix[i][j].callback = this.clickPageResultIndicator;
 				matrix[i][j].params = { scoId: this.resultState.activeActivity, studentId: studentId, pageSequence: (j-1) };
 			}
-		}		
+		} else {
+			var score = matrix[i][1].value;
+			var frac  = matrix[i][1].maxScore;
+			var cijfer = score / frac * 9 + 1; // cesuur = 50%;
+			var off = cesuur / 100.0 * frac; // cesuur in points.
+			if (score <= off) // lineair tot 1 .. 5.5
+			{ 
+			   cijfer = 1.0 + score / off * 4.5;
+			} else { // lineair 5.5 .. 10
+			   cijfer = (score - off) / (frac - off) * 4.5 + 5.5;
+			}
+					
+			matrix[i][1].longlabel = score + "/" + frac + " " + cijfer;
+			matrix[i][1].label = cijfer;
+			matrix[i][1].fraction = matrix[i][1].fraction / (maxPages-2.0)
+			matrix[i][1].score = cijfer * 10; // 0..100
+			matrix[i][1].value = cijfer;
+		}	
 				
 		i++;	
 	}
