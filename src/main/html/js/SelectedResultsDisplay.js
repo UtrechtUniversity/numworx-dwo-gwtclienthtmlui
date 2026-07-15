@@ -80,6 +80,11 @@ SelectedResultsDisplay.prototype.show = function() {
 }
 
 
+SelectedResultsDisplay.prototype.getCijfer = function(score, total, parts, all, cesuur) {
+	var result = app.getPresenterFactory().getSelectedResultsPresenter().getCijfer(score, total, parts, all, cesuur) 
+	return result;
+}
+
 SelectedResultsDisplay.prototype.localize = function() {
 	this.$panel.find("[data-translate]").each( Helpers.translate );
 }
@@ -511,7 +516,7 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 	matrix[0][0].resultsTitlePrefix = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_Activity");
 	
 	matrix[0][1] = {}
-	matrix[0][1].value = matrix[0][1].label = "Cijfer";
+	matrix[0][1].value = matrix[0][1].label = app.getTranslator().translate("NUM_TBL_SELECTEDRESULTS_Cijfer");
 	matrix[0][1].tableClass = "alternativeHeader";
 	j = 2;
 	matrix[0][i].linkLabel = cesuur + "%";
@@ -624,20 +629,8 @@ SelectedResultsDisplay.prototype.buildMatrixPagesActivityStudentsInModule = func
 		} else {
 			var score = matrix[i][1].value;
 			var frac  = matrix[i][1].maxScore;
-			var cijfer = score / frac * 9 + 1; // cesuur = 50%;
-			var off = cesuur / 100.0 * frac; // cesuur in points.
-			if (score <= off) // lineair tot 1 .. 5.5
-			{ 
-			   cijfer = 1.0 + score / off * 4.5;
-			} else { // lineair 5.5 .. 10
-			   cijfer = (score - off) / (frac - off) * 4.5 + 5.5;
-			}
-					
-			matrix[i][1].longlabel = score + "/" + frac + " " + cijfer;
-			matrix[i][1].label = cijfer;
-			matrix[i][1].fraction = matrix[i][1].fraction / (maxPages-2.0)
-			matrix[i][1].score = cijfer * 10; // 0..100
-			matrix[i][1].value = cijfer;
+			var parts = matrix[i][1].fraction;
+			matrix[i][1] = this.getCijfer(score, frac, parts, maxPages-2, cesuur)		
 		}	
 				
 		i++;	
