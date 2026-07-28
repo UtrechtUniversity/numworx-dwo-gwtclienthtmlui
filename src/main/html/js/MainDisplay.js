@@ -140,7 +140,8 @@ function MainDisplay() {
 	// Trigger window resize for initial help sizing
 	$(window).trigger('resize');
 	
-	this.entree(); // patch a.href with=entree
+	this.entree($("#withidphint")); // patch a.href with=entree
+	this.entree($("#withconext"));
 }
 
 MainDisplay.prototype.init = function() {
@@ -697,8 +698,8 @@ MainDisplay.prototype.onIdle = function() {
 	app.getPresenterFactory().getMainPresenter().onIdle();
 }
 
-MainDisplay.prototype.entree = function() {
-	var entree = $("#withidphint");
+MainDisplay.prototype.entree = function(param) {
+	var entree = param
 	var hint = entree.attr("href");
 	if (!hint) return;
     var h = ""
